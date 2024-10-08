@@ -4,12 +4,15 @@ import { Routes, Route } from 'react-router'
 
 import { HomePage } from './pages/HomePage'
 import { AboutUs, AboutTeam, AboutVision } from './pages/AboutUs'
+import { Class } from './pages/Class.jsx'
+import { Activities } from './pages/Activities.jsx'
 import { CarIndex } from './pages/CarIndex'
 import { CarDetails } from './pages/CarDetails'
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { UserDetails } from './pages/UserDetails'
+import { AdminIndex } from './pages/AdminIndex'
 
 import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
@@ -30,6 +33,8 @@ export function App() {
             <Route path='team' element={<AboutTeam />} />
             <Route path='vision' element={<AboutVision />} />
           </Route>
+          <Route path='class' element={<Class />} />
+          <Route path='activities' element={<Activities />} />
           <Route path='car' element={<CarIndex />} />
           <Route path='car/:carId' element={<CarDetails />} />
           <Route path='user/:id' element={<UserDetails />} />
@@ -37,6 +42,7 @@ export function App() {
             <Route index element={<Login />} />
             <Route path='signup' element={<Signup />} />
           </Route>
+          <Route path='admin' element={<AdminIndex />} />
         </Routes>
       </section>
       <AppFooter />
