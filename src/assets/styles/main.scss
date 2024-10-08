@@ -1,0 +1,25 @@
+@import "setup/variables.scss";
+@import "setup/mixins.scss";
+@import "setup/functions.scss";
+@import "setup/typography.scss";
+
+@import "basics/helpers.scss";
+@import "basics/layout.scss";
+@import "basics/base.scss";
+@import "basics/forms.scss";
+
+// pages
+@import "App.scss";
+
+@import "pages/HomePage.scss";
+@import "pages/CarIndex.scss";
+@import "pages/UserDetails.scss";
+@import "pages/LoginSignup.scss";
+@import "pages/AboutUs.scss";
+
+
+@import "cmps/AppHeader.scss";
+@import "cmps/AppFooter.scss";
+@import "cmps/UserMsg.scss";
+
+@import "cmps/CarFilter.scss";

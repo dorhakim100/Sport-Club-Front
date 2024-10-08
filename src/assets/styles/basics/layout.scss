@@ -1,0 +1,18 @@
+.main-container{
+    // width: 100vw;
+    // height: 100vh;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1em 1fr 1em;
+    grid-template-rows: 3rem 1fr 3rem;
+
+    > * {
+        grid-column: 2;
+
+        &.full {
+            grid-column: 1 / -1;
+        }
+    }
+
+
+}
