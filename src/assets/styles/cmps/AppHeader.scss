@@ -13,9 +13,23 @@
         gap: 1em;
         
         font-size: .8em;
+        a{
 
+            color: $dark-blue;
+
+            
+            &:hover{
+                color: $bold-navy;
+                
+            }
+        }
+        
         .active {
-            // color: $clr1;
+            color: $dark-green;
+            &:hover{
+
+                color: $dark-green-hover;
+            }
         }
 
         .logo {

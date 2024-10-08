@@ -1,0 +1,30 @@
+.menu{
+    position: 'relative';
+}
+
+.dropdown-menu {
+    background: #fff;
+    box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
+    transition: all linear 0.3s;
+    position: absolute;
+
+    ul {
+        list-style: none;
+        padding: unset;
+        margin: unset;
+      }
+
+    li {
+        padding: 14px;
+        transition: all linear 0.3s;
+
+        &:hover{
+            background: gray;
+            cursor: pointer;
+            color: #fff;
+
+        }
+      }
+      
+
+  }
