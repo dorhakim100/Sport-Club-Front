@@ -15,8 +15,7 @@ export function AppHeader() {
 
   const [isDropdownVisible, setDropdownVisible] = useState(false)
   const [hoveredSection, setHoveredSection] = useState()
-
-  const options = ['Option 1', 'Option 2', 'Option 3']
+  const [options, setOptions] = useState([])
 
   async function onLogout() {
     try {
@@ -28,13 +27,6 @@ export function AppHeader() {
     }
   }
 
-  function setNav(ev) {
-    console.log(ev.target.id)
-    setIsHover(true)
-    setIsOpen(true)
-    setPosition({ ...position, x: ev.pageX, y: ev.pageY })
-  }
-
   const handleMouseEnter = (section) => {
     setHoveredSection(section)
     setDropdownVisible(true)
@@ -42,6 +34,32 @@ export function AppHeader() {
 
   const handleMouseLeave = () => {
     setDropdownVisible(false)
+  }
+
+  const setDropdownOptions = (section) => {
+    let optionsToSet
+    switch (section) {
+      case 'activities':
+        optionsToSet = [
+          {
+            text: 'bla',
+            path: `${section}/bla`,
+          },
+        ]
+        break
+      case 'about':
+        optionsToSet = [
+          {
+            text: 'bla',
+            path: `${section}/bla`,
+          },
+        ]
+        break
+
+      default:
+        break
+    }
+    setOptions(optionsToSet)
   }
 
   return (
@@ -57,13 +75,17 @@ export function AppHeader() {
           <div
             className='menu'
             onMouseEnter={() => {
+              setDropdownOptions('activities')
               handleMouseEnter('activities')
             }}
             onMouseLeave={handleMouseLeave}
           >
             <span>Activities</span>
             {isDropdownVisible && hoveredSection === 'activities' && (
-              <DropDown />
+              <DropDown
+                options={options}
+                setDropdownVisible={setDropdownVisible}
+              />
             )}
           </div>
         </NavLink>
@@ -71,13 +93,19 @@ export function AppHeader() {
           <div
             className='menu'
             onMouseEnter={() => {
+              setDropdownOptions('about')
               handleMouseEnter('about')
             }}
             onMouseLeave={handleMouseLeave}
             // id={'about'}
           >
             <span>About</span>
-            {isDropdownVisible && hoveredSection === 'about' && <DropDown />}
+            {isDropdownVisible && hoveredSection === 'about' && (
+              <DropDown
+                options={options}
+                setDropdownVisible={setDropdownVisible}
+              />
+            )}
           </div>
         </NavLink>
         <NavLink to='car'>Cars</NavLink>

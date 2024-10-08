@@ -1,28 +1,33 @@
 import { useState, useEffect, userRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { makeId } from '../services/util.service.js'
 
-export function DropDown({ options, position, label, isOpen, setIsOpen }) {
+export function DropDown({ options, isDropdownVisible, setDropdownVisible }) {
   const [selectedOption, setSelectedOption] = useState(null)
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    console.log(position)
-  }, [position])
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen)
-  }
-
-  const handleOptionClick = (option) => {
-    setSelectedOption(option)
-    setIsOpen(false)
+  const handleOptionClick = () => {
+    // setSelectedOption(option)
+    setDropdownVisible(false)
   }
   return (
     <div className='dropdown-menu'>
       <ul>
-        <li>Menu 1</li>
-        <li>Menu 2</li>
-        <li>Menu 3</li>
+        {options.map((option) => {
+          return (
+            <li
+              key={makeId()}
+              onClick={(ev) => {
+                ev.preventDefault()
+                handleOptionClick()
+                navigate(option.path)
+              }}
+            >
+              {option.text}
+            </li>
+          )
+        })}
       </ul>
     </div>
   )
