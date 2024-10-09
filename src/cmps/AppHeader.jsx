@@ -103,7 +103,10 @@ export function AppHeader() {
   }
 
   return (
-    <header className='app-header full'>
+    <header
+      className='app-header full'
+      onClick={() => setDropdownVisible(false)}
+    >
       <nav>
         <NavLink to='/' className='logo'>
           {prefs.isEnglish ? 'Home' : 'בית'}

@@ -19,6 +19,7 @@ import { ItemFilter } from '../cmps/ItemFilter'
 export function ItemIndex() {
   const [filterBy, setFilterBy] = useState(itemService.getDefaultFilter())
   const items = useSelector((storeState) => storeState.itemModule.items)
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
   console.log(items)
 
   const [isGrid, setIsGrid] = useState(true)
@@ -63,7 +64,7 @@ export function ItemIndex() {
   return (
     <main className='item-index'>
       <header>
-        <h2>Items</h2>
+        <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
         {userService.getLoggedinUser() && (
           <button onClick={onAddItem}>Add a Item</button>
         )}

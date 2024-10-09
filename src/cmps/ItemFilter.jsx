@@ -40,50 +40,31 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
   return (
     <section className='item-filter'>
       <h3> {prefs.isEnglish ? 'Filter' : 'סינון'}:</h3>
-      <input
-        type='text'
-        name='txt'
-        value={filterToEdit.txt}
-        placeholder={prefs.isEnglish ? 'Im lookin for...' : 'חיפוש'}
-        onChange={handleChange}
-        required
-      />
+      <div className='input-container'>
+        <input
+          type='text'
+          name='txt'
+          value={filterToEdit.txt}
+          placeholder={prefs.isEnglish ? 'Im lookin for...' : 'חיפוש'}
+          onChange={handleChange}
+          required
+        />
+      </div>
       <input
         type='number'
         min='20'
+        max='4500'
         name='minPrice'
         value={filterToEdit.minPrice}
         placeholder={prefs.isEnglish ? 'Max. price' : 'מחיר מקסימלי'}
         onChange={handleChange}
         required
       />
-      <button className='btn-clear' onClick={clearFilter}>
+      <Button className='btn-clear' variant='contained' onClick={clearFilter}>
         {prefs.isEnglish ? 'Clear' : 'איפוס'}
-      </button>
+      </Button>
       <h3> {prefs.isEnglish ? 'Sort' : 'מיין לפי'}:</h3>
 
-      <div className='sort-dir'>
-        <label>
-          <span>Asce</span>
-          <input
-            type='radio'
-            name='sortDir'
-            value='1'
-            checked={filterToEdit.sortDir === 1}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <span>Desc</span>
-          <input
-            type='radio'
-            name='sortDir'
-            value='-1'
-            onChange={handleChange}
-            checked={filterToEdit.sortDir === -1}
-          />
-        </label>
-      </div>
       <Button className='btn-clear' variant='contained' onClick={clearSort}>
         {prefs.isEnglish ? 'Clear' : 'איפוס'}
       </Button>
@@ -91,7 +72,8 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
         variant='contained'
         onClick={() => setIsGrid((prev) => (prev = !prev))}
       >
-        {isGrid ? 'List' : 'Grid'}
+        {(prefs.isEnglish && (isGrid ? 'List' : 'Grid')) ||
+          (isGrid ? 'רשימה' : 'טבלה')}
       </Button>
     </section>
   )
