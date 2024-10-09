@@ -6,31 +6,7 @@
     padding: rem(10px) 1rem;
     
     nav {
-        display: flex;
-        width: 100%;
-        align-items: center;
-
-        gap: 1em;
-        
-        font-size: .8em;
-        a{
-
-            color: $dark-blue;
-
-            
-            &:hover{
-                color: $bold-navy;
-                
-            }
-        }
-        
-        .active {
-            color: $dark-green;
-            &:hover{
-
-                color: $dark-green-hover;
-            }
-        }
+      
 
         .logo {
             font-size: 1.4em;

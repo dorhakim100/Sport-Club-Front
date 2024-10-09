@@ -7,6 +7,34 @@ button {
 	cursor: pointer;
 }
 
+nav {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    gap: 1em;
+    
+    font-size: .8em;
+    a{
+
+        color: $dark-blue;
+
+        
+        &:hover{
+            color: $bold-navy;
+            
+        }
+    }
+    
+    .active {
+        color: $dark-green;
+        &:hover{
+
+            color: $dark-green-hover;
+        }
+    }
+}
+
 .btn-link {
 	border: 0;
 	background-color: transparent;

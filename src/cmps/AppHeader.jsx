@@ -65,8 +65,8 @@ export function AppHeader() {
             path: `${section}/tennis`,
           },
           {
-            text: prefs.isEnglish ? 'Iteme Center' : 'מרכז הטיפולים',
-            path: `${section}/iteme`,
+            text: prefs.isEnglish ? 'Care Center' : 'מרכז הטיפולים',
+            path: `${section}/care`,
           },
           {
             text: prefs.isEnglish ? 'Restaurant' : 'שף הכפר',

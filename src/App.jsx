@@ -15,7 +15,13 @@ import {
 import { Class } from './pages/Class.jsx'
 import { Schedule } from './pages/Schedule.jsx'
 import { TrainerIndex } from './pages/TrainerIndex.jsx'
-import { Activities } from './pages/Activities.jsx'
+import {
+  Activities,
+  Swimming,
+  Tennis,
+  Care,
+  Restaurant,
+} from './pages/Activities.jsx'
 import { ItemIndex } from './pages/ItemIndex'
 import { ItemDetails } from './pages/ItemDetails'
 import { LoginSignup } from './pages/LoginSignup.jsx'
@@ -52,7 +58,12 @@ export function App() {
           <Route path='class/schedule' element={<Schedule />} />
           <Route path='class/trainer' element={<TrainerIndex />} />
 
-          <Route path='activities' element={<Activities />} />
+          <Route path='activities' element={<Activities />}>
+            <Route path='swimming' element={<Swimming />} />
+            <Route path='tennis' element={<Tennis />} />
+            <Route path='care' element={<Care />} />
+            <Route path='restaurant' element={<Restaurant />} />
+          </Route>
           <Route path='item' element={<ItemIndex />} />
           <Route path='item/:itemId' element={<ItemDetails />} />
           <Route path='user/:id' element={<UserDetails />} />
