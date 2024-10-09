@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router'
 import { HomePage } from './pages/HomePage'
 import { AboutUs, AboutTeam, AboutVision } from './pages/AboutUs'
 import { Class } from './pages/Class.jsx'
+import { Schedule } from './pages/Schedule.jsx'
+import { TrainerIndex } from './pages/TrainerIndex.jsx'
 import { Activities } from './pages/Activities.jsx'
 import { CarIndex } from './pages/CarIndex'
 import { CarDetails } from './pages/CarDetails'
@@ -34,6 +36,9 @@ export function App() {
             <Route path='vision' element={<AboutVision />} />
           </Route>
           <Route path='class' element={<Class />} />
+          <Route path='class/schedule' element={<Schedule />} />
+          <Route path='class/trainer' element={<TrainerIndex />} />
+
           <Route path='activities' element={<Activities />} />
           <Route path='car' element={<CarIndex />} />
           <Route path='car/:carId' element={<CarDetails />} />

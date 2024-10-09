@@ -7,12 +7,15 @@ export function DropDown({ options, isDropdownVisible, setDropdownVisible }) {
   const [selectedOption, setSelectedOption] = useState(null)
   const navigate = useNavigate()
 
-  const handleOptionClick = () => {
+  const handleMouseLeave = () => {
     // setSelectedOption(option)
     setDropdownVisible(false)
   }
+  const handleOptionClick = () => {
+    setDropdownVisible(false)
+  }
   return (
-    <div className='dropdown-menu'>
+    <div className='dropdown-menu' onMouseLeave={handleMouseLeave}>
       <ul>
         {options.map((option) => {
           return (
