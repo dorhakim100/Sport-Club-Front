@@ -1,20 +1,15 @@
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 export function ItemPreview({ item }) {
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
   return (
     <article className='preview'>
       <header>
-        <Link to={`/item/${item._id}`}>{item.vendor}</Link>
+        <Link to={`/item/${item._id}`}>
+          {prefs.isEnglish ? item.title.eng : item.title.he}
+        </Link>
       </header>
-
-      <p>
-        Speed: <span>{item.speed.toLocaleString()} Km/h</span>
-      </p>
-      {item.owner && (
-        <p>
-          Owner: <span>{item.owner.fullname}</span>
-        </p>
-      )}
     </article>
   )
 }

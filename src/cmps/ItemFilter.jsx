@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
+import { Button } from '@mui/material'
 
-export function ItemFilter({ filterBy, setFilterBy }) {
+export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
   const prefs = useSelector((storeState) => storeState.userModule.prefs)
   const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
 
@@ -60,38 +61,7 @@ export function ItemFilter({ filterBy, setFilterBy }) {
         {prefs.isEnglish ? 'Clear' : 'איפוס'}
       </button>
       <h3> {prefs.isEnglish ? 'Sort' : 'מיין לפי'}:</h3>
-      <div className='sort-field'>
-        <label>
-          <span>Speed</span>
-          <input
-            type='radio'
-            name='sortField'
-            value='speed'
-            checked={filterToEdit.sortField === 'speed'}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <span>Vendor</span>
-          <input
-            type='radio'
-            name='sortField'
-            value='vendor'
-            checked={filterToEdit.sortField === 'vendor'}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <span>Owner</span>
-          <input
-            type='radio'
-            name='sortField'
-            value='owner'
-            checked={filterToEdit.sortField === 'owner'}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
+
       <div className='sort-dir'>
         <label>
           <span>Asce</span>
@@ -114,9 +84,15 @@ export function ItemFilter({ filterBy, setFilterBy }) {
           />
         </label>
       </div>
-      <button className='btn-clear' onClick={clearSort}>
+      <Button className='btn-clear' variant='contained' onClick={clearSort}>
         {prefs.isEnglish ? 'Clear' : 'איפוס'}
-      </button>
+      </Button>
+      <Button
+        variant='contained'
+        onClick={() => setIsGrid((prev) => (prev = !prev))}
+      >
+        {isGrid ? 'List' : 'Grid'}
+      </Button>
     </section>
   )
 }

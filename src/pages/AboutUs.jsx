@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 export function AboutUs() {
-  const [count, setCount] = useState(100)
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
 
   function onTellMeMore() {
     console.log('Telling you more')
@@ -12,10 +13,16 @@ export function AboutUs() {
     <section className='about-container'>
       <h2>About Us</h2>
       <nav>
-        <NavLink to='facilities'>Facilities</NavLink>
-        <NavLink to='team'>Team</NavLink>
-        <NavLink to='organization'>Organization</NavLink>
-        <NavLink to='accessibility'>Accessibility</NavLink>
+        <NavLink to='facilities'>
+          {prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}
+        </NavLink>
+        <NavLink to='team'>{prefs.isEnglish ? 'Team' : 'צוות המועדון'}</NavLink>
+        <NavLink to='organization'>
+          {prefs.isEnglish ? 'Organization' : 'עמותה'}
+        </NavLink>
+        <NavLink to='accessibility'>
+          {prefs.isEnglish ? 'Accessibility' : 'נגישות'}
+        </NavLink>
       </nav>
 
       <section>
@@ -24,11 +31,22 @@ export function AboutUs() {
     </section>
   )
 }
+export function Facilities() {
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+
+  return (
+    <section className='facilities-container'>
+      <span> {prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
+    </section>
+  )
+}
 
 export function AboutTeam() {
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+
   return (
     <section>
-      <span>team</span>{' '}
+      <span>{prefs.isEnglish ? 'Team' : 'צוות המועדון'}</span>{' '}
       <ul>
         <li>Popo Decaprio </li>
         <li>Jini Baba</li>
@@ -37,18 +55,11 @@ export function AboutTeam() {
   )
 }
 
-export function Facilities() {
-  return (
-    <section className='facilities-container'>
-      <span>facilities</span>
-    </section>
-  )
-}
-
 export function Organization() {
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
   return (
     <section>
-      <span>organization</span>
+      <span> {prefs.isEnglish ? 'Organization' : 'עמותה'}</span>
       <ul>
         <li>Save the day</li>
         <li>Spread some love</li>
@@ -59,24 +70,10 @@ export function Organization() {
 }
 
 export function Accessibility() {
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
   return (
     <section className='accessibility-container'>
-      <span>accessibility</span>
+      <span> {prefs.isEnglish ? 'Accessibility' : 'נגישות'}</span>
     </section>
   )
-}
-
-function FancyBox(props) {
-  return (
-    <div className='fancy-box'>
-      <button style={{ float: 'right' }} onClick={props.onClose}>
-        x
-      </button>
-      {props.children}
-    </div>
-  )
-}
-
-FancyBox.propTypes = {
-  onClose: PropTypes.func.isRequired,
 }

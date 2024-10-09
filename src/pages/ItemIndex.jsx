@@ -10,7 +10,7 @@ import {
 } from '../store/actions/item.actions'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { itemService } from '../services/item/'
+import { itemService } from '../services/item/item.service'
 import { userService } from '../services/user'
 
 import { ItemList } from '../cmps/ItemList'
@@ -19,6 +19,9 @@ import { ItemFilter } from '../cmps/ItemFilter'
 export function ItemIndex() {
   const [filterBy, setFilterBy] = useState(itemService.getDefaultFilter())
   const items = useSelector((storeState) => storeState.itemModule.items)
+  console.log(items)
+
+  const [isGrid, setIsGrid] = useState(true)
 
   useEffect(() => {
     loadItems(filterBy)
@@ -65,11 +68,17 @@ export function ItemIndex() {
           <button onClick={onAddItem}>Add a Item</button>
         )}
       </header>
-      <ItemFilter filterBy={filterBy} setFilterBy={setFilterBy} />
+      <ItemFilter
+        filterBy={filterBy}
+        setFilterBy={setFilterBy}
+        isGrid={isGrid}
+        setIsGrid={setIsGrid}
+      />
       <ItemList
         items={items}
         onRemoveItem={onRemoveItem}
         onUpdateItem={onUpdateItem}
+        isGrid={isGrid}
       />
     </main>
   )

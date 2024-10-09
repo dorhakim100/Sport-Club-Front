@@ -1,0 +1,48 @@
+.items-list-container{
+
+
+  
+
+
+    .item-container{
+        display: flex;
+        place-items: center;
+        justify-content: space-between;
+        padding: 1em;
+        background-color: $light-gray;
+        border: 2px solid $medium-gray;
+        border-radius: 5px;
+        
+        height: fit-content;
+        min-height: 100px;
+
+        transition: 0.2s ease-out;
+
+        a{
+            color: $dark-blue;
+        }
+        
+        &:hover{
+            background-color: $medium-gray;
+            border: 2px solid $bold-navy;
+            a{
+                color: $soft-green;
+            }
+            
+    }
+    }
+}
+
+.items-list-container.grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr); 
+     gap: 0.5em;
+
+     .item-container{
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+     }
+
+
+}

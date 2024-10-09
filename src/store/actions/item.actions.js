@@ -1,4 +1,4 @@
-import { itemService } from '../../services/item'
+import { itemService } from '../../services/item/item.service'
 import { store } from '../store'
 import {
   ADD_ITEM,
@@ -10,6 +10,7 @@ import {
 } from '../reducers/item.reducer'
 
 export async function loadItems(filterBy) {
+  console.log(filterBy)
   try {
     const items = await itemService.query(filterBy)
     store.dispatch(getCmdSetItems(items))

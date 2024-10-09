@@ -14,7 +14,7 @@ export function AppHeader() {
   const navigate = useNavigate()
 
   const prefs = useSelector((storeState) => storeState.userModule.prefs)
-  console.log(prefs)
+  // console.log(prefs)
 
   const [isDropdownVisible, setDropdownVisible] = useState(false)
   const [hoveredSection, setHoveredSection] = useState()
