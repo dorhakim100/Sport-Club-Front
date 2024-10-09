@@ -9,10 +9,17 @@ import MailIcon from '@mui/icons-material/Mail'
 export function AppFooter() {
   const count = useSelector((storeState) => storeState.userModule.count)
 
-  const address = 'קרן היסוד 19, כפר שמריהו'
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+
+  const address = prefs.isEnglish
+    ? 'Keren hayesod 19, Kfar Shmaryahu'
+    : 'קרן היסוד 19, כפר שמריהו'
+
   const phone = '09-958-0404'
   const email = 'service.kfar@gmail.com'
-  const rights = `כל הזכויות שמורות למועדון הספורט כפר שמריהו`
+  const rights = prefs.isEnglish
+    ? 'All rights reserved, Sport Club Kfar Shmaryahu'
+    : `כל הזכויות שמורות למועדון הספורט כפר שמריהו`
 
   return (
     <footer className='app-footer full'>

@@ -65,8 +65,8 @@ export function AppHeader() {
             path: `${section}/tennis`,
           },
           {
-            text: prefs.isEnglish ? 'Care Center' : 'מרכז הטיפולים',
-            path: `${section}/care`,
+            text: prefs.isEnglish ? 'Iteme Center' : 'מרכז הטיפולים',
+            path: `${section}/iteme`,
           },
           {
             text: prefs.isEnglish ? 'Restaurant' : 'שף הכפר',
@@ -127,6 +127,10 @@ export function AppHeader() {
           </div>
         </NavLink>
 
+        <NavLink to='item'>
+          {' '}
+          <span>{prefs.isEnglish ? 'Store' : 'חנות'}</span>
+        </NavLink>
         <NavLink to='activities'>
           <div
             className='menu'
@@ -164,7 +168,6 @@ export function AppHeader() {
             )}
           </div>
         </NavLink>
-        <NavLink to='car'>Cars</NavLink>
         {/* <NavLink to='chat'>Chat</NavLink>
         <NavLink to='review'>Review</NavLink> */}
 

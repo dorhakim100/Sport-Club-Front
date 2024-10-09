@@ -2,14 +2,22 @@ import { useState } from 'react'
 import React from 'react'
 import { Routes, Route } from 'react-router'
 
+import { useSelector } from 'react-redux'
+
 import { HomePage } from './pages/HomePage'
-import { AboutUs, AboutTeam, AboutVision } from './pages/AboutUs'
+import {
+  AboutUs,
+  AboutTeam,
+  Facilities,
+  Organization,
+  Accessibility,
+} from './pages/AboutUs'
 import { Class } from './pages/Class.jsx'
 import { Schedule } from './pages/Schedule.jsx'
 import { TrainerIndex } from './pages/TrainerIndex.jsx'
 import { Activities } from './pages/Activities.jsx'
-import { CarIndex } from './pages/CarIndex'
-import { CarDetails } from './pages/CarDetails'
+import { ItemIndex } from './pages/ItemIndex'
+import { ItemDetails } from './pages/ItemDetails'
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
@@ -23,25 +31,30 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import './App.css'
 
 export function App() {
-  const [count, setCount] = useState(0)
+  const prefs = useSelector((storeState) => storeState.userModule.prefs)
 
   return (
-    <main className='main-container'>
+    <main
+      className='main-container'
+      style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
+    >
       <AppHeader />
       <section className='page-container'>
         <Routes>
           <Route path='' element={<HomePage />} />
           <Route path='about' element={<AboutUs />}>
             <Route path='team' element={<AboutTeam />} />
-            <Route path='vision' element={<AboutVision />} />
+            <Route path='facilities' element={<Facilities />} />
+            <Route path='organization' element={<Organization />} />
+            <Route path='accessibility' element={<Accessibility />} />
           </Route>
           <Route path='class' element={<Class />} />
           <Route path='class/schedule' element={<Schedule />} />
           <Route path='class/trainer' element={<TrainerIndex />} />
 
           <Route path='activities' element={<Activities />} />
-          <Route path='car' element={<CarIndex />} />
-          <Route path='car/:carId' element={<CarDetails />} />
+          <Route path='item' element={<ItemIndex />} />
+          <Route path='item/:itemId' element={<ItemDetails />} />
           <Route path='user/:id' element={<UserDetails />} />
           <Route path='login' element={<LoginSignup />}>
             <Route index element={<Login />} />

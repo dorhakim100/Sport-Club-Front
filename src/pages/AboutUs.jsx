@@ -9,27 +9,18 @@ export function AboutUs() {
     console.log('Telling you more')
   }
   return (
-    <section>
+    <section className='about-container'>
       <h2>About Us</h2>
       <nav>
-        <NavLink to='team'>Team</NavLink> |<NavLink to='vision'>Vision</NavLink>
+        <NavLink to='facilities'>Facilities</NavLink>
+        <NavLink to='team'>Team</NavLink>
+        <NavLink to='organization'>Organization</NavLink>
+        <NavLink to='accessibility'>Accessibility</NavLink>
       </nav>
 
       <section>
         <Outlet />
       </section>
-
-      <FancyBox onClose={() => console.log('ok, closing')}>
-        <h3>{count.toLocaleString()} Followers</h3>
-        <button onClick={onTellMeMore}>Tell me More</button>
-      </FancyBox>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni aperiam
-        quo veniam velit dolor reprehenderit, laudantium consequatur neque
-        numquam labore quae. Accusamus libero perferendis ducimus? Alias unde
-        hic quisquam doloremque.
-      </p>
     </section>
   )
 }
@@ -37,7 +28,7 @@ export function AboutUs() {
 export function AboutTeam() {
   return (
     <section>
-      <h2>Best Team</h2>
+      <span>team</span>{' '}
       <ul>
         <li>Popo Decaprio </li>
         <li>Jini Baba</li>
@@ -46,15 +37,31 @@ export function AboutTeam() {
   )
 }
 
-export function AboutVision() {
+export function Facilities() {
+  return (
+    <section className='facilities-container'>
+      <span>facilities</span>
+    </section>
+  )
+}
+
+export function Organization() {
   return (
     <section>
-      <h2>Vision</h2>
+      <span>organization</span>
       <ul>
         <li>Save the day</li>
         <li>Spread some love</li>
         <li>Take over the world</li>
       </ul>
+    </section>
+  )
+}
+
+export function Accessibility() {
+  return (
+    <section className='accessibility-container'>
+      <span>accessibility</span>
     </section>
   )
 }
