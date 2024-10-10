@@ -1,6 +1,6 @@
 .item-filter {
     display: grid;
-    grid-template-columns: 1fr 5em 5em auto;
+    grid-template-columns: repeat(3,1fr);
     align-items: center;
     gap: 0 .5em;
 
@@ -8,13 +8,19 @@
     padding: .5em;
 
     .type-container{
+        grid-column: 2/3;
+        // grid-row: 2/3;
         display: flex;
         gap: 0.5em;
     }
 
+    align-items: center;
+    justify-items: center;
+
     .price-range-container{
+        justify-self: start;
         grid-column: 1/2;
-        grid-row: 2/3;
+        grid-row: 1/2;
         display: grid;
         grid-template-rows: repeat(2,1fr);
 
@@ -33,6 +39,58 @@
 
     }
 
+    .price-range-container {
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+        // padding: 20px;
+        // background-color: #f9f9f9; // Light background for contrast
+        // border-radius: 8px;
+        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+        .prices-container {
+        //   display: flex;
+        //   align-items: center;
+        //   gap: 10px; // Space between the span and input
+        //   margin-bottom: 15px;
+      
+          span {
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: auto;
+            // color: #333;
+          }
+      
+          input[type="number"] {
+            width: 80px;
+            padding: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+      
+            &:focus {
+              border-color: rgba(44, 62, 80, 1);
+              box-shadow: inset 0 2px 4px rgba(63, 81, 181, 0.3);
+              outline: none;
+            }
+      
+            &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+              appearance: none; // Removes the arrows in most browsers
+            }
+          }
+        }
+      
+        // Slider customization
+        .MuiSlider-root {
+          color: #4CAF50; // Customize slider color
+        //   margin-top: 10px;
+        }
+      }
+
     .checkbox-container{
         input[type="checkbox"]{
             display: none;
@@ -50,6 +108,66 @@
             background-color: $primary-light-blue;
 
         }
+    }
+
+    .controller-container{
+        grid-column: 1/3;
+        place-self: start;
+        display: flex;
+        gap: 0.8em;
+        place-items: center;
+
+        .page-controller-container{
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            
+            .page-idx-container{
+                cursor: auto;
+                display: flex;
+                align-items: center;
+                justify-items: center;
+                height: 2em;
+                min-width: 80px;
+
+                background-color: $light-gray;
+                color: $bold-navy;
+            }
+        }
+
+        .page-controller-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          
+            .page-idx-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            //   padding: 0 10px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  // Subtle shadow for depth
+              border: none;
+              outline: none;
+              cursor: auto;
+            }
+          
+            .page-idx {
+                cursor: auto;
+              font-size: 1.2rem;
+              font-weight: bold;
+              color: $bold-navy;  // Adjust color to your design
+            //   background-color: #f5f5f5;  // Light background for contrast
+            //   border-radius: 50%;  // Circular appearance
+            //   width: 40px;
+            //   height: 40px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: background-color 0.3s ease, color 0.3s ease;
+          
+          
+            }
+          }
     }
 
     h3 {
@@ -75,7 +193,9 @@
 
 
     .btn-clear {
-        grid-column: 4;
+        justify-self: end;
+        grid-column: 3/4;
+        grid-row: 2/3;
     }
 
     .sort-field, .sort-dir {

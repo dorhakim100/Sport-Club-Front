@@ -48,7 +48,10 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
   return (
     <CacheProvider value={prefs.isEnglish ? cacheLtr : cacheRtl}>
       <ThemeProvider theme={theme}>
-        <FormControl variant='filled' sx={{ m: 1, minWidth: 120 }}>
+        <FormControl
+          variant='filled'
+          sx={{ m: 1, minWidth: 150, margin: '0', justifySelf: 'end' }}
+        >
           <InputLabel id='sort'>
             {prefs.isEnglish ? 'Price' : 'מחיר'}
           </InputLabel>

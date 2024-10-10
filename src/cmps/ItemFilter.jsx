@@ -4,11 +4,24 @@ import { useSelector } from 'react-redux'
 
 import { Button } from '@mui/material'
 
+import ButtonGroup from '@mui/material/ButtonGroup'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+
 import { SortSelect } from './SortSelect'
+
+import PropTypes from 'prop-types'
+import Slider, { SliderThumb } from '@mui/material/Slider'
+import { styled } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
+import Tooltip from '@mui/material/Tooltip'
+import Box from '@mui/material/Box'
+import { itemService } from '../services/item/item.service'
 
 export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
   const prefs = useSelector((storeState) => storeState.userModule.prefs)
   const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
+  const [price, setPrice] = useState(filterToEdit.maxPrice || '')
 
   useEffect(() => {
     setFilterBy(filterToEdit)
@@ -16,8 +29,9 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
 
   function handleChange(ev) {
     const type = ev.target.type
-    const field = ev.target.name
+    let field = ev.target.name
     let value
+    console.log(ev.target)
 
     console.log(type)
     console.log(field)
@@ -50,7 +64,17 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
         }
         break
     }
+
     setFilterToEdit({ ...filterToEdit, [field]: value })
+  }
+
+  const handleChangeCommitted = (ev, newValue) => {
+    setFilterToEdit({ ...filterToEdit, maxPrice: price })
+  }
+
+  const onRangeChange = (ev) => {
+    const priceToSet = ev.target.value
+    setPrice(priceToSet)
   }
 
   function clearFilter() {
@@ -60,16 +84,25 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
       maxPrice: '',
       types: [],
       sortDir: '',
+      pageIdx: 0,
     })
   }
 
-  function clearSort() {
-    setFilterToEdit({ ...filterToEdit, sortField: '', sortDir: '' })
+  const onPageNavigation = async (diff) => {
+    if (filterToEdit.pageIdx + diff === -1) return
+    const maxPage = await itemService.getMaxPage(filterToEdit)
+    if (filterToEdit.pageIdx + diff === maxPage) {
+      setFilterToEdit({ ...filterToEdit, pageIdx: 0 })
+
+      return
+    }
+
+    setFilterToEdit({ ...filterToEdit, pageIdx: filterToEdit.pageIdx + diff })
   }
 
   return (
     <section className='item-filter'>
-      <h3> {prefs.isEnglish ? 'Filter' : 'סינון'}:</h3>
+      {/* <h3> {prefs.isEnglish ? 'Filter' : 'סינון'}:</h3> */}
       <div className='type-container'>
         <div className='checkbox-container'>
           <input
@@ -109,15 +142,20 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
       <div className='price-range-container'>
         <div className='prices-container'>
           <span>{prefs.isEnglish ? 'Max Price' : 'מחיר מקסימלי'}</span>
-          <span>-</span>
+          {/* <span>-</span> */}
           <input
             type='number'
-            value={filterToEdit.maxPrice}
+            value={price}
             min='20'
             max='800'
+            name='maxPrice'
+            onChange={(event) => {
+              handleChange(event)
+              setPrice(event.target.value)
+            }}
           />
         </div>
-        <input
+        {/* <input
           type='range'
           min='20'
           max='800'
@@ -126,6 +164,18 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
           placeholder={prefs.isEnglish ? 'Max. price' : 'מחיר מקסימלי'}
           onChange={handleChange}
           required
+        /> */}
+        {/* <Typography gutterBottom>pretto.fr</Typography> */}
+        <PrettoSlider
+          valueLabelDisplay='auto'
+          aria-label='pretto slider'
+          // defaultValue={20}
+          min={20}
+          max={800}
+          value={price || ''}
+          onChange={onRangeChange}
+          onChangeCommitted={handleChangeCommitted}
+          name='maxPrice'
         />
       </div>
       <Button className='btn-clear' variant='contained' onClick={clearFilter}>
@@ -137,13 +187,75 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
         setFilterToEdit={setFilterToEdit}
         prefs={prefs}
       />
-      <Button
-        variant='contained'
-        onClick={() => setIsGrid((prev) => (prev = !prev))}
-      >
-        {(prefs.isEnglish && (isGrid ? 'List' : 'Grid')) ||
-          (isGrid ? 'רשימה' : 'טבלה')}
-      </Button>
+      <div className='controller-container'>
+        <ButtonGroup
+          variant='contained'
+          aria-label='Basic button group'
+          dir='ltr'
+          className='page-controller-container'
+        >
+          <Button onClick={() => onPageNavigation(1)}>
+            <ArrowBackIosNewIcon />
+          </Button>
+          {/* <Button disabled={true}>{filterBy.pageIdx + 1}</Button> */}
+          <div className='page-idx-container'>
+            <span className='page-idx'>{filterToEdit.pageIdx + 1}</span>
+          </div>
+
+          <Button
+            disabled={filterToEdit.pageIdx === 0}
+            onClick={() => onPageNavigation(-1)}
+          >
+            <ArrowForwardIosIcon />
+          </Button>
+        </ButtonGroup>
+        <Button
+          variant='contained'
+          onClick={() => setIsGrid((prev) => (prev = !prev))}
+        >
+          {(prefs.isEnglish && (isGrid ? 'List' : 'Grid')) ||
+            (isGrid ? 'רשימה' : 'טבלה')}
+        </Button>
+      </div>
     </section>
   )
 }
+
+const PrettoSlider = styled(Slider)({
+  color: '#52af77',
+  height: 8,
+  '& .MuiSlider-track': {
+    border: 'none',
+  },
+  '& .MuiSlider-thumb': {
+    height: 24,
+    width: 24,
+    backgroundColor: '#fff',
+    border: '2px solid currentColor',
+    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+      boxShadow: 'inherit',
+    },
+    '&::before': {
+      display: 'none',
+    },
+  },
+  '& .MuiSlider-valueLabel': {
+    lineHeight: 1.2,
+    fontSize: 12,
+    background: 'unset',
+    padding: 0,
+    width: 32,
+    height: 32,
+    borderRadius: '50% 50% 50% 0',
+    backgroundColor: '#52af77',
+    transformOrigin: 'bottom left',
+    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
+    '&::before': { display: 'none' },
+    '&.MuiSlider-valueLabelOpen': {
+      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+    },
+    '& > *': {
+      transform: 'rotate(45deg)',
+    },
+  },
+})
