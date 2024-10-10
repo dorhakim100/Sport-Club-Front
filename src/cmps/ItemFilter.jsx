@@ -9,6 +9,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import { SortSelect } from './SortSelect'
+import { Loader } from './Loader'
 
 import PropTypes from 'prop-types'
 import Slider, { SliderThumb } from '@mui/material/Slider'
@@ -18,10 +19,17 @@ import Tooltip from '@mui/material/Tooltip'
 import Box from '@mui/material/Box'
 import { itemService } from '../services/item/item.service'
 
-export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
+export function ItemFilter({
+  filterBy,
+  setFilterBy,
+  isGrid,
+  setIsGrid,
+  maxPage,
+}) {
   const prefs = useSelector((storeState) => storeState.userModule.prefs)
   const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
   const [price, setPrice] = useState(filterToEdit.maxPrice || '')
+  console.log(maxPage)
 
   useEffect(() => {
     setFilterBy(filterToEdit)
@@ -31,10 +39,10 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
     const type = ev.target.type
     let field = ev.target.name
     let value
-    console.log(ev.target)
+    // console.log(ev.target)
 
-    console.log(type)
-    console.log(field)
+    // console.log(type)
+    // console.log(field)
 
     switch (type) {
       case 'text':
@@ -65,11 +73,11 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
         break
     }
 
-    setFilterToEdit({ ...filterToEdit, [field]: value })
+    setFilterToEdit({ ...filterToEdit, [field]: value, pageIdx: 0 })
   }
 
   const handleChangeCommitted = (ev, newValue) => {
-    setFilterToEdit({ ...filterToEdit, maxPrice: price })
+    setFilterToEdit({ ...filterToEdit, maxPrice: price, pageIdx: 0 })
   }
 
   const onRangeChange = (ev) => {
@@ -88,9 +96,9 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
     })
   }
 
-  const onPageNavigation = async (diff) => {
+  const onPageNavigation = (diff) => {
     if (filterToEdit.pageIdx + diff === -1) return
-    const maxPage = await itemService.getMaxPage(filterToEdit)
+    // const maxPage = await itemService.getMaxPage(filterToEdit)
     if (filterToEdit.pageIdx + diff === maxPage) {
       setFilterToEdit({ ...filterToEdit, pageIdx: 0 })
 
@@ -205,6 +213,9 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
           <Button
             disabled={filterToEdit.pageIdx === 0}
             onClick={() => onPageNavigation(-1)}
+            sx={{
+              cursor: filterToEdit.pageIdx === 0 ? 'not-allowed' : 'pointer',
+            }}
           >
             <ArrowForwardIosIcon />
           </Button>
@@ -217,6 +228,7 @@ export function ItemFilter({ filterBy, setFilterBy, isGrid, setIsGrid }) {
             (isGrid ? 'רשימה' : 'טבלה')}
         </Button>
       </div>
+      <Loader />
     </section>
   )
 }

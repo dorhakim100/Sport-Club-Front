@@ -20,12 +20,17 @@ export function ItemIndex() {
   const [filterBy, setFilterBy] = useState(itemService.getDefaultFilter())
   const items = useSelector((storeState) => storeState.itemModule.items)
   const prefs = useSelector((storeState) => storeState.userModule.prefs)
-  console.log(filterBy)
+  const [maxPage, setMaxPage] = useState(itemService.getMaxPage(filterBy))
 
   const [isGrid, setIsGrid] = useState(true)
 
   useEffect(() => {
-    loadItems(filterBy)
+    const setItems = async () => {
+      loadItems(filterBy)
+      const max = await itemService.getMaxPage(filterBy)
+      setMaxPage(max)
+    }
+    setItems()
   }, [filterBy])
 
   async function onRemoveItem(itemId) {
@@ -74,6 +79,7 @@ export function ItemIndex() {
         setFilterBy={setFilterBy}
         isGrid={isGrid}
         setIsGrid={setIsGrid}
+        maxPage={maxPage}
       />
       <ItemList
         items={items}

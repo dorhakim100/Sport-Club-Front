@@ -36,7 +36,7 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
 
   const handleChange = (event) => {
     const sortDir = event.target.value
-    setFilterToEdit({ ...filterToEdit, sortDir })
+    setFilterToEdit({ ...filterToEdit, sortDir, pageIdx: 0 })
   }
 
   // Create theme based on language preference
@@ -50,7 +50,13 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
       <ThemeProvider theme={theme}>
         <FormControl
           variant='filled'
-          sx={{ m: 1, minWidth: 150, margin: '0', justifySelf: 'end' }}
+          sx={{
+            m: 1,
+            minWidth: 150,
+            margin: '0',
+            justifySelf: 'end',
+            textAlign: 'start',
+          }}
         >
           <InputLabel id='sort'>
             {prefs.isEnglish ? 'Price' : 'מחיר'}
@@ -61,13 +67,34 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
             onChange={handleChange}
             value={filterToEdit.sortDir}
           >
-            <MenuItem value=''>
+            <MenuItem
+              value=''
+              sx={{
+                textAlign: prefs.isEnglish ? 'left' : 'right',
+                display: 'flex',
+                justifyContent: prefs.isEnglish ? 'flex-start' : 'flex-end',
+              }}
+            >
               <em>{prefs.isEnglish ? 'None' : 'איפוס'}</em>
             </MenuItem>
-            <MenuItem value={1}>
+            <MenuItem
+              value={1}
+              sx={{
+                textAlign: prefs.isEnglish ? 'left' : 'right',
+                display: 'flex',
+                justifyContent: prefs.isEnglish ? 'flex-start' : 'flex-end',
+              }}
+            >
               {prefs.isEnglish ? 'Low to High' : 'מהנמוך לגבוה'}
             </MenuItem>
-            <MenuItem value={-1}>
+            <MenuItem
+              value={-1}
+              sx={{
+                textAlign: prefs.isEnglish ? 'left' : 'right',
+                display: 'flex',
+                justifyContent: prefs.isEnglish ? 'flex-start' : 'flex-end',
+              }}
+            >
               {prefs.isEnglish ? 'High to Low' : 'מהגבוה לנמוך'}
             </MenuItem>
           </Select>
