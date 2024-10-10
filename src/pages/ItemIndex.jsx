@@ -20,7 +20,7 @@ export function ItemIndex() {
   const [filterBy, setFilterBy] = useState(itemService.getDefaultFilter())
   const items = useSelector((storeState) => storeState.itemModule.items)
   const prefs = useSelector((storeState) => storeState.userModule.prefs)
-  console.log(items)
+  console.log(filterBy)
 
   const [isGrid, setIsGrid] = useState(true)
 

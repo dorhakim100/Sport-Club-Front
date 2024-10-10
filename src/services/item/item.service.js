@@ -20,23 +20,32 @@ if (!localStorage.getItem(STORAGE_KEY)) {
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
+  console.log(filterBy)
   var items = await storageService.query(STORAGE_KEY)
-  const { txt, maxPrice, sortField, sortDir } = filterBy
+  const { txt, maxPrice, sortDir, types } = filterBy
 
   if (txt) {
     const regex = new RegExp(filterBy.txt, 'i')
     items = items.filter(
-      (item) => regex.test(item.vendor) || regex.test(item.description)
+      (item) =>
+        regex.test(item.title.he) ||
+        regex.test(item.title.eng) ||
+        regex.test(item.description.he) ||
+        regex.test(item.description.eng)
     )
   }
   if (maxPrice) {
     items = items.filter((item) => item.price <= maxPrice)
   }
 
-  if (sortField === 'price' || sortField === 'title') {
-    items.sort(
-      (item1, item2) => (item1[sortField] - item2[sortField]) * +sortDir
+  if (types.length > 0) {
+    items = items.filter((item) =>
+      types.some((type) => item.types.includes(type))
     )
+  }
+
+  if (sortDir) {
+    items.sort((item1, item2) => (item1.price - item2.price) * +sortDir)
   }
 
   return items
@@ -103,9 +112,8 @@ function getDefaultFilter() {
   return {
     txt: '',
     maxPrice: '',
-    sortField: '',
     sortDir: '',
-    type: [],
+    types: [],
   }
 }
 
