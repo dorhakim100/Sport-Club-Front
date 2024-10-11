@@ -1,16 +1,12 @@
 @font-face {
-    font-family: 'Alef';
-    src: url('../../../../public/fonts/Alef-Regular.woff2') format('woff2'),
-         url('../../../../public/fonts/Alef-Regular.woff') format('woff'),
-         url('../../../../public/fonts/Alef-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-  }
+  font-family: alef;
+  src: url('public/fonts/Alef-Regular.ttf');
+}
   
   // Apply to body and headings
   body {
-    font-family: 'Alef', sans-serif;
-    font-size: 16px;
+    font-family: alef;
+    // font-size: 16px;
   }
   
 

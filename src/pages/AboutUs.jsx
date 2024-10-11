@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 export function AboutUs() {
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
   function onTellMeMore() {
     console.log('Telling you more')
@@ -32,7 +32,7 @@ export function AboutUs() {
   )
 }
 export function Facilities() {
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
   return (
     <section className='facilities-container'>
@@ -42,7 +42,7 @@ export function Facilities() {
 }
 
 export function AboutTeam() {
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
   return (
     <section>
@@ -56,7 +56,7 @@ export function AboutTeam() {
 }
 
 export function Organization() {
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   return (
     <section>
       <span> {prefs.isEnglish ? 'Organization' : 'עמותה'}</span>
@@ -69,8 +69,8 @@ export function Organization() {
   )
 }
 
-export function Accessibility() {
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+export function AccessibilityPage() {
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   return (
     <section className='accessibility-container'>
       <span> {prefs.isEnglish ? 'Accessibility' : 'נגישות'}</span>

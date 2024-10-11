@@ -9,7 +9,7 @@ import {
   SET_USER,
   SET_USERS,
   SET_WATCHED_USER,
-  SET_PREFS,
+  // SET_PREFS,
 } from '../reducers/user.reducer'
 
 export async function loadUsers() {
@@ -87,7 +87,7 @@ export async function loadUser(userId) {
   }
 }
 
-export function setPrefs(prefs) {
-  userService.setPrefs(prefs)
-  store.dispatch({ type: SET_PREFS, prefs })
-}
+// export function setPrefs(prefs) {
+//   userService.setPrefs(prefs)
+//   store.dispatch({ type: SET_PREFS, prefs })
+// }

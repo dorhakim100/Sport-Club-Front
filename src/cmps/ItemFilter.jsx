@@ -26,7 +26,7 @@ export function ItemFilter({
   setIsGrid,
   maxPage,
 }) {
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
   const [price, setPrice] = useState(filterToEdit.maxPrice || '')
   console.log(maxPage)

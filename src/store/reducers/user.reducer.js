@@ -15,7 +15,7 @@ const initialState = {
   user: userService.getLoggedinUser(),
   users: [],
   watchedUser: null,
-  prefs: userService.getPrefs(),
+  // prefs: userService.getPrefs(),
 }
 
 export function userReducer(state = initialState, action) {

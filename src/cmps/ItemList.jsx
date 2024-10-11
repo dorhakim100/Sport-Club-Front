@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
 export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   function shouldShowActionBtns(item) {
     const user = userService.getLoggedinUser()
 

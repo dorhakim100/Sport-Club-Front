@@ -15,20 +15,28 @@ import { userService } from '../services/user'
 
 import { ItemList } from '../cmps/ItemList'
 import { ItemFilter } from '../cmps/ItemFilter'
+import { setIsLoading } from '../store/actions/system.actions'
 
 export function ItemIndex() {
   const [filterBy, setFilterBy] = useState(itemService.getDefaultFilter())
   const items = useSelector((storeState) => storeState.itemModule.items)
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const [maxPage, setMaxPage] = useState(itemService.getMaxPage(filterBy))
 
   const [isGrid, setIsGrid] = useState(true)
 
   useEffect(() => {
     const setItems = async () => {
-      loadItems(filterBy)
-      const max = await itemService.getMaxPage(filterBy)
-      setMaxPage(max)
+      try {
+        setIsLoading(true)
+        loadItems(filterBy)
+        const max = await itemService.getMaxPage(filterBy)
+        setMaxPage(max)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setIsLoading(false)
+      }
     }
     setItems()
   }, [filterBy])

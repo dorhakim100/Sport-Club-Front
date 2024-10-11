@@ -9,7 +9,7 @@ import MailIcon from '@mui/icons-material/Mail'
 export function AppFooter() {
   const count = useSelector((storeState) => storeState.userModule.count)
 
-  const prefs = useSelector((storeState) => storeState.userModule.prefs)
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
   const address = prefs.isEnglish
     ? 'Keren hayesod 19, Kfar Shmaryahu'
