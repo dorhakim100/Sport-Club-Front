@@ -1,3 +1,5 @@
+import { userService } from '../../services/user'
+
 export const LOADING_START = 'LOADING_START'
 export const LOADING_DONE = 'LOADING_DONE'
 export const SET_IS_ACCESSIBILITY = 'SET_IS_ACCESSIBILITY'

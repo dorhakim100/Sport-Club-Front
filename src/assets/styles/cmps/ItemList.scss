@@ -1,7 +1,7 @@
 .items-list-container{
 
 
-  
+
 
 
     .item-container{
@@ -10,9 +10,9 @@
         justify-content: space-between;
         padding: 1em;
         background-color: $light-gray;
-        border: 2px solid $medium-gray;
+        // border: 2px solid $medium-gray;
         border-radius: 5px;
-        
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
         height: fit-content;
         min-height: 100px;
 
@@ -24,25 +24,174 @@
         
         &:hover{
             background-color: $medium-gray;
-            border: 2px solid $bold-navy;
+            // border: 2px solid $bold-navy;
             a{
                 color: $soft-green;
             }
             
     }
-    }
+
+}
 }
 
 .items-list-container.grid{
     display: grid;
     grid-template-columns: repeat(3,1fr); 
-     gap: 0.5em;
+    gap: 0.5em;
+    margin: auto;
+    margin-top: 1em;
+    width: 50%;
+    
+    img{
+        width: 150px;
+        height: 150px;
 
-     .item-container{
+        object-fit: cover;
+    }
+    
+    .item-container{
+        display: grid;
+        grid-template-rows: 1fr auto;
+        place-items: center;
+        height: 300px;
+        // width: 300px;
+
+     }
+
+     .preview{
+
+        align-self: start;
         display: flex;
         flex-direction: column;
-        height: 200px;
+
      }
 
 
 }
+
+.items-list-container {
+    min-height: 736.5px;
+    margin: 2em auto;
+    width: 80%; // Increased width for better alignment
+
+    .item-container {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2em;
+    //   place-items: center;
+    //   justify-content: space-between;
+      padding: 1.2em; // Slight increase for better spacing
+      background-color: $light-gray;
+      border-radius: 8px; // Smooth corners
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 3px, rgba(60, 64, 67, 0.15) 0px 1px 3px;
+      min-height: 100px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease; // Smooth transition
+  
+      a {
+        color: $dark-blue;
+        transition: color 0.3s ease; // Smooth transition for link color
+      }
+  
+      &:hover {
+        background-color: $medium-gray;
+        box-shadow: rgba(60, 64, 67, 0.4) 0px 4px 6px; // Stronger shadow on hover
+        a {
+          color: $soft-green;
+        }
+      }
+      .preview{
+        // justify-self: start;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        // justify-items: center;
+        justify-content: space-between;
+
+
+
+      }
+      .img-container{
+          
+          img{
+              width: 150px;
+              border-radius: 8px;
+            }
+        }
+        @media (max-width:470px) {
+          .img-container{
+              display: none;
+          }
+        }
+    }
+  }
+  
+  .items-list-container.grid {
+    min-height: 616px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+
+    @media (max-width:1220px) {
+        
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); // Responsive grid
+    }
+    gap: 1em; // Increased gap for better spacing
+    margin: 2em auto;
+    width: 80%; // Increased width for better alignment
+
+
+   
+  
+    .item-container {
+      display: grid;
+      grid-template-columns: 1fr;
+        justify-items: center;
+        align-items: center;
+        height: 500px;
+
+      padding: 1.5em; // Increase padding for more breathing space
+        a{
+            width: 100%;
+            // font-size: .5em;
+        }
+ .img-container{
+
+        width: 200px; // Full width for responsiveness
+        height: 150px;
+        overflow: hidden;
+
+        img {
+            
+            transition: transform 0.3s ease-in-out; // Smooth transition for scale effect
+            width: 100%; // Full width for responsiveness
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px; // Consistent rounded corners for images
+        }
+    }
+        &:hover{
+
+            img{
+           
+                transform: scale(1.2);
+            }
+    }
+
+    @media (max-width:470px) {
+        .img-container{
+            display: block;
+        }
+      }
+
+    }
+  
+    .preview {
+        align-self: center;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      grid-template-columns: 1fr;
+      align-items: center;
+      justify-items: center;
+      gap: 0.5em; // Spacing between preview items
+    }
+  }
+  
