@@ -171,8 +171,6 @@ export function AppHeader() {
             )}
           </div>
         </NavLink>
-        {/* <NavLink to='chat'>Chat</NavLink>
-        <NavLink to='review'>Review</NavLink> */}
 
         {user?.isAdmin && (
           <NavLink to='/admin'> {prefs.isEnglish ? 'Admin' : 'מנהל'}</NavLink>

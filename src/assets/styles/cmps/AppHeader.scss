@@ -2,12 +2,15 @@
     display: flex;
     min-height: 3.5rem;
 
-    // background-color: $clr4;
+    background-color: white;
+    background-color: $very-light-blue;
     padding: rem(10px) 1rem;
     
     nav {
-      
-
+        display: grid;
+        grid-template-columns: repeat(6,1fr);
+        display: flex;
+        font-size: 2em;
         .logo {
             font-size: 1.4em;
             font-weight: bold;

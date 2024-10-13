@@ -29,7 +29,6 @@ export function ItemFilter({
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
   const [price, setPrice] = useState(filterToEdit.maxPrice || '')
-  console.log(maxPage)
 
   useEffect(() => {
     setFilterBy(filterToEdit)

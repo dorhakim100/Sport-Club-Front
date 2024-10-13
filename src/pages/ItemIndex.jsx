@@ -17,11 +17,14 @@ import { ItemList } from '../cmps/ItemList'
 import { ItemFilter } from '../cmps/ItemFilter'
 import { setIsLoading } from '../store/actions/system.actions'
 
+import cover from '../../public/imgs/picture.jpg'
+import { DynamicCover } from '../cmps/DynamicCover'
+
 export function ItemIndex() {
   const [filterBy, setFilterBy] = useState(itemService.getDefaultFilter())
   const items = useSelector((storeState) => storeState.itemModule.items)
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
-  const [maxPage, setMaxPage] = useState(itemService.getMaxPage(filterBy))
+  const [maxPage, setMaxPage] = useState()
 
   const [isGrid, setIsGrid] = useState(true)
 
@@ -76,6 +79,7 @@ export function ItemIndex() {
 
   return (
     <main className='item-index'>
+      <DynamicCover coverSrc={cover} />
       <header>
         <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
         {userService.getLoggedinUser() && (
