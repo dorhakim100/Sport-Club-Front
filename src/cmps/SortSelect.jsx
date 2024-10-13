@@ -55,12 +55,11 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
             minWidth: 150,
             margin: '0',
             justifySelf: 'end',
+            alignSelf: 'start',
             textAlign: 'start',
           }}
         >
-          <InputLabel id='sort'>
-            {prefs.isEnglish ? 'Price' : 'מחיר'}
-          </InputLabel>
+          <InputLabel id='sort'>{prefs.isEnglish ? 'Sort' : 'מיון'}</InputLabel>
           <Select
             labelId='sort'
             id='sort'

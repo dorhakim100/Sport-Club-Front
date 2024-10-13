@@ -1,6 +1,6 @@
 .item-filter {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: 200px 200px 150px;
     align-items: center;
     gap: 0 .5em;
 
@@ -8,6 +8,7 @@
     // padding: .5em;
 
     .type-container{
+        align-self: start;
         grid-column: 2/3;
         // grid-row: 2/3;
         display: flex;
@@ -92,11 +93,13 @@
       }
 
     .checkbox-container{
+
         input[type="checkbox"]{
             display: none;
         }
         label{
             padding: 5px;
+            font-size: 0.5em;
             border-radius: 5px;
             outline: 1px solid $bold-navy;
             background-color: white;

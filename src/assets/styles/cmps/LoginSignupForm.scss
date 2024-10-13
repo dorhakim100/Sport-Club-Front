@@ -1,26 +1,33 @@
 .login-form,.signup-form{
 
-    display: grid;
+    // display: grid;
 	// width: 80vw;
-	align-items: center;
-	justify-items: center;
+	// align-items: center;
+	// justify-items: center;
 
-	// margin: auto;
-
+    // margin: auto;
+    // width: 50%;
 	padding: 1em;
     form{
-        min-width:300px;
-        width: 40vw;
+        margin-top: 2em;
+        // min-width:300px;
+        // width: 40vw;
     }
 
     .input-container{
-        display: grid;
 
-    grid-template-columns: 3fr 1fr;
+        display: grid;
+        grid-template-columns: 1fr;
+    grid-template-rows: 1fr 50px;
     align-items: center;
     justify-items: center;
     gap: 1em;
     font-size: 0.8em;
+
+    input{
+        max-width: 600px;
+        min-width: 300px;
+    }
     }
 
     .input-container.error{
