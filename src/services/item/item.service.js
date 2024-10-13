@@ -1,6 +1,6 @@
 import { storageService } from '../async-storage.service'
 import { makeId } from '../util.service'
-import { userService } from '../user'
+import { userService } from '../user/user.service'
 
 const STORAGE_KEY = 'item'
 const PAGE_SIZE = 6

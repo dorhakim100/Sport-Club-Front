@@ -1,4 +1,4 @@
-import { userService } from '../services/user'
+import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
 import Button from '@mui/material/Button'

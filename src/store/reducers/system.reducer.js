@@ -1,4 +1,4 @@
-import { userService } from '../../services/user'
+import { userService } from '../../services/user/user.service'
 
 export const LOADING_START = 'LOADING_START'
 export const LOADING_DONE = 'LOADING_DONE'

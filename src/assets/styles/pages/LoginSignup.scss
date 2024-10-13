@@ -1,47 +1,50 @@
-.login-form,
-.signup-form {
-	display: grid;
-	width: min(80%, 300px);
-	margin: auto;
+// .login-form,
+// .signup-form {
+// 	display: grid;
+// 	width: 80vw;
+// 	align-items: center;
+// 	justify-items: center;
 
-	padding: 1em;
+// 	margin: auto;
 
-}
+// 	padding: 1em;
 
-.signup-form {
-	input {
-		width: 100%;
-	}
+// }
 
-    .admin-toggle {
-        display: flex;
-        align-items: center;
-        justify-self: start;
+// .signup-form {
+// 	input {
+// 		width: 100%;
+// 	}
 
-        span {
-            font-size: .8em;
-        }
-    }
-}
+//     .admin-toggle {
+//         display: flex;
+//         align-items: center;
+//         justify-self: start;
 
-.login-page nav {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 2em;
+//         span {
+//             font-size: .8em;
+//         }
+//     }
+// }
 
-	margin-block: 100px 0.5em;
+// .login-page nav {
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: center;
+// 	gap: 2em;
 
-	a {
-		font-size: 0.8em;
-		// color: $clr4;
+// 	margin-block: 100px 0.5em;
 
-		&:hover {
-			// color: $clr1;
-		}
-	}
-	a.active {
-		text-decoration: underline;
-		// color: $clr2;
-	}
-}
+// 	a {
+// 		font-size: 0.8em;
+// 		// color: $clr4;
+
+// 		&:hover {
+// 			// color: $clr1;
+// 		}
+// 	}
+// 	a.active {
+// 		text-decoration: underline;
+// 		// color: $clr2;
+// 	}
+// }

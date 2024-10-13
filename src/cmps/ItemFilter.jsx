@@ -228,7 +228,6 @@ export function ItemFilter({
             (isGrid ? 'רשימה' : 'טבלה')}
         </Button>
       </div>
-      <Loader />
     </section>
   )
 }

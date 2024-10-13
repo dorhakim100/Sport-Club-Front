@@ -5,7 +5,7 @@
   text-align: center;
   max-width: 100vw;
   overflow-x: hidden;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .logo {

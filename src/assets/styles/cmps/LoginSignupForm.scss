@@ -1,0 +1,32 @@
+.login-form,.signup-form{
+
+    display: grid;
+	// width: 80vw;
+	align-items: center;
+	justify-items: center;
+
+	// margin: auto;
+
+	padding: 1em;
+    form{
+        min-width:300px;
+        width: 40vw;
+    }
+
+    .input-container{
+        display: grid;
+
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 1em;
+    font-size: 0.8em;
+    }
+
+    .input-container.error{
+        input{
+            border: 2px solid $light-red;
+        }
+    }
+
+}

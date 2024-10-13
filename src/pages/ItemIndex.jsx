@@ -11,7 +11,7 @@ import {
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { itemService } from '../services/item/item.service'
-import { userService } from '../services/user'
+import { userService } from '../services/user/user.service'
 
 import { ItemList } from '../cmps/ItemList'
 import { ItemFilter } from '../cmps/ItemFilter'

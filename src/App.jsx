@@ -35,6 +35,7 @@ import { Accessibility } from './cmps/Accessibility'
 import { AccessibilityButton } from './cmps/AccessibilityButton'
 import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg.jsx'
+import { Loader } from './cmps/Loader'
 
 import './App.css'
 
@@ -46,6 +47,7 @@ export function App() {
     <>
       <AccessibilityButton />
       <Accessibility bodyRef={bodyRef} />
+      <Loader />
       <main
         className='main-container'
         style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
