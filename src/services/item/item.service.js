@@ -73,20 +73,26 @@ async function remove(itemId) {
 async function save(item) {
   var savedItem
   if (item._id) {
+    console.log(item)
     const itemToSave = {
       _id: item._id,
+      cover: item.cover,
+      preview: item.preview,
       price: item.price,
-      speed: item.speed,
+      quantity: item.quantity,
+      title: item.title,
+      types: item.types,
     }
     savedItem = await storageService.put(STORAGE_KEY, itemToSave)
   } else {
     const itemToSave = {
-      vendor: item.vendor,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729010361/cropping_j9auka.webp',
+      preview: item.preview,
       price: item.price,
-      speed: item.speed,
-      // Later, owner is set by the backend
-      owner: userService.getLoggedinUser(),
-      msgs: [],
+      quantity: item.quantity,
+      title: item.title,
+      types: [],
     }
     savedItem = await storageService.post(STORAGE_KEY, itemToSave)
   }
@@ -112,9 +118,10 @@ function getEmptyItem() {
   return {
     _id: makeId(),
     price: '',
-    title: '',
-    preview: '',
-    type: '',
+    title: { he: '', eng: '' },
+    preview: { he: '', eng: '' },
+    types: [],
+    cover: '',
   }
 }
 
@@ -153,6 +160,9 @@ function _createItems() {
       },
       price: 800,
       types: ['card'],
+      quantity: true,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002831/picture_mz9ke7.jpg',
     },
     {
       _id: makeId(),
@@ -166,6 +176,9 @@ function _createItems() {
       },
       price: 600,
       types: ['card'],
+      quantity: true,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002473/20_rjsrgf.jpg',
     },
     {
       _id: makeId(),
@@ -179,6 +192,9 @@ function _createItems() {
       },
       price: 720,
       types: ['card'],
+      quantity: true,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002513/34_gdwu4o.jpg',
     },
     {
       _id: makeId(),
@@ -192,6 +208,9 @@ function _createItems() {
       },
       price: 520,
       types: ['card'],
+      quantity: true,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002495/32_peuixp.jpg',
     },
     {
       _id: makeId(),
@@ -205,6 +224,9 @@ function _createItems() {
       },
       price: 20,
       types: ['accessories'],
+      quantity: 30,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002558/HPIM0594_g0hqlu.jpg',
     },
     {
       _id: makeId(),
@@ -218,6 +240,9 @@ function _createItems() {
       },
       price: 40,
       types: ['accessories'],
+      quantity: 25,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002533/45_shdnag.jpg',
     },
     {
       _id: makeId(),
@@ -231,6 +256,9 @@ function _createItems() {
       },
       price: 40,
       types: ['accessories'],
+      quantity: 21,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002559/HPIM0347_vdpqdu.jpg',
     },
     {
       _id: makeId(),
@@ -244,6 +272,9 @@ function _createItems() {
       },
       price: 40,
       types: ['accessories'],
+      quantity: 13,
+      cover:
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002831/picture_mz9ke7.jpg',
     },
   ]
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items))

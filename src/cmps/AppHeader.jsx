@@ -29,7 +29,6 @@ export function AppHeader({ bodyRef }) {
   const logoRef = useRef()
 
   const handleScroll = () => {
-    console.log(bodyRef)
     const scrollY = window.scrollY
     if (scrollY > 0) {
       setScrolled(true)

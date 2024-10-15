@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-
+import { useNavigate } from 'react-router-dom'
 import {
   loadItems,
   addItem,
@@ -20,7 +20,10 @@ import { setIsLoading } from '../store/actions/system.actions'
 import cover from '../../public/imgs/picture.jpg'
 import { DynamicCover } from '../cmps/DynamicCover'
 
+import { Button } from '@mui/material'
+
 export function ItemIndex() {
+  const navigate = useNavigate()
   const [filterBy, setFilterBy] = useState(itemService.getDefaultFilter())
   const items = useSelector((storeState) => storeState.itemModule.items)
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -55,22 +58,25 @@ export function ItemIndex() {
 
   async function onAddItem() {
     const item = itemService.getEmptyItem()
-    item.vendor = prompt('Vendor?')
+
+    delete item._id
     try {
       const savedItem = await addItem(item)
-      showSuccessMsg(`Item added (id: ${savedItem._id})`)
+      showSuccessMsg(`Item added`)
+      navigate(`/item/edit/${savedItem._id}`)
     } catch (err) {
       showErrorMsg('Cannot add item')
     }
   }
 
   async function onUpdateItem(item) {
-    const speed = +prompt('New speed?', item.speed)
-    if (speed === 0 || speed === item.speed) return
+    // const speed = +prompt('New speed?', item.speed)
+    // if (speed === 0 || speed === item.speed) return
 
-    const itemToSave = { ...item, speed }
+    // const itemToSave = { ...item, speed }
+
     try {
-      const savedItem = await updateItem(itemToSave)
+      // const savedItem = await updateItem(itemToSave)
       showSuccessMsg(`Item updated, new speed: ${savedItem.speed}`)
     } catch (err) {
       showErrorMsg('Cannot update item')
@@ -83,7 +89,9 @@ export function ItemIndex() {
       <header>
         <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
         {userService.getLoggedinUser() && (
-          <button onClick={onAddItem}>Add a Item</button>
+          <Button variant='contained' onClick={onAddItem}>
+            Add Item
+          </Button>
         )}
       </header>
       <ItemFilter

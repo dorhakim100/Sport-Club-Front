@@ -24,6 +24,7 @@ import {
 } from './pages/Activities.jsx'
 import { ItemIndex } from './pages/ItemIndex'
 import { ItemDetails } from './pages/ItemDetails'
+import { ItemEdit } from './pages/ItemEdit.jsx'
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
@@ -76,6 +77,7 @@ export function App() {
             </Route>
             <Route path='item' element={<ItemIndex />} />
             <Route path='item/:itemId' element={<ItemDetails />} />
+            <Route path='item/edit/:itemId' element={<ItemEdit />} />
             <Route path='user/:id' element={<UserDetails />} />
             <Route path='login' element={<LoginSignup />}>
               <Route index element={<Login />} />

@@ -1,0 +1,36 @@
+.item-edit-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    gap: 2em;
+    padding: 2em;
+
+    .cover-container{
+        width: 300px;
+        border-radius: 5px;
+        img{
+            border-radius: 5px;
+            height: 300px;
+            object-fit: cover;
+        }
+    }
+
+    .upload-button-container{
+        gap: 1em;
+    }
+
+    .input-container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        align-items: center;
+
+    }
+
+    .types-container{
+
+        display: flex;
+        gap: 2em;
+        font-size: 2em;
+    }
+}

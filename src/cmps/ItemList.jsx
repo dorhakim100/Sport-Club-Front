@@ -1,3 +1,4 @@
+import { useNavigate, useParams } from 'react-router-dom'
 import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
@@ -5,6 +6,7 @@ import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
 export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
+  const navigate = useNavigate()
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   function shouldShowActionBtns(item) {
     const user = userService.getLoggedinUser()
@@ -30,7 +32,9 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
                   variant='contained'
                   aria-label='Basic button group'
                 >
-                  <Button onClick={() => onUpdateItem(item)}>Edit</Button>
+                  <Button onClick={() => navigate(`/item/edit/${item._id}`)}>
+                    Edit
+                  </Button>
                   <Button onClick={() => onRemoveItem(item._id)}>Remove</Button>
                 </ButtonGroup>
               )) || (
