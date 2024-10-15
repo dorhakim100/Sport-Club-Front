@@ -1,6 +1,6 @@
 import { storageService } from '../async-storage.service'
 
-const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+const STORAGE_KEY_LOGGEDIN_USER = 'user'
 
 export const userService = {
   login,
@@ -46,10 +46,16 @@ async function update({ _id, score }) {
 }
 
 async function login(userCred) {
-  const users = await storageService.query('user')
-  const user = users.find((user) => user.username === userCred.username)
+  try {
+    console.log(userCred)
+    const users = await storageService.query('user')
+    console.log(users)
+    const user = users.find((user) => user.username === userCred.username)
 
-  if (user) return saveLoggedinUser(user)
+    if (user) return saveLoggedinUser(user)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 async function signup(userCred) {
@@ -115,11 +121,12 @@ function setPrefs(prefs) {
 async function _createAdmin() {
   const userCred = {
     username: 'admin',
-    password: 'admin',
+    password: 'admin123',
     fullname: 'Dor Hakim',
     imgUrl:
       'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png',
     isAdmin: true,
+    email: 'service.kfar@gmail.com',
     ordersIds: [],
   }
 

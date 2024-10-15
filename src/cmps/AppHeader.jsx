@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
-import { useState, useEffect, userRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -9,7 +9,10 @@ import { logout } from '../store/actions/user.actions'
 
 import { DropDown } from '../cmps/DropDown.jsx'
 
-export function AppHeader() {
+import { Button } from '@mui/material'
+import logo from '../../public/imgs/logo.png'
+
+export function AppHeader({ bodyRef }) {
   const user = useSelector((storeState) => storeState.userModule.user)
   const navigate = useNavigate()
 
@@ -19,6 +22,35 @@ export function AppHeader() {
   const [isDropdownVisible, setDropdownVisible] = useState(false)
   const [hoveredSection, setHoveredSection] = useState()
   const [options, setOptions] = useState([])
+
+  const [scrolled, setScrolled] = useState(false)
+  const headerRef = useRef()
+  const waterRef = useRef()
+  const logoRef = useRef()
+
+  const handleScroll = () => {
+    console.log(bodyRef)
+    const scrollY = window.scrollY
+    if (scrollY > 0) {
+      setScrolled(true)
+
+      logoRef.current.style.height = '70px'
+
+      logoRef.current.style.transition = '0.3s ease-out'
+    } else {
+      setScrolled(false)
+      logoRef.current.style.height = '100px'
+
+      logoRef.current.style.transition = '0.3s ease-out'
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   async function onLogout() {
     try {
@@ -104,21 +136,42 @@ export function AppHeader() {
 
   return (
     <header
-      className='app-header full'
+      className={scrolled ? 'app-header sticky full' : 'app-header full'}
       onClick={() => setDropdownVisible(false)}
+      ref={headerRef}
+      onMouseEnter={() => {
+        if (scrolled) {
+          headerRef.current.style.opacity = '1'
+          headerRef.current.style.transition = '0.1s ease-in'
+        }
+      }}
+      onMouseLeave={() => {
+        if (scrolled) {
+          headerRef.current.style.opacity = '0.8'
+          headerRef.current.style.transition = '0.1s ease-in'
+        }
+      }}
     >
       <nav>
-        <NavLink to='/' className='logo'>
-          {prefs.isEnglish ? 'Home' : 'בית'}
+        <NavLink
+          to='/'
+          className='logo'
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <img src={logo} alt='' ref={logoRef} />
         </NavLink>
 
-        <NavLink to='class'>
+        <NavLink
+          to='class'
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <div
             className='menu'
             onMouseEnter={() => {
               setDropdownOptions('class')
               handleMouseEnter('class')
             }}
+            onMouseLeave={() => setDropdownVisible(false)}
           >
             <span>{prefs.isEnglish ? 'Class' : 'חוגים'}</span>
             {isDropdownVisible && hoveredSection === 'class' && (
@@ -130,11 +183,17 @@ export function AppHeader() {
           </div>
         </NavLink>
 
-        <NavLink to='item'>
-          {' '}
+        <NavLink
+          to='item'
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <span>{prefs.isEnglish ? 'Store' : 'חנות'}</span>
         </NavLink>
-        <NavLink to='activities'>
+
+        <NavLink
+          to='activities'
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <div
             className='menu'
             onMouseEnter={() => {
@@ -152,7 +211,11 @@ export function AppHeader() {
             )}
           </div>
         </NavLink>
-        <NavLink to='about'>
+
+        <NavLink
+          to='about'
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <div
             className='menu'
             onMouseEnter={() => {
@@ -160,7 +223,6 @@ export function AppHeader() {
               handleMouseEnter('about')
             }}
             onMouseLeave={handleMouseLeave}
-            // id={'about'}
           >
             <span>{prefs.isEnglish ? 'About' : 'אודות'}</span>
             {isDropdownVisible && hoveredSection === 'about' && (
@@ -173,25 +235,30 @@ export function AppHeader() {
         </NavLink>
 
         {user?.isAdmin && (
-          <NavLink to='/admin'> {prefs.isEnglish ? 'Admin' : 'מנהל'}</NavLink>
+          <NavLink
+            to='/admin'
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            {prefs.isEnglish ? 'Admin' : 'מנהל'}
+          </NavLink>
         )}
 
         {!user && (
-          <NavLink to='login' className='login-link'>
+          <NavLink
+            to='login'
+            className='login-link'
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             {prefs.isEnglish ? 'Login' : 'כניסה'}
           </NavLink>
         )}
+
         {user && (
           <div className='user-info'>
-            <Link to={`user/${user._id}`}>
-              {/* {user.imgUrl && <img src={user.imgUrl} />} */}
-              {user.fullname}
-            </Link>
-            {/* <span className="score">{user.score?.toLocaleString()}</span> */}
-            <button onClick={onLogout}>
-              {' '}
+            <Link to={`user/${user._id}`}>{user.fullname}</Link>
+            <Button onClick={onLogout} variant='contained'>
               {prefs.isEnglish ? 'Logout' : 'יציאה'}
-            </button>
+            </Button>
           </div>
         )}
       </nav>

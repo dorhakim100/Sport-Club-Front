@@ -1,15 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
 import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import { Button } from '@mui/material'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { login, signup } from '../store/actions/user.actions'
+import { setIsLoading } from '../store/actions/system.actions'
 // import { addComment } from '../store/actions/comment.actions'
 
 export function LoginSignupForm({ isSignup }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
-
+  const navigate = useNavigate()
   let initialValues
   let validate
   if (isSignup) {
@@ -28,7 +31,7 @@ export function LoginSignupForm({ isSignup }) {
       if (!values.username) {
         errors.username = prefs.isEnglish ? 'Required' : 'הכרחי'
       } else if (values.username.length < 2) {
-        errors.username = pregs.isEnglish
+        errors.username = prefs.isEnglish
           ? 'Invalid username'
           : 'שם משתמש לא תקין'
       }
@@ -65,7 +68,7 @@ export function LoginSignupForm({ isSignup }) {
       if (!values.username) {
         errors.username = prefs.isEnglish ? 'Required' : 'הכרחי'
       } else if (values.username.length < 2) {
-        errors.username = pregs.isEnglish
+        errors.username = prefs.isEnglish
           ? 'Invalid username'
           : 'שם משתמש לא תקין'
       }
@@ -90,19 +93,38 @@ export function LoginSignupForm({ isSignup }) {
     //   showErrorMsg('Login first')
     //   return
     // }
-
-    const { email, username, fullname } = values
-    const comment = {
-      email,
-      username,
-      fullname,
-      owner: { id: user._id, fullname: user.fullname, imgUrl: user.imgUrl },
+    const { email, username, password, fullname } = values
+    let cred
+    if (isSignup) {
+      cred = {
+        email,
+        username,
+        password,
+        fullname,
+      }
+    } else {
+      cred = {
+        email,
+        username,
+        password,
+      }
     }
     // console.log(comment)
     try {
+      setIsLoading(true)
       //   await onAddComment(comment)
+      if (isSignup) {
+        const signed = await signup(cred)
+        showSuccessMsg('Signed in successfully')
+      } else {
+        const logged = await login(cred)
+        showSuccessMsg('Loged in successfully')
+      }
+      navigate('/')
     } catch (err) {
       console.log(err)
+    } finally {
+      setIsLoading(false)
     }
   }
 

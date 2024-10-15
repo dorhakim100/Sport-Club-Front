@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 
 import { userService } from '../services/user/user.service'

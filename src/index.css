@@ -7,6 +7,7 @@
   /* color: rgba(255, 255, 255, 0.87); */
   /* background-color: #242424; */
    overflow-x: hidden;
+   /* position: static; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,6 +26,7 @@ a:hover {
 
 body {
   margin: 0;
+  /* position: static; */
   /* display: flex; */
   /* place-items: center; */
   /* min-width: 320px;

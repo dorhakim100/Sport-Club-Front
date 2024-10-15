@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 20%;
-    right: -300px;
+    top: 11em;
+    // right: -300px;
+    left: -300px;
     transition: right 0.3s ease;
     background-color: white;
     padding: 10px;
@@ -11,7 +12,9 @@
     z-index: 1000;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+    position: fixed;
+    transition: 0.2s ease-in;
+    // translate: 150%;
     .close-container{
         align-self: end;
         // position: absolute;
@@ -40,14 +43,14 @@
   }
   
   .accessibility-panel.visible {
-    right: 0;
+    left: 1em;
   }
   
 
     .accessibility-btn {
         position: fixed;
         left: 1em;
-        top: 15%;
+        top: 9em;
     //   width: 80px;
       z-index: 1000;
       border-radius: 5px;
@@ -88,3 +91,5 @@
   .accessibility-controls button:hover {
     background-color: #0056b3;
   }
+
+  

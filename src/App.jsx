@@ -45,6 +45,7 @@ export function App() {
 
   return (
     <>
+      <UserMsg />
       <AccessibilityButton />
       <Accessibility bodyRef={bodyRef} />
       <Loader />
@@ -53,8 +54,7 @@ export function App() {
         style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
         ref={bodyRef}
       >
-        <AppHeader />
-
+        <AppHeader bodyRef={bodyRef} />
         <section className='page-container'>
           <Routes>
             <Route path='' element={<HomePage />} />

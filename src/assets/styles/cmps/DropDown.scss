@@ -8,6 +8,8 @@
     box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
     transition: all linear 0.3s;
     position: absolute;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     
     ul {
         list-style: none;
@@ -16,21 +18,31 @@
     }
     
     .options-container{
-          border-radius: 5px;
-      }
-
+        border-radius: 5px;
+    }
+    
     li {
         padding: 14px;
         transition: all linear 0.3s;
-
+        
         &:hover{
             background: gray;
             cursor: pointer;
             color: #fff;
+            
+        }
+        
+        &:first-of-type{
+            border-top-left-radius: 8px;
+            
+        }
+        &:last-of-type{
+
+            border-bottom-left-radius: 8px;
 
         }
-      }
-      li.active {
+    }
+    li.active {
         color: $dark-green;
         color: $bold-navy;
         background-color: $primary-light-blue;
