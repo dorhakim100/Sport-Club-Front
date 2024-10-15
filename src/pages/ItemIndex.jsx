@@ -86,7 +86,7 @@ export function ItemIndex() {
   return (
     <main className='item-index'>
       <DynamicCover coverSrc={cover} />
-      <header>
+      <header className='item-index-header'>
         <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
         {userService.getLoggedinUser() && (
           <Button variant='contained' onClick={onAddItem}>

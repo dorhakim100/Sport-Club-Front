@@ -31,6 +31,9 @@ const VisuallyHiddenInput = styled('input')({
 
 export function ItemEdit() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const isLoading = useSelector(
+    (storeState) => storeState.systemModule.isLoading
+  )
 
   const types = ['card', 'accessories']
 
@@ -169,16 +172,17 @@ export function ItemEdit() {
       <div className='cover-container'>
         {cover && <img src={cover} alt='' className='item-cover-edit' />}
       </div>
-      <Button
+      <LoadingButton
         component='label'
         role={undefined}
         variant='contained'
         tabIndex={-1}
         startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
+        loading={isLoading}
       >
         Upload file
         <VisuallyHiddenInput type='file' onChange={uploadFile} />
-      </Button>
+      </LoadingButton>
       <form action='' className='item-edit-form' onSubmit={onSaveItem}>
         <div className='input-container'>
           <label htmlFor=''>{prefs.isEnglish ? 'Title:' : 'כותרת:'}</label>
@@ -201,17 +205,6 @@ export function ItemEdit() {
           />
           {/* <span>₪</span> */}
         </div>
-        {typeof editItem.quantity === 'number' && (
-          <div>
-            <label htmlFor=''>{prefs.isEnglish ? 'Quantity:' : 'כמות:'}</label>
-            <input
-              value={editItem.quantity}
-              onChange={handleChange}
-              type='number'
-              name={'quantity'}
-            />
-          </div>
-        )}
         <div className='input-container preview'>
           <label htmlFor=''>{prefs.isEnglish ? 'Preview:' : 'תיאור:'}</label>
           <textarea
@@ -222,6 +215,36 @@ export function ItemEdit() {
             style={{ width: 350, height: 200 }}
           />
         </div>
+        {(typeof editItem.quantity === 'number' && (
+          <div className='input-container quantity'>
+            <label htmlFor=''>{prefs.isEnglish ? 'Quantity:' : 'כמות:'}</label>
+            <div className='quantity-container'>
+              <input
+                value={editItem.quantity}
+                onChange={handleChange}
+                type='number'
+                name={'quantity'}
+              />
+              <Button
+                variant='contained'
+                onClick={() => {
+                  setEditItem({ ...editItem, quantity: true })
+                }}
+              >
+                {prefs.isEnglish ? 'Remove quantity' : 'הסר כמות'}
+              </Button>
+            </div>
+          </div>
+        )) || (
+          <Button
+            variant='contained'
+            onClick={() => {
+              setEditItem({ ...editItem, quantity: 0 })
+            }}
+          >
+            {prefs.isEnglish ? 'Add quantity' : 'הוסף כמות'}
+          </Button>
+        )}
         <div className='input-container'>
           <label htmlFor=''>{prefs.isEnglish ? 'Types:' : 'סוג:'}</label>
           <div className='types-container'>
@@ -241,7 +264,7 @@ export function ItemEdit() {
             })}
           </div>
         </div>
-        <LoadingButton variant='contained' type='submit'>
+        <LoadingButton variant='contained' type='submit' loading={isLoading}>
           Submit
         </LoadingButton>
       </form>

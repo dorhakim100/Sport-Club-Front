@@ -15,7 +15,14 @@ export function ItemPreview({ item }) {
       <div className='img-container'>
         <img src={item.cover} alt='' />
       </div>
-      {user && user.isAdmin && <span>{item.quantity}</span>}
+      {user && user.isAdmin && typeof item.quantity === 'number' && (
+        <>
+          <div className='quantity-container'>
+            <span>{prefs.isEnglish ? 'Quantity:' : 'מלאי:'}</span>
+            <span>{item.quantity}</span>
+          </div>
+        </>
+      )}
     </article>
   )
 }

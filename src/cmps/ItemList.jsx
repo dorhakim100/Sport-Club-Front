@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
+
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
@@ -26,7 +27,7 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
         {items.map((item) => (
           <li key={item._id} className='item-container'>
             <ItemPreview item={item} />
-            <div className='actions'>
+            <div className='actions' style={{ direction: 'ltr' }}>
               {(shouldShowActionBtns(item) && (
                 <ButtonGroup
                   variant='contained'

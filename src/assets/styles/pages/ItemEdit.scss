@@ -24,8 +24,24 @@
         display: grid;
         grid-template-columns: repeat(2,1fr);
         align-items: center;
-
+        
     }
+    
+    .input-container.quantity{
+
+        label{
+            justify-self: center;
+        }
+        justify-items: start;
+        div{
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            gap: 0.5em;
+        }
+    }
+
+  
 
     .types-container{
 

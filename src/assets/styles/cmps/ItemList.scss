@@ -203,6 +203,11 @@
       align-items: center;
       justify-items: center;
       gap: 0.5em; // Spacing between preview items
+
+      .quantity-container{
+        display: flex;
+        gap: 0.5em;
+      }
     }
   }
   
