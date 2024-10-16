@@ -1,4 +1,4 @@
-.accessibility-panel {
+.accessibility-panel, .prefs-panel {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -45,9 +45,18 @@
   .accessibility-panel.visible {
     left: 1em;
   }
+
+  .prefs-panel{
+    left: auto;
+    right: -300px;
+  }
+
+  .prefs-panel.visible{
+    right: 1em;
+  }
   
 
-    .accessibility-btn {
+    .accessibility-btn, .prefs-button {
         position: fixed;
         left: 1em;
         top: 9em;
@@ -66,8 +75,35 @@
     padding: 10px;
     cursor: pointer;
   }
+
+  .prefs-button{
+    right: 1em;
+    left: auto;
+  }
+
+  .prefs-button{
+    // transition: transform 0.6s ease-in-out;
+    &:hover {
+      svg{
+
+        animation: spin 2s linear forwards;
+      }
+      // transform: rotateY(180deg);
+    }
+  }
+
+
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
   
-  .accessibility-controls {
+  .accessibility-controls, .prefs-control {
     display: flex;
     flex-direction: column;
     
@@ -84,12 +120,15 @@
         background-color: #007bff;
         color: white;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;   
-             cursor: pointer;
+        cursor: pointer;
+
+        &:hover{
+          background-color: #0056b3;
+
+        }
     }
     
 }
-  .accessibility-controls button:hover {
-    background-color: #0056b3;
-  }
+
 
   

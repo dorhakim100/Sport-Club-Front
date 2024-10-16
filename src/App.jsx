@@ -37,6 +37,8 @@ import { AccessibilityButton } from './cmps/AccessibilityButton'
 import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg.jsx'
 import { Loader } from './cmps/Loader'
+import { PrefsButton } from './cmps/PrefsButton.jsx'
+import { Prefs } from './cmps/Prefs.jsx'
 
 import './App.css'
 
@@ -49,6 +51,8 @@ export function App() {
       <UserMsg />
       <AccessibilityButton />
       <Accessibility bodyRef={bodyRef} />
+      <PrefsButton />
+      <Prefs bodyRef={bodyRef} />
       <Loader />
       <main
         className='main-container'

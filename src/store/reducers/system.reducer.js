@@ -21,6 +21,10 @@ export function systemReducer(state = initialState, action = {}) {
       return { ...state, isLoading: false }
     case SET_IS_ACCESSIBILITY:
       return { ...state, isAccessibility: action.isAccessibility }
+    case SET_IS_PREFS:
+      return { ...state, isPrefs: action.isPrefs }
+    case SET_PREFS:
+      return { ...state, prefs: action.prefs }
     default:
       return state
   }

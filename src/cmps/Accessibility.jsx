@@ -19,7 +19,7 @@ export function Accessibility({ bodyRef }) {
     (storeState) => storeState.systemModule.isAccessibility
   )
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
-  console.log(isVisible)
+
   const [textSize, setTextSize] = useState(16)
   const [grayScale, setGrayScale] = useState(false)
   const [highContrast, setHighContrast] = useState(false)

@@ -7,6 +7,7 @@ import {
   LOADING_DONE,
   SET_PREFS,
   SET_IS_ACCESSIBILITY,
+  SET_IS_PREFS,
 } from '../reducers/system.reducer'
 
 export function setIsLoading(stateToSet) {
@@ -18,6 +19,9 @@ export function setIsLoading(stateToSet) {
 export function setPrefs(prefs) {
   userService.setPrefs(prefs)
   store.dispatch({ type: SET_PREFS, prefs })
+}
+export function setIsPrefs(stateToSet) {
+  store.dispatch({ type: SET_IS_PREFS, isPrefs: stateToSet })
 }
 
 export function setIsAccessibility(stateToSet) {
