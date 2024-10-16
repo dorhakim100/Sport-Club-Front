@@ -12,17 +12,23 @@ export function ItemPreview({ item }) {
       <Link to={`/item/${item._id}`}>
         {prefs.isEnglish ? item.title.eng : item.title.he}
       </Link>
+      {/* {user && user.isAdmin && typeof item.quantity === 'number' && ( */}
+
+      <div
+        className={
+          user && user.isAdmin && typeof item.quantity === 'number'
+            ? 'quantity-container visible'
+            : 'quantity-container'
+        }
+      >
+        <span>{prefs.isEnglish ? 'Quantity:' : 'מלאי:'}</span>
+        <span>{item.quantity}</span>
+      </div>
+
+      {/* )} */}
       <div className='img-container'>
         <img src={item.cover} alt='' />
       </div>
-      {user && user.isAdmin && typeof item.quantity === 'number' && (
-        <>
-          <div className='quantity-container'>
-            <span>{prefs.isEnglish ? 'Quantity:' : 'מלאי:'}</span>
-            <span>{item.quantity}</span>
-          </div>
-        </>
-      )}
     </article>
   )
 }

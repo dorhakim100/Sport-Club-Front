@@ -33,7 +33,12 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
                   variant='contained'
                   aria-label='Basic button group'
                 >
-                  <Button onClick={() => navigate(`/item/edit/${item._id}`)}>
+                  <Button
+                    onClick={() => {
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                      navigate(`/item/edit/${item._id}`)
+                    }}
+                  >
                     Edit
                   </Button>
                   <Button onClick={() => onRemoveItem(item._id)}>Remove</Button>

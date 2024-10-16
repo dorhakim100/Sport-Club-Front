@@ -6,3 +6,17 @@
 }
 
 
+.accessibility-container{
+    text-align: right;
+    li{
+
+    }
+    ul{
+        
+        margin-inline-start: 1em;
+        list-style: circle;
+        li{
+            margin-inline-start: 1em;
+        }
+    }
+}

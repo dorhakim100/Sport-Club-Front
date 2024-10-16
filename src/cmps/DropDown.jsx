@@ -1,4 +1,4 @@
-import { useState, useEffect, userRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { makeId } from '../services/util.service.js'
@@ -7,6 +7,12 @@ export function DropDown({ options, isDropdownVisible, setDropdownVisible }) {
   const [selectedOption, setSelectedOption] = useState(null)
   const navigate = useNavigate()
   const location = useLocation()
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const dropdownRef = useRef()
+
+  useEffect(() => {
+    setDropdownDarkMode()
+  }, [prefs.isDarkMode])
 
   const handleMouseLeave = () => {
     // setSelectedOption(option)
@@ -16,8 +22,21 @@ export function DropDown({ options, isDropdownVisible, setDropdownVisible }) {
     setDropdownVisible(false)
   }
 
+  const setDropdownDarkMode = () => {
+    if (prefs.isDarkMode) {
+      dropdownRef.current.style.backgroundColor = '#425c77'
+      dropdownRef.current.style.color = 'white'
+      dropdownRef.current.style.transition =
+        'background-color 0.3s ease, color 0.3s ease'
+    }
+  }
+
   return (
-    <div className='dropdown-menu' onMouseLeave={handleMouseLeave}>
+    <div
+      className='dropdown-menu'
+      onMouseLeave={handleMouseLeave}
+      ref={dropdownRef}
+    >
       <ul className='options-container'>
         {options.map((option) => {
           return (

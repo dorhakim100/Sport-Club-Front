@@ -62,7 +62,7 @@
         font-size: 2em;
         // color: #333;
         span{
-          color: $bold-navy;
+          // color: $bold-navy;
         }
   
         svg {
@@ -70,17 +70,6 @@
         //   color: #666;
         }
   
-        &.address {
-          color: $bold-navy; // Example color for the address section
-        }
-  
-        &.phone {
-          color: $bold-navy; // Example color for the phone section
-        }
-  
-        &.email {
-          color: $bold-navy // Example color for the email section
-        }
       }
     }
   
@@ -116,7 +105,7 @@
   
     span {
       font-size: 15px;
-      color: $bold-navy;
+      // color: $bold-navy;
     }
   
     // Responsive adjustments

@@ -146,10 +146,10 @@ export function ItemFilter({
           required
         />
       </div> */}
-      <div className='price-range-container'>
+      {/* <div className='price-range-container'>
         <div className='prices-container'>
           <span>{prefs.isEnglish ? 'Max Price' : 'מחיר מקסימלי'}</span>
-          {/* <span>-</span> */}
+
           <input
             type='number'
             value={price}
@@ -162,17 +162,7 @@ export function ItemFilter({
             }}
           />
         </div>
-        {/* <input
-          type='range'
-          min='20'
-          max='800'
-          name='maxPrice'
-          value={filterToEdit.maxPrice}
-          placeholder={prefs.isEnglish ? 'Max. price' : 'מחיר מקסימלי'}
-          onChange={handleChange}
-          required
-        /> */}
-        {/* <Typography gutterBottom>pretto.fr</Typography> */}
+
         <PrettoSlider
           valueLabelDisplay='auto'
           aria-label='pretto slider'
@@ -184,7 +174,7 @@ export function ItemFilter({
           onChangeCommitted={handleChangeCommitted}
           name='maxPrice'
         />
-      </div>
+      </div> */}
       <Button className='btn-clear' variant='contained' onClick={clearFilter}>
         {prefs.isEnglish ? 'Clear' : 'איפוס'}
       </Button>

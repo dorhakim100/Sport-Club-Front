@@ -19,11 +19,11 @@ export function Prefs({ bodyRef }) {
     if (darkMode) {
       bodyRef.current.style.backgroundColor = `#2C3E50`
       bodyRef.current.style.color = `#F5F5F5`
-      bodyRef.current.style.transition = `0.2s ease-in`
+      bodyRef.current.style.transition = `background-color 0.3s ease, color 0.3s ease`
     } else {
       bodyRef.current.style.backgroundColor = `#F5F5F5`
       bodyRef.current.style.color = `#2C3E50`
-      bodyRef.current.style.transition = `0.2s ease-in`
+      bodyRef.current.style.transition = `background-color 0.3s ease, color 0.3s ease`
     }
   }, [darkMode])
 

@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
 import InstagramIcon from '@mui/icons-material/Instagram'
@@ -11,6 +12,8 @@ export function AppFooter() {
 
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
+  const footerRef = useRef()
+
   const address = prefs.isEnglish
     ? 'Keren hayesod 19, Kfar Shmaryahu'
     : 'קרן היסוד 19, כפר שמריהו'
@@ -21,8 +24,22 @@ export function AppFooter() {
     ? 'All rights reserved, Sport Club Kfar Shmaryahu'
     : `כל הזכויות שמורות למועדון הספורט כפר שמריהו`
 
+  useEffect(() => {
+    setFooterDarkMode()
+  }, [prefs.isDarkMode])
+
+  const setFooterDarkMode = () => {
+    if (prefs.isDarkMode) {
+      footerRef.current.style.backgroundColor = '#425c77'
+      footerRef.current.style.color = 'white'
+    } else {
+      footerRef.current.style.backgroundColor = '#6EC1E4'
+      footerRef.current.style.color = '#2C3E50'
+    }
+  }
+
   return (
-    <footer className='app-footer full'>
+    <footer className='app-footer full' ref={footerRef}>
       <div className='contact-container'>
         <div className='method-container address'>
           <PlaceIcon />

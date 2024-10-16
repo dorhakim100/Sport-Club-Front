@@ -86,7 +86,7 @@
     &:hover {
       svg{
 
-        animation: spin 2s linear forwards;
+        animation: spin 0.5s linear forwards;
       }
       // transform: rotateY(180deg);
     }
@@ -99,7 +99,7 @@
       transform: rotate(0deg);
     }
     to {
-      transform: rotate(360deg);
+      transform: rotate(90deg);
     }
   }
   

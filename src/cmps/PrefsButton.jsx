@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
 import { setIsPrefs } from '../store/actions/system.actions'
@@ -17,7 +17,7 @@ export function PrefsButton() {
       className='prefs-button'
       ref={buttonRef}
       onClick={() => {
-        spinButton()
+        // spinButton()
         setIsPrefs(!isVisible)
       }}
     >

@@ -9,6 +9,8 @@ import { logout } from '../store/actions/user.actions'
 
 import { DropDown } from '../cmps/DropDown.jsx'
 
+import Divider from '@mui/material/Divider'
+
 import { Button } from '@mui/material'
 import logo from '../../public/imgs/logo.png'
 
@@ -28,6 +30,17 @@ export function AppHeader({ bodyRef }) {
   const waterRef = useRef()
   const logoRef = useRef()
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    setHeaderDarkMode()
+  }, [prefs.isDarkMode])
+
   const handleScroll = () => {
     const scrollY = window.scrollY
     if (scrollY > 0) {
@@ -39,17 +52,25 @@ export function AppHeader({ bodyRef }) {
     } else {
       setScrolled(false)
       logoRef.current.style.height = '100px'
+      headerRef.current.style.opacity = '1'
 
       logoRef.current.style.transition = '0.3s ease-out'
     }
   }
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
+  const setHeaderDarkMode = () => {
+    if (prefs.isDarkMode) {
+      headerRef.current.style.backgroundColor = '#181e24'
+      headerRef.current.style.color = 'white'
+      headerRef.current.style.transition =
+        'background-color 0.3s ease, color 0.3s ease'
+    } else {
+      headerRef.current.style.backgroundColor = '#dff9ff'
+      headerRef.current.style.color = '#2C3E50'
+      headerRef.current.style.transition =
+        'background-color 0.3s ease, color 0.3s ease'
     }
-  }, [])
+  }
 
   async function onLogout() {
     try {
@@ -107,10 +128,10 @@ export function AppHeader({ bodyRef }) {
         break
       case 'about':
         optionsToSet = [
-          {
-            text: prefs.isEnglish ? 'Facilities' : 'מתקני המועדון',
-            path: `${section}/facilities`,
-          },
+          // {
+          //   text: prefs.isEnglish ? 'Facilities' : 'מתקני המועדון',
+          //   path: `${section}/facilities`,
+          // },
           {
             text: prefs.isEnglish ? 'Our Team' : 'צוות המועדון',
             path: `${section}/team`,
@@ -159,6 +180,12 @@ export function AppHeader({ bodyRef }) {
         >
           <img src={logo} alt='' ref={logoRef} />
         </NavLink>
+        <NavLink
+          to='facilities'
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <span>{prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
+        </NavLink>
 
         <NavLink
           to='class'
@@ -181,7 +208,6 @@ export function AppHeader({ bodyRef }) {
             )}
           </div>
         </NavLink>
-
         <NavLink
           to='item'
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -244,7 +270,7 @@ export function AppHeader({ bodyRef }) {
 
         {!user && (
           <NavLink
-            to='login'
+            to='user/login'
             className='login-link'
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >

@@ -65,11 +65,32 @@ export function Accessibility({ bodyRef }) {
     readableFont,
   ])
 
+  useEffect(() => {
+    // Attach the event listener
+    window.addEventListener('keydown', handleKeyDown)
+
+    // Cleanup function to remove the listener
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
+  const handleKeyDown = (event) => {
+    console.log(`Key pressed: ${event.key}`)
+    if (event.key === 'Tab') {
+      setIsAccessibility(true)
+    } else if (event.key === 'Escape') {
+      setIsAccessibility(false)
+    }
+  }
+
   return (
     <div className={`accessibility-panel ${isVisible ? 'visible' : ''}`}>
       <div
+        tabIndex='0' /* Ensures the div can capture key events */
         className='close-container'
         onClick={() => setIsAccessibility(false)}
+        // onKeyDown={handleKeyDown}
       >
         <CloseIcon />
       </div>
