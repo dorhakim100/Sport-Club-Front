@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Link, NavLink } from 'react-router-dom'
 
 import { SwiperCarousel } from '../cmps/SwiperCarousel.jsx'
+import { HeadContainer } from '../cmps/HeadContainer.jsx'
 
 import React from 'react'
 import { makeId } from '../services/util.service.js'
@@ -80,21 +81,13 @@ export function HomePage() {
           <Updates isHover={isUpdatesHover} />
         </div>
       </div>
-      <div className='head-container'>
-        <h3>
-          <span
-            style={
-              prefs.isDarkMode
-                ? { backgroundColor: '#2C3E50' }
-                : { backgroundColor: '#F5F5F5' }
-            }
-          >
-            {prefs.isEnglish
-              ? '9 reasons to join us'
-              : '9 סיבות להצטרף למועדון הספורט'}
-          </span>
-        </h3>
-      </div>
+      <HeadContainer
+        text={{
+          eng: '9 reasons to join us',
+          he: '9 סיבות להצטרף למועדון הספורט',
+        }}
+      />
+
       <MouseWheelCarousel />
 
       <ContactUs />

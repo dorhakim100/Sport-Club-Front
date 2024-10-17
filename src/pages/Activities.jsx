@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import { HeadContainer } from '../cmps/HeadContainer'
+
 import Divider from '@mui/material/Divider'
 
 export function Activities() {
@@ -9,6 +11,10 @@ export function Activities() {
     <section className='activities-page-container'>
       <h2>{prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}</h2>
       <nav className='page-navigation-container'>
+        <NavLink to='/activities'>
+          {prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}
+        </NavLink>
+        <Divider orientation='vertical' flexItem />
         <NavLink to='swimming'>
           {prefs.isEnglish ? 'Swimming School' : 'בית הספר לשחייה'}
         </NavLink>
@@ -41,9 +47,10 @@ export function Activities() {
 export function Swimming() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
+  const headText = { he: 'בית הספר לשחייה', eng: 'Swimming School' }
   return (
     <div className='swimming-container'>
-      <h3> {prefs.isEnglish ? 'Swimming School' : 'בית הספר לשחייה'}</h3>
+      <HeadContainer text={headText} />
     </div>
   )
 }
@@ -51,9 +58,10 @@ export function Swimming() {
 export function Tennis() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
+  const headText = { he: 'בית הספר לטניס', eng: 'Tennis School' }
   return (
     <div className='tennis-container'>
-      <h3> {prefs.isEnglish ? 'Tennis School' : 'בית הספר לטניס'}</h3>
+      <HeadContainer text={headText} />
     </div>
   )
 }
@@ -61,27 +69,30 @@ export function Tennis() {
 export function Care() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
+  const headText = { he: 'מרכז הטיפולים', eng: 'Care' }
   return (
     <div className='care-container'>
-      <h3> {prefs.isEnglish ? 'Care' : 'מרכז הטיפולים'}</h3>
+      <HeadContainer text={headText} />
     </div>
   )
 }
 
 export function SummerCamp() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const headText = { he: 'קייטנת הקיץ', eng: 'Summer Camp' }
   return (
     <div className='care-container'>
-      <h3> {prefs.isEnglish ? 'Summer Camp' : 'קייטנת הקיץ'}</h3>
+      <HeadContainer text={headText} />
     </div>
   )
 }
 
 export function Restaurant() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const headText = { he: 'שף הכפר', eng: 'Restaurant' }
   return (
     <div className='restaurant-container'>
-      <h3> {prefs.isEnglish ? 'Restaurant' : 'שף הכפר'}</h3>
+      <HeadContainer text={headText} />
     </div>
   )
 }

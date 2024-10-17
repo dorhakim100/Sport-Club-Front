@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux'
 
+import { HeadContainer } from './HeadContainer'
+
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 
@@ -8,19 +10,12 @@ export function ContactUs() {
 
   return (
     <div className='contact-us-container'>
-      <div className='head-container'>
-        <h3>
-          <span
-            style={
-              prefs.isDarkMode
-                ? { backgroundColor: '#2C3E50' }
-                : { backgroundColor: '#F5F5F5' }
-            }
-          >
-            {prefs.isEnglish ? 'Contact us' : 'צרו קשר'}
-          </span>
-        </h3>
-      </div>
+      <HeadContainer
+        text={{
+          eng: 'Contact us',
+          he: 'צרו קשר',
+        }}
+      />
       <div className='input-container'>
         <input
           type='text'

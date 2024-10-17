@@ -3,6 +3,8 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { HeadContainer } from '../cmps/HeadContainer'
+
 import Divider from '@mui/material/Divider'
 
 export function AboutUs() {
@@ -15,9 +17,8 @@ export function AboutUs() {
     <section className='about-container'>
       <h2>{prefs.isEnglish ? 'About Us' : 'אודות המועדון'}</h2>
       <nav className='page-navigation-container'>
-        {/* <NavLink to='facilities'>
-          {prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}
-        </NavLink> */}
+        <NavLink to='/about'>{prefs.isEnglish ? 'About' : 'אודות'}</NavLink>
+        <Divider orientation='vertical' flexItem />
 
         <NavLink to='team'>{prefs.isEnglish ? 'Team' : 'צוות המועדון'}</NavLink>
         <Divider orientation='vertical' flexItem />
@@ -40,9 +41,11 @@ export function AboutUs() {
 export function AboutTeam() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
+  const headText = { eng: 'Team', he: 'צוות המועדון' }
   return (
     <section>
-      <h3>{prefs.isEnglish ? 'Team' : 'צוות המועדון'}</h3>{' '}
+      <HeadContainer text={headText} />
+
       <ul>
         <li>Popo Decaprio </li>
         <li>Jini Baba</li>
@@ -53,9 +56,10 @@ export function AboutTeam() {
 
 export function Organization() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const headText = { eng: 'Organization', he: 'עמותה' }
   return (
     <section>
-      <h3> {prefs.isEnglish ? 'Organization' : 'עמותה'}</h3>
+      <HeadContainer text={headText} />
       <ul>
         <li>Save the day</li>
         <li>Spread some love</li>
@@ -67,9 +71,12 @@ export function Organization() {
 
 export function AccessibilityPage() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const headText = { eng: 'Accessibility', he: 'הצהרת נגישות' }
+
   return (
     <section className='accessibility-container' style={{ direction: 'rtl' }}>
-      <h3> {prefs.isEnglish ? 'Accessibility' : 'הצהרת נגישות'}</h3>
+      <HeadContainer text={headText} />
+
       <p>
         אגודת הספורט כפר שמריהו ("האגודה") נוקטת את מירב המאמצים ומשקיעה משאבים
         רבים על מנת לספק לכל לקוחותיה שירות שוויוני, מכובד, נגיש ומקצועי. בהתאם

@@ -1,6 +1,13 @@
-.item-index-header{
-    margin: 1em;
+.item-index{
+    // margin: 1em;
     h2{
         margin: 0;
+    }
+
+    .control-container{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        justify-content: space-around;
     }
 }

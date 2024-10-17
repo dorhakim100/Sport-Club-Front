@@ -12,6 +12,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 
 import { containerClasses } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
+import { HeadContainer } from '../cmps/HeadContainer'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -74,6 +75,8 @@ export function Schedule() {
     <section className='schedule-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
       <nav className='page-navigation-container'>
+        <NavLink to='/class'>{prefs.isEnglish ? 'Class' : 'שיעורים'}</NavLink>
+        <Divider orientation='vertical' flexItem />
         <NavLink to='/class/schedule'>
           {prefs.isEnglish ? 'Schedule' : 'לוח החוגים'}
         </NavLink>
@@ -82,19 +85,8 @@ export function Schedule() {
           {prefs.isEnglish ? 'Our Instructors' : 'המדריכים שלנו'}
         </NavLink>
       </nav>
-      <div className='head-container'>
-        <h3>
-          <span
-            style={
-              prefs.isDarkMode
-                ? { backgroundColor: '#2C3E50' }
-                : { backgroundColor: '#F5F5F5' }
-            }
-          >
-            {prefs.isEnglish ? 'Schedule' : 'מערכת החוגים'}
-          </span>
-        </h3>
-      </div>{' '}
+      <HeadContainer text={{ he: 'מערכת החוגים', eng: 'Schedule' }} />
+
       {
         <div className='schedule-img-container' key={schedule._id}>
           <img src={schedule.link} alt='' />

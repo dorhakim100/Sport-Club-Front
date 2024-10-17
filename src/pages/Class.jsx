@@ -12,7 +12,9 @@ export function Class() {
     <section className='class-page-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
       <nav className='page-navigation-container'>
-        <NavLink to='/class/schedule'>
+        <NavLink to='/class'>{prefs.isEnglish ? 'Class' : 'שיעורים'}</NavLink>
+        <Divider orientation='vertical' flexItem />
+        <NavLink to='schedule'>
           {prefs.isEnglish ? 'Schedule' : 'לוח החוגים'}
         </NavLink>
         <Divider orientation='vertical' flexItem />

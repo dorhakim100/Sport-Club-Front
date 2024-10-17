@@ -17,8 +17,10 @@ import { ItemList } from '../cmps/ItemList'
 import { ItemFilter } from '../cmps/ItemFilter'
 import { setIsLoading } from '../store/actions/system.actions'
 
-import cover from '../../public/imgs/picture.jpg'
+import { HeadContainer } from '../cmps/HeadContainer'
 import { DynamicCover } from '../cmps/DynamicCover'
+
+import cover from '../../public/imgs/picture.jpg'
 
 import { Button } from '@mui/material'
 
@@ -30,6 +32,8 @@ export function ItemIndex() {
   const [maxPage, setMaxPage] = useState()
 
   const [isGrid, setIsGrid] = useState(true)
+
+  const headText = { he: 'חנות', eng: 'Store' }
 
   useEffect(() => {
     const setItems = async () => {
@@ -85,22 +89,24 @@ export function ItemIndex() {
 
   return (
     <main className='item-index'>
-      <DynamicCover coverSrc={cover} />
       <header className='item-index-header'>
-        <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
+        <DynamicCover coverSrc={cover} />
+        <HeadContainer text={headText} />
+      </header>
+      <div className='control-container'>
+        <ItemFilter
+          filterBy={filterBy}
+          setFilterBy={setFilterBy}
+          isGrid={isGrid}
+          setIsGrid={setIsGrid}
+          maxPage={maxPage}
+        />
         {userService.getLoggedinUser() && (
           <Button variant='contained' onClick={onAddItem}>
             Add Item
           </Button>
         )}
-      </header>
-      <ItemFilter
-        filterBy={filterBy}
-        setFilterBy={setFilterBy}
-        isGrid={isGrid}
-        setIsGrid={setIsGrid}
-        maxPage={maxPage}
-      />
+      </div>
       <ItemList
         items={items}
         onRemoveItem={onRemoveItem}
