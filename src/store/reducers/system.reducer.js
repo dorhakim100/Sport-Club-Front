@@ -11,6 +11,8 @@ const initialState = {
   prefs: userService.getPrefs(),
   isAccessibility: false,
   isPrefs: false,
+  schedule:
+    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729158737/%D7%97%D7%95%D7%92%D7%99%D7%9D_%D7%97%D7%93%D7%A9_%D7%9E%D7%A2%D7%95%D7%93%D7%9B%D7%9F_8-2024-1_kceouw.png',
 }
 
 export function systemReducer(state = initialState, action = {}) {

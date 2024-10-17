@@ -1,6 +1,6 @@
 @import "setup/variables.scss";
-@import "setup/mixins.scss";
-@import "setup/functions.scss";
+// @import "setup/mixins.scss";
+// @import "setup/functions.scss";
 @import "setup/typography.scss";
 
 @import "basics/helpers.scss";
@@ -29,6 +29,10 @@
 @import "cmps/Loader.scss";
 @import "cmps/LoginSignupForm.scss";
 @import "cmps/DynamicCover.scss";
+@import "cmps/SwiperCarousel.scss";
+@import "cmps/MouseWheelCarousel.scss";
+@import "cmps/Updates.scss";
+@import "cmps/ContactUs.scss";
 
 
 @import "cmps/ItemFilter.scss";

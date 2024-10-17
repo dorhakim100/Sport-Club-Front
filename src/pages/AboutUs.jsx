@@ -36,15 +36,6 @@ export function AboutUs() {
     </section>
   )
 }
-export function Facilities() {
-  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
-
-  return (
-    <section className='facilities-container'>
-      <h3> {prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</h3>
-    </section>
-  )
-}
 
 export function AboutTeam() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)

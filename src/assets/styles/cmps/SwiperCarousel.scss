@@ -1,0 +1,119 @@
+
+
+.swiper {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 5px;
+    margin-top: 0.5em;
+    user-select: none;
+  }
+
+  .swiper-button-next,
+.swiper-button-prev {
+  background-color: $dark-green; /* Set the background color */
+  border-radius: 50%; /* Optional: Make buttons round */
+  width: 60px; /* Set width */
+  height: 60px; /* Set height */
+  transition: 0.3s ease-out;
+  
+  
+  display: flex; /* Align icon */
+  justify-content: center; /* Center icon */
+  align-items: center; /* Center icon */
+  
+  &:hover{
+      background-color: $dark-green-hover;
+
+  }
+}
+
+/* Optional: Change icon color */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: white; /* Change arrow color to white */
+}
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+
+    height: 100%;
+    height: 40vh;
+    object-fit: cover;
+    object-fit: scale-down;
+}
+
+body {
+    background: #000;
+    color: #000;
+}
+
+.swiper {
+    width: 100%;
+    height: 300px;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .mySwiper2 {
+    height: 80%;
+    width: 100%;
+  }
+  
+  .mySwiper {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+  
+  .mySwiper .swiper-slide {
+    // width: 25%;
+    // height: 100%;
+    height: 80px;
+    object-fit: cover;
+    opacity: 0.4;
+
+  }
+  
+  .mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    // width: 100%;
+    // height: 100%;
+    // height: 20vh;
+    width: 100vw;
+    
+    object-fit: cover;
+    // object-fit: scale-down;
+}
+
+.nav-img{
+    height: 10vh;
+    width: auto;
+
+    
+  }
+  
+
+  

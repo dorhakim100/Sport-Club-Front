@@ -12,7 +12,7 @@ import { DropDown } from '../cmps/DropDown.jsx'
 import Divider from '@mui/material/Divider'
 
 import { Button } from '@mui/material'
-import logo from '../../public/imgs/logo.png'
+// import logo from '../../public/imgs/logo.png'
 
 export function AppHeader({ bodyRef }) {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -20,6 +20,9 @@ export function AppHeader({ bodyRef }) {
 
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   // console.log(prefs)
+  const [logo, setLogo] = useState(
+    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+  )
 
   const [isDropdownVisible, setDropdownVisible] = useState(false)
   const [hoveredSection, setHoveredSection] = useState()
@@ -45,16 +48,17 @@ export function AppHeader({ bodyRef }) {
     const scrollY = window.scrollY
     if (scrollY > 0) {
       setScrolled(true)
-
-      logoRef.current.style.height = '70px'
-
-      logoRef.current.style.transition = '0.3s ease-out'
+      logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
+      // headerRef.current.style.height = '100px'
+      // headerRef.current.style.transition =
+      //   'height 0.3s ease-out, transform 0.3s ease-out'
     } else {
       setScrolled(false)
-      logoRef.current.style.height = '100px'
+      logoRef.current.style.transform = 'scale(1)' // Resets logo to original size
+      // headerRef.current.style.height = '150px'
+      // headerRef.current.style.transition =
+      //   'height 0.3s ease-out, transform 0.3s ease-out'
       headerRef.current.style.opacity = '1'
-
-      logoRef.current.style.transition = '0.3s ease-out'
     }
   }
 
@@ -64,11 +68,17 @@ export function AppHeader({ bodyRef }) {
       headerRef.current.style.color = 'white'
       headerRef.current.style.transition =
         'background-color 0.3s ease, color 0.3s ease'
+      setLogo(
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729070986/logoDarkMode_i25wgx.png'
+      )
     } else {
       headerRef.current.style.backgroundColor = '#dff9ff'
       headerRef.current.style.color = '#2C3E50'
       headerRef.current.style.transition =
         'background-color 0.3s ease, color 0.3s ease'
+      setLogo(
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+      )
     }
   }
 

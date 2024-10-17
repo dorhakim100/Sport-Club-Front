@@ -41,7 +41,7 @@ export function Signup() {
 
   return (
     <div className='signup-form' onSubmit={onSignup}>
-      <h3>{prefs.isEnglish ? 'Signup' : 'רישום'}</h3>
+      <h2>{prefs.isEnglish ? 'Signup' : 'רישום'}</h2>
       <LoginSignupForm isSignup={true} />
       {/* <input
         type='text'

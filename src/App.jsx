@@ -5,10 +5,10 @@ import { Routes, Route } from 'react-router'
 import { useSelector } from 'react-redux'
 
 import { HomePage } from './pages/HomePage'
+import { Facilities } from './pages/Facilities'
 import {
   AboutUs,
   AboutTeam,
-  Facilities,
   Organization,
   AccessibilityPage,
 } from './pages/AboutUs'
@@ -41,6 +41,8 @@ import { Loader } from './cmps/Loader'
 import { PrefsButton } from './cmps/PrefsButton.jsx'
 import { Prefs } from './cmps/Prefs.jsx'
 
+import { SwiperCarousel } from './cmps/SwiperCarousel'
+
 import './App.css'
 
 export function App() {
@@ -62,6 +64,7 @@ export function App() {
       >
         <AppHeader bodyRef={bodyRef} />
         <section className='page-container'>
+          {/* <SwiperCarousel /> */}
           <Routes>
             <Route path='' element={<HomePage />} />
             <Route path='facilities' element={<Facilities />} />

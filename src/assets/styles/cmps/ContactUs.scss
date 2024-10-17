@@ -1,0 +1,24 @@
+.contact-us-container{
+
+
+    .input-container{
+
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        padding: 0em 5em 2.5em 5em;
+        // margin-inline-start: 1em;
+
+        gap: 1em;
+        input{
+            width: 50%;
+            align-self: start;
+        }
+
+        textarea{
+            // width: 80%;
+            height: 300px;
+        }
+    }
+}

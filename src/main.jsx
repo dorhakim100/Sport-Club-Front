@@ -13,9 +13,11 @@ import { store } from './store/store'
 import './assets/styles/main.scss'
 
 createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </StrictMode>
 )

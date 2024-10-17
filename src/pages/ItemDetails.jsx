@@ -9,6 +9,7 @@ import { loadItem, addItemMsg } from '../store/actions/item.actions'
 export function ItemDetails() {
   const { itemId } = useParams()
   const item = useSelector((storeState) => storeState.itemModule.item)
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
   useEffect(() => {
     loadItem(itemId)
@@ -24,23 +25,9 @@ export function ItemDetails() {
   }
 
   return (
-    <section className='item-details'>
-      <Link to='/item'>Back to list</Link>
-      <h1>Item Details</h1>
-      {item && (
-        <div>
-          <h3>{item.vendor}</h3>
-          <h4>${item.price}</h4>
-          <pre> {JSON.stringify(item, null, 2)} </pre>
-        </div>
-      )}
-      <button
-        onClick={() => {
-          onAddItemMsg(item._id)
-        }}
-      >
-        Add item msg
-      </button>
+    <section className='item-details-container'>
+      <Link to='/item'>{prefs.isEnglish ? 'Back to list' : 'חזרה לתפריט'}</Link>
+      <h1>{prefs.isEnglish ? item.title.eng : item.title.he}</h1>
     </section>
   )
 }

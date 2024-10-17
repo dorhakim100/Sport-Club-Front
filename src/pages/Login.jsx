@@ -43,7 +43,7 @@ export function Login() {
 
   return (
     <div className='login-form' onSubmit={onLogin}>
-      <h3>{prefs.isEnglish ? 'Login' : 'חיבור'}</h3>
+      <h2>{prefs.isEnglish ? 'Login' : 'חיבור'}</h2>
       <LoginSignupForm />
       {/* <select
         name='username'
