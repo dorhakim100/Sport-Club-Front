@@ -8,17 +8,19 @@ export function ContactUs() {
 
   return (
     <div className='contact-us-container'>
-      <h3>
-        <span
-          style={
-            prefs.isDarkMode
-              ? { backgroundColor: '#2C3E50' }
-              : { backgroundColor: '#F5F5F5' }
-          }
-        >
-          {prefs.isEnglish ? 'Contact us' : 'צרו קשר'}
-        </span>
-      </h3>
+      <div className='head-container'>
+        <h3>
+          <span
+            style={
+              prefs.isDarkMode
+                ? { backgroundColor: '#2C3E50' }
+                : { backgroundColor: '#F5F5F5' }
+            }
+          >
+            {prefs.isEnglish ? 'Contact us' : 'צרו קשר'}
+          </span>
+        </h3>
+      </div>
       <div className='input-container'>
         <input
           type='text'

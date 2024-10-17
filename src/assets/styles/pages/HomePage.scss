@@ -104,47 +104,40 @@
     
 }
 
-.head-container{
-    position: relative;
+// .head-container{
+//     position: relative;
 
-    .line{
-        position: absolute;
-        left: 50px;
-             height: 2px;
-            width: 25vw;  
-            max-width: 300px; 
-            background-color: $dark-blue; 
-    }
-}
 
-    h3{
-        font-size: 2em;
-        margin: 2em;
-        position: relative;
-        background-color: transparent;
-
-        span{
-            padding: 0 1em; /* Horizontal padding for the span */
-            transition: background-color 0.3s ease;
-            position: relative; /* Make it relative to adjust positioning */
-            z-index: 1; 
-
-        }
-
-        &::after {
-            content: '';
-            position: absolute;
-
-            right: 0;
-            bottom: 20px;
-                height: 2px;
-                width: 100%; 
-                background-color: $dark-blue; 
+//     h3{
+//         font-size: 2em;
+//         margin: 2em;
+//         position: relative;
+//         background-color: transparent;
+    
+//         span{
+//             padding: 0 1em; /* Horizontal padding for the span */
+//             transition: background-color 0.3s ease;
+//             position: relative; /* Make it relative to adjust positioning */
+//             z-index: 1; 
+    
+//         }
+    
+//         &::after {
+//             content: '';
+//             position: absolute;
+    
+//             right: 0;
+//             bottom: 20px;
+//                 height: 2px;
+//                 width: 100%; 
+//                 background-color: $dark-blue; 
        
-            border-radius: 5px;
-          }
- 
-    }
+//             border-radius: 5px;
+//           }
+    
+//     }
+// }
+
 
 }
 
