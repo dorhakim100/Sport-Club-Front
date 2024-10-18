@@ -23,7 +23,6 @@ export function ItemDetails() {
       showErrorMsg('Cannot add item msg')
     }
   }
-
   return (
     <section className='item-details-container'>
       <Link to='/item'>{prefs.isEnglish ? 'Back to list' : 'חזרה לתפריט'}</Link>

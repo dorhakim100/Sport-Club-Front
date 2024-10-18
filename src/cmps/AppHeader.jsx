@@ -49,12 +49,15 @@ export function AppHeader({ bodyRef }) {
     if (scrollY > 0) {
       setScrolled(true)
       logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
+      // headerRef.current.style.transform = 'scaleY(0.8)'
       // headerRef.current.style.height = '100px'
       // headerRef.current.style.transition =
       //   'height 0.3s ease-out, transform 0.3s ease-out'
-    } else {
+      headerRef.current.style.opacity = '0.8'
+    } else if (scrollY === 0) {
       setScrolled(false)
       logoRef.current.style.transform = 'scale(1)' // Resets logo to original size
+      // headerRef.current.style.transform = 'scaleY(1)'
       // headerRef.current.style.height = '150px'
       // headerRef.current.style.transition =
       //   'height 0.3s ease-out, transform 0.3s ease-out'
