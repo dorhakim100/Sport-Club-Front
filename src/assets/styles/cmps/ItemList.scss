@@ -90,6 +90,8 @@
       min-height: 100px;
       transition: background-color 0.3s ease, box-shadow 0.3s ease; // Smooth transition
   
+      background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+
       a {
         color: $dark-blue;
         transition: color 0.3s ease; // Smooth transition for link color

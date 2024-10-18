@@ -1,0 +1,57 @@
+.trainers-list-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1em;
+   @media (max-width:1220px) {
+        
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); // Responsive grid
+        }
+    margin: 0em 1em 0em 1em;
+    padding: 1em;
+
+    .trainer-container{
+        background-color: $light-gray;
+        padding: 1em;
+        transition: 0.1s ease-out;
+        border-radius: 5px;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr 80px;
+        align-items: center;
+        justify-items: center;
+        gap: 0.5em;
+     
+        background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+        
+        
+        &:hover{
+            // background-color: $medium-gray;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            
+            .hidden{
+                opacity: 1;
+            }
+        }
+        
+        span{
+            font-size: 1.5em;
+            padding: 0.5em;
+        }
+        
+        img{
+            border-radius: 50%;
+            max-width: 300px;
+            width: 20vw;
+
+
+            // width: 100px;
+        }
+
+        .hidden{
+            opacity: 0;
+            transition: 0.3s ease-out;
+        }
+
+    }
+}

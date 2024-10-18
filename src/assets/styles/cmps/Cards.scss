@@ -1,0 +1,27 @@
+.cards{
+    .swiper-button-next,
+.swiper-button-prev {
+  background-color: $primary-light-blue; /* Set the background color */
+  border-radius: 50%; /* Optional: Make buttons round */
+  width: 40px; /* Set width */
+  height: 40px; /* Set height */
+  transition: 0.3s ease-out;
+
+  
+  
+  display: flex; /* Align icon */
+  justify-content: center; /* Center icon */
+  align-items: center; /* Center icon */
+
+
+  
+  &:hover{
+      background-color: $dark-blue;
+
+  }
+
+  &::after{
+    font-size: 1.5em;
+  }
+}
+}

@@ -26,7 +26,7 @@ export function ItemDetails() {
   return (
     <section className='item-details-container'>
       <Link to='/item'>{prefs.isEnglish ? 'Back to list' : 'חזרה לתפריט'}</Link>
-      <h1>{prefs.isEnglish ? item.title.eng : item.title.he}</h1>
+      {/* <h1>{prefs.isEnglish ? item.title.eng : item.title.he}</h1> */}
     </section>
   )
 }

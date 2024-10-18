@@ -28,9 +28,9 @@ export function SwiperCarousel({ imgs }) {
           '--swiper-navigation-color': '#4CAF50',
           '--swiper-pagination-color': '#fff',
         }}
-        loop={true}
+        // loop={true}
         spaceBetween={10}
-        navigation={true}
+        // navigation={true}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}

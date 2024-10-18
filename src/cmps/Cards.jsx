@@ -7,7 +7,7 @@ import 'swiper/css'
 import 'swiper/css/effect-cards'
 
 // import required modules
-import { EffectCards } from 'swiper/modules'
+import { EffectCards, Navigation } from 'swiper/modules'
 
 export function Cards() {
   return (
@@ -15,9 +15,10 @@ export function Cards() {
       <Swiper
         effect={'cards'}
         grabCursor={true}
-        modules={[EffectCards]}
+        modules={[EffectCards, Navigation]}
         className='cards'
         style={{ width: '300px', height: '300px', margin: '0px' }}
+        navigation={true}
       >
         <SwiperSlide style={{ borderRadius: '15px' }}>Slide 1</SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>

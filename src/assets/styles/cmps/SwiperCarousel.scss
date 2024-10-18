@@ -26,6 +26,10 @@
       background-color: $dark-green-hover;
 
   }
+
+  &::after{
+    font-size: 2em;
+  }
 }
 
 /* Optional: Change icon color */

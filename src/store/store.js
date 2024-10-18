@@ -4,12 +4,14 @@ import { itemReducer } from './reducers/item.reducer'
 import { userReducer } from './reducers/user.reducer'
 import { reviewReducer } from './reducers/review.reducer'
 import { systemReducer } from './reducers/system.reducer'
+import { trainerReducer } from './reducers/trainer.reducer.js'
 
 const rootReducer = combineReducers({
   itemModule: itemReducer,
   userModule: userReducer,
   systemModule: systemReducer,
   reviewModule: reviewReducer,
+  trainerModule: trainerReducer,
 })
 
 const middleware = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

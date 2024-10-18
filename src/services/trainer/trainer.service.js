@@ -5,7 +5,7 @@ import { userService } from '../user/user.service'
 const STORAGE_KEY = 'trainer'
 const PAGE_SIZE = 6
 
-export const scheduleService = {
+export const trainerService = {
   query,
   getById,
   save,
