@@ -32,21 +32,37 @@
             .hidden{
                 opacity: 1;
             }
+
+            .img-container{
+
+                img{
+                    transform: scale(1.1); // Slight scale effect to enhance the hover effect
+    
+                }
+            }
+
         }
         
         span{
             font-size: 1.5em;
             padding: 0.5em;
         }
-        
-        img{
-            border-radius: 50%;
+
+        .img-container{
             max-width: 300px;
             width: 20vw;
+            border-radius: 50%;
+            overflow: hidden;
 
+            img{
+                border-radius: 50%;
+                transition: 0.2s ease-out;
 
-            // width: 100px;
+    
+                // width: 100px;
+            }
         }
+        
 
         .hidden{
             opacity: 0;

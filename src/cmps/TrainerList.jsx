@@ -17,7 +17,9 @@ export function TrainerList({ trainers }) {
         return (
           <div className='trainer-container'>
             <span>{prefs.isEnglish ? trainer.name.eng : trainer.name.he}</span>
-            <img src={trainer.img} alt='' />
+            <div className='img-container'>
+              <img src={trainer.img} alt='' />
+            </div>
             <div className='buttons-container' style={{ direction: 'ltr' }}>
               {(user && user.isAdmin && (
                 <ButtonGroup

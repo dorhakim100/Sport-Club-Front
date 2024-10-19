@@ -10,7 +10,7 @@ export const trainerService = {
   getById,
   save,
   remove,
-
+  getDefaultFilter,
   getMaxPage,
 }
 
@@ -85,6 +85,10 @@ async function getMaxPage() {
   } catch (err) {
     console.log(err)
   }
+}
+
+function getDefaultFilter() {
+  return { types: [], pageIdx: 0, iaAll: true }
 }
 
 function _createTrainers() {

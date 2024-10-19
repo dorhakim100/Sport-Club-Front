@@ -13,6 +13,7 @@ export async function loadTrainers(filterBy) {
   try {
     const trainers = await trainerService.query(filterBy)
     store.dispatch(getCmdSetTrainers(trainers))
+    return trainers
   } catch (err) {
     console.log('Cannot load trainers', err)
     throw err

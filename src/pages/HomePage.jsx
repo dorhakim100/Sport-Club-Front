@@ -1,13 +1,16 @@
+import React from 'react'
 import { useState, useEffect, userRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link, NavLink } from 'react-router-dom'
 
+import { trainerService } from '../services/trainer/trainer.service.js'
+import { makeId } from '../services/util.service.js'
+import { loadTrainers } from '../store/actions/trainer.actions.js'
+
 import { SwiperCarousel } from '../cmps/SwiperCarousel.jsx'
 import { HeadContainer } from '../cmps/HeadContainer.jsx'
 
-import React from 'react'
-import { makeId } from '../services/util.service.js'
 import { MouseWheelCarousel } from '../cmps/MouseWheelCarousel.jsx'
 import { Cards } from '../cmps/Cards.jsx'
 import { Updates } from '../cmps/Updates.jsx'
@@ -46,6 +49,18 @@ export function HomePage() {
   ]
 
   const [isUpdatesHover, setIsUpdatesHover] = useState(false)
+
+  const trainers = useSelector(
+    (stateSelector) => stateSelector.trainerModule.trainers
+  )
+
+  useEffect(() => {
+    const getTrainers = async () => {
+      const t = await loadTrainers(trainerService.getDefaultFilter())
+      console.log(t)
+    }
+    getTrainers()
+  }, [])
   return (
     <section className='home-container'>
       {/* <h2>Home sweet Home</h2> */}
@@ -70,7 +85,7 @@ export function HomePage() {
         </div>
         <div className='cards-container'>
           <b>{prefs.isEnglish ? 'Our trainers' : 'המאמנים שלנו'}</b>
-          <Cards />
+          <Cards trainers={trainers} />
         </div>
         <div
           className='updates-container'

@@ -2,10 +2,33 @@
   font-family: alef;
   src: url('public/fonts/Alef-Regular.ttf');
 }
+
+@font-face {
+  font-family: 'assistantRegular';
+  src: url('/fonts/Assistant-Regular.ttf');
+}
+@font-face {
+  font-family: 'assistantLight';
+  src: url('/fonts/Assistant-Light.ttf');
+}
+@font-face {
+  font-family: 'assistantMedium';
+  src: url('/fonts/Assistant-Medium.ttf');
+}
+@font-face {
+  font-family: 'assistantBold';
+  src: url('/fonts/Assistant-Bold.ttf');
+}
+@font-face {
+  font-family: 'assistantExtraBold';
+  src: url('/fonts/Assistant-ExtraBold.ttf');
+}
+
   
   // Apply to body and headings
   body {
-    font-family: alef;
+    // font-family: alef;
+    font-family: assistantRegular;
     font-size: 16px;
   }
   

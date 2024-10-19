@@ -24,6 +24,7 @@
 
         font-size: 3em;
         a{
+          font-family: assistantExtraBold;
             position: relative;
             color: $bold-navy;
             text-decoration: none;
@@ -88,6 +89,8 @@
 
 
         b{
+          font-family: assistantMedium;
+          font-size: 1.2em;
             text-align: start;
         }
         

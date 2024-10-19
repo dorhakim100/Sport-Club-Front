@@ -1,5 +1,12 @@
 h2{
 	font-size: 3.5em;
+	font-family: assistantBold;
+}
+a{
+	&:hover{
+
+		text-decoration: none;
+	}
 }
 
 button {
@@ -216,6 +223,8 @@ nav {
 
 .head-container{
     position: relative;
+
+	font-family: assistantBold;
 
 
     h3{
