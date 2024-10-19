@@ -16,7 +16,11 @@ export function ContactUs() {
           he: 'צרו קשר',
         }}
       />
-      <div className='input-container'>
+      <div
+        className={
+          prefs.isDarkMode ? 'input-container dark-mode' : 'input-container'
+        }
+      >
         <input
           type='text'
           name=''

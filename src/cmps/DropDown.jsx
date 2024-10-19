@@ -33,7 +33,7 @@ export function DropDown({ options, isDropdownVisible, setDropdownVisible }) {
 
   return (
     <div
-      className='dropdown-menu'
+      className={prefs.isEnglish ? 'dropdown-menu ltr' : 'dropdown-menu'}
       onMouseLeave={handleMouseLeave}
       ref={dropdownRef}
     >

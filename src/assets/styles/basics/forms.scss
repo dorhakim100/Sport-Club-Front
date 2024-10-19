@@ -91,6 +91,8 @@ nav {
 		border-color: #e53e3e; // Error color
 	  }
 	}
+
+	
   
 	.input-label {
 	  position: absolute;
@@ -108,8 +110,17 @@ nav {
 	  color: #e53e3e;
 	  margin-top: 5px;
 	}
+
+
   }
 
+.input-container.dark-mode{
+	input,textarea{
+
+		color: white;
+		background-color: $dark-gray;
+	}
+	}
   input[type="number"] {
 	width: 80px;
 	padding: 8px;
