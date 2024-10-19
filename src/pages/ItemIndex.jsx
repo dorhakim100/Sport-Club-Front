@@ -33,7 +33,7 @@ export function ItemIndex() {
 
   const [isGrid, setIsGrid] = useState(true)
 
-  const headText = { he: 'חנות', eng: 'Store' }
+  const headText = { he: 'מוצרים', eng: 'Items' }
 
   useEffect(() => {
     const setItems = async () => {
@@ -90,6 +90,7 @@ export function ItemIndex() {
   return (
     <main className='item-index'>
       <header className='item-index-header'>
+        <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
         <DynamicCover coverSrc={cover} />
         <HeadContainer text={headText} />
       </header>

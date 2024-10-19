@@ -110,7 +110,11 @@ export function ItemFilter({
   return (
     <section className='item-filter'>
       {/* <h3> {prefs.isEnglish ? 'Filter' : 'סינון'}:</h3> */}
-      <div className='type-container'>
+      <div
+        className={
+          prefs.isDarkMode ? 'type-container dark-mode' : 'type-container'
+        }
+      >
         <div className='checkbox-container'>
           <input
             type='checkbox'

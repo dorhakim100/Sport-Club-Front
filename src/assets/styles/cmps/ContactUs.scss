@@ -7,18 +7,30 @@
         flex-direction: column;
         justify-items: center;
         align-items: center;
-        padding: 0em 5em 2.5em 5em;
+        // padding: 0em 5em 2.5em 5em;
+        min-width: 250px;
+        max-width: 1000px;
         // margin-inline-start: 1em;
 
         gap: 1em;
+
         input{
             width: 50%;
+            
             align-self: start;
         }
-
+        
         textarea{
-            // width: 80%;
+            align-self: start;
+            width: 60%;
             height: 300px;
+        }
+        @media (max-width:550px) {
+            input, textarea{
+                width: 100%;
+            }
+            
+            
         }
     }
 }

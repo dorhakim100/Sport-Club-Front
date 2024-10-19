@@ -36,7 +36,6 @@ export function TrainerIndex() {
   useEffect(() => {
     const getTrainers = async () => {
       await loadTrainers(filter)
-      console.log(trainers)
     }
     getTrainers()
   }, [filter])

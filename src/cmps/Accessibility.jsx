@@ -76,7 +76,16 @@ export function Accessibility({ bodyRef }) {
   }, [])
 
   const handleKeyDown = (event) => {
-    console.log(`Key pressed: ${event.key}`)
+    const focusedElement = event.target
+
+    if (
+      focusedElement.tagName === 'INPUT' ||
+      focusedElement.tagName === 'TEXTAREA' ||
+      focusedElement.tagName === 'SELECT'
+    ) {
+      return
+    }
+
     if (event.key === 'Tab') {
       setIsAccessibility(true)
     } else if (event.key === 'Escape') {

@@ -132,6 +132,32 @@ nav {
 	}
   }
 
+  div.dark-mode{
+	label{
+		background-color: $dark-gray;
+		&:hover{
+			
+			background-color: $very-dark-gray;
+		}
+	}
+	div{
+		
+		&:has(input:checked) label{
+			background-color: $dark-blue;
+			color: white;
+			&:hover{
+				background-color: $bold-navy;
+				background-color: $very-dark-gray;
+			  color: white;
+	
+			}
+	
+		  }
+	}
+
+
+  }
+
   .checkbox-container{
 
 	input[type="checkbox"]{
@@ -229,7 +255,7 @@ nav {
 
     h3{
         font-size: 2em;
-        margin: 2em;
+        margin: 2em 0em 2em 0em;
         position: relative;
         background-color: transparent;
     
@@ -255,4 +281,8 @@ nav {
           }
     
     }
+}
+
+.page-container{
+	margin: 0em 3em 0em 3em;
 }
