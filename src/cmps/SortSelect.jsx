@@ -14,14 +14,26 @@ import Select from '@mui/material/Select'
 // If your app/website doesn't deal with this, you can have just:
 
 export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
-  const theme = createTheme({ direction: prefs.isEnglish ? 'ltr' : 'rtl' })
-  // const theme = (outerTheme) =>
-  //   createTheme({
-  //     direction: 'rtl',
-  //     palette: {
-  //       mode: outerTheme.palette.mode,
-  //     },
-  //   })
+  const theme = createTheme({
+    direction: prefs.isEnglish ? 'ltr' : 'rtl',
+    palette: {
+      mode: prefs.isDarkMode ? 'dark' : 'light', // Switch between light and dark mode
+      primary: {
+        main: prefs.isDarkMode ? '#90caf9' : '#1976d2', // Blue for light mode, lighter blue for dark mode
+      },
+      secondary: {
+        main: prefs.isDarkMode ? '#f48fb1' : '#f50057', // Pink variations for light and dark mode
+      },
+      background: {
+        default: prefs.isDarkMode ? '#121212' : '#ffffff', // Dark background for dark mode, white for light
+        paper: prefs.isDarkMode ? '#1d1d1d' : '#f5f5f5', // Paper background for elements
+      },
+      text: {
+        primary: prefs.isDarkMode ? '#ffffff' : '#000000', // White text in dark mode, black text in light mode
+        secondary: prefs.isDarkMode ? '#b0bec5' : '#424242', // Gray for secondary text
+      },
+    },
+  })
   // Create RTL cache
   const cacheRtl = createCache({
     key: 'muirtl',
@@ -65,6 +77,9 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
             id='sort'
             onChange={handleChange}
             value={filterToEdit.sortDir}
+            MenuProps={{
+              disableScrollLock: true, // This prevents adding padding and overflow to the body
+            }}
           >
             <MenuItem
               value=''
