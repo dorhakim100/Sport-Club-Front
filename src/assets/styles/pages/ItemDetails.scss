@@ -1,0 +1,115 @@
+
+
+.item-details-container{
+    text-align: start;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1em;
+
+    padding: 2em;
+
+    a{
+        grid-column: 1/-1;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+
+    }
+
+    .title-container{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        gap: 1em;
+
+        b{
+
+            font-size: 2em;
+            font-family: assistantBold;
+        }
+
+
+        .price-container{
+            display: grid;
+            gap: 1em;
+            align-items: center;
+            justify-items: center;
+
+            .quantity-container{
+                display: flex;
+                align-items: center;
+                justify-items: center;
+                button{
+                    font-size: 0px;
+                    padding: 3px;
+                    // width: 100%;
+                    // padding: 12px 15px;
+                    // font-size: 16px;
+                    border: 2px solid #ccc;
+                    border-radius: 8px;
+                    outline: none;
+                    background-color: #f9f9f9;
+                    transition: border-color 0.3s, background-color 0.3s;
+
+                    &:focus {
+                      border-color: #3182ce; // Highlight color on focus
+                      background-color: #fff;
+                
+                      &::placeholder {
+                        color: transparent; // Hide placeholder on focus
+                      }
+                    }
+                }
+            
+                &::placeholder {
+                  color: #999;
+                  transition: color 0.3s;
+                }
+            
+          
+            }
+
+            input{
+                text-align: center;
+                &:focus {
+                    border-color: #3182ce; // Highlight color on focus
+                    background-color: #fff;
+              
+                    &::placeholder {
+                      color: transparent; // Hide placeholder on focus
+                    }
+                  }
+            }
+
+
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            /* For Firefox */
+            input[type="number"] {
+            -moz-appearance: textfield;
+
+            }
+        }
+
+    }
+
+    .img-container{
+        align-self: center;
+        img{
+            border-radius: 5px;
+        }
+    }
+
+    .preview-container{
+        grid-column: 1/-1;
+        align-self: start;
+
+    }
+    
+}

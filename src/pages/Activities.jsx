@@ -1,41 +1,52 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import { Nav } from '../cmps/Nav'
 import { HeadContainer } from '../cmps/HeadContainer'
 
 import Divider from '@mui/material/Divider'
 
 export function Activities() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+
+  const origin = {
+    path: '/activities',
+    he: 'פעילויות במועדון',
+    eng: 'Activities',
+  }
+
+  const links = [
+    {
+      path: 'swimming',
+      he: 'בית הספר לשחייה',
+      eng: 'Swimming School',
+    },
+    {
+      path: 'tennis',
+      he: 'בית הספר לטניס',
+      eng: 'Tennis School',
+    },
+    {
+      path: 'care',
+      he: 'מרכז הטיפולים',
+      eng: 'Care',
+    },
+    {
+      path: 'camp',
+      he: 'קייטנת הקיץ',
+      eng: 'Summer Camp',
+    },
+    {
+      path: 'restaurant',
+      he: 'שף הכפר',
+      eng: 'Restaurant',
+    },
+  ]
+
   return (
     <section className='activities-page-container'>
       <h2>{prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}</h2>
-      <nav className='page-navigation-container'>
-        <NavLink to='/activities'>
-          {prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='swimming'>
-          {prefs.isEnglish ? 'Swimming School' : 'בית הספר לשחייה'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='tennis'>
-          {prefs.isEnglish ? 'Tennis School' : 'בית הספר לטניס'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='care'>
-          {prefs.isEnglish ? 'Care' : 'מרכז הטיפולים'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='camp'>
-          {prefs.isEnglish ? 'Summer Camp' : 'קייטנת הקיץ'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-
-        <NavLink to='restaurant'>
-          {prefs.isEnglish ? 'Restaurant' : 'שף הכפר'}
-        </NavLink>
-      </nav>
+      <Nav origin={origin} links={links} />
 
       <section>
         <Outlet />

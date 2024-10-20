@@ -84,6 +84,35 @@
         }
     }
 
+    .cart-button{
+        position: relative;
+
+        &:hover{
+
+            span{
+                // color: white;
+                // background-color: $medium-red;
+            }
+        }
+
+        span{
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            transition: 0.2s ease-out;
+
+            width: fit-content;
+            height: fit-content;
+
+            width: 25px;
+            color: $bold-navy;
+
+            border-radius: 50%;
+            background-color: $light-red;
+        }
+
+    }
+
    
 }    
 

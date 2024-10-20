@@ -6,6 +6,12 @@ import { Link } from 'react-router-dom'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadItem, addItemMsg } from '../store/actions/item.actions'
 
+import { AddToCartButton } from '../cmps/AddToCartButton'
+
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
+
 export function ItemDetails() {
   const { itemId } = useParams()
   const item = useSelector((storeState) => storeState.itemModule.item)
@@ -25,8 +31,33 @@ export function ItemDetails() {
   }
   return (
     <section className='item-details-container'>
-      <Link to='/item'>{prefs.isEnglish ? 'Back to list' : 'חזרה לתפריט'}</Link>
-      {/* <h1>{prefs.isEnglish ? item.title.eng : item.title.he}</h1> */}
+      <Link to='/item'>
+        {prefs.isEnglish ? `Back to list` : 'חזרה לתפריט'}
+        <ArrowBackIosNewIcon />
+      </Link>
+
+      <div className='title-container'>
+        <b>{prefs.isEnglish ? item.title.eng : item.title.he}</b>
+        <div className='price-container'>
+          <span>{item.price}</span>
+          <div className='quantity-container'>
+            <button>
+              <AddIcon />
+            </button>
+            <input type='number' name='' id='' />
+            <button>
+              <RemoveIcon />
+            </button>
+          </div>
+        </div>
+        <AddToCartButton item={item} />
+      </div>
+      <div className='img-container'>
+        <img src={item.cover} alt='' />
+      </div>
+      <div className='preview-container'>
+        <p>{prefs.isEnglish ? item.preview.eng : item.preview.he}</p>
+      </div>
     </section>
   )
 }

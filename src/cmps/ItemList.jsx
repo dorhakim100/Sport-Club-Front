@@ -3,6 +3,8 @@ import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
 
+import { AddToCartButton } from './AddToCartButton'
+
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
@@ -28,7 +30,8 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
           <li key={item._id} className='item-container'>
             <ItemPreview item={item} />
             <div className='actions' style={{ direction: 'ltr' }}>
-              {(shouldShowActionBtns(item) && (
+              <AddToCartButton item={item} />
+              {/* {(shouldShowActionBtns(item) && (
                 <ButtonGroup
                   variant='contained'
                   aria-label='Basic button group'
@@ -47,7 +50,7 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
                 <Button variant='contained'>
                   {prefs.isEnglish ? 'Add To Cart' : 'הוסף לעגלה'}
                 </Button>
-              )}
+              )} */}
             </div>
           </li>
         ))}

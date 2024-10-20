@@ -1,3 +1,5 @@
+import { itemService } from '../../services/item/item.service'
+
 export const SET_ITEMS = 'SET_ITEMS'
 export const SET_ITEM = 'SET_ITEM'
 export const REMOVE_ITEM = 'REMOVE_ITEM'
@@ -7,7 +9,7 @@ export const ADD_ITEM_MSG = 'ADD_ITEM_MSG'
 
 const initialState = {
   items: [],
-  item: null,
+  item: itemService.getEmptyItem(),
 }
 
 export function itemReducer(state = initialState, action) {

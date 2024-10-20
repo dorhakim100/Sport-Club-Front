@@ -31,6 +31,9 @@ import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { UserDetails } from './pages/UserDetails'
 import { AdminIndex } from './pages/AdminIndex'
+import { UpdateIndex } from './pages/UpdateIndex.jsx'
+import { OrderIndex } from './pages/OrderIndex.jsx'
+import { Cart } from './pages/Cart.jsx'
 
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
@@ -89,12 +92,17 @@ export function App() {
             <Route path='item/:itemId' element={<ItemDetails />} />
             <Route path='item/edit/:itemId' element={<ItemEdit />} />
             <Route path='user/:id' element={<UserDetails />} />
+            <Route path='user/:id/cart' element={<Cart />} />
+
             <Route path='user' element={<LoginSignup />}>
               <Route path='login' element={<Login />} />
               <Route path='signup' element={<Signup />} />
             </Route>
 
-            <Route path='admin' element={<AdminIndex />} />
+            <Route path='admin' element={<AdminIndex />}>
+              <Route path='update' element={<UpdateIndex />} />
+              <Route path='order' element={<OrderIndex />} />
+            </Route>
           </Routes>
         </section>
         <AppFooter />

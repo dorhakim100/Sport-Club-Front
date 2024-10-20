@@ -10,9 +10,9 @@ a{
 }
 
 button {
-	border: 0;
+	// border: 0;
 	// background-color: $clr1;
-	color: whitesmoke;
+	// color: whitesmoke;
 	padding: 5px 10px;
 	margin: 5px;
 	cursor: pointer;
@@ -27,13 +27,12 @@ nav {
     
     // font-size: .8em;
     a{
-
         color: $dark-blue;
-
+		transition: 0.3s ease;
+		font-family: assistantBold;
         
         &:hover{
             color: $bold-navy;
-            
         }
     }
     
@@ -295,5 +294,8 @@ nav {
 }
 
 .page-container{
-	margin: 0em 3em 0em 3em;
+	margin: 1em 3em 3em 3em;
+
+    // padding: 1em 0em 1em 0em;
+	// margin: 3em;
 }

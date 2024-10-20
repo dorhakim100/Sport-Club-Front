@@ -6,6 +6,8 @@ import { scheduleService } from '../services/schedule/schedule.service'
 import { uploadService } from '../services/upload.service'
 import { setIsLoading } from '../store/actions/system.actions'
 
+import { Nav } from '../cmps/Nav'
+
 import { styled } from '@mui/material/styles'
 import Divider from '@mui/material/Divider'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
@@ -71,20 +73,30 @@ export function Schedule() {
     }
   }
 
+  const origin = {
+    path: '/class',
+    he: 'שיעורים',
+    eng: 'Class',
+  }
+
+  const links = [
+    {
+      path: '/class/schedule',
+      he: 'לוח החוגים',
+      eng: 'Schedule',
+    },
+    {
+      path: '/class/trainer',
+      he: 'המדריכים שלנו',
+      eng: 'Our Instructors',
+    },
+  ]
+
   return (
     <section className='schedule-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
-      <nav className='page-navigation-container'>
-        <NavLink to='/class'>{prefs.isEnglish ? 'Class' : 'שיעורים'}</NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='/class/schedule'>
-          {prefs.isEnglish ? 'Schedule' : 'לוח החוגים'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='/class/trainer'>
-          {prefs.isEnglish ? 'Our Instructors' : 'המדריכים שלנו'}
-        </NavLink>
-      </nav>
+      <Nav origin={origin} links={links} />
+
       <HeadContainer text={{ he: 'מערכת החוגים', eng: 'Schedule' }} />
 
       {

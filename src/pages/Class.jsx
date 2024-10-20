@@ -2,26 +2,38 @@ import React, { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
+import { Nav } from '../cmps/Nav'
+
 import Divider from '@mui/material/Divider'
 
 export function Class() {
   const location = useLocation()
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
+  const origin = {
+    path: '/class',
+    he: 'שיעורים',
+    eng: 'Class',
+  }
+
+  const links = [
+    {
+      path: 'schedule',
+      he: 'לוח החוגים',
+      eng: 'Schedule',
+    },
+    {
+      path: 'trainer',
+      he: 'המדריכים שלנו',
+      eng: 'Our Instructors',
+    },
+  ]
+
   return (
     <section className='class-page-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
-      <nav className='page-navigation-container'>
-        <NavLink to='/class'>{prefs.isEnglish ? 'Class' : 'שיעורים'}</NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='schedule'>
-          {prefs.isEnglish ? 'Schedule' : 'לוח החוגים'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='/class/trainer'>
-          {prefs.isEnglish ? 'Our Instructors' : 'המדריכים שלנו'}
-        </NavLink>
-      </nav>
+      <Nav origin={origin} links={links} />
     </section>
   )
 }

@@ -3,6 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { Nav } from '../cmps/Nav'
 import { HeadContainer } from '../cmps/HeadContainer'
 
 import Divider from '@mui/material/Divider'
@@ -13,23 +14,34 @@ export function AboutUs() {
   function onTellMeMore() {
     console.log('Telling you more')
   }
+
+  const origin = {
+    path: '/about',
+    he: 'אודות',
+    eng: 'About',
+  }
+
+  const links = [
+    {
+      path: 'team',
+      he: 'צוות המועדון',
+      eng: 'Team',
+    },
+    {
+      path: 'organization',
+      he: 'עמותה',
+      eng: 'Organization',
+    },
+    {
+      path: 'accessibility',
+      he: 'נגישות',
+      eng: 'Accessibility',
+    },
+  ]
   return (
     <section className='about-container'>
       <h2>{prefs.isEnglish ? 'About Us' : 'אודות המועדון'}</h2>
-      <nav className='page-navigation-container'>
-        <NavLink to='/about'>{prefs.isEnglish ? 'About' : 'אודות'}</NavLink>
-        <Divider orientation='vertical' flexItem />
-
-        <NavLink to='team'>{prefs.isEnglish ? 'Team' : 'צוות המועדון'}</NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='organization'>
-          {prefs.isEnglish ? 'Organization' : 'עמותה'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='accessibility'>
-          {prefs.isEnglish ? 'Accessibility' : 'נגישות'}
-        </NavLink>
-      </nav>
+      <Nav origin={origin} links={links} />
 
       <section>
         <Outlet />

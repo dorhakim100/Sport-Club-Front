@@ -16,6 +16,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 import { userService } from '../services/user/user.service'
 
+import { Nav } from '../cmps/Nav'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { TrainerFilter } from '../cmps/TrainerFilter.jsx'
 import { TrainerList } from '../cmps/TrainerList.jsx'
@@ -33,6 +34,25 @@ export function TrainerIndex() {
 
   const headText = { he: 'המדריכים שלנו', eng: 'Our Instructors' }
 
+  const origin = {
+    path: '/class',
+    he: 'שיעורים',
+    eng: 'Class',
+  }
+
+  const links = [
+    {
+      path: '/class/schedule',
+      he: 'לוח החוגים',
+      eng: 'Schedule',
+    },
+    {
+      path: '/class/trainer',
+      he: 'המדריכים שלנו',
+      eng: 'Our Instructors',
+    },
+  ]
+
   useEffect(() => {
     const getTrainers = async () => {
       await loadTrainers(filter)
@@ -43,17 +63,7 @@ export function TrainerIndex() {
   return (
     <section className='trainer-index-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
-      <nav className='page-navigation-container'>
-        <NavLink to='/class'>{prefs.isEnglish ? 'Class' : 'שיעורים'}</NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='/class/schedule'>
-          {prefs.isEnglish ? 'Schedule' : 'לוח החוגים'}
-        </NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='/class/trainer'>
-          {prefs.isEnglish ? 'Our Instructors' : 'המדריכים שלנו'}
-        </NavLink>
-      </nav>
+      <Nav origin={origin} links={links} />
       <HeadContainer text={headText} />
 
       <TrainerFilter filter={filter} setFilter={setFilter} />

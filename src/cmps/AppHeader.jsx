@@ -10,6 +10,7 @@ import { logout } from '../store/actions/user.actions'
 import { DropDown } from '../cmps/DropDown.jsx'
 
 import Divider from '@mui/material/Divider'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 import { Button } from '@mui/material'
 // import logo from '../../public/imgs/logo.png'
@@ -294,6 +295,14 @@ export function AppHeader({ bodyRef }) {
         {user && (
           <div className='user-info'>
             <Link to={`user/${user._id}`}>{user.fullname}</Link>
+            <Button
+              variant='contained'
+              onClick={() => navigate(`/user/${user._id}/cart`)}
+              className='cart-button'
+            >
+              <span>32</span>
+              <ShoppingCartIcon />
+            </Button>
             <Button onClick={onLogout} variant='contained'>
               {prefs.isEnglish ? 'Logout' : 'יציאה'}
             </Button>

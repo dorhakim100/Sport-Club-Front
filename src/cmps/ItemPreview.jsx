@@ -10,6 +10,7 @@ export function ItemPreview({ item }) {
   return (
     <article className='preview'>
       <Link
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         to={`/item/${item._id}`}
         className={prefs.isDarkMode ? 'dark-mode' : ''}
       >
