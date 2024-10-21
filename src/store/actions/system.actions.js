@@ -16,7 +16,8 @@ export function setIsLoading(stateToSet) {
     : store.dispatch({ type: LOADING_DONE })
 }
 
-export function setPrefs(prefs) {
+export function setPrefs(prefsToSet) {
+  const prefs = { ...prefsToSet }
   userService.setPrefs(prefs)
   store.dispatch({ type: SET_PREFS, prefs })
 }

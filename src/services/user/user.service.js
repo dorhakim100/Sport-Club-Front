@@ -15,6 +15,7 @@ export const userService = {
   getEmptyUser,
   getPrefs,
   setPrefs,
+  getLoggedinCart,
 }
 
 async function getUsers() {
@@ -33,23 +34,24 @@ function remove(userId) {
   return storageService.remove('user', userId)
 }
 
-async function update({ _id, score }) {
+async function update(userToUpdate) {
+  const { _id } = userToUpdate
   const user = await storageService.get('user', _id)
-  user.score = score
-  await storageService.put('user', user)
+
+  const savedUser = await storageService.put('user', userToUpdate)
 
   // When admin updates other user's details, do not update loggedinUser
   const loggedinUser = getLoggedinUser()
   if (loggedinUser._id === user._id) saveLoggedinUser(user)
 
-  return user
+  return savedUser
 }
 
 async function login(userCred) {
   try {
-    console.log(userCred)
+    // console.log(userCred)
     const users = await storageService.query('user')
-    console.log(users)
+    // console.log(users)
     const user = users.find((user) => user.username === userCred.username)
 
     if (user) return saveLoggedinUser(user)
@@ -62,7 +64,9 @@ async function signup(userCred) {
   if (!userCred.imgUrl)
     userCred.imgUrl =
       'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-  userCred.score = 10000
+
+  userCred.ordersIds = []
+  if (!userCred.items) userCred.items = []
 
   const user = await storageService.post('user', userCred)
   return saveLoggedinUser(user)
@@ -80,9 +84,12 @@ function saveLoggedinUser(user) {
   user = {
     _id: user._id,
     fullname: user.fullname,
+    username: user.username,
     imgUrl: user.imgUrl,
-    score: user.score,
     isAdmin: user.isAdmin,
+    email: user.email,
+    ordersIds: user.ordersIds,
+    items: user.items,
   }
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
   return user
@@ -94,7 +101,9 @@ function getEmptyUser() {
     password: '',
     fullname: '',
     isAdmin: false,
-    score: 100,
+    ordersIds: [],
+    items: [],
+    email: '',
   }
 }
 
@@ -116,6 +125,14 @@ function setPrefs(prefs) {
   localStorage.setItem(entityType, JSON.stringify(prefs))
 }
 
+function getLoggedinCart() {
+  const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+  if (!user) return []
+  const cart = user.items
+  console.log(cart)
+  return cart
+}
+
 // To quickly create an admin user, uncomment the next line
 // _createAdmin()
 async function _createAdmin() {
@@ -128,6 +145,7 @@ async function _createAdmin() {
     isAdmin: true,
     email: 'service.kfar@gmail.com',
     ordersIds: [],
+    items: [],
   }
 
   const newUser = await storageService.post('user', userCred)

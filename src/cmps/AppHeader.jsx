@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -13,10 +13,11 @@ import Divider from '@mui/material/Divider'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 import { Button } from '@mui/material'
-// import logo from '../../public/imgs/logo.png'
 
 export function AppHeader({ bodyRef }) {
   const user = useSelector((storeState) => storeState.userModule.user)
+  const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
+  console.log(cart)
   const navigate = useNavigate()
 
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -45,23 +46,29 @@ export function AppHeader({ bodyRef }) {
     setHeaderDarkMode()
   }, [prefs.isDarkMode])
 
+  useEffect(() => {
+    // calcCartLength()
+    console.log('cartLength:', cartLength)
+  }, [cart])
+
+  const cartLength = useMemo(() => {
+    let length = 0
+    if (!cart) return
+    const cartLength = cart.reduce((accu, item) => accu + item.quantity, length)
+    return cartLength
+  }, [cart])
+
   const handleScroll = () => {
     const scrollY = window.scrollY
     if (scrollY > 0) {
       setScrolled(true)
       logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
-      // headerRef.current.style.transform = 'scaleY(0.8)'
-      // headerRef.current.style.height = '100px'
-      // headerRef.current.style.transition =
-      //   'height 0.3s ease-out, transform 0.3s ease-out'
+
       headerRef.current.style.opacity = '0.8'
     } else if (scrollY === 0) {
       setScrolled(false)
       logoRef.current.style.transform = 'scale(1)' // Resets logo to original size
-      // headerRef.current.style.transform = 'scaleY(1)'
-      // headerRef.current.style.height = '150px'
-      // headerRef.current.style.transition =
-      //   'height 0.3s ease-out, transform 0.3s ease-out'
+
       headerRef.current.style.opacity = '1'
     }
   }
@@ -300,7 +307,7 @@ export function AppHeader({ bodyRef }) {
               onClick={() => navigate(`/user/${user._id}/cart`)}
               className='cart-button'
             >
-              <span>32</span>
+              {cart && cart.length > 0 && <span>{cartLength}</span>}
               <ShoppingCartIcon />
             </Button>
             <Button onClick={onLogout} variant='contained'>

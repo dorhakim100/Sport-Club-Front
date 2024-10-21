@@ -9,6 +9,7 @@ import {
   SET_USER,
   SET_USERS,
   SET_WATCHED_USER,
+  UPDATE_CART,
   // SET_PREFS,
 } from '../reducers/user.reducer'
 
@@ -84,6 +85,20 @@ export async function loadUser(userId) {
   } catch (err) {
     showErrorMsg('Cannot load user')
     console.log('Cannot load user', err)
+  }
+}
+
+export async function updateCart(user) {
+  const cart = [...user.items]
+  console.log(cart)
+
+  store.dispatch({ type: UPDATE_CART, cart })
+
+  try {
+    const saved = await userService.update(user)
+  } catch (err) {
+    console.log(err)
+    throw err
   }
 }
 

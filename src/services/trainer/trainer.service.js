@@ -97,7 +97,7 @@ function _createTrainers() {
       _id: makeId(),
       name: { he: 'שביט אביטל', eng: 'Shavit Avital' },
       types: ['gym', 'studio'],
-      img: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+      img: 'https://sb.kaleidousercontent.com/67418/1672x1018/6463a5af0d/screenshot-2022-05-24-at-15-22-28.png',
       preview: {
         he: 'האני מאמין שלי בכל מה שקשור לאימונים',
         eng: 'I believe the most important thing in this training world is',
@@ -108,7 +108,7 @@ function _createTrainers() {
       _id: makeId(),
       name: { he: 'נועה כהן', eng: 'Noa Cohen' },
       types: ['studio', 'yoga'],
-      img: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn9zilY2Yu2hc19pDZFxgWDTUDy5DId7ITqA&s',
       preview: {
         he: 'שיטה המשלבת תרגילי כוח ואירובי',
         eng: 'A method combining strength and aerobic exercises',
@@ -119,7 +119,7 @@ function _createTrainers() {
       _id: makeId(),
       name: { he: 'רן לוי', eng: 'Ran Levi' },
       types: ['gym', 'yoga'],
-      img: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+      img: 'https://sb.kaleidousercontent.com/67418/1920x1545/c5f15ac173/samuel-raita-ridxdghg7pw-unsplash.jpg',
       preview: {
         he: 'יוגה כשגרת חיים בריאה ואיזון נפשי',
         eng: 'Yoga as a healthy lifestyle and mental balance',
@@ -130,7 +130,7 @@ function _createTrainers() {
       _id: makeId(),
       name: { he: 'מירב בן דוד', eng: 'Mirev Ben David' },
       types: ['gym', 'studio'],
-      img: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqCLdOQljlb1LPXcGyeXJbUcWm9UYIgcnvbA&s',
       preview: {
         he: 'תנועה בשילוב מוזיקה ככלי לביטוי עצמי',
         eng: 'Movement with music as a tool for self-expression',
@@ -141,7 +141,7 @@ function _createTrainers() {
       _id: makeId(),
       name: { he: 'איתי קפלן', eng: 'Itay Kaplan' },
       types: ['gym', 'yoga', 'studio'],
-      img: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+      img: 'https://storage.googleapis.com/support-forums-api/avatar/profile-63011905-5200827860822575448.png',
       preview: {
         he: 'קרוספיט כאורח חיים לאתגר מתמיד',
         eng: 'Crossfit as a lifestyle for constant challenge',
