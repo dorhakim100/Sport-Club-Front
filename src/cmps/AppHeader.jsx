@@ -17,7 +17,7 @@ import { Button } from '@mui/material'
 export function AppHeader({ bodyRef }) {
   const user = useSelector((storeState) => storeState.userModule.user)
   const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
-  console.log(cart)
+
   const navigate = useNavigate()
 
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -56,7 +56,7 @@ export function AppHeader({ bodyRef }) {
     if (!cart) return
     const cartLength = cart.reduce((accu, item) => accu + item.quantity, length)
     return cartLength
-  }, [cart])
+  }, [cart]) // using useMemo to prevent calculating each and every render
 
   const handleScroll = () => {
     const scrollY = window.scrollY

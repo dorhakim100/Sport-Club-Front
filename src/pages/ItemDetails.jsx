@@ -7,10 +7,9 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadItem, addItemMsg } from '../store/actions/item.actions'
 
 import { AddToCartButton } from '../cmps/AddToCartButton'
+import { Quantity } from '../cmps/Quantity.jsx'
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
 
 export function ItemDetails() {
   const { itemId } = useParams()
@@ -31,18 +30,6 @@ export function ItemDetails() {
     }
   }
 
-  const onSetQuantity = (diff) => {
-    if (quantity === 1 && diff === -1) return
-    console.log(diff)
-    setQuantity((prev) => prev + diff)
-  }
-
-  const handleChange = (ev) => {
-    let value = ev.target.value
-    value = +value
-    if (value > 0) setQuantity(value)
-  }
-
   return (
     <section className='item-details-container'>
       <Link to='/item'>
@@ -53,8 +40,9 @@ export function ItemDetails() {
       <div className='title-container'>
         <b>{prefs.isEnglish ? item.title.eng : item.title.he}</b>
         <div className='price-container'>
-          <span>{item.price}</span>
-          <div className='quantity-container'>
+          <Quantity quantity={quantity} setQuantity={setQuantity} />
+          {/* <div className='quantity-container'>
+            <span>{prefs.isEnglish ? 'Quantity' : 'כמות'}</span>
             <button>
               <AddIcon onClick={() => onSetQuantity(1)} />
             </button>
@@ -68,7 +56,8 @@ export function ItemDetails() {
             <button>
               <RemoveIcon onClick={() => onSetQuantity(-1)} />
             </button>
-          </div>
+          </div> */}
+          <b>₪{item.price}</b>
         </div>
         <AddToCartButton item={{ ...item, quantity }} />
       </div>

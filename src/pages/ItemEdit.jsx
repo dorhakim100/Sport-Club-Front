@@ -215,12 +215,12 @@ export function ItemEdit() {
             style={{ width: 350, height: 200 }}
           />
         </div>
-        {(typeof editItem.quantity === 'number' && (
+        {(typeof editItem.stockQuantity === 'number' && (
           <div className='input-container quantity'>
             <label htmlFor=''>{prefs.isEnglish ? 'Quantity:' : 'כמות:'}</label>
             <div className='quantity-container'>
               <input
-                value={editItem.quantity}
+                value={editItem.stockQuantity}
                 onChange={handleChange}
                 type='number'
                 name={'quantity'}
@@ -228,7 +228,7 @@ export function ItemEdit() {
               <Button
                 variant='contained'
                 onClick={() => {
-                  setEditItem({ ...editItem, quantity: true })
+                  setEditItem({ ...editItem, stockQuantity: true })
                 }}
               >
                 {prefs.isEnglish ? 'Remove quantity' : 'הסר כמות'}
@@ -239,7 +239,7 @@ export function ItemEdit() {
           <Button
             variant='contained'
             onClick={() => {
-              setEditItem({ ...editItem, quantity: 0 })
+              setEditItem({ ...editItem, stockQuantity: 0 })
             }}
           >
             {prefs.isEnglish ? 'Add quantity' : 'הוסף כמות'}

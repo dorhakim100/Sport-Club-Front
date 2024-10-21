@@ -79,7 +79,7 @@ async function save(item) {
       cover: item.cover,
       preview: item.preview,
       price: item.price,
-      quantity: item.quantity,
+      stockQuantity: item.stockQuantity,
       title: item.title,
       types: item.types,
     }
@@ -90,7 +90,7 @@ async function save(item) {
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729010361/cropping_j9auka.webp',
       preview: item.preview,
       price: item.price,
-      quantity: item.quantity,
+      stockQuantity: item.stockQuantity,
       title: item.title,
       types: [],
     }
@@ -160,7 +160,7 @@ function _createItems() {
       },
       price: 800,
       types: ['card'],
-      quantity: true,
+      stockQuantity: true,
       cover:
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002831/picture_mz9ke7.jpg',
     },
@@ -176,7 +176,7 @@ function _createItems() {
       },
       price: 600,
       types: ['card'],
-      quantity: true,
+      stockQuantity: true,
       cover:
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002473/20_rjsrgf.jpg',
     },
@@ -192,7 +192,7 @@ function _createItems() {
       },
       price: 720,
       types: ['card'],
-      quantity: true,
+      stockQuantity: true,
       cover:
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002513/34_gdwu4o.jpg',
     },
@@ -208,7 +208,7 @@ function _createItems() {
       },
       price: 520,
       types: ['card'],
-      quantity: true,
+      stockQuantity: true,
       cover:
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002495/32_peuixp.jpg',
     },
@@ -224,7 +224,7 @@ function _createItems() {
       },
       price: 20,
       types: ['accessories'],
-      quantity: 30,
+      stockQuantity: 30,
       cover:
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002558/HPIM0594_g0hqlu.jpg',
     },
@@ -240,7 +240,7 @@ function _createItems() {
       },
       price: 40,
       types: ['accessories'],
-      quantity: 25,
+      stockQuantity: 25,
       cover:
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002533/45_shdnag.jpg',
     },
@@ -256,7 +256,7 @@ function _createItems() {
       },
       price: 40,
       types: ['accessories'],
-      quantity: 21,
+      stockQuantity: 21,
       cover:
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002559/HPIM0347_vdpqdu.jpg',
     },
@@ -272,7 +272,7 @@ function _createItems() {
       },
       price: 40,
       types: ['accessories'],
-      quantity: 13,
+      stockQuantity: 13,
       cover:
         'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002831/picture_mz9ke7.jpg',
     },

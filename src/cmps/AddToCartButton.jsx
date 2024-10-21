@@ -29,16 +29,23 @@ export function AddToCartButton({ item }) {
     if (itemsIds.includes(itemToAdd._id)) {
       const idx = user.items.findIndex((item) => item.id === itemToAdd._id)
       let newQuantity
-      if (item.quantity === 1) {
+      if (itemToAdd.quantity === 1) {
         newQuantity = user.items[idx].quantity + 1
       } else {
         newQuantity = user.items[idx].quantity + itemToAdd.quantity
       }
-      user.items.splice(idx, 1, { id: itemToAdd._id, quantity: newQuantity })
+      user.items.splice(idx, 1, {
+        id: itemToAdd._id,
+        quantity: newQuantity,
+        title: itemToAdd.title,
+        cover: itemToAdd.cover,
+      })
     } else {
       user.items.push({
         id: itemToAdd._id,
-        quantity,
+        quantity: itemToAdd.quantity || 1,
+        title: itemToAdd.title,
+        cover: itemToAdd.cover,
       })
     }
 

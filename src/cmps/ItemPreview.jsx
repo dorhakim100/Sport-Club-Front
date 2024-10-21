@@ -20,13 +20,13 @@ export function ItemPreview({ item }) {
 
       <div
         className={
-          user && user.isAdmin && typeof item.quantity === 'number'
+          user && user.isAdmin && typeof item.stockQuantity === 'number'
             ? 'quantity-container visible'
             : 'quantity-container'
         }
       >
         <span>{prefs.isEnglish ? 'Quantity:' : 'מלאי:'}</span>
-        <span>{item.quantity}</span>
+        <span>{item.stockQuantity}</span>
       </div>
 
       {/* )} */}
