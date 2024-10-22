@@ -1,9 +1,10 @@
-.add-update-container{
+.update-control-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-items: center;
     gap: 1em;
+    position: static;
     
     .input-container{
 
@@ -27,3 +28,5 @@
         }
     }
 }
+
+

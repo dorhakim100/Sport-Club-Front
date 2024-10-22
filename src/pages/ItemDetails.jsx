@@ -41,22 +41,7 @@ export function ItemDetails() {
         <b>{prefs.isEnglish ? item.title.eng : item.title.he}</b>
         <div className='price-container'>
           <Quantity quantity={quantity} setQuantity={setQuantity} />
-          {/* <div className='quantity-container'>
-            <span>{prefs.isEnglish ? 'Quantity' : 'כמות'}</span>
-            <button>
-              <AddIcon onClick={() => onSetQuantity(1)} />
-            </button>
-            <input
-              type='number'
-              name=''
-              id=''
-              value={quantity}
-              onChange={handleChange}
-            />
-            <button>
-              <RemoveIcon onClick={() => onSetQuantity(-1)} />
-            </button>
-          </div> */}
+
           <b>₪{item.price}</b>
         </div>
         <AddToCartButton item={{ ...item }} quantity={quantity} />

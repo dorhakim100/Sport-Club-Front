@@ -2,7 +2,7 @@ import { legacy_createStore as createStore, combineReducers } from 'redux'
 
 import { itemReducer } from './reducers/item.reducer'
 import { userReducer } from './reducers/user.reducer'
-import { reviewReducer } from './reducers/review.reducer'
+import { updateReducer } from './reducers/update.reducer'
 import { systemReducer } from './reducers/system.reducer'
 import { trainerReducer } from './reducers/trainer.reducer.js'
 
@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   itemModule: itemReducer,
   userModule: userReducer,
   systemModule: systemReducer,
-  reviewModule: reviewReducer,
+  updateModule: updateReducer,
   trainerModule: trainerReducer,
 })
 

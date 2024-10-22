@@ -10,8 +10,8 @@ export const updateService = {
   getById,
   save,
   remove,
-
   getMaxPage,
+  saveUpdatesOrder,
 }
 
 if (!localStorage.getItem(STORAGE_KEY)) {
@@ -77,6 +77,11 @@ async function getMaxPage() {
   } catch (err) {
     console.log(err)
   }
+}
+
+function saveUpdatesOrder(updates) {
+  console.log(updates)
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(updates))
 }
 
 function _createUpdates() {

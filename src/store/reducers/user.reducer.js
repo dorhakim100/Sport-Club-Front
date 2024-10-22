@@ -19,8 +19,6 @@ const initialState = {
   cart: userService.getLoggedinCart() || [],
 }
 
-console.log(initialState.cart)
-
 export function userReducer(state = initialState, action) {
   var newState = state
   switch (action.type) {
