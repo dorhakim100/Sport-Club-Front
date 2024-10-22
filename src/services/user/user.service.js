@@ -1,4 +1,5 @@
 import { storageService } from '../async-storage.service'
+import { itemService } from '../item/item.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'user'
 
@@ -16,6 +17,7 @@ export const userService = {
   getPrefs,
   setPrefs,
   getLoggedinCart,
+  getCartItems,
 }
 
 async function getUsers() {
@@ -131,6 +133,31 @@ function getLoggedinCart() {
   const cart = user.items
   console.log(cart)
   return cart
+}
+
+async function getCartItems(cart) {
+  try {
+    let items = await itemService.query({ isAll: true })
+    const itemsToReturn = []
+    let idx = 0
+    cart.map((item) => {
+      const currItem = items.find((itemToFind) => itemToFind._id === item.id)
+      if (currItem) {
+        itemsToReturn[idx] = {
+          id: currItem._id,
+          cover: currItem.cover,
+          price: currItem.price,
+          title: currItem.title,
+          quantity: item.quantity,
+        }
+        idx++
+      }
+    })
+
+    return itemsToReturn
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 // To quickly create an admin user, uncomment the next line

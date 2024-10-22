@@ -38,7 +38,31 @@ export function RemoveModal({ isModal, setIsModal, item }) {
           <Button variant='contained' onClick={() => onRemoveFromCart()}>
             {prefs.isEnglish ? 'Remove' : 'להסיר'}
           </Button>
-          <Button variant='outlined' onClick={() => setIsModal(false)}>
+          <Button
+            variant='outlined'
+            onClick={() => setIsModal(false)}
+            sx={
+              prefs.isDarkMode
+                ? {
+                    color: '#6EC1E4', // Light blue text color
+                    borderColor: '#6EC1E4', // Light blue border color
+                    transition: '0.3s ease-out',
+                    '&:hover': {
+                      backgroundColor: 'rgba(110, 193, 228, 0.1)', // Light blue transparent hover background
+                      borderColor: '#4A90E2', // Slightly darker border on hover
+                    },
+                  }
+                : {
+                    color: 'inherit', // Default text color
+                    borderColor: 'inherit', // Default border color
+                    transition: '0.3s ease-out',
+                    '&:hover': {
+                      backgroundColor: 'rgba(0, 0, 0, 0.04)', // Default light transparent background on hover
+                      borderColor: 'inherit', // Keep border same as default
+                    },
+                  }
+            }
+          >
             {prefs.isEnglish ? 'Cancel' : 'ביטול'}
           </Button>
         </div>

@@ -49,12 +49,15 @@ export function CartItem({ item }) {
           alt=''
           onClick={() => navigate(`/item/${item.id}`)}
         />
-        <Link
-          to={`/item/${item.id}`}
-          className={prefs.isDarkMode ? 'dark-mode' : ''}
-        >
-          {prefs.isEnglish ? item.title.eng : item.title.he}
-        </Link>
+        <div className='title-container'>
+          <Link
+            to={`/item/${item.id}`}
+            className={prefs.isDarkMode ? 'dark-mode' : ''}
+          >
+            {prefs.isEnglish ? item.title.eng : item.title.he}
+          </Link>
+          <span>₪{item.price}</span>
+        </div>
         <Quantity
           quantity={quantity}
           setQuantity={setQuantity}

@@ -21,9 +21,13 @@ if (!localStorage.getItem(STORAGE_KEY)) {
   _createItems()
 }
 
-async function query(filterBy = { txt: '', price: 0 }) {
+async function query(filterBy = { txt: '', price: 0, types: [] }) {
   var items = await storageService.query(STORAGE_KEY)
   const { txt, maxPrice, sortDir, types, pageIdx, isAll } = filterBy
+
+  if (isAll) {
+    return items
+  }
 
   if (txt) {
     const regex = new RegExp(filterBy.txt, 'i')
@@ -47,10 +51,6 @@ async function query(filterBy = { txt: '', price: 0 }) {
 
   if (sortDir) {
     items.sort((item1, item2) => (item1.price - item2.price) * +sortDir)
-  }
-
-  if (isAll) {
-    return items
   }
 
   if (pageIdx !== undefined) {

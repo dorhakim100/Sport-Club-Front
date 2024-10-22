@@ -304,7 +304,10 @@ export function AppHeader({ bodyRef }) {
             <Link to={`user/${user._id}`}>{user.fullname}</Link>
             <Button
               variant='contained'
-              onClick={() => navigate(`/user/${user._id}/cart`)}
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                navigate(`/user/${user._id}/cart`)
+              }}
               className='cart-button'
             >
               {cart && cart.length > 0 && <span>{cartLength}</span>}

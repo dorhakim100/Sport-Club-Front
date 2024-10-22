@@ -59,7 +59,7 @@ export function ItemDetails() {
           </div> */}
           <b>₪{item.price}</b>
         </div>
-        <AddToCartButton item={{ ...item, quantity }} />
+        <AddToCartButton item={{ ...item }} quantity={quantity} />
       </div>
       <div className='img-container'>
         <img src={item.cover} alt='' />
