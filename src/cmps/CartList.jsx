@@ -24,7 +24,7 @@ export function CartList({ cart, setCart }) {
   }, [quantity])
 
   return (
-    <div className='cart-container'>
+    <>
       <div className='items-container'>
         {cart.map((item, index) => {
           return (
@@ -39,6 +39,6 @@ export function CartList({ cart, setCart }) {
           )
         })}
       </div>
-    </div>
+    </>
   )
 }

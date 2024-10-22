@@ -11,6 +11,9 @@ import { CartList } from '../cmps/CartList.jsx'
 import { updateCart } from '../store/actions/user.actions'
 import { setIsLoading } from '../store/actions/system.actions'
 
+import { Button } from '@mui/material'
+import Divider from '@mui/material/Divider'
+
 export function Cart() {
   const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
@@ -52,11 +55,20 @@ export function Cart() {
   }
 
   return (
-    <section className='page-container cart-container'>
+    <section className='page-container cart-page-container'>
       <h2>{prefs.isEnglish ? 'Shopping Cart' : 'סל הקניות'}</h2>
       <HeadContainer text={headText} />
-      {fullCart && <CartList cart={cart} setCart={setCart} />}
-      <div className='total-container'>{total}</div>
+      <div className='cart-container'>
+        {fullCart && <CartList cart={cart} setCart={setCart} />}
+        <div className='total-container'>
+          <b>₪{total}</b>
+          <Divider orientation='horizontal' flexItem />
+
+          <Button variant='contained'>
+            {prefs.isEnglish ? 'Checkout' : 'תשלום'}
+          </Button>
+        </div>
+      </div>
     </section>
   )
 }
