@@ -60,14 +60,23 @@ export function Cart() {
       <HeadContainer text={headText} />
       <div className='cart-container'>
         {fullCart && <CartList cart={cart} setCart={setCart} />}
-        <div className='total-container'>
-          <b>₪{total}</b>
-          <Divider orientation='horizontal' flexItem />
+        {fullCart && (
+          <div className='total-container'>
+            <b>₪{total}</b>
+            <Divider orientation='horizontal' flexItem />
 
-          <Button variant='contained'>
-            {prefs.isEnglish ? 'Checkout' : 'תשלום'}
-          </Button>
-        </div>
+            <Button variant='contained'>
+              {prefs.isEnglish ? 'Checkout' : 'תשלום'}
+            </Button>
+          </div>
+        )}
+        {!fullCart && (
+          <b className='empty-cart'>
+            {prefs.isEnglish
+              ? 'Add items to cart'
+              : 'יש להוסיף פריטים לעגלת הקניות'}
+          </b>
+        )}
       </div>
     </section>
   )

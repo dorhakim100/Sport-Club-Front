@@ -99,6 +99,8 @@ export function App() {
               <Route path='signup' element={<Signup />} />
             </Route>
 
+            {/* <Route path='admin/update' element={<UpdateIndex />} /> */}
+
             <Route path='admin' element={<AdminIndex />}>
               <Route path='update' element={<UpdateIndex />} />
               <Route path='order' element={<OrderIndex />} />

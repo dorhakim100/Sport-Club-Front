@@ -153,12 +153,12 @@ export function LoginSignupForm({ isSignup }) {
         <form onSubmit={handleSubmit}>
           {isSignup && (
             <div
-              className={
-                (errors.fullname &&
-                  touched.fullname &&
-                  'input-container error full-name') ||
-                'input-container full-name'
-              }
+              // className={
+              //   prefs.isDarkMode ? 'input-container dark-mode' : 'input-container'
+              // }
+              className={`input-container full-name ${
+                prefs.isDarkMode ? 'dark-mode' : ''
+              } ${errors.fullname && touched.fullname ? 'error' : ''}`}
             >
               <input
                 name='fullname'
@@ -176,12 +176,9 @@ export function LoginSignupForm({ isSignup }) {
             </div>
           )}
           <div
-            className={
-              (errors.username &&
-                touched.username &&
-                'input-container error username') ||
-              'input-container username'
-            }
+            className={`input-container username ${
+              prefs.isDarkMode ? 'dark-mode' : ''
+            } ${errors.username && touched.username ? 'error' : ''}`}
           >
             <input
               type='username'
@@ -196,12 +193,9 @@ export function LoginSignupForm({ isSignup }) {
             </span>
           </div>
           <div
-            className={
-              (errors.password &&
-                touched.password &&
-                'input-container error password') ||
-              'input-container password'
-            }
+            className={`input-container password ${
+              prefs.isDarkMode ? 'dark-mode' : ''
+            } ${errors.password && touched.password ? 'error' : ''}`}
           >
             <input
               type='password'
@@ -211,15 +205,14 @@ export function LoginSignupForm({ isSignup }) {
               value={values.password}
               placeholder={prefs.isEnglish ? 'Password' : 'סיסמא'}
             />
-            {errors.password && touched.password && errors.password}
+            <span>
+              {errors.password && touched.password && errors.password}
+            </span>
           </div>
           <div
-            className={
-              (errors.email &&
-                touched.email &&
-                'input-container error email') ||
-              'input-container email'
-            }
+            className={`input-container email ${
+              prefs.isDarkMode ? 'dark-mode' : ''
+            } ${errors.email && touched.email ? 'error' : ''}`}
           >
             <input
               type='email'

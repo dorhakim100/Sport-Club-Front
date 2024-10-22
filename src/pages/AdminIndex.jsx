@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { loadUsers, removeUser } from '../store/actions/user.actions'
-import { useNavigate } from 'react-router'
+import { useNavigate, Outlet } from 'react-router'
 
 import { Nav } from '../cmps/Nav'
 
@@ -56,6 +56,7 @@ export function AdminIndex() {
           ))}
         </ul>
       )} */}
+      <Outlet />
     </section>
   )
 }

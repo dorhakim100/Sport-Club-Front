@@ -33,7 +33,7 @@ export function ContactUs() {
           id=''
           placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
         />
-        <textarea name='' id='' />
+        <textarea name='' id='' style={{ resize: 'none' }} />
       </div>{' '}
       <LoadingButton variant='contained'>
         {prefs.isEnglish ? 'Send' : 'שליחה'}

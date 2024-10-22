@@ -4,6 +4,7 @@
     grid-template-rows: 1fr;
 
     min-height: 3.5rem;
+    font-size: 1.2em;
 
     // padding: rem(10px) 1rem;
     // background-color: $primary-light-blue;
@@ -13,7 +14,7 @@
     }
     
     span {
-        font-size: .8em;
+        // font-size: .8em;
         
         &.local-services {
             // color: $clr1;
@@ -44,7 +45,7 @@
     color: $bold-navy;
 
     padding: 20px;
-    font-size: 14px;
+    // font-size: 14px;
     // color: #333;
     height: fit-content;
   
@@ -59,7 +60,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        font-size: 2em;
+        // font-size: 2em;
         // color: #333;
         span{
           // color: $bold-navy;
@@ -104,7 +105,7 @@
     }
   
     span {
-      font-size: 15px;
+      // font-size: 15px;
       // color: $bold-navy;
     }
   
@@ -116,7 +117,7 @@
       }
   
       .method-container {
-        font-size: 14px;
+        // font-size: 14px;
   
         svg {
           font-size: 18px;

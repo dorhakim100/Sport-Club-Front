@@ -1,0 +1,29 @@
+.add-update-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 1em;
+    
+    .input-container{
+
+        display: grid;
+        justify-items: center;
+        gap: 1em;
+        input{
+            
+            width: 500px;
+        }
+        
+        textarea{
+            width: 500px;
+            height: 300px;
+
+        }
+
+
+        button{
+            // justify-self: end;
+        }
+    }
+}
