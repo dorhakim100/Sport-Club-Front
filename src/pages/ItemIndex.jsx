@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
+
 import {
   loadItems,
   addItem,
@@ -12,6 +13,8 @@ import {
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { itemService } from '../services/item/item.service'
 import { userService } from '../services/user/user.service'
+
+import { useEffectUpdate } from '../customHooks/useEffectUpdate'
 
 import { ItemList } from '../cmps/ItemList'
 import { ItemFilter } from '../cmps/ItemFilter'
@@ -26,30 +29,69 @@ import { Button } from '@mui/material'
 
 export function ItemIndex() {
   const navigate = useNavigate()
-  const [filterBy, setFilterBy] = useState(itemService.getDefaultFilter())
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  // Update filterBy based on the URL (searchParams or default filter)
+  const [filterBy, setFilterBy] = useState({
+    types: searchParams.get('types').split(','),
+    pageIdx: +searchParams.get('pageIdx'),
+    sortDir: +searchParams.get('sortDir'),
+  })
+
   const items = useSelector((storeState) => storeState.itemModule.items)
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const [maxPage, setMaxPage] = useState()
-
   const [isGrid, setIsGrid] = useState(true)
 
   const headText = { he: 'מוצרים', eng: 'Items' }
 
   useEffect(() => {
+    // Fetch filter settings from searchParams
+    const sortDir = +searchParams.get('sortDir') || 0
+    const pageIdx = +searchParams.get('pageIdx') || 0
+    const typesParam = searchParams.get('types') || ''
+
+    const types = typesParam ? typesParam.split(',') : []
+
+    const filterToSet = { ...filterBy, sortDir, types, pageIdx }
+    console.log(filterToSet)
+
+    // Only update filterBy if it's different
+    if (JSON.stringify(filterBy) !== JSON.stringify(filterToSet)) {
+      setFilterBy(filterToSet)
+    }
+  }, [searchParams]) // Runs when searchParams change
+
+  useEffect(() => {
     const setItems = async () => {
       try {
         setIsLoading(true)
-        loadItems(filterBy)
+        console.log(filterBy)
+        await loadItems(filterBy)
         const max = await itemService.getMaxPage(filterBy)
         setMaxPage(max)
+
+        // Only update searchParams if needed
+        if (
+          searchParams.get('sortDir') !== filterBy.sortDir.toString() ||
+          searchParams.get('pageIdx') !== filterBy.pageIdx.toString() ||
+          searchParams.get('types') !== filterBy.types.toString()
+        ) {
+          setSearchParams({
+            sortDir: filterBy.sortDir.toString(),
+            pageIdx: filterBy.pageIdx.toString(),
+            types: filterBy.types.toString(),
+          })
+        }
       } catch (err) {
         console.log(err)
       } finally {
         setIsLoading(false)
       }
     }
+
     setItems()
-  }, [filterBy])
+  }, [filterBy]) // Run when filterBy changes
 
   async function onRemoveItem(itemId) {
     try {

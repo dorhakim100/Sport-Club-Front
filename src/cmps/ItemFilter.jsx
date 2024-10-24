@@ -35,7 +35,7 @@ export function ItemFilter({
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   useEffect(() => {
-    setFilterBy(filterToEdit)
+    setFilterBy({ ...filterToEdit })
   }, [filterToEdit])
 
   function handleChange(ev) {

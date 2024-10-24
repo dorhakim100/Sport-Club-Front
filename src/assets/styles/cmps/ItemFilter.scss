@@ -120,11 +120,15 @@
                 align-items: center;
                 justify-items: center;
                 height: 36px;
-                min-width: 80px;
+                // min-width: 80px;
+
+                span{
+                    width: 50px;
+                }
 
 
-                background-color: $light-gray;
-                color: $bold-navy;
+                // background-color: $light-gray;
+                // color: $bold-navy;
             }
         }
 
@@ -148,7 +152,7 @@
                 cursor: auto;
               font-size: 1.2rem;
               font-weight: bold;
-              color: $bold-navy;  // Adjust color to your design
+            //   color: $bold-navy;  // Adjust color to your design
             //   background-color: #f5f5f5;  // Light background for contrast
             //   border-radius: 50%;  // Circular appearance
             //   width: 40px;

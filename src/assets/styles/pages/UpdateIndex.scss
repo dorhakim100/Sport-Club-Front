@@ -11,6 +11,25 @@
      display: block;       
             
     }
+
+    .control-container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        align-items: center;
+        justify-items: center;
+    }
+
+    .page-idx-container{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+
+
+        span{
+            width: 50px;
+        }
+
+    }
     
     .input-container{
         margin: 0px;
@@ -34,6 +53,12 @@
         button{
             // justify-self: end;
         }
+
+        @media (max-width:1200px) {
+            
+            margin-bottom: 2em;
+                   
+           }
     }
 
     .list-control-container{

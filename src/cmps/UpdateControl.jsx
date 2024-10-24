@@ -39,6 +39,8 @@ export function UpdateControl({
       setIsLoading(true)
       await loadUpdates(updateService.getDefaultFilter())
       setDragEdit(false)
+      const defaultFilter = updateService.getDefaultFilter()
+      setFilter({ ...defaultFilter })
     } catch (err) {
       console.log(err)
     } finally {
@@ -51,6 +53,8 @@ export function UpdateControl({
       setIsLoading(true)
       setDragEdit(false)
       await updateService.saveUpdatesOrder(updates)
+      const defaultFilter = updateService.getDefaultFilter()
+      setFilter({ ...defaultFilter })
     } catch (err) {
       console.log(err)
     } finally {
@@ -65,7 +69,7 @@ export function UpdateControl({
   }
 
   return (
-    <div className='update-control-container'>
+    <div className='control-container'>
       {isDragEdit ? (
         <ButtonGroup
           variant='contained'

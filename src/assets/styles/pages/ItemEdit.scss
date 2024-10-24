@@ -1,10 +1,34 @@
+@media (max-width:500px) {
+    .page-container{
+        margin: 0px;
+        margin: auto;
+        width: 100%;
+    }
+    
+    .item-edit-container{
+        
+        margin: auto;
+        width: 100%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    
+}
+
 .item-edit-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-items: center;
     gap: 2em;
-    padding: 2em;
+    padding: 2em 0em 2em 0em;
+    margin: auto;
+    border-radius: 8px;
+
+    width: 350px;
+
+    background-color: $light-gray;
+        background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
 
     .cover-container{
         width: 300px;
@@ -20,10 +44,27 @@
         gap: 1em;
     }
 
+    .item-edit-form{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        gap: 1em;
+    }
+
     .input-container{
         display: grid;
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: 100px 1fr;
         align-items: center;
+        input, textarea{
+
+            transition: 0.3s ease-out;
+        }
+
+        textarea {
+            resize: none;
+            width: 300px;
+            height: 200px;
+          }
         
     }
     
@@ -45,8 +86,14 @@
 
     .types-container{
 
+        .checkbox-container{
+            label{
+
+                transition: 0.3s ease-out;
+            }
+        }
         display: flex;
         gap: 2em;
-        font-size: 2em;
+        font-size: 1.2em;
     }
 }

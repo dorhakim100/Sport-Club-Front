@@ -184,8 +184,16 @@ export function ItemEdit() {
         <VisuallyHiddenInput type='file' onChange={uploadFile} />
       </LoadingButton>
       <form action='' className='item-edit-form' onSubmit={onSaveItem}>
-        <div className='input-container'>
-          <label htmlFor=''>{prefs.isEnglish ? 'Title:' : 'כותרת:'}</label>
+        <div
+          className={
+            prefs.isDarkMode
+              ? 'input-container title dark-mode'
+              : 'input-container title'
+          }
+        >
+          <label htmlFor='' style={{ backgroundColor: 'transparent' }}>
+            {prefs.isEnglish ? 'Title:' : 'כותרת:'}
+          </label>
           <input
             onChange={handleChange}
             name='title'
@@ -194,8 +202,16 @@ export function ItemEdit() {
             style={{ width: 200 }}
           />
         </div>{' '}
-        <div className='input-container price'>
-          <label htmlFor=''>{prefs.isEnglish ? 'Item Price:' : 'מחיר:'}</label>
+        <div
+          className={
+            prefs.isDarkMode
+              ? 'input-container price dark-mode'
+              : 'input-container price'
+          }
+        >
+          <label htmlFor='' style={{ backgroundColor: 'transparent' }}>
+            {prefs.isEnglish ? 'Item Price:' : 'מחיר:'}
+          </label>
           <input
             className='price'
             name='price'
@@ -205,14 +221,18 @@ export function ItemEdit() {
           />
           {/* <span>₪</span> */}
         </div>
-        <div className='input-container preview'>
-          <label htmlFor=''>{prefs.isEnglish ? 'Preview:' : 'תיאור:'}</label>
+        <div
+          className={
+            prefs.isDarkMode
+              ? 'input-container preview dark-mode'
+              : 'input-container preview'
+          }
+        >
           <textarea
             onChange={handleChange}
             name='preview'
             type='text'
             value={prefs.isEnglish ? editItem.preview.eng : editItem.preview.he}
-            style={{ width: 350, height: 200 }}
           />
         </div>
         {(typeof editItem.stockQuantity === 'number' && (
@@ -223,7 +243,7 @@ export function ItemEdit() {
                 value={editItem.stockQuantity}
                 onChange={handleChange}
                 type='number'
-                name={'quantity'}
+                name={'stockQuantity'}
               />
               <Button
                 variant='contained'
@@ -250,8 +270,24 @@ export function ItemEdit() {
           <div className='types-container'>
             {types.map((type) => {
               return (
-                <div className='checkbox-container' key={makeId()}>
-                  <label htmlFor={type}>{type}</label>
+                <div
+                  className={
+                    prefs.isDarkMode
+                      ? 'checkbox-container dark-mode'
+                      : 'checkbox-container'
+                  }
+                  key={makeId()}
+                >
+                  <label htmlFor={type}>
+                    {prefs.isEnglish
+                      ? type === 'card'
+                        ? 'Card'
+                        : 'Accessories'
+                      : type === 'card'
+                      ? 'כרטיסיה'
+                      : 'ציוד נלווה'}
+                  </label>
+
                   <input
                     onChange={handleChange}
                     type='checkbox'

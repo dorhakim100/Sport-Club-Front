@@ -18,6 +18,7 @@ import { loadUpdates } from '../store/actions/update.actions'
 
 export function UpdatesList({ updates, isDragEdit }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   const [orderedUpdates, setOrderedUpdates] = useState(updates)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -139,7 +140,25 @@ export function UpdatesList({ updates, isDragEdit }) {
                     </span>
                   </div>
                   <p>{update.content}</p>
-                  <AddToCartButton />
+                  {user.isAdmin && (
+                    <ButtonGroup
+                      variant='contained'
+                      aria-label='Basic button group'
+                      style={{ direction: 'ltr' }}
+                    >
+                      <Button
+                        onClick={() => {
+                          window.scrollTo({ top: 0, behavior: 'smooth' })
+                          navigate(`/update/edit/${update._id}`)
+                        }}
+                      >
+                        {prefs.isEnglish ? 'Edit' : 'עריכה'}
+                      </Button>
+                      <Button onClick={() => onRemoveItem(update._id)}>
+                        {prefs.isEnglish ? 'Remove' : 'הסרה'}
+                      </Button>
+                    </ButtonGroup>
+                  )}
                 </div>
               )
             )}

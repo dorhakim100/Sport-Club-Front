@@ -2,7 +2,7 @@
     display: grid;
     background-color: $light-gray;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 3px, rgba(60, 64, 67, 0.15) 0px 1px 3px;
-    min-height: 100px;
+    // min-height: 100px;
     transition: background-color 0.3s  ease-in-out, box-shadow 0.3s ease; // Smooth transition
     
     background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
@@ -10,7 +10,8 @@
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
 
-    max-height: calc(0.6em * 6 + 600px);
+    // max-height: calc(0.6em * 2 + 600px);
+    height: 600px;
     overflow-y: auto;
     &:first-of-type{
     }
@@ -34,7 +35,7 @@
         transition: 0.2s ease;
         background: linear-gradient(135deg, #6ec1e440 0%, #a8e6a11e 100%); // Gradient from light blue to soft green
         
-      
+      height: 100px;
         // max-height: calc(0.6em + 100px);
         p{
             text-align: start;

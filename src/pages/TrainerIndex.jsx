@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, Link, Outlet } from 'react-router-dom'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import {
+  useNavigate,
+  useParams,
+  useLocation,
+  useSearchParams,
+} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { trainerService } from '../services/trainer/trainer.service'
@@ -28,6 +33,7 @@ export function TrainerIndex() {
     (stateSelector) => stateSelector.trainerModule.trainers
   )
   const [filter, setFilter] = useState({ types: [], pageIdx: 0, isAll: false })
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const location = useLocation()
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -56,9 +62,10 @@ export function TrainerIndex() {
   useEffect(() => {
     const getTrainers = async () => {
       await loadTrainers(filter)
+      setSearchParams(filter)
     }
     getTrainers()
-  }, [filter])
+  }, [filter, searchParams])
 
   return (
     <section className='trainer-index-container'>
