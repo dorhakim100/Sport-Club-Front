@@ -28,7 +28,7 @@ export function UpdateIndex() {
     setUpdates()
   }, [filter])
 
-  const setUpdates = async () => {
+  async function setUpdates() {
     try {
       await loadUpdates(filter)
       const max = await updateService.getMaxPage()
@@ -47,7 +47,7 @@ export function UpdateIndex() {
         }}
       />
       <div className='update-control-container'>
-        <AddUpdate />
+        <AddUpdate setUpdates={setUpdates} />
         <div className='list-control-container'>
           <UpdateControl
             setDragEdit={setDragEdit}

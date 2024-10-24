@@ -29,8 +29,6 @@ export function UpdateEdit() {
     content: '',
     createdAt: Date.now(),
   })
-  const [cover, setCover] = useState(null)
-  // const coverRef = useRef(cover)
 
   useEffect(() => {
     loadUpdate()
@@ -39,6 +37,7 @@ export function UpdateEdit() {
   async function loadUpdate() {
     if (params.updateId === undefined) return
     try {
+      setIsLoading(true)
       const update = await updateService.getById(params.updateId)
 
       setEditUpdate({ ...update })
@@ -47,6 +46,8 @@ export function UpdateEdit() {
       console.log(err)
       showErrorMsg('Cannot load update')
       navigate('/admin/update')
+    } finally {
+      setIsLoading(false)
     }
   }
 

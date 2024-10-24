@@ -21,6 +21,7 @@ if (!localStorage.getItem(STORAGE_KEY)) {
 
 async function query(filterBy = { pageIdx: 0 }) {
   var updates = await storageService.query(STORAGE_KEY)
+  updates = [...updates].reverse()
   const { pageIdx, isAll } = filterBy
   if (isAll) {
     return updates

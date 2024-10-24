@@ -52,6 +52,7 @@ export function ItemEdit() {
   async function loadItem() {
     if (params.itemId === undefined) return
     try {
+      setIsLoading(true)
       const item = await itemService.getById(params.itemId)
 
       setEditItem({ ...item })
@@ -62,6 +63,8 @@ export function ItemEdit() {
       console.log(err)
       showErrorMsg('Cannot load item')
       navigate('/item')
+    } finally {
+      setIsLoading(false)
     }
   }
 
