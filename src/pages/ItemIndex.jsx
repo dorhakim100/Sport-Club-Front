@@ -60,18 +60,18 @@ export function ItemIndex() {
     }
   }
 
-  async function onAddItem() {
-    const item = itemService.getEmptyItem()
+  // async function onAddItem() {
+  //   const item = itemService.getEmptyItem()
 
-    delete item._id
-    try {
-      const savedItem = await addItem(item)
-      showSuccessMsg(`Item added`)
-      navigate(`/item/edit/${savedItem._id}`)
-    } catch (err) {
-      showErrorMsg('Cannot add item')
-    }
-  }
+  //   delete item._id
+  //   try {
+  //     const savedItem = await addItem(item)
+  //     showSuccessMsg(`Item added`)
+  //     navigate(`/item/edit/${savedItem._id}`)
+  //   } catch (err) {
+  //     showErrorMsg('Cannot add item')
+  //   }
+  // }
 
   async function onUpdateItem(item) {
     // const speed = +prompt('New speed?', item.speed)
@@ -102,11 +102,11 @@ export function ItemIndex() {
           setIsGrid={setIsGrid}
           maxPage={maxPage}
         />
-        {userService.getLoggedinUser() && (
+        {/* {userService.getLoggedinUser() && (
           <Button variant='contained' onClick={onAddItem}>
             Add Item
           </Button>
-        )}
+        )} */}
       </div>
       <ItemList
         items={items}

@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -10,7 +12,10 @@ import 'swiper/css/navigation'
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 
-export function Updates({ isHover }) {
+export function Updates({ isHover, updates }) {
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const navigate = useNavigate()
+
   const progressCircle = useRef(null)
   const progressContent = useRef(null)
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -43,19 +48,39 @@ export function Updates({ isHover }) {
         // navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         onAutoplayTimeLeft={onAutoplayTimeLeft}
-        className='updates'
+        className={
+          prefs.isDarkMode ? 'updates-carousel dark-mode' : 'updates-carousel'
+        }
         style={{ height: '100px' }}
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
-        <div className='autoplay-progress' slot='container-end'>
+        {updates.map((update) => {
+          return (
+            <SwiperSlide
+              className={
+                prefs.isDarkMode ? 'update-banner dark-mode' : 'update-banner'
+              }
+            >
+              <div className='title-container'>
+                <b>{update.title}</b>
+                <span>
+                  {prefs.isEnglish
+                    ? new Date(update.createdAt).toLocaleString('eng')
+                    : new Date(update.createdAt).toLocaleString('he')}
+                </span>
+              </div>
+              <p>{update.content}</p>
+            </SwiperSlide>
+          )
+        })}
+
+        <div
+          className={
+            prefs.isDarkMode
+              ? 'autoplay-progress dark-mode'
+              : 'autoplay-progress'
+          }
+          slot='container-end'
+        >
           <svg viewBox='0 0 48 48' ref={progressCircle}>
             <circle cx='24' cy='24' r='20'></circle>
           </svg>

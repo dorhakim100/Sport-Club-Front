@@ -19,16 +19,20 @@ export function UpdateIndex() {
     (stateSelector) => stateSelector.updateModule.updates
   )
 
+  const [filter, setFilter] = useState(updateService.getDefaultFilter())
+  const [maxPage, setMaxPage] = useState(0)
+
   const [isDragEdit, setDragEdit] = useState(false)
 
   useEffect(() => {
     setUpdates()
-  }, [])
+  }, [filter])
 
   const setUpdates = async () => {
     try {
-      await loadUpdates({ isAll: true })
-      console.log(updates)
+      await loadUpdates(filter)
+      const max = await updateService.getMaxPage()
+      setMaxPage(max)
     } catch (err) {
       console.log(err)
     }
@@ -44,8 +48,14 @@ export function UpdateIndex() {
       />
       <div className='update-control-container'>
         <AddUpdate />
-        <div>
-          <UpdateControl setDragEdit={setDragEdit} isDragEdit={isDragEdit} />
+        <div className='list-control-container'>
+          <UpdateControl
+            setDragEdit={setDragEdit}
+            isDragEdit={isDragEdit}
+            filter={filter}
+            setFilter={setFilter}
+            maxPage={maxPage}
+          />
           <UpdatesList updates={updates} isDragEdit={isDragEdit} />
         </div>
       </div>

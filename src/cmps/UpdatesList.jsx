@@ -5,6 +5,8 @@ import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
 
+import { setUpdateOrder } from '../store/actions/update.actions'
+
 import { AddToCartButton } from './AddToCartButton'
 
 import Button from '@mui/material/Button'
@@ -37,14 +39,18 @@ export function UpdatesList({ updates, isDragEdit }) {
     if (!destination) return // If dropped outside the list, ignore
 
     if (source.index !== destination.index) {
-      const reorderedUpdates = Array.from(updates)
+      const reorderedUpdates = Array.from(orderedUpdates)
       const [removed] = reorderedUpdates.splice(source.index, 1)
-      reorderedUpdates.splice(destination.index, 0, removed)
+      const time = Date.now()
+      const updated = { ...removed, createdAt: time }
+
+      reorderedUpdates.splice(destination.index, 0, updated)
       // Update your state here to reflect the new order
-      updateService.saveUpdatesOrder(reorderedUpdates)
+      // updateService.saveUpdatesOrder(reorderedUpdates)
       const reorderedIds = reorderedUpdates.map((update) => update._id)
       setOrderedUpdates(reorderedUpdates)
-      loadUpdates()
+      setUpdateOrder(reorderedUpdates)
+      // loadUpdates()
     }
   }
 
@@ -97,7 +103,11 @@ export function UpdatesList({ updates, isDragEdit }) {
 
                     return (
                       <div
-                        className='update-container dragable'
+                        className={
+                          snapshot.isDragging
+                            ? 'update-container draggable dragging'
+                            : 'update-container draggable'
+                        }
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}

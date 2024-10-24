@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
+import { userService } from '../services/user/user.service'
+
+import { onPageNavigation } from '../services/util.service'
 
 import { Button } from '@mui/material'
 
@@ -29,6 +32,7 @@ export function ItemFilter({
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
   const [price, setPrice] = useState(filterToEdit.maxPrice || '')
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   useEffect(() => {
     setFilterBy(filterToEdit)
@@ -95,26 +99,49 @@ export function ItemFilter({
     })
   }
 
-  const onPageNavigation = (diff) => {
-    if (filterToEdit.pageIdx + diff === -1) return
-    // const maxPage = await itemService.getMaxPage(filterToEdit)
-    if (filterToEdit.pageIdx + diff === maxPage) {
-      setFilterToEdit({ ...filterToEdit, pageIdx: 0 })
+  // const onPageNavigation = (diff) => {
+  //   if (filterToEdit.pageIdx + diff === -1) return
+  //   // const maxPage = await itemService.getMaxPage(filterToEdit)
+  //   if (filterToEdit.pageIdx + diff === maxPage) {
+  //     setFilterToEdit({ ...filterToEdit, pageIdx: 0 })
 
-      return
+  //     return
+  //   }
+
+  //   setFilterToEdit({ ...filterToEdit, pageIdx: filterToEdit.pageIdx + diff })
+  // }
+
+  async function onAddItem() {
+    const item = itemService.getEmptyItem()
+
+    delete item._id
+    try {
+      const savedItem = await addItem(item)
+      showSuccessMsg(`Item added`)
+      navigate(`/item/edit/${savedItem._id}`)
+    } catch (err) {
+      showErrorMsg('Cannot add item')
     }
-
-    setFilterToEdit({ ...filterToEdit, pageIdx: filterToEdit.pageIdx + diff })
   }
 
   return (
     <section className='item-filter'>
       {/* <h3> {prefs.isEnglish ? 'Filter' : 'סינון'}:</h3> */}
+      {userService.getLoggedinUser() && (
+        <Button
+          variant='contained'
+          onClick={onAddItem}
+          style={{ justifySelf: 'start' }}
+        >
+          {prefs.isEnglish ? 'Add Item' : 'הוסף מוצר'}
+        </Button>
+      )}
       <div
         className={
           prefs.isDarkMode ? 'type-container dark-mode' : 'type-container'
         }
       >
+        {' '}
         <div className='checkbox-container'>
           <input
             type='checkbox'
@@ -195,7 +222,11 @@ export function ItemFilter({
           dir='ltr'
           className='page-controller-container'
         >
-          <Button onClick={() => onPageNavigation(1)}>
+          <Button
+            onClick={() =>
+              onPageNavigation(1, filterToEdit, setFilterToEdit, maxPage)
+            }
+          >
             <ArrowBackIosNewIcon />
           </Button>
           {/* <Button disabled={true}>{filterBy.pageIdx + 1}</Button> */}
@@ -205,7 +236,9 @@ export function ItemFilter({
 
           <Button
             disabled={filterToEdit.pageIdx === 0}
-            onClick={() => onPageNavigation(-1)}
+            onClick={() =>
+              onPageNavigation(-1, filterToEdit, setFilterToEdit, maxPage)
+            }
             sx={{
               cursor: filterToEdit.pageIdx === 0 ? 'not-allowed' : 'pointer',
             }}

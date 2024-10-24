@@ -18,6 +18,8 @@ import { ContactUs } from '../cmps/ContactUs.jsx'
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { loadUpdates } from '../store/actions/update.actions.js'
+import { updateService } from '../services/update/update.service.js'
 
 export function HomePage() {
   const navigate = useNavigate()
@@ -25,6 +27,10 @@ export function HomePage() {
   const schedule = useSelector(
     (stateSelector) => stateSelector.systemModule.schedule
   )
+  const updates = useSelector(
+    (stateSelector) => stateSelector.updateModule.updates
+  )
+
   const imgs = [
     {
       id: makeId(),
@@ -57,9 +63,12 @@ export function HomePage() {
   useEffect(() => {
     const getTrainers = async () => {
       const t = await loadTrainers(trainerService.getDefaultFilter())
-      console.log(t)
+    }
+    const getUpdates = async () => {
+      const u = await loadUpdates(updateService.getDefaultFilter())
     }
     getTrainers()
+    getUpdates()
   }, [])
   return (
     <section className='home-container'>
@@ -88,12 +97,12 @@ export function HomePage() {
           <Cards trainers={trainers} />
         </div>
         <div
-          className='updates-container'
+          className='updates-carousel-container'
           onMouseEnter={() => setIsUpdatesHover(true)}
           onMouseLeave={() => setIsUpdatesHover(false)}
         >
           <b>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</b>
-          <Updates isHover={isUpdatesHover} />
+          <Updates isHover={isUpdatesHover} updates={updates} />
         </div>
       </div>
       <HeadContainer

@@ -96,16 +96,88 @@
         
     }
     
-    .updates-container{
+    .updates-carousel-container{
         
         grid-column: 1/-1;
         grid-row: 2/3;
+
+        .update-banner{
+          transition: background-color 0.3s  ease-in-out, box-shadow 0.3s ease; // Smooth transition
+          background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+          
+          display: grid;
+          grid-template-columns: 3em auto 1fr;
+          gap: 1em;
+          
+          text-align: start;
+
+          cursor: grab;
+          
+          .title-container{
+            grid-column: 2/3;
+            display: grid;
+            align-items: start;
+            
+            b{
+              font-family: assistantBold;
+              font-size: 1.1em;
+            }
+          }
+          
+        }
+
+        .swiper-pagination-bullet {
+
+          background-color: $dark-gray; /* Default color */
+          border-radius: 50%;
+          transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        /* Active bullet styles */
+        .swiper-pagination-bullet-active {
+          background-color: $dark-blue; /* Active color */
+          transform: scale(1.4); /* Enlarged for active bullet */
+        }
+        
+        
+      }
+      
+      .updates-carousel.dark-mode{
+
+        .swiper-pagination-bullet {
+  
+          background-color: white;
+          border-radius: 50%;
+          transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        /* Active bullet styles */
+        .swiper-pagination-bullet-active {
+          background-color: $very-light-blue;
+          transform: scale(1.4); /* Enlarged for active bullet */
+        }
+
+      }
+      
+      .autoplay-progress.dark-mode{
+        
+        span{
+          transition: 0.3s  ease-in-out;
+          color: $primary-light-blue;
+        }
+        
+        
+        circle{
+          transition: background-color 0.3s  ease-in-out; // Smooth transition
+          stroke: $primary-light-blue; 
+          
+        }
+        
+      }
+    
+      
     }
 
-
-
-    
-}
 
 // .head-container{
 //     position: relative;

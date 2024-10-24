@@ -12,6 +12,7 @@ export const updateService = {
   remove,
   getMaxPage,
   saveUpdatesOrder,
+  getDefaultFilter,
 }
 
 if (!localStorage.getItem(STORAGE_KEY)) {
@@ -80,8 +81,16 @@ async function getMaxPage() {
 }
 
 function saveUpdatesOrder(updates) {
-  console.log(updates)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(updates))
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updates))
+      resolve(updates)
+    }, 500)
+  )
+}
+
+function getDefaultFilter() {
+  return { pageIdx: 0, isAll: false }
 }
 
 function _createUpdates() {
@@ -127,6 +136,48 @@ function _createUpdates() {
       content:
         'ביום חמישי הקרוב תתקיים סדנת תזונה ספורטיבית עם מומחה. מספר המקומות מוגבל.',
       createdAt: Date.now() - 2000000, // example timestamp
+    },
+    {
+      _id: makeId(),
+      title: 'יום משפחה במועדון',
+      content:
+        'ביום שבת הקרוב, יום משפחה במועדון! פעילויות לילדים ולמבוגרים, והכניסה חופשית למנויים.',
+      createdAt: Date.now() - 1000000, // example timestamp
+    },
+    {
+      _id: makeId(),
+      title: 'הדרכה טכנית על ציוד כושר',
+      content:
+        'בואו להדרכה טכנית על ציוד הכושר החדש שהגיע למועדון! ההדרכה תתקיים ביום רביעי הקרוב.',
+      createdAt: Date.now() - 4000000, // example timestamp
+    },
+    {
+      _id: makeId(),
+      title: 'הפנינג בריאות',
+      content:
+        'ביום ראשון הקרוב יתקיים הפנינג בריאות במועדון עם מגוון הרצאות והדגמות. הכניסה חופשית לכולם.',
+      createdAt: Date.now() - 30000000, // example timestamp
+    },
+    {
+      _id: makeId(),
+      title: 'מרוץ שנתי למנויים',
+      content:
+        'מרוץ שנתי יתקיים בעוד חודש. ההרשמה פתוחה לכל המנויים ויש פרסים לזוכים.',
+      createdAt: Date.now() - 60000000, // example timestamp
+    },
+    {
+      _id: makeId(),
+      title: 'סגירת המועדון לשיפוצים',
+      content:
+        'המועדון ייסגר לשיפוצים בעוד שבועיים למשך שלושה ימים. יש להתעדכן בלוח הזמנים החדש.',
+      createdAt: Date.now() - 70000000, // example timestamp
+    },
+    {
+      _id: makeId(),
+      title: 'פתיחת חוג סקייטבורד',
+      content:
+        'נפתח חוג סקייטבורד חדש לילדים ובני נוער! בואו להתנסות ולהירשם מראש דרך האתר.',
+      createdAt: Date.now() - 80000000, // example timestamp
     },
   ]
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updates))

@@ -14,6 +14,7 @@ import { setIsLoading } from '../store/actions/system.actions'
 export function AddToCartButton({ item, quantity }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+  const navigate = useNavigate()
   function shouldShowActionBtns(item) {
     const user = userService.getLoggedinUser()
 
@@ -75,9 +76,11 @@ export function AddToCartButton({ item, quantity }) {
             navigate(`/item/edit/${item._id}`)
           }}
         >
-          Edit
+          {prefs.isEnglish ? 'Edit' : 'עריכה'}
         </Button>
-        <Button onClick={() => onRemoveItem(item._id)}>Remove</Button>
+        <Button onClick={() => onRemoveItem(item._id)}>
+          {prefs.isEnglish ? 'Remove' : 'הסרה'}
+        </Button>
       </ButtonGroup>
     )) || (
       <Button variant='contained' onClick={() => onAddToCart(item, quantity)}>

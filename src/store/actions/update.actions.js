@@ -36,6 +36,11 @@ export async function removeUpdate(reviewId) {
     throw err
   }
 }
+
+export function setUpdateOrder(newOrder) {
+  store.dispatch({ type: SET_UPDATES, updates: newOrder })
+}
+
 // Command Creators
 export function getActionRemoveUpdate(reviewId) {
   return { type: REMOVE_UPDATE, reviewId }

@@ -5,9 +5,17 @@
     justify-items: center;
     gap: 1em;
     position: static;
+
+    @media (max-width:1200px) {
+            
+     display: block;       
+            
+    }
     
     .input-container{
-
+        margin: 0px;
+        padding: 0px;
+        align-self: start;
         display: grid;
         justify-items: center;
         gap: 1em;
@@ -26,6 +34,11 @@
         button{
             // justify-self: end;
         }
+    }
+
+    .list-control-container{
+        display: grid;
+        gap: 1em;
     }
 }
 
