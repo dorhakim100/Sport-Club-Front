@@ -32,8 +32,12 @@ export function TrainerIndex() {
   const trainers = useSelector(
     (stateSelector) => stateSelector.trainerModule.trainers
   )
-  const [filter, setFilter] = useState({ types: [], pageIdx: 0, isAll: false })
   const [searchParams, setSearchParams] = useSearchParams()
+  const [filter, setFilter] = useState({
+    types: searchParams.get('types').split(','),
+    pageIdx: +searchParams.get('pageIdx'),
+    isAll: false,
+  })
 
   const location = useLocation()
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -60,12 +64,41 @@ export function TrainerIndex() {
   ]
 
   useEffect(() => {
-    const getTrainers = async () => {
-      await loadTrainers(filter)
-      setSearchParams(filter)
+    const pageIdx = +searchParams.get('pageIdx') || 0
+    const typesParam = searchParams.get('types') || ''
+
+    const types = typesParam ? typesParam.split(',') : []
+
+    const filterToSet = { ...filter, types, pageIdx }
+
+    // Only update filter if it's different
+    if (JSON.stringify(filter) !== JSON.stringify(filterToSet)) {
+      setFilter(filterToSet)
     }
+  }, [searchParams]) // Runs when searchParams change
+
+  // Effect to load trainers based on filter
+  useEffect(() => {
+    const getTrainers = async () => {
+      await loadTrainers(filter) // Load trainers with the current filter
+
+      // Update searchParams if necessary
+      const currentPageIdx = searchParams.get('pageIdx') || 0
+      const currentTypes = searchParams.get('types') || ''
+
+      if (
+        currentPageIdx !== filter.pageIdx.toString() ||
+        currentTypes !== filter.types.toString()
+      ) {
+        setSearchParams({
+          pageIdx: filter.pageIdx.toString(),
+          types: filter.types.toString(),
+        })
+      }
+    }
+
     getTrainers()
-  }, [filter, searchParams])
+  }, [filter]) // Only run when filter changes
 
   return (
     <section className='trainer-index-container'>
