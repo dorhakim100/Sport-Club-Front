@@ -19,6 +19,7 @@ import { loadUpdates } from '../store/actions/update.actions'
 export function UpdatesList({ updates, isDragEdit }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+  const navigate = useNavigate()
 
   const [orderedUpdates, setOrderedUpdates] = useState(updates)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -149,7 +150,7 @@ export function UpdatesList({ updates, isDragEdit }) {
                       <Button
                         onClick={() => {
                           window.scrollTo({ top: 0, behavior: 'smooth' })
-                          navigate(`/update/edit/${update._id}`)
+                          navigate(`/admin/update/edit/${update._id}`)
                         }}
                       >
                         {prefs.isEnglish ? 'Edit' : 'עריכה'}

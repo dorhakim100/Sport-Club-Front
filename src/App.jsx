@@ -32,6 +32,7 @@ import { Signup } from './pages/Signup.jsx'
 import { UserDetails } from './pages/UserDetails'
 import { AdminIndex } from './pages/AdminIndex'
 import { UpdateIndex } from './pages/UpdateIndex.jsx'
+import { UpdateEdit } from './pages/UpdateEdit.jsx'
 import { OrderIndex } from './pages/OrderIndex.jsx'
 import { Cart } from './pages/Cart.jsx'
 
@@ -103,6 +104,7 @@ export function App() {
 
             <Route path='admin' element={<AdminIndex />}>
               <Route path='update' element={<UpdateIndex />} />
+              <Route path='update/edit/:updateId' element={<UpdateEdit />} />
               <Route path='order' element={<OrderIndex />} />
             </Route>
           </Routes>

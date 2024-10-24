@@ -44,7 +44,6 @@ async function remove(updateId) {
 }
 
 async function save(update) {
-  var savedSchedule
   let updateToSave
 
   if (update._id) {
@@ -55,7 +54,7 @@ async function save(update) {
       createdAt: Date.now(),
     }
 
-    savedSchedule = await storageService.put(STORAGE_KEY, updateToSave)
+    updateToSave = await storageService.put(STORAGE_KEY, updateToSave)
   } else {
     updateToSave = {
       title: update.title,
@@ -63,10 +62,10 @@ async function save(update) {
       createdAt: Date.now(),
     }
 
-    savedSchedule = await storageService.post(STORAGE_KEY, updateToSave)
+    updateToSave = await storageService.post(STORAGE_KEY, updateToSave)
   }
 
-  return savedSchedule
+  return updateToSave
 }
 
 async function getMaxPage() {

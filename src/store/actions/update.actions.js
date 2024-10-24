@@ -5,6 +5,7 @@ import {
   ADD_UPDATE,
   REMOVE_UPDATE,
   SET_UPDATES,
+  LOAD_UPDATE,
 } from '../reducers/update.reducer'
 
 export async function loadUpdates(filter) {
@@ -33,6 +34,31 @@ export async function removeUpdate(reviewId) {
     store.dispatch(getActionRemoveUpdate(reviewId))
   } catch (err) {
     console.log('UpdateActions: err in removeUpdate', err)
+    throw err
+  }
+}
+
+export async function loadUpdate(updateId) {
+  console.log(updateId)
+  try {
+    const update = await updateService.getById(updateId)
+    store.dispatch({ type: LOAD_UPDATE, update })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
+export async function saveUpdate(newUpdate) {
+  try {
+    const saved = await updateService.save(newUpdate)
+    // return {
+    //   type: UPDATE_ITEM,
+    //   item,
+    // }
+    return saved
+  } catch (err) {
+    console.log(err)
     throw err
   }
 }

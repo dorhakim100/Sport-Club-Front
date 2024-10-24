@@ -13,6 +13,7 @@ import { LoadingButton } from '@mui/lab'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 export function UpdateControl({
   setDragEdit,
@@ -55,8 +56,10 @@ export function UpdateControl({
       await updateService.saveUpdatesOrder(updates)
       const defaultFilter = updateService.getDefaultFilter()
       setFilter({ ...defaultFilter })
+      showSuccessMsg(prefs.isEnglish ? 'Order saved' : 'סדר נשמר')
     } catch (err) {
       console.log(err)
+      showErrorMsg(prefs.isEnglish ? `Couldn't save order` : 'סדר לא נשמר')
     } finally {
       setIsLoading(false)
     }

@@ -2,9 +2,11 @@ export const SET_UPDATES = 'SET_UPDATES'
 export const ADD_UPDATE = 'ADD_UPDATE'
 export const REMOVE_UPDATE = 'REMOVE_UPDATE'
 export const UPDATE_UPDATE = 'UPDATE_UPDATE'
+export const LOAD_UPDATE = 'LOAD_UPDATE'
 
 const initialState = {
   updates: [],
+  update: null,
 }
 
 export function updateReducer(state = initialState, action = {}) {
@@ -27,6 +29,8 @@ export function updateReducer(state = initialState, action = {}) {
           update._id === action.update._id ? action.update : update
         ),
       }
+    case LOAD_UPDATE:
+      return { ...state, update: action.update }
     default:
       return state
   }
