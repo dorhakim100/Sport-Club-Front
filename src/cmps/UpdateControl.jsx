@@ -53,7 +53,7 @@ export function UpdateControl({
     try {
       setIsLoading(true)
       setDragEdit(false)
-      await updateService.saveUpdatesOrder(updates)
+      await updateService.saveUpdatesOrder([...updates].reverse())
       const defaultFilter = updateService.getDefaultFilter()
       setFilter({ ...defaultFilter })
       showSuccessMsg(prefs.isEnglish ? 'Order saved' : 'סדר נשמר')

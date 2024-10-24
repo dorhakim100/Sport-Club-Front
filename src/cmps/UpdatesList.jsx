@@ -6,6 +6,7 @@ import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
 
 import { setUpdateOrder } from '../store/actions/update.actions'
+import { loadUpdates, removeUpdate } from '../store/actions/update.actions'
 
 import { AddToCartButton } from './AddToCartButton'
 
@@ -14,9 +15,9 @@ import ButtonGroup from '@mui/material/ButtonGroup'
 import Divider from '@mui/material/Divider'
 
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
-import { loadUpdates } from '../store/actions/update.actions'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
-export function UpdatesList({ updates, isDragEdit }) {
+export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const navigate = useNavigate()
@@ -75,6 +76,17 @@ export function UpdatesList({ updates, isDragEdit }) {
         x: e.clientX - offset.x + window.scrollX, // Adjust for horizontal scroll
         y: e.clientY - offset.y + window.scrollY, // Adjust for vertical scroll
       })
+    }
+  }
+
+  async function onRemoveUpdate(updateId) {
+    try {
+      await removeUpdate(updateId)
+      showSuccessMsg(prefs.isEnglish ? 'Update removed' : 'עדכון הוסר')
+      await loadUpdates()
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(prefs.isEnglish ? `Couldn't remove` : 'עדכון לא הוסר')
     }
   }
 
@@ -155,7 +167,7 @@ export function UpdatesList({ updates, isDragEdit }) {
                       >
                         {prefs.isEnglish ? 'Edit' : 'עריכה'}
                       </Button>
-                      <Button onClick={() => onRemoveItem(update._id)}>
+                      <Button onClick={() => onRemoveUpdate(update._id)}>
                         {prefs.isEnglish ? 'Remove' : 'הסרה'}
                       </Button>
                     </ButtonGroup>

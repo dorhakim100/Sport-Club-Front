@@ -56,7 +56,11 @@ export function UpdateIndex() {
             setFilter={setFilter}
             maxPage={maxPage}
           />
-          <UpdatesList updates={updates} isDragEdit={isDragEdit} />
+          <UpdatesList
+            updates={updates}
+            isDragEdit={isDragEdit}
+            loadUpdates={loadUpdates}
+          />
         </div>
       </div>
     </div>

@@ -33,7 +33,9 @@ export function ItemIndex() {
 
   // Update filterBy based on the URL (searchParams or default filter)
   const [filterBy, setFilterBy] = useState({
-    types: searchParams.get('types').split(','),
+    types: searchParams.get('types')
+      ? searchParams.get('types').split(',')
+      : '',
     pageIdx: +searchParams.get('pageIdx'),
     sortDir: +searchParams.get('sortDir'),
   })

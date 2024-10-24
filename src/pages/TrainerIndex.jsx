@@ -34,7 +34,9 @@ export function TrainerIndex() {
   )
   const [searchParams, setSearchParams] = useSearchParams()
   const [filter, setFilter] = useState({
-    types: searchParams.get('types').split(','),
+    types: searchParams.get('types')
+      ? searchParams.get('types').split(',')
+      : [],
     pageIdx: +searchParams.get('pageIdx'),
     isAll: false,
   })
