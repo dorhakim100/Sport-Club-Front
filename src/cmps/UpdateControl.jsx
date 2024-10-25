@@ -113,7 +113,9 @@ export function UpdateControl({
           className='page-controller-container'
         >
           <Button
-            onClick={() => onPageNavigation(1, filter, setFilter, maxPage)}
+            onClick={() => {
+              onPageNavigation(1, filter, setFilter, maxPage)
+            }}
           >
             <ArrowBackIosNewIcon />
           </Button>

@@ -131,7 +131,7 @@ function getLoggedinCart() {
   const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
   if (!user) return []
   const cart = user.items
-  console.log(cart)
+
   return cart
 }
 

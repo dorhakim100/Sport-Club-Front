@@ -10,6 +10,7 @@ import { HeadContainer } from '../cmps/HeadContainer'
 import { CartList } from '../cmps/CartList.jsx'
 import { updateCart } from '../store/actions/user.actions'
 import { setIsLoading } from '../store/actions/system.actions'
+import { setCartTotal } from '../store/actions/user.actions'
 
 import { Button } from '@mui/material'
 import Divider from '@mui/material/Divider'
@@ -18,6 +19,7 @@ export function Cart() {
   const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const navigate = useNavigate()
 
   const [fullCart, setFullCart] = useState(null)
 
@@ -37,6 +39,7 @@ export function Cart() {
       (accu, item) => accu + item.price * item.quantity,
       total
     )
+    setCartTotal(cartTotal)
     return cartTotal
   }, [cart]) // using useMemo to prevent calculating each and every render
 
@@ -54,6 +57,20 @@ export function Cart() {
     }
   }
 
+  function onCheckout() {
+    console.log(cart)
+    console.log(total)
+
+    try {
+      setIsLoading(true)
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(prefs.isEnglish ? `Could't checkout` : 'שגיאה')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <section className='page-container cart-page-container'>
       <h2>{prefs.isEnglish ? 'Shopping Cart' : 'סל הקניות'}</h2>
@@ -65,7 +82,13 @@ export function Cart() {
             <b>₪{total}</b>
             <Divider orientation='horizontal' flexItem />
 
-            <Button variant='contained'>
+            <Button
+              variant='contained'
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                navigate(`/user/${user._id}/cart/paying`)
+              }}
+            >
               {prefs.isEnglish ? 'Checkout' : 'תשלום'}
             </Button>
           </div>

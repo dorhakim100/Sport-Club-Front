@@ -27,6 +27,11 @@ export function Activities() {
       eng: 'Tennis School',
     },
     {
+      path: 'pilates',
+      he: 'פילאטיס מכשירים',
+      eng: 'Reformer Pilates',
+    },
+    {
       path: 'care',
       he: 'מרכז הטיפולים',
       eng: 'Care',
@@ -72,6 +77,17 @@ export function Tennis() {
   const headText = { he: 'בית הספר לטניס', eng: 'Tennis School' }
   return (
     <div className='tennis-container'>
+      <HeadContainer text={headText} />
+    </div>
+  )
+}
+
+export function Pilates() {
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+
+  const headText = { he: 'פילאטיס מכשירים', eng: 'Reformer Pilates' }
+  return (
+    <div className='pilates-container'>
       <HeadContainer text={headText} />
     </div>
   )

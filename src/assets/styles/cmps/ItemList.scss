@@ -68,6 +68,7 @@
           display: flex;
           gap: 0.5em;
           opacity: 0;
+
         }
   
         .quantity-container.visible{
@@ -140,15 +141,20 @@
         border-radius: 5px; // Consistent rounded corners for images
     justify-self: center;
     align-self: center;
-        img {
-            
-            transition: transform 0.3s ease-in-out; // Smooth transition for scale effect
-            width: 100%; // Full width for responsiveness
-            height: 250px;
-            object-fit: scale-down;
-            // object-fit: cover;
-            border-radius: 5px; // Consistent rounded corners for images
-        }
+    border-radius: 8px;
+    width: 250px;
+    height: 250px;
+    img {
+      
+      transition: transform 0.3s ease-in-out; // Smooth transition for scale effect
+      width: 100%; // Full width for responsiveness
+      object-fit: scale-down;
+      object-fit: cover;
+      width: 250px;
+      height: 250px;
+
+      border-radius: 8px;
+    }
     }
         &:hover{
 

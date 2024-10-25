@@ -9,6 +9,7 @@ import ButtonGroup from '@mui/material/ButtonGroup'
 export function TrainerList({ trainers }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((storeState) => storeState.userModule.user)
+  const navigate = useNavigate()
   console.log(trainers)
 
   return (
@@ -39,7 +40,15 @@ export function TrainerList({ trainers }) {
                   </Button>
                 </ButtonGroup>
               )) || (
-                <Button variant='contained' className='hidden'>
+                <Button
+                  variant='contained'
+                  className='hidden'
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+
+                    navigate(`/class/trainer/${trainer._id}`)
+                  }}
+                >
                   {prefs.isEnglish ? 'About' : 'מידע נוסף'}
                 </Button>
               )}

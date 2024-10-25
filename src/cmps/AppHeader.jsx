@@ -53,10 +53,14 @@ export function AppHeader({ bodyRef }) {
 
   const cartLength = useMemo(() => {
     let length = 0
-    if (!cart) return
+    console.log(user)
+    console.log(cart)
+    if (!cart) {
+      return 0
+    }
     const cartLength = cart.reduce((accu, item) => accu + item.quantity, length)
     return cartLength
-  }, [cart]) // using useMemo to prevent calculating each and every render
+  }, [cart, user]) // using useMemo to prevent calculating each and every render
 
   const handleScroll = () => {
     const scrollY = window.scrollY
@@ -302,17 +306,19 @@ export function AppHeader({ bodyRef }) {
         {user && (
           <div className='user-info'>
             <Link to={`user/${user._id}`}>{user.fullname}</Link>
-            <Button
-              variant='contained'
-              onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-                navigate(`/user/${user._id}/cart`)
-              }}
-              className='cart-button'
-            >
-              {cart && cart.length > 0 && <span>{cartLength}</span>}
-              <ShoppingCartIcon />
-            </Button>
+            {!user.isAdmin && (
+              <Button
+                variant='contained'
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  navigate(`/user/${user._id}/cart`)
+                }}
+                className='cart-button'
+              >
+                {cart && cart.length > 0 && <span>{cartLength}</span>}
+                <ShoppingCartIcon />
+              </Button>
+            )}
             <Button onClick={onLogout} variant='contained'>
               {prefs.isEnglish ? 'Logout' : 'יציאה'}
             </Button>

@@ -24,8 +24,12 @@ export function AddToCartButton({ item, quantity }) {
   }
 
   async function onAddToCart(itemToAdd, quantity = 1) {
-    console.log(itemToAdd)
-    console.log(quantity)
+    if (!user) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      navigate('/user/login')
+      return
+    }
+
     const itemsIds = user.items.map((item) => {
       return item.id
     })
@@ -41,15 +45,11 @@ export function AddToCartButton({ item, quantity }) {
       user.items.splice(idx, 1, {
         id: itemToAdd._id,
         quantity: newQuantity,
-        // title: itemToAdd.title,
-        // cover: itemToAdd.cover,
       })
     } else {
       user.items.push({
         id: itemToAdd._id,
         quantity: quantity || 1,
-        // title: itemToAdd.title,
-        // cover: itemToAdd.cover,
       })
     }
 

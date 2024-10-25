@@ -22,6 +22,7 @@ import {
   Care,
   SummerCamp,
   Restaurant,
+  Pilates,
 } from './pages/Activities.jsx'
 import { ItemIndex } from './pages/ItemIndex'
 import { ItemDetails } from './pages/ItemDetails'
@@ -35,6 +36,8 @@ import { UpdateIndex } from './pages/UpdateIndex.jsx'
 import { UpdateEdit } from './pages/UpdateEdit.jsx'
 import { OrderIndex } from './pages/OrderIndex.jsx'
 import { Cart } from './pages/Cart.jsx'
+import { Paying } from './pages/Paying.jsx'
+import { TrainerDetails } from './pages/TrainerDetails.jsx'
 
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
@@ -81,10 +84,15 @@ export function App() {
             <Route path='class' element={<Class />} />
             <Route path='class/schedule' element={<Schedule />} />
             <Route path='class/trainer' element={<TrainerIndex />} />
+            <Route
+              path='class/trainer/:trainerId'
+              element={<TrainerDetails />}
+            />
 
             <Route path='activities' element={<Activities />}>
               <Route path='swimming' element={<Swimming />} />
               <Route path='tennis' element={<Tennis />} />
+              <Route path='pilates' element={<Pilates />} />
               <Route path='care' element={<Care />} />
               <Route path='camp' element={<SummerCamp />} />
               <Route path='restaurant' element={<Restaurant />} />
@@ -94,6 +102,7 @@ export function App() {
             <Route path='item/edit/:itemId' element={<ItemEdit />} />
             <Route path='user/:id' element={<UserDetails />} />
             <Route path='user/:id/cart' element={<Cart />} />
+            <Route path='user/:id/cart/paying' element={<Paying />} />
 
             <Route path='user' element={<LoginSignup />}>
               <Route path='login' element={<Login />} />

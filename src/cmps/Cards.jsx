@@ -34,6 +34,8 @@ export function Cards({ trainers }) {
               <div
                 className='card-container'
                 onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+
                   navigate(`/class/trainer/${trainer._id}`)
                 }}
               >

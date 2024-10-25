@@ -1,0 +1,70 @@
+.page-container.trainer-details{
+    display: grid;
+    .back-btn{
+        justify-self: end;
+    }
+}
+
+
+
+.trainer-details-container{
+    display: grid;
+    align-items: center;
+    gap: 2em;
+    // justify-items: center;
+
+    img{
+        justify-self: center;
+        width: 40vw;
+        height: calc(40vw);
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+        min-width: 300px;
+        min-height: 300px;
+
+        max-width: 600px;
+        max-height: 600px;
+    }
+
+
+    .types-container{
+        justify-self: center;
+        display: flex;
+        align-items: center;
+        gap: 2em;
+
+
+        a{
+            padding: 5px;
+            font-size: 1.5em;
+            border-radius: 5px;
+            outline: 1px solid $bold-navy;
+            background-color: white;
+            transition: 0.2s;
+            color: $bold-navy;
+            width: 100px;
+            &:hover{
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.113) 0px 3px 6px; 
+                background-color: $light-gray;
+            }
+            
+        }
+        
+    }
+    .dark-mode{
+        a{
+            background-color: $dark-blue;
+            color: white;
+
+            &:hover{
+                background-color: $bold-navy;
+                background-color: $dark-gray;
+                color: white;
+    
+            }
+        }
+
+      }
+}

@@ -9,7 +9,9 @@ export const REMOVE_USER = 'REMOVE_USER'
 export const SET_USERS = 'SET_USERS'
 export const SET_SCORE = 'SET_SCORE'
 export const SET_PREFS = 'SET_PREFS'
+export const SET_CART = 'SET_CART'
 export const UPDATE_CART = 'UPDATE_CART'
+export const SET_TOTAL = 'SET_TOTAL'
 
 const initialState = {
   count: 10,
@@ -17,6 +19,7 @@ const initialState = {
   users: [],
   watchedUser: null,
   cart: userService.getLoggedinCart() || [],
+  total: 0,
 }
 
 export function userReducer(state = initialState, action) {
@@ -46,14 +49,16 @@ export function userReducer(state = initialState, action) {
     case SET_USERS:
       newState = { ...state, users: action.users }
       break
-    case SET_SCORE:
-      const user = { ...state.user, score: action.score }
+    case SET_CART:
+      const user = { ...state.user, items: action.score }
       newState = { ...state, user }
       userService.saveLoggedinUser(user)
       break
     case UPDATE_CART:
       newState = { ...state, cart: action.cart }
       break
+    case SET_TOTAL:
+      newState = { ...state, total: action.total }
     default:
   }
   // For debug:

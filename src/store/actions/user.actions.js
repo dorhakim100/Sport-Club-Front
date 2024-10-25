@@ -10,6 +10,7 @@ import {
   SET_USERS,
   SET_WATCHED_USER,
   UPDATE_CART,
+  SET_TOTAL,
   // SET_PREFS,
 } from '../reducers/user.reducer'
 
@@ -37,6 +38,9 @@ export async function removeUser(userId) {
 export async function login(credentials) {
   try {
     const user = await userService.login(credentials)
+    const cart = [...user.items] || []
+
+    store.dispatch({ type: UPDATE_CART, cart })
     store.dispatch({
       type: SET_USER,
       user,
@@ -100,6 +104,10 @@ export async function updateCart(user) {
     console.log(err)
     throw err
   }
+}
+
+export function setCartTotal(total) {
+  store.dispatch({ type: SET_TOTAL, total })
 }
 
 // export function setPrefs(prefs) {
