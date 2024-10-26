@@ -38,6 +38,7 @@ import { OrderIndex } from './pages/OrderIndex.jsx'
 import { Cart } from './pages/Cart.jsx'
 import { Paying } from './pages/Paying.jsx'
 import { TrainerDetails } from './pages/TrainerDetails.jsx'
+import { MessageIndex } from './pages/MessageIndex.jsx'
 
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
@@ -115,6 +116,7 @@ export function App() {
               <Route path='update' element={<UpdateIndex />} />
               <Route path='update/edit/:updateId' element={<UpdateEdit />} />
               <Route path='order' element={<OrderIndex />} />
+              <Route path='message' element={<MessageIndex />} />
             </Route>
           </Routes>
         </section>

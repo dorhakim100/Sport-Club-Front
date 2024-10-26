@@ -102,6 +102,15 @@ export function TrainerIndex() {
     getTrainers()
   }, [filter]) // Only run when filter changes
 
+  async function onRemoveTrainer(trainerId) {
+    try {
+      await removeTrainer(trainerId)
+      showSuccessMsg(prefs.isEnglish ? 'Trainer removed' : 'מאמן הוסר')
+    } catch (err) {
+      showErrorMsg(prefs.isEnglish ? `Couldn't remove trainer` : 'מאמן לא הוסר')
+    }
+  }
+
   return (
     <section className='trainer-index-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
@@ -109,7 +118,7 @@ export function TrainerIndex() {
       <HeadContainer text={headText} />
 
       <TrainerFilter filter={filter} setFilter={setFilter} />
-      <TrainerList trainers={trainers} />
+      <TrainerList trainers={trainers} onRemoveTrainer={onRemoveTrainer} />
     </section>
   )
 }

@@ -1,5 +1,3 @@
-import { Nav } from '../cmps/Nav'
-
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -12,35 +10,15 @@ import { HeadContainer } from '../cmps/HeadContainer'
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 
-export function OrderIndex() {
-  const origin = {
-    path: '/admin',
-    he: 'מנהל',
-    eng: 'Admin',
-  }
-
-  const links = [
-    {
-      path: 'update',
-      he: 'עדכונים',
-      eng: 'Updates',
-    },
-    {
-      path: 'order',
-      he: 'הזמנות',
-      eng: 'Orders',
-    },
-  ]
-
+export function MessageIndex() {
   const text = {
-    eng: 'Orders',
-    he: 'הזמנות',
+    eng: 'Messages',
+    he: 'הודעות',
   }
 
   return (
-    <div className='order-index-container'>
+    <div className='page-container message-index'>
       <HeadContainer text={text} />
-      {/* <Nav origin={origin} links={links} /> */}
     </div>
   )
 }

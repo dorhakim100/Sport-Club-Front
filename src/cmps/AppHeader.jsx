@@ -226,32 +226,41 @@ export function AppHeader({ bodyRef }) {
       }}
     >
       {' '}
-      {windowDimensions.width < 900 && (
+      {windowDimensions.width < 1050 && (
         <Button
           variant='contained'
           onClick={() => setMenu((prev) => (prev = !prev))}
         >
-          <MenuIcon />
+          {(menu && <MenuOpenIcon />) || <MenuIcon />}
         </Button>
       )}
       <nav className={menu ? (prefs.isEnglish ? 'shown ltr' : 'shown') : ''}>
         <NavLink
           to='/'
           className='logo'
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setMenu(false)
+          }}
         >
           <img src={logo} alt='' ref={logoRef} />
         </NavLink>
         <NavLink
           to='facilities'
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setMenu(false)
+          }}
         >
           <span>{prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
         </NavLink>
 
         <NavLink
           to='class'
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setMenu(false)
+          }}
         >
           <div
             className='menu'
@@ -272,14 +281,20 @@ export function AppHeader({ bodyRef }) {
         </NavLink>
         <NavLink
           to='item'
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setMenu(false)
+          }}
         >
           <span>{prefs.isEnglish ? 'Store' : 'חנות'}</span>
         </NavLink>
 
         <NavLink
           to='activities'
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setMenu(false)
+          }}
         >
           <div
             className='menu'
@@ -301,7 +316,10 @@ export function AppHeader({ bodyRef }) {
 
         <NavLink
           to='about'
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setMenu(false)
+          }}
         >
           <div
             className='menu'
@@ -324,7 +342,10 @@ export function AppHeader({ bodyRef }) {
         {user?.isAdmin && (
           <NavLink
             to='/admin'
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+              setMenu(false)
+            }}
           >
             {prefs.isEnglish ? 'Admin' : 'מנהל'}
           </NavLink>
@@ -334,7 +355,10 @@ export function AppHeader({ bodyRef }) {
           <NavLink
             to='user/login'
             className='login-link'
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+              setMenu(false)
+            }}
           >
             {prefs.isEnglish ? 'Login' : 'כניסה'}
           </NavLink>
@@ -348,6 +372,7 @@ export function AppHeader({ bodyRef }) {
                 variant='contained'
                 onClick={() => {
                   window.scrollTo({ top: 0, behavior: 'smooth' })
+                  setMenu(false)
                   navigate(`/user/${user._id}/cart`)
                 }}
                 className='cart-button'
@@ -362,7 +387,7 @@ export function AppHeader({ bodyRef }) {
           </div>
         )}
       </nav>
-      {windowDimensions.width < 900 && (
+      {windowDimensions.width < 1050 && (
         <NavLink
           to='/'
           className='logo'

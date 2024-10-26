@@ -74,7 +74,7 @@
         button {
             margin-inline-end: 0;
         }
-        @media (max-width:1100px) {
+        @media (max-width:1430px) {
 
     
                 font-size: 1.5em;
@@ -82,7 +82,7 @@
             
         }
 
-        @media (max-width:900px) {
+        @media (max-width:1050px) {
             position: absolute;
             flex-direction: column;
             background-color: $light-gray;

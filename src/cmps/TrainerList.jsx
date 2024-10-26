@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { Button } from '@mui/material'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
-export function TrainerList({ trainers }) {
+export function TrainerList({ trainers, onRemoveTrainer }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((storeState) => storeState.userModule.user)
   const navigate = useNavigate()
@@ -33,10 +33,10 @@ export function TrainerList({ trainers }) {
                       navigate(`/trainer/edit/${trainer._id}`)
                     }}
                   >
-                    Edit
+                    {prefs.isEnglish ? 'Edit' : 'עריכה'}
                   </Button>
-                  <Button onClick={() => onRemoveItem(trainer._id)}>
-                    Remove
+                  <Button onClick={() => onRemoveTrainer(trainer._id)}>
+                    {prefs.isEnglish ? 'Remove' : 'הסרה'}
                   </Button>
                 </ButtonGroup>
               )) || (

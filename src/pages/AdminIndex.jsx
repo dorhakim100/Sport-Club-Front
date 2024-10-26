@@ -36,6 +36,11 @@ export function AdminIndex() {
       he: 'הזמנות',
       eng: 'Orders',
     },
+    {
+      path: 'message',
+      he: 'הודעות',
+      eng: 'Messages',
+    },
   ]
 
   return (

@@ -11,7 +11,7 @@ import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import { setIsLoading } from '../store/actions/system.actions'
 
-export function AddToCartButton({ item, quantity }) {
+export function AddToCartButton({ item, quantity, onRemoveItem }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const navigate = useNavigate()

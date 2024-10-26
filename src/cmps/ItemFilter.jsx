@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
 import { userService } from '../services/user/user.service'
@@ -10,6 +11,9 @@ import { Button } from '@mui/material'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { addItem } from '../store/actions/item.actions'
 
 import { SortSelect } from './SortSelect'
 import { Loader } from './Loader'
@@ -33,6 +37,7 @@ export function ItemFilter({
   const [filterToEdit, setFilterToEdit] = useState(structuredClone(filterBy))
   const [price, setPrice] = useState(filterToEdit.maxPrice || '')
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+  const navigate = useNavigate()
 
   useEffect(() => {
     setFilterBy({ ...filterToEdit })
@@ -120,6 +125,7 @@ export function ItemFilter({
       showSuccessMsg(`Item added`)
       navigate(`/item/edit/${savedItem._id}`)
     } catch (err) {
+      console.log(err)
       showErrorMsg('Cannot add item')
     }
   }

@@ -30,7 +30,7 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
           <li key={item._id} className='item-container'>
             <ItemPreview item={item} />
             <div className='actions' style={{ direction: 'ltr' }}>
-              <AddToCartButton item={item} />
+              <AddToCartButton item={item} onRemoveItem={onRemoveItem} />
               {/* {(shouldShowActionBtns(item) && (
                 <ButtonGroup
                   variant='contained'

@@ -61,7 +61,7 @@ export function Accessibility({ bodyRef }) {
         element.style.backgroundColor = 'white'
         element.style.color = 'black' // Ensures text is visible on a white background
       } else {
-        element.style.backgroundColor = '' // Resets to original background
+        element.style.backgroundColor = 'default' // Resets to original background
         element.style.color = '' // Resets to original text color
       }
     })
