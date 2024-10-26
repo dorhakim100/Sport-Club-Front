@@ -1,0 +1,105 @@
+.messages-list-container{
+    display: grid;
+    grid-template-rows: repeat(6,1fr);
+    background-color: $light-gray;
+
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 3px, rgba(60, 64, 67, 0.15) 0px 1px 3px;
+    // min-height: 100px;
+    transition: background-color 0.3s  ease-in-out, box-shadow 0.3s ease; // Smooth transition
+    
+    background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+    
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+
+    // max-height: calc(0.6em * 2 + 600px);
+    // height: 600px;
+    overflow-y: auto;
+    align-items: center;
+
+
+    &:first-of-type{
+    }
+    
+    &:last-of-type{
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        
+    }
+
+}
+
+.message-container{
+
+    display: grid;
+    grid-template-columns: 150px 1fr 45px;
+    gap: 0.8em;
+
+    font-family: assistantBold;
+    font-size: 1.1em;
+
+    text-align: start;
+    align-items: center;
+
+    padding: 1em;
+
+    cursor: pointer;
+    transition:  0.3s  ease-in-out;// Smooth transition
+    
+    
+    // background: linear-gradient(135deg, #6ec1e458 0%, #a8e6a127 100%); // Gradient from light blue to soft green
+    &:hover{
+        background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+        // background-color: $medium-gray;
+    }
+    
+    span{
+        
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+    }
+    
+    p{
+        margin: 0px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+    }
+
+    .checkbox-container{
+        // justify-self: center;
+        font-size: 1.1rem;
+        label{
+
+            // width: 45px;
+        }
+    }
+
+    .checkbox-container:has(input:checked){
+        label{
+            background-color: $dark-green;
+        }
+    }
+    
+}
+
+.message-container.done{
+    font-family: assistantMedium;
+    color: $dark-gray;
+    font-size: 1em;
+    background: none; // Gradient from light blue to soft green
+    &:hover{
+        background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+        // background-color: $medium-gray;
+    }
+
+
+    
+}
+
+.message-container.done.dark-mode{
+    color: $light-gray;
+}

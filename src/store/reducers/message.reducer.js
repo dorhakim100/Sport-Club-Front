@@ -4,6 +4,7 @@ export const SET_MESSAGES = 'SET_MESSAGES'
 export const SET_MESSAGE = 'SET_MESSAGE'
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
 export const ADD_MESSAGE = 'ADD_MESSAGE'
+export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
 
 const initialState = {
   messages: [],
@@ -32,6 +33,8 @@ export function messageReducer(state = initialState, action) {
     case ADD_MESSAGE:
       newState = { ...state, messages: [...state.messages, action.message] }
       break
+    case UPDATE_MESSAGE:
+      newState = { ...state, message: action.message }
 
     default:
   }

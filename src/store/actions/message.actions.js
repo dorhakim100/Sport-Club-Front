@@ -5,6 +5,7 @@ import {
   SET_MESSAGE,
   SET_MESSAGES,
   REMOVE_MESSAGE,
+  UPDATE_MESSAGE,
 } from '../reducers/message.reducer'
 
 export async function loadMessages(filterBy) {
@@ -49,6 +50,19 @@ export async function addMessage(message) {
     return savedMessage
   } catch (err) {
     console.log('Cannot add message', err)
+    throw err
+  }
+}
+
+export async function updateMessage(messageToUpdate) {
+  try {
+    const updatedMessage = await messageService.save(messageToUpdate)
+    console.log(updatedMessage)
+    store.dispatch({ type: UPDATE_MESSAGE, message: updatedMessage })
+
+    return updatedMessage
+  } catch (err) {
+    console.log(err)
     throw err
   }
 }

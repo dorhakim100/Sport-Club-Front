@@ -2,6 +2,7 @@ import { storageService } from '../async-storage.service'
 import { makeId } from '../util.service'
 
 const STORAGE_KEY = 'message'
+const PAGE_SIZE = 6
 
 if (!localStorage.getItem(STORAGE_KEY)) {
   _createMessages()
@@ -61,6 +62,7 @@ async function save(message) {
       content: message.content,
       phone: message.content,
       createdAt: Date.now(),
+      isDone: message.isDone,
     }
     savedMessage = await storageService.put(STORAGE_KEY, messageToSave)
   } else {
@@ -110,6 +112,7 @@ function _createMessages() {
       content: 'האם אפשר לקבל מידע נוסף על השירותים שלכם ועלויות המנוי?',
       createdAt: Date.now() - 3600000, // לפני שעה
       phone: '052-1234567',
+      isDone: false,
     },
     {
       _id: makeId(),
@@ -117,6 +120,7 @@ function _createMessages() {
       content: 'אני מתקשה להיכנס לחשבון שלי באתר. אשמח לעזרה.',
       createdAt: Date.now() - 7200000, // לפני שעתיים
       phone: '054-9876543',
+      isDone: true,
     },
     {
       _id: makeId(),
@@ -124,6 +128,7 @@ function _createMessages() {
       content: 'נהניתי מאוד מהאימון האחרון, אבל יש לי כמה הצעות לשיפור.',
       createdAt: Date.now() - 10800000, // לפני שלוש שעות
       phone: '050-4567890',
+      isDone: true,
     },
     {
       _id: makeId(),
@@ -131,6 +136,7 @@ function _createMessages() {
       content: 'יש לי שאלה לגבי החשבונית האחרונה שלי. תוכלו לעזור?',
       createdAt: Date.now() - 14400000, // לפני ארבע שעות
       phone: '052-3332211',
+      isDone: false,
     },
     {
       _id: makeId(),
@@ -139,6 +145,7 @@ function _createMessages() {
         'אנחנו מעוניינים לשתף פעולה עם המועדון שלכם. נשמח אם תיצרו איתנו קשר.',
       createdAt: Date.now() - 18000000, // לפני חמש שעות
       phone: '053-9998877',
+      isDone: false,
     },
     {
       _id: makeId(),
@@ -146,6 +153,7 @@ function _createMessages() {
       content: 'אשמח לדעת אם יש מקום בקבוצת האימון שלכם להצטרף כמנוי חדש.',
       createdAt: Date.now() - 21600000, // לפני שש שעות
       phone: '054-1122334',
+      isDone: false,
     },
     {
       _id: makeId(),
@@ -153,6 +161,7 @@ function _createMessages() {
       content: 'שמים לב שהמקלחות במועדון זקוקות לניקוי. אפשר לטפל בזה?',
       createdAt: Date.now() - 25200000, // לפני שבע שעות
       phone: '050-6677889',
+      isDone: true,
     },
     {
       _id: makeId(),
@@ -160,6 +169,7 @@ function _createMessages() {
       content: 'האם המועדון פתוח גם בסופי שבוע? אשמח לדעת.',
       createdAt: Date.now() - 28800000, // לפני שמונה שעות
       phone: '052-2244668',
+      isDone: false,
     },
     {
       _id: makeId(),
@@ -167,6 +177,7 @@ function _createMessages() {
       content: 'אני מעוניין באימון אישי במועדון. אפשר לקבל מידע על כך?',
       createdAt: Date.now() - 32400000, // לפני תשע שעות
       phone: '054-4455667',
+      isDone: false,
     },
     {
       _id: makeId(),
@@ -175,6 +186,7 @@ function _createMessages() {
         'האתר מאוד נוח לשימוש, אך כדאי להוסיף אפשרות לקבוע אימונים דרך האתר.',
       createdAt: Date.now() - 36000000, // לפני עשר שעות
       phone: '050-7788990',
+      isDone: false,
     },
   ]
 
