@@ -5,10 +5,12 @@ export const SET_MESSAGE = 'SET_MESSAGE'
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
 export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
+export const SET_OPEN_MESSAGES = 'SET_OPEN_MESSAGES'
 
 const initialState = {
   messages: [],
   message: messageService.getEmptyMessage(),
+  openLength: 0,
 }
 
 export function messageReducer(state = initialState, action) {
@@ -34,8 +36,15 @@ export function messageReducer(state = initialState, action) {
       newState = { ...state, messages: [...state.messages, action.message] }
       break
     case UPDATE_MESSAGE:
-      newState = { ...state, message: action.message }
+      newState = {
+        ...state,
+        message: action.message,
+        openLength: action.openLength,
+      }
 
+    case SET_OPEN_MESSAGES:
+      newState = { ...state, openLength: action.openLength }
+      break
     default:
   }
   return newState

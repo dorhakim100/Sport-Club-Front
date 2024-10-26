@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { logout } from '../store/actions/user.actions'
+import { loadOpenMessages } from '../store/actions/message.actions'
 
 import { DropDown } from '../cmps/DropDown.jsx'
 
@@ -23,6 +24,9 @@ export function AppHeader({ bodyRef }) {
   const navigate = useNavigate()
 
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const openMessages = useSelector(
+    (stateSelector) => stateSelector.messageModule.openLength
+  )
   // console.log(prefs)
   const [logo, setLogo] = useState(
     'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
@@ -66,9 +70,26 @@ export function AppHeader({ bodyRef }) {
   }, [prefs.isDarkMode])
 
   useEffect(() => {
-    // calcCartLength()
-    console.log('cartLength:', cartLength)
-  }, [cart])
+    const setTasks = async () => {
+      try {
+        await loadOpenMessages()
+      } catch (err) {
+        console.log(err)
+        showSuccessMsg(
+          prefs.isEnglish ? `Tasks couldn't be load` : 'משימות לא נטענו'
+        )
+      }
+    }
+    setTasks()
+  }, [user])
+
+  const openTasks = useMemo(() => {
+    let open
+    open = openMessages
+    return open
+  }, [openMessages])
+
+  console.log(openTasks)
 
   const cartLength = useMemo(() => {
     let length = 0
@@ -230,8 +251,23 @@ export function AppHeader({ bodyRef }) {
         <Button
           variant='contained'
           onClick={() => setMenu((prev) => (prev = !prev))}
+          className='menu-btn'
         >
-          {(menu && <MenuOpenIcon />) || <MenuIcon />}
+          {(menu && (
+            <>
+              {user && user.isAdmin && openTasks > 0 && (
+                <span>{openTasks}</span>
+              )}
+              <MenuOpenIcon />
+            </>
+          )) || (
+            <>
+              {user && user.isAdmin && openTasks > 0 && (
+                <span>{openTasks}</span>
+              )}
+              <MenuIcon />
+            </>
+          )}
         </Button>
       )}
       <nav className={menu ? (prefs.isEnglish ? 'shown ltr' : 'shown') : ''}>
@@ -347,7 +383,11 @@ export function AppHeader({ bodyRef }) {
               setMenu(false)
             }}
           >
-            {prefs.isEnglish ? 'Admin' : 'מנהל'}
+            {' '}
+            <Button variant='contained' className='admin-btn'>
+              {openTasks > 0 && <span>{openTasks}</span>}
+              {prefs.isEnglish ? 'Admin' : 'מנהל'}
+            </Button>
           </NavLink>
         )}
 

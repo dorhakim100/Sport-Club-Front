@@ -16,6 +16,7 @@ export const messageService = {
   getDefaultFilter,
   getMaxPage,
   getEmptyMessage,
+  getOpenMessages,
 }
 
 async function query(filterBy = { pageIdx: 0, txt: '' }) {
@@ -36,18 +37,17 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
     )
   }
 
-  if (onlyDone) {
-    const unDone = messages.filter((message) => message.isDone === false)
-    const doneMessages = messages.filter((message) => message.isDone === true)
-    messages = [...unDone, ...doneMessages] // "fusing" both arrays using spread
-  }
-
   if (sortDir) {
     messages.sort(
       (item1, item2) => (item1.createdAt - item2.createdAt) * +sortDir
     )
   }
 
+  if (onlyDone) {
+    const unDone = messages.filter((message) => message.isDone === false)
+    const doneMessages = messages.filter((message) => message.isDone === true)
+    messages = [...unDone, ...doneMessages] // "fusing" both arrays using spread
+  }
   if (pageIdx !== undefined) {
     const startIdx = pageIdx * PAGE_SIZE
     messages = messages.slice(startIdx, startIdx + PAGE_SIZE)
@@ -116,6 +116,18 @@ function getEmptyMessage() {
     content: '',
     phone: '',
     createdAt: Date.now(),
+  }
+}
+
+async function getOpenMessages() {
+  try {
+    var messages = await storageService.query(STORAGE_KEY)
+
+    const unDone = messages.filter((message) => message.isDone === false)
+    return unDone.length
+  } catch (err) {
+    console.log(err)
+    throw err
   }
 }
 

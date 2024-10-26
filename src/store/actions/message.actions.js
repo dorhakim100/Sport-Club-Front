@@ -6,6 +6,7 @@ import {
   SET_MESSAGES,
   REMOVE_MESSAGE,
   UPDATE_MESSAGE,
+  SET_OPEN_MESSAGES,
 } from '../reducers/message.reducer'
 
 export async function loadMessages(filterBy) {
@@ -57,10 +58,28 @@ export async function addMessage(message) {
 export async function updateMessage(messageToUpdate) {
   try {
     const updatedMessage = await messageService.save(messageToUpdate)
-    console.log(updatedMessage)
-    store.dispatch({ type: UPDATE_MESSAGE, message: updatedMessage })
+    const open = await messageService.getOpenMessages()
+    store.dispatch({
+      type: UPDATE_MESSAGE,
+      message: updatedMessage,
+      openLength: open,
+    })
 
     return updatedMessage
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
+export async function loadOpenMessages() {
+  try {
+    const open = await messageService.getOpenMessages()
+
+    store.dispatch({
+      type: SET_OPEN_MESSAGES,
+      openLength: open,
+    })
   } catch (err) {
     console.log(err)
     throw err

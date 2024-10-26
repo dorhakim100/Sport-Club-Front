@@ -1,6 +1,10 @@
 .item-filter {
     display: grid;
     grid-template-columns: 200px 200px 150px;
+    @media (max-width:680px) {
+        grid-template-columns: repeat(3,auto);
+        
+    }
     align-items: center;
     gap: 0.5em;
 
