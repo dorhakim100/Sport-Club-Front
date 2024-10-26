@@ -26,15 +26,14 @@ async function query(filterBy = { pageIdx: 0, types: [] }) {
     return trainers
   }
 
-  if (pageIdx !== undefined) {
-    const startIdx = pageIdx * PAGE_SIZE
-    trainers = trainers.slice(startIdx, startIdx + PAGE_SIZE)
-  }
-
   if (types.length > 0) {
     trainers = trainers.filter((trainer) =>
       types.some((type) => trainer.types.includes(type))
     )
+  }
+  if (pageIdx !== undefined) {
+    const startIdx = pageIdx * PAGE_SIZE
+    trainers = trainers.slice(startIdx, startIdx + PAGE_SIZE)
   }
 
   return trainers

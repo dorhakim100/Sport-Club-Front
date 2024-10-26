@@ -5,6 +5,7 @@ import { userReducer } from './reducers/user.reducer'
 import { updateReducer } from './reducers/update.reducer'
 import { systemReducer } from './reducers/system.reducer'
 import { trainerReducer } from './reducers/trainer.reducer.js'
+import { messageReducer } from './reducers/message.reducer.js'
 
 const rootReducer = combineReducers({
   itemModule: itemReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   systemModule: systemReducer,
   updateModule: updateReducer,
   trainerModule: trainerReducer,
+  messageModule: messageReducer,
 })
 
 const middleware = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

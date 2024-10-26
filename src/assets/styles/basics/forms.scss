@@ -157,6 +157,7 @@ nav {
 		&:has(input:checked) label{
 			background-color: $dark-blue;
 			color: white;
+
 			&:hover{
 				background-color: $bold-navy;
 				background-color: $very-dark-gray;
