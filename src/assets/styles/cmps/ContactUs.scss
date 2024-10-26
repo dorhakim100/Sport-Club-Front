@@ -11,20 +11,26 @@
         min-width: 250px;
         max-width: 1000px;
         // margin-inline-start: 1em;
+        width: 60%;
+        max-width: 800px;
+        margin: auto;
+        margin-bottom: 1em;
 
         gap: 1em;
 
         input{
-            width: 50%;
-            
+            // width: 50%;
+            max-width: 400px;
             align-self: start;
         }
         
         textarea{
             align-self: start;
-            width: 60%;
+            // width: 60%;
             height: 300px;
         }
+
+      
         @media (max-width:550px) {
             input, textarea{
                 width: 100%;
