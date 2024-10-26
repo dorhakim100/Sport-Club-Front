@@ -20,7 +20,7 @@ export const messageService = {
 
 async function query(filterBy = { pageIdx: 0, txt: '' }) {
   var messages = await storageService.query(STORAGE_KEY)
-  const { pageIdx, txt, onlyDone } = filterBy
+  const { pageIdx, txt, onlyDone, sortDir } = filterBy
   if (filterBy.isAll) {
     return messages
   }
@@ -40,6 +40,12 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
     const unDone = messages.filter((message) => message.isDone === false)
     const doneMessages = messages.filter((message) => message.isDone === true)
     messages = [...unDone, ...doneMessages] // "fusing" both arrays using spread
+  }
+
+  if (sortDir) {
+    messages.sort(
+      (item1, item2) => (item1.createdAt - item2.createdAt) * +sortDir
+    )
   }
 
   if (pageIdx !== undefined) {

@@ -9,6 +9,8 @@ import { setIsLoading } from '../store/actions/system.actions'
 import { onPageNavigation } from '../services/util.service'
 import { debounce } from '../services/util.service'
 
+import { SortSelect } from './SortSelect'
+
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import ButtonGroup from '@mui/material/ButtonGroup'
@@ -107,6 +109,13 @@ export function MessagesFilter({ filter, setFilter, maxPage }) {
           }
         />
       </div>
+
+      <SortSelect
+        prefs={prefs}
+        filterToEdit={filter}
+        setFilterToEdit={setFilter}
+        isMessages={true}
+      />
 
       <div
         className={

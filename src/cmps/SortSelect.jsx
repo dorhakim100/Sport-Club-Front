@@ -13,7 +13,12 @@ import Select from '@mui/material/Select'
 // Consuming the outer theme is only required with coexisting themes, like in this documentation.
 // If your app/website doesn't deal with this, you can have just:
 
-export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
+export function SortSelect({
+  prefs,
+  filterToEdit,
+  setFilterToEdit,
+  isMessages,
+}) {
   const theme = createTheme({
     direction: prefs.isEnglish ? 'ltr' : 'rtl',
     palette: {
@@ -64,7 +69,8 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
           variant='filled'
           sx={{
             m: 1,
-            minWidth: 150,
+            minWidth: '100%',
+            maxWidth: '150px',
             margin: '0',
             justifySelf: 'end',
             alignSelf: 'start',
@@ -99,7 +105,13 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
                 justifyContent: prefs.isEnglish ? 'flex-start' : 'flex-end',
               }}
             >
-              {prefs.isEnglish ? 'Low to High' : 'מהנמוך לגבוה'}
+              {isMessages
+                ? prefs.isEnglish
+                  ? 'Newest'
+                  : 'החדשים'
+                : prefs.isEnglish
+                ? 'Low to High'
+                : 'מהנמוך לגבוה'}
             </MenuItem>
             <MenuItem
               value={-1}
@@ -109,7 +121,13 @@ export function SortSelect({ prefs, filterToEdit, setFilterToEdit }) {
                 justifyContent: prefs.isEnglish ? 'flex-start' : 'flex-end',
               }}
             >
-              {prefs.isEnglish ? 'High to Low' : 'מהגבוה לנמוך'}
+              {isMessages
+                ? prefs.isEnglish
+                  ? 'Oldest'
+                  : 'הישנים'
+                : prefs.isEnglish
+                ? 'High to Low'
+                : 'מהגבוה לנמוך'}
             </MenuItem>
           </Select>
         </FormControl>
