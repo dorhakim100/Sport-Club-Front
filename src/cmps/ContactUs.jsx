@@ -58,11 +58,11 @@ export function ContactUs() {
       >
         <input
           type='text'
-          name='title'
+          name='name'
           id=''
           placeholder={prefs.isEnglish ? 'Name' : 'שם'}
           onChange={handleChange}
-          value={editMessage.title}
+          value={editMessage.name}
         />
         <input
           type='text'
@@ -71,6 +71,14 @@ export function ContactUs() {
           placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
           onChange={handleChange}
           value={editMessage.phone}
+        />
+        <input
+          type='text'
+          name='title'
+          id=''
+          placeholder={prefs.isEnglish ? 'Title' : 'כותרת'}
+          onChange={handleChange}
+          value={editMessage.title}
         />
         <textarea
           name='content'

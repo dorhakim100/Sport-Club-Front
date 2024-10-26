@@ -1,0 +1,27 @@
+.messages-filter-container{
+    display: flex;
+    justify-content: space-around;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr auto;
+    gap: 1em;
+    margin-bottom: 1em;
+    align-items: center;
+    justify-items: center;
+
+    .input-container{
+
+    }
+    
+    .page-idx-container{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        
+        width: 50px;
+
+    }
+
+    .checkbox-container{
+        grid-column: 4/5;
+    }
+}

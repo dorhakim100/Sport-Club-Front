@@ -20,7 +20,7 @@ export const messageService = {
 
 async function query(filterBy = { pageIdx: 0, txt: '' }) {
   var messages = await storageService.query(STORAGE_KEY)
-  const { pageIdx, txt } = filterBy
+  const { pageIdx, txt, onlyDone } = filterBy
   if (filterBy.isAll) {
     return messages
   }
@@ -29,10 +29,17 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
     const regex = new RegExp(filterBy.txt, 'i')
     messages = messages.filter(
       (message) =>
+        regex.test(message.name) ||
         regex.test(message.title) ||
         regex.test(message.content) ||
         regex.test(message.phone)
     )
+  }
+
+  if (onlyDone) {
+    const unDone = messages.filter((message) => message.isDone === false)
+    const doneMessages = messages.filter((message) => message.isDone === true)
+    messages = [...unDone, ...doneMessages] // "fusing" both arrays using spread
   }
 
   if (pageIdx !== undefined) {
@@ -58,6 +65,7 @@ async function save(message) {
   if (message._id) {
     const messageToSave = {
       _id: message._id,
+      name: message.name,
       title: message.title,
       content: message.content,
       phone: message.content,
@@ -67,6 +75,7 @@ async function save(message) {
     savedMessage = await storageService.put(STORAGE_KEY, messageToSave)
   } else {
     const messageToSave = {
+      name: message.name,
       title: message.title,
       content: message.content,
       phone: message.content,
@@ -91,7 +100,7 @@ async function getMaxPage() {
 }
 
 function getDefaultFilter() {
-  return { txt: '', pageIdx: 0, iaAll: false }
+  return { txt: '', pageIdx: 0, onlyDone: false, sortDir: '', iaAll: false }
 }
 
 function getEmptyMessage() {
@@ -113,6 +122,7 @@ function _createMessages() {
       createdAt: Date.now() - 3600000, // לפני שעה
       phone: '052-1234567',
       isDone: false,
+      name: 'יוסי כהן',
     },
     {
       _id: makeId(),
@@ -121,6 +131,7 @@ function _createMessages() {
       createdAt: Date.now() - 7200000, // לפני שעתיים
       phone: '054-9876543',
       isDone: true,
+      name: 'רותם לוי',
     },
     {
       _id: makeId(),
@@ -129,6 +140,7 @@ function _createMessages() {
       createdAt: Date.now() - 10800000, // לפני שלוש שעות
       phone: '050-4567890',
       isDone: true,
+      name: 'נועה גבע',
     },
     {
       _id: makeId(),
@@ -137,6 +149,7 @@ function _createMessages() {
       createdAt: Date.now() - 14400000, // לפני ארבע שעות
       phone: '052-3332211',
       isDone: false,
+      name: 'עמית ברק',
     },
     {
       _id: makeId(),
@@ -146,6 +159,7 @@ function _createMessages() {
       createdAt: Date.now() - 18000000, // לפני חמש שעות
       phone: '053-9998877',
       isDone: false,
+      name: 'שיר בנימין',
     },
     {
       _id: makeId(),
@@ -154,6 +168,7 @@ function _createMessages() {
       createdAt: Date.now() - 21600000, // לפני שש שעות
       phone: '054-1122334',
       isDone: false,
+      name: 'אופיר חן',
     },
     {
       _id: makeId(),
@@ -162,6 +177,7 @@ function _createMessages() {
       createdAt: Date.now() - 25200000, // לפני שבע שעות
       phone: '050-6677889',
       isDone: true,
+      name: 'ליאור זיתוני',
     },
     {
       _id: makeId(),
@@ -170,6 +186,7 @@ function _createMessages() {
       createdAt: Date.now() - 28800000, // לפני שמונה שעות
       phone: '052-2244668',
       isDone: false,
+      name: 'דניאל נעמי',
     },
     {
       _id: makeId(),
@@ -178,6 +195,7 @@ function _createMessages() {
       createdAt: Date.now() - 32400000, // לפני תשע שעות
       phone: '054-4455667',
       isDone: false,
+      name: 'איילה אשר',
     },
     {
       _id: makeId(),
@@ -187,6 +205,7 @@ function _createMessages() {
       createdAt: Date.now() - 36000000, // לפני עשר שעות
       phone: '050-7788990',
       isDone: false,
+      name: 'מתן קרני',
     },
   ]
 

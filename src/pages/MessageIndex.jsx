@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { updateService } from '../services/update/update.service'
-import { loadUpdates } from '../store/actions/update.actions'
+import { debounce } from '../services/util.service'
 
 import { HeadContainer } from '../cmps/HeadContainer'
 import { MessagesFilter } from '../cmps/MessagesFilter.jsx'
@@ -14,6 +13,7 @@ import { LoadingButton } from '@mui/lab'
 import { loadMessages } from '../store/actions/message.actions'
 import { messageService } from '../services/message/message.service'
 import { showErrorMsg } from '../services/event-bus.service'
+import { setIsLoading } from '../store/actions/system.actions'
 
 export function MessageIndex() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -23,6 +23,7 @@ export function MessageIndex() {
   )
 
   const [filter, setFilter] = useState(messageService.getDefaultFilter())
+  const [maxPage, setMaxPage] = useState()
 
   const text = {
     eng: 'Messages',
@@ -31,21 +32,26 @@ export function MessageIndex() {
 
   useEffect(() => {
     setMessages()
-  }, [])
+  }, [filter])
   async function setMessages() {
     try {
-      await loadMessages()
+      setIsLoading(true)
+      await loadMessages(filter)
+      const max = await messageService.getMaxPage()
+      setMaxPage(max)
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't load messages` : 'טעינת הודעות נכשלה'
       )
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
     <div className='page-container message-index'>
       <HeadContainer text={text} />
-      <MessagesFilter />
+      <MessagesFilter filter={filter} setFilter={setFilter} maxPage={maxPage} />
       <MessagesList messages={messages} setMessages={setMessages} />
     </div>
   )
