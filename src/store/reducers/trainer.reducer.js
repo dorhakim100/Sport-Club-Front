@@ -1,3 +1,5 @@
+import { trainerService } from '../../services/trainer/trainer.service'
+
 export const SET_TRAINERS = 'SET_TRAINERS'
 export const SET_TRAINER = 'SET_TRAINER'
 export const REMOVE_TRAINER = 'REMOVE_TRAINER'
@@ -6,7 +8,7 @@ export const UPDATE_TRAINER = 'UPDATE_TRAINER'
 
 const initialState = {
   trainers: [],
-  trainer: null,
+  trainer: trainerService.getEmptyTrainer(),
 }
 
 export function trainerReducer(state = initialState, action) {
@@ -17,6 +19,7 @@ export function trainerReducer(state = initialState, action) {
       newState = { ...state, trainers: action.trainers }
       break
     case SET_TRAINER:
+      console.log(action.trainer)
       newState = { ...state, trainer: action.trainer }
       break
     case REMOVE_TRAINER:

@@ -24,13 +24,17 @@ export function TrainerDetails() {
 
   const navigate = useNavigate()
 
-  const head = {
-    he: trainer.name.he,
-    eng: trainer.name.eng,
-  }
+  const [head, setHead] = useState({ he: '', eng: '' })
 
   useEffect(() => {
-    loadTrainer(trainerId)
+    const setTrainer = async () => {
+      const t = await loadTrainer(trainerId)
+      setHead({
+        he: t.name.he,
+        eng: t.name.eng,
+      })
+    }
+    setTrainer()
   }, [trainerId])
 
   return (

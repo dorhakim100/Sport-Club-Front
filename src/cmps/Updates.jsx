@@ -51,7 +51,7 @@ export function Updates({ isHover, updates }) {
         className={
           prefs.isDarkMode ? 'updates-carousel dark-mode' : 'updates-carousel'
         }
-        style={{ height: '100px' }}
+        style={{ height: '100px', direction: 'rtl' }}
       >
         {updates.map((update) => {
           return (

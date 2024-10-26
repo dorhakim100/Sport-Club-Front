@@ -22,9 +22,11 @@ export async function loadTrainers(filterBy) {
 
 export async function loadTrainer(trainerId) {
   try {
+    console.log(trainerId)
     const trainer = await trainerService.getById(trainerId)
     console.log(trainer)
     store.dispatch(getCmdSetTrainer(trainer))
+    return trainer
   } catch (err) {
     console.log('Cannot load trainer', err)
     throw err

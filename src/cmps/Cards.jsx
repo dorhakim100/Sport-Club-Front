@@ -22,7 +22,12 @@ export function Cards({ trainers }) {
         grabCursor={true}
         modules={[EffectCards, Navigation]}
         className='cards'
-        style={{ width: '300px', height: '300px', margin: '0px' }}
+        style={{
+          width: '300px',
+          height: '300px',
+          margin: '0px',
+          direction: 'rtl',
+        }}
         navigation={true}
       >
         {trainers.map((trainer) => {

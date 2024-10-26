@@ -55,6 +55,16 @@ export function Accessibility({ bodyRef }) {
     ${reverseContrast ? 'invert(100%)' : ''}
   `
     // bodyRef.current.style.backgroundColor = whiteBackground ? 'white' : ''
+    const allElements = document.querySelectorAll('*')
+    allElements.forEach((element) => {
+      if (whiteBackground) {
+        element.style.backgroundColor = 'white'
+        element.style.color = 'black' // Ensures text is visible on a white background
+      } else {
+        element.style.backgroundColor = '' // Resets to original background
+        element.style.color = '' // Resets to original text color
+      }
+    })
     if (prefs.isDarkMode) {
     } else {
     }

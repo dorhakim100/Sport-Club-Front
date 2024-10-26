@@ -13,6 +13,8 @@ import Divider from '@mui/material/Divider'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 import { Button } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 
 export function AppHeader({ bodyRef }) {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -35,12 +37,29 @@ export function AppHeader({ bodyRef }) {
   const waterRef = useRef()
   const logoRef = useRef()
 
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  )
+
+  const [menu, setMenu] = useState(false)
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions())
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [windowDimensions])
 
   useEffect(() => {
     setHeaderDarkMode()
@@ -179,6 +198,15 @@ export function AppHeader({ bodyRef }) {
     setOptions(optionsToSet)
   }
 
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window
+    // console.log(width)
+    return {
+      width,
+      height,
+    }
+  }
+
   return (
     <header
       className={scrolled ? 'app-header sticky full' : 'app-header full'}
@@ -197,7 +225,16 @@ export function AppHeader({ bodyRef }) {
         }
       }}
     >
-      <nav>
+      {' '}
+      {windowDimensions.width < 900 && (
+        <Button
+          variant='contained'
+          onClick={() => setMenu((prev) => (prev = !prev))}
+        >
+          <MenuIcon />
+        </Button>
+      )}
+      <nav className={menu ? (prefs.isEnglish ? 'shown ltr' : 'shown') : ''}>
         <NavLink
           to='/'
           className='logo'
@@ -325,6 +362,15 @@ export function AppHeader({ bodyRef }) {
           </div>
         )}
       </nav>
+      {windowDimensions.width < 900 && (
+        <NavLink
+          to='/'
+          className='logo'
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <img src={logo} alt='' ref={logoRef} />
+        </NavLink>
+      )}
     </header>
   )
 }

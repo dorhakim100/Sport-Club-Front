@@ -12,6 +12,7 @@ export const trainerService = {
   remove,
   getDefaultFilter,
   getMaxPage,
+  getEmptyTrainer,
 }
 
 if (!localStorage.getItem(STORAGE_KEY)) {
@@ -89,6 +90,20 @@ async function getMaxPage() {
 
 function getDefaultFilter() {
   return { types: [], pageIdx: 0, iaAll: true }
+}
+
+function getEmptyTrainer() {
+  return {
+    _id: makeId(),
+    name: { he: '', eng: '' },
+    types: [],
+    img: '',
+    preview: {
+      he: '',
+      eng: '',
+    },
+    experience: '01-01-2000',
+  }
 }
 
 function _createTrainers() {
