@@ -33,62 +33,9 @@
         
     }
 
-    .menu-btn{
-        position: relative;
-
-        &:hover{
-
-            span{
-                // color: white;
-                // background-color: $medium-red;
-            }
-        }
-
-        span{
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            transition: 0.2s ease-out;
-
-            width: fit-content;
-            height: fit-content;
-
-            width: 25px;
-            color: $bold-navy;
-
-            border-radius: 50%;
-            background-color: $light-red;
-        }
-    }
+  
     
-    .admin-btn{
-        position: relative;
-    
-        &:hover{
-    
-            span{
-                // color: white;
-                // background-color: $medium-red;
-            }
-        }
-    
-        span{
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            transition: 0.2s ease-out;
-    
-            width: fit-content;
-            height: fit-content;
-    
-            width: 25px;
-            color: $bold-navy;
-    
-            border-radius: 50%;
-            background-color: $light-red;
-        }
-
-    }
+ 
     
     
     nav {
@@ -214,34 +161,8 @@
         }
     }
 
-    .cart-button{
-        position: relative;
-
-        &:hover{
-
-            span{
-                // color: white;
-                // background-color: $medium-red;
-            }
-        }
-
-        span{
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            transition: 0.2s ease-out;
-
-            width: fit-content;
-            height: fit-content;
-
-            width: 25px;
-            color: $bold-navy;
-
-            border-radius: 50%;
-            background-color: $light-red;
-        }
-
-    }
+   
+    
 
     
 
@@ -258,6 +179,6 @@
 
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     // height: 100px;
-    opacity: 0.8;
+    // opacity: 0.8;
 
 }

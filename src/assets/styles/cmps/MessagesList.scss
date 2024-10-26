@@ -81,7 +81,13 @@
     .checkbox-container:has(input:checked){
         label{
             background-color: $dark-green;
+
+            &:hover{
+                background-color: $dark-green-hover;
+            }
         }
+
+
     }
     
 }

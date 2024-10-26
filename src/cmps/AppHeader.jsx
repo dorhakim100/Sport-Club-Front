@@ -234,10 +234,8 @@ export function AppHeader({ bodyRef }) {
       onClick={() => setDropdownVisible(false)}
       ref={headerRef}
       onMouseEnter={() => {
-        if (scrolled) {
-          headerRef.current.style.opacity = '1'
-          headerRef.current.style.transition = '0.1s ease-in'
-        }
+        headerRef.current.style.opacity = '1'
+        headerRef.current.style.transition = '0.1s ease-in'
       }}
       onMouseLeave={() => {
         if (scrolled) {
@@ -251,7 +249,7 @@ export function AppHeader({ bodyRef }) {
         <Button
           variant='contained'
           onClick={() => setMenu((prev) => (prev = !prev))}
-          className='menu-btn'
+          className='notification-btn'
         >
           {(menu && (
             <>
@@ -384,7 +382,7 @@ export function AppHeader({ bodyRef }) {
             }}
           >
             {' '}
-            <Button variant='contained' className='admin-btn'>
+            <Button variant='contained' className='notification-btn'>
               {openTasks > 0 && <span>{openTasks}</span>}
               {prefs.isEnglish ? 'Admin' : 'מנהל'}
             </Button>
@@ -415,7 +413,7 @@ export function AppHeader({ bodyRef }) {
                   setMenu(false)
                   navigate(`/user/${user._id}/cart`)
                 }}
-                className='cart-button'
+                className='notification-btn'
               >
                 {cart && cart.length > 0 && <span>{cartLength}</span>}
                 <ShoppingCartIcon />
