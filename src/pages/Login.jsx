@@ -6,6 +6,8 @@ import { userService } from '../services/user/user.service'
 import { login } from '../store/actions/user.actions'
 
 import { LoginSignupForm } from '../cmps/LoginSignupForm'
+import { showErrorMsg } from '../services/event-bus.service'
+import { setIsLoading } from '../store/actions/system.actions'
 
 export function Login() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -18,21 +20,29 @@ export function Login() {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    loadUsers()
-  }, [])
+  // useEffect(() => {
+  //   loadUsers()
+  // }, [])
 
-  async function loadUsers() {
-    const users = await userService.getUsers()
-    setUsers(users)
-  }
+  // async function loadUsers() {
+  //   const users = await userService.getUsers()
+  //   setUsers(users)
+  // }
 
   async function onLogin(ev = null) {
     if (ev) ev.preventDefault()
 
     if (!credentials.username) return
-    await login(credentials)
-    navigate('/')
+
+    try {
+      setIsLoading(true)
+      await login(credentials)
+      navigate('/')
+    } catch (err) {
+      showErrorMsg(prefs.isEnglish ? `Couldn't login` : 'חיבור לא הצליח')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   function handleChange(ev) {
@@ -45,19 +55,6 @@ export function Login() {
     <div className='login-form' onSubmit={onLogin}>
       <h2>{prefs.isEnglish ? 'Login' : 'חיבור'}</h2>
       <LoginSignupForm />
-      {/* <select
-        name='username'
-        value={credentials.username}
-        onChange={handleChange}
-      >
-        <option value=''>Select User</option>
-        {users.map((user) => (
-          <option key={user._id} value={user.username}>
-            {user.fullname}
-          </option>
-        ))}
-      </select>
-      <button>Login</button> */}
     </div>
   )
 }

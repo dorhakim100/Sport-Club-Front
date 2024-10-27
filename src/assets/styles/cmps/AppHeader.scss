@@ -118,6 +118,14 @@
                     margin: 0px;
                 }
             }
+
+        }
+        @media (max-width:1050px) {
+            nav.small-header{
+
+                top: 125px;
+            }
+            
         }
         
         nav.shown{

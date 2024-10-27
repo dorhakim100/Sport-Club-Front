@@ -67,7 +67,9 @@ export function Schedule() {
       setSchedule({ ...saved })
     } catch (err) {
       console.log(err)
-      showErrorMsg(`Couldn't upload image`)
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't upload image` : 'העלאת תמונה נכשלה'
+      )
     } finally {
       setIsLoading(false)
     }

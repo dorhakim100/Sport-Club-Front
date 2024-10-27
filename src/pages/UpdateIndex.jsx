@@ -12,6 +12,8 @@ import { UpdateControl } from '../cmps/UpdateControl.jsx'
 
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
+import { setIsLoading } from '../store/actions/system.actions'
+import { showErrorMsg } from '../services/event-bus.service'
 
 export function UpdateIndex() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -30,11 +32,17 @@ export function UpdateIndex() {
 
   async function setUpdates() {
     try {
+      setIsLoading(true)
       await loadUpdates(filter)
       const max = await updateService.getMaxPage()
       setMaxPage(max)
     } catch (err) {
       console.log(err)
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't load updates` : 'טעינת עדכונים נכשלה'
+      )
+    } finally {
+      setIsLoading(false)
     }
   }
 

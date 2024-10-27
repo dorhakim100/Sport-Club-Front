@@ -104,19 +104,6 @@ export function ItemIndex() {
     }
   }
 
-  // async function onAddItem() {
-  //   const item = itemService.getEmptyItem()
-
-  //   delete item._id
-  //   try {
-  //     const savedItem = await addItem(item)
-  //     showSuccessMsg(`Item added`)
-  //     navigate(`/item/edit/${savedItem._id}`)
-  //   } catch (err) {
-  //     showErrorMsg('Cannot add item')
-  //   }
-  // }
-
   async function onUpdateItem(item) {
     // const speed = +prompt('New speed?', item.speed)
     // if (speed === 0 || speed === item.speed) return

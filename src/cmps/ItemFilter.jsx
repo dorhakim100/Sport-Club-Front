@@ -104,18 +104,6 @@ export function ItemFilter({
     })
   }
 
-  // const onPageNavigation = (diff) => {
-  //   if (filterToEdit.pageIdx + diff === -1) return
-  //   // const maxPage = await itemService.getMaxPage(filterToEdit)
-  //   if (filterToEdit.pageIdx + diff === maxPage) {
-  //     setFilterToEdit({ ...filterToEdit, pageIdx: 0 })
-
-  //     return
-  //   }
-
-  //   setFilterToEdit({ ...filterToEdit, pageIdx: filterToEdit.pageIdx + diff })
-  // }
-
   async function onAddItem() {
     const item = itemService.getEmptyItem()
 

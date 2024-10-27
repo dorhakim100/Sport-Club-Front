@@ -11,6 +11,7 @@ import { makeId } from '../services/util.service'
 
 import { Button } from '@mui/material'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import { setIsLoading } from '../store/actions/system.actions'
 
 export function TrainerDetails() {
   const { trainerId } = useParams()
@@ -28,11 +29,21 @@ export function TrainerDetails() {
 
   useEffect(() => {
     const setTrainer = async () => {
-      const t = await loadTrainer(trainerId)
-      setHead({
-        he: t.name.he,
-        eng: t.name.eng,
-      })
+      setIsLoading(true)
+      try {
+        const t = await loadTrainer(trainerId)
+        setHead({
+          he: t.name.he,
+          eng: t.name.eng,
+        })
+      } catch (err) {
+        console.log(err)
+        showErrorMsg(
+          prefs.isEnglish ? `Couldn't show trainers` : 'טעינת מאמנים נכשלה'
+        )
+      } finally {
+        setIsLoading(false)
+      }
     }
     setTrainer()
   }, [trainerId])

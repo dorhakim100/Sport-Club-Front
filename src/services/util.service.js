@@ -89,8 +89,7 @@ export function loadFromStorage(key) {
 
 export function onPageNavigation(diff, filter, setFilter, maxPage) {
   if (filter.pageIdx + diff === -1) return
-  console.log(maxPage)
-  // const maxPage = await itemService.getMaxPage(filter)
+
   if (filter.pageIdx + diff === maxPage) {
     setFilter({ ...filter, pageIdx: 0 })
 

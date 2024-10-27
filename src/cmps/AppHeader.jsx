@@ -276,7 +276,11 @@ export function AppHeader({ bodyRef }) {
           )}
         </Button>
       )}
-      <nav className={menu ? (prefs.isEnglish ? 'shown ltr' : 'shown') : ''}>
+      <nav
+        className={`${scrolled ? 'small-header' : ''} ${menu ? 'shown' : ''} ${
+          menu && prefs.isEnglish ? 'ltr' : ''
+        }`}
+      >
         <NavLink
           to='/'
           className='logo'

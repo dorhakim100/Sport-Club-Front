@@ -96,7 +96,7 @@ function getEmptyTrainer() {
     _id: makeId(),
     name: { he: '', eng: '' },
     types: [],
-    img: '',
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1730047839/blank-profile-picture-973460_1280_jidp6j.webp',
     preview: {
       he: '',
       eng: '',

@@ -20,6 +20,8 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { loadUpdates } from '../store/actions/update.actions.js'
 import { updateService } from '../services/update/update.service.js'
+import { setIsLoading } from '../store/actions/system.actions.js'
+import { showErrorMsg } from '../services/event-bus.service.js'
 
 export function HomePage() {
   const navigate = useNavigate()
@@ -62,10 +64,30 @@ export function HomePage() {
 
   useEffect(() => {
     const getTrainers = async () => {
-      const t = await loadTrainers(trainerService.getDefaultFilter())
+      try {
+        setIsLoading(true)
+        const t = await loadTrainers(trainerService.getDefaultFilter())
+      } catch (err) {
+        console.log(err)
+        showErrorMsg(
+          prefs.isEnglish ? `Couldn't show trainers` : 'טעינת מאמנים נכשלה'
+        )
+      } finally {
+        setIsLoading(false)
+      }
     }
     const getUpdates = async () => {
-      const u = await loadUpdates(updateService.getDefaultFilter())
+      try {
+        setIsLoading(true)
+        const u = await loadUpdates(updateService.getDefaultFilter())
+      } catch (err) {
+        console.log(err)
+        showErrorMsg(
+          prefs.isEnglish ? `Couldn't show updates` : 'טעינת עדכונים נכשלה'
+        )
+      } finally {
+        setIsLoading(false)
+      }
     }
     getTrainers()
     getUpdates()

@@ -28,6 +28,7 @@ import { TrainerList } from '../cmps/TrainerList.jsx'
 
 import Divider from '@mui/material/Divider'
 import { Button } from '@mui/material'
+import { setIsLoading } from '../store/actions/system.actions'
 
 export function TrainerIndex() {
   const trainers = useSelector(
@@ -87,7 +88,17 @@ export function TrainerIndex() {
 
   // Effect to load trainers based on filter
   const getTrainers = async () => {
-    await loadTrainers(filter) // Load trainers with the current filter
+    try {
+      setIsLoading(true)
+      await loadTrainers(filter) // Load trainers with the current filter
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't load trainers` : 'טעינת מאמנים נכשלה'
+      )
+    } finally {
+      setIsLoading(false)
+    }
 
     // Update searchParams if necessary
     const currentPageIdx = searchParams.get('pageIdx') || 0
