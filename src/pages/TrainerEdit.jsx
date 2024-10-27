@@ -121,10 +121,6 @@ export function TrainerEdit() {
           },
         })
 
-        // const preview = { ...editTrainer.preview, eng: value }
-        // console.log(preview)
-        // setEditTrainer({ ...editTrainer, preview })
-
         return
       case 'textarea':
         setEditTrainer({

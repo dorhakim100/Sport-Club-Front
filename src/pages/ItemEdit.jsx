@@ -82,6 +82,8 @@ export function ItemEdit() {
     const types = editItem.types
     let newTypes = []
 
+    const key = prefs.isEnglish ? 'eng' : 'he'
+
     switch (target.type) {
       case 'number':
       case 'range':
@@ -106,23 +108,26 @@ export function ItemEdit() {
         return
         break
       case 'text':
-        if (prefs.isEnglish) {
-          if (field === 'title') {
-            const title = { ...editItem.title, eng: value }
-            setEditItem({ ...editItem, title })
-          } else if (field === 'preview') {
-            const preview = { ...editItem.title, eng: value }
-            setEditItem({ ...editItem, preview })
-          }
-        } else {
-          if (field === 'title') {
-            const title = { ...editItem.title, he: value }
-            setEditItem({ ...editItem, title })
-          } else if (field === 'preview') {
-            const preview = { ...editItem.title, he: value }
-            setEditItem({ ...editItem, preview })
-          }
-        }
+        console.log(field)
+
+        setEditItem({
+          ...editItem,
+          [field]: {
+            ...editItem[field],
+            [key]: value,
+          },
+        })
+
+        return
+      case 'textarea':
+        setEditItem({
+          ...editItem,
+          [field]: {
+            ...editItem[field],
+            [key]: value,
+          },
+        })
+
         return
       default:
         break
