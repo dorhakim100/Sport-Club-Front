@@ -182,8 +182,16 @@ export function AppHeader({ bodyRef }) {
             path: `${section}/tennis`,
           },
           {
+            text: prefs.isEnglish ? 'Reformer Pilates' : 'פילאטיס מכשירים',
+            path: `${section}/pilates`,
+          },
+          {
             text: prefs.isEnglish ? 'Care Center' : 'מרכז הטיפולים',
             path: `${section}/care`,
+          },
+          {
+            text: prefs.isEnglish ? 'Summer Camp' : 'קייטנת הקיץ',
+            path: `${section}/camp`,
           },
           {
             text: prefs.isEnglish ? 'Restaurant' : 'שף הכפר',

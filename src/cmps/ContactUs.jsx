@@ -15,10 +15,21 @@ import { setIsLoading } from '../store/actions/system.actions'
 
 export function ContactUs() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   const [editMessage, setEditMessage] = useState(
     messageService.getEmptyMessage()
   )
+
+  useEffect(() => {
+    if (user && !user.isAdmin) {
+      setEditMessage({ ...editMessage, name: user.fullname })
+    } else {
+      const newM = messageService.getEmptyMessage()
+      console.log(newM)
+      setEditMessage({ ...newM })
+    }
+  }, [user])
 
   function handleChange({ target }) {
     const field = target.name
@@ -33,6 +44,7 @@ export function ContactUs() {
     try {
       setIsLoading(true)
       const addedMessage = await addMessage(editMessage)
+      console.log(addedMessage)
       showSuccessMsg(prefs.isEnglish ? 'Message sent' : 'הודעה נשלחה')
       setEditMessage(messageService.getEmptyMessage())
     } catch (err) {

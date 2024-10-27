@@ -8,7 +8,7 @@ export function HeadContainer({ text }) {
   return (
     <div className='head-container'>
       <h3>
-        <span
+        <text
           style={
             prefs.isDarkMode
               ? { backgroundColor: '#2C3E50' }
@@ -16,7 +16,7 @@ export function HeadContainer({ text }) {
           }
         >
           {langText}
-        </span>
+        </text>
       </h3>
     </div>
   )

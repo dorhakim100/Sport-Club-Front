@@ -55,14 +55,30 @@ export function Accessibility({ bodyRef }) {
     ${reverseContrast ? 'invert(100%)' : ''}
   `
     // bodyRef.current.style.backgroundColor = whiteBackground ? 'white' : ''
-    const allElements = document.querySelectorAll('*')
+    const allElements = document.querySelectorAll([
+      'h2',
+      'h3',
+      'h4',
+      'span',
+      'b',
+      'p',
+      'ul',
+      'li',
+      'a',
+      'text',
+    ])
     allElements.forEach((element) => {
       if (whiteBackground) {
         element.style.backgroundColor = 'white'
         element.style.color = 'black' // Ensures text is visible on a white background
       } else {
-        element.style.backgroundColor = 'default' // Resets to original background
+        element.style.backgroundColor = '' // Resets to original background
         element.style.color = '' // Resets to original text color
+        if (element.tagName === 'TEXT') {
+          element.style.backgroundColor = prefs.isDarkMode
+            ? '#2C3E50'
+            : '#F5F5F5'
+        }
       }
     })
     if (prefs.isDarkMode) {

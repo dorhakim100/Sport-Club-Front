@@ -53,18 +53,19 @@ export function LoginSignupForm({ isSignup }) {
       return errors
     }
   } else {
-    initialValues = { email: '', password: '', username: '' }
+    // initialValues = { email: '', password: '', username: '' }
+    initialValues = { password: '', username: '' }
     validate = (values) => {
       const errors = {}
-      if (!values.email) {
-        errors.email = prefs.isEnglish ? 'Required' : 'הכרחי'
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      ) {
-        errors.email = prefs.isEnglish
-          ? 'Invalid email'
-          : 'דואר אלקטרוני לא תקין'
-      }
+      // if (!values.email) {
+      //   errors.email = prefs.isEnglish ? 'Required' : 'הכרחי'
+      // } else if (
+      //   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+      // ) {
+      //   errors.email = prefs.isEnglish
+      //     ? 'Invalid email'
+      //     : 'דואר אלקטרוני לא תקין'
+      // }
       if (!values.username) {
         errors.username = prefs.isEnglish ? 'Required' : 'הכרחי'
       } else if (values.username.length < 2) {
@@ -104,12 +105,10 @@ export function LoginSignupForm({ isSignup }) {
       }
     } else {
       cred = {
-        email,
         username,
         password,
       }
     }
-    // console.log(comment)
     try {
       setIsLoading(true)
       //   await onAddComment(comment)
@@ -209,21 +208,23 @@ export function LoginSignupForm({ isSignup }) {
               {errors.password && touched.password && errors.password}
             </span>
           </div>
-          <div
-            className={`input-container email ${
-              prefs.isDarkMode ? 'dark-mode' : ''
-            } ${errors.email && touched.email ? 'error' : ''}`}
-          >
-            <input
-              type='email'
-              name='email'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-              placeholder={prefs.isEnglish ? 'Email' : 'דואר אלקטרוני'}
-            />
-            <span>{errors.email && touched.email && errors.email}</span>
-          </div>
+          {isSignup && (
+            <div
+              className={`input-container email ${
+                prefs.isDarkMode ? 'dark-mode' : ''
+              } ${errors.email && touched.email ? 'error' : ''}`}
+            >
+              <input
+                type='email'
+                name='email'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                placeholder={prefs.isEnglish ? 'Email' : 'דואר אלקטרוני'}
+              />
+              <span>{errors.email && touched.email && errors.email}</span>
+            </div>
+          )}
           <Button variant='contained' type='submit' disabled={isSubmitting}>
             {(isSignup && (prefs.isEnglish ? 'Signup' : 'רישום')) ||
               (prefs.isEnglish ? 'Login' : 'חיבור')}

@@ -80,12 +80,14 @@ async function save(message) {
     }
     savedMessage = await storageService.put(STORAGE_KEY, messageToSave)
   } else {
+    console.log(message)
     const messageToSave = {
       name: message.name,
       title: message.title,
       content: message.content,
       phone: message.content,
       createdAt: Date.now(),
+      isDone: false,
     }
 
     savedMessage = await storageService.post(STORAGE_KEY, messageToSave)
@@ -112,6 +114,7 @@ function getDefaultFilter() {
 function getEmptyMessage() {
   return {
     _id: makeId(),
+    name: '',
     title: '',
     content: '',
     phone: '',

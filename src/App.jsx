@@ -39,6 +39,7 @@ import { Cart } from './pages/Cart.jsx'
 import { Paying } from './pages/Paying.jsx'
 import { TrainerDetails } from './pages/TrainerDetails.jsx'
 import { MessageIndex } from './pages/MessageIndex.jsx'
+import { MessageDetails } from './pages/MessageDetails.jsx'
 
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
@@ -101,9 +102,9 @@ export function App() {
             <Route path='item' element={<ItemIndex />} />
             <Route path='item/:itemId' element={<ItemDetails />} />
             <Route path='item/edit/:itemId' element={<ItemEdit />} />
-            <Route path='user/:id' element={<UserDetails />} />
-            <Route path='user/:id/cart' element={<Cart />} />
-            <Route path='user/:id/cart/paying' element={<Paying />} />
+            <Route path='user/:userId' element={<UserDetails />} />
+            <Route path='user/:userId/cart' element={<Cart />} />
+            <Route path='user/:userId/cart/paying' element={<Paying />} />
 
             <Route path='user' element={<LoginSignup />}>
               <Route path='login' element={<Login />} />
@@ -117,6 +118,7 @@ export function App() {
               <Route path='update/edit/:updateId' element={<UpdateEdit />} />
               <Route path='order' element={<OrderIndex />} />
               <Route path='message' element={<MessageIndex />} />
+              <Route path='message/:messageId' element={<MessageDetails />} />
             </Route>
           </Routes>
         </section>

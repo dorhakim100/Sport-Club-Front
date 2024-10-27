@@ -16,6 +16,7 @@ import { MessagesList } from '../cmps/MessagesList.jsx'
 
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 export function MessagePreview({ message, setMessages }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -55,6 +56,9 @@ export function MessagePreview({ message, setMessages }) {
     >
       <span>{message.title}</span>
       <p>{message.content}</p>
+      {/* <Button variant='contained'>
+        <DeleteIcon />
+      </Button> */}
       <div
         className={
           prefs.isDarkMode

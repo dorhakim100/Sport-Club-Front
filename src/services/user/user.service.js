@@ -51,14 +51,31 @@ async function update(userToUpdate) {
 
 async function login(userCred) {
   try {
-    // console.log(userCred)
-    const users = await storageService.query('user')
-    // console.log(users)
-    const user = users.find((user) => user.username === userCred.username)
+    console.log(userCred)
 
-    if (user) return saveLoggedinUser(user)
+    const users = await storageService.query('user')
+    console.log(users)
+    const user = users.find(
+      (user) =>
+        user.username === userCred.username || user.email === userCred.username
+    )
+
+    if (
+      (user && userCred.username === user.username) ||
+      userCred.username === user.email
+    ) {
+      return saveLoggedinUser(user)
+    } else {
+      const err = new Error('User credentials do not match.')
+      err.details = {
+        he: 'שם משתמש או סיסמא לא תקינים',
+        eng: 'Authentication failed',
+      }
+      throw err
+    }
   } catch (err) {
     console.log(err)
+    throw err
   }
 }
 
