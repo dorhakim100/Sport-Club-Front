@@ -16,6 +16,8 @@ import { uploadService } from '../services/upload.service.js'
 import { makeId } from '../services/util.service.js'
 import { setIsLoading } from '../store/actions/system.actions.js'
 
+import { HeadContainer } from '../cmps/HeadContainer.jsx'
+
 // import '../css/ItemEdit.css'
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -43,7 +45,11 @@ export function ItemEdit() {
   const [item, setItem] = useState({ types: [] })
   const [editItem, setEditItem] = useState(itemService.getEmptyItem())
   const [cover, setCover] = useState(null)
-  // const coverRef = useRef(cover)
+
+  const text = {
+    he: 'מוצר',
+    eng: 'Item',
+  }
 
   useEffect(() => {
     loadItem()
@@ -129,13 +135,6 @@ export function ItemEdit() {
     ev.preventDefault()
     const { name, price, types } = editItem
 
-    // if (!cover) {
-    //   editItem.cover =
-    //     'https://vglist.co/packs/media/images/no-cover-369ad8f0ea82dde5923c942ba1a26482.png'
-    // } else {
-    //   editItem.cover = cover
-    // }
-    // todoService.save(todoToEdit)
     setIsLoading(true)
     try {
       const savedItem = await updateItem(editItem)
@@ -171,142 +170,149 @@ export function ItemEdit() {
   }
 
   return (
-    <section className='item-edit-container'>
-      <div className='cover-container'>
-        {cover && <img src={cover} alt='' className='item-cover-edit' />}
-      </div>
-      <LoadingButton
-        component='label'
-        role={undefined}
-        variant='contained'
-        tabIndex={-1}
-        startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
-        loading={isLoading}
-      >
-        Upload file
-        <VisuallyHiddenInput type='file' onChange={uploadFile} />
-      </LoadingButton>
-      <form action='' className='item-edit-form' onSubmit={onSaveItem}>
-        <div
-          className={
-            prefs.isDarkMode
-              ? 'input-container title dark-mode'
-              : 'input-container title'
-          }
-        >
-          <label htmlFor='' style={{ backgroundColor: 'transparent' }}>
-            {prefs.isEnglish ? 'Title:' : 'כותרת:'}
-          </label>
-          <input
-            onChange={handleChange}
-            name='title'
-            type='text'
-            value={prefs.isEnglish ? editItem.title.eng : editItem.title.he}
-            style={{ width: 200 }}
-          />
-        </div>{' '}
-        <div
-          className={
-            prefs.isDarkMode
-              ? 'input-container price dark-mode'
-              : 'input-container price'
-          }
-        >
-          <label htmlFor='' style={{ backgroundColor: 'transparent' }}>
-            {prefs.isEnglish ? 'Item Price:' : 'מחיר:'}
-          </label>
-          <input
-            className='price'
-            name='price'
-            onChange={handleChange}
-            type='number'
-            value={editItem.price}
-          />
-          {/* <span>₪</span> */}
+    <>
+      <HeadContainer text={text} />
+      <section className='item-edit-container'>
+        <div className='cover-container'>
+          {cover && <img src={cover} alt='' className='item-cover-edit' />}
         </div>
-        <div
-          className={
-            prefs.isDarkMode
-              ? 'input-container preview dark-mode'
-              : 'input-container preview'
-          }
+        <LoadingButton
+          component='label'
+          role={undefined}
+          variant='contained'
+          tabIndex={-1}
+          startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
+          loading={isLoading}
         >
-          <textarea
-            onChange={handleChange}
-            name='preview'
-            type='text'
-            value={prefs.isEnglish ? editItem.preview.eng : editItem.preview.he}
-          />
-        </div>
-        {(typeof editItem.stockQuantity === 'number' && (
-          <div className='input-container quantity'>
-            <label htmlFor=''>{prefs.isEnglish ? 'Quantity:' : 'כמות:'}</label>
-            <div className='quantity-container'>
-              <input
-                value={editItem.stockQuantity}
-                onChange={handleChange}
-                type='number'
-                name={'stockQuantity'}
-              />
-              <Button
-                variant='contained'
-                onClick={() => {
-                  setEditItem({ ...editItem, stockQuantity: true })
-                }}
-              >
-                {prefs.isEnglish ? 'Remove quantity' : 'הסר כמות'}
-              </Button>
+          Upload file
+          <VisuallyHiddenInput type='file' onChange={uploadFile} />
+        </LoadingButton>
+        <form action='' className='item-edit-form' onSubmit={onSaveItem}>
+          <div
+            className={
+              prefs.isDarkMode
+                ? 'input-container title dark-mode'
+                : 'input-container title'
+            }
+          >
+            <label htmlFor='' style={{ backgroundColor: 'transparent' }}>
+              {prefs.isEnglish ? 'Title:' : 'כותרת:'}
+            </label>
+            <input
+              onChange={handleChange}
+              name='title'
+              type='text'
+              value={prefs.isEnglish ? editItem.title.eng : editItem.title.he}
+              style={{ width: 200 }}
+            />
+          </div>{' '}
+          <div
+            className={
+              prefs.isDarkMode
+                ? 'input-container price dark-mode'
+                : 'input-container price'
+            }
+          >
+            <label htmlFor='' style={{ backgroundColor: 'transparent' }}>
+              {prefs.isEnglish ? 'Item Price:' : 'מחיר:'}
+            </label>
+            <input
+              className='price'
+              name='price'
+              onChange={handleChange}
+              type='number'
+              value={editItem.price}
+            />
+            {/* <span>₪</span> */}
+          </div>
+          <div
+            className={
+              prefs.isDarkMode
+                ? 'input-container preview dark-mode'
+                : 'input-container preview'
+            }
+          >
+            <textarea
+              onChange={handleChange}
+              name='preview'
+              type='text'
+              value={
+                prefs.isEnglish ? editItem.preview.eng : editItem.preview.he
+              }
+            />
+          </div>
+          {(typeof editItem.stockQuantity === 'number' && (
+            <div className='input-container quantity'>
+              <label htmlFor=''>
+                {prefs.isEnglish ? 'Quantity:' : 'כמות:'}
+              </label>
+              <div className='quantity-container'>
+                <input
+                  value={editItem.stockQuantity}
+                  onChange={handleChange}
+                  type='number'
+                  name={'stockQuantity'}
+                />
+                <Button
+                  variant='contained'
+                  onClick={() => {
+                    setEditItem({ ...editItem, stockQuantity: true })
+                  }}
+                >
+                  {prefs.isEnglish ? 'Remove quantity' : 'הסר כמות'}
+                </Button>
+              </div>
+            </div>
+          )) || (
+            <Button
+              variant='contained'
+              onClick={() => {
+                setEditItem({ ...editItem, stockQuantity: 0 })
+              }}
+            >
+              {prefs.isEnglish ? 'Add quantity' : 'הוסף כמות'}
+            </Button>
+          )}
+          <div className='input-container'>
+            <label htmlFor=''>{prefs.isEnglish ? 'Types:' : 'סוג:'}</label>
+            <div className='types-container'>
+              {types.map((type) => {
+                return (
+                  <div
+                    className={
+                      prefs.isDarkMode
+                        ? 'checkbox-container dark-mode'
+                        : 'checkbox-container'
+                    }
+                    key={makeId()}
+                  >
+                    <label htmlFor={type}>
+                      {prefs.isEnglish
+                        ? type === 'card'
+                          ? 'Card'
+                          : 'Accessories'
+                        : type === 'card'
+                        ? 'כרטיסיה'
+                        : 'ציוד נלווה'}
+                    </label>
+
+                    <input
+                      onChange={handleChange}
+                      type='checkbox'
+                      checked={editItem.types.includes(type)}
+                      name='types'
+                      id={type}
+                    />
+                  </div>
+                )
+              })}
             </div>
           </div>
-        )) || (
-          <Button
-            variant='contained'
-            onClick={() => {
-              setEditItem({ ...editItem, stockQuantity: 0 })
-            }}
-          >
-            {prefs.isEnglish ? 'Add quantity' : 'הוסף כמות'}
-          </Button>
-        )}
-        <div className='input-container'>
-          <label htmlFor=''>{prefs.isEnglish ? 'Types:' : 'סוג:'}</label>
-          <div className='types-container'>
-            {types.map((type) => {
-              return (
-                <div
-                  className={
-                    prefs.isDarkMode
-                      ? 'checkbox-container dark-mode'
-                      : 'checkbox-container'
-                  }
-                  key={makeId()}
-                >
-                  <label htmlFor={type}>
-                    {prefs.isEnglish
-                      ? type === 'card'
-                        ? 'Card'
-                        : 'Accessories'
-                      : type === 'card'
-                      ? 'כרטיסיה'
-                      : 'ציוד נלווה'}
-                  </label>
-
-                  <input
-                    onChange={handleChange}
-                    type='checkbox'
-                    checked={editItem.types.includes(type)}
-                    name='types'
-                    id={type}
-                  />
-                </div>
-              )
-            })}
-          </div>
-        </div>
-        <LoadingButton variant='contained' type='submit' loading={isLoading}>
-          Submit
-        </LoadingButton>
-      </form>
-    </section>
+          <LoadingButton variant='contained' type='submit' loading={isLoading}>
+            Submit
+          </LoadingButton>
+        </form>
+      </section>{' '}
+    </>
   )
 }

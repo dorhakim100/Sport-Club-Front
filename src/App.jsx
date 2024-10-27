@@ -27,17 +27,23 @@ import {
 import { ItemIndex } from './pages/ItemIndex'
 import { ItemDetails } from './pages/ItemDetails'
 import { ItemEdit } from './pages/ItemEdit.jsx'
+
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { UserDetails } from './pages/UserDetails'
 import { AdminIndex } from './pages/AdminIndex'
+
 import { UpdateIndex } from './pages/UpdateIndex.jsx'
 import { UpdateEdit } from './pages/UpdateEdit.jsx'
+
 import { OrderIndex } from './pages/OrderIndex.jsx'
 import { Cart } from './pages/Cart.jsx'
 import { Paying } from './pages/Paying.jsx'
+
 import { TrainerDetails } from './pages/TrainerDetails.jsx'
+import { TrainerEdit } from './pages/TrainerEdit.jsx'
+
 import { MessageIndex } from './pages/MessageIndex.jsx'
 import { MessageDetails } from './pages/MessageDetails.jsx'
 
@@ -49,8 +55,6 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { Loader } from './cmps/Loader'
 import { PrefsButton } from './cmps/PrefsButton.jsx'
 import { Prefs } from './cmps/Prefs.jsx'
-
-import { SwiperCarousel } from './cmps/SwiperCarousel'
 
 import './App.css'
 
@@ -86,6 +90,10 @@ export function App() {
             <Route path='class' element={<Class />} />
             <Route path='class/schedule' element={<Schedule />} />
             <Route path='class/trainer' element={<TrainerIndex />} />
+            <Route
+              path='class/trainer/edit/:trainerId'
+              element={<TrainerEdit />}
+            />
             <Route
               path='class/trainer/:trainerId'
               element={<TrainerDetails />}

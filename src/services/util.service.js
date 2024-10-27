@@ -99,3 +99,7 @@ export function onPageNavigation(diff, filter, setFilter, maxPage) {
 
   setFilter({ ...filter, pageIdx: filter.pageIdx + diff })
 }
+
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}

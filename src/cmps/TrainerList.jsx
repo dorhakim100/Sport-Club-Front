@@ -30,7 +30,7 @@ export function TrainerList({ trainers, onRemoveTrainer }) {
                   <Button
                     onClick={() => {
                       window.scrollTo({ top: 0, behavior: 'smooth' })
-                      navigate(`/trainer/edit/${trainer._id}`)
+                      navigate(`/class/trainer/edit/${trainer._id}`)
                     }}
                   >
                     {prefs.isEnglish ? 'Edit' : 'עריכה'}

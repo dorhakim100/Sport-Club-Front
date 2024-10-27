@@ -54,19 +54,19 @@ async function save(trainer) {
   if (trainer._id) {
     const trainerToSave = {
       _id: trainer._id,
-      name: trainer.name,
+      name: { he: trainer.name.he, eng: trainer.name.eng },
       types: trainer.types,
       img: trainer.img,
-      preview: trainer.preview,
+      preview: { he: trainer.preview.he, eng: trainer.preview.eng },
       experience: trainer.experience,
     }
     savedTrainer = await storageService.put(STORAGE_KEY, trainerToSave)
   } else {
     const trainerToSave = {
-      name: trainer.name,
+      name: { he: trainer.name.he, eng: trainer.name.eng },
       types: trainer.types,
       img: trainer.img,
-      preview: trainer.preview,
+      preview: { he: trainer.preview.he, eng: trainer.preview.eng },
       experience: trainer.experience,
     }
 

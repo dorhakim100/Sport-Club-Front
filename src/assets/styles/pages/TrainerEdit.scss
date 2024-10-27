@@ -1,0 +1,111 @@
+@media (max-width:500px) {
+    .page-container{
+        // margin: 0px;
+        // margin: auto;
+        // width: 100%;
+    }
+    
+    .trainer-edit-container{
+        
+        margin: auto;
+        width: 100%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    
+}
+
+.trainer-edit-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    gap: 2em;
+    padding: 2em 0em 2em 0em;
+    margin: auto;
+    border-radius: 8px;
+
+    width: 350px;
+
+    background-color: $light-gray;
+        background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+
+        .trainer-edit-form{
+            margin: 1em;
+        }
+
+    .img-container{
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+
+        img{
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+        }
+    }
+
+    .upload-button-container{
+        gap: 1em;
+    }
+
+    .trainer-edit-form{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        gap: 1em;
+    }
+
+    .input-container{
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        align-items: center;
+        input, textarea{
+
+            transition: 0.3s ease-out;
+        }
+
+        textarea {
+            resize: none;
+            // width: 300px;
+            height: 200px;
+
+            grid-column: 1/-1;
+          }
+        
+    }
+    
+    .input-container.quantity{
+
+        label{
+            justify-self: center;
+        }
+        justify-items: start;
+        div{
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            gap: 0.5em;
+        }
+    }
+
+  
+
+    .types-container{
+
+        .checkbox-container{
+            label{
+
+                transition: 0.3s ease-out;
+            }
+        }
+        grid-column: 1/-1;
+        display: flex;
+        gap: 2em;
+        font-size: 1.2em;
+    }
+}
