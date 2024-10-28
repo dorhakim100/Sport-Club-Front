@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import { Nav } from '../cmps/Nav'
 import { HeadContainer } from '../cmps/HeadContainer'
+import { InstagramPost } from '../cmps/InstagramPost'
 
 import Divider from '@mui/material/Divider'
 
@@ -64,9 +65,12 @@ export function Swimming() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
   const headText = { he: 'בית הספר לשחייה', eng: 'Swimming School' }
+  const instagram =
+    'https://www.instagram.com/reel/DBRbR0WObHd/?utm_source=ig_web_copy_link'
   return (
     <div className='swimming-container'>
       <HeadContainer text={headText} />
+      <InstagramPost postUrl={instagram} />
     </div>
   )
 }
