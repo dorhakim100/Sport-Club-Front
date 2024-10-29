@@ -95,6 +95,8 @@ export function HomePage() {
   return (
     <section className='home-container'>
       {/* <h2>Home sweet Home</h2> */}
+      <h2>נופש בקיץ, ספורט בחורף</h2>
+      <h2>מועדון אחד כל השנה</h2>
       <SwiperCarousel imgs={imgs} />
 
       <div className='info-center-container'>

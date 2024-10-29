@@ -22,7 +22,7 @@ export function MouseWheelCarousel() {
         }}
         modules={[Mousewheel, Pagination]}
         className='mouse-wheel'
-        style={{ width: '50vw' }}
+        // style={{ width: '90vw' }}
       >
         <SwiperSlide>Slide 1</SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>

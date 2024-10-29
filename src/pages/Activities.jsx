@@ -21,38 +21,50 @@ export function Activities() {
       path: 'swimming',
       he: 'בית הספר לשחייה',
       eng: 'Swimming School',
+      icon: 'public/imgs/swimming.svg',
+      darkIcon: 'public/imgs/swimming-dark.svg',
     },
     {
       path: 'tennis',
       he: 'בית הספר לטניס',
       eng: 'Tennis School',
+      icon: 'public/imgs/tennis.svg',
+      darkIcon: 'public/imgs/tennis-dark.svg',
     },
     {
       path: 'pilates',
       he: 'פילאטיס מכשירים',
       eng: 'Reformer Pilates',
+      icon: 'public/imgs/pilates.svg',
+      darkIcon: 'public/imgs/pilates-dark.svg',
     },
     {
       path: 'care',
       he: 'מרכז הטיפולים',
       eng: 'Care',
+      icon: 'public/imgs/care.svg',
+      darkIcon: 'public/imgs/care-dark.svg',
     },
     {
       path: 'camp',
       he: 'קייטנת הקיץ',
       eng: 'Summer Camp',
+      icon: 'public/imgs/camp.svg',
+      darkIcon: 'public/imgs/camp-dark.svg',
     },
     {
       path: 'restaurant',
       he: 'שף הכפר',
       eng: 'Restaurant',
+      icon: 'public/imgs/restaurant.svg',
+      darkIcon: 'public/imgs/restaurant-dark.svg',
     },
   ]
 
   return (
     <section className='activities-page-container'>
       <h2>{prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}</h2>
-      <Nav origin={origin} links={links} />
+      <Nav origin={origin} links={links} isMain={true} />
 
       <section>
         <Outlet />

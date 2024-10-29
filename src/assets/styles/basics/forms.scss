@@ -18,12 +18,54 @@ button {
 	cursor: pointer;
 }
 
+nav.main{
+
+	display: grid;
+
+	grid-template-columns: repeat(3,1fr);
+	grid-template-rows: repeat(3,1fr);
+	// width: 50%;
+	margin: 0px;
+	align-items: center;
+	justify-items: center;
+	gap: 3em;
+
+
+	:first-child{
+		grid-column: 1/-1;
+	}
+
+	// display: flex;
+	// flex-wrap: wrap;
+
+	.main-link-container{
+		a{
+			grid-column: 1/2;
+			align-self: center;
+		}
+
+		img{
+			width: 150px;
+			// height: 80px;
+		}
+		display: grid;
+		grid-template-columns: repeat(2,150px);
+
+		// display: flex;
+		align-items: center;
+		// justify-items: center;
+		gap: 1em;
+	}
+
+}
+
 nav {
     display: flex;
     width: 100%;
     align-items: center;
 
     gap: 1em;
+
     
     // font-size: .8em;
     a{
@@ -35,6 +77,8 @@ nav {
             color: $bold-navy;
         }
     }
+
+
     
     .active {
         color: $dark-green;
@@ -324,10 +368,14 @@ nav {
 		height: fit-content;
 
 		width: 25px;
+
 		color: $bold-navy;
 
 		border-radius: 50%;
 		background-color: $light-red;
+		font-family: assistantBold;
+
+		// font-size: 1.2em;
 	}
 
 }

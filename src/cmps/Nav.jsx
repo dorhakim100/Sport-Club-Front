@@ -4,18 +4,24 @@ import { useSelector } from 'react-redux'
 
 import Divider from '@mui/material/Divider'
 
-export function Nav({ origin, links }) {
+export function Nav({ origin, links, isMain }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const openMessages = useSelector(
     (stateSelector) => stateSelector.messageModule.openLength
   )
 
   return (
-    <nav className='page-navigation-container'>
-      <NavLink to={`${origin.path}`}>
-        {prefs.isEnglish ? origin.eng : origin.he}
-      </NavLink>
-      <Divider orientation='vertical' flexItem />
+    <nav
+      className={
+        isMain ? 'page-navigation-container main' : 'page-navigation-container'
+      }
+    >
+      <>
+        <NavLink to={`${origin.path}`}>
+          {prefs.isEnglish ? origin.eng : origin.he}
+        </NavLink>
+        {!isMain && <Divider orientation='vertical' flexItem />}
+      </>
 
       {links.map((link, index) => {
         return (
@@ -33,9 +39,25 @@ export function Nav({ origin, links }) {
                 <Divider orientation='vertical' flexItem />
               )}
             </>
+          )) ||
+          (isMain && (
+            <>
+              <div className={'main-link-container'}>
+                <NavLink to={link.path}>
+                  {prefs.isEnglish ? link.eng : link.he}
+                </NavLink>
+                <img
+                  src={prefs.isDarkMode ? link.darkIcon : link.icon}
+                  alt=''
+                />
+              </div>
+              {/* {index + 1 < links.length && (
+                <Divider orientation='vertical' flexItem />
+              )} */}
+            </>
           )) || (
             <>
-              <NavLink to={link.path}>
+              <NavLink to={link.path} className={'link'}>
                 {prefs.isEnglish ? link.eng : link.he}
               </NavLink>
               {index + 1 < links.length && (
@@ -45,13 +67,6 @@ export function Nav({ origin, links }) {
           )
         )
       })}
-      {/* <NavLink to='organization'>
-        {prefs.isEnglish ? 'Organization' : 'עמותה'}
-      </NavLink>
-      <Divider orientation='vertical' flexItem />
-      <NavLink to='accessibility'>
-        {prefs.isEnglish ? 'Accessibility' : 'נגישות'}
-      </NavLink> */}
     </nav>
   )
 }
