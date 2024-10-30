@@ -57,7 +57,8 @@ export async function addClass(clas) {
 export async function updateClass(clas) {
   try {
     const savedClass = await classService.save(clas)
-    store.dispatch(getCmdUpdateClass(savedTrainer))
+
+    store.dispatch(getCmdUpdateClass(savedClass))
     return savedClass
   } catch (err) {
     console.log('Cannot save class', err)

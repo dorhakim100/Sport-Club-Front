@@ -9,7 +9,6 @@ import {
 } from '../reducers/trainer.reducer'
 
 export async function loadTrainers(filterBy) {
-  console.log(filterBy)
   try {
     const trainers = await trainerService.query(filterBy)
     store.dispatch(getCmdSetTrainers(trainers))

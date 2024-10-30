@@ -135,7 +135,7 @@ export function ClassIndex() {
     try {
       const savedClass = await addClass(clas)
       showSuccessMsg(prefs.isEnglish ? `Class added` : 'שיעור נוסף')
-      // navigate(`/class/edit/${savedClass._id}`)
+      navigate(`/class/edit/${savedClass._id}`)
     } catch (err) {
       console.log(err)
       showErrorMsg(prefs.isEnglish ? `Cannot add class` : 'פעולה לא בוצעה')

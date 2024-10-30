@@ -15,7 +15,7 @@
     
 }
 
-.trainer-edit-container{
+.trainer-edit-container, .class-edit-container{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,7 +30,7 @@
     background-color: $light-gray;
         background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
 
-        .trainer-edit-form{
+        .trainer-edit-form, .class-edit-form{
             margin: 1em;
         }
 
@@ -53,7 +53,7 @@
         gap: 1em;
     }
 
-    .trainer-edit-form{
+    .trainer-edit-form, .class-edit-form{
         display: grid;
         align-items: center;
         justify-items: center;
@@ -108,4 +108,23 @@
         gap: 2em;
         font-size: 1.2em;
     }
+}
+
+.class-edit-container{
+    .img-container{
+
+        border-radius: 8px;
+
+        img{
+            border-radius: 8px;
+
+        }
+    }
+}
+
+.class-edit-trainers-container{
+    grid-column: 1/-1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
 }

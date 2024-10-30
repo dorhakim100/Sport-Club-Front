@@ -37,7 +37,7 @@ export function classReducer(state = initialState, action) {
       break
     case UPDATE_CLASS:
       classes = state.classes.map((classToMap) =>
-        classToMap._id === action.class._id ? action.class : classToMap
+        classToMap._id === action.clas._id ? action.clas : classToMap
       )
       newState = { ...state, classes }
       break

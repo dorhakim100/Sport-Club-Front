@@ -13,6 +13,7 @@ import {
   AccessibilityPage,
 } from './pages/AboutUs'
 import { ClassIndex } from './pages/ClassIndex.jsx'
+import { ClassEdit } from './pages/ClassEdit.jsx'
 import { Schedule } from './pages/Schedule.jsx'
 import { TrainerIndex } from './pages/TrainerIndex.jsx'
 import {
@@ -77,7 +78,6 @@ export function App() {
       >
         <AppHeader bodyRef={bodyRef} />
         <section className='page-container'>
-          {/* <SwiperCarousel /> */}
           <Routes>
             <Route path='' element={<HomePage />} />
             <Route path='facilities' element={<Facilities />} />
@@ -88,6 +88,8 @@ export function App() {
               <Route path='accessibility' element={<AccessibilityPage />} />
             </Route>
             <Route path='class' element={<ClassIndex />} />
+            <Route path='class/edit/:classId' element={<ClassEdit />} />
+
             <Route path='class/schedule' element={<Schedule />} />
             <Route path='class/trainer' element={<TrainerIndex />} />
             <Route
