@@ -12,6 +12,7 @@ import { makeId } from '../services/util.service'
 import { Button } from '@mui/material'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { setIsLoading } from '../store/actions/system.actions'
+import { ContactUs } from '../cmps/ContactUs'
 
 export function TrainerDetails() {
   const { trainerId } = useParams()
@@ -89,6 +90,7 @@ export function TrainerDetails() {
           <p>{prefs.isEnglish ? trainer.preview.eng : trainer.preview.he}</p>
         </div>
       </div>
+      <ContactUs />
     </div>
   )
 }

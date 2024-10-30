@@ -19,8 +19,7 @@ export function classReducer(state = initialState, action) {
       newState = { ...state, classes: action.classes }
       break
     case SET_CLASS:
-      console.log(action.class)
-      newState = { ...state, class: action.class }
+      newState = { ...state, class: action.clas }
       break
     case REMOVE_CLASS:
       const lastRemovedItem = state.classes.find(

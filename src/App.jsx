@@ -14,6 +14,7 @@ import {
 } from './pages/AboutUs'
 import { ClassIndex } from './pages/ClassIndex.jsx'
 import { ClassEdit } from './pages/ClassEdit.jsx'
+import { ClassDetails } from './pages/ClassDetails.jsx'
 import { Schedule } from './pages/Schedule.jsx'
 import { TrainerIndex } from './pages/TrainerIndex.jsx'
 import {
@@ -89,6 +90,7 @@ export function App() {
             </Route>
             <Route path='class' element={<ClassIndex />} />
             <Route path='class/edit/:classId' element={<ClassEdit />} />
+            <Route path='class/:classId' element={<ClassDetails />} />
 
             <Route path='class/schedule' element={<Schedule />} />
             <Route path='class/trainer' element={<TrainerIndex />} />

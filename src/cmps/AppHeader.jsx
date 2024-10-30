@@ -104,8 +104,8 @@ export function AppHeader({ bodyRef }) {
     const scrollY = window.scrollY
     if (scrollY > 0) {
       setScrolled(true)
-      logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
 
+      logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
       headerRef.current.style.opacity = '0.8'
     } else if (scrollY === 0) {
       setScrolled(false)
@@ -441,7 +441,12 @@ export function AppHeader({ bodyRef }) {
           className='logo'
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <img src={logo} alt='' ref={logoRef} />
+          <img
+            src={logo}
+            alt=''
+            ref={logoRef}
+            style={{ transition: '0.3s ease' }}
+          />
         </NavLink>
       )}
     </header>

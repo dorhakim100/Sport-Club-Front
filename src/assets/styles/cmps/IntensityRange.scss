@@ -33,6 +33,10 @@
   .intensity-range:hover {
     opacity: 1; /* Fully visible on hover */
   }
+
+  .intensity-range.read-only{
+    opacity: 1;
+  }
   
   .intensity-range::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -42,11 +46,14 @@
     background: white;
     border: 2px solid $medium-gray;
     border: none;
-    cursor: pointer;
+    cursor: grab;
     position: relative;
     border-radius:  5px 5px 50% 50%; /* Round on top, flat on bottom */
 }
 
+.intensity-range.read-only::-webkit-slider-thumb{
+    cursor: auto;
+  }
 
 .intensity-range::-moz-range-thumb {
     width: 20px;
@@ -55,7 +62,11 @@
     background: white;
     border: 2px solid #999;
     border: none;
-    cursor: pointer;
+    cursor: grab;
+  }
+
+  .intensity-range.read-only::-moz-range-thumb{
+    cursor: auto;
   }
   
   .intensity-labels {

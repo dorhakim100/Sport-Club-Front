@@ -10,6 +10,7 @@ import { AddToCartButton } from '../cmps/AddToCartButton'
 import { Quantity } from '../cmps/Quantity.jsx'
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import { ContactUs } from '../cmps/ContactUs'
 
 export function ItemDetails() {
   const { itemId } = useParams()
@@ -31,27 +32,30 @@ export function ItemDetails() {
   }
 
   return (
-    <section className='item-details-container'>
-      <Link to='/item'>
-        {prefs.isEnglish ? `Back to list` : 'חזרה לתפריט'}
-        <ArrowBackIosNewIcon />
-      </Link>
+    <>
+      <section className='item-details-container'>
+        <Link to='/item'>
+          {prefs.isEnglish ? `Back to list` : 'חזרה לתפריט'}
+          <ArrowBackIosNewIcon />
+        </Link>
 
-      <div className='title-container'>
-        <b>{prefs.isEnglish ? item.title.eng : item.title.he}</b>
-        <div className='price-container'>
-          <Quantity quantity={quantity} setQuantity={setQuantity} />
+        <div className='title-container'>
+          <b>{prefs.isEnglish ? item.title.eng : item.title.he}</b>
+          <div className='price-container'>
+            <Quantity quantity={quantity} setQuantity={setQuantity} />
 
-          <b>₪{item.price}</b>
+            <b>₪{item.price}</b>
+          </div>
+          <AddToCartButton item={{ ...item }} quantity={quantity} />
         </div>
-        <AddToCartButton item={{ ...item }} quantity={quantity} />
-      </div>
-      <div className='img-container'>
-        <img src={item.cover} alt='' />
-      </div>
-      <div className='preview-container'>
-        <p>{prefs.isEnglish ? item.preview.eng : item.preview.he}</p>
-      </div>
-    </section>
+        <div className='img-container'>
+          <img src={item.cover} alt='' />
+        </div>
+        <div className='preview-container'>
+          <p>{prefs.isEnglish ? item.preview.eng : item.preview.he}</p>
+        </div>
+      </section>
+      <ContactUs />
+    </>
   )
 }
