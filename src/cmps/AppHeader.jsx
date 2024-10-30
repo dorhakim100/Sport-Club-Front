@@ -89,8 +89,6 @@ export function AppHeader({ bodyRef }) {
     return open
   }, [openMessages])
 
-  console.log(openTasks)
-
   const cartLength = useMemo(() => {
     let length = 0
     console.log(user)

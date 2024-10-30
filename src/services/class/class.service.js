@@ -104,7 +104,17 @@ function _createClass() {
       title: { he: 'יוגה', eng: 'Yoga' },
       preview: { he: 'יוגה לגוף ולנפש', eng: 'Yoga for self care' },
       intensity: 3,
-      trainers: [],
+      trainers: [
+        {
+          name: { he: 'לולי', eng: 'Loli' },
+          id: makeId(),
+        },
+        {
+          name: { he: 'מירב', eng: 'Meirav' },
+          id: makeId(),
+        },
+      ],
+      img: 'https://www.auromere.com/images/Yoga-Pastel-Sun-FB.jpg',
     },
     {
       _id: makeId(),
@@ -114,7 +124,17 @@ function _createClass() {
         eng: 'Pilates for body strengthening',
       },
       intensity: 4,
-      trainers: [],
+      trainers: [
+        {
+          name: { he: 'לולי', eng: 'Loli' },
+          id: makeId(),
+        },
+        {
+          name: { he: 'מירב', eng: 'Meirav' },
+          id: makeId(),
+        },
+      ],
+      img: 'https://media.self.com/photos/628e481b77d608f44f5f5abe/4:3/w_2560%2Cc_limit/what-is-pilates.jpeg',
     },
     {
       _id: makeId(),
@@ -124,14 +144,34 @@ function _createClass() {
         eng: 'Intensive workout for muscle building',
       },
       intensity: 5,
-      trainers: [],
+      trainers: [
+        {
+          name: { he: 'לולי', eng: 'Loli' },
+          id: makeId(),
+        },
+        {
+          name: { he: 'מירב', eng: 'Meirav' },
+          id: makeId(),
+        },
+      ],
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ-8usgopg9FLBs8wzDXGFKIW0qVXMdnn7tA&s',
     },
     {
       _id: makeId(),
       title: { he: 'מדיטציה', eng: 'Meditation' },
       preview: { he: 'מדיטציה להרגעת הנפש', eng: 'Meditation for relaxation' },
       intensity: 1,
-      trainers: [],
+      trainers: [
+        {
+          name: { he: 'לולי', eng: 'Loli' },
+          id: makeId(),
+        },
+        {
+          name: { he: 'מירב', eng: 'Meirav' },
+          id: makeId(),
+        },
+      ],
+      img: 'https://www.everydayyoga.com/cdn/shop/articles/yoga_1024x1024.jpg?v=1703853908',
     },
     {
       _id: makeId(),
@@ -141,7 +181,17 @@ function _createClass() {
         eng: 'Dance to strengthen the body and have fun',
       },
       intensity: 3,
-      trainers: [],
+      trainers: [
+        {
+          name: { he: 'לולי', eng: 'Loli' },
+          id: makeId(),
+        },
+        {
+          name: { he: 'מירב', eng: 'Meirav' },
+          id: makeId(),
+        },
+      ],
+      img: 'https://cdn-magazine.nutrabay.com/wp-content/uploads/2024/04/workout-scene-fitness-enthusiasts-diving-deep-into-intense-training-bathed-dynamic-lighting-scaled.jpg',
     },
     {
       _id: makeId(),
@@ -151,7 +201,17 @@ function _createClass() {
         eng: 'Endurance and strength workout',
       },
       intensity: 4,
-      trainers: [],
+      trainers: [
+        {
+          name: { he: 'לולי', eng: 'Loli' },
+          id: makeId(),
+        },
+        {
+          name: { he: 'מירב', eng: 'Meirav' },
+          id: makeId(),
+        },
+      ],
+      img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw8Delf7PU14zyph0SV_oCxctDi9BQikH3Dg&s',
     },
     {
       _id: makeId(),
@@ -161,7 +221,17 @@ function _createClass() {
         eng: 'Improve cardiovascular fitness',
       },
       intensity: 3,
-      trainers: [],
+      trainers: [
+        {
+          name: { he: 'לולי', eng: 'Loli' },
+          id: makeId(),
+        },
+        {
+          name: { he: 'מירב', eng: 'Meirav' },
+          id: makeId(),
+        },
+      ],
+      img: 'https://media.self.com/photos/64063998753c98598ce42cde/3:2/w_8382,h_5588,c_limit/benfits%20of%20running.jpeg',
     },
   ]
 

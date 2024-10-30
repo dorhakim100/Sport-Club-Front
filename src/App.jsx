@@ -12,7 +12,7 @@ import {
   Organization,
   AccessibilityPage,
 } from './pages/AboutUs'
-import { Class } from './pages/Class.jsx'
+import { ClassIndex } from './pages/ClassIndex.jsx'
 import { Schedule } from './pages/Schedule.jsx'
 import { TrainerIndex } from './pages/TrainerIndex.jsx'
 import {
@@ -87,7 +87,7 @@ export function App() {
               <Route path='organization' element={<Organization />} />
               <Route path='accessibility' element={<AccessibilityPage />} />
             </Route>
-            <Route path='class' element={<Class />} />
+            <Route path='class' element={<ClassIndex />} />
             <Route path='class/schedule' element={<Schedule />} />
             <Route path='class/trainer' element={<TrainerIndex />} />
             <Route

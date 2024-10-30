@@ -12,7 +12,7 @@ export async function loadClasses(filterBy) {
   console.log(filterBy)
   try {
     const classes = await classService.query(filterBy)
-    store.dispatch(getCmdSetTrainers(classes))
+    store.dispatch(getCmdSetClasses(classes))
     return classes
   } catch (err) {
     console.log('Cannot load classes', err)
@@ -25,7 +25,7 @@ export async function loadClass(classId) {
     console.log(classId)
     const clas = await classService.getById(classId)
     console.log(clas)
-    store.dispatch(getCmdSetTrainer(clas))
+    store.dispatch(getCmdSetClass(clas))
     return clas
   } catch (err) {
     console.log('Cannot load class', err)
@@ -36,7 +36,7 @@ export async function loadClass(classId) {
 export async function removeClass(classId) {
   try {
     await classService.remove(classId)
-    store.dispatch(getCmdRemoveTrainer(classId))
+    store.dispatch(getCmdRemoveClass(classId))
   } catch (err) {
     console.log('Cannot remove class', err)
     throw err
@@ -46,7 +46,7 @@ export async function removeClass(classId) {
 export async function addClass(clas) {
   try {
     const savedTrainer = await classService.save(clas)
-    store.dispatch(getCmdAddTrainer(savedTrainer))
+    store.dispatch(getCmdAddClass(savedTrainer))
     return savedTrainer
   } catch (err) {
     console.log('Cannot add class', err)
@@ -57,7 +57,7 @@ export async function addClass(clas) {
 export async function updateClass(clas) {
   try {
     const savedClass = await classService.save(clas)
-    store.dispatch(getCmdUpdateTrainer(savedTrainer))
+    store.dispatch(getCmdUpdateClass(savedTrainer))
     return savedClass
   } catch (err) {
     console.log('Cannot save class', err)
@@ -72,25 +72,25 @@ function getCmdSetClasses(classes) {
     classes,
   }
 }
-function getCmdSetClasses(clas) {
+function getCmdSetClass(clas) {
   return {
     type: SET_CLASS,
     clas,
   }
 }
-function getCmdRemoveClasses(classId) {
+function getCmdRemoveClass(classId) {
   return {
     type: REMOVE_CLASS,
     classId,
   }
 }
-function getCmdAddClasses(clas) {
+function getCmdAddClass(clas) {
   return {
     type: ADD_CLASS,
     clas,
   }
 }
-function getCmdUpdateClasses(clas) {
+function getCmdUpdateClass(clas) {
   return {
     type: UPDATE_CLASS,
     clas,
