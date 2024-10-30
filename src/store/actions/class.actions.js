@@ -45,9 +45,9 @@ export async function removeClass(classId) {
 
 export async function addClass(clas) {
   try {
-    const savedTrainer = await classService.save(clas)
-    store.dispatch(getCmdAddClass(savedTrainer))
-    return savedTrainer
+    const savedClass = await classService.save(clas)
+    store.dispatch(getCmdAddClass(savedClass))
+    return savedClass
   } catch (err) {
     console.log('Cannot add class', err)
     throw err

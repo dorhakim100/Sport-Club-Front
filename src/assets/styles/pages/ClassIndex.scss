@@ -1,6 +1,8 @@
 .class-navigation-container{
     margin: 1em 0em 1em 0em;
     justify-self: start;
+    display: flex;
+    gap: 1em;
 
     .page-idx-container{
         display: flex;
@@ -91,11 +93,17 @@
       
       .title-container{
           display: grid;
+          grid-template-rows: repeat(3,1fr);
           position: relative;
           padding: 0.5em;
 
           b{
             font-family: assistantBold;
+            align-self: center;
+          }
+
+          .class-button-group{
+            justify-self: start;
             align-self: center;
           }
 

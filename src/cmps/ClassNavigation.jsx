@@ -10,9 +10,10 @@ import { Button } from '@mui/material'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
-export function ClassNavigation({ filter, setFilter, maxPage }) {
+export function ClassNavigation({ filter, setFilter, maxPage, onAddClass }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   return (
     <div className='class-navigation-container'>
@@ -44,6 +45,11 @@ export function ClassNavigation({ filter, setFilter, maxPage }) {
           <ArrowForwardIosIcon />
         </Button>
       </ButtonGroup>
+      {user && user.isAdmin && (
+        <Button variant='contained' onClick={onAddClass}>
+          {prefs.isEnglish ? 'Add' : 'הוסף'}
+        </Button>
+      )}
     </div>
   )
 }

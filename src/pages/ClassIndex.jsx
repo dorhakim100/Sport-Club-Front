@@ -31,6 +31,7 @@ import Divider from '@mui/material/Divider'
 export function ClassIndex() {
   const location = useLocation()
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const navigate = useNavigate()
 
   const origin = {
     path: '/class',
@@ -117,27 +118,27 @@ export function ClassIndex() {
     getClass()
   }, [filter]) // Only run when filter changes
 
-  async function onRemoveTrainer(trainerId) {
+  async function onRemoveClass(classId) {
     try {
-      await removeTrainer(trainerId)
-      showSuccessMsg(prefs.isEnglish ? 'Trainer removed' : 'מאמן הוסר')
+      await removeClass(classId)
+      showSuccessMsg(prefs.isEnglish ? 'Class removed' : 'שיעור הוסר')
       getClass()
     } catch (err) {
-      showErrorMsg(prefs.isEnglish ? `Couldn't remove trainer` : 'מאמן לא הוסר')
+      showErrorMsg(prefs.isEnglish ? `Couldn't remove class` : 'שיעור לא הוסר')
     }
   }
 
-  async function onAddTrainer() {
-    const trainer = trainerService.getEmptyTrainer()
+  async function onAddClass() {
+    const clas = classService.getEmptyClass()
 
-    delete trainer._id
+    delete clas._id
     try {
-      const savedTrainer = await addTrainer(trainer)
-      showSuccessMsg(prefs.isEnglish ? `Trainer added` : 'מאמן נוסף')
-      navigate(`/class/trainer/edit/${savedTrainer._id}`)
+      const savedClass = await addClass(clas)
+      showSuccessMsg(prefs.isEnglish ? `Class added` : 'שיעור נוסף')
+      // navigate(`/class/edit/${savedClass._id}`)
     } catch (err) {
       console.log(err)
-      showErrorMsg(prefs.isEnglish ? `Cannot add trainer` : 'פעולה לא בוצעה')
+      showErrorMsg(prefs.isEnglish ? `Cannot add class` : 'פעולה לא בוצעה')
     }
   }
 
@@ -150,8 +151,9 @@ export function ClassIndex() {
         filter={filter}
         setFilter={setFilter}
         maxPage={maxPage}
+        onAddClass={onAddClass}
       />
-      <ClassList classes={classes} />
+      <ClassList classes={classes} onRemoveClass={onRemoveClass} />
     </section>
   )
 }

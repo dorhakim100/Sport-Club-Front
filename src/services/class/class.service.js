@@ -47,23 +47,25 @@ async function save(classToSave) {
   var savedClass
 
   if (classToSave._id) {
-    const trainerToSave = {
+    const clas = {
       _id: classToSave._id,
-      name: { he: classToSave.name.he, eng: classToSave.name.eng },
+      title: { he: classToSave.title.he, eng: classToSave.title.eng },
       img: classToSave.img,
       preview: { he: classToSave.preview.he, eng: classToSave.preview.eng },
       trainers: classToSave.trainers,
+      intensity: classToSave.intensity,
     }
-    savedClass = await storageService.put(STORAGE_KEY, trainerToSave)
+    savedClass = await storageService.put(STORAGE_KEY, clas)
   } else {
-    const trainerToSave = {
-      name: { he: classToSave.name.he, eng: classToSave.name.eng },
-      img: classToSave.img,
+    const clas = {
+      title: { he: classToSave.title.he, eng: classToSave.title.eng },
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729010361/cropping_j9auka.webp',
       preview: { he: classToSave.preview.he, eng: classToSave.preview.eng },
       trainers: classToSave.trainers,
+      intensity: classToSave.intensity,
     }
 
-    savedClass = await storageService.post(STORAGE_KEY, trainerToSave)
+    savedClass = await storageService.post(STORAGE_KEY, clas)
   }
 
   return savedClass
@@ -87,7 +89,7 @@ function getDefaultFilter() {
 function getEmptyClass() {
   return {
     _id: makeId(),
-    name: { he: '', eng: '' },
+    title: { he: '', eng: '' },
     preview: {
       he: '',
       eng: '',

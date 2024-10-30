@@ -32,7 +32,8 @@ export function classReducer(state = initialState, action) {
       newState = { ...state, classes, lastRemovedItem }
       break
     case ADD_CLASS:
-      newState = { ...state, classes: [...state.classes, action.class] }
+      newState = { ...state, classes: [...state.classes, action.clas] }
+      console.log(newState)
       break
     case UPDATE_CLASS:
       classes = state.classes.map((classToMap) =>
