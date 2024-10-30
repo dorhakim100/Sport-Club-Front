@@ -23,6 +23,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 import { Nav } from '../cmps/Nav'
 import { ClassList } from '../cmps/ClassList.jsx'
+import { ClassNavigation } from '../cmps/ClassNavigation.jsx'
 
 import Divider from '@mui/material/Divider'
 
@@ -52,7 +53,6 @@ export function ClassIndex() {
   const classes = useSelector(
     (stateSelector) => stateSelector.classModule.classes
   )
-  console.log(classes)
 
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -60,6 +60,8 @@ export function ClassIndex() {
     pageIdx: +searchParams.get('pageIdx'),
     isAll: false,
   })
+
+  const [maxPage, setMaxPage] = useState()
 
   useEffect(() => {
     const pageIdx = +searchParams.get('pageIdx') || 0
@@ -80,6 +82,8 @@ export function ClassIndex() {
     try {
       setIsLoading(true)
       await loadClasses(filter) // Load classes with the current filter
+      const max = await classService.getMaxPage()
+      setMaxPage(max)
     } catch (err) {
       console.log(err)
       showErrorMsg(
@@ -135,6 +139,11 @@ export function ClassIndex() {
     <section className='class-page-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
       <Nav origin={origin} links={links} />
+      <ClassNavigation
+        filter={filter}
+        setFilter={setFilter}
+        maxPage={maxPage}
+      />
       <ClassList classes={classes} />
     </section>
   )
