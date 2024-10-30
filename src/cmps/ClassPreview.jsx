@@ -17,6 +17,7 @@ export function ClassPreview({ clas, onRemoveClass }) {
       key={clas._id}
       onClick={() => {
         if (isHover) return
+        window.scrollTo({ top: 0, behavior: 'smooth' })
         navigate(`/class/${clas._id}`)
       }}
     >
@@ -49,11 +50,13 @@ export function ClassPreview({ clas, onRemoveClass }) {
           </ButtonGroup>
         )}
         <p>
-          {prefs.isEnglish ? 'Trainers:' : 'מדריכים:'}
+          {/* {prefs.isEnglish ? 'Trainers:' : 'מדריכים:'} */}
           {clas.trainers.map((trainer, index) => {
             return (
               <span key={`${makeId()}ClassPreview`}>
-                {prefs.isEnglish ? trainer.name.eng : trainer.name.he}
+                {prefs.isEnglish
+                  ? trainer.name.eng.split(' ')[0]
+                  : trainer.name.he.split(' ')[0]}
                 {index + 1 !== clas.trainers.length && ','}
               </span>
             )

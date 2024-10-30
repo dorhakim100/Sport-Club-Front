@@ -110,13 +110,17 @@
 
         p{
             position: absolute;
-            bottom: -4em;
+            bottom: -10em;
             transition: 0.3s ease-out;
             z-index: 3;
             inset-inline-start: 0.5em;
             display: flex;
             gap: 0.3em;
-        }
+            white-space: nowrap;       /* Prevents text wrapping */
+            overflow: hidden;          /* Hides overflow */
+            text-overflow: ellipsis;  
+            max-width: 80%;    
+           }
       }
           &:hover{
             &::before{

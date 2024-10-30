@@ -19,6 +19,7 @@ import { capitalizeFirstLetter } from '../services/util.service.js'
 import { HeadContainer } from '../cmps/HeadContainer.jsx'
 
 import { Button } from '@mui/material'
+import { IntensityRange } from '../cmps/IntensityRange.jsx'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -93,6 +94,7 @@ export function ClassEdit() {
       case 'number':
       case 'range':
         value = +value || ''
+        console.log(value)
         break
 
       case 'checkbox':
@@ -238,7 +240,11 @@ export function ClassEdit() {
                 prefs.isEnglish ? editClass.preview.eng : editClass.preview.he
               }
             />
-          </div>
+          </div>{' '}
+          <IntensityRange
+            intensity={editClass.intensity}
+            handleChange={handleChange}
+          />
           <div className='input-container'>
             <div className='class-edit-trainers-container'>
               {trainers.map((trainer) => {
