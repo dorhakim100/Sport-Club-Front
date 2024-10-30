@@ -9,12 +9,17 @@ import { login, signup } from '../store/actions/user.actions'
 import { setIsLoading } from '../store/actions/system.actions'
 // import { addComment } from '../store/actions/comment.actions'
 
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
+
 export function LoginSignupForm({ isSignup }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
   let initialValues
   let validate
+
+  const [isShown, setIsShown] = useState(false)
+
   if (isSignup) {
     initialValues = { email: '', password: '', username: '', fullname: '' }
     validate = (values) => {
@@ -159,15 +164,17 @@ export function LoginSignupForm({ isSignup }) {
                 prefs.isDarkMode ? 'dark-mode' : ''
               } ${errors.fullname && touched.fullname ? 'error' : ''}`}
             >
-              <input
-                name='fullname'
-                type='fullname'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.fullname}
-                placeholder={prefs.isEnglish ? 'Full Name' : 'שם מלא'}
-                id=''
-              />
+              <div className='fullname-container'>
+                <input
+                  name='fullname'
+                  type='fullname'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.fullname}
+                  placeholder={prefs.isEnglish ? 'Full Name' : 'שם מלא'}
+                  id=''
+                />
+              </div>
 
               <span>
                 {errors.fullname && touched.fullname && errors.fullname}
@@ -179,14 +186,16 @@ export function LoginSignupForm({ isSignup }) {
               prefs.isDarkMode ? 'dark-mode' : ''
             } ${errors.username && touched.username ? 'error' : ''}`}
           >
-            <input
-              type='username'
-              name='username'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.username}
-              placeholder={prefs.isEnglish ? 'Username' : 'שם משתמש'}
-            />
+            <div className='username-container'>
+              <input
+                type='username'
+                name='username'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.username}
+                placeholder={prefs.isEnglish ? 'Username' : 'שם משתמש'}
+              />
+            </div>
             <span>
               {errors.username && touched.username && errors.username}
             </span>
@@ -196,14 +205,27 @@ export function LoginSignupForm({ isSignup }) {
               prefs.isDarkMode ? 'dark-mode' : ''
             } ${errors.password && touched.password ? 'error' : ''}`}
           >
-            <input
-              type='password'
-              name='password'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-              placeholder={prefs.isEnglish ? 'Password' : 'סיסמא'}
-            />
+            <div className='password-container'>
+              <input
+                type={isShown ? 'text' : 'password'}
+                name='password'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                placeholder={prefs.isEnglish ? 'Password' : 'סיסמא'}
+              />
+              <Button
+                variant='contained'
+                onMouseDown={() => {
+                  setIsShown(true)
+                }}
+                onMouseUp={() => {
+                  setIsShown(false)
+                }}
+              >
+                <RemoveRedEyeIcon />
+              </Button>
+            </div>
             <span>
               {errors.password && touched.password && errors.password}
             </span>
@@ -214,14 +236,16 @@ export function LoginSignupForm({ isSignup }) {
                 prefs.isDarkMode ? 'dark-mode' : ''
               } ${errors.email && touched.email ? 'error' : ''}`}
             >
-              <input
-                type='email'
-                name='email'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                placeholder={prefs.isEnglish ? 'Email' : 'דואר אלקטרוני'}
-              />
+              <div className='email-container'>
+                <input
+                  type='email'
+                  name='email'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  placeholder={prefs.isEnglish ? 'Email' : 'דואר אלקטרוני'}
+                />
+              </div>
               <span>{errors.email && touched.email && errors.email}</span>
             </div>
           )}

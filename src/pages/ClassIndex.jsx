@@ -24,6 +24,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { Nav } from '../cmps/Nav'
 import { ClassList } from '../cmps/ClassList.jsx'
 import { ClassNavigation } from '../cmps/ClassNavigation.jsx'
+import { HeadContainer } from '../cmps/HeadContainer'
 
 import Divider from '@mui/material/Divider'
 
@@ -49,6 +50,11 @@ export function ClassIndex() {
       eng: 'Our Instructors',
     },
   ]
+
+  const head = {
+    he: 'רשימת השיעורים',
+    eng: 'Class List',
+  }
 
   const classes = useSelector(
     (stateSelector) => stateSelector.classModule.classes
@@ -139,6 +145,7 @@ export function ClassIndex() {
     <section className='class-page-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
       <Nav origin={origin} links={links} />
+      <HeadContainer text={head} />
       <ClassNavigation
         filter={filter}
         setFilter={setFilter}
