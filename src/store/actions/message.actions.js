@@ -23,9 +23,8 @@ export async function loadMessages(filterBy) {
 
 export async function loadMessage(messageId) {
   try {
-    console.log(messageId)
     const message = await messageService.getById(messageId)
-    console.log(message)
+
     store.dispatch(getCmdSetMessage(message))
     return message
   } catch (err) {

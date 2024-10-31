@@ -61,12 +61,18 @@ export function Activities() {
     },
   ]
 
+  const head = {
+    he: 'הפעילויות שלנו',
+    eng: 'Our Activities',
+  }
+
   return (
     <section className='activities-page-container'>
       <h2>{prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}</h2>
       <Nav origin={origin} links={links} isMain={true} />
 
       <section>
+        <HeadContainer text={head} />
         <Outlet />
       </section>
     </section>

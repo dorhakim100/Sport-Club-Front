@@ -12,6 +12,9 @@
         margin-top: 2em;
         // min-width:300px;
         // width: 40vw;
+        display: grid;
+        justify-items: center;
+
     }
 
     .input-container{
@@ -23,10 +26,14 @@
     justify-items: center;
     gap: 1em;
     font-size: 0.8em;
+    // width: 50%;
+    // margin: auto;
+    width: fit-content;
+
+    max-width: 600px;
+    min-width: 300px;
 
     input{
-        max-width: 600px;
-        min-width: 300px;
     }
     }
 

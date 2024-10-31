@@ -13,6 +13,7 @@ import { updateMessage } from '../store/actions/message.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { MessagesFilter } from '../cmps/MessagesFilter.jsx'
 import { MessagesList } from '../cmps/MessagesList.jsx'
+import { DoneMessageButton } from '../cmps/DoneMessageButton.jsx'
 
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
@@ -20,6 +21,9 @@ import DeleteIcon from '@mui/icons-material/Delete'
 
 export function MessagePreview({ message, setMessages }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const navigate = useNavigate()
+
+  const [isHover, setIsHover] = useState(false)
 
   async function handleDoneChange(messageId) {
     console.log(messageId)
@@ -53,30 +57,23 @@ export function MessagePreview({ message, setMessages }) {
           ? 'message-container dark-mode'
           : 'message-container'
       }
+      onClick={() => {
+        if (isHover) return
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        navigate(`/admin/message/${message._id}`)
+      }}
     >
       <span>{message.title}</span>
       <p>{message.content}</p>
       {/* <Button variant='contained'>
         <DeleteIcon />
       </Button> */}
-      <div
-        className={
-          prefs.isDarkMode
-            ? 'checkbox-container dark-mode'
-            : 'checkbox-container'
-        }
-      >
-        <label htmlFor={`${message._id}Done`}>
-          {prefs.isEnglish ? 'Done' : 'בוצע'}
-        </label>
-        <input
-          type='checkbox'
-          name=''
-          id={`${message._id}Done`}
-          onChange={() => handleDoneChange(message._id)}
-          checked={message.isDone}
-        />
-      </div>
+
+      <DoneMessageButton
+        message={message}
+        setIsHover={setIsHover}
+        setChange={setMessages}
+      />
     </div>
   )
 }

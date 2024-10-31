@@ -1,0 +1,61 @@
+.message-details-container{
+    display: grid;
+    gap: 1em;
+
+    .sender-details-container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        align-items: center;
+
+        b{
+            justify-self: start;
+            font-size: 2.5em;
+        }
+
+        .checkbox-container{
+            // justify-self: center;
+            font-size: 1.1rem;
+            label{
+    
+                // width: 45px;
+            }
+        }
+    
+        .checkbox-container:has(input:checked){
+            label{
+                background-color: $dark-green;
+    
+                &:hover{
+                    background-color: $dark-green-hover;
+                }
+            }
+    
+    
+        }
+
+        span{
+            justify-self: end;
+            font-size: 1.5em;
+        }
+
+
+
+    }
+
+    .sender-info-container{
+        justify-self: start;
+        display: flex;
+        gap: 1em;
+
+        font-size: 1.5em;
+    }
+    
+    p{
+        justify-self: start;
+        font-size: 1.3em;
+
+    }
+
+
+
+}

@@ -74,7 +74,7 @@ async function save(message) {
       name: message.name,
       title: message.title,
       content: message.content,
-      phone: message.content,
+      phone: message.phone,
       createdAt: Date.now(),
       isDone: message.isDone,
     }
@@ -85,7 +85,7 @@ async function save(message) {
       name: message.name,
       title: message.title,
       content: message.content,
-      phone: message.content,
+      phone: message.phone,
       createdAt: Date.now(),
       isDone: false,
     }

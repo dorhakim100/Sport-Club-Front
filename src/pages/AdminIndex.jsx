@@ -32,14 +32,24 @@ export function AdminIndex() {
       eng: 'Updates',
     },
     {
+      path: 'message',
+      he: 'הודעות',
+      eng: 'Messages',
+    },
+    {
       path: 'order',
       he: 'הזמנות',
       eng: 'Orders',
     },
     {
-      path: 'message',
-      he: 'הודעות',
-      eng: 'Messages',
+      path: 'member',
+      he: 'מנויים חדשים',
+      eng: 'New Members',
+    },
+    {
+      path: 'coupon',
+      he: 'קופונים',
+      eng: 'Coupons',
     },
   ]
 

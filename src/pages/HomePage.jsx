@@ -102,7 +102,7 @@ export function HomePage() {
       <div className='info-center-container'>
         <div className='schedule-container'>
           <Link
-            to='class/schedule'
+            to='class'
             className={prefs.isDarkMode ? 'dark' : ''}
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' })

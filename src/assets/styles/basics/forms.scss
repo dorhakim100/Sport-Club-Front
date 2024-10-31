@@ -105,6 +105,14 @@ nav {
 	// max-width: 400px;
 	margin: 10px 0;
 
+
+	div{
+		// margin: auto;
+		// width: 100%;
+		// width: 50%;
+
+	}
+
   
 	input, textarea {
 
@@ -398,4 +406,13 @@ nav {
 		// font-size: 1.2em;
 	}
 
+}
+
+b{
+	font-family: assistantBold;
+
+}
+
+p,span,b{
+	// font-size: 1.2em;
 }
