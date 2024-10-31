@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 import { Nav } from '../cmps/Nav'
 import { HeadContainer } from '../cmps/HeadContainer'
@@ -9,6 +10,7 @@ import Divider from '@mui/material/Divider'
 
 export function Activities() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const location = useLocation()
 
   const origin = {
     path: '/activities',
@@ -66,13 +68,15 @@ export function Activities() {
     eng: 'Our Activities',
   }
 
+  console.log(location)
+
   return (
     <section className='activities-page-container'>
       <h2>{prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}</h2>
       <Nav origin={origin} links={links} isMain={true} />
 
       <section>
-        <HeadContainer text={head} />
+        {location.pathname === '/activities' && <HeadContainer text={head} />}
         <Outlet />
       </section>
     </section>

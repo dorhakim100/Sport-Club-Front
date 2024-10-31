@@ -49,6 +49,10 @@ import { TrainerEdit } from './pages/TrainerEdit.jsx'
 import { MessageIndex } from './pages/MessageIndex.jsx'
 import { MessageDetails } from './pages/MessageDetails.jsx'
 
+import { MemberIndex } from './pages/MemberIndex.jsx'
+
+import { CouponIndex } from './pages/CouponIndex.jsx'
+
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
 import { AccessibilityButton } from './cmps/AccessibilityButton'
@@ -131,6 +135,8 @@ export function App() {
               <Route path='message' element={<MessageIndex />} />
               <Route path='message/:messageId' element={<MessageDetails />} />
               <Route path='order' element={<OrderIndex />} />
+              <Route path='member' element={<MemberIndex />} />
+              <Route path='coupon' element={<CouponIndex />} />
             </Route>
           </Routes>
         </section>

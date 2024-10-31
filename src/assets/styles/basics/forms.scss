@@ -30,6 +30,17 @@ nav.main{
 	justify-items: center;
 	gap: 3em;
 
+	@media (max-width:740px) {
+
+		
+
+
+		// display: block;
+		grid-template-columns: 1fr;
+
+		
+	}
+
 
 	:first-child{
 		grid-column: 1/-1;
@@ -50,6 +61,21 @@ nav.main{
 		}
 		display: grid;
 		grid-template-columns: repeat(2,150px);
+
+		@media (max-width:1140px) {
+
+
+				grid-template-columns: repeat(2,80px);
+				img{
+					width: 80px;
+				}
+	
+
+	
+	
+			// display: block;
+			
+		}
 
 		// display: flex;
 		align-items: center;
@@ -117,6 +143,7 @@ nav {
 	input, textarea {
 
 	  width: 100%;
+	  min-width: 220px;
 	  padding: 12px 15px;
 	  font-size: 16px;
 	  border: 2px solid #ccc;

@@ -32,6 +32,8 @@ export function ClassDetails() {
     <div className='page-container class-details'>
       <HeadContainer text={head} />
       <div className='class-details-container'>
+        {' '}
+        <img src={clas.img} alt='' />
         <div
           className={
             prefs.isDarkMode ? 'info-container dark-mode' : 'info-container'
@@ -40,14 +42,12 @@ export function ClassDetails() {
           <p>{prefs.isEnglish ? clas.preview.eng : clas.preview.he}</p>
           <div className='trainers-container'>
             {clas.trainers.map((trainer) => (
-              <div
-                className='trainer-container'
+              <Link
+                to={`/class/trainer/${trainer.id}`}
                 key={`${trainer.id}ClassDetails`}
               >
-                <Link to={`/class/trainer/${trainer.id}`}>
-                  {prefs.isEnglish ? trainer.name.eng : trainer.name.he}
-                </Link>
-              </div>
+                {prefs.isEnglish ? trainer.name.eng : trainer.name.he}
+              </Link>
             ))}
           </div>
           <div className='intensity-container'>
@@ -55,7 +55,6 @@ export function ClassDetails() {
             <IntensityRange intensity={clas.intensity} isReadOnly={true} />
           </div>
         </div>
-        <img src={clas.img} alt='' />
       </div>
       <ContactUs />
     </div>

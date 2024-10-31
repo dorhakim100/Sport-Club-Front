@@ -119,14 +119,19 @@ export function LoginSignupForm({ isSignup }) {
       //   await onAddComment(comment)
       if (isSignup) {
         const signed = await signup(cred)
-        showSuccessMsg('Signed in successfully')
+        showSuccessMsg(
+          prefs.isEnglish ? 'Signed in successfully' : 'רישום בוצע בהצלחה'
+        )
       } else {
         const logged = await login(cred)
-        showSuccessMsg('Loged in successfully')
+        showSuccessMsg(
+          prefs.isEnglish ? 'Loged in successfully' : 'חיבור בוצע בהצלחה'
+        )
       }
       navigate('/')
     } catch (err) {
       console.log(err)
+      showErrorMsg(prefs.isEnglish ? `Couldn't login` : 'לא היה ניתן להתחבר')
     } finally {
       setIsLoading(false)
     }
