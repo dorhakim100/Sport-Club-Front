@@ -24,10 +24,10 @@ export function trainerReducer(state = initialState, action) {
       break
     case REMOVE_TRAINER:
       const lastRemovedItem = state.trainers.find(
-        (trainer) => trainer._id === action.itemId
+        (trainer) => trainer._id === action.trainerId
       )
       trainers = state.trainers.filter(
-        (trainer) => trainer._id !== action.itemId
+        (trainer) => trainer._id !== action.trainerId
       )
       newState = { ...state, trainers, lastRemovedItem }
       break

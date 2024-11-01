@@ -42,11 +42,19 @@ export function SwiperCarousel({ imgs }) {
         //   clickable: false,
         // }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]} // Include the Autoplay module
-        className='mySwiper2'
+        className='home-swiper'
       >
         {imgs.map((img, index) => (
-          <SwiperSlide key={img.id}>
-            <img src={img.link} alt={`Slide ${index + 1}`} />
+          <SwiperSlide key={img.id} className='home-slide'>
+            <img
+              src={img.link}
+              alt={`Slide ${index + 1}Blur`}
+              className='blur'
+            />
+
+            <div className='img-container'>
+              <img src={img.link} alt={`Slide ${index + 1}`} />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
