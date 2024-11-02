@@ -178,7 +178,7 @@ async function getCartItems(cart) {
 }
 
 // To quickly create an admin user, uncomment the next line
-// _createAdmin()
+_createAdmin()
 async function _createAdmin() {
   const userCred = {
     username: 'admin',

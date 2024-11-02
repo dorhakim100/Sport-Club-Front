@@ -139,8 +139,14 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
   }, [editClass.occurrences])
 
   const onRemoveClass = (idToRemove) => {
-    const newDays = selectedDays.filter((day) => day.id !== idToRemove)
-    setSelectedDays(newDays)
+    console.log(editClass)
+    console.log(selectedDays)
+    // const newDays = selectedDays.filter((day) => day.id !== idToRemove)
+    const newOccurrences = editClass.occurrences.filter(
+      (occur) => occur.id !== idToRemove
+    )
+    setEditClass({ ...editClass, occurrences: newOccurrences })
+    // setSelectedDays(newDays)
   }
 
   //   const handleTimeChange = (ev, type, occurId) => {
