@@ -23,6 +23,7 @@ export function ClassDetails() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
   const [trainers, setTrainers] = useState([])
+  console.log(trainers)
 
   const head = {
     he: clas.title.he,
@@ -58,7 +59,7 @@ export function ClassDetails() {
             prefs.isDarkMode ? 'info-container dark-mode' : 'info-container'
           }
         >
-          <p>{prefs.isEnglish ? clas.preview.eng : clas.preview.he}</p>
+          <p>{prefs.isEnglish ? clas.description.eng : clas.description.he}</p>
           <div className='trainers-container'>
             {trainers.map((trainer) => (
               <Link

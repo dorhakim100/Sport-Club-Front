@@ -6,6 +6,7 @@ import { he } from 'date-fns/locale'
 
 import dayjs from 'dayjs'
 import { makeId } from '../services/util.service'
+import { capitalizeFirstLetter } from '../services/util.service'
 
 import { TrainerSelect } from './TrainerSelect'
 
@@ -34,8 +35,6 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
 
   const handleDayChange = (event, newSelectedDay) => {
     const id = makeId()
-    selectedDays.push({ str: newSelectedDay, id })
-    setSelectedDays([...selectedDays])
 
     const dayString = newSelectedDay.toString()
 
@@ -60,6 +59,7 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
       day: fullDay,
       from: '',
       to: '',
+      time: dayString,
       trainer: {
         id: '',
         name: {
@@ -68,20 +68,109 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
         },
       },
     }
+
+    console.log(occurToPush)
+
     // setEditOccur({ ...editOccur, day: fullDay, id })
     setEditOccur({ ...occurToPush })
     editClass.occurrences.push(occurToPush)
     setEditClass({ ...editClass })
+    selectedDays.push({ ...occurToPush })
+    setSelectedDays([...selectedDays])
+  }
+
+  function getNextDateWithDayAndTime(day, time = '00:00') {
+    const daysOfWeek = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ]
+    const dayIndex = daysOfWeek.indexOf(day)
+
+    if (dayIndex === -1) throw new Error('Invalid day provided')
+
+    const [hour, minute] = time.split(':').map(Number)
+    console.log(time)
+    const today = new Date()
+    let resultDate = new Date(today)
+
+    // Calculate how many days to add to get the next occurrence of the day
+    let daysToAdd = (dayIndex - today.getDay() + 7) % 7
+    if (
+      daysToAdd === 0 &&
+      (hour < today.getHours() ||
+        (hour === today.getHours() && minute <= today.getMinutes()))
+    ) {
+      daysToAdd = 7 // If today is the correct day but time has passed, set to next week
+    }
+
+    resultDate.setDate(today.getDate() + daysToAdd)
+    resultDate.setHours(hour, minute, 0, 0)
+
+    console.log(resultDate)
+
+    return resultDate // Returns in the desired format
   }
 
   useEffect(() => {
-    console.log(editClass)
-  }, [editClass])
+    const { occurrences } = editClass
+    console.log(occurrences)
+    const daysToSet = occurrences.map((occur) => {
+      console.log(occur)
+      const dayToSet = {
+        id: occur.id,
+        time: getNextDateWithDayAndTime(
+          capitalizeFirstLetter(occur.day),
+          occur.from || '00:00'
+        ),
+        from: occur.from || '',
+        to: occur.to || '',
+        trainer: occur.trainer,
+        day: occur.day,
+      }
+      return dayToSet
+    })
+    console.log(daysToSet)
+    setSelectedDays(daysToSet)
+  }, [editClass.occurrences])
 
   const onRemoveClass = (idToRemove) => {
     const newDays = selectedDays.filter((day) => day.id !== idToRemove)
     setSelectedDays(newDays)
   }
+
+  //   const handleTimeChange = (ev, type, occurId) => {
+  //     const date = new Date(ev.$d)
+  //     const timeString = date.toLocaleTimeString([], {
+  //       hour: '2-digit',
+  //       minute: '2-digit',
+  //       hour12: false,
+  //     })
+
+  //     let newOccur
+  //     if (editClass.occurrences.some((occur) => occur.id === occurId)) {
+  //       const idx = editClass.occurrences.findIndex(
+  //         (occurrence) => occurrence.id === occurId
+  //       )
+  //       const occur = editClass.occurrences.find(
+  //         (occurrence) => occurrence.id === occurId
+  //       )
+
+  //       newOccur = { ...occur, [type]: timeString }
+  //       editClass.occurrences.splice(idx, 1, newOccur)
+  //     } else {
+  //       newOccur = { ...editOccur, [type]: timeString }
+  //       editClass.occurrences.push({ ...newOccur })
+  //     }
+
+  //     console.log(newOccur)
+  //     console.log({ ...editClass })
+  //     setEditClass({ ...editClass })
+  //   }
 
   const handleTimeChange = (ev, type, occurId) => {
     const date = new Date(ev.$d)
@@ -91,18 +180,28 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
       hour12: false,
     })
 
-    const idx = editClass.occurrences.findIndex(
-      (occurrence) => occurrence.id === occurId
-    )
-    const occur = editClass.occurrences.find(
-      (occurrence) => occurrence.id === occurId
+    // Check if the occurrence with occurId already exists
+    const occurrenceExists = editClass.occurrences.some(
+      (occur) => occur.id === occurId
     )
 
-    const newOccur = { ...occur, [type]: timeString }
+    // Create updated occurrences array without mutating the original
+    const updatedOccurrences = occurrenceExists
+      ? editClass.occurrences.map((occur) =>
+          occur.id === occurId ? { ...occur, [type]: timeString } : occur
+        )
+      : [
+          ...editClass.occurrences,
+          { ...editOccur, id: occurId, [type]: timeString },
+        ]
 
-    editClass.occurrences.splice(idx, 1, newOccur)
+    // Set the updated occurrences into editClass
+    setEditClass((prevEditClass) => ({
+      ...prevEditClass,
+      occurrences: updatedOccurrences,
+    }))
 
-    setEditClass({ ...editClass })
+    console.log({ ...editClass, occurrences: updatedOccurrences })
   }
 
   return (
@@ -139,8 +238,8 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
             <div className='occur-container' key={day.id}>
               <Typography variant='body1' style={{ marginTop: '16px' }}>
                 {prefs.isEnglish
-                  ? format(day.str, 'EEEE') // Returns the full name of the day in English, e.g., "Friday"
-                  : format(day.str, 'EEEE', { locale: he })}
+                  ? format(day.time, 'EEEE') // Returns the full name of the day in English, e.g., "Friday"
+                  : format(day.time, 'EEEE', { locale: he })}
               </Typography>
               <div
                 className='times-container'
@@ -159,6 +258,11 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
                       onChange={(event) =>
                         handleTimeChange(event, 'from', day.id)
                       }
+                      value={
+                        day.from
+                          ? dayjs(`2022-04-17T${day.from}`)
+                          : dayjs(`2022-04-17T15:30`)
+                      }
                     />
                   </DemoItem>
 
@@ -168,6 +272,11 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
                       defaultValue={dayjs('2022-04-17T15:30')}
                       onChange={(event) =>
                         handleTimeChange(event, 'to', day.id)
+                      }
+                      value={
+                        day.to
+                          ? dayjs(`2022-04-17T${day.to}`)
+                          : dayjs(`2022-04-17T15:30`)
                       }
                     />
                   </DemoItem>
@@ -188,6 +297,7 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
                 editOccur={editOccur}
                 setEditOccur={setEditOccur}
                 id={day.id}
+                occur={day}
               />
             </div>
           )

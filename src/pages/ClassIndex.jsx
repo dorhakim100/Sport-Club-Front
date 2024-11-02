@@ -92,6 +92,7 @@ export function ClassIndex() {
       console.log(c)
       const max = await classService.getMaxPage()
       setMaxPage(max)
+      return c
     } catch (err) {
       console.log(err)
       showErrorMsg(
@@ -123,7 +124,11 @@ export function ClassIndex() {
     try {
       await removeClass(classId)
       showSuccessMsg(prefs.isEnglish ? 'Class removed' : 'שיעור הוסר')
-      getClass()
+      const newClass = await getClass()
+      if (newClass.length === 0) {
+        const pageToSet = filter.pageIdx - 1
+        setFilter({ ...filter, pageIdx: pageToSet })
+      }
     } catch (err) {
       showErrorMsg(prefs.isEnglish ? `Couldn't remove class` : 'שיעור לא הוסר')
     }

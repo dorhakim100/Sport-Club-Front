@@ -114,10 +114,9 @@ function getEmptyTrainer() {
 }
 
 function _createTrainers() {
-  let trainerId = 0
   const trainers = [
     {
-      _id: trainerId++,
+      _id: '0',
       name: { he: 'שביט אביטל', eng: 'Shavit Avital' },
       types: ['gym', 'studio'],
       img: 'https://sb.kaleidousercontent.com/67418/1672x1018/6463a5af0d/screenshot-2022-05-24-at-15-22-28.png',
@@ -128,7 +127,7 @@ function _createTrainers() {
       experience: '01-01-2005',
     },
     {
-      _id: trainerId++,
+      _id: '1',
       name: { he: 'נועה כהן', eng: 'Noa Cohen' },
       types: ['studio', 'yoga'],
       img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn9zilY2Yu2hc19pDZFxgWDTUDy5DId7ITqA&s',
@@ -139,7 +138,7 @@ function _createTrainers() {
       experience: '15-06-2010',
     },
     {
-      _id: trainerId++,
+      _id: '2',
       name: { he: 'רן לוי', eng: 'Ran Levi' },
       types: ['gym', 'yoga'],
       img: 'https://sb.kaleidousercontent.com/67418/1920x1545/c5f15ac173/samuel-raita-ridxdghg7pw-unsplash.jpg',
@@ -150,7 +149,7 @@ function _createTrainers() {
       experience: '10-09-2008',
     },
     {
-      _id: trainerId++,
+      _id: '3',
       name: { he: 'מירב בן דוד', eng: 'Mirev Ben David' },
       types: ['gym', 'studio'],
       img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqCLdOQljlb1LPXcGyeXJbUcWm9UYIgcnvbA&s',
@@ -161,7 +160,7 @@ function _createTrainers() {
       experience: '22-03-2012',
     },
     {
-      _id: trainerId++,
+      _id: '4',
       name: { he: 'איתי קפלן', eng: 'Itay Kaplan' },
       types: ['gym', 'yoga', 'studio'],
       img: 'https://storage.googleapis.com/support-forums-api/avatar/profile-63011905-5200827860822575448.png',

@@ -56,6 +56,7 @@ export async function addClass(clas) {
 
 export async function updateClass(clas) {
   try {
+    console.log(clas)
     const savedClass = await classService.save(clas)
 
     store.dispatch(getCmdUpdateClass(savedClass))

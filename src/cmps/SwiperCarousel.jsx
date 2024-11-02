@@ -27,6 +27,7 @@ export function SwiperCarousel({ imgs }) {
         style={{
           '--swiper-navigation-color': '#4CAF50',
           '--swiper-pagination-color': '#fff',
+          direction: 'rtl',
         }}
         // loop={true}
         spaceBetween={10}

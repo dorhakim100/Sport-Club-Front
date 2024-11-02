@@ -69,6 +69,7 @@ export function ClassEdit() {
     try {
       setIsLoading(true)
       const clas = await classService.getById(classId)
+      console.log(clas)
       await loadTrainers({ isAll: true })
       const t = classService.getClassTrainer(clas)
       setClassTrainers(t)
@@ -150,8 +151,8 @@ export function ClassEdit() {
 
   async function onSaveClass(ev) {
     ev.preventDefault()
-    const { name, types } = editClass
-
+    // const { name, types } = editClass
+    console.log(editClass)
     setIsLoading(true)
     try {
       const savedClass = await updateClass(editClass)
@@ -218,15 +219,16 @@ export function ClassEdit() {
                 : 'input-container name'
             }
           >
-            <label htmlFor='' style={{ backgroundColor: 'transparent' }}>
+            {/* <label htmlFor='' style={{ backgroundColor: 'transparent' }}>
               {prefs.isEnglish ? 'name:' : 'כותרת:'}
-            </label>
+            </label> */}
             <input
               onChange={handleChange}
               name='title'
               type='text'
               value={prefs.isEnglish ? editClass.title.eng : editClass.title.he}
-              style={{ width: 200 }}
+              style={{ gridColumn: '1/-1' }}
+              placeholder={prefs.isEnglish ? 'Name' : 'כותרת'}
             />
           </div>{' '}
           <div

@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux'
 export function IntensityRange({ intensity, handleChange, isReadOnly }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   return (
-    <div className='intensity-slider'>
+    <div className='intensity-slider' style={{ direction: 'ltr' }}>
       <input
         className={
           prefs.isEnglish
             ? `intensity-range ltr ${isReadOnly ? 'read-only' : ''}`
-            : `intensity-range ${isReadOnly ? 'read-only' : ''}`
+            : `intensity-range ltr ${isReadOnly ? 'read-only' : ''}`
         }
         type='range'
         onChange={handleChange}

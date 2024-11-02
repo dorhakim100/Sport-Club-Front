@@ -22,6 +22,7 @@ export function TrainerSelect({
   editOccur,
   setEditOccur,
   id,
+  occur,
 }) {
   const theme = createTheme({
     direction: prefs.isEnglish ? 'ltr' : 'rtl',
@@ -55,47 +56,46 @@ export function TrainerSelect({
     stylisPlugins: [prefixer], // Only prefixer, no RTL plugin
   })
 
-  //   const [occur, setOccur] = useState({
-  //     trainer: {
-  //       name: { he: '', eng: '' },
-  //     },
-  //   })
-
   const [selectedTrainer, setSelectedTrainer] = useState('')
 
   const handleChange = (event) => {
     const trainerToSet = event.target.value
-    setSelectedTrainer(event.target.value)
-
-    setEditOccur({
-      ...editOccur,
-      trainer: { id: trainerToSet._id, name: trainerToSet.name },
-      id,
-    })
+    console.log(trainerToSet)
+    // setSelectedTrainer(trainerToSet)
+    setTrainerToClass(trainerToSet)
+    // setEditOccur({
+    //   ...editOccur,
+    //   trainer: { id: trainerToSet._id, name: trainerToSet.name },
+    //   id,
+    // })
   }
-  const setTrainerToClass = () => {
+
+  const setTrainerToClass = (trainerToSet) => {
+    console.log(occur)
+    console.log(editClass)
     const idx = editClass.occurrences.findIndex(
-      (occurrence) => occurrence.id === editOccur.id
-    )
-    const occur = editClass.occurrences.find(
-      (occurrence) => occurrence.id === editOccur.id
+      (occurrence) => occurrence.id === occur.id
     )
 
-    const newOccur = { ...occur, trainer: editOccur.trainer }
+    const newOccur = {
+      ...occur,
+      trainer: { id: trainerToSet._id, name: trainerToSet.name },
+    }
 
     editClass.occurrences.splice(idx, 1, newOccur)
 
-    setEditClass({ ...editClass })
+    setSelectedTrainer(trainerToSet)
+    console.log(editClass)
+    const classToSet = { ...editClass }
+    setEditClass(classToSet)
   }
   useEffect(() => {
-    setTrainerToClass()
-  }, [editOccur])
-
-  // Create theme based on language preference
-  // const theme = createTheme({
-  //   direction: prefs.isEnglish ? 'ltr' : 'rtl',
-  //   // Add other theme customization here if needed
-  // })
+    console.log(occur)
+    const trainerToSet = trainers.find(
+      (trainer) => trainer._id === occur.trainer.id
+    )
+    setSelectedTrainer(trainerToSet)
+  }, [occur])
 
   return (
     <CacheProvider value={prefs.isEnglish ? cacheLtr : cacheRtl}>
@@ -119,13 +119,7 @@ export function TrainerSelect({
             labelId='trainer'
             id='trainer'
             onChange={handleChange}
-            // value={trainer}
             value={selectedTrainer}
-            // value={
-            //   prefs.isEnglish
-            //     ? editOccur.trainer.name.eng
-            //     : editOccur.trainer.name.he
-            // }
             MenuProps={{
               disableScrollLock: true, // This prevents adding padding and overflow to the body
             }}

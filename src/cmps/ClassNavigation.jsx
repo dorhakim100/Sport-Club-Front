@@ -24,6 +24,7 @@ export function ClassNavigation({ filter, setFilter, maxPage, onAddClass }) {
         className='page-controller-container'
       >
         <Button
+          disabled={filter.pageIdx + 1 === maxPage}
           onClick={() => {
             onPageNavigation(1, filter, setFilter, maxPage)
           }}
