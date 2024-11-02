@@ -98,11 +98,12 @@ export function ContactUs() {
           style={{ resize: 'none' }}
           onChange={handleChange}
           value={editMessage.content}
+          placeholder={prefs.isEnglish ? 'Content' : 'גוף ההודעה'}
         />
+        <LoadingButton variant='contained' onClick={() => onSend()}>
+          {prefs.isEnglish ? 'Send' : 'שליחה'}
+        </LoadingButton>
       </div>{' '}
-      <LoadingButton variant='contained' onClick={() => onSend()}>
-        {prefs.isEnglish ? 'Send' : 'שליחה'}
-      </LoadingButton>
     </div>
   )
 }

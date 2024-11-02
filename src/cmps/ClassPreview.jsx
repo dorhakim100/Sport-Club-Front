@@ -51,7 +51,7 @@ export function ClassPreview({ clas, onRemoveClass }) {
         )}
         <p>
           {/* {prefs.isEnglish ? 'Trainers:' : 'מדריכים:'} */}
-          {clas.trainers.map((trainer, index) => {
+          {/* {clas.trainers.map((trainer, index) => {
             return (
               <span key={`${makeId()}ClassPreview`}>
                 {prefs.isEnglish
@@ -60,7 +60,8 @@ export function ClassPreview({ clas, onRemoveClass }) {
                 {index + 1 !== clas.trainers.length && ','}
               </span>
             )
-          })}
+          })} */}
+          {prefs.isEnglish ? clas.preview.eng : clas.preview.he}
         </p>
       </div>
       <div className={prefs.isEnglish ? 'img-container ltr' : 'img-container'}>

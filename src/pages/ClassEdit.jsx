@@ -17,6 +17,7 @@ import { uploadService } from '../services/upload.service.js'
 import { capitalizeFirstLetter } from '../services/util.service.js'
 
 import { HeadContainer } from '../cmps/HeadContainer.jsx'
+import { DaySelector } from '../cmps/DaySelector.jsx'
 
 import { Button } from '@mui/material'
 import { IntensityRange } from '../cmps/IntensityRange.jsx'
@@ -48,6 +49,8 @@ export function ClassEdit() {
   const [editClass, setEditClass] = useState(classService.getEmptyClass())
   const [img, setImg] = useState(null)
 
+  const [classTrainers, setClassTrainers] = useState([])
+
   const trainers = useSelector(
     (stateSelector) => stateSelector.trainerModule.trainers
   )
@@ -67,7 +70,8 @@ export function ClassEdit() {
       setIsLoading(true)
       const clas = await classService.getById(classId)
       await loadTrainers({ isAll: true })
-
+      const t = classService.getClassTrainer(clas)
+      setClassTrainers(t)
       setEditClass({ ...clas })
       setClas({ ...clas })
       setImg(clas.img)
@@ -232,12 +236,33 @@ export function ClassEdit() {
                 : 'input-container preview'
             }
           >
-            <textarea
+            <input
               onChange={handleChange}
               name='preview'
+              placeholder={prefs.isEnglish ? 'Preview' : 'תקציר'}
               type='text'
               value={
                 prefs.isEnglish ? editClass.preview.eng : editClass.preview.he
+              }
+              style={{ gridColumn: '1/-1' }}
+            />
+          </div>{' '}
+          <div
+            className={
+              prefs.isDarkMode
+                ? 'input-container preview dark-mode'
+                : 'input-container preview'
+            }
+          >
+            <textarea
+              onChange={handleChange}
+              name='description'
+              type='text'
+              placeholder={prefs.isEnglish ? 'Description' : 'תיאור'}
+              value={
+                prefs.isEnglish
+                  ? editClass.description.eng
+                  : editClass.description.he
               }
             />
           </div>{' '}
@@ -247,7 +272,7 @@ export function ClassEdit() {
           />
           <div className='input-container'>
             <div className='class-edit-trainers-container'>
-              {trainers.map((trainer) => {
+              {/* {trainers.map((trainer) => {
                 return (
                   <div
                     className={
@@ -266,17 +291,20 @@ export function ClassEdit() {
                     <input
                       onChange={(event) => handleChange(event, trainer)}
                       type='checkbox'
-                      checked={editClass.trainers.some(
-                        (t) => t.id === trainer._id
-                      )}
+                      checked={classTrainers.some((t) => t.id === trainer._id)}
                       name='trainers'
                       id={`${trainer._id}ClassEdit`}
                     />
                   </div>
                 )
-              })}
+              })} */}
             </div>
           </div>
+          <DaySelector
+            editClass={editClass}
+            setEditClass={setEditClass}
+            trainers={trainers}
+          />
           <LoadingButton variant='contained' type='submit' loading={isLoading}>
             {prefs.isEnglish ? 'Submit' : 'בצע'}
           </LoadingButton>

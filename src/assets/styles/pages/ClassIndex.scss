@@ -91,10 +91,15 @@
       transition: 0.3s ease-out;
       overflow: hidden;
       cursor: pointer;
+
+  
+
+
       
       .title-container{
           display: grid;
           grid-template-rows: repeat(3,1fr);
+          grid-template-columns: repeat(2,1fr);
           position: relative;
           padding: 0.5em;
 
@@ -104,7 +109,7 @@
           }
 
           .class-button-group{
-            justify-self: start;
+            justify-self: end;
             align-self: center;
           }
 

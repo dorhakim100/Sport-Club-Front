@@ -88,7 +88,8 @@ export function ClassIndex() {
   const getClass = async () => {
     try {
       setIsLoading(true)
-      await loadClasses(filter) // Load classes with the current filter
+      const c = await loadClasses(filter) // Load classes with the current filter
+      console.log(c)
       const max = await classService.getMaxPage()
       setMaxPage(max)
     } catch (err) {

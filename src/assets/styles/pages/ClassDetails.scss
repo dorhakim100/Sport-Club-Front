@@ -22,24 +22,28 @@
     .info-container{
         display: grid;
         grid-template-rows: 1fr auto 100px;
+        grid-template-columns: 1fr;
         gap: 1em;
 
         p{
+            // grid-column: 1/-1;
+            text-align: start;
             justify-self: start;
             font-size: 1.2em;
             margin: 0px;
         }
-
+        
         .trainers-container{
+            // grid-column: 1/-1;
             align-self: center;
             display: flex;
             flex-wrap: wrap;
             gap: 1em;
-
+            
             .trainer-container{
-
+                
             }
-
+            
             a{
                 color: $bold-navy;
                 padding: 0.8em;
@@ -47,23 +51,24 @@
                 background-color: $primary-light-blue;
                 border-radius: 8px;
                 transition: 0.3s ease;
-
+                
                 &:hover{
                     background-color: $dark-blue;
                     color: white;
                 }
             }
-
-
-
-
+            
+            
+            
+            
         }
-
+        
         .intensity-container{
+            // grid-column: 1/-1;
             align-self: end;
         }
     }
-
+    
     .info-container.dark-mode{
         a{
             // color: white;

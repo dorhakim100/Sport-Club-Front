@@ -13,7 +13,7 @@
         // margin-inline-start: 1em;
         width: 60%;
         max-width: 800px;
-        margin: auto;
+        // margin: auto;
         margin-bottom: 1em;
 
         gap: 1em;
@@ -38,5 +38,10 @@
             
             
         }
+    }
+
+    button{
+        justify-self: end;
+        // align-self: end;
     }
 }

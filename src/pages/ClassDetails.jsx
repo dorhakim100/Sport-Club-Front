@@ -14,20 +14,39 @@ import { HeadContainer } from '../cmps/HeadContainer'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { IntensityRange } from '../cmps/IntensityRange'
 import { ContactUs } from '../cmps/ContactUs'
+import { classService } from '../services/class/class.service'
+import { setIsLoading } from '../store/actions/system.actions'
 
 export function ClassDetails() {
   const { classId } = useParams()
   const clas = useSelector((stateSelector) => stateSelector.classModule.class)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
+  const [trainers, setTrainers] = useState([])
+
   const head = {
     he: clas.title.he,
     eng: clas.title.eng,
   }
 
+  const setClass = async () => {
+    try {
+      setIsLoading(true)
+      const c = await loadClass(classId)
+      console.log(c)
+      const t = classService.getClassTrainer({ ...c })
+      setTrainers(t)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   useEffect(() => {
-    loadClass(classId)
+    setClass()
   }, [classId])
+
   return (
     <div className='page-container class-details'>
       <HeadContainer text={head} />
@@ -41,7 +60,7 @@ export function ClassDetails() {
         >
           <p>{prefs.isEnglish ? clas.preview.eng : clas.preview.he}</p>
           <div className='trainers-container'>
-            {clas.trainers.map((trainer) => (
+            {trainers.map((trainer) => (
               <Link
                 to={`/class/trainer/${trainer.id}`}
                 key={`${trainer.id}ClassDetails`}
