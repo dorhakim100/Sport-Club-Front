@@ -1,37 +1,247 @@
 .schedule-container{
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
 
     
-
-    .schedule-img-container{
-
-
-        align-self: center;
-        justify-self: center;
-        display: flex;
+    .day-container{
+        display: grid;
+        grid-template-rows: 100px;
         align-items: center;
-        justify-items: center;
 
-        // width: 80vw;
+        &:last-of-type{
 
-        // margin: auto;
-        margin-bottom: 1em;
+            border-top-right-radius: 5px;
+        }
 
-        transition: 0.2s;
-      
+        &:first-of-type{
 
-        img{
-            max-width: 1000px;
+            border-top-left-radius: 5px;
+        }
+        
 
-            width: 80vw;
-            border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        .hour-container{
 
+            // padding: 0.5em;
+            font-size: 1.3em;
+            display: grid;
+            grid-template-rows: repeat(3,auto);
+            align-items: center;
+
+            
+            max-height: 200px;
+            min-height: 120px;
+            height: 100%;
+            
+            &.day{
+                min-height: 100px;
+
+                height: 100%;
+                // height: 100px;
+                b{
+                    align-self: center;
+
+                }
+                grid-template-rows: 1fr;
+                background-color: $light-gray;
+                color: $dark-green;
+            }
+            
+            &:nth-of-type(2n):not(.day){
+                
+                // background-color: $medium-gray;
+            }
+
+            .time-container{
+                font-family: assistantBold;
+            }
+            
+            
+            
+        }
+
+        &:first-of-type{
+
+            border-bottom-left-radius: 5px;
+        }
+
+        &:last-of-type{
+
+            border-bottom-right-radius: 5px;
         }
     }
 
-    .control-container{
-        margin: 1em;
+
+
+    b{
+        font-size: 1.5em;
     }
+
+
+
+
+ &.dark-mode{
+    .day-container{
+     border-top: 2px solid $light-gray;
+        border-bottom: 2px solid $light-gray;
+        border-left: 2px solid $light-gray;
+        
+
+        .hour-container{
+            border-bottom: 2px solid $light-gray;
+            
+            
+            &:last-of-type{
+                border-bottom: none;
+            }
+            
+            &.day{
+                border-bottom: 2px solid $light-gray;
+
+            }
+
+            &.day{
+              
+                background-color: $dark-gray;
+                color: $primary-light-blue;
+                background-color: $very-dark-blue;
+                color: $medium-green;
+
+                // background-color: $bold-navy;
+                // color: white;
+            }
+        }
+
+    }
+
+}
+&.rtl{
+
+    .day-container{
+
+        &:last-of-type{
+
+            border-top-left-radius: 5px;
+            border-top-right-radius: 0px;
+        }
+        
+        &:first-of-type{
+            
+            border-top-right-radius: 5px;
+            border-top-left-radius: 0px;
+        }
+        &:first-of-type{
+            border-right: 2px solid $bold-navy;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 0px;
+            
+        }
+        
+        &:last-of-type{
+            border-right: none;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 0px;
+            
+        }
+
+   
+    }
+}
+&.rtl.dark-mode{
+
+    .day-container{
+
+        
+        &:first-of-type{
+            border-right: 2px solid $light-gray;
+            
+        }
+        
+        &:last-of-type{
+            border-right: none;
+            
+        }
+    }
+}
+
+    .day-container{
+        border-top: 2px solid $bold-navy;
+        border-bottom: 2px solid $bold-navy;
+        border-left: 2px solid $bold-navy;
+        
+        &:last-of-type{
+            border-right: 2px solid $bold-navy;
+
+            
+        }
+
+        
+        &.day{
+            grid-row: 1/2;
+    
+        }
+
+        .hour-container{
+            border-bottom: 2px solid $bold-navy;
+            
+            
+            &:last-of-type{
+                border-bottom: none;
+            }
+            
+            &.day{
+                border-bottom: 2px solid $bold-navy;
+
+            }
+        }
+        
+    }
+    &.dark-mode{
+
+        .day-container{
+            &:last-of-type{
+
+                border-right: 2px solid $light-gray;
+                
+            }
+
+        }
+
+    }
+    // flex-direction: column;
+
+    
+
+    // .schedule-img-container{
+
+
+    //     align-self: center;
+    //     justify-self: center;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-items: center;
+
+    //     // width: 80vw;
+
+    //     // margin: auto;
+    //     margin-bottom: 1em;
+
+    //     transition: 0.2s;
+      
+
+    //     img{
+    //         max-width: 1000px;
+
+    //         width: 80vw;
+    //         border-radius: 5px;
+    //         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    //     }
+    // }
+
+    // .control-container{
+    //     margin: 1em;
+    // }
 }

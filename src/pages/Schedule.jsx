@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { NavLink, Link, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import { classService } from '../services/class/class.service'
 import { scheduleService } from '../services/schedule/schedule.service'
 import { uploadService } from '../services/upload.service'
 import { setIsLoading } from '../store/actions/system.actions'
+import {
+  capitalizeFirstLetter,
+  translateDayToHebrew,
+} from '../services/util.service'
 
 import { Nav } from '../cmps/Nav'
 
@@ -15,6 +20,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { containerClasses } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { HeadContainer } from '../cmps/HeadContainer'
+import { makeId } from '../services/util.service'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -34,14 +40,27 @@ export function Schedule() {
     (storeState) => storeState.systemModule.isLoading
   )
 
+  const [occurrs, setOccurrs] = useState([])
+
   const [schedules, setSchedules] = useState([])
   const [schedule, setSchedule] = useState({})
 
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [filter, setFilter] = useState({ pageIds: 0, isAll: false })
 
+  const daysOfWeek = [
+    'sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+  ]
+
   useEffect(() => {
     loadSchedules()
+    loadOccurrences()
   }, [])
 
   const loadSchedules = async () => {
@@ -52,6 +71,21 @@ export function Schedule() {
       return schedules
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  const loadOccurrences = async () => {
+    setIsLoading(true)
+    try {
+      const occurrences = await classService.getOccurrences()
+      setOccurrs(occurrences)
+      console.log(occurrences)
+    } catch (err) {
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't load schedule` : 'טעינת מערכת נכשלה'
+      )
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -95,18 +129,99 @@ export function Schedule() {
   ]
 
   return (
-    <section className='schedule-container'>
+    <section className='page-container schedule'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
       <Nav origin={origin} links={links} />
 
       <HeadContainer text={{ he: 'מערכת החוגים', eng: 'Schedule' }} />
 
-      {
+      <div
+        className={`schedule-container ${prefs.isEnglish ? '' : 'rtl'} ${
+          prefs.isDarkMode ? 'dark-mode' : ''
+        }`}
+      >
+        {daysOfWeek.map((day) => {
+          let counter = [1, 2, 3, 4, 5, 6]
+          // counter.length = 5
+          return (
+            <div className='day-container'>
+              <div className='hour-container day' key={`${day}${makeId()}`}>
+                <b>
+                  {prefs.isEnglish
+                    ? capitalizeFirstLetter(day)
+                    : translateDayToHebrew(day)}
+                </b>
+              </div>
+              {occurrs.map((occur) => {
+                return (
+                  occur.day === day && (
+                    <div className='hour-container'>
+                      <b>
+                        {prefs.isEnglish ? occur.title.eng : occur.title.he}
+                      </b>
+                      <span
+                        className='time-container'
+                        style={{ direction: 'ltr' }}
+                      >{`${occur.from}-${occur.to}`}</span>
+                      <span>
+                        {prefs.isEnglish
+                          ? occur.trainer.name.eng
+                          : occur.trainer.name.he}
+                      </span>
+                    </div>
+                  )
+                )
+              })}
+              {/* {counter.map((count) => {
+                console.log(occurrs)
+                return occurrs.map((occur, index, array) => {
+                  console.log(index)
+                  if (occur.day === day) {
+                    // array.splice(index, 1)
+                    return (
+                      <div className='hour-container'>
+                        <b>
+                          {prefs.isEnglish ? occur.title.eng : occur.title.he}
+                        </b>
+                        <span>
+                          {prefs.isEnglish
+                            ? occur.trainer.name.eng
+                            : occur.trainer.name.he}
+                        </span>
+                        <span
+                          style={{ direction: 'ltr' }}
+                        >{`${occur.from}-${occur.to}`}</span>
+                      </div>
+                    )
+                  } else {
+                    return (
+                      <div className='hour-container'>
+                        <span>1</span>
+                        <span>1</span>
+                        <span>1</span>
+                      </div>
+                    )
+                  }
+                })
+
+              })} */}
+              {/* <div className='hour-container'>{counter++}</div>
+              <div className='hour-container'>{counter++}</div>
+              <div className='hour-container'>{counter++}</div>
+              <div className='hour-container'>{counter++}</div>
+              <div className='hour-container'>{counter++}</div>
+              <div className='hour-container'>{counter++}</div> */}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* {
         <div className='schedule-img-container' key={schedule._id}>
           <img src={schedule.link} alt='' />
         </div>
-      }
-      {user && user.isAdmin && (
+      } */}
+      {/* {user && user.isAdmin && (
         <div className='control-container'>
           <LoadingButton
             component='label'
@@ -120,7 +235,7 @@ export function Schedule() {
             <VisuallyHiddenInput type='file' onChange={uploadFile} />
           </LoadingButton>
         </div>
-      )}
+      )} */}
     </section>
   )
 }

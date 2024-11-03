@@ -102,3 +102,22 @@ export function onPageNavigation(diff, filter, setFilter, maxPage) {
 export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
+
+export function translateDayToHebrew(day) {
+  const daysInHebrew = {
+    sunday: 'ראשון',
+    monday: 'שני',
+    tuesday: 'שלישי',
+    wednesday: 'רביעי',
+    thursday: 'חמישי',
+    friday: 'שישי',
+    saturday: 'שבת',
+  }
+
+  // Convert input to lowercase to ensure case insensitivity
+  return daysInHebrew[day.toLowerCase()] || 'Invalid day'
+}
+
+// Example usage
+console.log(translateDayToHebrew('sunday')) // Output: ראשון
+console.log(translateDayToHebrew('Wednesday')) // Output: רביעי

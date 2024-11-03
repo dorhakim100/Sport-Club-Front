@@ -14,6 +14,7 @@ export const classService = {
   getMaxPage,
   getEmptyClass,
   getClassTrainer,
+  getOccurrences,
 }
 
 if (!localStorage.getItem(STORAGE_KEY)) {
@@ -123,6 +124,26 @@ function getClassTrainer(clas) {
     trainers.push(occur.trainer)
   })
   return trainers
+}
+async function getOccurrences() {
+  try {
+    const classes = await query({ isAll: true })
+
+    const allOccurrences = []
+
+    classes.forEach((clas) => {
+      clas.occurrences.map((occur) => {
+        occur.title = clas.title
+        delete occur.time
+        allOccurrences.push(occur)
+      })
+    })
+    console.log(allOccurrences)
+    return allOccurrences
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
 }
 
 function _createClass() {

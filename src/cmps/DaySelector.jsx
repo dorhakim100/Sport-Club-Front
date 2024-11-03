@@ -57,8 +57,8 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
     const occurToPush = {
       id,
       day: fullDay,
-      from: '',
-      to: '',
+      from: '17:30',
+      to: '18:30',
       time: dayString,
       trainer: {
         id: '',
@@ -68,10 +68,6 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
         },
       },
     }
-
-    console.log(occurToPush)
-
-    // setEditOccur({ ...editOccur, day: fullDay, id })
     setEditOccur({ ...occurToPush })
     editClass.occurrences.push(occurToPush)
     setEditClass({ ...editClass })
@@ -139,14 +135,10 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
   }, [editClass.occurrences])
 
   const onRemoveClass = (idToRemove) => {
-    console.log(editClass)
-    console.log(selectedDays)
-    // const newDays = selectedDays.filter((day) => day.id !== idToRemove)
     const newOccurrences = editClass.occurrences.filter(
       (occur) => occur.id !== idToRemove
     )
     setEditClass({ ...editClass, occurrences: newOccurrences })
-    // setSelectedDays(newDays)
   }
 
   //   const handleTimeChange = (ev, type, occurId) => {
@@ -260,14 +252,14 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
                   <DemoItem label={prefs.isEnglish ? 'From' : 'משעה'}>
                     <MobileTimePicker
                       ampm={false}
-                      defaultValue={dayjs('2022-04-17T15:30')}
+                      defaultValue={dayjs('2022-04-17T17:30')}
                       onChange={(event) =>
                         handleTimeChange(event, 'from', day.id)
                       }
                       value={
                         day.from
                           ? dayjs(`2022-04-17T${day.from}`)
-                          : dayjs(`2022-04-17T15:30`)
+                          : dayjs(`2022-04-17T17:30`)
                       }
                     />
                   </DemoItem>
@@ -275,14 +267,14 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
                   <DemoItem label={prefs.isEnglish ? 'To' : 'עד השעה'}>
                     <MobileTimePicker
                       ampm={false}
-                      defaultValue={dayjs('2022-04-17T15:30')}
+                      defaultValue={dayjs('2022-04-17T18:30')}
                       onChange={(event) =>
                         handleTimeChange(event, 'to', day.id)
                       }
                       value={
                         day.to
                           ? dayjs(`2022-04-17T${day.to}`)
-                          : dayjs(`2022-04-17T15:30`)
+                          : dayjs(`2022-04-17T18:30`)
                       }
                     />
                   </DemoItem>
