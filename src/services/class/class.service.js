@@ -1,5 +1,6 @@
 import { storageService } from '../async-storage.service'
-import { makeId } from '../util.service'
+import { convertToDate, makeId } from '../util.service'
+
 import { userService } from '../user/user.service'
 
 const STORAGE_KEY = 'class'
@@ -24,6 +25,7 @@ if (!localStorage.getItem(STORAGE_KEY)) {
 async function query(filterBy = { pageIdx: 0 }) {
   var classes = await storageService.query(STORAGE_KEY)
   const { pageIdx } = filterBy
+
   if (filterBy.isAll) {
     return classes
   }
@@ -133,12 +135,17 @@ async function getOccurrences() {
 
     classes.forEach((clas) => {
       clas.occurrences.map((occur) => {
+        if (!occur.isActive) return
         occur.title = clas.title
         delete occur.time
         allOccurrences.push(occur)
       })
     })
-    console.log(allOccurrences)
+    allOccurrences.sort((item1, item2) => {
+      const from1 = convertToDate(item1.from)
+      const from2 = convertToDate(item2.from)
+      return from1 - from2
+    })
     return allOccurrences
   } catch (err) {
     console.log(err)
@@ -369,7 +376,17 @@ function _createClass() {
     },
   ]
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(classes))
+  const updatedClasses = classes.map((classItem) => {
+    return {
+      ...classItem,
+      occurrences: classItem.occurrences.map((occurrence) => ({
+        ...occurrence,
+        isActive: true,
+      })),
+    }
+  })
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedClasses))
 }
 
 // trainers: [

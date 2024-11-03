@@ -10,7 +10,7 @@ import { Button } from '@mui/material'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
-export function ClassNavigation({ filter, setFilter, maxPage, onAddClass }) {
+export function Controller({ filter, setFilter, maxPage, onAdd }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
@@ -47,7 +47,7 @@ export function ClassNavigation({ filter, setFilter, maxPage, onAddClass }) {
         </Button>
       </ButtonGroup>
       {user && user.isAdmin && (
-        <Button variant='contained' onClick={onAddClass}>
+        <Button variant='contained' onClick={onAdd}>
           {prefs.isEnglish ? 'Add' : 'הוסף'}
         </Button>
       )}

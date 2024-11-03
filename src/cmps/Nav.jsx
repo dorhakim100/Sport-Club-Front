@@ -3,6 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import Divider from '@mui/material/Divider'
+import { makeId } from '../services/util.service'
 
 export function Nav({ origin, links, isMain }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -26,8 +27,12 @@ export function Nav({ origin, links, isMain }) {
       {links.map((link, index) => {
         return (
           ((link.path === 'message' || link.path === 'order') && (
-            <>
-              <NavLink to={link.path} className={'notification-btn'}>
+            <div key={makeId()}>
+              <NavLink
+                to={link.path}
+                className={'notification-btn'}
+                key={makeId()}
+              >
                 {prefs.isEnglish ? link.eng : link.he}
 
                 {link.path === 'message' && openMessages > 0 && (
@@ -38,12 +43,12 @@ export function Nav({ origin, links, isMain }) {
               {index + 1 < links.length && (
                 <Divider orientation='vertical' flexItem />
               )}
-            </>
+            </div>
           )) ||
           (isMain && (
-            <>
+            <div key={makeId()}>
               <div className={'main-link-container'}>
-                <NavLink to={link.path}>
+                <NavLink to={link.path} key={makeId()}>
                   {prefs.isEnglish ? link.eng : link.he}
                 </NavLink>
                 <img
@@ -54,16 +59,16 @@ export function Nav({ origin, links, isMain }) {
               {/* {index + 1 < links.length && (
                 <Divider orientation='vertical' flexItem />
               )} */}
-            </>
+            </div>
           )) || (
-            <>
+            <div key={makeId()}>
               <NavLink to={link.path} className={'link'}>
                 {prefs.isEnglish ? link.eng : link.he}
               </NavLink>
               {index + 1 < links.length && (
                 <Divider orientation='vertical' flexItem />
               )}
-            </>
+            </div>
           )
         )
       })}

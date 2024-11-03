@@ -23,7 +23,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 import { Nav } from '../cmps/Nav'
 import { ClassList } from '../cmps/ClassList.jsx'
-import { ClassNavigation } from '../cmps/ClassNavigation.jsx'
+import { Controller } from '../cmps/Controller.jsx'
 import { HeadContainer } from '../cmps/HeadContainer'
 
 import Divider from '@mui/material/Divider'
@@ -153,11 +153,11 @@ export function ClassIndex() {
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
       <Nav origin={origin} links={links} />
       <HeadContainer text={head} />
-      <ClassNavigation
+      <Controller
         filter={filter}
         setFilter={setFilter}
         maxPage={maxPage}
-        onAddClass={onAddClass}
+        onAdd={onAddClass}
       />
       <ClassList classes={classes} onRemoveClass={onRemoveClass} />
     </section>

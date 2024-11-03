@@ -17,11 +17,13 @@ export function CouponList({ coupons, setCoupons, onDeleteCoupon }) {
       </div>
       {coupons.map((coupon) => {
         return (
-          <CouponPreview
-            coupon={coupon}
-            setCoupons={setCoupons}
-            onDeleteCoupon={onDeleteCoupon}
-          />
+          <div key={coupon._id}>
+            <CouponPreview
+              coupon={coupon}
+              setCoupons={setCoupons}
+              onDeleteCoupon={onDeleteCoupon}
+            />
+          </div>
         )
       })}
     </div>

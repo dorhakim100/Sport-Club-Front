@@ -19,7 +19,7 @@ export function CouponPreview({ coupon, setCoupons, onDeleteCoupon }) {
   return (
     <div
       className='coupon-container'
-      key={coupon._id}
+      // key={coupon._id}
       onClick={() => {
         if (isHover) return
         navigate(`/admin/coupon/${coupon._id}`)

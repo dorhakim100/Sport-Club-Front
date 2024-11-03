@@ -118,6 +118,13 @@ export function translateDayToHebrew(day) {
   return daysInHebrew[day.toLowerCase()] || 'Invalid day'
 }
 
+export function convertToDate(timeString) {
+  const [hours, minutes] = timeString.split(':').map(Number) // Split and convert to numbers
+  const now = new Date() // Get the current date
+  now.setHours(hours, minutes, 0, 0) // Set hours, minutes, and reset seconds and milliseconds
+  return now
+}
+
 // Example usage
 console.log(translateDayToHebrew('sunday')) // Output: ראשון
 console.log(translateDayToHebrew('Wednesday')) // Output: רביעי

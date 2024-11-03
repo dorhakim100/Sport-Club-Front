@@ -37,6 +37,8 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
     )
   }
 
+  console.log(pageIdx)
+
   if (pageIdx !== undefined) {
     const startIdx = pageIdx * PAGE_SIZE
     coupons = coupons.slice(startIdx, startIdx + PAGE_SIZE)

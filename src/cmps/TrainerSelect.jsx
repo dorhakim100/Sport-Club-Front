@@ -111,6 +111,7 @@ export function TrainerSelect({
             alignSelf: 'start',
             textAlign: 'start',
           }}
+          required
         >
           <InputLabel id='trainer'>
             {prefs.isEnglish ? 'Trainer' : 'מדריך'}

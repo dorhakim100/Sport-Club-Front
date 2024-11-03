@@ -60,6 +60,7 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
       from: '17:30',
       to: '18:30',
       time: dayString,
+      isActive: true,
       trainer: {
         id: '',
         name: {
@@ -127,6 +128,7 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
         to: occur.to || '',
         trainer: occur.trainer,
         day: occur.day,
+        isActive: occur.isActive,
       }
       return dayToSet
     })
@@ -202,6 +204,25 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
     console.log({ ...editClass, occurrences: updatedOccurrences })
   }
 
+  const handleActiveChange = (occurToEdit) => {
+    const { id } = occurToEdit
+    const idx = editClass.occurrences.findIndex((occur) => occur.id === id)
+    console.log(idx)
+    let stateToSet = occurToEdit.isActive
+    stateToSet = !stateToSet
+    console.log(stateToSet)
+    editClass.occurrences.splice(idx, 1, {
+      ...occurToEdit,
+      isActive: stateToSet,
+    })
+    console.log(editClass.occurrences)
+    const newOccurrences = [...editClass.occurrences]
+    setEditClass((prevEditClass) => ({
+      ...prevEditClass,
+      occurrences: newOccurrences,
+    }))
+  }
+
   return (
     <Box textAlign='center'>
       <ToggleButtonGroup
@@ -234,11 +255,13 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
         selectedDays.map((day) => {
           return (
             <div className='occur-container' key={day.id}>
-              <Typography variant='body1' style={{ marginTop: '16px' }}>
+              {/* <Typography variant='body1' style={{ marginTop: '16px' }}> */}
+              <b>
                 {prefs.isEnglish
                   ? format(day.time, 'EEEE') // Returns the full name of the day in English, e.g., "Friday"
                   : format(day.time, 'EEEE', { locale: he })}
-              </Typography>
+              </b>
+              {/* </Typography> */}
               <div
                 className='times-container'
                 style={{
@@ -297,6 +320,25 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
                 id={day.id}
                 occur={day}
               />
+              <div
+                className={`checkbox-container ${
+                  prefs.isDarkMode && 'dark-mode'
+                }`}
+              >
+                <label htmlFor={`isActive${day.id}`}>
+                  {prefs.isEnglish ? 'Active' : 'פעיל'}
+                </label>
+                <input
+                  type='checkbox'
+                  name=''
+                  id={`isActive${day.id}`}
+                  // checked={true}
+                  checked={day.isActive}
+                  onChange={() => {
+                    handleActiveChange(day)
+                  }}
+                />
+              </div>
             </div>
           )
         })}

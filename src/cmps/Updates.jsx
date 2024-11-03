@@ -59,6 +59,7 @@ export function Updates({ isHover, updates }) {
               className={
                 prefs.isDarkMode ? 'update-banner dark-mode' : 'update-banner'
               }
+              key={update._id}
             >
               <div className='title-container'>
                 <b>{update.title}</b>

@@ -3,10 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { couponService } from '../services/coupon/coupon.service'
-import { loadCoupons, removeCoupon } from '../store/actions/coupon.actions'
+import {
+  addCoupon,
+  loadCoupons,
+  removeCoupon,
+} from '../store/actions/coupon.actions'
 
 import { HeadContainer } from '../cmps/HeadContainer'
 import { CouponList } from '../cmps/CouponList'
+import { Controller } from '../cmps/Controller.jsx'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
@@ -21,6 +26,13 @@ export function CouponIndex() {
     (stateSelector) => stateSelector.couponModule.coupons
   )
 
+  const [filter, setFilter] = useState({
+    pageIdx: 0,
+    isAll: false,
+  })
+
+  const [maxPage, setMaxPage] = useState()
+
   const head = {
     he: 'קופונים',
     eng: 'Coupons',
@@ -29,7 +41,14 @@ export function CouponIndex() {
   const setCoupons = async () => {
     try {
       setIsLoading(true)
-      const c = await loadCoupons()
+      const c = await loadCoupons(filter)
+      if (c.length === 0) {
+        const pageToSet = filter.pageIdx - 1
+        setFilter({ ...filter, pageIdx: pageToSet })
+        return
+      }
+      const max = await couponService.getMaxPage()
+      setMaxPage(max)
       console.log(c)
     } catch (err) {
       showErrorMsg(
@@ -42,7 +61,7 @@ export function CouponIndex() {
 
   useEffect(() => {
     setCoupons()
-  }, [])
+  }, [filter])
 
   async function onDeleteCoupon(couponId) {
     setIsLoading(true)
@@ -58,9 +77,32 @@ export function CouponIndex() {
     }
   }
 
+  async function onAddCoupon() {
+    setIsLoading(true)
+    const coupon = couponService.getEmptyCoupon()
+    delete coupon._id
+    try {
+      const savedCoupon = await addCoupon(coupon)
+      showSuccessMsg(prefs.isEnglish ? `Coupon added` : 'קופון נוסף')
+      // navigate(`/admin/coupon/edit/${savedCoupon._id}`)
+    } catch (err) {
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't add coupon` : 'לא היה ניתן להוסיף קופון'
+      )
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className='coupon-index-container'>
       <HeadContainer text={head} />
+      <Controller
+        filter={filter}
+        setFilter={setFilter}
+        maxPage={maxPage}
+        onAdd={onAddCoupon}
+      />
       <CouponList
         coupons={coupons}
         setCoupons={setCoupons}
