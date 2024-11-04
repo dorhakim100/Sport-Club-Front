@@ -22,6 +22,8 @@ import { LoadingButton } from '@mui/lab'
 export function CouponIndex() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
+  const navigate = useNavigate()
+
   const coupons = useSelector(
     (stateSelector) => stateSelector.couponModule.coupons
   )
@@ -84,7 +86,7 @@ export function CouponIndex() {
     try {
       const savedCoupon = await addCoupon(coupon)
       showSuccessMsg(prefs.isEnglish ? `Coupon added` : 'קופון נוסף')
-      // navigate(`/admin/coupon/edit/${savedCoupon._id}`)
+      navigate(`/admin/coupon/edit/${savedCoupon._id}`)
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't add coupon` : 'לא היה ניתן להוסיף קופון'

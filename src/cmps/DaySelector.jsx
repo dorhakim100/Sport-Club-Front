@@ -320,24 +320,27 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
                 id={day.id}
                 occur={day}
               />
-              <div
-                className={`checkbox-container ${
-                  prefs.isDarkMode && 'dark-mode'
-                }`}
-              >
-                <label htmlFor={`isActive${day.id}`}>
-                  {prefs.isEnglish ? 'Active' : 'פעיל'}
-                </label>
-                <input
-                  type='checkbox'
-                  name=''
-                  id={`isActive${day.id}`}
-                  // checked={true}
-                  checked={day.isActive}
-                  onChange={() => {
-                    handleActiveChange(day)
-                  }}
-                />
+              <div className='input-container active'>
+                <div
+                  className={`checkbox-container ${
+                    prefs.isDarkMode && 'dark-mode'
+                  }`}
+                  style={{ gridColumn: '1/-1' }}
+                >
+                  <label htmlFor={`isActive${day.id}`}>
+                    {prefs.isEnglish ? 'Active' : 'פעיל'}
+                  </label>
+                  <input
+                    type='checkbox'
+                    name=''
+                    id={`isActive${day.id}`}
+                    // checked={true}
+                    checked={day.isActive}
+                    onChange={() => {
+                      handleActiveChange(day)
+                    }}
+                  />
+                </div>
               </div>
             </div>
           )

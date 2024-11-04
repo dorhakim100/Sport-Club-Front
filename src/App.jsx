@@ -52,6 +52,7 @@ import { MessageDetails } from './pages/MessageDetails.jsx'
 import { MemberIndex } from './pages/MemberIndex.jsx'
 
 import { CouponIndex } from './pages/CouponIndex.jsx'
+import { CouponEdit } from './pages/CouponEdit.jsx'
 
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
@@ -137,6 +138,7 @@ export function App() {
               <Route path='order' element={<OrderIndex />} />
               <Route path='member' element={<MemberIndex />} />
               <Route path='coupon' element={<CouponIndex />} />
+              <Route path='coupon/edit/:couponId' element={<CouponEdit />} />
             </Route>
           </Routes>
         </section>

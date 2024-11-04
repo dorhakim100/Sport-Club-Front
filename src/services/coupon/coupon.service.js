@@ -32,7 +32,7 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
       (coupon) =>
         regex.test(coupon.title.he) ||
         regex.test(coupon.title.eng) ||
-        regex.test(coupon.key) ||
+        regex.test(coupon.code) ||
         regex.test(coupon.amount + '')
     )
   }
@@ -63,7 +63,7 @@ async function save(coupon) {
     const couponToSave = {
       _id: coupon._id,
       title: coupon.title,
-      key: coupon.key,
+      code: coupon.code,
       amount: coupon.amount,
       isActive: coupon.isActive,
       type: coupon.type,
@@ -73,7 +73,7 @@ async function save(coupon) {
   } else {
     const couponToSave = {
       title: coupon.title,
-      key: coupon.key,
+      code: coupon.code,
       amount: coupon.amount,
       isActive: coupon.isActive,
       type: coupon.type,
@@ -105,10 +105,10 @@ function getEmptyCoupon() {
   return {
     _id: makeId(),
     title: { he: '', eng: '' },
-    key: '',
-    isActive: '',
+    code: '',
+    isActive: true,
     amount: '',
-    type: '',
+    type: 'fixed',
     items: [],
   }
 }
@@ -130,7 +130,7 @@ function _createCoupons() {
     {
       _id: makeId(),
       title: { he: 'אמהות הרצליה', eng: 'Herzeliya Moms' },
-      key: 'MOMS80',
+      code: 'MOMS80',
       amount: 80,
       type: 'fixed',
       isActive: true,
@@ -139,7 +139,7 @@ function _createCoupons() {
     {
       _id: makeId(),
       title: { he: 'כרטיסיית אורחי מנוי', eng: `Member's card` },
-      key: 'MEMBER500',
+      code: 'MEMBER500',
       amount: 300,
       isActive: false,
       type: 'fixed',
@@ -148,7 +148,7 @@ function _createCoupons() {
     {
       _id: makeId(),
       title: { he: 'קיבוצים', eng: `Kibutzs` },
-      key: 'KIBUTZ',
+      code: 'KIBUTZ',
       amount: 10,
       type: 'percentage',
       isActive: true,

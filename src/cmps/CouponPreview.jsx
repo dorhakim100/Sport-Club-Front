@@ -10,6 +10,7 @@ import { ActiveCouponButton } from './ActiveCouponButton'
 import { Button } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import IconButton from '@mui/material/IconButton'
+import EditIcon from '@mui/icons-material/Edit'
 
 export function CouponPreview({ coupon, setCoupons, onDeleteCoupon }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -36,7 +37,20 @@ export function CouponPreview({ coupon, setCoupons, onDeleteCoupon }) {
       </div>
       <div className='buttons-container'>
         <div
-          className='delete-container'
+          className='button-container edit'
+          onClick={(e) => {
+            e.stopPropagation() // Prevents triggering the main onClick
+            navigate(`/admin/coupon/edit/${coupon._id}`)
+          }}
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+        >
+          <IconButton aria-label='delete'>
+            <EditIcon />
+          </IconButton>
+        </div>
+        <div
+          className='button-container delete'
           onClick={(e) => {
             e.stopPropagation() // Prevents triggering the main onClick
             onDeleteCoupon(coupon._id)

@@ -1,0 +1,75 @@
+
+.switch-container{
+    
+    input[type="checkbox"]{
+        display: none;
+    }
+
+    i{
+        margin: 0px;
+        font-size: 0.8em;
+    }
+    .pill-checkbox-label {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    
+        background-color: whitesmoke;
+        background-color: $very-dark-blue;
+        color: $dark-blue;
+        
+        width: 60px;
+        height: 30px;
+        margin: 0 auto;
+        
+        border: 1px solid $medium-gray;
+        border-radius: 100vh;
+        cursor: pointer;
+        transition: 0.4s ease-in-out;
+        
+        &:hover{
+            border: 1px solid $primary-light-blue;
+            
+        }
+    
+    }
+    
+    .pill-checkbox-label > div {
+        position: absolute;
+        left: 0;
+        top:0;
+        scale: .85;
+    
+        width: 50%;
+        height: 100%;
+        
+        background-color: black;
+        background-color: white;
+        border-radius: 50%;
+        
+        transition: 0.4s ease-in-out;
+    }
+    
+    &:has(input:checked) .pill-checkbox-label  {
+        background-color: $very-dark-blue;
+        color: $dark-green;
+    
+    }
+    
+    &:has(input:checked) body  {
+        background-color: rgb(37, 37, 37);
+        color: whitesmoke;
+    }
+    
+    &:has(input:checked) .header  {
+        background-color: rgb(37, 37, 37);
+        color: whitesmoke;
+    }
+    
+    &:has(input:checked) .pill-checkbox-label > div {
+        background-color: whitesmoke;
+    
+        translate: 100% 0;
+    }
+}

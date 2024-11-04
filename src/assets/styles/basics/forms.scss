@@ -194,8 +194,24 @@ nav {
 
   }
 
-.input-container.dark-mode{
-	input,textarea{
+  .input-container.active{
+
+	  
+	  .checkbox-container:has(input:checked){
+		  label{
+			  background-color: $dark-green;
+			  
+			  &:hover{
+				  background-color: $dark-green-hover;
+				}
+			}
+			
+			
+		}
+		
+	}
+		.input-container.dark-mode{
+			input,textarea{
 
 		color: white;
 		background-color: $dark-gray;
@@ -222,6 +238,7 @@ nav {
 
 	&::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
 	  appearance: none; // Removes the arrows in most browsers
+
 	}
   }
 
