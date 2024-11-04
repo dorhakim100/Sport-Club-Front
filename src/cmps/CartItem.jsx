@@ -43,7 +43,10 @@ export function CartItem({ item }) {
 
   return (
     <>
-      <div className='item-container' key={`${item.id}Cart`}>
+      <div
+        className={`item-container ${item.isDiscount && 'discount'}`}
+        key={`${item.id}Cart`}
+      >
         <img
           src={item.cover}
           alt=''
@@ -64,6 +67,11 @@ export function CartItem({ item }) {
           isCart={true}
           item={item}
         />
+        {item.isDiscount && (
+          <span className={`discount-tag ${!prefs.isEnglish && 'rtl'}`}>
+            {prefs.isEnglish ? 'Discount' : 'הנחה'}
+          </span>
+        )}
       </div>
       {/* <Divider orientation='horizontal' flexItem /> */}
     </>

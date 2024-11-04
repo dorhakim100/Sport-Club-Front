@@ -39,7 +39,7 @@ function remove(userId) {
 async function update(userToUpdate) {
   const { _id } = userToUpdate
   const user = await storageService.get('user', _id)
-
+  console.log(userToUpdate)
   const savedUser = await storageService.put('user', userToUpdate)
 
   // When admin updates other user's details, do not update loggedinUser

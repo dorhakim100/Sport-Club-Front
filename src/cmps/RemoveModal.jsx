@@ -44,12 +44,13 @@ export function RemoveModal({ isModal, setIsModal, item }) {
             sx={
               prefs.isDarkMode
                 ? {
-                    color: '#6EC1E4', // Light blue text color
-                    borderColor: '#6EC1E4', // Light blue border color
+                    color: '#4A90E2', // Light blue text color
+                    borderColor: '#4A90E2', // Light blue border color
                     transition: '0.3s ease-out',
                     '&:hover': {
                       backgroundColor: 'rgba(110, 193, 228, 0.1)', // Light blue transparent hover background
-                      borderColor: '#4A90E2', // Slightly darker border on hover
+                      borderColor: '#2C3E50', // Slightly darker border on hover
+                      color: '#2C3E50',
                     },
                   }
                 : {

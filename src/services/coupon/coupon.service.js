@@ -16,13 +16,19 @@ export const couponService = {
   getDefaultFilter,
   getMaxPage,
   getEmptyCoupon,
-  getOpenMessages,
+  getDiscount,
+  createDiscount,
 }
 
 async function query(filterBy = { pageIdx: 0, txt: '' }) {
   var coupons = await storageService.query(STORAGE_KEY)
-  const { pageIdx, txt, amount } = filterBy
+  const { pageIdx, txt, amount, allActive } = filterBy
   if (filterBy.isAll) {
+    return coupons
+  }
+
+  if (allActive) {
+    coupons = coupons.filter((coupon) => coupon.isActive === true)
     return coupons
   }
 
@@ -36,8 +42,6 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
         regex.test(coupon.amount + '')
     )
   }
-
-  console.log(pageIdx)
 
   if (pageIdx !== undefined) {
     const startIdx = pageIdx * PAGE_SIZE
@@ -113,15 +117,31 @@ function getEmptyCoupon() {
   }
 }
 
-async function getOpenMessages() {
+async function getDiscount(couponCode) {
   try {
-    var coupons = await storageService.query(STORAGE_KEY)
+    const coupons = await query({ allActive: true })
 
-    const unDone = coupons.filter((coupon) => coupon.isDone === false)
-    return unDone.length
+    if (coupons.some((coupon) => coupon.code === couponCode)) {
+      const coupon = coupons.find((coupon) => coupon.code === couponCode)
+
+      return { amount: coupon.amount, type: coupon.type, items: coupon.items }
+    } else {
+      throw new Error(`Couldn't find coupon`)
+    }
   } catch (err) {
     console.log(err)
     throw err
+  }
+}
+
+function createDiscount(discount) {
+  return {
+    title: { he: 'הנחה', eng: 'Discount' },
+    _id: makeId(),
+    price: discount.amount,
+    quantity: 1,
+    cover:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1730727611/discount-stamp-3_wgbcqd.png',
   }
 }
 
