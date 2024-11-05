@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -20,7 +21,7 @@ import { makeId } from '../services/util.service'
 
 export function SwiperCarousel({ imgs }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null) // Initialize thumbsSwiper state
-  console.log(imgs)
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   return (
     <>
       <Swiper
@@ -55,6 +56,16 @@ export function SwiperCarousel({ imgs }) {
 
             <div className='img-container'>
               <img src={img.link} alt={`Slide ${index + 1}`} />
+              <div className='header-container'>
+                <div className='text'>
+                  <h2>
+                    {prefs.isEnglish ? img.text.first.eng : img.text.first.he}
+                  </h2>
+                  <h2>
+                    {prefs.isEnglish ? img.text.second.eng : img.text.second.he}
+                  </h2>
+                </div>
+              </div>
             </div>
           </SwiperSlide>
         ))}
