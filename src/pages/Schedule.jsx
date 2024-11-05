@@ -21,6 +21,8 @@ import { containerClasses } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { makeId } from '../services/util.service'
+import WbSunnyIcon from '@mui/icons-material/WbSunny'
+import BedtimeIcon from '@mui/icons-material/Bedtime'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -128,8 +130,22 @@ export function Schedule() {
     },
   ]
 
+  function getFromTime(from) {
+    const array = from.split(':')
+    let hour = array[0]
+    hour = +hour
+    let state
+    if (hour >= 14) {
+      state = 'evening'
+    }
+    if (hour < 14) {
+      state = 'morning'
+    }
+    return state
+  }
+
   return (
-    <section className='page-container schedule'>
+    <section className='schedule'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
       <Nav origin={origin} links={links} />
 
@@ -155,7 +171,9 @@ export function Schedule() {
               {occurrs.map((occur) => {
                 return (
                   occur.day === day && (
-                    <div className='hour-container'>
+                    <div
+                      className={`hour-container ${getFromTime(occur.from)}`}
+                    >
                       <b>
                         {prefs.isEnglish ? occur.title.eng : occur.title.he}
                       </b>
@@ -168,6 +186,11 @@ export function Schedule() {
                           ? occur.trainer.name.eng
                           : occur.trainer.name.he}
                       </span>
+                      <div className='icon'>
+                        {(getFromTime(occur.from) === 'morning' && (
+                          <WbSunnyIcon />
+                        )) || <BedtimeIcon />}
+                      </div>
                     </div>
                   )
                 )

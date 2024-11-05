@@ -162,7 +162,7 @@ export function Cart() {
                 value={coupon}
               />
               <Button variant='contained' onClick={onEnterCoupon}>
-                {prefs.isEnglish ? 'Enter' : 'בצע'}
+                {prefs.isEnglish ? 'Enter' : 'אישור'}
               </Button>
             </div>
 

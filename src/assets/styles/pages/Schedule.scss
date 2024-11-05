@@ -5,6 +5,17 @@
     display: grid;
     grid-template-columns: repeat(7,1fr);
 
+    @media (max-width:1200px) {
+        font-size: 0.8em;
+        
+    }
+    @media (max-width:850px) {
+
+        width: 80vw;
+        overflow-x: auto;
+        
+    }
+
     
     .day-container{
         display: grid;
@@ -21,7 +32,19 @@
 
             border-top-left-radius: 5px;
         }
-        
+          &:hover{
+
+                .hour-container{
+
+                    .icon{
+                        margin: 0.5em;
+                        top: 0px;
+                        opacity: 1;
+                    }
+                }
+
+            }
+            
 
         .hour-container{
 
@@ -30,6 +53,7 @@
             display: grid;
             grid-template-rows: repeat(3,auto);
             align-items: center;
+            position: relative;
 
             
             max-height: 200px;
@@ -59,8 +83,29 @@
             .time-container{
                 font-family: assistantBold;
             }
-            
-            
+
+          
+            .icon{
+                position: absolute;
+                top: 25px;
+                opacity: 0;
+                transition: 0.2s ease;
+            }
+
+            &.morning{
+                .icon{
+                    color: $morning-yellow;
+                    background-color: $primary-light-blue;
+                    height: 25px;
+                    border-radius: 50%;
+
+                }
+            }
+            &.evening{
+                .icon{
+                    color: $dark-blue;
+                }
+            }
             
         }
 

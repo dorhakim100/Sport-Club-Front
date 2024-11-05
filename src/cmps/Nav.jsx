@@ -25,6 +25,7 @@ export function Nav({ origin, links, isMain }) {
       </>
 
       {links.map((link, index) => {
+        console.log(link)
         return (
           ((link.path === 'message' || link.path === 'order') && (
             <div key={makeId()}>
@@ -51,9 +52,14 @@ export function Nav({ origin, links, isMain }) {
                 <NavLink to={link.path} key={makeId()}>
                   {prefs.isEnglish ? link.eng : link.he}
                 </NavLink>
+                {/* <img
+                  src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1730727611/discount-stamp-3_wgbcqd.png'
+                  alt=''
+                /> */}
                 <img
                   src={prefs.isDarkMode ? link.darkIcon : link.icon}
-                  alt=''
+                  alt={`${link.eng} Icon`}
+                  className='icon-class'
                 />
               </div>
               {/* {index + 1 < links.length && (
@@ -65,6 +71,7 @@ export function Nav({ origin, links, isMain }) {
               <NavLink to={link.path} className={'link'}>
                 {prefs.isEnglish ? link.eng : link.he}
               </NavLink>
+
               {index + 1 < links.length && (
                 <Divider orientation='vertical' flexItem />
               )}
