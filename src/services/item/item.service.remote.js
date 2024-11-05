@@ -1,5 +1,7 @@
 import { httpService } from '../http.service'
 
+const KEY = 'item'
+
 export const itemService = {
   query,
   getById,
@@ -8,28 +10,59 @@ export const itemService = {
   addItemMsg,
 }
 
-async function query(filterBy = { txt: '', price: 0 }) {
-  return httpService.get(`item`, filterBy)
+async function query(
+  filterBy = {
+    txt: '',
+    maxPrice: 0,
+    sortDir: '',
+    types: [],
+    pageIdx: 0,
+    isAll: false,
+  }
+) {
+  try {
+    const res = await httpService.get(KEY, filterBy)
+    return res
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
 }
 
-function getById(itemId) {
-  return httpService.get(`item/${itemId}`)
+async function getById(itemId) {
+  try {
+    const res = await httpService.get(`${KEY}/${itemId}`)
+    return res
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
 }
 
 async function remove(itemId) {
-  return httpService.delete(`item/${itemId}`)
+  try {
+    return await httpService.delete(`${KEY}/${itemId}`)
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
 }
 async function save(item) {
-  var savedItem
-  if (item._id) {
-    savedItem = await httpService.put(`item/${item._id}`, item)
-  } else {
-    savedItem = await httpService.post('item', item)
+  try {
+    var savedItem
+    if (item._id) {
+      savedItem = await httpService.put(`${KEY}/${item._id}`, item)
+    } else {
+      savedItem = await httpService.post(KEY, item)
+    }
+    return savedItem
+  } catch (err) {
+    console.log(err)
+    throw err
   }
-  return savedItem
 }
 
 async function addItemMsg(itemId, txt) {
-  const savedMsg = await httpService.post(`item/${itemId}/msg`, { txt })
+  const savedMsg = await httpService.post(`${KEY}/${itemId}/msg`, { txt })
   return savedMsg
 }

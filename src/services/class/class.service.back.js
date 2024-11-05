@@ -1,8 +1,8 @@
 import { httpService } from '../http.service'
 
-const KEY = 'update'
+const KEY = 'class'
 
-export const updateService = {
+export const classService = {
   query,
   getById,
   save,
@@ -19,9 +19,9 @@ async function query(filterBy = { pageIdx: 0 }) {
   }
 }
 
-async function getById(updateId) {
+async function getById(classId) {
   try {
-    const res = await httpService.get(`${KEY}/${updateId}`)
+    const res = await httpService.get(`${KEY}/${classId}`)
     return res
   } catch (err) {
     console.log(err)
@@ -29,23 +29,23 @@ async function getById(updateId) {
   }
 }
 
-async function remove(updateId) {
+async function remove(classId) {
   try {
-    return await httpService.delete(`${KEY}/${updateId}`)
+    return await httpService.delete(`${KEY}/${classId}`)
   } catch (err) {
     console.log(err)
     throw err
   }
 }
-async function save(update) {
+async function save(clas) {
   try {
-    var savedUpdate
-    if (update._id) {
-      savedUpdate = await httpService.put(`${KEY}/${update._id}`, update)
+    var savedCoupon
+    if (clas._id) {
+      savedCoupon = await httpService.put(`${KEY}/${clas._id}`, clas)
     } else {
-      savedUpdate = await httpService.post(KEY, update)
+      savedCoupon = await httpService.post(KEY, clas)
     }
-    return savedUpdate
+    return savedCoupon
   } catch (err) {
     console.log(err)
     throw err
