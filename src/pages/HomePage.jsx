@@ -74,7 +74,8 @@ export function HomePage() {
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        await loadTrainers(trainerService.getDefaultFilter())
+        const t = await loadTrainers(trainerService.getDefaultFilter())
+        console.log('trainers', t)
         await loadUpdates(updateService.getDefaultFilter())
       } catch (err) {
         showErrorMsg(

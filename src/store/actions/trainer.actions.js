@@ -10,6 +10,7 @@ import {
 
 export async function loadTrainers(filterBy) {
   try {
+    console.log(filterBy)
     const trainers = await trainerService.query(filterBy)
     store.dispatch(getCmdSetTrainers(trainers))
     return trainers
