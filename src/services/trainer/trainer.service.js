@@ -17,6 +17,7 @@ export const trainerService = {
 async function query(filterBy = { pageIdx: 0, types: [] }) {
   try {
     const res = await httpService.get(KEY, filterBy)
+    console.log(res)
     return res
   } catch (err) {
     console.log(err)
