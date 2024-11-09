@@ -3,7 +3,6 @@ import { NavLink, Link, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { classService } from '../services/class/class.service'
-import { scheduleService } from '../services/schedule/schedule.service'
 import { uploadService } from '../services/upload.service'
 import { setIsLoading } from '../store/actions/system.actions'
 import {
@@ -174,22 +173,24 @@ export function Schedule() {
                     <div
                       className={`hour-container ${getFromTime(occur.from)}`}
                     >
-                      <b>
-                        {prefs.isEnglish ? occur.title.eng : occur.title.he}
-                      </b>
-                      <span
-                        className='time-container'
-                        style={{ direction: 'ltr' }}
-                      >{`${occur.from}-${occur.to}`}</span>
-                      <span>
-                        {prefs.isEnglish
-                          ? occur.trainer.name.eng
-                          : occur.trainer.name.he}
-                      </span>
-                      <div className='icon'>
-                        {(getFromTime(occur.from) === 'morning' && (
-                          <WbSunnyIcon />
-                        )) || <BedtimeIcon />}
+                      <div className='occurrence-container'>
+                        <b>
+                          {prefs.isEnglish ? occur.title.eng : occur.title.he}
+                        </b>
+                        <span
+                          className='time-container'
+                          style={{ direction: 'ltr' }}
+                        >{`${occur.from}-${occur.to}`}</span>
+                        <span>
+                          {prefs.isEnglish
+                            ? occur.trainer.name.eng
+                            : occur.trainer.name.he}
+                        </span>
+                        <div className='icon'>
+                          {(getFromTime(occur.from) === 'morning' && (
+                            <WbSunnyIcon />
+                          )) || <BedtimeIcon />}
+                        </div>
                       </div>
                     </div>
                   )
