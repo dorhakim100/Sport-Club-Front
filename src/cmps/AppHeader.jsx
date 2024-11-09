@@ -72,10 +72,12 @@ export function AppHeader({ bodyRef }) {
   useEffect(() => {
     const setTasks = async () => {
       try {
-        await loadOpenMessages()
+        if (user && user.isAdmin) {
+          await loadOpenMessages()
+        }
       } catch (err) {
         console.log(err)
-        showSuccessMsg(
+        showErrorMsg(
           prefs.isEnglish ? `Tasks couldn't be load` : 'משימות לא נטענו'
         )
       }

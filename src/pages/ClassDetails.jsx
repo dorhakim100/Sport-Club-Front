@@ -23,7 +23,6 @@ export function ClassDetails() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
   const [trainers, setTrainers] = useState([])
-  console.log(trainers)
 
   const head = {
     he: clas.title.he,
@@ -35,7 +34,7 @@ export function ClassDetails() {
       setIsLoading(true)
       const c = await loadClass(classId)
       console.log(c)
-      const t = classService.getClassTrainer({ ...c })
+      const t = await classService.getClassTrainer({ ...c })
       setTrainers(t)
     } catch (err) {
       console.log(err)

@@ -127,8 +127,8 @@ export function LoginSignupForm({ isSignup }) {
         showSuccessMsg(
           prefs.isEnglish ? 'Loged in successfully' : 'חיבור בוצע בהצלחה'
         )
+        navigate('/')
       }
-      navigate('/')
     } catch (err) {
       console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't login` : 'לא היה ניתן להתחבר')

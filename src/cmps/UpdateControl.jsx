@@ -49,11 +49,34 @@ export function UpdateControl({
     }
   }
 
+  // async function onSaveOrder() {
+  //   try {
+  //     setIsLoading(true)
+  //     setDragEdit(false)
+  //     await updateService.saveUpdatesOrder([...updates].reverse())
+  //     const defaultFilter = updateService.getDefaultFilter()
+  //     setFilter({ ...defaultFilter })
+  //     showSuccessMsg(prefs.isEnglish ? 'Order saved' : 'סדר נשמר')
+  //   } catch (err) {
+  //     console.log(err)
+  //     showErrorMsg(prefs.isEnglish ? `Couldn't save order` : 'סדר לא נשמר')
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }
+
   async function onSaveOrder() {
     try {
       setIsLoading(true)
       setDragEdit(false)
-      await updateService.saveUpdatesOrder([...updates].reverse())
+
+      // Add position property to each update
+      const orderedUpdates = updates.map((update, index) => ({
+        ...update,
+        position: index + 1, // New position based on the current order
+      }))
+
+      await updateService.saveUpdatesOrder(orderedUpdates)
       const defaultFilter = updateService.getDefaultFilter()
       setFilter({ ...defaultFilter })
       showSuccessMsg(prefs.isEnglish ? 'Order saved' : 'סדר נשמר')

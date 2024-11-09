@@ -35,9 +35,9 @@ export function ItemIndex() {
   const [filterBy, setFilterBy] = useState({
     types: searchParams.get('types')
       ? searchParams.get('types').split(',')
-      : '',
+      : [],
     pageIdx: +searchParams.get('pageIdx'),
-    sortDir: +searchParams.get('sortDir'),
+    sortDir: +searchParams.get('sortDir') || '',
   })
 
   const items = useSelector((storeState) => storeState.itemModule.items)
@@ -49,14 +49,13 @@ export function ItemIndex() {
 
   useEffect(() => {
     // Fetch filter settings from searchParams
-    const sortDir = +searchParams.get('sortDir') || 0
+    const sortDir = +searchParams.get('sortDir') || ''
     const pageIdx = +searchParams.get('pageIdx') || 0
-    const typesParam = searchParams.get('types') || ''
+    const typesParam = searchParams.get('types')
 
     const types = typesParam ? typesParam.split(',') : []
 
     const filterToSet = { ...filterBy, sortDir, types, pageIdx }
-    console.log(filterToSet)
 
     // Only update filterBy if it's different
     if (JSON.stringify(filterBy) !== JSON.stringify(filterToSet)) {
@@ -69,7 +68,8 @@ export function ItemIndex() {
       try {
         setIsLoading(true)
         console.log(filterBy)
-        await loadItems(filterBy)
+        const res = await loadItems(filterBy)
+
         const max = await itemService.getMaxPage(filterBy)
         setMaxPage(max)
 

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { saveUpdate } from '../store/actions/update.actions'
+import { updateService } from '../services/update/update.service'
 
 import { setIsLoading } from '../store/actions/system.actions'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
@@ -32,6 +33,8 @@ export function AddUpdate({ setUpdates }) {
 
     setIsLoading(true)
     try {
+      // const allUpdates = await updateService.query({ isAll: true })
+      editUpdate.position = 1
       const savedUpdate = await saveUpdate(editUpdate)
       showSuccessMsg('Item edited successfully')
       await setUpdates()

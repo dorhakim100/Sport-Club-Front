@@ -111,7 +111,8 @@ export function Accessibility({ bodyRef }) {
     if (
       focusedElement.tagName === 'INPUT' ||
       focusedElement.tagName === 'TEXTAREA' ||
-      focusedElement.tagName === 'SELECT'
+      focusedElement.tagName === 'SELECT' ||
+      focusedElement.tagName === 'BUTTON'
     ) {
       return
     }

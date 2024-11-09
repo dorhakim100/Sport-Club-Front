@@ -10,10 +10,12 @@ import {
 } from '../reducers/item.reducer'
 
 export async function loadItems(filterBy) {
-  console.log(filterBy)
   try {
+    console.log(filterBy)
     const items = await itemService.query(filterBy)
+    console.log(items)
     store.dispatch(getCmdSetItems(items))
+    return items
   } catch (err) {
     console.log('Cannot load items', err)
     throw err
