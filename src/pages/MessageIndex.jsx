@@ -37,7 +37,8 @@ export function MessageIndex() {
     try {
       setIsLoading(true)
       await loadMessages(filter)
-      const max = await messageService.getMaxPage()
+      const max = await messageService.getMaxPage(filter)
+
       setMaxPage(max)
     } catch (err) {
       showErrorMsg(

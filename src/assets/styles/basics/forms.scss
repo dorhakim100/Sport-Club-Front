@@ -417,6 +417,11 @@ nav {
 	padding-top: 150px;
     // padding: 1em 0em 1em 0em;
 	// margin: 3em;
+	@media (max-width:500px) {
+		margin: 0px;
+
+		
+	}
 }
 
 .notification-btn{

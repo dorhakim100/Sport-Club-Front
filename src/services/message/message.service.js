@@ -63,12 +63,14 @@ function getDefaultFilter() {
   return { txt: '', pageIdx: 0, onlyDone: false, sortDir: '', iaAll: false }
 }
 
-async function getMaxPage() {
+async function getMaxPage(filter) {
+  console.log(filter)
   const PAGE_SIZE = 6
   try {
-    var messages = await query({ isAll: true })
+    var messages = await query({ ...filter, isAll: true })
     let maxPage = messages.length / PAGE_SIZE
     maxPage = Math.ceil(maxPage)
+    console.log(maxPage)
     return maxPage
   } catch (err) {
     console.log(err)
