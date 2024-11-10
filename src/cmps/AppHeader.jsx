@@ -251,6 +251,8 @@ export function AppHeader({ bodyRef }) {
           headerRef.current.style.transition = '0.1s ease-in'
         }
       }}
+      // style={{ position: 'fixed', left: '0px', right: '0px', top: '0px' }}
+      style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
     >
       {' '}
       {windowDimensions.width < 1050 && (

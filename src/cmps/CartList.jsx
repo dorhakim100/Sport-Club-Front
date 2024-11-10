@@ -18,11 +18,6 @@ export function CartList({ cart, setCart }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [quantity, setQuantity] = useState(1)
 
-  useEffect(() => {
-    console.log(user)
-    // updateCart({...user})
-  }, [quantity])
-
   return (
     <>
       <div className='items-container'>

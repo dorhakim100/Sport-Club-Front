@@ -140,6 +140,24 @@ export function Cart() {
     }
   }
 
+  async function onPay() {
+    try {
+      const order = createOrder()
+      console.log(order)
+    } catch (err) {
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't start payment` : 'לא ניתן להתחיל תשלום'
+      )
+    }
+  }
+
+  const createOrder = () => {
+    return {
+      items: cart,
+      total: total,
+    }
+  }
+
   return (
     <section className='page-container cart-page-container'>
       <h2>{prefs.isEnglish ? 'Shopping Cart' : 'סל הקניות'}</h2>
@@ -169,8 +187,9 @@ export function Cart() {
             <Button
               variant='contained'
               onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-                navigate(`/user/${user._id}/cart/paying`)
+                // window.scrollTo({ top: 0, behavior: 'smooth' })
+                // navigate(`/user/${user._id}/cart/paying`)
+                onPay()
               }}
             >
               {prefs.isEnglish ? 'Checkout' : 'תשלום'}

@@ -97,6 +97,7 @@ export async function updateCart(user) {
   console.log(cart)
 
   store.dispatch({ type: UPDATE_CART, cart })
+  store.dispatch({ type: SET_USER, user })
 
   try {
     const saved = await userService.update(user)

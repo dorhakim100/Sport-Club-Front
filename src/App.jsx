@@ -77,12 +77,12 @@ export function App() {
       <PrefsButton />
       <Prefs bodyRef={bodyRef} />
       <Loader />
+      <AppHeader bodyRef={bodyRef} />
       <main
         className='main-container'
         style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
         ref={bodyRef}
       >
-        <AppHeader bodyRef={bodyRef} />
         <section className='page-container'>
           <Routes>
             <Route path='' element={<HomePage />} />

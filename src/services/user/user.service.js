@@ -48,15 +48,16 @@ async function remove(userId) {
   }
 }
 
-async function update({ _id, score }) {
+async function update(user) {
   try {
-    const user = await httpService.put(`user/${_id}`, { _id, score })
+    const { _id } = user
+    const savedUser = await httpService.put(`user/${_id}`, user)
 
     // When admin updates other user's details, do not update loggedinUser
     const loggedinUser = getLoggedinUser() // Might not work because its defined in the main service???
-    if (loggedinUser._id === user._id) saveLoggedinUser(user)
+    if (loggedinUser._id === user._id) saveLoggedinUser(savedUser)
 
-    return user
+    return savedUser
   } catch (err) {
     console.log(err)
     throw err
@@ -161,7 +162,11 @@ function getLoggedinCart() {
 async function getCartItems(cart) {
   try {
     const cartItems = await httpService.get(`item/cart`, cart)
-    return cartItems
+    const cartToReturn = cartItems.map((item) => {
+      const integerQuantity = +item.quantity
+      return { ...item, quantity: integerQuantity }
+    })
+    return cartToReturn
   } catch (err) {
     console.log(err)
     throw err
