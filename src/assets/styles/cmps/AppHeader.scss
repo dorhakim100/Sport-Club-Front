@@ -10,8 +10,13 @@
     transition: 0.3 ease-out;
     z-index: 2;
     // position: relative;
+    position: fixed;
     position: sticky;
+    position: absolute;
     top: 0px;
+    right: 0px;
+    left: 0px;
+    width: 100vw;
 
 
     align-items: center;
@@ -188,6 +193,7 @@
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     // height: 100px;
     opacity: 0.8;
+    position: fixed;
 
     .logo{
 

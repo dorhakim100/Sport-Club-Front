@@ -122,6 +122,7 @@ export function LoginSignupForm({ isSignup }) {
         showSuccessMsg(
           prefs.isEnglish ? 'Signed in successfully' : 'רישום בוצע בהצלחה'
         )
+        navigate('/')
       } else {
         const logged = await login(cred)
         showSuccessMsg(

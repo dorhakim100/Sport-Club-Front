@@ -27,9 +27,12 @@ export function CartItem({ item }) {
       )
       user.items.splice(idx, 1, { ...item, quantity: quantity })
       console.log(user)
+      const userToUpdate = { ...user }
+      console.log(userToUpdate)
+
       try {
         setIsLoading(true)
-        const saved = await updateCart({ ...user })
+        const saved = await updateCart(userToUpdate)
       } catch (err) {
         console.log(err)
       } finally {

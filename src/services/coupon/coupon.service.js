@@ -96,7 +96,8 @@ async function getDiscount(couponCode) {
     // } else {
     //   throw new Error(`Couldn't find coupon`)
     // }
-    const res = await httpService.get('coupon/allActive', couponCode)
+
+    const res = await httpService.get('coupon/allActive', { code: couponCode })
     return res
   } catch (err) {
     console.log(err)
