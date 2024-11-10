@@ -3,7 +3,10 @@ import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { messageService } from '../services/message/message.service'
+import { socketService } from '../services/socket.service'
 import { addMessage } from '../store/actions/message.actions'
+
+import { SOCKET_EMIT_SEND_MSG } from '../services/socket.service'
 
 import { HeadContainer } from './HeadContainer'
 
@@ -47,6 +50,7 @@ export function ContactUs() {
       console.log(addedMessage)
       showSuccessMsg(prefs.isEnglish ? 'Message sent' : 'הודעה נשלחה')
       setEditMessage(messageService.getEmptyMessage())
+      socketService.emit(SOCKET_EMIT_SEND_MSG, addedMessage)
     } catch (err) {
       console.log(err)
       showErrorMsg(prefs.isEnglish ? `Could't send message` : 'הודעה לא נשלחה')

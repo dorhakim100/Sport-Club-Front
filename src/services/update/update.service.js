@@ -60,6 +60,7 @@ async function getMaxPage() {
     var items = await query({ isAll: true })
     let maxPage = items.length / PAGE_SIZE
     maxPage = Math.ceil(maxPage)
+    console.log(maxPage)
     return maxPage
   } catch (err) {
     console.log(err)

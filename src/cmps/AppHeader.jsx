@@ -8,6 +8,8 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { logout } from '../store/actions/user.actions'
 import { loadOpenMessages } from '../store/actions/message.actions'
 
+import { SOCKET_EVENT_ADD_MSG } from '../services/socket.service'
+
 import { DropDown } from '../cmps/DropDown.jsx'
 
 import Divider from '@mui/material/Divider'
@@ -16,6 +18,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
+import { socketService } from '../services/socket.service'
 
 export function AppHeader({ bodyRef }) {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -74,6 +77,16 @@ export function AppHeader({ bodyRef }) {
       try {
         if (user && user.isAdmin) {
           await loadOpenMessages()
+          socketService.on(SOCKET_EVENT_ADD_MSG, async () => {
+            try {
+              await loadOpenMessages()
+              showSuccessMsg(
+                prefs.isEnglish ? `New message received` : 'הודעה חדשה התקבלה'
+              )
+            } catch (err) {
+              console.log(`Couldn't load socket event`)
+            }
+          })
         }
       } catch (err) {
         console.log(err)
@@ -106,10 +119,11 @@ export function AppHeader({ bodyRef }) {
     const scrollY = window.scrollY
     if (scrollY > 0) {
       setScrolled(true)
-
+      headerRef.current.style.transition = '0.3s ease'
       logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
       headerRef.current.style.opacity = '0.8'
     } else if (scrollY === 0) {
+      headerRef.current.style.transition = '0.3s ease'
       setScrolled(false)
       logoRef.current.style.transform = 'scale(1)' // Resets logo to original size
 
@@ -282,6 +296,7 @@ export function AppHeader({ bodyRef }) {
         className={`${scrolled ? 'small-header' : ''} ${menu ? 'shown' : ''} ${
           menu && prefs.isEnglish ? 'ltr' : ''
         }`}
+        style={scrolled ? { top: '83px' } : { top: '148px' }}
       >
         <NavLink
           to='/'
