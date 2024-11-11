@@ -23,8 +23,8 @@ export function Cards({ trainers }) {
         modules={[EffectCards, Navigation]}
         className='cards'
         style={{
-          width: '300px',
-          height: '300px',
+          width: '275px',
+          height: '275px',
           margin: '0px',
           direction: 'rtl',
         }}
