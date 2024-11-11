@@ -381,6 +381,22 @@ nav {
 
 	font-family: assistantBold;
 
+	@media (max-width:500px) {
+		width: 80vw;
+		margin: 0 auto;
+		
+		h3{
+			
+			text{
+				width: 50vw;
+				font-size: 0.8em;
+
+
+	
+			}
+		}
+		
+	}
 
     h3{
         font-size: 2em;
@@ -389,7 +405,10 @@ nav {
         background-color: transparent;
     
         text{
-            padding: 0 1em; /* Horizontal padding for the span */
+			@media (min-width:500px) {
+				
+				padding: 0 1em; /* Horizontal padding for the span */
+			}
             transition: background-color 0.3s ease;
             position: relative; /* Make it relative to adjust positioning */
             z-index: 1; 

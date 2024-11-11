@@ -1,6 +1,14 @@
 .contact-us-container{
 
+    @media (max-width:500px) {
+        
 
+        .input-container{
+
+            justify-self: center;
+        }
+        
+    }
     .input-container{
 
         display: flex;
