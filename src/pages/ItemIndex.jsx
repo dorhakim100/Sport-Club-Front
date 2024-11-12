@@ -71,6 +71,7 @@ export function ItemIndex() {
         const res = await loadItems(filterBy)
 
         const max = await itemService.getMaxPage(filterBy)
+        console.log(max)
         setMaxPage(max)
 
         // Only update searchParams if needed
@@ -122,7 +123,7 @@ export function ItemIndex() {
     <main className='item-index'>
       <header className='item-index-header'>
         <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
-        <DynamicCover coverSrc={cover} />
+        <DynamicCover coverSrc={cover} prefs={prefs} />
         <HeadContainer text={headText} />
       </header>
       <div className='control-container'>

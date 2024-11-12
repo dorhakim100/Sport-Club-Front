@@ -37,7 +37,7 @@ export function TrainerEdit() {
     (storeState) => storeState.systemModule.isLoading
   )
 
-  const types = ['gym', 'studio', 'yoga']
+  const types = ['gym', 'studio', 'swimming', 'tennis']
 
   const params = useParams()
   const navigate = useNavigate()
@@ -259,6 +259,8 @@ export function TrainerEdit() {
                         ? capitalizeFirstLetter(type)
                         : (type === 'gym' && 'חדר כושר') ||
                           (type === 'yoga' && 'יוגה') ||
+                          (type === 'swimming' && 'שחייה') ||
+                          (type === 'tennis' && 'טניס') ||
                           (type === 'studio' && 'סטודיו')}
                     </label>
 

@@ -121,7 +121,7 @@ export function ItemFilter({
   return (
     <section className='item-filter'>
       {/* <h3> {prefs.isEnglish ? 'Filter' : 'סינון'}:</h3> */}
-      {userService.getLoggedinUser() && (
+      {user && user.isAdmin && (
         <Button
           variant='contained'
           onClick={onAddItem}
@@ -220,6 +220,7 @@ export function ItemFilter({
             onClick={() =>
               onPageNavigation(1, filterToEdit, setFilterToEdit, maxPage)
             }
+            disabled={filterToEdit.pageIdx + 1 === maxPage}
           >
             <ArrowBackIosNewIcon />
           </Button>
