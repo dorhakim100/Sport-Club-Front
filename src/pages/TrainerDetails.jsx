@@ -7,7 +7,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { loadTrainer } from '../store/actions/trainer.actions'
 
 import { HeadContainer } from '../cmps/HeadContainer'
-import { makeId } from '../services/util.service'
+import { capitalizeFirstLetter, makeId } from '../services/util.service'
 
 import { Button } from '@mui/material'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
@@ -75,11 +75,11 @@ export function TrainerDetails() {
                 key={makeId()}
               >
                 {prefs.isEnglish
-                  ? (type === 'gym' && 'Gym') ||
-                    (type === 'studio' && 'Studio') ||
-                    (type === 'yoga' && 'Yoga')
+                  ? capitalizeFirstLetter(type)
                   : (type === 'gym' && 'חדר כושר') ||
                     (type === 'studio' && 'סטודיו') ||
+                    (type === 'swimming' && 'שחייה') ||
+                    (type === 'Tennis' && 'טניס') ||
                     (type === 'yoga' && 'יוגה')}
               </Link>
             )

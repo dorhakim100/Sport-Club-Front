@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
 
 import { AddToCartButton } from './AddToCartButton'
 
@@ -19,6 +20,8 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
     // return item.owner?._id === user._id
   }
 
+  const [isHover, setIsHover] = useState(false)
+
   return (
     <section>
       <ul
@@ -27,9 +30,22 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
         }
       >
         {items.map((item) => (
-          <li key={item._id} className='item-container'>
+          <li
+            key={item._id}
+            className='item-container'
+            onClick={() => {
+              if (isHover) return
+              navigate(`/item/${item._id}`)
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          >
             <ItemPreview item={item} />
-            <div className='actions' style={{ direction: 'ltr' }}>
+            <div
+              className='actions'
+              style={{ direction: 'ltr' }}
+              onMouseEnter={() => setIsHover(true)}
+              onMouseLeave={() => setIsHover(false)}
+            >
               <AddToCartButton item={item} onRemoveItem={onRemoveItem} />
               {/* {(shouldShowActionBtns(item) && (
                 <ButtonGroup

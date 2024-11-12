@@ -19,6 +19,7 @@
   
       background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
 
+      cursor: pointer;
       &:first-of-type{
         border-top-right-radius: 8px;
         border-top-left-radius: 8px;

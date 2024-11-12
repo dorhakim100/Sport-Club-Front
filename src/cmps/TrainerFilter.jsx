@@ -16,8 +16,12 @@ export function TrainerFilter({ filter, setFilter }) {
       id: 'studio',
     },
     {
-      label: { he: 'יוגה', eng: 'Yoga' },
-      id: 'yoga',
+      label: { he: 'שחייה', eng: 'Swimming' },
+      id: 'swimming',
+    },
+    {
+      label: { he: 'טניס', eng: 'Tennis' },
+      id: 'tennis',
     },
   ]
 

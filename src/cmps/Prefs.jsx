@@ -35,6 +35,7 @@ export function Prefs({ bodyRef }) {
         const newLang = !prefs.isEnglish
         newPrefs = { ...prefs, isEnglish: newLang }
         setPrefs(newPrefs)
+        setIsPrefs(false)
         return
 
       case 'darkMode':
@@ -42,6 +43,7 @@ export function Prefs({ bodyRef }) {
         newPrefs = { ...prefs, isDarkMode: newMode }
         setDarkMode(newMode)
         setPrefs(newPrefs)
+        setIsPrefs(false)
         return
 
       default:

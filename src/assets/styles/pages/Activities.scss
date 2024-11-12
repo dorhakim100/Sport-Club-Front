@@ -1,5 +1,22 @@
 .activities-page-container{
 
+    .trainers-social-container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        align-items: center;
+
+        @media (max-width:850px) {
+            grid-template-columns: 1fr;
+            gap: 3em;
+            
+        }
+    }
+    .cards-container{
+        justify-items: center;
+        align-items: start;
+
+        // height: 60vh;
+    }
 
 
 

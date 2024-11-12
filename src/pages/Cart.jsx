@@ -54,14 +54,14 @@ export function Cart() {
       setIsLoading(true)
       const fetchedCart = await userService.getCartItems(cart)
       if (discount) {
-        console.log(
-          'discount.items IDs:',
-          discount.items.map((item) => item.id)
-        )
-        console.log(
-          'fetchedCart IDs:',
-          fetchedCart.map((item) => item.id)
-        )
+        // console.log(
+        //   'discount.items IDs:',
+        //   discount.items.map((item) => item.id)
+        // )
+        // console.log(
+        //   'fetchedCart IDs:',
+        //   fetchedCart.map((item) => item.id)
+        // )
 
         fetchedCart.forEach((item) => {
           const matchedDiscountItem = discount.items.find(

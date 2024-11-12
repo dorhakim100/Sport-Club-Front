@@ -1,0 +1,25 @@
+.activity-info-container{
+
+    font-size: 2em;
+    // height: 80vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    margin-bottom: 3em;
+
+    @media (max-width:550px) {
+        // font-size: 1em;
+        padding: 1em;
+        
+    }
+
+    span{
+        font-family: assistantBold;
+        font-size: 3em;
+    }
+
+    p{
+        text-align: start;
+    }
+}
