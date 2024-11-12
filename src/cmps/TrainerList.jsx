@@ -6,11 +6,10 @@ import { useSelector } from 'react-redux'
 import { Button } from '@mui/material'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
-export function TrainerList({ trainers, onRemoveTrainer }) {
+export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((storeState) => storeState.userModule.user)
   const navigate = useNavigate()
-  console.log(trainers)
 
   return (
     <div className='trainers-list-container'>
