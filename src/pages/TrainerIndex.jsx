@@ -31,10 +31,14 @@ import { Button } from '@mui/material'
 import { setIsLoading } from '../store/actions/system.actions'
 
 export function TrainerIndex() {
-  const trainers = useSelector(
+  const [trainers, setTrainers] = useState([])
+  const loadedTrainers = useSelector(
     (stateSelector) => stateSelector.trainerModule.trainers
   )
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+  const isLoading = useSelector(
+    (stateSelector) => stateSelector.systemModule.isLoading
+  )
 
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -90,7 +94,18 @@ export function TrainerIndex() {
   const getTrainers = async () => {
     try {
       setIsLoading(true)
-      await loadTrainers(filter) // Load trainers with the current filter
+      const newTrainers = await loadTrainers(filter) // Load trainers with the current filter
+
+      if (newTrainers.length > 0) {
+        setHasMore(true)
+        if (filter.pageIdx > 0) {
+          setTrainers((prev) => [...prev, ...newTrainers])
+        } else {
+          setTrainers(newTrainers)
+        }
+      } else {
+        setHasMore(false)
+      }
     } catch (err) {
       console.log(err)
       showErrorMsg(
@@ -117,6 +132,39 @@ export function TrainerIndex() {
   useEffect(() => {
     getTrainers()
   }, [filter]) // Only run when filter changes
+
+  // const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+
+  useEffect(() => {
+    let throttleTimeout = null
+
+    const handleScroll = () => {
+      if (throttleTimeout) return
+
+      throttleTimeout = setTimeout(() => {
+        throttleTimeout = null
+
+        if (
+          window.innerHeight + document.documentElement.scrollTop >=
+            document.documentElement.offsetHeight - 100 &&
+          hasMore
+        ) {
+          setFilter((prevFilter) => ({
+            ...prevFilter,
+            pageIdx: prevFilter.pageIdx + 1,
+          }))
+        }
+      }, 300) // Adjust 300 ms as needed
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (throttleTimeout) clearTimeout(throttleTimeout)
+    }
+  }, [hasMore, isLoading])
 
   async function onRemoveTrainer(trainerId) {
     try {
@@ -153,7 +201,12 @@ export function TrainerIndex() {
           {prefs.isEnglish ? 'Add' : 'הוסף'}
         </Button>
       )}{' '}
-      <TrainerList trainers={trainers} onRemoveTrainer={onRemoveTrainer} />
+      <TrainerList
+        trainers={trainers}
+        onRemoveTrainer={onRemoveTrainer}
+        filter={filter}
+        setFilter={setFilter}
+      />
     </section>
   )
 }

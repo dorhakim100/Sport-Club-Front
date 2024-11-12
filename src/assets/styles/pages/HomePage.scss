@@ -143,8 +143,9 @@
         justify-self: center;
         align-self: center;
         width: 90vw;
-
+        
         .update-banner{
+          font-size: 0.9em;
           grid-template-columns: auto 1fr;
         }
         p{
