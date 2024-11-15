@@ -44,7 +44,6 @@ async function remove(messageId) {
 }
 async function save(message) {
   try {
-    console.log(message)
     var savedMessage
     if (message._id) {
       savedMessage = await httpService.put(`${KEY}/${message._id}`, message)
@@ -64,13 +63,12 @@ function getDefaultFilter() {
 }
 
 async function getMaxPage(filter) {
-  console.log(filter)
   const PAGE_SIZE = 6
   try {
     var messages = await query({ ...filter, isAll: true })
     let maxPage = messages.length / PAGE_SIZE
     maxPage = Math.ceil(maxPage)
-    console.log(maxPage)
+
     return maxPage
   } catch (err) {
     console.log(err)

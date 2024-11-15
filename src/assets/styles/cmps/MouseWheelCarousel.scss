@@ -11,10 +11,21 @@
 
       @media (max-width:500px) {
         width: 50vw;
+    
         
       }
 
 
+  }
+
+  .swiper-slide.mouse-wheel{
+    position: relative;
+
+    span{
+      position: absolute;
+
+      
+    }
   }
   
   .swiper-slide .mouse-wheel img {

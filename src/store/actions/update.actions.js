@@ -39,7 +39,6 @@ export async function removeUpdate(reviewId) {
 }
 
 export async function loadUpdate(updateId) {
-  console.log(updateId)
   try {
     const update = await updateService.getById(updateId)
     store.dispatch({ type: LOAD_UPDATE, update })

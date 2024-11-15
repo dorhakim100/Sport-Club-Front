@@ -24,7 +24,13 @@ export function MouseWheelCarousel() {
         className='mouse-wheel'
         style={{ width: '90vw' }}
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide className='mouse-wheel'>
+          <img
+            src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002702/DJI_0481_e3lubw.jpg'
+            alt=''
+          />
+          <span>slide 1</span>
+        </SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>

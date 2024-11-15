@@ -25,7 +25,6 @@ export function Nav({ origin, links, isMain }) {
       </>
 
       {links.map((link, index) => {
-        console.log(link)
         return (
           ((link.path === 'message' || link.path === 'order') && (
             <div key={makeId()}>

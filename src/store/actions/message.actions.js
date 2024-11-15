@@ -10,7 +10,6 @@ import {
 } from '../reducers/message.reducer'
 
 export async function loadMessages(filterBy) {
-  console.log(filterBy)
   try {
     const messages = await messageService.query(filterBy)
     store.dispatch(getCmdSetMessages(messages))

@@ -33,7 +33,7 @@ export function ClassDetails() {
     try {
       setIsLoading(true)
       const c = await loadClass(classId)
-      console.log(c)
+
       const t = await classService.getClassTrainer({ ...c })
       setTrainers(t)
     } catch (err) {

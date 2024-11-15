@@ -10,7 +10,6 @@ export function DoneMessageButton({ message, setIsHover, setChange }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
   async function handleDoneChange(messageId) {
-    console.log(messageId)
     try {
       const messageToUpdate = { ...message, isDone: !message.isDone }
 

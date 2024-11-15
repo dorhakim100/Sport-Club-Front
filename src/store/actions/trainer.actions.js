@@ -10,7 +10,6 @@ import {
 
 export async function loadTrainers(filterBy) {
   try {
-    console.log(filterBy)
     const trainers = await trainerService.query(filterBy)
     store.dispatch(getCmdSetTrainers(trainers))
     return trainers
@@ -22,10 +21,7 @@ export async function loadTrainers(filterBy) {
 
 export async function loadTrainer(trainerId) {
   try {
-    console.log(trainerId)
-
     const trainer = await trainerService.getById(trainerId)
-    console.log(trainer)
     store.dispatch(getCmdSetTrainer(trainer))
     return trainer
   } catch (err) {

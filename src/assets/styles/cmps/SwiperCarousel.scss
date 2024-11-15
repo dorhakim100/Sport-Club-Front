@@ -87,8 +87,16 @@ body {
   
   .home-swiper{
     position: relative;
-    height: 500px;
-    
+    // height: 500px;
+    width: auto;
+
+    @media (max-width:550px) {
+            // height: 200px;
+            
+ 
+    }
+        height: calc(30vw);
+    max-height: 500px;
   }
   
   .home-slide{
@@ -102,12 +110,19 @@ body {
     // overflow: hidden;
     // height: 500px;
     margin: 0px;
+
+
     
     @media (max-width:550px) {
-      height: 200px;
+      // height: 200px;
+
+      .header-container{
+        // height: 500px;
+      }
       
       .blur, .img-container, img{
         height: 100px;
+
         
       }
       

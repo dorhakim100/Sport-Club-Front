@@ -91,7 +91,7 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
     if (dayIndex === -1) throw new Error('Invalid day provided')
 
     const [hour, minute] = time.split(':').map(Number)
-    console.log(time)
+
     const today = new Date()
     let resultDate = new Date(today)
 
@@ -108,16 +108,13 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
     resultDate.setDate(today.getDate() + daysToAdd)
     resultDate.setHours(hour, minute, 0, 0)
 
-    console.log(resultDate)
-
     return resultDate // Returns in the desired format
   }
 
   useEffect(() => {
     const { occurrences } = editClass
-    console.log(occurrences)
+
     const daysToSet = occurrences.map((occur) => {
-      console.log(occur)
       const dayToSet = {
         id: occur.id,
         time: getNextDateWithDayAndTime(
@@ -132,7 +129,7 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
       }
       return dayToSet
     })
-    console.log(daysToSet)
+
     setSelectedDays(daysToSet)
   }, [editClass.occurrences])
 
@@ -142,35 +139,6 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
     )
     setEditClass({ ...editClass, occurrences: newOccurrences })
   }
-
-  //   const handleTimeChange = (ev, type, occurId) => {
-  //     const date = new Date(ev.$d)
-  //     const timeString = date.toLocaleTimeString([], {
-  //       hour: '2-digit',
-  //       minute: '2-digit',
-  //       hour12: false,
-  //     })
-
-  //     let newOccur
-  //     if (editClass.occurrences.some((occur) => occur.id === occurId)) {
-  //       const idx = editClass.occurrences.findIndex(
-  //         (occurrence) => occurrence.id === occurId
-  //       )
-  //       const occur = editClass.occurrences.find(
-  //         (occurrence) => occurrence.id === occurId
-  //       )
-
-  //       newOccur = { ...occur, [type]: timeString }
-  //       editClass.occurrences.splice(idx, 1, newOccur)
-  //     } else {
-  //       newOccur = { ...editOccur, [type]: timeString }
-  //       editClass.occurrences.push({ ...newOccur })
-  //     }
-
-  //     console.log(newOccur)
-  //     console.log({ ...editClass })
-  //     setEditClass({ ...editClass })
-  //   }
 
   const handleTimeChange = (ev, type, occurId) => {
     const date = new Date(ev.$d)
@@ -200,22 +168,20 @@ export function DaySelector({ editClass, setEditClass, trainers }) {
       ...prevEditClass,
       occurrences: updatedOccurrences,
     }))
-
-    console.log({ ...editClass, occurrences: updatedOccurrences })
   }
 
   const handleActiveChange = (occurToEdit) => {
     const { id } = occurToEdit
     const idx = editClass.occurrences.findIndex((occur) => occur.id === id)
-    console.log(idx)
+
     let stateToSet = occurToEdit.isActive
     stateToSet = !stateToSet
-    console.log(stateToSet)
+
     editClass.occurrences.splice(idx, 1, {
       ...occurToEdit,
       isActive: stateToSet,
     })
-    console.log(editClass.occurrences)
+
     const newOccurrences = [...editClass.occurrences]
     setEditClass((prevEditClass) => ({
       ...prevEditClass,

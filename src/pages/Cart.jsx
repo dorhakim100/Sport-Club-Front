@@ -17,6 +17,7 @@ import { setCartTotal } from '../store/actions/user.actions'
 import { Button } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import { makeId } from '../services/util.service'
+import { orderService } from '../services/order/order.service'
 
 export function Cart() {
   const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
@@ -54,15 +55,6 @@ export function Cart() {
       setIsLoading(true)
       const fetchedCart = await userService.getCartItems(cart)
       if (discount) {
-        // console.log(
-        //   'discount.items IDs:',
-        //   discount.items.map((item) => item.id)
-        // )
-        // console.log(
-        //   'fetchedCart IDs:',
-        //   fetchedCart.map((item) => item.id)
-        // )
-
         fetchedCart.forEach((item) => {
           const matchedDiscountItem = discount.items.find(
             (itemToCheck) => itemToCheck.id === item.id
@@ -74,8 +66,6 @@ export function Cart() {
             (cartItem) => cartItem.id === item.id
           )
           let itemToModify = fetchedCart[idx]
-
-          console.log('Item to modify:', itemToModify)
 
           if (discount.type === 'fixed') {
             itemToModify = {
@@ -108,9 +98,6 @@ export function Cart() {
   }
 
   function onCheckout() {
-    console.log(cart)
-    console.log(total)
-
     try {
       setIsLoading(true)
     } catch (err) {
@@ -122,11 +109,9 @@ export function Cart() {
   }
 
   async function onEnterCoupon({ target }) {
-    console.log(coupon)
     try {
       setIsLoading(true)
       const res = await couponService.getDiscount(coupon)
-      console.log(res)
       await setCart(res)
       showSuccessMsg(
         prefs.isEnglish ? 'Coupon added successfully' : 'קופון נוסף בהצלחה'
@@ -152,10 +137,14 @@ export function Cart() {
   }
 
   const createOrder = () => {
-    return {
+    const order = {
+      ...orderService.getEmptyOrder(),
       items: cart,
-      total: total,
+      amount: total,
+      user: { id: user._id, name: user.fullname },
     }
+
+    return order
   }
 
   return (

@@ -2,16 +2,16 @@ import { httpService } from '../http.service'
 import { makeId } from '../util.service'
 import { userService } from '../user/user.service'
 
-const KEY = 'trainer'
+const KEY = 'order'
 
-export const trainerService = {
+export const orderService = {
   query,
   getById,
   save,
   remove,
   getDefaultFilter,
   getMaxPage,
-  getEmptyTrainer,
+  getEmptyOrder,
 }
 
 async function query(filterBy = { pageIdx: 0, types: [] }) {
@@ -25,9 +25,9 @@ async function query(filterBy = { pageIdx: 0, types: [] }) {
   }
 }
 
-async function getById(trainerId) {
+async function getById(orderId) {
   try {
-    const res = await httpService.get(`${KEY}/${trainerId}`)
+    const res = await httpService.get(`${KEY}/${orderId}`)
     return res
   } catch (err) {
     console.log(err)
@@ -35,23 +35,23 @@ async function getById(trainerId) {
   }
 }
 
-async function remove(trainerId) {
+async function remove(orderId) {
   try {
-    return await httpService.delete(`${KEY}/${trainerId}`)
+    return await httpService.delete(`${KEY}/${orderId}`)
   } catch (err) {
     console.log(err)
     throw err
   }
 }
-async function save(trainer) {
+async function save(order) {
   try {
-    var savedTrainer
-    if (trainer._id) {
-      savedTrainer = await httpService.put(`${KEY}/${trainer._id}`, trainer)
+    var savedOrder
+    if (order._id) {
+      savedOrder = await httpService.put(`${KEY}/${order._id}`, order)
     } else {
-      savedTrainer = await httpService.post(KEY, trainer)
+      savedOrder = await httpService.post(KEY, order)
     }
-    return savedTrainer
+    return savedOrder
   } catch (err) {
     console.log(err)
     throw err
@@ -64,8 +64,8 @@ function getDefaultFilter() {
 
 async function getMaxPage() {
   try {
-    var trainers = await query({ isAll: true })
-    let maxPage = trainers.length / PAGE_SIZE
+    var orders = await query({ isAll: true })
+    let maxPage = orders.length / PAGE_SIZE
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
@@ -73,16 +73,13 @@ async function getMaxPage() {
   }
 }
 
-function getEmptyTrainer() {
+function getEmptyOrder() {
   return {
     _id: makeId(),
-    name: { he: '', eng: '' },
-    types: [],
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1730047839/blank-profile-picture-973460_1280_jidp6j.webp',
-    preview: {
-      he: '',
-      eng: '',
-    },
-    experience: '01-01-2000',
+    user: { id: '' },
+    items: [],
+    amount: '',
+
+    createdAt: Date.now(),
   }
 }

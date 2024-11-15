@@ -11,9 +11,7 @@ import Divider from '@mui/material/Divider'
 export function AboutUs() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
-  function onTellMeMore() {
-    console.log('Telling you more')
-  }
+  function onTellMeMore() {}
 
   const origin = {
     path: '/about',

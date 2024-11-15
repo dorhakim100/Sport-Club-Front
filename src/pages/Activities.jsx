@@ -9,6 +9,7 @@ import { DynamicCover } from '../cmps/DynamicCover'
 import { InstagramPost } from '../cmps/InstagramPost'
 import { ActivityInfo } from '../cmps/ActivityInfo.jsx'
 import { Cards } from '../cmps/Cards'
+import { ContactUs } from '../cmps/ContactUs'
 
 import Divider from '@mui/material/Divider'
 
@@ -88,6 +89,7 @@ export function Activities() {
         {location.pathname === '/activities' && <HeadContainer text={head} />}
         <Outlet />
       </section>
+      <ContactUs />
     </section>
   )
 }
@@ -117,7 +119,6 @@ export function Swimming() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log(entry.target)
           entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
           // entry.target.classList.remove('hidden')
         } else {

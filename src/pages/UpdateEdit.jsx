@@ -71,9 +71,6 @@ export function UpdateEdit() {
     const field = target.name
     let value = target.value
 
-    console.log(field)
-    console.log(value)
-
     setEditUpdate({ ...editUpdate, [field]: value })
   }
 

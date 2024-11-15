@@ -9,7 +9,6 @@ import {
 } from '../reducers/class.reducer'
 
 export async function loadClasses(filterBy) {
-  console.log(filterBy)
   try {
     const classes = await classService.query(filterBy)
     store.dispatch(getCmdSetClasses(classes))
@@ -22,9 +21,7 @@ export async function loadClasses(filterBy) {
 
 export async function loadClass(classId) {
   try {
-    console.log(classId)
     const clas = await classService.getById(classId)
-    console.log(clas)
     store.dispatch(getCmdSetClass(clas))
     return clas
   } catch (err) {
@@ -56,7 +53,6 @@ export async function addClass(clas) {
 
 export async function updateClass(clas) {
   try {
-    console.log(clas)
     const savedClass = await classService.save(clas)
 
     store.dispatch(getCmdUpdateClass(savedClass))

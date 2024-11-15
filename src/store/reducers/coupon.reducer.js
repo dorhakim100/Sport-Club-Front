@@ -19,7 +19,6 @@ export function couponReducer(state = initialState, action) {
       newState = { ...state, coupons: action.coupons }
       break
     case SET_COUPON:
-      console.log(action.coupon)
       newState = { ...state, coupon: action.coupon }
       break
     case REMOVE_COUPON:

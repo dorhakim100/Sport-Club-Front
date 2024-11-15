@@ -51,7 +51,6 @@ export function CouponIndex() {
       }
       const max = await couponService.getMaxPage()
       setMaxPage(max)
-      console.log(c)
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't load coupons` : 'לא היה ניתן לטעון קופונים'

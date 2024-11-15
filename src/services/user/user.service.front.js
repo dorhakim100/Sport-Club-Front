@@ -55,7 +55,7 @@ async function update(userToUpdate) {
   try {
     const { _id } = userToUpdate
     const user = await storageService.get('user', _id)
-    console.log(userToUpdate)
+
     const savedUser = await storageService.put('user', userToUpdate)
 
     // When admin updates other user's details, do not update loggedinUser
@@ -71,10 +71,8 @@ async function update(userToUpdate) {
 
 async function login(userCred) {
   try {
-    console.log(userCred)
-
     const users = await storageService.query('user')
-    console.log(users)
+
     const user = users.find(
       (user) =>
         user.username === userCred.username || user.email === userCred.username
@@ -252,7 +250,6 @@ async function _createAdmin() {
     }
 
     const newUser = await storageService.post('user', userCred)
-    console.log('newUser: ', newUser)
   } catch (err) {
     console.log(err)
     throw err

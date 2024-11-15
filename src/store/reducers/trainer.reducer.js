@@ -19,7 +19,6 @@ export function trainerReducer(state = initialState, action) {
       newState = { ...state, trainers: action.trainers }
       break
     case SET_TRAINER:
-      console.log(action.trainer)
       newState = { ...state, trainer: action.trainer }
       break
     case REMOVE_TRAINER:

@@ -26,9 +26,8 @@ export function CartItem({ item }) {
         (itemToUpdate) => itemToUpdate.id === item.id
       )
       user.items.splice(idx, 1, { ...item, quantity: quantity })
-      console.log(user)
+
       const userToUpdate = { ...user }
-      console.log(userToUpdate)
 
       try {
         setIsLoading(true)
@@ -41,7 +40,6 @@ export function CartItem({ item }) {
     }
 
     updateItemQuantity()
-    // console.log(item)
   }, [quantity])
 
   return (

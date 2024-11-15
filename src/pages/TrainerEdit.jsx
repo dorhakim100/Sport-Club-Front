@@ -46,7 +46,7 @@ export function TrainerEdit() {
   const [editTrainer, setEditTrainer] = useState(
     trainerService.getEmptyTrainer()
   )
-  console.log(editTrainer)
+
   const [img, setImg] = useState(null)
 
   const text = {
@@ -67,7 +67,6 @@ export function TrainerEdit() {
       setEditTrainer({ ...trainer })
       setTrainer({ ...trainer })
       setImg(trainer.img)
-      console.log(trainer)
     } catch (err) {
       console.log(err)
       showErrorMsg('Cannot load trainer')
@@ -95,7 +94,6 @@ export function TrainerEdit() {
 
       case 'checkbox':
         if (field === 'types') {
-          console.log(editTrainer.types)
           if (types.includes(checkedButton)) {
             const idx = editTrainer.types.findIndex(
               (type) => type === checkedButton
@@ -111,8 +109,6 @@ export function TrainerEdit() {
         return
         break
       case 'text':
-        console.log(field)
-
         setEditTrainer({
           ...editTrainer,
           [field]: {
@@ -170,8 +166,7 @@ export function TrainerEdit() {
     setIsLoading(true)
     try {
       const res = await uploadService.uploadImg(ev)
-      console.log(res)
-      console.log(res.url)
+
       const ImgSrc = res.url
       setImg(ImgSrc)
       setEditTrainer({ ...editTrainer, img: ImgSrc })

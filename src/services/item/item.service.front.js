@@ -73,7 +73,6 @@ async function remove(itemId) {
 async function save(item) {
   var savedItem
   if (item._id) {
-    console.log(item)
     const itemToSave = {
       _id: item._id,
       cover: item.cover,
