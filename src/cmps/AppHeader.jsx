@@ -305,6 +305,7 @@ export function AppHeader({ bodyRef }) {
         style={scrolled ? { top: '83px' } : { top: '148px' }}
       >
         <NavLink
+          ref={logoRef}
           to='/'
           className='logo'
           onClick={() => {
@@ -312,7 +313,7 @@ export function AppHeader({ bodyRef }) {
             setMenu(false)
           }}
         >
-          <img src={logo} alt='' ref={logoRef} />
+          <img src={logo} alt='' />
         </NavLink>
         <NavLink
           to='facilities'
@@ -465,13 +466,9 @@ export function AppHeader({ bodyRef }) {
           to='/'
           className='logo'
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          ref={logoRef}
         >
-          <img
-            src={logo}
-            alt=''
-            ref={logoRef}
-            style={{ transition: '0.3s ease' }}
-          />
+          <img src={logo} alt='' style={{ transition: '0.3s ease' }} />
         </NavLink>
       )}
     </header>

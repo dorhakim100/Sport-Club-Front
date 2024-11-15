@@ -152,6 +152,14 @@
         height: calc(30vw);
         max-height: 500px;
 
+        @media (max-width:980px) {
+          // height: 200px;
+
+          height: 300px;
+          
+
+  }
+
         // top: 50%;
         // height: fit-content;
 
