@@ -26,7 +26,6 @@ export function MessagePreview({ message, setMessages }) {
   const [isHover, setIsHover] = useState(false)
 
   async function handleDoneChange(messageId) {
-    console.log(messageId)
     try {
       const messageToUpdate = { ...message, isDone: !message.isDone }
 

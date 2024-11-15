@@ -60,19 +60,11 @@ export function TrainerSelect({
 
   const handleChange = (event) => {
     const trainerToSet = event.target.value
-    console.log(trainerToSet)
-    // setSelectedTrainer(trainerToSet)
+
     setTrainerToClass(trainerToSet)
-    // setEditOccur({
-    //   ...editOccur,
-    //   trainer: { id: trainerToSet._id, name: trainerToSet.name },
-    //   id,
-    // })
   }
 
   const setTrainerToClass = (trainerToSet) => {
-    console.log(occur)
-    console.log(editClass)
     const idx = editClass.occurrences.findIndex(
       (occurrence) => occurrence.id === occur.id
     )
@@ -85,7 +77,7 @@ export function TrainerSelect({
     editClass.occurrences.splice(idx, 1, newOccur)
 
     setSelectedTrainer(trainerToSet)
-    console.log(editClass)
+
     const classToSet = { ...editClass }
     setEditClass(classToSet)
   }

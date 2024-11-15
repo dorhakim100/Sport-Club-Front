@@ -67,11 +67,11 @@ export function ItemIndex() {
     const setItems = async () => {
       try {
         setIsLoading(true)
-        console.log(filterBy)
+
         const res = await loadItems(filterBy)
 
         const max = await itemService.getMaxPage(filterBy)
-        console.log(max)
+
         setMaxPage(max)
 
         // Only update searchParams if needed

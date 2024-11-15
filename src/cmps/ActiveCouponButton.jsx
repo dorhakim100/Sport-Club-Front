@@ -10,7 +10,6 @@ export function ActiveCouponButton({ coupon, setIsHover, setChange }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
   async function handleDoneChange(couponId) {
-    console.log(couponId)
     try {
       const couponToUpdate = { ...coupon, isActive: !coupon.isActive }
 

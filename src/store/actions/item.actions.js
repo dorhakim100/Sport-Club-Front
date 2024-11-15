@@ -11,9 +11,8 @@ import {
 
 export async function loadItems(filterBy) {
   try {
-    console.log(filterBy)
     const items = await itemService.query(filterBy)
-    console.log(items)
+
     store.dispatch(getCmdSetItems(items))
     return items
   } catch (err) {

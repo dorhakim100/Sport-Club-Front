@@ -32,7 +32,7 @@ export function UpdateControl({
   )
 
   useEffect(() => {
-    console.log(updates)
+    // console.log(updates)
   }, [updates])
 
   async function onCancelEdit() {

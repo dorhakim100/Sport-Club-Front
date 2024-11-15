@@ -67,7 +67,6 @@ export function CouponEdit() {
       setEditCoupon({ ...coupon })
       setCoupon({ ...coupon })
       await getItems()
-      console.log(coupon)
     } catch (err) {
       console.log(err)
       showErrorMsg('Cannot load coupon')
@@ -81,7 +80,7 @@ export function CouponEdit() {
     try {
       setIsLoading(true)
       const itemsToSet = await itemService.query({ isAll: true })
-      console.log(itemsToSet)
+
       setItems(itemsToSet)
     } catch (err) {
       showErrorMsg(
@@ -98,7 +97,6 @@ export function CouponEdit() {
     let checkedButton = target.id
     const array = checkedButton.split('|')
     checkedButton = array[1]
-    console.log(value)
 
     const itemsToCheck = editCoupon.items
     let newItems = []
@@ -116,7 +114,6 @@ export function CouponEdit() {
           if (
             itemsToCheck.some((itemToCheck) => itemToCheck.id === checkedButton)
           ) {
-            console.log(items)
             const idx = editCoupon.items.findIndex(
               (item) => item.id === checkedButton
             )
@@ -135,7 +132,6 @@ export function CouponEdit() {
         }
 
         if (field === 'type') {
-          console.log(editCoupon.type)
           const stateToSet =
             editCoupon.type === 'fixed' ? 'percentage' : 'fixed'
           setEditCoupon({ ...editCoupon, type: stateToSet })
@@ -149,7 +145,6 @@ export function CouponEdit() {
           setEditCoupon({ ...editCoupon, [field]: value })
           return
         }
-        console.log(field)
 
         setEditCoupon({
           ...editCoupon,
@@ -208,8 +203,7 @@ export function CouponEdit() {
     setIsLoading(true)
     try {
       const res = await uploadService.uploadImg(ev)
-      console.log(res)
-      console.log(res.url)
+
       const ImgSrc = res.url
       setImg(ImgSrc)
       setEditCoupon({ ...editCoupon, img: ImgSrc })

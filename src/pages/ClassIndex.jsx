@@ -89,7 +89,7 @@ export function ClassIndex() {
     try {
       setIsLoading(true)
       const c = await loadClasses(filter) // Load classes with the current filter
-      console.log(c)
+
       const max = await classService.getMaxPage()
       setMaxPage(max)
       return c

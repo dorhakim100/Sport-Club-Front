@@ -28,10 +28,8 @@ export function MessageDetails() {
       setIsLoading(true)
       const m = await loadMessage(messageId)
       const d = new Date(m.createdAt)
-      console.log(m)
 
       setDate(d)
-      console.log(m)
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Could't load message` : 'לא ניתן לטעון הודעה'

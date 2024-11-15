@@ -80,7 +80,6 @@ async function save(message) {
     }
     savedMessage = await storageService.put(STORAGE_KEY, messageToSave)
   } else {
-    console.log(message)
     const messageToSave = {
       name: message.name,
       title: message.title,

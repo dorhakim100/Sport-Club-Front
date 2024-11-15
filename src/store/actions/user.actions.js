@@ -94,7 +94,6 @@ export async function loadUser(userId) {
 
 export async function updateCart(user) {
   const cart = [...user.items]
-  console.log(cart)
 
   store.dispatch({ type: UPDATE_CART, cart })
   store.dispatch({ type: SET_USER, user })

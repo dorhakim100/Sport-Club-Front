@@ -24,9 +24,8 @@ async function query(
   }
 ) {
   try {
-    console.log(filterBy)
     const items = await httpService.get(KEY, filterBy)
-    console.log(items)
+
     return items
   } catch (err) {
     console.log(err)

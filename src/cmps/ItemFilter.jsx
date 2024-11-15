@@ -47,10 +47,6 @@ export function ItemFilter({
     const type = ev.target.type
     let field = ev.target.name
     let value
-    // console.log(ev.target)
-
-    // console.log(type)
-    // console.log(field)
 
     switch (type) {
       case 'text':
@@ -66,7 +62,7 @@ export function ItemFilter({
         break
       case 'checkbox':
         const checkedButton = ev.target.id
-        console.log(checkedButton)
+
         if (field === 'type') {
           if (filterToEdit.types.includes(checkedButton)) {
             const idx = filterToEdit.types.findIndex(

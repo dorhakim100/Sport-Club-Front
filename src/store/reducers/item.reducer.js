@@ -65,24 +65,18 @@ function unitTestReducer() {
   }
 
   state = itemReducer(state, { type: SET_ITEMS, items: [item1] })
-  console.log('After SET_ITEMS:', state)
 
   state = itemReducer(state, { type: ADD_ITEM, item: item2 })
-  console.log('After ADD_ITEM:', state)
 
   state = itemReducer(state, {
     type: UPDATE_ITEM,
     item: { ...item2, vendor: 'Good' },
   })
-  console.log('After UPDATE_ITEM:', state)
 
   state = itemReducer(state, { type: REMOVE_ITEM, itemId: item2._id })
-  console.log('After REMOVE_ITEM:', state)
 
   const msg = { id: 'm' + parseInt(Math.random() * 100), txt: 'Some msg' }
   state = itemReducer(state, { type: ADD_ITEM_MSG, itemId: item1._id, msg })
-  console.log('After ADD_ITEM_MSG:', state)
 
   state = itemReducer(state, { type: REMOVE_ITEM, itemId: item1._id })
-  console.log('After REMOVE_ITEM:', state)
 }

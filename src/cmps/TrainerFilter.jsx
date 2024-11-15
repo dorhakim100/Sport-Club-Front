@@ -32,15 +32,13 @@ export function TrainerFilter({ filter, setFilter }) {
 
     const checkedButton = ev.target.id
 
-    console.log(checkedButton)
-
     if (filter.types.includes(checkedButton)) {
       const idx = filter.types.findIndex((type) => type === checkedButton)
       filter.types.splice(idx, 1)
     } else {
       filter.types.push(checkedButton)
     }
-    console.log(filter)
+
     setFilter({ ...filter, pageIdx: 0 })
   }
 

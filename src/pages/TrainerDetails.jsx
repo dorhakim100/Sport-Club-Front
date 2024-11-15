@@ -20,7 +20,6 @@ export function TrainerDetails() {
   const trainer = useSelector(
     (stateSelector) => stateSelector.trainerModule.trainer
   )
-  console.log(trainerId)
 
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
@@ -73,6 +72,9 @@ export function TrainerDetails() {
               <Link
                 to={`/class/trainer?pageIdx=0&types=${type}`}
                 key={makeId()}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
               >
                 {prefs.isEnglish
                   ? capitalizeFirstLetter(type)

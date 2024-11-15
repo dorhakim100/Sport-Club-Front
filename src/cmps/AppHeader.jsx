@@ -30,7 +30,7 @@ export function AppHeader({ bodyRef }) {
   const openMessages = useSelector(
     (stateSelector) => stateSelector.messageModule.openLength
   )
-  // console.log(prefs)
+
   const [logo, setLogo] = useState(
     'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
   )
@@ -106,8 +106,7 @@ export function AppHeader({ bodyRef }) {
 
   const cartLength = useMemo(() => {
     let length = 0
-    console.log(user)
-    console.log(cart)
+
     if (!cart) {
       return 0
     }
@@ -117,14 +116,17 @@ export function AppHeader({ bodyRef }) {
 
   const handleScroll = () => {
     const scrollY = window.scrollY
+
     if (scrollY > 0) {
       setScrolled(true)
       headerRef.current.style.transition = '0.3s ease'
       logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
       headerRef.current.style.opacity = '0.8'
+      headerRef.current.style.opacity = '0.8'
+      headerRef.current.style.transition = '0.1s ease-in'
     } else if (scrollY === 0) {
-      headerRef.current.style.transition = '0.3s ease'
       setScrolled(false)
+      headerRef.current.style.transition = '0.3s ease'
       logoRef.current.style.transform = 'scale(1)' // Resets logo to original size
 
       headerRef.current.style.opacity = '1'
@@ -243,7 +245,7 @@ export function AppHeader({ bodyRef }) {
 
   function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window
-    // console.log(width)
+
     return {
       width,
       height,
@@ -266,7 +268,11 @@ export function AppHeader({ bodyRef }) {
         }
       }}
       // style={{ position: 'fixed', left: '0px', right: '0px', top: '0px' }}
-      style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
+      style={
+        prefs.isEnglish
+          ? { direction: 'ltr', opacity: scrolled ? '0.8' : '' }
+          : { direction: 'rtl', opacity: scrolled ? '0.8' : '' }
+      }
     >
       {' '}
       {windowDimensions.width < 1050 && (

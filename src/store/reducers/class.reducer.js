@@ -32,7 +32,7 @@ export function classReducer(state = initialState, action) {
       break
     case ADD_CLASS:
       newState = { ...state, classes: [...state.classes, action.clas] }
-      console.log(newState)
+
       break
     case UPDATE_CLASS:
       classes = state.classes.map((classToMap) =>

@@ -29,7 +29,7 @@ export function ContactUs() {
       setEditMessage({ ...editMessage, name: user.fullname })
     } else {
       const newM = messageService.getEmptyMessage()
-      console.log(newM)
+
       setEditMessage({ ...newM })
     }
   }, [user])
@@ -42,12 +42,11 @@ export function ContactUs() {
   }
 
   async function onSend() {
-    console.log(editMessage)
     delete editMessage._id
     try {
       setIsLoading(true)
       const addedMessage = await addMessage(editMessage)
-      console.log(addedMessage)
+
       showSuccessMsg(prefs.isEnglish ? 'Message sent' : 'הודעה נשלחה')
       setEditMessage(messageService.getEmptyMessage())
       socketService.emit(SOCKET_EMIT_SEND_MSG, addedMessage)

@@ -69,7 +69,7 @@ export function ClassEdit() {
     try {
       setIsLoading(true)
       const clas = await classService.getById(classId)
-      console.log(clas)
+
       await loadTrainers({ isAll: true })
       const t = classService.getClassTrainer(clas)
       setClassTrainers(t)
@@ -99,7 +99,7 @@ export function ClassEdit() {
       case 'number':
       case 'range':
         value = +value || ''
-        console.log(value)
+
         break
 
       case 'checkbox':
@@ -114,15 +114,13 @@ export function ClassEdit() {
             newTrainers = editClass.trainers
             newTrainers.push({ id: trainer._id, name: trainer.name })
           }
-          console.log(newTrainers)
+
           setEditClass({ ...editClass })
         }
 
         return
         break
       case 'text':
-        console.log(field)
-
         setEditClass({
           ...editClass,
           [field]: {
@@ -152,7 +150,7 @@ export function ClassEdit() {
   async function onSaveClass(ev) {
     ev.preventDefault()
     // const { name, types } = editClass
-    console.log(editClass)
+
     setIsLoading(true)
     try {
       const savedClass = await updateClass(editClass)
@@ -178,8 +176,7 @@ export function ClassEdit() {
     setIsLoading(true)
     try {
       const res = await uploadService.uploadImg(ev)
-      console.log(res)
-      console.log(res.url)
+
       const ImgSrc = res.url
       setImg(ImgSrc)
       setEditClass({ ...editClass, img: ImgSrc })

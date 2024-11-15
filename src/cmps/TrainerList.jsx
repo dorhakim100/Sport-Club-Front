@@ -41,7 +41,7 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
               )) || (
                 <Button
                   variant='contained'
-                  className='hidden'
+                  className='hidden-btn'
                   onClick={() => {
                     window.scrollTo({ top: 0, behavior: 'smooth' })
 

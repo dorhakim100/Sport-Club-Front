@@ -14,7 +14,7 @@ import { EffectCards, Navigation } from 'swiper/modules'
 export function Cards({ trainers }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
-  console.log(trainers)
+
   return (
     <>
       <Swiper

@@ -32,7 +32,7 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
   }, [updates])
 
   useEffect(() => {
-    console.log(position)
+    // console.log(position)
   }, [position])
 
   const onDragEnd = async (result) => {

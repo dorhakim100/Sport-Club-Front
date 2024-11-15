@@ -124,7 +124,3 @@ export function convertToDate(timeString) {
   now.setHours(hours, minutes, 0, 0) // Set hours, minutes, and reset seconds and milliseconds
   return now
 }
-
-// Example usage
-console.log(translateDayToHebrew('sunday')) // Output: ראשון
-console.log(translateDayToHebrew('Wednesday')) // Output: רביעי

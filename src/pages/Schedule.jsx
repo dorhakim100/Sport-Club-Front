@@ -80,7 +80,6 @@ export function Schedule() {
     try {
       const occurrences = await classService.getOccurrences()
       setOccurrs(occurrences)
-      console.log(occurrences)
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't load schedule` : 'טעינת מערכת נכשלה'

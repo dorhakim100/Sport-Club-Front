@@ -10,7 +10,7 @@ export function AccessibilityButton() {
     (storeState) => storeState.systemModule.isAccessibility
   )
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
-  console.log(isVisible)
+
   return (
     <button
       className='accessibility-btn'

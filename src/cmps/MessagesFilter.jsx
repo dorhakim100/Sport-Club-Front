@@ -42,7 +42,6 @@ export function MessagesFilter({ filter, setFilter, maxPage }) {
 
     switch (type) {
       case 'search':
-        console.log(value)
         setEditFilter({ ...editFilter, txt: value })
         debouncedSetFilter.current((prevFilter) => ({
           ...prevFilter,

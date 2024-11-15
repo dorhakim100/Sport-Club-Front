@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import React from 'react'
-import { Routes, Route } from 'react-router'
+import { Routes, Route, useLocation } from 'react-router'
 
 import { useSelector } from 'react-redux'
 
@@ -69,6 +69,9 @@ export function App() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const bodyRef = useRef()
 
+  const location = useLocation()
+  const isHome = location.pathname === '/'
+
   return (
     <>
       <UserMsg />
@@ -83,7 +86,7 @@ export function App() {
         style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
         ref={bodyRef}
       >
-        <section className='page-container'>
+        <section className={isHome ? '' : 'page-container'}>
           <Routes>
             <Route path='' element={<HomePage />} />
             <Route path='facilities' element={<Facilities />} />

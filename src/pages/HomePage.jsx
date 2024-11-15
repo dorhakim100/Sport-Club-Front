@@ -70,12 +70,19 @@ export function HomePage() {
     },
   ]
 
+  const preview = {
+    eng: 'Join us for a year-round experience blending the thrill of winter sports with the warmth of summer family activities. From action-packed classes to serene leisure moments, we’re here to make every season memorable.',
+    he: 'הצטרפו אלינו לחוויה ייחודית כל השנה, שמשלבת את הריגוש של ספורט החורף עם פעילויות קיץ לכל המשפחה. שיעורים מלאי אקשן לצד רגעים של רוגע ונחת - אנחנו כאן כדי להפוך כל עונה לבלתי נשכחת.',
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const t = await loadTrainers(trainerService.getDefaultFilter())
-        console.log('trainers', t)
+        const t = await loadTrainers({
+          ...trainerService.getDefaultFilter(),
+          isRandom: true,
+        })
         await loadUpdates(updateService.getDefaultFilter())
       } catch (err) {
         showErrorMsg(
@@ -90,9 +97,12 @@ export function HomePage() {
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+          const timeout = index + 1
+          setTimeout(() => {
+            entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+          }, 300)
           // entry.target.classList.remove('hidden')
         } else {
           entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
@@ -109,10 +119,16 @@ export function HomePage() {
   return (
     <section className='home-container'>
       <div
-        className={`main-header-container section hidden ${
+        className={`main-header-container background-img section hidden ${
           !prefs.isEnglish && 'rtl'
         }`}
       >
+        {/* <img
+          src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002473/20_rjsrgf.jpg'
+          alt=''
+          className='background-img'
+        /> */}
+
         <div
           className={prefs.isEnglish ? 'text-container' : 'text-container rtl'}
         >
@@ -121,61 +137,77 @@ export function HomePage() {
               ? 'Sports and Action in Winter, Family Experience in Summer'
               : 'נופש משפחתי בקיץ, אקשן בחורף'}
           </h2>
+
           <h2>
             {prefs.isEnglish
               ? 'A Year-Round Sports and Leisure Club'
               : 'מועדון ספורט אחד כל השנה'}
           </h2>
+
+          <p>{prefs.isEnglish ? preview.eng : preview.he}</p>
         </div>
       </div>
 
-      <div className='home-carousel'>
-        <SwiperCarousel imgs={imgs} />
-      </div>
-
-      <div
-        className={`info-center-container section hidden ${
-          !prefs.isEnglish && 'rtl'
-        }`}
-      >
-        <div className='schedule-container'>
-          <Link
-            to='class'
-            className={prefs.isDarkMode ? 'dark' : ''}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          >
-            {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}
-            {prefs.isEnglish ? (
-              <ArrowForwardIosIcon className='arrow right' />
-            ) : (
-              <ArrowBackIosNewIcon className='arrow left' />
-            )}
-          </Link>
-        </div>
-        <div className='cards-container'>
-          <b>{prefs.isEnglish ? 'Our trainers' : 'המאמנים שלנו'}</b>
-          <Cards trainers={trainers} />
-        </div>
+      <div className='home-content-container'>
         <div
-          className='updates-carousel-container'
-          onMouseEnter={() => setIsUpdatesHover(true)}
-          onMouseLeave={() => setIsUpdatesHover(false)}
-        >
-          <b>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</b>
-          <Updates isHover={isUpdatesHover} updates={updates} />
+          className={`section hidden ${
+            !prefs.isEnglish && 'rtl'
+          } text-container`}
+        ></div>
+        <div className='home-carousel'>
+          <SwiperCarousel imgs={imgs} />
         </div>
+
+        <div
+          className={`info-center-container section hidden ${
+            !prefs.isEnglish && 'rtl'
+          }`}
+        >
+          <div className='schedule-container'>
+            <Link
+              to='class'
+              className={prefs.isDarkMode ? 'dark' : ''}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}
+              {prefs.isEnglish ? (
+                <ArrowForwardIosIcon className='arrow right' />
+              ) : (
+                <ArrowBackIosNewIcon className='arrow left' />
+              )}
+            </Link>
+          </div>
+          <div className='cards-container'>
+            <Link
+              to={'/class/trainer'}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className={prefs.isDarkMode ? 'dark-mode' : ''}
+            >
+              {prefs.isEnglish ? 'Our trainers' : 'המאמנים שלנו'}
+            </Link>
+            <Cards trainers={trainers} />
+          </div>
+          <div
+            className='updates-carousel-container'
+            onMouseEnter={() => setIsUpdatesHover(true)}
+            onMouseLeave={() => setIsUpdatesHover(false)}
+          >
+            <b>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</b>
+            <Updates isHover={isUpdatesHover} updates={updates} />
+          </div>
+        </div>
+
+        <HeadContainer
+          text={{
+            eng: '9 reasons to join us',
+            he: '9 סיבות להצטרף למועדון הספורט',
+          }}
+        />
+
+        <MouseWheelCarousel />
+
+        <ContactUs />
       </div>
-
-      <HeadContainer
-        text={{
-          eng: '9 reasons to join us',
-          he: '9 סיבות להצטרף למועדון הספורט',
-        }}
-      />
-
-      <MouseWheelCarousel />
-
-      <ContactUs />
     </section>
   )
 }

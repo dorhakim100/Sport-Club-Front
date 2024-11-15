@@ -64,7 +64,6 @@ export function ItemEdit() {
       setEditItem({ ...item })
       setItem({ ...item })
       setCover(item.cover)
-      console.log(item)
     } catch (err) {
       console.log(err)
       showErrorMsg('Cannot load item')
@@ -92,7 +91,6 @@ export function ItemEdit() {
 
       case 'checkbox':
         if (field === 'types') {
-          console.log(editItem.types)
           if (types.includes(checkedButton)) {
             const idx = editItem.types.findIndex(
               (company) => company === checkedButton
@@ -108,8 +106,6 @@ export function ItemEdit() {
         return
         break
       case 'text':
-        console.log(field)
-
         setEditItem({
           ...editItem,
           [field]: {
@@ -161,8 +157,7 @@ export function ItemEdit() {
     setIsLoading(true)
     try {
       const res = await uploadService.uploadImg(ev)
-      console.log(res)
-      console.log(res.url)
+
       const coverSrc = res.url
       setCover(coverSrc)
       setEditItem({ ...editItem, cover: coverSrc })
