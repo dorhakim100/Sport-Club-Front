@@ -92,6 +92,7 @@ nav {
 
     gap: 1em;
 
+
     
     // font-size: .8em;
     a{
@@ -347,6 +348,16 @@ nav {
 	// grid-template-columns: repeat(2,auto);
 	// align-items: center;
 	// justify-items: center;
+
+	@media (max-width:600px) {
+		// margin: 0em 2em 0em 2em;
+		margin: 0px;
+		padding: 0em 2em 0em 2em;
+		width: 100vw;
+		overflow-x: auto;
+
+	}
+
 
 	a{
 		background-color: $primary-light-blue;
