@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { logout } from '../store/actions/user.actions'
+import { logout, setRemembered } from '../store/actions/user.actions'
 import { loadOpenMessages } from '../store/actions/message.actions'
 
 import { SOCKET_EVENT_ADD_MSG } from '../services/socket.service'
@@ -19,6 +19,8 @@ import { Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import { socketService } from '../services/socket.service'
+import { userService } from '../services/user/user.service'
+import { setPrefs } from '../store/actions/system.actions'
 
 export function AppHeader({ bodyRef }) {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -153,9 +155,30 @@ export function AppHeader({ bodyRef }) {
     }
   }
 
+  useEffect(() => {
+    const setRememberedUser = async () => {
+      try {
+        const remembered = await userService.getRememberedUser()
+
+        setRemembered(remembered)
+      } catch (err) {
+        console.log(err)
+        showErrorMsg(
+          prefs.isEnglish
+            ? `Couldn't load saved user`
+            : 'לא היה ניתן לטעון משתמש שמור'
+        )
+      }
+    }
+    setRememberedUser()
+  }, [])
+
   async function onLogout() {
     try {
       await logout()
+      const prefsToSet = prefs
+      delete prefsToSet.user
+      setPrefs({ ...prefsToSet })
       navigate('/')
       showSuccessMsg(`Bye now`)
     } catch (err) {

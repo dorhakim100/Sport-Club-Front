@@ -259,7 +259,8 @@ nav {
 
 			&:hover{
 				background-color: $bold-navy;
-				background-color: $very-dark-gray;
+				background-color: $very-dark-gray;	
+				background-color: #12406a;
 			  color: white;
 	
 			}
@@ -303,12 +304,14 @@ nav {
         }
         &:has(input:checked) label{
           background-color: $dark-blue;
+	
           color: white;
           &:hover{
-            background-color: $bold-navy;
-            color: white;
-
-          }
+			  background-color: $bold-navy;
+	
+			  color: white;
+			  
+			}
 
         }
 	// &:has(input:checked) label{

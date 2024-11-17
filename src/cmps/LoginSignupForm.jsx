@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 import { Button } from '@mui/material'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { login, signup } from '../store/actions/user.actions'
-import { setIsLoading } from '../store/actions/system.actions'
+import { setIsLoading, setPrefs } from '../store/actions/system.actions'
 // import { addComment } from '../store/actions/comment.actions'
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
@@ -19,6 +19,8 @@ export function LoginSignupForm({ isSignup }) {
   let validate
 
   const [isShown, setIsShown] = useState(false)
+
+  const [isRemember, setIsRemember] = useState(false)
 
   if (isSignup) {
     initialValues = { email: '', password: '', username: '', fullname: '' }
@@ -116,15 +118,20 @@ export function LoginSignupForm({ isSignup }) {
     }
     try {
       setIsLoading(true)
-      //   await onAddComment(comment)
       if (isSignup) {
         const signed = await signup(cred)
         showSuccessMsg(
           prefs.isEnglish ? 'Signed in successfully' : 'רישום בוצע בהצלחה'
         )
+        if (isRemember) {
+          setPrefs({ ...prefs, user: signed })
+        }
         navigate('/')
       } else {
         const logged = await login(cred)
+        if (isRemember) {
+          setPrefs({ ...prefs, user: logged })
+        }
         showSuccessMsg(
           prefs.isEnglish ? 'Loged in successfully' : 'חיבור בוצע בהצלחה'
         )
@@ -255,10 +262,30 @@ export function LoginSignupForm({ isSignup }) {
               <span>{errors.email && touched.email && errors.email}</span>
             </div>
           )}
-          <Button variant='contained' type='submit' disabled={isSubmitting}>
-            {(isSignup && (prefs.isEnglish ? 'Signup' : 'רישום')) ||
-              (prefs.isEnglish ? 'Login' : 'חיבור')}
-          </Button>
+          <div
+            className={`input-container ${prefs.isDarkMode && 'dark-mode'}`}
+            style={{}}
+          >
+            <div className='checkbox-container'>
+              <input
+                type='checkbox'
+                name=''
+                id='isRemember'
+                checked={isRemember}
+                onChange={() => {
+                  console.log(isRemember)
+                  setIsRemember((prev) => (prev = !prev))
+                }}
+              />
+              <label htmlFor='isRemember'>
+                {prefs.isEnglish ? 'Remember me' : 'זכור משתמש'}
+              </label>
+            </div>
+            <Button variant='contained' type='submit' disabled={isSubmitting}>
+              {(isSignup && (prefs.isEnglish ? 'Signup' : 'רישום')) ||
+                (prefs.isEnglish ? 'Login' : 'חיבור')}
+            </Button>
+          </div>
         </form>
       )}
     </Formik>
