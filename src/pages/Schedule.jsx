@@ -79,6 +79,7 @@ export function Schedule() {
     setIsLoading(true)
     try {
       const occurrences = await classService.getOccurrences()
+
       setOccurrs(occurrences)
     } catch (err) {
       showErrorMsg(

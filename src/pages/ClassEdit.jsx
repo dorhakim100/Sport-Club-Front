@@ -160,7 +160,7 @@ export function ClassEdit() {
     } catch (err) {
       console.log(err)
       showErrorMsg(
-        prefs.isEnglish ? `Class couldn't be edited` : 'לא היה ניתן לערוך מאמן'
+        prefs.isEnglish ? `Class couldn't be edited` : 'לא היה ניתן לערוך שיעור'
       )
     } finally {
       setIsLoading(false)

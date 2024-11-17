@@ -5,7 +5,7 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 
 import { useNavigate, useParams } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { logout, setRemembered } from '../store/actions/user.actions'
+import { login, logout, setRemembered } from '../store/actions/user.actions'
 import { loadOpenMessages } from '../store/actions/message.actions'
 
 import { SOCKET_EVENT_ADD_MSG } from '../services/socket.service'
@@ -76,6 +76,7 @@ export function AppHeader({ bodyRef }) {
 
   useEffect(() => {
     const setTasks = async () => {
+      if (!user) return
       try {
         if (user && user.isAdmin) {
           await loadOpenMessages()
@@ -159,8 +160,16 @@ export function AppHeader({ bodyRef }) {
     const setRememberedUser = async () => {
       try {
         const remembered = await userService.getRememberedUser()
+        if (!remembered) return
 
         setRemembered(remembered)
+
+        const cred = {
+          username: remembered.username,
+          password: '',
+          isRemembered: true,
+        }
+        await login(cred)
       } catch (err) {
         console.log(err)
         showErrorMsg(
@@ -293,8 +302,16 @@ export function AppHeader({ bodyRef }) {
       // style={{ position: 'fixed', left: '0px', right: '0px', top: '0px' }}
       style={
         prefs.isEnglish
-          ? { direction: 'ltr', opacity: scrolled ? '0.8' : '' }
-          : { direction: 'rtl', opacity: scrolled ? '0.8' : '' }
+          ? {
+              direction: 'ltr',
+              opacity: scrolled ? '0.8' : '',
+              paddingLeft: windowDimensions.width < 1050 && '1.5em',
+            }
+          : {
+              direction: 'rtl',
+              opacity: scrolled ? '0.8' : '',
+              paddingRight: windowDimensions.width < 1050 && '1.5em',
+            }
       }
     >
       {' '}
@@ -325,7 +342,7 @@ export function AppHeader({ bodyRef }) {
         className={`${scrolled ? 'small-header' : ''} ${menu ? 'shown' : ''} ${
           menu && prefs.isEnglish ? 'ltr' : ''
         }`}
-        style={scrolled ? { top: '83px' } : { top: '148px' }}
+        style={scrolled ? { top: '100px' } : { top: '148px' }}
       >
         <NavLink
           ref={logoRef}
