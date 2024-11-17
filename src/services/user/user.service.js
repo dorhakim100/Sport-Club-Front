@@ -67,8 +67,19 @@ async function update(user) {
 
 async function login(userCred) {
   try {
+    console.log(userCred)
     const user = await httpService.post('auth/login', userCred)
     if (user) return saveLoggedinUser(user)
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
+async function loginToken() {
+  try {
+    const user = await httpService.post('auth/verify-token')
+    return user
   } catch (err) {
     console.log(err)
     throw err
@@ -106,7 +117,7 @@ async function logout() {
 async function getLoggedinUser() {
   try {
     const remembered = await getRememberedUser()
-    console.log(remembered)
+
     if (remembered) {
       return saveLoggedinUser(remembered)
     }
@@ -128,6 +139,7 @@ function saveLoggedinUser(user) {
     ordersIds: user.ordersIds,
     items: user.items,
   }
+  console.log(user)
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
   return user
 }
@@ -192,9 +204,19 @@ async function getRememberedUser() {
   try {
     if (userId) {
       console.log(userId)
+
+      // const cred = {
+      //   username: prefs.user.username,
+      //   password: '',
+      //   isRemembered: true,
+      // }
+      // const user = await login(cred)
+
       const user = await getById(userId)
-      console.log(user)
-      return user
+      // const user = await loginToken()
+      if (user) {
+        return saveLoggedinUser(user)
+      }
     } else {
       return null
     }

@@ -39,6 +39,7 @@ export async function removeUser(userId) {
 export async function login(credentials) {
   try {
     const user = await userService.login(credentials)
+    console.log(user)
     const cart = [...user.items] || []
 
     store.dispatch({ type: UPDATE_CART, cart })
