@@ -15,7 +15,7 @@ export const SET_TOTAL = 'SET_TOTAL'
 
 const initialState = {
   count: 10,
-  user: userService.getLoggedinUser(),
+  user: null,
   users: [],
   watchedUser: null,
   cart: userService.getLoggedinCart() || [],

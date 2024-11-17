@@ -17,6 +17,7 @@ export const userService = {
   setPrefs,
   getLoggedinCart,
   getCartItems,
+  getRememberedUser,
 }
 
 async function getUsers() {
@@ -102,8 +103,18 @@ async function logout() {
   }
 }
 
-function getLoggedinUser() {
-  return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+async function getLoggedinUser() {
+  try {
+    const remembered = await getRememberedUser()
+    console.log(remembered)
+    if (remembered) {
+      return saveLoggedinUser(remembered)
+    }
+    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
 }
 
 function saveLoggedinUser(user) {
@@ -167,6 +178,26 @@ async function getCartItems(cart) {
       return { ...item, quantity: integerQuantity }
     })
     return cartToReturn
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
+async function getRememberedUser() {
+  const prefs = getPrefs()
+  if (!prefs.user) return
+  const userId = prefs.user._id ? prefs.user._id : null
+
+  try {
+    if (userId) {
+      console.log(userId)
+      const user = await getById(userId)
+      console.log(user)
+      return user
+    } else {
+      return null
+    }
   } catch (err) {
     console.log(err)
     throw err

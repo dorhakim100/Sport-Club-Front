@@ -13,6 +13,7 @@ import {
   SET_TOTAL,
   // SET_PREFS,
 } from '../reducers/user.reducer'
+import { setPrefs } from './system.actions'
 
 export async function loadUsers() {
   try {
@@ -53,6 +54,16 @@ export async function login(credentials) {
   }
 }
 
+export function setRemembered(user) {
+  store.dispatch({
+    type: SET_USER,
+    user,
+  })
+  if (user) {
+    store.dispatch({ type: UPDATE_CART, cart: user.items })
+  }
+}
+
 export async function signup(credentials) {
   try {
     const user = await userService.signup(credentials)
@@ -75,6 +86,7 @@ export async function logout() {
       type: SET_USER,
       user: null,
     })
+
     // socketService.logout()
   } catch (err) {
     console.log('Cannot logout', err)
