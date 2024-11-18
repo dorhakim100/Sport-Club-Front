@@ -148,7 +148,7 @@ export function Cart() {
   }
 
   return (
-    <section className='page-container cart-page-container'>
+    <section className='cart-page-container'>
       <h2>{prefs.isEnglish ? 'Shopping Cart' : 'סל הקניות'}</h2>
       <HeadContainer text={headText} />
       <div className='cart-container'>

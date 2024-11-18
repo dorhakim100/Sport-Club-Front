@@ -124,13 +124,13 @@ export function LoginSignupForm({ isSignup }) {
           prefs.isEnglish ? 'Signed in successfully' : 'רישום בוצע בהצלחה'
         )
         if (isRemember) {
-          setPrefs({ ...prefs, user: signed })
+          setPrefs({ ...prefs, user: { _id: signed._id } })
         }
         navigate('/')
       } else {
         const logged = await login(cred)
         if (isRemember) {
-          setPrefs({ ...prefs, user: logged })
+          setPrefs({ ...prefs, user: { _id: logged._id } })
         }
         showSuccessMsg(
           prefs.isEnglish ? 'Loged in successfully' : 'חיבור בוצע בהצלחה'

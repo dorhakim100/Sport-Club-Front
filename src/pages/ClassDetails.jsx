@@ -48,7 +48,7 @@ export function ClassDetails() {
   }, [classId])
 
   return (
-    <div className='page-container class-details'>
+    <div className='class-details'>
       <HeadContainer text={head} />
       <div className='class-details-container'>
         {' '}

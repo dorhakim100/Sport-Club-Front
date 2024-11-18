@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -8,8 +9,10 @@ import 'swiper/css/pagination'
 
 // import required modules
 import { Mousewheel, Pagination } from 'swiper/modules'
+import { makeId } from '../services/util.service'
 
-export function MouseWheelCarousel() {
+export function MouseWheelCarousel({ imgs }) {
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   return (
     <>
       <Swiper
@@ -22,23 +25,30 @@ export function MouseWheelCarousel() {
         }}
         modules={[Mousewheel, Pagination]}
         className='mouse-wheel'
-        style={{ width: '90vw' }}
+        style={{
+          width: '80vw',
+          height: 'calc(50vw)',
+          maxHeight: '600px',
+          minHeight: '300px',
+        }}
       >
-        <SwiperSlide className='mouse-wheel'>
-          <img
-            src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002702/DJI_0481_e3lubw.jpg'
-            alt=''
-          />
-          <span>slide 1</span>
-        </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        {imgs.map((slide) => {
+          return (
+            <SwiperSlide key={makeId()} className='mouse-wheel'>
+              <img
+                src={slide.img}
+                alt=''
+                style={{
+                  objectFit: 'cover',
+                  height: 'calc(50vw)',
+                  maxHeight: '600px',
+                  minHeight: '300px',
+                }}
+              />
+              <span>{prefs.isEnglish ? slide.text.eng : slide.text.he}</span>
+            </SwiperSlide>
+          )
+        })}
       </Swiper>
     </>
   )
