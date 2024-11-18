@@ -52,9 +52,15 @@ export function MessageIndex() {
   }
 
   return (
-    <div className='page-container message-index'>
+    <div className='message-index'>
       <HeadContainer text={text} />
-      <MessagesFilter filter={filter} setFilter={setFilter} maxPage={maxPage} />
+      <MessagesFilter
+        filter={filter}
+        setFilter={setFilter}
+        maxPage={maxPage}
+        idsToRemove={idsToRemove}
+        setIdsToRemove={setIdsToRemove}
+      />
       <MessagesList
         messages={messages}
         setMessages={setMessages}

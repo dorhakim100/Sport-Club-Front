@@ -5,6 +5,7 @@ import {
   SET_MESSAGE,
   SET_MESSAGES,
   REMOVE_MESSAGE,
+  REMOVE_MESSAGES,
   UPDATE_MESSAGE,
   SET_OPEN_MESSAGES,
 } from '../reducers/message.reducer'
@@ -35,9 +36,21 @@ export async function loadMessage(messageId) {
 export async function removeMessage(messageId) {
   try {
     await messageService.remove(messageId)
-    store.dispatch(getCmdRemoveMessage(messageId))
+
+    // store.dispatch(getCmdRemoveMessage(messageId))
   } catch (err) {
     console.log('Cannot remove message', err)
+    throw err
+  }
+}
+
+export async function removeMessages(ids) {
+  try {
+    await messageService.removeBulk(ids)
+
+    store.dispatch({ type: REMOVE_MESSAGES, bulkIds: ids })
+  } catch (err) {
+    console.log(err)
     throw err
   }
 }

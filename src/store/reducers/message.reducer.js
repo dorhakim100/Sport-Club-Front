@@ -6,11 +6,13 @@ export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
 export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
 export const SET_OPEN_MESSAGES = 'SET_OPEN_MESSAGES'
+export const REMOVE_MESSAGES = 'REMOVE_MESSAGES'
 
 const initialState = {
   messages: [],
   message: messageService.getEmptyMessage(),
   openLength: 0,
+  bulkIds: [],
 }
 
 export function messageReducer(state = initialState, action) {
@@ -22,6 +24,15 @@ export function messageReducer(state = initialState, action) {
       break
     case SET_MESSAGE:
       newState = { ...state, message: action.message }
+      break
+    case REMOVE_MESSAGES:
+      const idsToExclude = action.bulkIds
+      const newMessages = state.messages.filter(
+        (message) => !idsToExclude.includes(message._id)
+      )
+
+      // Update the state with the filtered messages
+      newState = { ...state, messages: newMessages }
       break
     case REMOVE_MESSAGE:
       const lastRemovedItem = state.messages.find(

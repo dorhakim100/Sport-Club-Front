@@ -15,6 +15,7 @@ export function MessagesList({
             setMessages={setMessages}
             idsToRemove={idsToRemove}
             setIdsToRemove={setIdsToRemove}
+            key={message._id}
           />
         )
       })}

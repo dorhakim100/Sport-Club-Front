@@ -121,6 +121,7 @@ async function getLoggedinUser() {
     if (remembered) {
       return saveLoggedinUser(remembered)
     }
+
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
   } catch (err) {
     console.log(err)

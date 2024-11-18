@@ -18,6 +18,7 @@ import { DoneMessageButton } from '../cmps/DoneMessageButton.jsx'
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import DeleteIcon from '@mui/icons-material/Delete'
+import Checkbox from '@mui/material/Checkbox'
 
 export function MessagePreview({
   message,
@@ -30,7 +31,7 @@ export function MessagePreview({
 
   const [isHover, setIsHover] = useState(false)
 
-  console.log(idsToRemove)
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
   async function handleDoneChange(messageId) {
     try {
@@ -50,6 +51,20 @@ export function MessagePreview({
         prefs.isEnglish ? `Couldn't mark message` : 'פעולה לא הצליחה'
       )
     }
+  }
+
+  function toggleCheckBox() {
+    if (idsToRemove.includes(message._id)) {
+      const idx = idsToRemove.findIndex(
+        (idToRemove) => idToRemove === message._id
+      )
+      idsToRemove.splice(idx, 1)
+    } else {
+      idsToRemove.push(message._id)
+    }
+    const newIds = [...idsToRemove]
+    console.log(newIds)
+    setIdsToRemove(newIds)
   }
 
   return (
@@ -73,7 +88,19 @@ export function MessagePreview({
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        <input type='checkbox' name='' id='' />
+        {/* <input type='checkbox' name='' id='' /> */}
+        <Checkbox
+          {...label}
+          sx={{
+            color: prefs.isDarkMode ? 'white' : 'inherit', // Color for the checkbox itself
+            '&.Mui-checked': {
+              color: prefs.isDarkMode ? '#6EC1E4' : '', // Color for the checkmark (v) when checked
+            },
+          }}
+          checked={idsToRemove.includes(message._id)}
+          onChange={toggleCheckBox}
+        />
+
         {/* <label htmlFor=''>{prefs.isEnglish ? 'Remove' : 'הסר'}</label> */}
       </div>
       <span>{message.title}</span>
