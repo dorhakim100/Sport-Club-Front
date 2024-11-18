@@ -49,7 +49,7 @@ export function TrainerDetails() {
   }, [trainerId])
 
   return (
-    <div className='page-container trainer-details'>
+    <div className='trainer-details'>
       {/* <Button
         variant='contained'
         className='back-btn'

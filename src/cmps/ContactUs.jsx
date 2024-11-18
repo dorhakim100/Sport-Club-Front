@@ -86,6 +86,7 @@ export function ContactUs() {
           placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
           onChange={handleChange}
           value={editMessage.phone}
+          required
         />
         <input
           type='text'
@@ -103,7 +104,20 @@ export function ContactUs() {
           value={editMessage.content}
           placeholder={prefs.isEnglish ? 'Content' : 'גוף ההודעה'}
         />
-        <LoadingButton variant='contained' onClick={() => onSend()}>
+        <LoadingButton
+          variant='contained'
+          onClick={() => {
+            if (!editMessage.phone) {
+              showErrorMsg(
+                prefs.isEnglish
+                  ? `Phone number is required`
+                  : 'יש למלא מספר טלפון'
+              )
+              return
+            }
+            onSend()
+          }}
+        >
           {prefs.isEnglish ? 'Send' : 'שליחה'}
         </LoadingButton>
       </div>{' '}

@@ -19,11 +19,18 @@ import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import DeleteIcon from '@mui/icons-material/Delete'
 
-export function MessagePreview({ message, setMessages }) {
+export function MessagePreview({
+  message,
+  setMessages,
+  idsToRemove,
+  setIdsToRemove,
+}) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
 
   const [isHover, setIsHover] = useState(false)
+
+  console.log(idsToRemove)
 
   async function handleDoneChange(messageId) {
     try {
@@ -62,6 +69,13 @@ export function MessagePreview({ message, setMessages }) {
         navigate(`/admin/message/${message._id}`)
       }}
     >
+      <div
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
+        <input type='checkbox' name='' id='' />
+        {/* <label htmlFor=''>{prefs.isEnglish ? 'Remove' : 'הסר'}</label> */}
+      </div>
       <span>{message.title}</span>
       <p>{message.content}</p>
       {/* <Button variant='contained'>

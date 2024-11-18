@@ -25,6 +25,8 @@ export function MessageIndex() {
   const [filter, setFilter] = useState(messageService.getDefaultFilter())
   const [maxPage, setMaxPage] = useState()
 
+  const [idsToRemove, setIdsToRemove] = useState([])
+
   const text = {
     eng: 'Messages',
     he: 'הודעות',
@@ -53,7 +55,12 @@ export function MessageIndex() {
     <div className='page-container message-index'>
       <HeadContainer text={text} />
       <MessagesFilter filter={filter} setFilter={setFilter} maxPage={maxPage} />
-      <MessagesList messages={messages} setMessages={setMessages} />
+      <MessagesList
+        messages={messages}
+        setMessages={setMessages}
+        idsToRemove={idsToRemove}
+        setIdsToRemove={setIdsToRemove}
+      />
     </div>
   )
 }

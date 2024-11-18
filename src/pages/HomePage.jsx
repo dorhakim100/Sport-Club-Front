@@ -40,8 +40,8 @@ export function HomePage() {
     },
     {
       id: makeId(),
-      title: 'Flowers',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729009146/picture_nhyvs7.jpg',
+      title: 'Courts',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731949255/DSC06197_vctg4k.jpg',
       text: {
         first: { he: 'מתחם טניס יוקרתי', eng: 'Luxury tennis complex' },
         second: { he: 'שלושה מגרשים', eng: 'Three courts' },
@@ -49,11 +49,14 @@ export function HomePage() {
     },
     {
       id: makeId(),
-      title: 'Mini Golf',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002702/DJI_0481_e3lubw.jpg',
+      title: 'Gym',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947256/DSC06048_risthm.jpg',
       text: {
-        first: { he: 'מתחם מיני גולף', eng: 'Mini golf area' },
-        second: { he: 'מתאים לכל הגילאים', eng: 'Suitable for all ages' },
+        first: { he: 'חדר הכושר', eng: 'Our gym' },
+        second: {
+          he: 'חווית אימון אישית',
+          eng: 'Personal training experience',
+        },
       },
     },
     {
@@ -74,6 +77,72 @@ export function HomePage() {
     eng: 'Join us for a year-round experience blending the thrill of winter sports with the warmth of summer family activities. From action-packed classes to serene leisure moments, we’re here to make every season memorable.',
     he: 'הצטרפו אלינו לחוויה ייחודית כל השנה, שמשלבת את הריגוש של ספורט החורף עם פעילויות קיץ לכל המשפחה. שיעורים מלאי אקשן לצד רגעים של רוגע ונחת - אנחנו כאן כדי להפוך כל עונה לבלתי נשכחת.',
   }
+
+  const mouseWheelImgs = [
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947258/DSC06129_dxs8kb.jpg',
+      text: {
+        he: 'בריכה חצי אולימפית עם 7 מסלולי שחייה',
+        eng: 'Semi-Olympic Pool - 7 Swimming Lanes',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946217/DSC06063_bwttoj.jpg',
+      text: {
+        he: 'חדר כושר חדיש ומאובזר',
+        eng: 'Modern and Fully Equipped Gym',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947117/DSC06370_1_obeicj.jpg',
+      text: {
+        he: 'קהילת טניס מקצועית',
+        eng: 'Professional Tennis Community',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946647/DSC06225_pvjmhd.jpg',
+      text: {
+        he: 'סטודיו חוגים באווירה נעימה ואישית',
+        eng: 'Personalized Studio Classes in a Pleasant Atmosphere',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946648/DSC06537_guaopk.jpg',
+      text: {
+        he: 'מתחם מיני גולף עם 8 מסלולים',
+        eng: 'Mini Golf Area with 8 Tracks',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946217/DSC06444_pmpgpf.jpg',
+      text: {
+        he: 'מגרש סנוקרגל ייחודי ומהנה',
+        eng: 'Unique and Fun Snookball Court',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946219/DSC06189_yuuula.jpg',
+      text: {
+        he: 'מסעדה באווירה כפרית',
+        eng: 'Charming Restaurant with a Rustic Atmosphere',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946219/DSC06487_nuowb1.jpg',
+      text: {
+        he: 'מתחם נינג׳ה, משחקים ומתנפחים לילדים',
+        eng: 'Ninja Area, Games, and Inflatables for Kids',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947762/DSC06140_txbg2f.jpg',
+      text: {
+        he: 'חניה גדולה, נוחה וללא תשלום',
+        eng: 'Large, Convenient, and Free Parking Lot',
+      },
+    },
+  ]
 
   useEffect(() => {
     const fetchData = async () => {
@@ -197,14 +266,23 @@ export function HomePage() {
           </div>
         </div>
 
-        <HeadContainer
-          text={{
-            eng: '9 reasons to join us',
-            he: '9 סיבות להצטרף למועדון הספורט',
+        <div
+          className='reasons-header'
+          onClick={() => {
+            navigate('/facilities')
+            window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
-        />
+          style={{ cursor: 'pointer' }}
+        >
+          <HeadContainer
+            text={{
+              eng: '9 reasons to join us',
+              he: '9 סיבות להצטרף למועדון הספורט',
+            }}
+          />
+        </div>
 
-        <MouseWheelCarousel />
+        <MouseWheelCarousel imgs={mouseWheelImgs} />
 
         <ContactUs />
       </div>
