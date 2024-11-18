@@ -12,6 +12,7 @@ export const messageService = {
   getMaxPage,
   getEmptyMessage,
   getOpenMessages,
+  removeBulk,
 }
 
 async function query(filterBy = { pageIdx: 0, txt: '' }) {
@@ -42,6 +43,16 @@ async function remove(messageId) {
     throw err
   }
 }
+
+async function removeBulk(messageIds) {
+  try {
+    return await httpService.delete(`${KEY}/bulkDelete`, { data: messageIds })
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+
 async function save(message) {
   try {
     var savedMessage

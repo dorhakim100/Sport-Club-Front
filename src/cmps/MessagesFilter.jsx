@@ -17,8 +17,19 @@ import ButtonGroup from '@mui/material/ButtonGroup'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import IconButton from '@mui/material/IconButton'
+import Stack from '@mui/material/Stack'
+import DeleteIcon from '@mui/icons-material/Delete'
+import UndoIcon from '@mui/icons-material/Undo'
+import { loadMessages, removeMessages } from '../store/actions/message.actions'
 
-export function MessagesFilter({ filter, setFilter, maxPage }) {
+export function MessagesFilter({
+  filter,
+  setFilter,
+  maxPage,
+  idsToRemove,
+  setIdsToRemove,
+}) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const isLoading = useSelector(
     (stateSelector) => stateSelector.systemModule.isLoading
@@ -61,8 +72,57 @@ export function MessagesFilter({ filter, setFilter, maxPage }) {
     }
   }
 
+  async function onRemoveBulk(ids) {
+    try {
+      await removeMessages(ids)
+      await loadMessages(filter)
+      setIdsToRemove([])
+      showSuccessMsg(prefs.isEnglish ? 'Messages deleted' : 'הודעות נמחקו')
+    } catch (err) {
+      showErrorMsg(
+        prefs.isEnglish
+          ? `Couldn't delete messages`
+          : 'לא היה ניתן למחוק הודעות'
+      )
+    }
+  }
+
   return (
     <div className='messages-filter-container'>
+      <div className='remove-container'>
+        <IconButton
+          aria-label='delete'
+          disabled={idsToRemove.length === 0}
+          color='primary'
+          onClick={() => {
+            console.log('bla')
+            if (idsToRemove.length === 0) return
+            onRemoveBulk(idsToRemove)
+          }}
+        >
+          <DeleteIcon
+            style={{
+              color: idsToRemove.length > 0 && '#E53935',
+              opacity: idsToRemove.length > 0 && '0.8',
+            }}
+          />
+        </IconButton>
+        {idsToRemove.length > 0 && (
+          <IconButton
+            aria-label='delete'
+            disabled={idsToRemove.length === 0}
+            color='primary'
+            onClick={() => setIdsToRemove([])}
+          >
+            <UndoIcon
+              style={{
+                color: prefs.isDarkMode ? '#6EC1E4' : '#4A90E2',
+                opacity: '0.8',
+              }}
+            />
+          </IconButton>
+        )}
+      </div>
       <ButtonGroup
         variant='contained'
         aria-label='Basic button group'

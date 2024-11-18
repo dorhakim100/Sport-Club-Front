@@ -4,6 +4,7 @@ import { loadUsers, removeUser } from '../store/actions/user.actions'
 import { useNavigate, Outlet } from 'react-router'
 
 import { Nav } from '../cmps/Nav'
+import { userService } from '../services/user/user.service'
 
 export function AdminIndex() {
   const navigate = useNavigate()
@@ -14,8 +15,19 @@ export function AdminIndex() {
   const isLoading = useSelector((storeState) => storeState.userModule.isLoading)
 
   useEffect(() => {
-    if (!user.isAdmin) navigate('/')
-    loadUsers()
+    const checkUser = async () => {
+      const loggedIn = await userService.getLoggedinUser()
+      if (!user) {
+        // navigate('/')
+        // return
+      }
+      if (!loggedIn || !loggedIn.isAdmin) {
+        navigate('/')
+        return
+      }
+      loadUsers()
+    }
+    checkUser()
   }, [])
 
   const origin = {
