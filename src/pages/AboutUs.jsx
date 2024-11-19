@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { Nav } from '../cmps/Nav'
 import { HeadContainer } from '../cmps/HeadContainer'
+import { GoogleMapCmp } from '../cmps/GoogleMapCmp.jsx'
 
 import Divider from '@mui/material/Divider'
+import { makeId } from '../services/util.service'
 
 export function AboutUs() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const location = useLocation()
 
   function onTellMeMore() {}
 
@@ -20,11 +23,11 @@ export function AboutUs() {
   }
 
   const links = [
-    {
-      path: 'team',
-      he: 'צוות המועדון',
-      eng: 'Team',
-    },
+    // {
+    //   path: 'team',
+    //   he: 'צוות המועדון',
+    //   eng: 'Team',
+    // },
     {
       path: 'organization',
       he: 'עמותה',
@@ -36,11 +39,134 @@ export function AboutUs() {
       eng: 'Accessibility',
     },
   ]
+
+  const headText = {
+    he: 'אודות',
+    eng: 'About',
+  }
+
+  const preview1 = {
+    he: `מועדון ספורט ונופש כפר שמריהו ממוקם בלב הכפר. מוקף בירק ובעצים הממזגים את המקום עם טבע ושלווה פסטורלית. המועדון משרת מספר מצומצם של מנויים, דבר ההופך אותו לייחודי ולנקודת מפגש אידיאלית למשפחות למטרות בילוי, נופש וספורט.`,
+
+    eng: `Kfar Shmaryahu Sports Club is located in the heart of the village, surrounded by greenery and trees that blend the space with nature and pastoral tranquility. The club serves a limited number of members, making it unique and an ideal meeting place for families seeking recreation, leisure, and sports activities.
+    `,
+  }
+
+  const preview2 = {
+    he: `
+    צוות המועדון מקפיד על קשר חם ואישי עם המנויים, שומר על צביון כפרי, שקט ואינטימי ומהווה עבור קהל המנויים והמבקרים האיכותי שמגיעים אי של שקט הממוקם בפנינה ירוקה, נעימה ושלווה, בלב כפר שמריהו.
+
+    המועדון מקיים מגוון פעילויות לכל הגילאים כולל פעילויות לבוגרים, ילדים, גיל הזהב ופעילויות משותפות לכל המשפחה.`,
+    eng: `
+    The club staff ensures warm and personal connections with its members, maintaining a quiet, intimate, and rural character. For the high-quality members and visitors, the club serves as an oasis of peace nestled in a green, pleasant, and serene haven in the heart of Kfar Shmaryahu.
+    The club offers a variety of activities for all ages, including programs for adults, children, seniors, and shared family activities.
+    
+    `,
+  }
+
+  const offers = [
+    {
+      he: 'בריכות שחייה ופעוטות',
+      eng: `Semi Olympic Swimming pool and toddler pools`,
+    },
+    {
+      he: `חדר כושר חדיש ואיכותי`,
+      eng: `A modern, high-quality gym`,
+    },
+    {
+      he: `סטודיו לחוגים בקבוצות קטנות`,
+      eng: `A studio for small-group classes`,
+    },
+    {
+      he: `מגרשי טניס`,
+      eng: `Tennis courts`,
+    },
+    {
+      he: `סטודיו לפילאטיס מכשירים`,
+      eng: `Pilates studio`,
+    },
+    {
+      he: `בית ספר לטניס`,
+      eng: `Tennis school`,
+    },
+    {
+      he: `בית ספר לשחייה וקבוצות מאסטרס וטריאתלון`,
+      eng: `Swimming school, including Masters and triathlon groups`,
+    },
+    {
+      he: `מסעדה איכותית`,
+      eng: `Restaurant`,
+    },
+    {
+      he: `טיפולי אוסטאופתיה ותזונה הוליסטית`,
+      eng: `Osteopathy treatments and holistic nutrition services`,
+    },
+  ]
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          const timeout = index + 1
+          setTimeout(() => {
+            entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+          }, 100)
+          // entry.target.classList.remove('hidden')
+        } else {
+          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
+        }
+      })
+    })
+
+    const elements = document.querySelectorAll('.section')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => elements.forEach((el) => observer.unobserve(el))
+  }, [prefs.isEnglish, location.pathname])
+
   return (
     <section className='about-container'>
       <h2>{prefs.isEnglish ? 'About Us' : 'אודות המועדון'}</h2>
       <Nav origin={origin} links={links} />
 
+      {location.pathname === '/about' && (
+        <>
+          <HeadContainer text={headText} />
+          <div className='section'>
+            <p className='hidden'>
+              {prefs.isEnglish ? preview1.eng : preview1.he}
+            </p>
+          </div>
+          <div className='section'>
+            <p className='hidden'>
+              {prefs.isEnglish ? preview2.eng : preview2.he}
+            </p>
+          </div>
+          <b>{prefs.isEnglish ? 'What we offer' : 'מה במועדון'}</b>
+          <ul className='section'>
+            {offers.map((offer) => {
+              return (
+                <li className='hidden' key={makeId()}>
+                  {prefs.isEnglish ? offer.eng : offer.he}
+                </li>
+              )
+            })}
+          </ul>
+          <div className='section'>
+            <p>
+              {prefs.isEnglish
+                ? `We invite you to invest in your Wellbeing all year-round for both body and soul, with sports and leisure activities for the entire family.`
+                : 'אנו מזמינים אתכם בכל ימות השנה להשקיע בעצמכם למען הגוף והנפש בפעילות ספורטיבית ונופש לכל המשפחה.'}
+            </p>
+          </div>
+          {/* <div className='section hidden'> */}
+          <GoogleMapCmp />
+          {/* </div> */}
+        </>
+      )}
+      {/* <div className='about-container'> */}
+
+      {/* </div> */}
       <section>
         <Outlet />
       </section>

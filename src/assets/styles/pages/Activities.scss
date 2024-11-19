@@ -4,6 +4,23 @@
         display: grid;
         grid-template-columns: repeat(2,1fr);
         align-items: center;
+        gap: 1em;
+        text-align: start;
+
+        .section{
+            display: grid;
+            justify-items: center;
+        }
+
+        .img-container{
+            align-self: center;
+            width: 30vw;
+            padding: 1em;
+            img{
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+                border-radius: 50%;
+            }
+        }
 
         @media (max-width:850px) {
             grid-template-columns: 1fr;

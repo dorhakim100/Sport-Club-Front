@@ -75,7 +75,7 @@ export function SwiperCarousel({ imgs }) {
         onSwiper={setThumbsSwiper} // Set the thumbsSwiper reference here
         loop={true}
         spaceBetween={10}
-        slidesPerView={4}
+        slidesPerView={imgs.length}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}

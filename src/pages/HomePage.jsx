@@ -40,15 +40,6 @@ export function HomePage() {
     },
     {
       id: makeId(),
-      title: 'Courts',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731949255/DSC06197_vctg4k.jpg',
-      text: {
-        first: { he: 'מתחם טניס יוקרתי', eng: 'Luxury tennis complex' },
-        second: { he: 'שלושה מגרשים', eng: 'Three courts' },
-      },
-    },
-    {
-      id: makeId(),
       title: 'Gym',
       link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947256/DSC06048_risthm.jpg',
       text: {
@@ -61,13 +52,31 @@ export function HomePage() {
     },
     {
       id: makeId(),
+      title: 'Courts',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731949255/DSC06197_vctg4k.jpg',
+      text: {
+        first: { he: 'מתחם טניס יוקרתי', eng: 'Luxury tennis complex' },
+        second: { he: 'שלושה מגרשים', eng: 'Three courts' },
+      },
+    },
+    {
+      id: makeId(),
+      title: 'Studio',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732035131/DSC06221_ysilyb.jpg',
+      text: {
+        first: { he: 'סטודיו לחוגים', eng: 'Class studio' },
+        second: { he: 'בקבוצות קטנות', eng: 'Personal experience' },
+      },
+    },
+    {
+      id: makeId(),
       title: 'Child Activity',
       link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002559/HPIM0595_iiklas.jpg',
       text: {
-        first: { he: 'פעילויות קיץ לילדים', eng: 'Summer activities for kids' },
+        first: { he: 'פעילויות לילדים', eng: 'Activities for kids' },
         second: {
-          he: 'מתנפחים ומתחמי משחק',
-          eng: 'Inflatables and play areas',
+          he: 'קייטנות מתחמי משחק והפעלות',
+          eng: 'Summer camp, play areas for kids',
         },
       },
     },
@@ -82,29 +91,29 @@ export function HomePage() {
     {
       img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947258/DSC06129_dxs8kb.jpg',
       text: {
-        he: 'בריכה חצי אולימפית עם 7 מסלולי שחייה',
+        he: 'בריכה חצי אולימפית, מחוממת ומקורה',
         eng: 'Semi-Olympic Pool - 7 Swimming Lanes',
       },
     },
     {
       img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946217/DSC06063_bwttoj.jpg',
       text: {
-        he: 'חדר כושר חדיש ומאובזר',
+        he: 'חדר כושר חדיש ומאובזר, אימונים באווירה אישית',
         eng: 'Modern and Fully Equipped Gym',
       },
     },
     {
       img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947117/DSC06370_1_obeicj.jpg',
       text: {
-        he: 'קהילת טניס מקצועית',
-        eng: 'Professional Tennis Community',
+        he: 'בית ספר לטניס',
+        eng: 'Tennis school',
       },
     },
     {
       img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946647/DSC06225_pvjmhd.jpg',
       text: {
-        he: 'סטודיו חוגים באווירה נעימה ואישית',
-        eng: 'Personalized Studio Classes in a Pleasant Atmosphere',
+        he: 'סטודיו חוגים בקבוצות קטנות',
+        eng: 'Personalized Studio Classes',
       },
     },
     {
@@ -131,8 +140,8 @@ export function HomePage() {
     {
       img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946219/DSC06487_nuowb1.jpg',
       text: {
-        he: 'מתחם נינג׳ה, משחקים ומתנפחים לילדים',
-        eng: 'Ninja Area, Games, and Inflatables for Kids',
+        he: 'מתחם נינג׳ה, משחקים והפעלות לילדים',
+        eng: 'Ninja Area, Games, and activities for Kids',
       },
     },
     {
@@ -203,14 +212,14 @@ export function HomePage() {
         >
           <h2>
             {prefs.isEnglish
-              ? 'Sports and Action in Winter, Family Experience in Summer'
-              : 'נופש משפחתי בקיץ, אקשן בחורף'}
+              ? 'Sport Club kfar Shmaryahu'
+              : 'מועדון הספורט כפר שמריהו'}
           </h2>
 
           <h2>
             {prefs.isEnglish
-              ? 'A Year-Round Sports and Leisure Club'
-              : 'מועדון ספורט אחד כל השנה'}
+              ? 'Your choise for the good life'
+              : 'הבחירה שלכם לחיים הטובים'}
           </h2>
 
           <p>{prefs.isEnglish ? preview.eng : preview.he}</p>
