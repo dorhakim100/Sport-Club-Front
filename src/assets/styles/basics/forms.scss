@@ -508,6 +508,7 @@ textarea, input{
     left: -300px;
     filter: blur(5px);
     *{
+		filter: blur(0px);
       
       opacity: 0;
     }
@@ -541,6 +542,7 @@ textarea, input{
     
     filter: blur(0px);
     *{
+		filter: blur(0px);
       
       opacity: 1;
       

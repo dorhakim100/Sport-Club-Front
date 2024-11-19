@@ -56,7 +56,7 @@ export function Schedule() {
     'wednesday',
     'thursday',
     'friday',
-    'saturday',
+    // 'saturday',
   ]
 
   useEffect(() => {
@@ -149,7 +149,22 @@ export function Schedule() {
       <Nav origin={origin} links={links} />
 
       <HeadContainer text={{ he: 'מערכת החוגים', eng: 'Schedule' }} />
-
+      <div className='icons-container'>
+        <div className='icon-container'>
+          <b>{prefs.isEnglish ? 'Morning' : 'בוקר'}</b>
+          <b>-</b>
+          <div className='icon morning'>
+            <WbSunnyIcon />
+          </div>
+        </div>
+        <div className='icon-container'>
+          <b>{prefs.isEnglish ? 'Evening' : 'ערב'}</b>
+          <b>-</b>
+          <div className='icon evening'>
+            <BedtimeIcon />
+          </div>
+        </div>
+      </div>
       <div
         className={`schedule-container ${prefs.isEnglish ? '' : 'rtl'} ${
           prefs.isDarkMode ? 'dark-mode' : ''

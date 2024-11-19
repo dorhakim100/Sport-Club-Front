@@ -21,7 +21,11 @@ import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import DeleteIcon from '@mui/icons-material/Delete'
 import UndoIcon from '@mui/icons-material/Undo'
-import { loadMessages, removeMessages } from '../store/actions/message.actions'
+import {
+  loadMessages,
+  loadOpenMessages,
+  removeMessages,
+} from '../store/actions/message.actions'
 
 export function MessagesFilter({
   filter,
@@ -77,6 +81,7 @@ export function MessagesFilter({
       await removeMessages(ids)
       await loadMessages(filter)
       setIdsToRemove([])
+      await loadOpenMessages()
       showSuccessMsg(prefs.isEnglish ? 'Messages deleted' : 'הודעות נמחקו')
     } catch (err) {
       showErrorMsg(
