@@ -64,6 +64,7 @@ export function ClassDetails() {
               <Link
                 to={`/class/trainer/${trainer.id}`}
                 key={`${trainer.id}ClassDetails`}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 {prefs.isEnglish ? trainer.name.eng : trainer.name.he}
               </Link>

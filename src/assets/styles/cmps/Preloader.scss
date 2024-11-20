@@ -1,0 +1,58 @@
+
+.preloader-container{
+    position: absolute;
+    top: 0px;
+    width: 100vw;
+    // height: 100vh;
+    // height: 100%;
+
+}
+
+.preloader {
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    // height: 100vh;
+    // background: rgb(124, 124, 124); 
+    overflow: hidden;
+
+
+
+  
+    .wave {
+      position: absolute;
+    //   bottom: 0;
+
+      left: 50%;
+      width: 200%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3); // Light effect
+      opacity: 0.7;
+      transform: translateX(-50%);
+      animation: wave-animation 3s infinite linear;
+  
+      &:nth-child(2) {
+        bottom: 10%;
+        background: rgba(255, 255, 255, 0.2); // Slightly different opacity
+        animation: wave-animation 5s infinite linear;
+      }
+    }
+
+    .img{
+        opacity: 0;
+    }
+  }
+
+
+@keyframes wave-animation {
+    0% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: rotate(10deg) translateY(250px) translateX(-25%) ;
+      // transform: rotate(10deg);
+    }
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+  }

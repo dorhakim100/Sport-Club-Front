@@ -3,8 +3,12 @@ import { useSelector } from 'react-redux'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 
 const containerStyle = {
-  width: '500px',
-  height: '500px',
+  minWidth: '300px',
+  minHeight: '300px',
+  width: '30vw',
+  height: '30vw',
+  maxWidth: '1000px',
+  maxHeight: '1000px',
   borderRadius: '10px',
   boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
 }
@@ -22,7 +26,7 @@ export function GoogleMapCmp() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKey,
-    // language: prefs.isEnglish ? 'en' : 'he',
+    language: 'he',
   })
 
   const [map, setMap] = React.useState(null)
@@ -45,16 +49,18 @@ export function GoogleMapCmp() {
   }, [])
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={15}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-    >
-      {/* Child components, such as markers, info windows, etc. */}
-      <></>
-    </GoogleMap>
+    <div className='map-container'>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={15}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        {/* Child components, such as markers, info windows, etc. */}
+        <></>
+      </GoogleMap>
+    </div>
   ) : (
     <></>
   )

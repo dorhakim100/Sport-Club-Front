@@ -132,38 +132,45 @@ export function AboutUs() {
       {location.pathname === '/about' && (
         <>
           <HeadContainer text={headText} />
-          <div className='section'>
-            <p className='hidden'>
-              {prefs.isEnglish ? preview1.eng : preview1.he}
-            </p>
+          <div className='about-page-container'>
+            <div className='about-text-container'>
+              <div className='section'>
+                <p className='hidden'>
+                  {prefs.isEnglish ? preview1.eng : preview1.he}
+                </p>
+              </div>
+              <div className='section'>
+                <p className='hidden'>
+                  {prefs.isEnglish ? preview2.eng : preview2.he}
+                </p>
+              </div>
+            </div>
+            <div className='offer-container'>
+              <b>{prefs.isEnglish ? 'What we offer' : 'מה במועדון'}</b>
+              <ul className='section'>
+                {offers.map((offer) => {
+                  return (
+                    <li className='hidden' key={makeId()}>
+                      {prefs.isEnglish ? offer.eng : offer.he}
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+            <div className='section end-container'>
+              <p>
+                {prefs.isEnglish
+                  ? `We invite you to invest in your Wellbeing all year-round for both body and soul, with sports and leisure activities for the entire family.`
+                  : 'אנו מזמינים אתכם בכל ימות השנה להשקיע בעצמכם למען הגוף והנפש בפעילות ספורטיבית ונופש לכל המשפחה.'}
+              </p>
+            </div>
+            {/* <div className='section hidden'> */}
+            <GoogleMapCmp />
           </div>
-          <div className='section'>
-            <p className='hidden'>
-              {prefs.isEnglish ? preview2.eng : preview2.he}
-            </p>
-          </div>
-          <b>{prefs.isEnglish ? 'What we offer' : 'מה במועדון'}</b>
-          <ul className='section'>
-            {offers.map((offer) => {
-              return (
-                <li className='hidden' key={makeId()}>
-                  {prefs.isEnglish ? offer.eng : offer.he}
-                </li>
-              )
-            })}
-          </ul>
-          <div className='section'>
-            <p>
-              {prefs.isEnglish
-                ? `We invite you to invest in your Wellbeing all year-round for both body and soul, with sports and leisure activities for the entire family.`
-                : 'אנו מזמינים אתכם בכל ימות השנה להשקיע בעצמכם למען הגוף והנפש בפעילות ספורטיבית ונופש לכל המשפחה.'}
-            </p>
-          </div>
-          {/* <div className='section hidden'> */}
-          <GoogleMapCmp />
           {/* </div> */}
         </>
       )}
+
       {/* <div className='about-container'> */}
 
       {/* </div> */}

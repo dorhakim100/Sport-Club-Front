@@ -1,12 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
+
+import { Preloader } from './Preloader'
 
 import picture from '../../public/imgs/picture.jpg'
 
 export function ItemPreview({ item }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((storeState) => storeState.userModule.user)
+
+  const [isLoaded, setIsLoaded] = useState(false)
+  const imgRef = useRef(null)
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsLoaded(true)
+    }
+  }, [])
 
   return (
     <article className='preview'>
@@ -32,7 +43,15 @@ export function ItemPreview({ item }) {
 
       {/* )} */}
       <div className='img-container'>
-        <img src={item.cover} alt='' />
+        {!isLoaded && <Preloader img={item.cover} />}
+        <img
+          src={item.cover}
+          alt=''
+          onLoad={() => {
+            setIsLoaded(true)
+          }}
+        />
+        {/* <img src={item.cover} alt='' /> */}
       </div>
     </article>
   )
