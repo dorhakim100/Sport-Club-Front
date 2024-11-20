@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, Outlet } from 'react-router-dom'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
+import { Preloader } from './Preloader'
 
 import { Button } from '@mui/material'
 import ButtonGroup from '@mui/material/ButtonGroup'
@@ -11,6 +13,15 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
   const user = useSelector((storeState) => storeState.userModule.user)
   const navigate = useNavigate()
 
+  const [isLoaded, setIsLoaded] = useState(false)
+  const imgRef = useRef(null)
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsLoaded(true)
+    }
+  }, [])
+
   return (
     <div className='trainers-list-container'>
       {trainers.map((trainer) => {
@@ -18,7 +29,15 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
           <div className='trainer-container'>
             <span>{prefs.isEnglish ? trainer.name.eng : trainer.name.he}</span>
             <div className='img-container'>
-              <img src={trainer.img} alt='' />
+              {/* <Preloader img={trainer.img} /> */}
+              {!isLoaded && <Preloader img={trainer.img} />}
+              <img
+                src={trainer.img}
+                alt=''
+                onLoad={() => {
+                  setIsLoaded(true)
+                }}
+              />
             </div>
             <div className='buttons-container' style={{ direction: 'ltr' }}>
               {(user && user.isAdmin && (

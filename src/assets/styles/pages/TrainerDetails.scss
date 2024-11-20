@@ -12,6 +12,11 @@
     align-items: center;
     gap: 2em;
     // justify-items: center;
+    text-align: start;
+
+    p{
+        font-size: 1.3em;
+    }
 
     img{
         justify-self: center;
