@@ -9,6 +9,17 @@
 
     padding: 2em;
 
+    @media (max-width:800px) {
+        grid-template-columns: 1fr;
+
+        .img-container{
+            grid-row: 2/3;
+        }
+
+       
+        
+    }
+
     a{
         grid-column: 1/-1;
         justify-self: end;
@@ -16,6 +27,12 @@
         align-items: center;
         justify-items: center;
 
+        color: $bold-navy;
+
+    }
+
+    a.dark-mode{
+        color: $light-gray;
     }
 
     .title-container{
@@ -39,7 +56,10 @@
             justify-items: center;
 
 
-            
+            @media (max-width:800px) {
+                grid-template-columns: 1fr;
+                
+            }
 
             input{
                 text-align: center;

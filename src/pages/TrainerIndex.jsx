@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, Outlet } from 'react-router-dom'
 import {
   useNavigate,
@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 
 import { trainerService } from '../services/trainer/trainer.service'
 
+import { useEffectUpdate } from '../customHooks/useEffectUpdate'
 import {
   loadTrainers,
   addTrainer,
@@ -53,6 +54,7 @@ export function TrainerIndex() {
   })
 
   const location = useLocation()
+  const isFirstRender = useRef(true)
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
   const headText = { he: 'המדריכים שלנו', eng: 'Our Instructors' }
@@ -99,11 +101,21 @@ export function TrainerIndex() {
       if (newTrainers.length > 0) {
         setHasMore(true)
         if (filter.pageIdx > 0) {
-          setTrainers((prev) => [...prev, ...newTrainers])
+          const pageSize = filter.pageIdx
+          // Create an array of promises for all previous pages
+          const fetchPromises = Array.from({ length: pageSize }, (_, i) =>
+            loadTrainers({ ...filter, pageIdx: i })
+          )
+
+          const prevTrainers = (await Promise.all(fetchPromises)).flat()
+
+          setTrainers([...prevTrainers, ...newTrainers])
         } else {
           setTrainers(newTrainers)
         }
       } else {
+        let page = filter.pageIdx
+        setFilter({ ...filter, pageIdx: --page })
         setHasMore(false)
       }
     } catch (err) {
@@ -148,12 +160,15 @@ export function TrainerIndex() {
         if (
           window.innerHeight + document.documentElement.scrollTop >=
             document.documentElement.offsetHeight - 100 &&
-          hasMore
+          hasMore &&
+          !isFirstRender.current
         ) {
           setFilter((prevFilter) => ({
             ...prevFilter,
             pageIdx: prevFilter.pageIdx + 1,
           }))
+        } else {
+          isFirstRender.current = false
         }
       }, 300) // Adjust 300 ms as needed
     }
