@@ -34,7 +34,7 @@ export function ItemDetails() {
   return (
     <>
       <section className='item-details-container'>
-        <Link to='/item'>
+        <Link to='/item' className={prefs.isDarkMode && 'dark-mode'}>
           {prefs.isEnglish ? `Back to list` : 'חזרה לתפריט'}
           <ArrowBackIosNewIcon />
         </Link>
@@ -42,9 +42,8 @@ export function ItemDetails() {
         <div className='title-container'>
           <b>{prefs.isEnglish ? item.title.eng : item.title.he}</b>
           <div className='price-container'>
-            <Quantity quantity={quantity} setQuantity={setQuantity} />
-
             <b>₪{item.price}</b>
+            <Quantity quantity={quantity} setQuantity={setQuantity} />
           </div>
           <AddToCartButton item={{ ...item }} quantity={quantity} />
         </div>

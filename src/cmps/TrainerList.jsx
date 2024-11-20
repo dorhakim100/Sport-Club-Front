@@ -13,14 +13,14 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
   const user = useSelector((storeState) => storeState.userModule.user)
   const navigate = useNavigate()
 
-  const [isLoaded, setIsLoaded] = useState(false)
-  const imgRef = useRef(null)
+  // const [isLoaded, setIsLoaded] = useState(false)
+  // const imgRef = useRef(null)
 
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
-      setIsLoaded(true)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (imgRef.current && imgRef.current.complete) {
+  //     setIsLoaded(true)
+  //   }
+  // }, [])
 
   return (
     <div className='trainers-list-container'>
@@ -30,14 +30,8 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
             <span>{prefs.isEnglish ? trainer.name.eng : trainer.name.he}</span>
             <div className='img-container'>
               {/* <Preloader img={trainer.img} /> */}
-              {!isLoaded && <Preloader img={trainer.img} />}
-              <img
-                src={trainer.img}
-                alt=''
-                onLoad={() => {
-                  setIsLoaded(true)
-                }}
-              />
+              {/* {!isLoaded && <Preloader img={trainer.img} />} */}
+              <img src={trainer.img} alt='' />
             </div>
             <div className='buttons-container' style={{ direction: 'ltr' }}>
               {(user && user.isAdmin && (
