@@ -45,7 +45,9 @@ export function MouseWheelCarousel({ imgs }) {
                   minHeight: '300px',
                 }}
               />
-              <span>{prefs.isEnglish ? slide.text.eng : slide.text.he}</span>
+              <span style={{ color: 'white' }}>
+                {prefs.isEnglish ? slide.text.eng : slide.text.he}
+              </span>
             </SwiperSlide>
           )
         })}

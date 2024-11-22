@@ -50,6 +50,7 @@
             transition: 0.2s;
             color: $bold-navy;
             width: 100px;
+            text-align: center;
             &:hover{
                 box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.113) 0px 3px 6px; 
                 background-color: $light-gray;

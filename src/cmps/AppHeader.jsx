@@ -508,7 +508,18 @@ export function AppHeader({ bodyRef }) {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           ref={logoRef}
         >
-          <img src={logo} alt='' style={{ transition: '0.3s ease' }} />
+          <img
+            src={logo}
+            alt=''
+            style={
+              prefs.isEnglish
+                ? { transition: '0.3s ease' }
+                : {
+                    paddingLeft: windowDimensions.width < 1050 && '1.5em',
+                    transition: '0.3s ease',
+                  }
+            }
+          />
         </NavLink>
       )}
     </header>

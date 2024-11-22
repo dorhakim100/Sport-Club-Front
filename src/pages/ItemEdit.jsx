@@ -139,10 +139,12 @@ export function ItemEdit() {
     setIsLoading(true)
     try {
       const savedItem = await updateItem(editItem)
-      showSuccessMsg('Item edited successfully')
+      showSuccessMsg(
+        prefs.isEnglish ? 'Item edited successfully' : 'מוצר נערך בהצלחה'
+      )
     } catch (err) {
       console.log(err)
-      showErrorMsg(`Item couldn't be edited`)
+      showErrorMsg(prefs.isEnglish ? `Item couldn't be edited` : 'מוצר לא נערך')
     } finally {
       setIsLoading(false)
     }
@@ -173,7 +175,7 @@ export function ItemEdit() {
     <>
       <HeadContainer text={text} />
       <section className='item-edit-container'>
-        <div className='cover-container'>
+        <div className='item-img-container'>
           {cover && <img src={cover} alt='' className='item-cover-edit' />}
         </div>
         <LoadingButton
@@ -273,7 +275,7 @@ export function ItemEdit() {
               {prefs.isEnglish ? 'Add quantity' : 'הוסף כמות'}
             </Button>
           )}
-          <div className='input-container'>
+          <div className='input-container types'>
             <label htmlFor=''>{prefs.isEnglish ? 'Types:' : 'סוג:'}</label>
             <div className='types-container'>
               {types.map((type) => {

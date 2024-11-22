@@ -19,7 +19,6 @@ const center = {
 }
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAP
-console.log(apiKey)
 
 export function GoogleMapCmp() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)

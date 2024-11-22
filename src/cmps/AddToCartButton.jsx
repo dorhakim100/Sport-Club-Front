@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
@@ -10,17 +10,42 @@ import { updateCart } from '../store/actions/user.actions'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import { setIsLoading } from '../store/actions/system.actions'
+import { showErrorMsg } from '../services/event-bus.service'
 
 export function AddToCartButton({ item, quantity, onRemoveItem }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const navigate = useNavigate()
-  function shouldShowActionBtns(item) {
-    const user = userService.getLoggedinUser()
+  const [isAdmin, setIsAdmin] = useState(false)
 
-    if (!user) return false
-    if (user.isAdmin) return true
-    // return item.owner?._id === user._id
+  useEffect(() => {
+    const setActionButtons = async () => {
+      try {
+        const stateToSet = await shouldShowActionBtns()
+        if (stateToSet) {
+          setIsAdmin(true)
+        }
+      } catch (err) {
+        showErrorMsg(
+          prefs.isEnglish
+            ? `Couldn't show action buttons`
+            : 'לא היה ניתן להראות כפתורים'
+        )
+      }
+    }
+    setActionButtons()
+  }, [user])
+
+  async function shouldShowActionBtns(item) {
+    try {
+      const user = await userService.getLoggedinUser()
+
+      if (!user) return false
+      if (user.isAdmin) return true
+      // return item.owner?._id === user._id
+    } catch (err) {
+      throw err
+    }
   }
 
   async function onAddToCart(itemToAdd, quantity = 1) {
@@ -64,7 +89,7 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
   }
 
   return (
-    (shouldShowActionBtns(item) && (
+    (isAdmin && (
       <ButtonGroup
         variant='contained'
         aria-label='Basic button group'

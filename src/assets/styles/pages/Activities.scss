@@ -4,7 +4,7 @@
         display: grid;
         grid-template-columns: repeat(2,1fr);
         align-items: center;
-        gap: 1em;
+        gap: 5em 1em;
         text-align: start;
 
         .section{
@@ -34,6 +34,30 @@
         align-items: start;
 
         // height: 60vh;
+    }
+
+
+
+    .pilates-container{
+
+        .instagram-container{
+            grid-column: 1/-1;
+            justify-self: center;
+
+            display: grid;
+            gap: 1em;
+
+            b{
+                transition: 0.2s ease;
+            }
+
+            &:hover{
+                b{
+
+                    transform: scale(1.1);
+                }
+            }
+        }
     }
 
 
