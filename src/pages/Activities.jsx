@@ -181,7 +181,7 @@ export function Tennis() {
   return (
     <div className='tennis-container'>
       <HeadContainer text={headText} />
-      <DynamicCover prefs={prefs} coverSrc={options.img} />
+      {/* <DynamicCover prefs={prefs} coverSrc={options.img} /> */}
     </div>
   )
 }
@@ -234,6 +234,9 @@ export function Pilates() {
           </div>
         </div>
         <div className='instagram-container section hidden'>
+          <b>
+            {prefs.isEnglish ? 'Follow me on Instagram' : 'עקבו אחרי באינסטגרם'}
+          </b>
           <InstagramPost postUrl={instagram} />
         </div>
       </div>

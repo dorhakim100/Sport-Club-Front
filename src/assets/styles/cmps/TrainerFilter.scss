@@ -15,6 +15,17 @@
 
     position: relative;
 
+    @media (max-width:550px) {
+        overflow-x: auto;
+        height: 150px;
+        grid-template-rows: auto;
+
+        &::after{
+            display: none;
+        }
+        
+    }
+
     .checkbox-container{
 
         @media (max-width:850px) {

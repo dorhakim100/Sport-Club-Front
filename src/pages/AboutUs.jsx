@@ -9,6 +9,8 @@ import { GoogleMapCmp } from '../cmps/GoogleMapCmp.jsx'
 
 import Divider from '@mui/material/Divider'
 import { makeId } from '../services/util.service'
+import { DynamicCover } from '../cmps/DynamicCover'
+import { ContactUs } from '../cmps/ContactUs'
 
 export function AboutUs() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -103,6 +105,11 @@ export function AboutUs() {
     },
   ]
 
+  const covers = {
+    about:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946218/DSC06479_b6n2yd.jpg',
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
@@ -157,6 +164,9 @@ export function AboutUs() {
                 })}
               </ul>
             </div>
+            {/* <div className='section hidden'> */}
+            <DynamicCover coverSrc={covers.about} prefs={prefs} />
+            <GoogleMapCmp />
             <div className='section end-container'>
               <p>
                 {prefs.isEnglish
@@ -164,9 +174,8 @@ export function AboutUs() {
                   : 'אנו מזמינים אתכם בכל ימות השנה להשקיע בעצמכם למען הגוף והנפש בפעילות ספורטיבית ונופש לכל המשפחה.'}
               </p>
             </div>
-            {/* <div className='section hidden'> */}
-            <GoogleMapCmp />
           </div>
+          <ContactUs />
           {/* </div> */}
         </>
       )}

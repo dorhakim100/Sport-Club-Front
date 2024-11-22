@@ -58,10 +58,14 @@ export function UpdateEdit() {
     setIsLoading(true)
     try {
       const savedUpdate = await saveUpdate(editUpdate)
-      showSuccessMsg('Item edited successfully')
+      showSuccessMsg(
+        prefs.isEnglish ? 'Update added successfully' : 'עדכון נוסף בהצלחה'
+      )
     } catch (err) {
       console.log(err)
-      showErrorMsg(`Item couldn't be edited`)
+      showErrorMsg(
+        prefs.isEnglish ? `Update couldn't be added` : 'עדכון לא נוסף'
+      )
     } finally {
       setIsLoading(false)
     }

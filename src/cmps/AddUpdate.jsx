@@ -36,11 +36,15 @@ export function AddUpdate({ setUpdates }) {
       // const allUpdates = await updateService.query({ isAll: true })
       editUpdate.position = 1
       const savedUpdate = await saveUpdate(editUpdate)
-      showSuccessMsg('Item edited successfully')
+      showSuccessMsg(
+        prefs.isEnglish ? 'Update added successfully' : 'עדכון נוסף בהצלחה'
+      )
       await setUpdates()
     } catch (err) {
       console.log(err)
-      showErrorMsg(`Item couldn't be edited`)
+      showErrorMsg(
+        prefs.isEnglish ? `Update couldn't be added` : 'עדכון לא נשמר'
+      )
     } finally {
       setIsLoading(false)
     }

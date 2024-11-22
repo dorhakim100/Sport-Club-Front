@@ -145,7 +145,7 @@ export function HomePage() {
       },
     },
     {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947762/DSC06140_txbg2f.jpg',
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732274704/DSC09047_gxxqfy.jpg',
       text: {
         he: 'חניה גדולה, נוחה וללא תשלום',
         eng: 'Large, Convenient, and Free Parking Lot',

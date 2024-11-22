@@ -23,8 +23,6 @@ import { setIsLoading } from '../store/actions/system.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { DynamicCover } from '../cmps/DynamicCover'
 
-import cover from '../../public/imgs/picture.jpg'
-
 import { Button } from '@mui/material'
 
 export function ItemIndex() {
@@ -46,6 +44,8 @@ export function ItemIndex() {
   const [isGrid, setIsGrid] = useState(true)
 
   const headText = { he: 'מוצרים', eng: 'Items' }
+  const cover =
+    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732275016/DSC06192_1_ciikqh.jpg'
 
   useEffect(() => {
     // Fetch filter settings from searchParams
