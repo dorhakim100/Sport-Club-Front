@@ -10,6 +10,7 @@ import FacebookIcon from '@mui/icons-material/Facebook'
 import PlaceIcon from '@mui/icons-material/Place'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import MailIcon from '@mui/icons-material/Mail'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export function AppFooter() {
   const count = useSelector((storeState) => storeState.userModule.count)
@@ -25,8 +26,13 @@ export function AppFooter() {
   const phone = '09-958-0404'
   const email = 'service.kfar@gmail.com'
   const rights = prefs.isEnglish
-    ? 'All rights reserved, Sport Club Kfar Shmaryahu'
-    : `כל הזכויות שמורות למועדון הספורט כפר שמריהו`
+    ? 'Dor Hakim, Sport Club Kfar Shmaryahu'
+    : `דור חכים, מועדון הספורט כפר שמריהו`
+
+  const links = {
+    facebook: 'https://www.facebook.com/moadonsportkfar/?locale=he_IL',
+    instagram: 'https://www.instagram.com/moadonsport/',
+  }
 
   useEffect(() => {
     setFooterDarkMode()
@@ -42,6 +48,17 @@ export function AppFooter() {
     }
   }
 
+  const handleCopyToClipboard = async (e) => {
+    e.preventDefault() // Prevent navigation to `mailto`
+    try {
+      await navigator.clipboard.writeText(email)
+      showSuccessMsg(prefs.isEnglish ? 'Email copied' : 'מייל הועתק')
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(prefs.isEnglish ? `Couldn't copy email` : 'מייל לא הועתק')
+    }
+  }
+
   return (
     <footer className='app-footer full' ref={footerRef}>
       <div className='contact-container'>
@@ -51,18 +68,41 @@ export function AppFooter() {
         </div>
         <div className='method-container phone'>
           <LocalPhoneIcon />
-          <span>{phone}</span>
+          <a
+            href='tel:099580404'
+            className={prefs.isDarkMode ? 'dark-mode' : ''}
+          >
+            {phone}
+          </a>
         </div>
-        <div className='method-container email'>
+        <div
+          className={`method-container email`}
+          onClick={handleCopyToClipboard}
+        >
           <MailIcon />
-          <span>{email}</span>
+          <span
+            style={{ cursor: 'pointer' }}
+            className={prefs.isDarkMode ? 'dark-mode' : ''}
+          >
+            {email}
+          </span>
         </div>
       </div>
       <div className='links-container'>
-        <div className='facebook-container'>
+        <div
+          className='facebook-container'
+          onClick={() => {
+            window.open(links.facebook)
+          }}
+        >
           <FacebookIcon />
         </div>
-        <div className='instagram-container'>
+        <div
+          className='instagram-container'
+          onClick={() => {
+            window.open(links.instagram)
+          }}
+        >
           <InstagramIcon />
         </div>
       </div>

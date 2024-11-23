@@ -17,12 +17,15 @@
     b{
         font-size: 1.5em;
     }
-
+    
     .about-page-container{
         display: grid;
         grid-template-columns: repeat(2,1fr);
         grid-template-rows: repeat(2,auto);
         gap: 1em;
+        // font-size: clamp(1em, 2.5vw, 2em);
+        font-size: clamp(1.5em, 1.5vw, 2em);
+
         
         @media (max-width:1120px) {
             // grid-template-columns: repeat(1, 1fr);
@@ -95,6 +98,8 @@
     // font-size: 2em;
     p{
         font-size: 1.5em;
+        font-size: clamp(1.5em, 1.5vw, 2em);
+
     }
     h4{
         font-size: 1.5em;

@@ -9,7 +9,8 @@ import { login, signup } from '../store/actions/user.actions'
 import { setIsLoading, setPrefs } from '../store/actions/system.actions'
 // import { addComment } from '../store/actions/comment.actions'
 
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
 export function LoginSignupForm({ isSignup }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
@@ -21,6 +22,21 @@ export function LoginSignupForm({ isSignup }) {
   const [isShown, setIsShown] = useState(false)
 
   const [isRemember, setIsRemember] = useState(false)
+
+  const [width, setWidth] = useState()
+
+  useEffect(() => {
+    setWidth(getWindowDimensions().width)
+  }, [window.innerWidth])
+
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window
+
+    return {
+      width,
+      height,
+    }
+  }
 
   if (isSignup) {
     initialValues = { email: '', password: '', username: '', fullname: '' }
@@ -229,14 +245,31 @@ export function LoginSignupForm({ isSignup }) {
               />
               <Button
                 variant='contained'
+                onClick={() => {
+                  if (width > 800) {
+                    return
+                  }
+
+                  if (isShown) {
+                    setIsShown(false)
+                  } else {
+                    setIsShown(true)
+                  }
+                }}
                 onMouseDown={() => {
+                  if (width < 800) {
+                    return
+                  }
                   setIsShown(true)
                 }}
                 onMouseUp={() => {
+                  if (width < 800) {
+                    return
+                  }
                   setIsShown(false)
                 }}
               >
-                <RemoveRedEyeIcon />
+                {isShown ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </Button>
             </div>
             <span>

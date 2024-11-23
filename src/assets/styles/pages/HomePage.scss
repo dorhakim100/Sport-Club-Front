@@ -72,11 +72,17 @@
       padding: 2em;
       // text-align: start;
 
+      h2{
+        // font-size: clamp(3em, 3.5vw, 5.5em);
+
+      }
       p{
         margin-top: 2em;
         font-size: 1.5em;
         text-align: start;
         max-width: 700px;
+        // font-size: clamp(1.5em, 2.5vw, 2.5em);
+
       }
 
     }
