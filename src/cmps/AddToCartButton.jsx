@@ -10,7 +10,7 @@ import { updateCart } from '../store/actions/user.actions'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import { setIsLoading } from '../store/actions/system.actions'
-import { showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export function AddToCartButton({ item, quantity, onRemoveItem }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -81,6 +81,7 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
     try {
       setIsLoading(true)
       await updateCart(user)
+      showSuccessMsg(prefs.isEnglish ? 'Item added to cart' : 'מוצר נוסף לעגלה')
     } catch (err) {
       console.log(err)
     } finally {
@@ -96,6 +97,7 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
         style={{ direction: 'ltr' }}
       >
         <Button
+          className='edit-btn'
           onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' })
             navigate(`/item/edit/${item._id}`)
@@ -103,12 +105,16 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
         >
           {prefs.isEnglish ? 'Edit' : 'עריכה'}
         </Button>
-        <Button onClick={() => onRemoveItem(item._id)}>
+        <Button className='edit-btn' onClick={() => onRemoveItem(item._id)}>
           {prefs.isEnglish ? 'Remove' : 'הסרה'}
         </Button>
       </ButtonGroup>
     )) || (
-      <Button variant='contained' onClick={() => onAddToCart(item, quantity)}>
+      <Button
+        className='add-to-cart-btn'
+        variant='contained'
+        onClick={() => onAddToCart(item, quantity)}
+      >
         {prefs.isEnglish ? 'Add To Cart' : 'הוסף לעגלה'}
       </Button>
     )

@@ -35,7 +35,10 @@ export function HomePage() {
       link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002513/34_gdwu4o.jpg',
       text: {
         first: { he: 'בריכה חצי אולימפית', eng: 'Half Olympic Pool' },
-        second: { he: 'שבעה מסלולי שחייה', eng: 'Seven swimming lanes' },
+        second: {
+          he: 'מחוממת ומקורה, פעילה בכל ימות השנה',
+          eng: 'Heated and covered, active all year round',
+        },
       },
     },
     {
@@ -45,8 +48,8 @@ export function HomePage() {
       text: {
         first: { he: 'חדר הכושר', eng: 'Our gym' },
         second: {
-          he: 'חווית אימון אישית',
-          eng: 'Personal training experience',
+          he: 'ציוד מתקדם, יחס אישי',
+          eng: 'Advanced equipment, personalized attention',
         },
       },
     },
@@ -55,17 +58,17 @@ export function HomePage() {
       title: 'Courts',
       link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731949255/DSC06197_vctg4k.jpg',
       text: {
-        first: { he: 'מתחם טניס יוקרתי', eng: 'Luxury tennis complex' },
-        second: { he: 'שלושה מגרשים', eng: 'Three courts' },
+        first: { he: 'מתחם מגרשי טניס', eng: 'Tennis complex' },
+        second: { he: 'הכולל שלושה מגרשים', eng: 'Three courts' },
       },
     },
     {
       id: makeId(),
       title: 'Studio',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732035131/DSC06221_ysilyb.jpg',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732343251/DSC06024_rr6o6a.jpg',
       text: {
         first: { he: 'סטודיו לחוגים', eng: 'Class studio' },
-        second: { he: 'בקבוצות קטנות', eng: 'Personal experience' },
+        second: { he: 'בקבוצות קטנות', eng: 'Small and personal groups' },
       },
     },
     {

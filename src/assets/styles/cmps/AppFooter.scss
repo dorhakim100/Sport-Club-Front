@@ -25,6 +25,21 @@
         }
     }
 
+    a{
+      color: $bold-navy;
+      &:visited {
+        color: $bold-navy;
+      }
+      
+      &.dark-mode{
+        color: $light-gray;
+        &:visited {
+          color: $light-gray;
+        }
+      }
+      
+    }
+
     .contact-container{
         display: flex;
         gap: 1em;

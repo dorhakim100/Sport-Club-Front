@@ -34,6 +34,13 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
             key={item._id}
             className='item-container'
             onClick={() => {
+              if (
+                e.target.closest('.add-to-cart-btn') ||
+                e.target.closest('.edit-btn')
+              ) {
+                e.stopPropagation()
+                return
+              }
               if (isHover) return
               navigate(`/item/${item._id}`)
               window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -47,26 +54,6 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
               onMouseLeave={() => setIsHover(false)}
             >
               <AddToCartButton item={item} onRemoveItem={onRemoveItem} />
-              {/* {(shouldShowActionBtns(item) && (
-                <ButtonGroup
-                  variant='contained'
-                  aria-label='Basic button group'
-                >
-                  <Button
-                    onClick={() => {
-                      window.scrollTo({ top: 0, behavior: 'smooth' })
-                      navigate(`/item/edit/${item._id}`)
-                    }}
-                  >
-                    Edit
-                  </Button>
-                  <Button onClick={() => onRemoveItem(item._id)}>Remove</Button>
-                </ButtonGroup>
-              )) || (
-                <Button variant='contained'>
-                  {prefs.isEnglish ? 'Add To Cart' : 'הוסף לעגלה'}
-                </Button>
-              )} */}
             </div>
           </li>
         ))}
