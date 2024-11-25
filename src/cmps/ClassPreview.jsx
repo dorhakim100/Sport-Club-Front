@@ -16,12 +16,20 @@ export function ClassPreview({ clas, onRemoveClass }) {
 
   const [isLoaded, setIsLoaded] = useState(false)
 
+  console.log(clas)
   return (
     <div
       className='class-preview-container'
       key={clas._id}
-      onClick={() => {
+      onClick={(event) => {
         if (isHover) return
+        if (
+          event.target.closest('.edit-btn') ||
+          event.target.closest('.remove-btn')
+        ) {
+          e.stopPropagation()
+          return
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' })
         navigate(`/class/${clas._id}`)
       }}
@@ -46,28 +54,19 @@ export function ClassPreview({ clas, onRemoveClass }) {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
                 navigate(`/class/edit/${clas._id}`)
               }}
+              className='edit-btn'
             >
               {prefs.isEnglish ? 'Edit' : 'עריכה'}
             </Button>
-            <Button onClick={() => onRemoveClass(clas._id)}>
+            <Button
+              onClick={() => onRemoveClass(clas._id)}
+              className='remove-btn'
+            >
               {prefs.isEnglish ? 'Remove' : 'הסרה'}
             </Button>
           </ButtonGroup>
         )}
-        <p>
-          {/* {prefs.isEnglish ? 'Trainers:' : 'מדריכים:'} */}
-          {/* {clas.trainers.map((trainer, index) => {
-            return (
-              <span key={`${makeId()}ClassPreview`}>
-                {prefs.isEnglish
-                  ? trainer.name.eng.split(' ')[0]
-                  : trainer.name.he.split(' ')[0]}
-                {index + 1 !== clas.trainers.length && ','}
-              </span>
-            )
-          })} */}
-          {prefs.isEnglish ? clas.preview.eng : clas.preview.he}
-        </p>
+        <p>{prefs.isEnglish ? clas.preview.eng : clas.preview.he}</p>
       </div>
       <div className={prefs.isEnglish ? 'img-container ltr' : 'img-container'}>
         <img src={clas.img} alt='' onLoad={() => setIsLoaded(true)} />
