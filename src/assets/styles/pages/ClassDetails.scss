@@ -14,9 +14,15 @@
     img{
         grid-column: 2/3;
         grid-row: 1/2;
+        justify-self: center;
         border-radius: 8px;
-        width: 100%;
+        min-width: 300px;
+        min-height: 300px;
+        width: 40vw;
+        height: calc(40vw);
+
         max-width: 800px;
+        object-fit: cover;
     }
 
     .info-container{

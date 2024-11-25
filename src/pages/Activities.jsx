@@ -177,11 +177,23 @@ export function Swimming() {
 export function Tennis() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
+  const options = {
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732541617/WhatsApp_Image_2024-10-29_at_16.16.04_eh1nrg.jpg',
+
+    title: { he: 'בית הספר לטניס', eng: 'Tennis School' },
+    preview: {
+      he: `ברוכים הבאים לבית הספר לשחייה שלנו, בו כל תלמיד יכול ללמוד לשחות בביטחון! בין אם אתם מתחילים או מתאמנים לרמת שחייה מתקדמת, המדריכים המנוסים שלנו מציעים ליווי אישי בסביבה בטוחה ומעודדת. הצטרפו למגוון התכניות שלנו, כולל שיעורי מתחילים, שיפור סגנון ושחייה מתקדמת. השיעורים שלנו מתוכננים כדי לעזור לשחיינים מכל הגילאים להתקדם בקצב שלהם ולהנות מהמסע. הצטרפו אלינו ותחוו את השמחה שבשחייה!
+        
+        `,
+      eng: `Welcome to our swimming school, where every student can learn to swim with confidence! Whether you're a beginner or training for advanced skills, our experienced instructors provide personalized guidance in a safe and encouraging environment. Dive into our range of programs, including beginner classes, stroke improvement, and advanced techniques. Our lessons are structured to help swimmers of all ages progress at their own pace, ensuring everyone enjoys the journey. Join us and experience the joy of swimming!`,
+    },
+  }
+
   const headText = { he: 'בית הספר לטניס', eng: 'Tennis School' }
   return (
     <div className='tennis-container'>
       <HeadContainer text={headText} />
-      {/* <DynamicCover prefs={prefs} coverSrc={options.img} /> */}
+      <DynamicCover prefs={prefs} coverSrc={options.img} />
     </div>
   )
 }
@@ -258,9 +270,21 @@ export function Care() {
 export function SummerCamp() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const headText = { he: 'קייטנת הקיץ', eng: 'Summer Camp' }
+  const options = {
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732541780/WhatsApp_Image_2024-10-29_at_16.16.03_1_ptejag.jpg',
+
+    title: { he: 'סטודיו מיטל תמיר', eng: 'Meital Tamir Studio' },
+    preview: {
+      he: `ברוכים הבאים לבית הספר לשחייה שלנו, בו כל תלמיד יכול ללמוד לשחות בביטחון! בין אם אתם מתחילים או מתאמנים לרמת שחייה מתקדמת, המדריכים המנוסים שלנו מציעים ליווי אישי בסביבה בטוחה ומעודדת. הצטרפו למגוון התכניות שלנו, כולל שיעורי מתחילים, שיפור סגנון ושחייה מתקדמת. השיעורים שלנו מתוכננים כדי לעזור לשחיינים מכל הגילאים להתקדם בקצב שלהם ולהנות מהמסע. הצטרפו אלינו ותחוו את השמחה שבשחייה!
+      
+      `,
+      eng: `Welcome to our swimming school, where every student can learn to swim with confidence! Whether you're a beginner or training for advanced skills, our experienced instructors provide personalized guidance in a safe and encouraging environment. Dive into our range of programs, including beginner classes, stroke improvement, and advanced techniques. Our lessons are structured to help swimmers of all ages progress at their own pace, ensuring everyone enjoys the journey. Join us and experience the joy of swimming!`,
+    },
+  }
   return (
-    <div className='care-container'>
+    <div className='camp-container'>
       <HeadContainer text={headText} />
+      <DynamicCover prefs={prefs} coverSrc={options.img} />
     </div>
   )
 }

@@ -108,7 +108,8 @@
         }
         grid-column: 1/-1;
         display: flex;
-        gap: 2em;
+        justify-content: space-around;
+        // gap: 1em;
         font-size: 1.2em;
     }
 }

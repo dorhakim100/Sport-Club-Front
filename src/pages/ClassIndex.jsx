@@ -72,11 +72,8 @@ export function ClassIndex() {
 
   useEffect(() => {
     const pageIdx = +searchParams.get('pageIdx') || 0
-    const typesParam = searchParams.get('types') || ''
 
-    const types = typesParam ? typesParam.split(',') : []
-
-    const filterToSet = { ...filter, types, pageIdx }
+    const filterToSet = { ...filter, pageIdx }
 
     // Only update filter if it's different
     if (JSON.stringify(filter) !== JSON.stringify(filterToSet)) {
@@ -92,6 +89,16 @@ export function ClassIndex() {
 
       const max = await classService.getMaxPage()
       setMaxPage(max)
+
+      // Update searchParams if necessary
+      console.log(filter)
+      const currentPageIdx = searchParams.get('pageIdx') || 0
+
+      if (currentPageIdx !== filter.pageIdx.toString()) {
+        setSearchParams({
+          pageIdx: filter.pageIdx.toString(),
+        })
+      }
       return c
     } catch (err) {
       console.log(err)
@@ -100,20 +107,6 @@ export function ClassIndex() {
       )
     } finally {
       setIsLoading(false)
-    }
-
-    // Update searchParams if necessary
-    const currentPageIdx = searchParams.get('pageIdx') || 0
-    const currentTypes = searchParams.get('types') || ''
-
-    if (
-      currentPageIdx !== filter.pageIdx.toString() ||
-      currentTypes !== filter.types.toString()
-    ) {
-      setSearchParams({
-        pageIdx: filter.pageIdx.toString(),
-        types: filter.types.toString(),
-      })
     }
   }
   useEffect(() => {

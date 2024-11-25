@@ -15,6 +15,7 @@ export function ClassList({ classes, onRemoveClass, onAddClass }) {
             clas={clas}
             onRemoveClass={onRemoveClass}
             onAddClass={onAddClass}
+            key={clas._id}
           />
         )
       })}
