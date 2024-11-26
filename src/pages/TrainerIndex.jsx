@@ -159,7 +159,7 @@ export function TrainerIndex() {
 
         if (
           window.innerHeight + document.documentElement.scrollTop >=
-            document.documentElement.offsetHeight - 100 &&
+            document.documentElement.offsetHeight - 200 &&
           hasMore &&
           !isFirstRender.current
         ) {

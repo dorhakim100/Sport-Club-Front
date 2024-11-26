@@ -253,10 +253,10 @@ export function AppHeader({ bodyRef }) {
           //   text: prefs.isEnglish ? 'Facilities' : 'מתקני המועדון',
           //   path: `${section}/facilities`,
           // },
-          {
-            text: prefs.isEnglish ? 'Our Team' : 'צוות המועדון',
-            path: `${section}/team`,
-          },
+          // {
+          //   text: prefs.isEnglish ? 'Our Team' : 'צוות המועדון',
+          //   path: `${section}/team`,
+          // },
           {
             text: prefs.isEnglish ? 'Organization' : 'העמותה',
             path: `${section}/organization`,
@@ -264,6 +264,10 @@ export function AppHeader({ bodyRef }) {
           {
             text: prefs.isEnglish ? 'Accessibility' : 'נגישות',
             path: `${section}/accessibility`,
+          },
+          {
+            text: prefs.isEnglish ? 'Cenceling Transaction' : 'מדיניות ביטולים',
+            path: `${section}/cancel`,
           },
         ]
         break
