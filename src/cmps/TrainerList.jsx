@@ -26,7 +26,25 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
     <div className='trainers-list-container'>
       {trainers.map((trainer) => {
         return (
-          <div className='trainer-container'>
+          <div
+            className='trainer-container'
+            style={(user && user.isAdmin && { cursor: 'pointer' }) || {}}
+            onClick={(event) => {
+              // console.log(event.target)
+              // return
+              if (
+                event.target.closest('.remove-btn') ||
+                event.target.closest('.edit-btn')
+              ) {
+                event.stopPropagation()
+                return
+              }
+              if (user && user.isAdmin) {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                navigate(`/class/trainer/${trainer._id}`)
+              }
+            }}
+          >
             <span>{prefs.isEnglish ? trainer.name.eng : trainer.name.he}</span>
             <div className='img-container'>
               {/* <Preloader img={trainer.img} /> */}
@@ -44,10 +62,14 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
                       window.scrollTo({ top: 0, behavior: 'smooth' })
                       navigate(`/class/trainer/edit/${trainer._id}`)
                     }}
+                    className='edit-btn'
                   >
                     {prefs.isEnglish ? 'Edit' : 'עריכה'}
                   </Button>
-                  <Button onClick={() => onRemoveTrainer(trainer._id)}>
+                  <Button
+                    className='remove-btn'
+                    onClick={() => onRemoveTrainer(trainer._id)}
+                  >
                     {prefs.isEnglish ? 'Remove' : 'הסרה'}
                   </Button>
                 </ButtonGroup>

@@ -8,7 +8,7 @@ import { HomePage } from './pages/HomePage'
 import { Facilities } from './pages/Facilities'
 import {
   AboutUs,
-  AboutTeam,
+  Cancel,
   Organization,
   AccessibilityPage,
 } from './pages/AboutUs'
@@ -91,7 +91,7 @@ export function App() {
             <Route path='' element={<HomePage />} />
             <Route path='facilities' element={<Facilities />} />
             <Route path='about' element={<AboutUs />}>
-              <Route path='team' element={<AboutTeam />} />
+              <Route path='cancel' element={<Cancel />} />
               {/* <Route path='facilities' element={<Facilities />} /> */}
               <Route path='organization' element={<Organization />} />
               <Route path='accessibility' element={<AccessibilityPage />} />
