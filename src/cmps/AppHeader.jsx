@@ -266,7 +266,7 @@ export function AppHeader({ bodyRef }) {
             path: `${section}/accessibility`,
           },
           {
-            text: prefs.isEnglish ? 'Cenceling Transaction' : 'מדיניות ביטולים',
+            text: prefs.isEnglish ? 'Cenceling' : 'ביטולים',
             path: `${section}/cancel`,
           },
         ]
@@ -367,6 +367,15 @@ export function AppHeader({ bodyRef }) {
           }}
         >
           <span>{prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
+        </NavLink>
+        <NavLink
+          to='update'
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setMenu(false)
+          }}
+        >
+          <span>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</span>
         </NavLink>
 
         <NavLink
@@ -484,7 +493,19 @@ export function AppHeader({ bodyRef }) {
 
         {user && (
           <div className='user-info'>
-            <Link to={`user/${user._id}`}>{user.fullname}</Link>
+            {!user.isAdmin ? (
+              <Link
+                to={`user/${user._id}`}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  setMenu(false)
+                }}
+              >
+                {user.fullname}
+              </Link>
+            ) : (
+              <b style={{ color: '#4A90E2' }}>{user.fullname}</b>
+            )}
             {!user.isAdmin && (
               <Button
                 variant='contained'
@@ -499,7 +520,14 @@ export function AppHeader({ bodyRef }) {
                 <ShoppingCartIcon />
               </Button>
             )}
-            <Button onClick={onLogout} variant='contained'>
+            <Button
+              onClick={() => {
+                setMenu(false)
+
+                onLogout()
+              }}
+              variant='contained'
+            >
               {prefs.isEnglish ? 'Logout' : 'יציאה'}
             </Button>
           </div>
@@ -509,7 +537,10 @@ export function AppHeader({ bodyRef }) {
         <NavLink
           to='/'
           className='logo'
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+            setMenu(false)
+          }}
           ref={logoRef}
         >
           <img

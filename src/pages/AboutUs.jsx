@@ -42,8 +42,8 @@ export function AboutUs() {
     },
     {
       path: 'cancel',
-      he: 'מדיניות ביטולים',
-      eng: 'Cenceling Transaction',
+      he: 'ביטולים',
+      eng: 'Cencels',
     },
   ]
 

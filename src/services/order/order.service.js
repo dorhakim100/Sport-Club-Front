@@ -12,6 +12,7 @@ export const orderService = {
   getDefaultFilter,
   getMaxPage,
   getEmptyOrder,
+  createNewOrderLink,
 }
 
 async function query(filterBy = { pageIdx: 0, types: [] }) {
@@ -81,5 +82,65 @@ function getEmptyOrder() {
     amount: '',
 
     createdAt: Date.now(),
+  }
+}
+
+async function createNewOrderLink(order) {
+  if (!order?.amount || !order?.id) {
+    throw new Error('Invalid order data: amount and id are required.')
+  }
+
+  try {
+    const response = await fetch('/api/payment/initiate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: order.amount, orderId: order.id }),
+    })
+
+    if (!response.ok) {
+      const errorDetails = await response.json() // Try to parse error details if available
+      throw new Error(
+        `Payment initiation failed with status ${response.status}: ${
+          errorDetails.error || response.statusText
+        }`
+      )
+    }
+
+    const result = await response.json()
+
+    if (result.paymentUrl) {
+      return result.paymentUrl
+    } else {
+      throw new Error(`Response did not contain a payment URL.`)
+    }
+  } catch (err) {
+    console.error('An error occurred while creating the payment order:', err)
+    throw err // Re-throw error for the caller to handle
+  }
+}
+
+async function cancelOrderTransaction({ confirmationKey, uniqueKey, total }) {
+  try {
+    const response = await fetch('/api/payment/cancel', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ confirmationKey, uniqueKey, total }),
+    })
+
+    if (!response.ok) {
+      const errorDetails = await response.json()
+      throw new Error(
+        `Cancellation failed with status ${response.status}: ${
+          errorDetails.error || response.statusText
+        }`
+      )
+    }
+
+    const result = await response.json()
+    console.log('Cancellation successful:', result.message)
+    return result.message
+  } catch (err) {
+    console.error('An error occurred while canceling the transaction:', err)
+    throw err
   }
 }
