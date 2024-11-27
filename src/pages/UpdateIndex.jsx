@@ -21,6 +21,8 @@ export function UpdateIndex() {
     (stateSelector) => stateSelector.updateModule.updates
   )
 
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
+
   const [filter, setFilter] = useState(updateService.getDefaultFilter())
   const [maxPage, setMaxPage] = useState(0)
 
@@ -55,8 +57,11 @@ export function UpdateIndex() {
         }}
       />
       <div className='update-control-container'>
-        <AddUpdate setUpdates={setUpdates} />
-        <div className='list-control-container'>
+        {user && user.isAdmin && <AddUpdate setUpdates={setUpdates} />}
+        <div
+          className='list-control-container'
+          style={!user || !user.isAdmin ? { gridColumn: '1/-1' } : {}}
+        >
           <UpdateControl
             setDragEdit={setDragEdit}
             isDragEdit={isDragEdit}

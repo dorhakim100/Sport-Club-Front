@@ -79,17 +79,6 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
     }
   }
 
-  async function onRemoveUpdate(updateId) {
-    try {
-      await removeUpdate(updateId)
-      showSuccessMsg(prefs.isEnglish ? 'Update removed' : 'עדכון הוסר')
-      await loadUpdates()
-    } catch (err) {
-      console.log(err)
-      showErrorMsg(prefs.isEnglish ? `Couldn't remove` : 'עדכון לא הוסר')
-    }
-  }
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId='updatesList' direction='vertical'>
@@ -137,7 +126,9 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                           </span>
                         </div>
                         <p>{update.content}</p>
-                        <AddToCartButton />
+                        {user && user.isAdmin && (
+                          <EditRemoveBtns update={update} />
+                        )}
                       </div>
                     )
                   }}
@@ -153,25 +144,7 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                     </span>
                   </div>
                   <p>{update.content}</p>
-                  {user.isAdmin && (
-                    <ButtonGroup
-                      variant='contained'
-                      aria-label='Basic button group'
-                      style={{ direction: 'ltr' }}
-                    >
-                      <Button
-                        onClick={() => {
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                          navigate(`/admin/update/edit/${update._id}`)
-                        }}
-                      >
-                        {prefs.isEnglish ? 'Edit' : 'עריכה'}
-                      </Button>
-                      <Button onClick={() => onRemoveUpdate(update._id)}>
-                        {prefs.isEnglish ? 'Remove' : 'הסרה'}
-                      </Button>
-                    </ButtonGroup>
-                  )}
+                  {user && user.isAdmin && <EditRemoveBtns update={update} />}
                 </div>
               )
             )}
@@ -180,5 +153,41 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
         )}
       </Droppable>
     </DragDropContext>
+  )
+}
+
+function EditRemoveBtns({ update }) {
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const navigate = useNavigate()
+
+  async function onRemoveUpdate(updateId) {
+    try {
+      await removeUpdate(updateId)
+      showSuccessMsg(prefs.isEnglish ? 'Update removed' : 'עדכון הוסר')
+      await loadUpdates()
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(prefs.isEnglish ? `Couldn't remove` : 'עדכון לא הוסר')
+    }
+  }
+
+  return (
+    <ButtonGroup
+      variant='contained'
+      aria-label='Basic button group'
+      style={{ direction: 'ltr' }}
+    >
+      <Button
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+          navigate(`/update/edit/${update._id}`)
+        }}
+      >
+        {prefs.isEnglish ? 'Edit' : 'עריכה'}
+      </Button>
+      <Button onClick={() => onRemoveUpdate(update._id)}>
+        {prefs.isEnglish ? 'Remove' : 'הסרה'}
+      </Button>
+    </ButtonGroup>
   )
 }
