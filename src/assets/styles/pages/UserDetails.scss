@@ -1,7 +1,52 @@
 .user-details {
-    .user-img {
-        height: 200px;
-        width: 200px;
-        background-size: contain;
+    
+    .list-container{
+        display: grid;
+        gap: 2em;
+
+        b{
+            font-size: 1.5em;
+            justify-self: start;
+        }
+    }
+    
+    .no-orders-container{
+        
+        a{
+
+            font-size: 1.5em;
+            font-family: assistantBold;
+            transition: 0.2s ease;
+
+            &:visited{
+                color: $dark-blue;
+                
+                &:hover{
+                    color: $bold-navy;
+                }
+            }
+            
+            &.dark-mode{
+                
+                &:visited{
+
+                    color: white;
+                }
+                &:hover{
+
+                    color: $light-gray;
+                }
+
+            }
+        }
+
+        display: grid;
+        justify-items: center;
+        gap: 2em;
+        img{
+            margin-right: 4em;
+            width: 50vw;
+            max-width: 400px;
+        }
     }
 }

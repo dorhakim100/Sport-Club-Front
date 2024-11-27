@@ -81,7 +81,7 @@ export function TrainerDetails() {
                   : (type === 'gym' && 'חדר כושר') ||
                     (type === 'studio' && 'סטודיו') ||
                     (type === 'swimming' && 'שחייה') ||
-                    (type === 'Tennis' && 'טניס') ||
+                    (type === 'tennis' && 'טניס') ||
                     (type === 'yoga' && 'יוגה')}
               </Link>
             )

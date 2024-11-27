@@ -54,7 +54,7 @@ export function TrainerFilter({ filter, setFilter }) {
         return (
           <div className='checkbox-container' key={checkbox.id + 'Checkbox'}>
             <label htmlFor={checkbox.id}>
-              {prefs.isenglish ? checkbox.label.eng : checkbox.label.he}
+              {prefs.isEnglish ? checkbox.label.eng : checkbox.label.he}
             </label>
             <input
               type='checkbox'

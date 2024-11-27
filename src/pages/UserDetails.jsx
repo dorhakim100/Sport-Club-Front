@@ -1,18 +1,42 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { loadUser } from '../store/actions/user.actions'
 import { store } from '../store/store'
-import { showSuccessMsg } from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+
 // import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from '../services/socket.service'
 
+import { HeadContainer } from '../cmps/HeadContainer'
+import { OrderList } from '../cmps/OrderList.jsx'
+import { setIsLoading } from '../store/actions/system.actions'
+import { ContactUs } from '../cmps/ContactUs'
+
 export function UserDetails() {
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const params = useParams()
   const user = useSelector((storeState) => storeState.userModule.watchedUser)
+  const [userName, setUserName] = useState({ he: '', eng: '' })
 
   useEffect(() => {
-    loadUser(params.id)
+    const setUser = async () => {
+      try {
+        setIsLoading(true)
+        const u = await loadUser(params.userId)
+        console.log(u)
+        setUserName({ he: u.fullname, eng: u.fullname })
+      } catch (err) {
+        showErrorMsg(
+          prefs.isEnglish
+            ? `Couldn't show user details`
+            : 'לא היה ניתן להציג משתמש'
+        )
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    setUser()
 
     // socketService.emit(SOCKET_EMIT_USER_WATCH, params.id)
     // socketService.on(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
@@ -31,14 +55,13 @@ export function UserDetails() {
 
   return (
     <section className='user-details'>
-      <h1>User Details</h1>
-      {user && (
+      {user && !user.isAdmin && (
         <div>
-          <h3>{user.fullname}</h3>
-          <img src={user.imgUrl} style={{ width: '100px' }} />
-          <pre> {JSON.stringify(user, null, 2)} </pre>
+          {/* <HeadContainer text={userName} /> */}
+          <OrderList user={user} />
         </div>
       )}
+      <ContactUs />
     </section>
   )
 }

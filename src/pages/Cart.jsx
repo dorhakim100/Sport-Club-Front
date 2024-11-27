@@ -128,7 +128,7 @@ export function Cart() {
   async function onPay() {
     try {
       const order = createOrder()
-      console.log(order)
+      const url = await orderService.createNewOrderLink(order)
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't start payment` : 'לא ניתן להתחיל תשלום'
