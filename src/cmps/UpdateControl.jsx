@@ -31,6 +31,8 @@ export function UpdateControl({
     (stateSelector) => stateSelector.updateModule.updates
   )
 
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
+
   useEffect(() => {
     // console.log(updates)
   }, [updates])
@@ -96,7 +98,7 @@ export function UpdateControl({
 
   return (
     <div className='control-container'>
-      {isDragEdit ? (
+      {user && user.isAdmin && isDragEdit ? (
         <ButtonGroup
           variant='contained'
           aria-label='Basic button group'
@@ -119,14 +121,17 @@ export function UpdateControl({
           </LoadingButton>
         </ButtonGroup>
       ) : (
-        <Button
-          variant='contained'
-          onClick={() => {
-            onStartDragEdit()
-          }}
-        >
-          {prefs.isEnglish ? 'Reorder' : 'שינוי סדר'}
-        </Button>
+        user &&
+        user.isAdmin && (
+          <Button
+            variant='contained'
+            onClick={() => {
+              onStartDragEdit()
+            }}
+          >
+            {prefs.isEnglish ? 'Reorder' : 'שינוי סדר'}
+          </Button>
+        )
       )}
       {!isDragEdit && (
         <ButtonGroup

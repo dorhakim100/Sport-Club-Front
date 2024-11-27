@@ -131,11 +131,12 @@ export function App() {
               <Route path='signup' element={<Signup />} />
             </Route>
 
-            {/* <Route path='admin/update' element={<UpdateIndex />} /> */}
+            <Route path='update' element={<UpdateIndex />} />
+            <Route path='update/edit/:updateId' element={<UpdateEdit />} />
 
             <Route path='admin' element={<AdminIndex />}>
-              <Route path='update' element={<UpdateIndex />} />
-              <Route path='update/edit/:updateId' element={<UpdateEdit />} />
+              {/* <Route path='update' element={<UpdateIndex />} /> */}
+              {/* <Route path='update/edit/:updateId' element={<UpdateEdit />} /> */}
               <Route path='message' element={<MessageIndex />} />
               <Route path='message/:messageId' element={<MessageDetails />} />
               <Route path='order' element={<OrderIndex />} />
