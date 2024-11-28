@@ -61,31 +61,33 @@ export function TrainerDetails() {
       </Button> */}
       <HeadContainer text={head} />
       <div className='trainer-details-container'>
-        <img src={trainer.img} alt='' />
-        <div
-          className={
-            prefs.isDarkMode ? 'types-container dark-mode' : 'types-container'
-          }
-        >
-          {trainer.types.map((type) => {
-            return (
-              <Link
-                to={`/class/trainer?pageIdx=0&types=${type}`}
-                key={makeId()}
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                }}
-              >
-                {prefs.isEnglish
-                  ? capitalizeFirstLetter(type)
-                  : (type === 'gym' && 'חדר כושר') ||
-                    (type === 'studio' && 'סטודיו') ||
-                    (type === 'swimming' && 'שחייה') ||
-                    (type === 'tennis' && 'טניס') ||
-                    (type === 'yoga' && 'יוגה')}
-              </Link>
-            )
-          })}
+        <div className='img-container'>
+          <img src={trainer.img} alt='' />
+          <div
+            className={
+              prefs.isDarkMode ? 'types-container dark-mode' : 'types-container'
+            }
+          >
+            {trainer.types.map((type) => {
+              return (
+                <Link
+                  to={`/class/trainer?pageIdx=0&types=${type}`}
+                  key={makeId()}
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                >
+                  {prefs.isEnglish
+                    ? capitalizeFirstLetter(type)
+                    : (type === 'gym' && 'חדר כושר') ||
+                      (type === 'studio' && 'סטודיו') ||
+                      (type === 'swimming' && 'שחייה') ||
+                      (type === 'tennis' && 'טניס') ||
+                      (type === 'yoga' && 'יוגה')}
+                </Link>
+              )
+            })}
+          </div>
         </div>
 
         <div className='preview-container'>

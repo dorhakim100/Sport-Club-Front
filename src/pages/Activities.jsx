@@ -170,7 +170,7 @@ export function Swimming() {
       <div className='owner-container section hidden'>
         <div className='img-container'>
           <img
-            src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1730287073/blank-profile-picture-973460_1280_mf770j.webp'
+            src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1732809518/PHOTO-2024-11-28-17-04-04_2_s96eec.jpg'
             alt=''
           />
         </div>
