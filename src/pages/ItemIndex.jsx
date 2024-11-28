@@ -22,6 +22,7 @@ import { setIsLoading } from '../store/actions/system.actions'
 
 import { HeadContainer } from '../cmps/HeadContainer'
 import { DynamicCover } from '../cmps/DynamicCover'
+import { ContactUs } from '../cmps/ContactUs'
 
 import { Button } from '@mui/material'
 
@@ -146,6 +147,7 @@ export function ItemIndex() {
         onUpdateItem={onUpdateItem}
         isGrid={isGrid}
       />
+      <ContactUs />
     </main>
   )
 }

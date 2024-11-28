@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
 import { AccordionCmp } from '../cmps/AccordionCmp.jsx'
+import { ContactUs } from '../cmps/ContactUs.jsx'
 
 export function Facilities() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -104,6 +105,7 @@ export function Facilities() {
       <h2> {prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</h2>
       <div className='imgs-container'></div>
       <AccordionCmp facilities={facilities} />
+      <ContactUs />
     </section>
   )
 }

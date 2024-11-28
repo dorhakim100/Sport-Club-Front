@@ -9,6 +9,7 @@ import { HeadContainer } from '../cmps/HeadContainer'
 import { AddUpdate } from '../cmps/AddUpdate.jsx'
 import { UpdatesList } from '../cmps/UpdatesList.jsx'
 import { UpdateControl } from '../cmps/UpdateControl.jsx'
+import { ContactUs } from '../cmps/ContactUs'
 
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
@@ -76,6 +77,7 @@ export function UpdateIndex() {
           />
         </div>
       </div>
+      <ContactUs />
     </div>
   )
 }
