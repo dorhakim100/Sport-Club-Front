@@ -125,11 +125,17 @@ export function Swimming() {
 
     title: { he: 'H2o', eng: 'H2o' },
     preview: {
-      he: `ברוכים הבאים לבית הספר לשחייה שלנו, בו כל תלמיד יכול ללמוד לשחות בביטחון! בין אם אתם מתחילים או מתאמנים לרמת שחייה מתקדמת, המדריכים המנוסים שלנו מציעים ליווי אישי בסביבה בטוחה ומעודדת. הצטרפו למגוון התכניות שלנו, כולל שיעורי מתחילים, שיפור סגנון ושחייה מתקדמת. השיעורים שלנו מתוכננים כדי לעזור לשחיינים מכל הגילאים להתקדם בקצב שלהם ולהנות מהמסע. הצטרפו אלינו ותחוו את השמחה שבשחייה!
-        
-        `,
+      he: `בית הספר לשחייה h2o+ במועדון הספורט כפר שמריהו מתמחה בלימוד שחייה ושיפור סגנון בכל ארבעת סגנונות השחייה לילדים ומבוגרים ובקבוצות שחייה מרמת מתחילים ועד מאסטרס ומעלה.
+      צוות המדריכים מונה מדריכים תחרותיים (בהווה או בעבר) אשר עוברים השתלמויות מקצועיות להעמקת הידע וליווי מקצועי לכל אורך השנה. בזכות זאת, אנו דואגים לכך שהמדריכים הטובים ביותר ימשיכו לשמור על כשירות ויהיו בעלי הידע העדכני ביותר בתחום.
+      אנו מזמינים אתכם להצטרף אלינו!`,
       eng: `Welcome to our swimming school, where every student can learn to swim with confidence! Whether you're a beginner or training for advanced skills, our experienced instructors provide personalized guidance in a safe and encouraging environment. Dive into our range of programs, including beginner classes, stroke improvement, and advanced techniques. Our lessons are structured to help swimmers of all ages progress at their own pace, ensuring everyone enjoys the journey. Join us and experience the joy of swimming!`,
     },
+  }
+
+  const ownerText = {
+    he: `ערן גרומי, שחיין אולימפי, מנהל את בית הספר לשחייה ואת הצוות המקצועי כאשר התפיסה המנחה היא שילוב בין מקצועיות ללא פשרות וראיית המתאמן. שילוב זה מאפשר את מיצוי הפוטנציאל הגלום בכל אחד מתלמידי ומתאמני בית הספר לשחייה.`,
+    eng: `Eran Groumi, Olympic swimmer, is the owner of the school and manage the professional stuff. The guiding concept is a combination of uncompromising professionalism and the vision of the trainee. This combination makes it possible to maximize the potential inherent in each of the swimming school's students and coaches.
+    `,
   }
 
   const [trainers, setTrainers] = useState([])
@@ -160,6 +166,15 @@ export function Swimming() {
       <DynamicCover prefs={prefs} coverSrc={options.img} />
       <div className='information-container'>
         <ActivityInfo options={options} />
+      </div>
+      <div className='owner-container section hidden'>
+        <div className='img-container'>
+          <img
+            src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1730287073/blank-profile-picture-973460_1280_mf770j.webp'
+            alt=''
+          />
+        </div>
+        <p>{prefs.isEnglish ? ownerText.eng : ownerText.he}</p>
       </div>
       <div className='trainers-social-container'>
         <div className='cards-container section hidden'>
