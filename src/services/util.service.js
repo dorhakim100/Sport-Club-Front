@@ -124,3 +124,17 @@ export function convertToDate(timeString) {
   now.setHours(hours, minutes, 0, 0) // Set hours, minutes, and reset seconds and milliseconds
   return now
 }
+
+export function getTodayDayName() {
+  const today = new Date()
+  const dayNames = [
+    'sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+  ]
+  return dayNames[today.getDay()]
+}

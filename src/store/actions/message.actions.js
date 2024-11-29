@@ -86,7 +86,7 @@ export async function updateMessage(messageToUpdate) {
 export async function loadOpenMessages() {
   try {
     const open = await messageService.getOpenMessages()
-
+    console.log(open)
     store.dispatch({
       type: SET_OPEN_MESSAGES,
       openLength: open,

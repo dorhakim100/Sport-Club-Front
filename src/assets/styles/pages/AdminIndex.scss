@@ -1,0 +1,29 @@
+.admin-interface-container{
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    // justify-items: center;
+    gap: 1em;
+
+    @media (max-width:705px) {
+        grid-template-columns: 1fr;
+        
+    }
+    
+    .chart-container{
+        justify-self: center;
+    }
+    
+    .today-class-container{
+        h3{
+            margin: 0px;
+            margin-bottom: 1em;
+        }
+        justify-self: center;
+        // display: grid;
+        min-width: 300px;
+        width: 50vw;
+        max-width: 1000px;
+
+    }
+}

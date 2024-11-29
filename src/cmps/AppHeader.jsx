@@ -347,6 +347,11 @@ export function AppHeader({ bodyRef }) {
           menu && prefs.isEnglish ? 'ltr' : ''
         }`}
         style={scrolled ? { top: '100px' } : { top: '148px' }}
+        onMouseLeave={(event) => {
+          if (event.relatedTarget.className === 'prefs-button') return
+
+          setMenu(false)
+        }}
       >
         <NavLink
           ref={logoRef}

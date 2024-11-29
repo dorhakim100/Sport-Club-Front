@@ -118,7 +118,7 @@ export function Swimming() {
 
   const headText = { he: 'בית הספר לשחייה', eng: 'Swimming School' }
   const instagram =
-    'https://www.instagram.com/reel/DBRbR0WObHd/?utm_source=ig_web_copy_link'
+    'https://www.instagram.com/h2o.plus.swim/?igsh=aDhqb2d4M3hlejBh'
 
   const options = {
     img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002409/partush_051214_-_5_so0d8s.jpg',
@@ -128,7 +128,11 @@ export function Swimming() {
       he: `בית הספר לשחייה h2o+ במועדון הספורט כפר שמריהו מתמחה בלימוד שחייה ושיפור סגנון בכל ארבעת סגנונות השחייה לילדים ומבוגרים ובקבוצות שחייה מרמת מתחילים ועד מאסטרס ומעלה.
       צוות המדריכים מונה מדריכים תחרותיים (בהווה או בעבר) אשר עוברים השתלמויות מקצועיות להעמקת הידע וליווי מקצועי לכל אורך השנה. בזכות זאת, אנו דואגים לכך שהמדריכים הטובים ביותר ימשיכו לשמור על כשירות ויהיו בעלי הידע העדכני ביותר בתחום.
       אנו מזמינים אתכם להצטרף אלינו!`,
-      eng: `Welcome to our swimming school, where every student can learn to swim with confidence! Whether you're a beginner or training for advanced skills, our experienced instructors provide personalized guidance in a safe and encouraging environment. Dive into our range of programs, including beginner classes, stroke improvement, and advanced techniques. Our lessons are structured to help swimmers of all ages progress at their own pace, ensuring everyone enjoys the journey. Join us and experience the joy of swimming!`,
+      eng: `
+      H2O+ swimming school that located in Kfar Shmariahu sport Specializing in learning to swim and improving style in all four swimming styles for children and adults, and nd in swimming groups from beginner level to masters and above. 
+      The team of instructors includes competitive instructors (currently or in the past) who undergo professional training to deepen their knowledge and professional accompaniment throughout the year. Thanks to this, we make sure that the best instructors will continue to maintain competence and have the most up-to-date knowledge in the field.
+      We invite you to join us!
+       `,
     },
   }
 
@@ -182,6 +186,11 @@ export function Swimming() {
           <span>{prefs.isEnglish ? 'Swimming Trainers' : 'מדריכי השחייה'}</span>
         </div>
         <div className='instagram-container section hidden'>
+          <b>
+            {prefs.isEnglish
+              ? 'Follow us on Instagram'
+              : 'עקבו אחרינו באינסטגרם'}
+          </b>
           <InstagramPost postUrl={instagram} />
         </div>
       </div>

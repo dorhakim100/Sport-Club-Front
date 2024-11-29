@@ -33,11 +33,12 @@
 
         p{
             // grid-column: 1/-1;
-            text-align: start;
+
             justify-self: start;
             font-size: 1.2em;
             margin: 0px;
             font-size: clamp(1em, 2.5vw, 2em);
+            text-align: justify;
         }
 
         

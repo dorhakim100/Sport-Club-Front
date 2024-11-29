@@ -110,9 +110,9 @@ async function getClassTrainer(clas) {
     throw err
   }
 }
-async function getOccurrences() {
+async function getOccurrences(filter = { isAll: true }) {
   try {
-    const res = await httpService.get('class/schedule', { isAll: true })
+    const res = await httpService.get('class/schedule', filter)
     return res
 
     // const classes = await query({ isAll: true })

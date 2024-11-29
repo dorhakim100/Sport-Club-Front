@@ -3,7 +3,12 @@ import { useSelector } from 'react-redux'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { makeId } from '../services/util.service.js'
 
-export function DropDown({ options, isDropdownVisible, setDropdownVisible }) {
+export function DropDown({
+  options,
+  isDropdownVisible,
+  setDropdownVisible,
+  setMenu,
+}) {
   const [selectedOption, setSelectedOption] = useState(null)
   const navigate = useNavigate()
   const location = useLocation()

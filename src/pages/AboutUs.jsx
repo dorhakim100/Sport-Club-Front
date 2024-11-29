@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider'
 import { makeId } from '../services/util.service'
 import { DynamicCover } from '../cmps/DynamicCover'
 import { ContactUs } from '../cmps/ContactUs'
+import { AccordionCmp } from '../cmps/AccordionCmp'
 
 export function AboutUs() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -73,40 +74,94 @@ export function AboutUs() {
 
   const offers = [
     {
-      he: 'בריכות שחייה ופעוטות',
-      eng: `Semi Olympic Swimming pool and toddler pools`,
+      title: {
+        he: 'בריכות שחייה ופעוטות',
+        eng: 'Semi Olympic Swimming pool and toddler pools',
+      },
+      description: {
+        he: 'מתחם הבריכות כולל בריכה חצי אולימפית ובריכות קטנות לפעוטות, מושלם לכל הגילאים.',
+        eng: 'The pool area includes a semi-Olympic pool and toddler pools, perfect for all ages.',
+      },
     },
     {
-      he: `חדר כושר חדיש ואיכותי`,
-      eng: `A modern, high-quality gym`,
+      title: {
+        he: 'חדר כושר חדיש ואיכותי',
+        eng: 'A modern, high-quality gym',
+      },
+      description: {
+        he: 'חדר הכושר מצויד בציוד המתקדם ביותר ומציע חווית אימון מקצועית.',
+        eng: 'The gym is equipped with state-of-the-art equipment and offers a professional workout experience.',
+      },
     },
     {
-      he: `סטודיו לחוגים בקבוצות קטנות`,
-      eng: `A studio for small-group classes`,
+      title: {
+        he: 'סטודיו לחוגים בקבוצות קטנות',
+        eng: 'A studio for small-group classes',
+      },
+      description: {
+        he: 'סטודיו מודרני למגוון חוגים בקבוצות קטנות, באווירה אישית ותומכת.',
+        eng: 'A modern studio offering a variety of small-group classes in a personal and supportive environment.',
+      },
     },
     {
-      he: `מגרשי טניס`,
-      eng: `Tennis courts`,
+      title: {
+        he: 'מגרשי טניס',
+        eng: 'Tennis courts',
+      },
+      description: {
+        he: 'מגרשי טניס מקצועיים באיכות גבוהה למשחקים ותחרויות.',
+        eng: 'High-quality professional tennis courts for games and competitions.',
+      },
     },
     {
-      he: `סטודיו לפילאטיס מכשירים`,
-      eng: `Pilates studio`,
+      title: {
+        he: 'סטודיו לפילאטיס מכשירים',
+        eng: 'Pilates studio',
+      },
+      description: {
+        he: 'סטודיו ייחודי לפילאטיס מכשירים, לחיזוק וגמישות הגוף.',
+        eng: 'A specialized Pilates studio for strengthening and body flexibility.',
+      },
     },
     {
-      he: `בית ספר לטניס`,
-      eng: `Tennis school`,
+      title: {
+        he: 'בית ספר לטניס',
+        eng: 'Tennis school',
+      },
+      description: {
+        he: 'תכנית מקצועית ללימודי טניס לכל הרמות, מגיל צעיר ועד מתקדמים.',
+        eng: 'A professional tennis school for all levels, from young beginners to advanced players.',
+      },
     },
     {
-      he: `בית ספר לשחייה וקבוצות מאסטרס וטריאתלון`,
-      eng: `Swimming school, including Masters and triathlon groups`,
+      title: {
+        he: 'בית ספר לשחייה וקבוצות מאסטרס וטריאתלון',
+        eng: 'Swimming school, including Masters and triathlon groups',
+      },
+      description: {
+        he: 'לימודי שחייה מקצועיים, כולל קבוצות למאסטרס וטריאתלטים.',
+        eng: 'Professional swimming lessons, including Masters and triathlon groups.',
+      },
     },
     {
-      he: `מסעדה איכותית`,
-      eng: `Restaurant`,
+      title: {
+        he: 'מסעדה איכותית',
+        eng: 'Restaurant',
+      },
+      description: {
+        he: 'מסעדה מגוונת ואיכותית, המציעה ארוחות בריאות וטעימות.',
+        eng: 'A diverse and high-quality restaurant offering healthy and delicious meals.',
+      },
     },
     {
-      he: `טיפולי אוסטאופתיה ותזונה הוליסטית`,
-      eng: `Osteopathy treatments and holistic nutrition services`,
+      title: {
+        he: 'טיפולי אוסטאופתיה ותזונה הוליסטית',
+        eng: 'Osteopathy treatments and holistic nutrition services',
+      },
+      description: {
+        he: 'מרכז טיפולים ייחודי לטיפולי אוסטאופתיה וייעוץ תזונתי הוליסטי.',
+        eng: 'A unique treatment center offering osteopathy and holistic nutrition consulting.',
+      },
     },
   ]
 
@@ -158,8 +213,11 @@ export function AboutUs() {
               </div>
             </div>
             <div className='offer-container'>
-              <b>{prefs.isEnglish ? 'What we offer' : 'מה במועדון'}</b>
-              <ul className='section'>
+              <HeadContainer
+                text={{ eng: 'What we offer', he: 'מה במועדון' }}
+              />
+
+              {/* <ul className='section'>
                 {offers.map((offer) => {
                   return (
                     <li className='hidden' key={makeId()}>
@@ -167,7 +225,10 @@ export function AboutUs() {
                     </li>
                   )
                 })}
-              </ul>
+              </ul> */}
+              <div className='section'>
+                <AccordionCmp options={offers} />
+              </div>
             </div>
             {/* <div className='section hidden'> */}
             <DynamicCover coverSrc={covers.about} prefs={prefs} />
