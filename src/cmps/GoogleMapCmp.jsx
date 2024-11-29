@@ -4,11 +4,12 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 
 const containerStyle = {
   minWidth: '300px',
-  minHeight: '300px',
+  minHeight: '400px',
   width: '30vw',
-  height: '30vw',
+  height: '40vw',
   maxWidth: '1000px',
   maxHeight: '1000px',
+
   borderRadius: '10px',
   boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
 }

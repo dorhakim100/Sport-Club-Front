@@ -10,7 +10,10 @@ import { MessagesList } from '../cmps/MessagesList.jsx'
 
 import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
-import { loadMessages } from '../store/actions/message.actions'
+import {
+  loadMessages,
+  loadOpenMessages,
+} from '../store/actions/message.actions'
 import { messageService } from '../services/message/message.service'
 import { showErrorMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
@@ -40,6 +43,7 @@ export function MessageIndex() {
       setIsLoading(true)
       await loadMessages(filter)
       const max = await messageService.getMaxPage(filter)
+      await loadOpenMessages()
 
       setMaxPage(max)
     } catch (err) {

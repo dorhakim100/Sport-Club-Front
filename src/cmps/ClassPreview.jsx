@@ -66,7 +66,9 @@ export function ClassPreview({ clas, onRemoveClass }) {
             </Button>
           </ButtonGroup>
         )}
-        <p>{prefs.isEnglish ? clas.preview.eng : clas.preview.he}</p>
+        <p style={{ color: 'white' }}>
+          {prefs.isEnglish ? clas.preview.eng : clas.preview.he}
+        </p>
       </div>
       <div className={prefs.isEnglish ? 'img-container ltr' : 'img-container'}>
         <img src={clas.img} alt='' onLoad={() => setIsLoaded(true)} />

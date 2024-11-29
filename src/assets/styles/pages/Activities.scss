@@ -1,10 +1,15 @@
 .activities-page-container{
 
     .owner-container{
+        justify-self: center;
+
         display: grid;
         grid-template-columns: 35vw 1fr;
         justify-items: center;
         gap: 1em;
+        // width: 1000px;
+        max-width: 1200px;
+    
 
         @media (max-width:750px) {
             grid-template-columns: 1fr;
@@ -15,13 +20,15 @@
             height: calc(30vw);
             width: 30vw;
             border-radius: 50%;
-            
+            justify-self: start;
             
             img{
                 border-radius: 50%;
                 object-fit: cover;
                 height: calc(30vw);
                 width: 30vw;
+                max-width: 500px;
+                max-height: 500px;
             }
             @media (max-width:750px) {
                 width: 300px;
@@ -36,22 +43,37 @@
         }
 
         p{
-            text-align: start;
+
+            text-align: justify;
+            align-self: center;
             font-size: 1.8em;
+            justify-self: end;
             @media (max-width:750px) {
                 font-size: 1em;
                 
             }
         }
+
+        .img-container, p{
+            @media (max-width:850px) {
+
+                justify-self: center;
+
+            
+        }
+        }
     }
 
     .trainers-social-container{
+        justify-self: center;
         display: grid;
         grid-template-columns: repeat(2,1fr);
         align-items: center;
         gap: 5em 1em;
         text-align: start;
-
+        padding: 1em;
+        width: 100%;
+        max-width: 1200px;
         .section{
             display: grid;
             justify-items: center;
@@ -71,16 +93,39 @@
         @media (max-width:850px) {
             grid-template-columns: 1fr;
             gap: 3em;
-            
+            justify-items: center;
         }
     }
     .cards-container{
+        justify-self: start;
         justify-items: center;
         align-items: start;
-
         // height: 60vh;
     }
+    
+    .instagram-container{
+        justify-self: end;
+        display: grid;
+        gap: 1em;
 
+        b{
+            transition: 0.2s ease;
+        }
+
+        &:hover{
+            b{
+
+                transform: scale(1.1);
+            }
+        }
+    }
+    .cards-container, .instagram-container{
+
+        @media (max-width:850px) {
+            
+            justify-self: center; 
+        }
+    }
 
 
     .pilates-container{
@@ -89,19 +134,7 @@
             grid-column: 1/-1;
             justify-self: center;
 
-            display: grid;
-            gap: 1em;
-
-            b{
-                transition: 0.2s ease;
-            }
-
-            &:hover{
-                b{
-
-                    transform: scale(1.1);
-                }
-            }
+       
         }
     }
 

@@ -17,7 +17,7 @@ import { makeId } from '../services/util.service'
 // $very-dark-blue: #263039;
 // $darkest-blue:#181e24;
 
-export function AccordionCmp({ facilities }) {
+export function AccordionCmp({ options }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -38,14 +38,16 @@ export function AccordionCmp({ facilities }) {
   }, [prefs.isEnglish])
   return (
     <div className='accordions-container'>
-      {facilities.map((facility) => {
+      {options.map((option) => {
         return (
           <div className='accordion-container section hidden' key={makeId()}>
-            <HeadContainer
-              text={{ eng: facility.title.eng, he: facility.title.he }}
-            />
+            {/* <HeadContainer
+              text={{ eng: option.title.eng, he: option.title.he }}
+            /> */}
             <Accordion
               sx={{
+                // width: '1000px',
+                width: 'auto',
                 backgroundColor: 'transparent',
               }}
             >
@@ -66,14 +68,16 @@ export function AccordionCmp({ facilities }) {
                         color: 'white',
                         borderTopRightRadius: '5px',
                         borderTopLeftRadius: '5px',
+                        textAlign: 'start',
                       }
                     : {
                         borderTopRightRadius: '5px',
                         borderTopLeftRadius: '5px',
+                        textAlign: 'start',
                       }
                 }
               >
-                Accordion 1
+                <b> {prefs.isEnglish ? option.title.eng : option.title.he}</b>
               </AccordionSummary>
               <AccordionDetails
                 sx={
@@ -93,11 +97,10 @@ export function AccordionCmp({ facilities }) {
                 }
               >
                 {prefs.isEnglish
-                  ? facility.description.eng
-                  : facility.description.he}
+                  ? option.description.eng
+                  : option.description.he}
               </AccordionDetails>
             </Accordion>
-            <img src={facility.img} alt='' />
           </div>
         )
       })}

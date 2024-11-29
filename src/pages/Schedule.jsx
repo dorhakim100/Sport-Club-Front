@@ -174,7 +174,7 @@ export function Schedule() {
           let counter = [1, 2, 3, 4, 5, 6]
           // counter.length = 5
           return (
-            <div className='day-container'>
+            <div className='day-container' key={makeId()}>
               <div className='hour-container day' key={`${day}${makeId()}`}>
                 <b>
                   {prefs.isEnglish

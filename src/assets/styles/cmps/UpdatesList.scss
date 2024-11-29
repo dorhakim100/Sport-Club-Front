@@ -41,10 +41,13 @@
         background: linear-gradient(135deg, #6ec1e440 0%, #a8e6a11e 100%); // Gradient from light blue to soft green
             border-bottom: 1px solid $bold-navy;
 
+            font-size: 1.4em;
     //   height: 100px;
         // max-height: calc(0.6em + 100px);
         p{
             text-align: start;
+            // text-align: justify;
+
             margin: 0px;
         }
         &:first-of-type{

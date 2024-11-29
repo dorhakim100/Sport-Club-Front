@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux'
 import { updateService } from '../services/update/update.service'
 import { loadUpdates } from '../store/actions/update.actions'
 
-import { loadMessages } from '../store/actions/message.actions'
+import {
+  loadMessages,
+  loadOpenMessages,
+} from '../store/actions/message.actions'
 import { messageService } from '../services/message/message.service'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { updateMessage } from '../store/actions/message.actions'
@@ -63,7 +66,7 @@ export function MessagePreview({
       idsToRemove.push(message._id)
     }
     const newIds = [...idsToRemove]
-    console.log(newIds)
+
     setIdsToRemove(newIds)
   }
 

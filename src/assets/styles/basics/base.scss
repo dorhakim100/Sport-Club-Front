@@ -51,3 +51,14 @@ input {
 }
 
 
+canvas {
+    display: block !important; /* Ensures the canvas is displayed */
+    margin: 0 auto; /* Centers the canvas if needed */
+    z-index: 20;
+    opacity: 1;
+  }
+
+  p{
+    text-align: justify;
+
+  }
