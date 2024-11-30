@@ -4,7 +4,7 @@ export function InstagramPost({ postUrl }) {
   return (
     <div
       style={{ display: 'flex', justifyContent: 'center' }}
-      className='hidden'
+      className='embed-container hidden'
     >
       <InstagramEmbed url={postUrl} width={328} />
     </div>

@@ -12,11 +12,13 @@ import { Cards } from '../cmps/Cards'
 import { ContactUs } from '../cmps/ContactUs'
 
 import Divider from '@mui/material/Divider'
+import { Button } from '@mui/material'
 
-import cover from '../../public/imgs/picture.jpg'
+import whatsapp from '../../public/imgs/whatsapp.svg'
 import { showErrorMsg } from '../services/event-bus.service'
 import { loadTrainers } from '../store/actions/trainer.actions'
 import { trainerService } from '../services/trainer/trainer.service'
+import { makeId } from '../services/util.service'
 
 const animation = () => {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -38,6 +40,11 @@ const animation = () => {
 
     return () => elements.forEach((el) => observer.unobserve(el))
   }, [prefs.isEnglish])
+}
+
+const openLink = (link) => {
+  console.log(link)
+  window.open(link)
 }
 export function Activities() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -115,7 +122,12 @@ export function Activities() {
 
 export function Swimming() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
-
+  const logo = {
+    regular:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732950392/%D7%9C%D7%95%D7%92%D7%95_%D7%A0%D7%98%D7%952_slppgi.png',
+    darkMode:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732950396/%D7%9C%D7%95%D7%92%D7%95_%D7%A0%D7%98%D7%952_white_spots_k2w5vv.png',
+  }
   const headText = { he: 'בית הספר לשחייה', eng: 'Swimming School' }
   const instagram =
     'https://www.instagram.com/h2o.plus.swim/?igsh=aDhqb2d4M3hlejBh'
@@ -169,7 +181,7 @@ export function Swimming() {
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
       <div className='information-container'>
-        <ActivityInfo options={options} />
+        <ActivityInfo options={options} logo={logo} />
       </div>
       <div className='owner-container section hidden'>
         <div className='img-container'>
@@ -181,6 +193,21 @@ export function Swimming() {
         <p>{prefs.isEnglish ? ownerText.eng : ownerText.he}</p>
       </div>
       <div className='trainers-social-container'>
+        <div
+          className='whatsapp-container'
+          onClick={() => openLink('https://wa.me/972525554183')}
+        >
+          <img src={whatsapp} alt='' />
+          <Button
+            variant='contained'
+            className={prefs.isDarkMode ? 'dark-mode' : ''}
+          >
+            {prefs.isEnglish ? 'WhatsApp' : 'וואצאפ'} -{' '}
+            <span style={{ fontFamily: 'assistantRegular' }}>
+              {prefs.isEnglish ? 'Swimming School' : 'בית הספר לשחייה'}
+            </span>
+          </Button>
+        </div>
         <div className='cards-container section hidden'>
           <Cards trainers={trainers} />
           <span>{prefs.isEnglish ? 'Swimming Trainers' : 'מדריכי השחייה'}</span>
@@ -206,18 +233,132 @@ export function Tennis() {
 
     title: { he: 'בית הספר לטניס', eng: 'Tennis School' },
     preview: {
-      he: `ברוכים הבאים לבית הספר לשחייה שלנו, בו כל תלמיד יכול ללמוד לשחות בביטחון! בין אם אתם מתחילים או מתאמנים לרמת שחייה מתקדמת, המדריכים המנוסים שלנו מציעים ליווי אישי בסביבה בטוחה ומעודדת. הצטרפו למגוון התכניות שלנו, כולל שיעורי מתחילים, שיפור סגנון ושחייה מתקדמת. השיעורים שלנו מתוכננים כדי לעזור לשחיינים מכל הגילאים להתקדם בקצב שלהם ולהנות מהמסע. הצטרפו אלינו ותחוו את השמחה שבשחייה!
-        
-        `,
-      eng: `Welcome to our swimming school, where every student can learn to swim with confidence! Whether you're a beginner or training for advanced skills, our experienced instructors provide personalized guidance in a safe and encouraging environment. Dive into our range of programs, including beginner classes, stroke improvement, and advanced techniques. Our lessons are structured to help swimmers of all ages progress at their own pace, ensuring everyone enjoys the journey. Join us and experience the joy of swimming!`,
+      he: `בבית הספר לטניס, אנו מחויבים לספק את חוויית הטניס הטובה ביותר לכל רמות השחקנים.
+  בין אם אתה שחקן מתחיל או מנוסה – אצלנו יש מקום לכולם!
+  
+  אנו מציעים מגוון תוכניות ופעילויות שיעזרו לך לשפר את כישורי המשחק, להכיר חברים חדשים, וליהנות מחוויית טניס ייחודית.
+  בית הספר מתגאה בהתחייבותו למצוינות, במתקנים המובילים ובצוות מאמנים מנוסה ומקצועי.
+  
+  מאז הקמתנו בשנת 2011, לומדים אצלנו למעלה מ-150 תלמידים שנהנים משיעורי שביעות רצון גבוהים במיוחד.`,
+      eng: `At The Tennis School, we are dedicated to providing the best tennis experience for players of all levels.
+      Whether you're a beginner or an experienced player – there's a place for everyone here!
+      
+      We offer a wide range of programs and activities to help you improve your skills, make new friends, and enjoy the game like never before.
+      Our school prides itself on a commitment to excellence, state-of-the-art facilities, and a team of highly experienced coaches.
+      
+      Founded in 2011, we now serve over 150 students with exceptionally high satisfaction rates.`,
     },
   }
 
   const headText = { he: 'בית הספר לטניס', eng: 'Tennis School' }
+
+  const instagram =
+    'https://www.instagram.com/h2o.plus.swim/?igsh=aDhqb2d4M3hlejBh'
+
+  const onwners = [
+    {
+      name: { he: 'אנה ברלין', eng: 'Anna Berlin' },
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732953318/WhatsApp_Image_2024-11-29_at_15.34.14_2_xbdepl.jpg',
+      txt: {
+        he: `מייסדת ומנהלת האקדמיה לטניס.
+    מאז ילדותי אני חיה ונושמת טניס. עם עשרות שנות ניסיון על המגרש ובאימון מקצועי ותחרותי, הפכתי את התשוקה שלי לענף לשליחות. במהלך הקריירה שלי אימנתי מאות שחקנים ברמות שונות, תוך התמקדות במצוינות ובחתירה מתמדת לתוצאות הטובות ביותר.
+    כמייסדת האקדמיה לטניס, אני גאה להוביל מוסד שמטפח שחקנים לא רק מבחינה מקצועית אלא גם מבחינה אישית. המטרה שלי היא להעניק לכל מתאמן את הכלים וההכוונה הנכונים כדי לממש את הפוטנציאל שלו ולהגשים את חלומותיו בטניס.`,
+        eng: `Founder and Head of the Tennis Academy
+    I’ve been living and breathing tennis since childhood. With decades of experience both on the court and in professional and competitive coaching, I’ve turned my passion for the sport into a lifelong mission. Throughout my career, I’ve coached hundreds of players at various levels, always striving for excellence and the best possible results.
+    As the founder of the Tennis Academy, I take pride in leading an institution that develops players not only professionally but also personally. My goal is to provide each trainee with the right tools and guidance to unlock their potential and achieve their tennis dreams.`,
+      },
+    },
+    {
+      name: { he: 'יורי קובלנבקו', eng: 'Yuri Kovalenko' },
+      img: '',
+      txt: {
+        he: `מנהל האקדמיה לטניס.
+   כבר יותר משני עשורים שאני חלק מעולם הטניס – תחילה כשחקן, וכיום כמאמן. במהלך הקריירה שלי עבדתי עם שחקנים בכל הרמות, כולל כאלה שהתחרו ברמות הגבוהות ביותר, אני מביא איתי ידע מעמיק וניסיון עשיר.
+   אני מאמין בהדרכה שמבוססת על שילוב של טכניקה, אסטרטגיה והתאמה אישית לכל מתאמן. המטרה שלי היא לעזור לכל אחד מהמתאמנים שלי לשפר את המשחק, להתפתח מקצועית, וליהנות מהדרך.`,
+        eng: `Manager of the Tennis Academy
+    For over two decades, tennis has been a central part of my life – first as a player and now as a coach. During my career, I’ve worked with players at all levels, including those competing at the highest ranks, bringing a wealth of knowledge and experience to the table.
+    I believe in coaching that combines technique, strategy, and a personalized approach for each player. My aim is to help every trainee improve their game, grow professionally, and enjoy the journey along the way.`,
+      },
+    },
+  ]
+
+  const [trainers, setTrainers] = useState([])
+
+  animation()
+
+  useEffect(() => {
+    const loadTennisTrainers = async () => {
+      try {
+        const filter = trainerService.getDefaultFilter()
+
+        const t = await loadTrainers({ ...filter, types: ['tennis'] })
+        setTrainers(t)
+      } catch (err) {
+        showErrorMsg(
+          prefs.isEnglish
+            ? `Couldn't load trainers`
+            : 'לא היה ניתן לטעון מאמנים'
+        )
+      }
+    }
+    loadTennisTrainers()
+  }, [])
   return (
     <div className='tennis-container'>
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
+      <div className='information-container'>
+        <ActivityInfo options={options} />
+      </div>
+      <div className='owners-container'>
+        {onwners.map((owner) => {
+          return (
+            <div className='owner-container section' key={makeId()}>
+              <div className='img-container'>
+                <img
+                  src={
+                    owner.img ||
+                    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732809518/PHOTO-2024-11-28-17-04-04_2_s96eec.jpg'
+                  }
+                  alt=''
+                />
+                <b>{prefs.isEnglish ? owner.name.eng : owner.name.he}</b>
+              </div>
+              <p>{prefs.isEnglish ? owner.txt.eng : owner.txt.he}</p>
+            </div>
+          )
+        })}
+      </div>
+
+      <div className='trainers-social-container'>
+        <div
+          className='whatsapp-container'
+          onClick={() => openLink('https://wa.me/972528747690')}
+        >
+          <img src={whatsapp} alt='' />
+          <Button
+            variant='contained'
+            className={prefs.isDarkMode ? 'dark-mode' : ''}
+          >
+            {prefs.isEnglish ? 'WhatsApp' : 'וואצאפ'} -{' '}
+            <span style={{ fontFamily: 'assistantRegular' }}>
+              {prefs.isEnglish ? 'Tennis School' : 'האקדמיה לטניס'}
+            </span>
+          </Button>
+        </div>
+        <div className='cards-container section hidden'>
+          <Cards trainers={trainers} />
+          <b>{prefs.isEnglish ? 'Tennis Trainers' : 'מדריכי הטניס'}</b>
+        </div>
+        <div className='instagram-container section hidden'>
+          <InstagramPost postUrl={instagram} />
+          <b>
+            {prefs.isEnglish
+              ? 'Follow us on Instagram'
+              : 'עקבו אחרינו באינסטגרם'}
+          </b>
+        </div>
+      </div>
     </div>
   )
 }

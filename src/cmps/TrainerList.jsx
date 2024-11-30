@@ -7,10 +7,14 @@ import { Preloader } from './Preloader'
 
 import { Button } from '@mui/material'
 import ButtonGroup from '@mui/material/ButtonGroup'
+import { showSuccessMsg } from '../services/event-bus.service'
 
 export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((storeState) => storeState.userModule.user)
+  const isLoading = useSelector(
+    (stateSelector) => stateSelector.systemModule.isLoading
+  )
   const navigate = useNavigate()
 
   // const [isLoaded, setIsLoaded] = useState(false)
@@ -22,6 +26,17 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
   //   }
   // }, [])
 
+  const waitForLoading = () => {
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+        if (!isLoading) {
+          clearInterval(interval) // Stop checking
+          resolve() // Resolve the promise
+        }
+      }, 50) // Check every 50ms
+    })
+  }
+
   return (
     <div className='trainers-list-container'>
       {trainers.map((trainer) => {
@@ -30,19 +45,28 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
             className='trainer-container'
             style={(user && user.isAdmin && { cursor: 'pointer' }) || {}}
             onClick={(event) => {
-              // console.log(event.target)
-              // return
-              if (
-                event.target.closest('.remove-btn') ||
-                event.target.closest('.edit-btn')
-              ) {
-                event.stopPropagation()
-                return
+              // Define a function that resolves when isLoading becomes false
+
+              const handleAction = async () => {
+                if (isLoading) {
+                  await waitForLoading() // Wait until isLoading becomes false
+                }
+
+                if (
+                  event.target.closest('.remove-btn') ||
+                  event.target.closest('.edit-btn')
+                ) {
+                  event.stopPropagation()
+                  return
+                }
+
+                if (user && user.isAdmin) {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  navigate(`/class/trainer/${trainer._id}`)
+                }
               }
-              if (user && user.isAdmin) {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-                navigate(`/class/trainer/${trainer._id}`)
-              }
+
+              handleAction() // Trigger the async function
             }}
           >
             <span>{prefs.isEnglish ? trainer.name.eng : trainer.name.he}</span>
@@ -58,7 +82,10 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
                   aria-label='Basic button group'
                 >
                   <Button
-                    onClick={() => {
+                    onClick={async () => {
+                      if (isLoading) {
+                        await waitForLoading() // Wait until isLoading becomes false
+                      }
                       window.scrollTo({ top: 0, behavior: 'smooth' })
                       navigate(`/class/trainer/edit/${trainer._id}`)
                     }}
@@ -77,7 +104,10 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
                 <Button
                   variant='contained'
                   className='hidden-btn'
-                  onClick={() => {
+                  onClick={async () => {
+                    if (isLoading) {
+                      await waitForLoading() // Wait until isLoading becomes false
+                    }
                     window.scrollTo({ top: 0, behavior: 'smooth' })
 
                     navigate(`/class/trainer/${trainer._id}`)
