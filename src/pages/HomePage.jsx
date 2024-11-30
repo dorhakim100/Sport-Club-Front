@@ -17,6 +17,9 @@ import { Cards } from '../cmps/Cards.jsx'
 import { Updates } from '../cmps/Updates.jsx'
 import { ContactUs } from '../cmps/ContactUs.jsx'
 
+import dumbbells from '/public/imgs/yoga.svg'
+import dumbbellsDarkMode from '/public/imgs/yoga-dark-mode.svg'
+
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
@@ -244,12 +247,18 @@ export function HomePage() {
             !prefs.isEnglish && 'rtl'
           }`}
         >
-          <div className='schedule-container'>
-            <Link
-              to='class'
-              className={prefs.isDarkMode ? 'dark' : ''}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
+          <div
+            className='schedule-container'
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+              navigate('/class')
+            }}
+          >
+            <img
+              src={prefs.isDarkMode ? dumbbellsDarkMode : dumbbells}
+              alt=''
+            />
+            <Link to='class' className={prefs.isDarkMode ? 'dark' : ''}>
               {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}
               {prefs.isEnglish ? (
                 <ArrowForwardIosIcon className='arrow right' />

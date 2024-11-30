@@ -21,7 +21,13 @@ export function Nav({ origin, links, isMain }) {
         <NavLink to={`${origin.path}`}>
           {prefs.isEnglish ? origin.eng : origin.he}
         </NavLink>
-        {!isMain && <Divider orientation='vertical' flexItem />}
+        {!isMain && (
+          <Divider
+            style={prefs.isDarkMode ? { backgroundColor: '#787878' } : {}}
+            orientation='vertical'
+            flexItem
+          />
+        )}
       </>
 
       {links.map((link, index) => {
@@ -41,7 +47,11 @@ export function Nav({ origin, links, isMain }) {
                 {link.path === 'order' && 0 > 0 && <span>0</span>}
               </NavLink>
               {index + 1 < links.length && (
-                <Divider orientation='vertical' flexItem />
+                <Divider
+                  style={prefs.isDarkMode ? { backgroundColor: '#787878' } : {}}
+                  orientation='vertical'
+                  flexItem
+                />
               )}
             </div>
           )) ||
@@ -72,7 +82,11 @@ export function Nav({ origin, links, isMain }) {
               </NavLink>
 
               {index + 1 < links.length && (
-                <Divider orientation='vertical' flexItem />
+                <Divider
+                  style={prefs.isDarkMode ? { backgroundColor: '#787878' } : {}}
+                  orientation='vertical'
+                  flexItem
+                />
               )}
             </div>
           )
