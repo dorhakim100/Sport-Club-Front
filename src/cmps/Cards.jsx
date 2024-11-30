@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
@@ -14,8 +14,32 @@ import { EffectCards, Navigation } from 'swiper/modules'
 export function Cards({ trainers }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
-  const [swiperInstance, setSwiperInstance] = useState(null)
+  const [swiperInstance, setSwiperInstance] = useState([])
   const [activeIndex, setActiveIndex] = useState(0)
+
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  )
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions())
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [windowDimensions])
+
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window
+
+    return {
+      width,
+      height,
+    }
+  }
 
   return (
     <>
@@ -25,13 +49,15 @@ export function Cards({ trainers }) {
         modules={[EffectCards, Navigation]}
         className='cards'
         style={{
-          width: '275px',
-          height: '275px',
+          width: windowDimensions.width >= 1050 ? '400px' : '275px',
+          height: windowDimensions.width >= 1050 ? '400px' : '275px',
           margin: '0px',
           direction: 'rtl',
         }}
         navigation={true}
-        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+        onSlideChange={(swiper) => {
+          setActiveIndex(swiper.activeIndex)
+        }}
         onSwiper={(swiper) => setSwiperInstance(swiper)} // Save the Swiper instance
       >
         {trainers.map((trainer, index) => {
@@ -55,8 +81,21 @@ export function Cards({ trainers }) {
                   }
                 }}
               >
-                <div className='gradient-container'></div>
-                <img src={trainer.img} alt='' />{' '}
+                <div
+                  className='gradient-container'
+                  style={{
+                    width: windowDimensions.width >= 1050 ? '400px' : '275px',
+                    height: windowDimensions.width >= 1050 ? '400px' : '275px',
+                  }}
+                ></div>
+                <img
+                  src={trainer.img}
+                  alt=''
+                  style={{
+                    width: windowDimensions.width >= 1050 ? '400px' : '275px',
+                    height: windowDimensions.width >= 1050 ? '400px' : '275px',
+                  }}
+                />{' '}
                 <span>
                   {prefs.isEnglish ? trainer.name.eng : trainer.name.he}
                 </span>

@@ -70,6 +70,15 @@ export function AppHeader({ bodyRef }) {
     }
   }, [windowDimensions])
 
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window
+
+    return {
+      width,
+      height,
+    }
+  }
+
   useEffect(() => {
     setHeaderDarkMode()
   }, [prefs.isDarkMode])
@@ -122,17 +131,17 @@ export function AppHeader({ bodyRef }) {
 
     if (scrollY > 0) {
       setScrolled(true)
-      headerRef.current.style.transition = '0.3s ease'
-      logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
-      headerRef.current.style.opacity = '0.8'
-      headerRef.current.style.opacity = '0.8'
-      headerRef.current.style.transition = '0.1s ease-in'
+      // headerRef.current.style.transition = '0.3s ease'
+      // logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
+      // headerRef.current.style.opacity = '0.8'
+      // headerRef.current.style.opacity = '0.8'
+      // headerRef.current.style.transition = '0.1s ease-in'
     } else if (scrollY === 0) {
       setScrolled(false)
-      headerRef.current.style.transition = '0.3s ease'
-      logoRef.current.style.transform = 'scale(1)' // Resets logo to original size
+      // headerRef.current.style.transition = '0.3s ease'
+      // logoRef.current.style.transform = 'scale(1)' // Resets logo to original size
 
-      headerRef.current.style.opacity = '1'
+      // headerRef.current.style.opacity = '1'
     }
   }
 
@@ -287,50 +296,86 @@ export function AppHeader({ bodyRef }) {
     setOptions(optionsToSet)
   }
 
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window
+  const opacityUp = () => {
+    headerRef.current.style.opacity = '1'
+    headerRef.current.style.transition = '0.1s ease-in'
+  }
 
-    return {
-      width,
-      height,
+  const opacityDown = () => {
+    if (scrolled) {
+      headerRef.current.style.opacity = '0.8'
+      headerRef.current.style.transition = '0.1s ease-in'
     }
+  }
+
+  const toggleMenu = () => {
+    setMenu((prev) => (prev = !prev))
+  }
+
+  const checkHoverOptionsButton = (event) => {
+    if (event.relatedTarget.className === 'prefs-button') return
+    setMenu(false)
+  }
+
+  const selectLink = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setMenu(false)
+  }
+
+  const clickOnLogout = () => {
+    setMenu(false)
+
+    onLogout()
+  }
+
+  const handlers = useMemo(() => {
+    const options = [
+      'facilities',
+      'update',
+      'class',
+      'item',
+      'activities',
+      'about',
+    ]
+    return options.reduce((acc, option) => {
+      acc[option] = () => {
+        setDropdownOptions(option)
+        handleMouseEnter(option)
+      }
+      return acc
+    }, {})
+  }, [setDropdownOptions, handleMouseEnter])
+
+  const removeDropdown = () => {
+    setDropdownVisible(false)
   }
 
   return (
     <header
       className={scrolled ? 'app-header sticky full' : 'app-header full'}
-      onClick={() => setDropdownVisible(false)}
+      onClick={removeDropdown}
       ref={headerRef}
-      onMouseEnter={() => {
-        headerRef.current.style.opacity = '1'
-        headerRef.current.style.transition = '0.1s ease-in'
-      }}
-      onMouseLeave={() => {
-        if (scrolled) {
-          headerRef.current.style.opacity = '0.8'
-          headerRef.current.style.transition = '0.1s ease-in'
-        }
-      }}
-      // style={{ position: 'fixed', left: '0px', right: '0px', top: '0px' }}
+      onMouseEnter={opacityUp}
+      onMouseLeave={opacityDown}
       style={
         prefs.isEnglish
           ? {
               direction: 'ltr',
               opacity: scrolled ? '0.8' : '',
-              paddingLeft: windowDimensions.width < 1050 && '1.5em',
+              paddingLeft: windowDimensions.width <= 1050 && '1.5em',
             }
           : {
               direction: 'rtl',
               opacity: scrolled ? '0.8' : '',
-              paddingRight: windowDimensions.width < 1050 && '1.5em',
+              paddingRight: windowDimensions.width <= 1050 && '1.5em',
             }
       }
     >
       {' '}
-      {windowDimensions.width < 1050 && (
+      {windowDimensions.width <= 1050 && (
         <Button
           variant='contained'
-          onClick={() => setMenu((prev) => (prev = !prev))}
+          onClick={toggleMenu}
           className='notification-btn'
         >
           {(menu && (
@@ -355,56 +400,23 @@ export function AppHeader({ bodyRef }) {
           menu && prefs.isEnglish ? 'ltr' : ''
         }`}
         style={scrolled ? { top: '100px' } : { top: '148px' }}
-        onMouseLeave={(event) => {
-          if (event.relatedTarget.className === 'prefs-button') return
-
-          setMenu(false)
-        }}
+        onMouseLeave={checkHoverOptionsButton}
       >
-        <NavLink
-          ref={logoRef}
-          to='/'
-          className='logo'
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setMenu(false)
-          }}
-        >
+        <NavLink ref={logoRef} to='/' className='logo' onClick={selectLink}>
           <img src={logo} alt='' />
         </NavLink>
-        <NavLink
-          to='facilities'
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setMenu(false)
-          }}
-        >
+        <NavLink to='facilities' onClick={selectLink}>
           <span>{prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
         </NavLink>
-        <NavLink
-          to='update'
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setMenu(false)
-          }}
-        >
+        <NavLink to='update' onClick={selectLink}>
           <span>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</span>
         </NavLink>
 
-        <NavLink
-          to='class'
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setMenu(false)
-          }}
-        >
+        <NavLink to='class' onClick={selectLink}>
           <div
             className='menu'
-            onMouseEnter={() => {
-              setDropdownOptions('class')
-              handleMouseEnter('class')
-            }}
-            onMouseLeave={() => setDropdownVisible(false)}
+            onMouseEnter={handlers['class']}
+            onMouseLeave={removeDropdown}
           >
             <span>{prefs.isEnglish ? 'Class' : 'חוגים'}</span>
             {isDropdownVisible && hoveredSection === 'class' && (
@@ -415,29 +427,14 @@ export function AppHeader({ bodyRef }) {
             )}
           </div>
         </NavLink>
-        <NavLink
-          to='item'
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setMenu(false)
-          }}
-        >
+        <NavLink to='item' onClick={selectLink}>
           <span>{prefs.isEnglish ? 'Store' : 'חנות'}</span>
         </NavLink>
 
-        <NavLink
-          to='activities'
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setMenu(false)
-          }}
-        >
+        <NavLink to='activities' onClick={selectLink}>
           <div
             className='menu'
-            onMouseEnter={() => {
-              setDropdownOptions('activities')
-              handleMouseEnter('activities')
-            }}
+            onMouseEnter={handlers['activities']}
             onMouseLeave={handleMouseLeave}
           >
             <span>{prefs.isEnglish ? 'Activities' : 'פעילויות'}</span>
@@ -450,19 +447,10 @@ export function AppHeader({ bodyRef }) {
           </div>
         </NavLink>
 
-        <NavLink
-          to='about'
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setMenu(false)
-          }}
-        >
+        <NavLink to='about' onClick={selectLink}>
           <div
             className='menu'
-            onMouseEnter={() => {
-              setDropdownOptions('about')
-              handleMouseEnter('about')
-            }}
+            onMouseEnter={handlers['about']}
             onMouseLeave={handleMouseLeave}
           >
             <span>{prefs.isEnglish ? 'About' : 'אודות'}</span>
@@ -476,13 +464,7 @@ export function AppHeader({ bodyRef }) {
         </NavLink>
 
         {user?.isAdmin && (
-          <NavLink
-            to='/admin'
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-              setMenu(false)
-            }}
-          >
+          <NavLink to='/admin' onClick={selectLink}>
             {' '}
             <Button variant='contained' className='notification-btn'>
               {openTasks > 0 && <span>{openTasks}</span>}
@@ -492,14 +474,7 @@ export function AppHeader({ bodyRef }) {
         )}
 
         {!user && (
-          <NavLink
-            to='user/login'
-            className='login-link'
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-              setMenu(false)
-            }}
-          >
+          <NavLink to='user/login' className='login-link' onClick={selectLink}>
             {prefs.isEnglish ? 'Login' : 'כניסה'}
           </NavLink>
         )}
@@ -507,55 +482,32 @@ export function AppHeader({ bodyRef }) {
         {user && (
           <div className='user-info'>
             {!user.isAdmin ? (
-              <Link
-                to={`user/${user._id}`}
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                  setMenu(false)
-                }}
-              >
+              <Link to={`user/${user._id}`} onClick={selectLink}>
                 {user.fullname}
               </Link>
             ) : (
               <b style={{ color: '#4A90E2' }}>{user.fullname}</b>
             )}
             {!user.isAdmin && (
-              <Button
-                variant='contained'
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                  setMenu(false)
-                  navigate(`/user/${user._id}/cart`)
-                }}
-                className='notification-btn'
-              >
-                {cart && cart.length > 0 && <span>{cartLength}</span>}
-                <ShoppingCartIcon />
-              </Button>
+              <Link to={`/user/${user._id}/cart`}>
+                <Button
+                  variant='contained'
+                  onClick={selectLink}
+                  className='notification-btn'
+                >
+                  {cart && cart.length > 0 && <span>{cartLength}</span>}
+                  <ShoppingCartIcon />
+                </Button>
+              </Link>
             )}
-            <Button
-              onClick={() => {
-                setMenu(false)
-
-                onLogout()
-              }}
-              variant='contained'
-            >
+            <Button onClick={clickOnLogout} variant='contained'>
               {prefs.isEnglish ? 'Logout' : 'יציאה'}
             </Button>
           </div>
         )}
       </nav>
-      {windowDimensions.width < 1050 && (
-        <NavLink
-          to='/'
-          className='logo'
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-            setMenu(false)
-          }}
-          ref={logoRef}
-        >
+      {windowDimensions.width <= 1050 && (
+        <NavLink to='/' className='logo' onClick={selectLink} ref={logoRef}>
           <img
             src={logo}
             alt=''
@@ -563,7 +515,7 @@ export function AppHeader({ bodyRef }) {
               prefs.isEnglish
                 ? { transition: '0.3s ease' }
                 : {
-                    paddingLeft: windowDimensions.width < 1050 && '1.5em',
+                    paddingLeft: windowDimensions.width <= 1050 && '1.5em',
                     transition: '0.3s ease',
                   }
             }

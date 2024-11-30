@@ -14,7 +14,7 @@ import { ContactUs } from '../cmps/ContactUs'
 import Divider from '@mui/material/Divider'
 import { Button } from '@mui/material'
 
-import whatsapp from '../../public/imgs/whatsapp.svg'
+import whatsapp from '/public/imgs/whatsapp.svg'
 import { showErrorMsg } from '../services/event-bus.service'
 import { loadTrainers } from '../store/actions/trainer.actions'
 import { trainerService } from '../services/trainer/trainer.service'
@@ -210,15 +210,15 @@ export function Swimming() {
         </div>
         <div className='cards-container section hidden'>
           <Cards trainers={trainers} />
-          <span>{prefs.isEnglish ? 'Swimming Trainers' : 'מדריכי השחייה'}</span>
+          <b>{prefs.isEnglish ? 'Swimming Trainers' : 'מדריכי השחייה'}</b>
         </div>
         <div className='instagram-container section hidden'>
+          <InstagramPost postUrl={instagram} />
           <b>
             {prefs.isEnglish
               ? 'Follow us on Instagram'
               : 'עקבו אחרינו באינסטגרם'}
           </b>
-          <InstagramPost postUrl={instagram} />
         </div>
       </div>
     </div>

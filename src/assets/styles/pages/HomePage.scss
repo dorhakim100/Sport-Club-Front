@@ -219,6 +219,8 @@
 
     margin-top: 2em;
 
+    justify-self: center;
+
     @media (max-width: 920px) {
       display: flex;
       flex-direction: column;
@@ -257,31 +259,35 @@
         align-self: center;
         justify-self: center;
 
-        display: flex;
+        display: grid;
         align-items: center;
         justify-items: center;
         gap: 0.5em;
-
+        cursor: pointer;
+        
         font-size: 3em;
+        &:hover{
+
+         .arrow{
+
+             transform: translateX(-10px);
+         }
+     }
         @media (max-width:500px) {
           font-size: 2.5em;
 
 
           
         }
+
+        img{
+          width: 300px;
+        }
         a{
           font-family: assistantExtraBold;
             position: relative;
             color: $bold-navy;
             text-decoration: none;
-            cursor: pointer;
-               &:hover{
-
-                .arrow{
-
-                    transform: translateX(-10px);
-                }
-            }
         }
         
         .dark{
@@ -324,15 +330,20 @@
     }
     
     .cards-container{
-        justify-self: center;
+        // justify-self: center;
         align-self: center;
         grid-column: 2/3;
         grid-row: 1/2;
         display: flex;
         flex-direction: column;
+        // display: grid;
         gap: 1em;
         padding: 1em;
+        justify-items: center;
+        justify-self: start;
 
+        justify-items: center;
+        align-items: start;
 
 
         a{
