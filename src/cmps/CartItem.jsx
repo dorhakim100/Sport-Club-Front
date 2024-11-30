@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 
@@ -18,6 +18,8 @@ export function CartItem({ item }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [quantity, setQuantity] = useState(item.quantity)
 
+  const isFirstRender = useRef(true)
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export function CartItem({ item }) {
         (itemToUpdate) => itemToUpdate.id === item.id
       )
       user.items.splice(idx, 1, { ...item, quantity: quantity })
-
+      console.log(user)
       const userToUpdate = { ...user }
 
       try {

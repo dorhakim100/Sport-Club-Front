@@ -42,10 +42,10 @@ export async function login(credentials) {
     console.log(user)
     const cart = [...user.items] || []
 
-    store.dispatch({ type: UPDATE_CART, cart })
+    store.dispatch({ type: UPDATE_CART, cart: cart })
     store.dispatch({
       type: SET_USER,
-      user,
+      user: user,
     })
     // socketService.login(user._id)
     return user
@@ -98,7 +98,8 @@ export async function logout() {
 export async function loadUser(userId) {
   try {
     const user = await userService.getById(userId)
-    store.dispatch({ type: SET_WATCHED_USER, user })
+    // store.dispatch({ type: SET_WATCHED_USER, user })
+    store.dispatch({ type: SET_USER, user })
     return user
   } catch (err) {
     showErrorMsg('Cannot load user')
@@ -107,6 +108,7 @@ export async function loadUser(userId) {
 }
 
 export async function updateCart(user) {
+  console.log(user)
   const cart = [...user.items]
 
   store.dispatch({ type: UPDATE_CART, cart })

@@ -122,7 +122,14 @@ async function getLoggedinUser() {
     if (remembered) {
       return saveLoggedinUser(remembered)
     } else {
-      return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+      const logged = JSON.parse(
+        sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
+      )
+      if (!logged) return
+
+      const retrieved = await getById(logged._id)
+
+      return saveLoggedinUser(retrieved)
     }
   } catch (err) {
     console.log(err)
@@ -191,6 +198,7 @@ async function getCartItems(cart) {
       const integerQuantity = +item.quantity
       return { ...item, quantity: integerQuantity }
     })
+    console.log(cartItems)
     return cartToReturn
   } catch (err) {
     console.log(err)
@@ -204,11 +212,12 @@ async function getRememberedUser() {
   )
 
   try {
-    if (sessionUser) {
-      const retrievedUser = await getById(sessionUser._id)
-      console.log(retrievedUser)
-      return saveLoggedinUser(retrievedUser)
-    }
+    // if (sessionUser) {
+    //   const retrievedUser = await getById(sessionUser._id)
+    //   console.log(retrievedUser)
+
+    //   return saveLoggedinUser(retrievedUser)
+    // }
     const prefs = getPrefs()
     if (!prefs.user) return
     const userId = prefs.user._id ? prefs.user._id : null
