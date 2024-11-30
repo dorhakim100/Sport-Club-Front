@@ -210,6 +210,10 @@ export function AppHeader({ bodyRef }) {
       case 'class':
         optionsToSet = [
           {
+            text: prefs.isEnglish ? 'Classes' : 'שיעורים',
+            path: `${section}`,
+          },
+          {
             text: prefs.isEnglish ? 'Schedule' : 'מערכת החוגים',
             path: `${section}/schedule`,
           },
@@ -257,6 +261,10 @@ export function AppHeader({ bodyRef }) {
           //   text: prefs.isEnglish ? 'Our Team' : 'צוות המועדון',
           //   path: `${section}/team`,
           // },
+          {
+            text: prefs.isEnglish ? 'About us' : 'אודותינו',
+            path: `${section}`,
+          },
           {
             text: prefs.isEnglish ? 'Organization' : 'העמותה',
             path: `${section}/organization`,
