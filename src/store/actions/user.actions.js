@@ -114,6 +114,7 @@ export async function updateCart(user) {
 
   try {
     const saved = await userService.update(user)
+    return saved
   } catch (err) {
     console.log(err)
     throw err

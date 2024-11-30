@@ -51,9 +51,10 @@ async function remove(userId) {
 
 async function update(user) {
   try {
+    console.log(user)
     const { _id } = user
     const savedUser = await httpService.put(`user/${_id}`, user)
-
+    console.log(savedUser)
     // When admin updates other user's details, do not update loggedinUser
     const loggedinUser = getLoggedinUser() // Might not work because its defined in the main service???
     if (loggedinUser._id === user._id) saveLoggedinUser(savedUser)
@@ -120,9 +121,9 @@ async function getLoggedinUser() {
 
     if (remembered) {
       return saveLoggedinUser(remembered)
+    } else {
+      return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
     }
-
-    return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
   } catch (err) {
     console.log(err)
     throw err
@@ -140,7 +141,7 @@ function saveLoggedinUser(user) {
     ordersIds: user.ordersIds,
     items: user.items,
   }
-  console.log(user)
+
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
   return user
 }
@@ -198,14 +199,20 @@ async function getCartItems(cart) {
 }
 
 async function getRememberedUser() {
-  const prefs = getPrefs()
-  if (!prefs.user) return
-  const userId = prefs.user._id ? prefs.user._id : null
+  const sessionUser = JSON.parse(
+    sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
+  )
 
   try {
+    if (sessionUser) {
+      const retrievedUser = await getById(sessionUser._id)
+      console.log(retrievedUser)
+      return saveLoggedinUser(retrievedUser)
+    }
+    const prefs = getPrefs()
+    if (!prefs.user) return
+    const userId = prefs.user._id ? prefs.user._id : null
     if (userId) {
-      console.log(userId)
-
       // const cred = {
       //   username: prefs.user.username,
       //   password: '',

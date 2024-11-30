@@ -5,26 +5,9 @@ import { updateCart } from '../store/actions/user.actions'
 import { Button } from '@mui/material'
 import { setIsLoading } from '../store/actions/system.actions'
 
-export function RemoveModal({ isModal, setIsModal, item }) {
+export function RemoveModal({ isModal, setIsModal, item, onRemove }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
-
-  async function onRemoveFromCart() {
-    const idx = user.items.findIndex(
-      (itemToRemove) => itemToRemove.id === item.id
-    )
-    user.items.splice(idx, 1)
-
-    try {
-      setIsLoading(true)
-      const saved = await updateCart({ ...user })
-    } catch (err) {
-      console.log(err)
-    } finally {
-      setIsLoading(false)
-      setIsModal(false)
-    }
-  }
 
   return (
     <div
@@ -33,9 +16,9 @@ export function RemoveModal({ isModal, setIsModal, item }) {
       }
     >
       <div className='control-container'>
-        <b>{prefs.isEnglish ? 'Remove item?' : 'להסיר מוצר?'}</b>
+        <b>{prefs.isEnglish ? 'Remove?' : 'להסיר?'}</b>
         <div className='buttons-container'>
-          <Button variant='contained' onClick={() => onRemoveFromCart()}>
+          <Button variant='contained' onClick={onRemove}>
             {prefs.isEnglish ? 'Remove' : 'להסיר'}
           </Button>
           <Button
