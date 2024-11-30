@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { setIsLoading } from '../store/actions/system.actions.js'
+import { updateCart } from '../store/actions/user.actions.js'
 
 import { RemoveModal } from './RemoveModal.jsx'
 
@@ -10,7 +12,8 @@ import RemoveIcon from '@mui/icons-material/Remove'
 
 export function Quantity({ quantity, setQuantity, isCart, item }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
-
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
+  console.log(user)
   const [isModal, setIsModal] = useState(false)
 
   const onSetQuantity = (diff) => {
@@ -26,6 +29,24 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
     let value = ev.target.value
     value = +value
     if (value > 0) setQuantity(value)
+  }
+
+  async function onRemoveFromCart() {
+    const idx = user.items.findIndex(
+      (itemToRemove) => itemToRemove.id === item.id
+    )
+    user.items.splice(idx, 1)
+
+    try {
+      setIsLoading(true)
+      const saved = await updateCart({ ...user })
+      console.log(saved)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setIsLoading(false)
+      setIsModal(false)
+    }
   }
 
   return (
@@ -48,7 +69,12 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
       </div>
 
       {isModal && (
-        <RemoveModal isModal={isModal} setIsModal={setIsModal} item={item} />
+        <RemoveModal
+          isModal={isModal}
+          setIsModal={setIsModal}
+          item={item}
+          onRemove={onRemoveFromCart}
+        />
       )}
     </>
   )

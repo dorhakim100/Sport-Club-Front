@@ -1,5 +1,5 @@
 import { makeId } from '../services/util.service.js'
-import { ClassSection } from './ClassSection.jsx'
+
 import { useSelector } from 'react-redux'
 
 import * as React from 'react'
@@ -65,58 +65,74 @@ export function TodayClass({ classes }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {classes.map(
-            (clas) =>
-              clas.isActive && (
-                <TableRow
-                  key={makeId()}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell
-                    component='th'
-                    scope='row'
-                    align='center'
-                    sx={{
-                      color: prefs.isDarkMode && 'white',
-                    }}
+          {classes.length > 0 ? (
+            classes.map(
+              (clas) =>
+                clas.isActive && (
+                  <TableRow
+                    key={makeId()}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    {prefs.isEnglish ? clas.title.eng : clas.title.he}
-                  </TableCell>
-                  <TableCell
-                    component='th'
-                    scope='row'
-                    align='center'
-                    sx={{
-                      color: prefs.isDarkMode && 'white',
-                    }}
-                  >
-                    {prefs.isEnglish
-                      ? clas.trainer.name.eng
-                      : clas.trainer.name.he}
-                  </TableCell>
+                    <TableCell
+                      component='th'
+                      scope='row'
+                      align='center'
+                      sx={{
+                        color: prefs.isDarkMode && 'white',
+                      }}
+                    >
+                      {prefs.isEnglish ? clas.title.eng : clas.title.he}
+                    </TableCell>
+                    <TableCell
+                      component='th'
+                      scope='row'
+                      align='center'
+                      sx={{
+                        color: prefs.isDarkMode && 'white',
+                      }}
+                    >
+                      {prefs.isEnglish
+                        ? clas.trainer.name.eng
+                        : clas.trainer.name.he}
+                    </TableCell>
 
-                  <TableCell
-                    align='center'
-                    sx={{
-                      color: prefs.isDarkMode && 'white',
-                    }}
-                  >
-                    {clas.from}
-                  </TableCell>
-                  <TableCell
-                    align='center'
-                    sx={{
-                      color: prefs.isDarkMode && 'white',
-                    }}
-                  >
-                    {clas.to}
-                  </TableCell>
-                  {/* <TableCell align='right'>{row.calories}</TableCell>
+                    <TableCell
+                      align='center'
+                      sx={{
+                        color: prefs.isDarkMode && 'white',
+                      }}
+                    >
+                      {clas.from}
+                    </TableCell>
+                    <TableCell
+                      align='center'
+                      sx={{
+                        color: prefs.isDarkMode && 'white',
+                      }}
+                    >
+                      {clas.to}
+                    </TableCell>
+                    {/* <TableCell align='right'>{row.calories}</TableCell>
               <TableCell align='right'>{row.fat}</TableCell>
               <TableCell align='right'>{row.carbs}</TableCell>
               <TableCell align='right'>{row.protein}</TableCell> */}
-                </TableRow>
-              )
+                  </TableRow>
+                )
+            )
+          ) : (
+            <TableCell
+              component='th'
+              scope='row'
+              align='center'
+              sx={{
+                color: prefs.isDarkMode && 'white',
+                border: 'none',
+              }}
+            >
+              {prefs.isEnglish
+                ? 'No active classes today'
+                : 'אין שיעורים פעילים היום'}
+            </TableCell>
           )}
         </TableBody>
       </Table>
