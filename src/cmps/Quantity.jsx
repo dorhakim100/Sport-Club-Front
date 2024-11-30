@@ -36,6 +36,7 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
       (itemToRemove) => itemToRemove.id === item.id
     )
     user.items.splice(idx, 1)
+    console.log(user)
 
     try {
       setIsLoading(true)

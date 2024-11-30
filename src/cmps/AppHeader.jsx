@@ -198,9 +198,9 @@ export function AppHeader({ bodyRef }) {
       delete prefsToSet.user
       setPrefs({ ...prefsToSet })
       navigate('/')
-      showSuccessMsg(`Bye now`)
+      showSuccessMsg(prefs.isEnglish ? `Bye now` : 'להתראות')
     } catch (err) {
-      showErrorMsg('Cannot logout')
+      showErrorMsg(prefs.isEnglish ? 'Had error logging out' : 'בעיה בחיבור')
     }
   }
 

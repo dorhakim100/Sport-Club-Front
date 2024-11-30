@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,7 +10,7 @@ import { couponService } from '../services/coupon/coupon.service'
 
 import { HeadContainer } from '../cmps/HeadContainer'
 import { CartList } from '../cmps/CartList.jsx'
-import { updateCart } from '../store/actions/user.actions'
+import { loadUser, updateCart } from '../store/actions/user.actions'
 import { setIsLoading } from '../store/actions/system.actions'
 import { setCartTotal } from '../store/actions/user.actions'
 
@@ -25,9 +25,13 @@ export function Cart() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
 
+  console.log(user)
+
   const [fullCart, setFullCart] = useState(null)
 
   const [coupon, setCoupon] = useState('')
+
+  const isFirstRender = useRef(true)
 
   const headText = user
     ? { eng: user.fullname, he: user.fullname }
@@ -53,7 +57,12 @@ export function Cart() {
     if (cart.length === 0) return
     try {
       setIsLoading(true)
+      const logged = await userService.getLoggedinUser()
+      console.log(logged)
+      const loaded = await loadUser(logged._id)
+      console.log(loaded)
       const fetchedCart = await userService.getCartItems(cart)
+      isFirstRender.current === false
       if (discount) {
         fetchedCart.forEach((item) => {
           const matchedDiscountItem = discount.items.find(
@@ -88,8 +97,12 @@ export function Cart() {
           fetchedCart.splice(idx, 1, itemToModify)
         })
       }
+      console.log(user)
+      console.log(fetchedCart)
       setFullCart([...fetchedCart])
-      await updateCart({ ...user, items: [...fetchedCart] })
+      const userToUpdate = { ...loaded, items: [...fetchedCart] }
+      console.log(userToUpdate)
+      await updateCart(userToUpdate)
     } catch (err) {
       console.log(err)
     } finally {
