@@ -17,7 +17,7 @@ export const trainerService = {
 async function query(filterBy = { pageIdx: 0, types: [] }) {
   try {
     const res = await httpService.get(KEY, filterBy)
-
+    console.log(res)
     return res
   } catch (err) {
     console.log(err)
@@ -25,9 +25,9 @@ async function query(filterBy = { pageIdx: 0, types: [] }) {
   }
 }
 
-async function getById(trainerId) {
+async function getById(trainerId, trainerFilter) {
   try {
-    const res = await httpService.get(`${KEY}/${trainerId}`)
+    const res = await httpService.get(`${KEY}/${trainerId}`, trainerFilter)
     return res
   } catch (err) {
     console.log(err)
@@ -85,4 +85,17 @@ function getEmptyTrainer() {
     },
     experience: '01-01-2000',
   }
+}
+
+function _setNextPrevBookId(book) {
+  return storageService.query(BOOK_KEY).then((books) => {
+    const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
+    const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0]
+    const prevBook = books[bookIdx - 1]
+      ? books[bookIdx - 1]
+      : books[books.length - 1]
+    book.nextBookId = nextBook.id
+    book.prevBookId = prevBook.id
+    return book
+  })
 }

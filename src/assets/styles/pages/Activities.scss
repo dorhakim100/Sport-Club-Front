@@ -107,6 +107,7 @@
             grid-template-columns: 1fr;
             gap: 3em;
             justify-items: center;
+            padding: 0px;
         }
     }
     .cards-container{
@@ -114,6 +115,11 @@
         justify-items: center;
         align-items: start;
         // height: 60vh;
+
+        @media (max-width:1300px) {
+            grid-row: 1/2;
+            
+        }
     }
     
     .instagram-container{
@@ -123,20 +129,13 @@
 
         @media (min-width:1300px) {
             justify-self: end;
-            // .embed-container {
-            //     // position: relative;
-    
-            //     aspect-ratio: 1 / 1; /* Ensures a square ratio */
-            //     overflow: hidden;
-            //   }
-              
-            //   .embed-container iframe {
-    
-    
-            //     height: 100%;
-    
-            //   }
-        }
+
+                }
+        @media (max-width:1300px) {
+
+
+            grid-row: 2/3;
+                }
 
 
         b{
@@ -180,6 +179,11 @@
         @media (min-width:1300px) {
             justify-self: start;
             
+        }
+        @media (max-width:1300px) {
+            // justify-self: start;
+            grid-row: 3/4;
+            grid-column: 1/-1;
         }
         button{
             background-color: #25D366;
