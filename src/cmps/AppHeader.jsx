@@ -239,7 +239,7 @@ export function AppHeader({ bodyRef }) {
             path: `${section}/swimming`,
           },
           {
-            text: prefs.isEnglish ? 'Tennis School' : 'בית הספר לטניס',
+            text: prefs.isEnglish ? 'Tennis Academy' : 'האקדמיה לטניס',
             path: `${section}/tennis`,
           },
           {

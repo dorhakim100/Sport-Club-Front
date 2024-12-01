@@ -5,10 +5,12 @@ export const SET_TRAINER = 'SET_TRAINER'
 export const REMOVE_TRAINER = 'REMOVE_TRAINER'
 export const ADD_TRAINER = 'ADD_TRAINER'
 export const UPDATE_TRAINER = 'UPDATE_TRAINER'
+export const SET_TRAINER_FILTER = 'SET_TRAINER_FILTER'
 
 const initialState = {
   trainers: [],
   trainer: trainerService.getEmptyTrainer(),
+  filter: trainerService.getDefaultFilter(),
 }
 
 export function trainerReducer(state = initialState, action) {
@@ -39,6 +41,9 @@ export function trainerReducer(state = initialState, action) {
       )
       newState = { ...state, trainers }
       break
+
+    case SET_TRAINER_FILTER:
+      newState = { ...state, filter: action.filter }
 
     default:
   }

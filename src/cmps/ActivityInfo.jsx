@@ -30,6 +30,9 @@ export function ActivityInfo({ options, logo }) {
       <p className='section hidden'>
         {prefs.isEnglish ? options.preview.eng : options.preview.he}
       </p>
+      <b className='section hidden'>
+        {prefs.isEnglish ? options.ending.eng : options.ending.he}
+      </b>
     </div>
   )
 }

@@ -6,12 +6,17 @@ import {
   SET_TRAINERS,
   SET_TRAINER,
   UPDATE_TRAINER,
+  SET_TRAINER_FILTER,
 } from '../reducers/trainer.reducer'
 
 export async function loadTrainers(filterBy) {
   try {
     const trainers = await trainerService.query(filterBy)
     store.dispatch(getCmdSetTrainers(trainers))
+    store.dispatch({
+      type: SET_TRAINER_FILTER,
+      filter: filterBy,
+    })
     return trainers
   } catch (err) {
     console.log('Cannot load trainers', err)
@@ -19,9 +24,12 @@ export async function loadTrainers(filterBy) {
   }
 }
 
-export async function loadTrainer(trainerId) {
+export async function loadTrainer(
+  trainerId,
+  trainerFilter = trainerService.getDefaultFilter()
+) {
   try {
-    const trainer = await trainerService.getById(trainerId)
+    const trainer = await trainerService.getById(trainerId, trainerFilter)
     store.dispatch(getCmdSetTrainer(trainer))
     return trainer
   } catch (err) {

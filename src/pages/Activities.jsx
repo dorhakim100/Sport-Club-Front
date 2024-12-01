@@ -66,8 +66,8 @@ export function Activities() {
     },
     {
       path: 'tennis',
-      he: 'בית הספר לטניס',
-      eng: 'Tennis School',
+      he: 'האקדמיה לטניס',
+      eng: 'Tennis Academy',
       icon: '/imgs/tennis.svg',
       darkIcon: '/imgs/tennis-dark.svg',
     },
@@ -137,14 +137,15 @@ export function Swimming() {
 
     title: { he: 'H2o', eng: 'H2o' },
     preview: {
-      he: `בית הספר לשחייה h2o+ במועדון הספורט כפר שמריהו מתמחה בלימוד שחייה ושיפור סגנון בכל ארבעת סגנונות השחייה לילדים ומבוגרים ובקבוצות שחייה מרמת מתחילים ועד מאסטרס ומעלה.
-      צוות המדריכים מונה מדריכים תחרותיים (בהווה או בעבר) אשר עוברים השתלמויות מקצועיות להעמקת הידע וליווי מקצועי לכל אורך השנה. בזכות זאת, אנו דואגים לכך שהמדריכים הטובים ביותר ימשיכו לשמור על כשירות ויהיו בעלי הידע העדכני ביותר בתחום.
-      אנו מזמינים אתכם להצטרף אלינו!`,
+      he: `בית הספר לשחייה +h2o במועדון הספורט כפר שמריהו מתמחה בלימוד שחייה ושיפור סגנון בכל ארבעת סגנונות השחייה, לילדים ומבוגרים ובקבוצות שחייה מרמת - מתחילים ועד מאסטרס ומעלה.
+      צוות המדריכים מונה מדריכים תחרותיים (בהווה או בעבר) אשר עוברים השתלמויות מקצועיות להעמקת הידע וליווי מקצועי לכל אורך השנה. בזכות זאת, אנו דואגים לכך שהמדריכים הטובים ביותר ימשיכו לשמור על כשירות ויהיו בעלי הידע העדכני ביותר בתחום.`,
       eng: `
-      H2O+ swimming school that located in Kfar Shmariahu sport Specializing in learning to swim and improving style in all four swimming styles for children and adults, and nd in swimming groups from beginner level to masters and above. 
-      The team of instructors includes competitive instructors (currently or in the past) who undergo professional training to deepen their knowledge and professional accompaniment throughout the year. Thanks to this, we make sure that the best instructors will continue to maintain competence and have the most up-to-date knowledge in the field.
-      We invite you to join us!
-       `,
+      h2o+ swimming school that located in Kfar Shmariahu sport Specializing in learning to swim and improving style in all four swimming styles, for children and adults, in swimming groups from beginner level to masters and above. 
+      The team of instructors includes competitive instructors (currently or in the past) who undergo professional training to deepen their knowledge and professional accompaniment throughout the year. Thanks to this, we make sure that the best instructors will continue to maintain competence and have the most up-to-date knowledge in the field.`,
+    },
+    ending: {
+      he: `אנו מזמינים אתכם להצטרף אלינו!`,
+      eng: `We invite you to join us!`,
     },
   }
 
@@ -229,18 +230,18 @@ export function Tennis() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732541617/WhatsApp_Image_2024-10-29_at_16.16.04_eh1nrg.jpg',
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733031708/WhatsApp_Image_2024-10-29_at_16.16.02_2_q0eenv.jpg',
 
-    title: { he: 'בית הספר לטניס', eng: 'Tennis School' },
+    title: { he: 'האקדמיה לטניס', eng: 'Tennis Academy' },
     preview: {
-      he: `בבית הספר לטניס, אנו מחויבים לספק את חוויית הטניס הטובה ביותר לכל רמות השחקנים.
+      he: `באקדמיה לטניס, אנו מחויבים לספק את חוויית הטניס הטובה ביותר לכל רמות השחקנים.
   בין אם אתה שחקן מתחיל או מנוסה – אצלנו יש מקום לכולם!
   
   אנו מציעים מגוון תוכניות ופעילויות שיעזרו לך לשפר את כישורי המשחק, להכיר חברים חדשים, וליהנות מחוויית טניס ייחודית.
   בית הספר מתגאה בהתחייבותו למצוינות, במתקנים המובילים ובצוות מאמנים מנוסה ומקצועי.
   
   מאז הקמתנו בשנת 2011, לומדים אצלנו למעלה מ-150 תלמידים שנהנים משיעורי שביעות רצון גבוהים במיוחד.`,
-      eng: `At The Tennis School, we are dedicated to providing the best tennis experience for players of all levels.
+      eng: `At The Tennis Academy, we are dedicated to providing the best tennis experience for players of all levels.
       Whether you're a beginner or an experienced player – there's a place for everyone here!
       
       We offer a wide range of programs and activities to help you improve your skills, make new friends, and enjoy the game like never before.
@@ -248,9 +249,13 @@ export function Tennis() {
       
       Founded in 2011, we now serve over 150 students with exceptionally high satisfaction rates.`,
     },
+    ending: {
+      he: `אנו מזמינים אתכם להצטרף אלינו!`,
+      eng: `We invite you to join us!`,
+    },
   }
 
-  const headText = { he: 'בית הספר לטניס', eng: 'Tennis School' }
+  const headText = { he: 'האקדמיה לטניס', eng: 'Tennis Academy' }
 
   const instagram =
     'https://www.instagram.com/h2o.plus.swim/?igsh=aDhqb2d4M3hlejBh'
@@ -342,7 +347,7 @@ export function Tennis() {
           >
             {prefs.isEnglish ? 'WhatsApp' : 'וואצאפ'} -{' '}
             <span style={{ fontFamily: 'assistantRegular' }}>
-              {prefs.isEnglish ? 'Tennis School' : 'האקדמיה לטניס'}
+              {prefs.isEnglish ? 'Tennis Academy' : 'האקדמיה לטניס'}
             </span>
           </Button>
         </div>
@@ -377,6 +382,10 @@ export function Pilates() {
       
       `,
       eng: `Welcome to our swimming school, where every student can learn to swim with confidence! Whether you're a beginner or training for advanced skills, our experienced instructors provide personalized guidance in a safe and encouraging environment. Dive into our range of programs, including beginner classes, stroke improvement, and advanced techniques. Our lessons are structured to help swimmers of all ages progress at their own pace, ensuring everyone enjoys the journey. Join us and experience the joy of swimming!`,
+    },
+    ending: {
+      he: `אני מזמינה אתכם להצטרף אלינו!`,
+      eng: `I invite you to join us!`,
     },
   }
   const instagram =
