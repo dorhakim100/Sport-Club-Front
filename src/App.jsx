@@ -26,7 +26,7 @@ import {
   Restaurant,
   Pilates,
 } from './pages/Activities.jsx'
-import { ItemIndex } from './pages/ItemIndex'
+import { ItemIndex, CardIndex, AccessoriesIndex } from './pages/ItemIndex'
 import { ItemDetails } from './pages/ItemDetails'
 import { ItemEdit } from './pages/ItemEdit.jsx'
 
@@ -119,7 +119,11 @@ export function App() {
               <Route path='camp' element={<SummerCamp />} />
               <Route path='restaurant' element={<Restaurant />} />
             </Route>
-            <Route path='item' element={<ItemIndex />} />
+            <Route path='item' element={<ItemIndex />}>
+              <Route path='card' element={<CardIndex />} />
+              <Route path='accessories' element={<AccessoriesIndex />} />
+            </Route>
+
             <Route path='item/:itemId' element={<ItemDetails />} />
             <Route path='item/edit/:itemId' element={<ItemEdit />} />
             <Route path='user/:userId' element={<UserDetails />} />

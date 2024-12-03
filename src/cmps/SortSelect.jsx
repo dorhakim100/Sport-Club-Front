@@ -75,6 +75,7 @@ export function SortSelect({
             justifySelf: 'end',
             alignSelf: 'start',
             textAlign: 'start',
+            gridColumn: '2/4',
           }}
         >
           <InputLabel id='sort'>{prefs.isEnglish ? 'Sort' : 'מיון'}</InputLabel>

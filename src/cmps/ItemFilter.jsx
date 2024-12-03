@@ -126,7 +126,7 @@ export function ItemFilter({
           {prefs.isEnglish ? 'Add Item' : 'הוסף מוצר'}
         </Button>
       )}
-      <div
+      {/* <div
         className={
           prefs.isDarkMode ? 'type-container dark-mode' : 'type-container'
         }
@@ -156,7 +156,7 @@ export function ItemFilter({
             {prefs.isEnglish ? 'Accessories' : 'ציוד נלווה'}
           </label>
         </div>
-      </div>
+      </div> */}
       {/* <div className='input-container'>
         <input
           type='text'

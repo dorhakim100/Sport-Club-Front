@@ -232,6 +232,22 @@ export function AppHeader({ bodyRef }) {
           },
         ]
         break
+      case 'item':
+        optionsToSet = [
+          {
+            text: prefs.isEnglish ? 'Store' : 'חנות',
+            path: `${section}`,
+          },
+          {
+            text: prefs.isEnglish ? 'Cards' : 'כרטיסיות',
+            path: `${section}/card`,
+          },
+          {
+            text: prefs.isEnglish ? 'Accessories' : 'אביזרים',
+            path: `${section}/accessories`,
+          },
+        ]
+        break
       case 'activities':
         optionsToSet = [
           {
@@ -292,7 +308,7 @@ export function AppHeader({ bodyRef }) {
       default:
         break
     }
-
+    console.log(optionsToSet)
     setOptions(optionsToSet)
   }
 
@@ -428,7 +444,19 @@ export function AppHeader({ bodyRef }) {
           </div>
         </NavLink>
         <NavLink to='item' onClick={selectLink}>
-          <span>{prefs.isEnglish ? 'Store' : 'חנות'}</span>
+          <div
+            className='menu'
+            onMouseEnter={handlers['item']}
+            onMouseLeave={handleMouseLeave}
+          >
+            <span>{prefs.isEnglish ? 'Store' : 'חנות'}</span>
+            {isDropdownVisible && hoveredSection === 'item' && (
+              <DropDown
+                options={options}
+                setDropdownVisible={setDropdownVisible}
+              />
+            )}
+          </div>
         </NavLink>
 
         <NavLink to='activities' onClick={selectLink}>

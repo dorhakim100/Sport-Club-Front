@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
+import {
+  useNavigate,
+  useSearchParams,
+  useParams,
+  useLocation,
+} from 'react-router-dom'
 
 import {
   loadItems,
@@ -23,6 +28,7 @@ import { setIsLoading } from '../store/actions/system.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { DynamicCover } from '../cmps/DynamicCover'
 import { ContactUs } from '../cmps/ContactUs'
+import { Nav } from '../cmps/Nav'
 
 import { Button } from '@mui/material'
 
@@ -41,12 +47,33 @@ export function ItemIndex() {
 
   const items = useSelector((storeState) => storeState.itemModule.items)
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const location = useLocation()
   const [maxPage, setMaxPage] = useState()
   const [isGrid, setIsGrid] = useState(true)
 
-  const headText = { he: 'מוצרים', eng: 'Items' }
-  const cover =
+  const [headText, setHeadText] = useState({ he: 'מוצרים', eng: 'Items' })
+  const [cover, setCover] = useState(
     'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732275016/DSC06192_1_ciikqh.jpg'
+  )
+
+  const origin = {
+    path: '/item',
+    he: 'מוצרים',
+    eng: 'Items',
+  }
+
+  const links = [
+    {
+      path: 'card',
+      he: 'כרטיסיות',
+      eng: 'Cards',
+    },
+    {
+      path: 'accessories',
+      he: 'אביזרים',
+      eng: 'Accessories',
+    },
+  ]
 
   useEffect(() => {
     // Fetch filter settings from searchParams
@@ -55,14 +82,39 @@ export function ItemIndex() {
     const typesParam = searchParams.get('types')
 
     const types = typesParam ? typesParam.split(',') : []
+    let filterToSet = {}
+    switch (location.pathname) {
+      case '/item/card':
+        filterToSet = { ...filterBy, sortDir, types: ['card'], pageIdx }
+        setHeadText({ he: 'כרטיסיות', eng: 'Cards' })
+        setCover(
+          'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733237221/DSC06141_wifl4r.jpg'
+        )
+        break
 
-    const filterToSet = { ...filterBy, sortDir, types, pageIdx }
+      case '/item/accessories':
+        filterToSet = { ...filterBy, sortDir, types: ['accessories'], pageIdx }
+        setHeadText({ he: 'אביזרים', eng: 'Accessories' })
+        setCover(
+          'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733237228/DSC06193_ifenm8.jpg'
+        )
+        break
+
+      case '/item':
+        setCover(
+          'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732275016/DSC06192_1_ciikqh.jpg'
+        )
+        break
+
+      default:
+        break
+    }
 
     // Only update filterBy if it's different
     if (JSON.stringify(filterBy) !== JSON.stringify(filterToSet)) {
       setFilterBy(filterToSet)
     }
-  }, [searchParams]) // Runs when searchParams change
+  }, [searchParams, location.pathname]) // Runs when searchParams change
 
   useEffect(() => {
     const setItems = async () => {
@@ -95,7 +147,7 @@ export function ItemIndex() {
     }
 
     setItems()
-  }, [filterBy]) // Run when filterBy changes
+  }, [filterBy, location.pathname]) // Run when filterBy changes
 
   async function onRemoveItem(itemId) {
     try {
@@ -124,7 +176,10 @@ export function ItemIndex() {
     <main className='item-index'>
       <header className='item-index-header'>
         <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
-        <DynamicCover coverSrc={cover} prefs={prefs} />
+        <Nav origin={origin} links={links} />
+        <div className='cover-container'>
+          <DynamicCover coverSrc={cover} prefs={prefs} />
+        </div>
         <HeadContainer text={headText} />
       </header>
       <div className='control-container'>
@@ -141,13 +196,22 @@ export function ItemIndex() {
           </Button>
         )} */}
       </div>
+
       <ItemList
         items={items}
         onRemoveItem={onRemoveItem}
         onUpdateItem={onUpdateItem}
         isGrid={isGrid}
       />
+
       <ContactUs />
     </main>
   )
+}
+
+export function CardIndex() {
+  return <div className='card-index'></div>
+}
+export function AccessoriesIndex() {
+  return <div className='accessories-index'></div>
 }
