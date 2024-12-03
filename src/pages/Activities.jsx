@@ -229,16 +229,22 @@ export function Swimming() {
 export function Tennis() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
+  const logo = {
+    regular:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
+    darkMode:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
+  }
   const options = {
     img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733031708/WhatsApp_Image_2024-10-29_at_16.16.02_2_q0eenv.jpg',
 
     title: { he: 'האקדמיה לטניס', eng: 'Tennis Academy' },
     preview: {
       he: `באקדמיה לטניס, אנו מחויבים לספק את חוויית הטניס הטובה ביותר לכל רמות השחקנים.
-  בין אם אתה שחקן מתחיל או מנוסה – אצלנו יש מקום לכולם!
-  
-  אנו מציעים מגוון תוכניות ופעילויות שיעזרו לך לשפר את כישורי המשחק, להכיר חברים חדשים, וליהנות מחוויית טניס ייחודית.
-  בית הספר מתגאה בהתחייבותו למצוינות, במתקנים המובילים ובצוות מאמנים מנוסה ומקצועי.
+      בין אם אתה שחקן מתחיל או מנוסה – אצלנו יש מקום לכולם!
+      
+      אנו מציעים מגוון תוכניות ופעילויות שיעזרו לך לשפר את כישורי המשחק, להכיר חברים חדשים, וליהנות מחוויית טניס ייחודית.
+      בית הספר מתגאה בהתחייבותו למצוינות, במתקנים המובילים ובצוות מאמנים מנוסה ומקצועי.
   
   מאז הקמתנו בשנת 2011, לומדים אצלנו למעלה מ-150 תלמידים שנהנים משיעורי שביעות רצון גבוהים במיוחד.`,
       eng: `At The Tennis Academy, we are dedicated to providing the best tennis experience for players of all levels.
@@ -257,8 +263,7 @@ export function Tennis() {
 
   const headText = { he: 'האקדמיה לטניס', eng: 'Tennis Academy' }
 
-  const instagram =
-    'https://www.instagram.com/h2o.plus.swim/?igsh=aDhqb2d4M3hlejBh'
+  const instagram = 'https://www.instagram.com/anna_berlin_tennis_school/'
 
   const onwners = [
     {
@@ -275,7 +280,7 @@ export function Tennis() {
     },
     {
       name: { he: 'יורי קובלנבקו', eng: 'Yuri Kovalenko' },
-      img: '',
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241757/9354C7DB-7D1A-405D-AC98-ADDA7047F2E8_1_201_a_uihpil.jpg',
       txt: {
         he: `מנהל האקדמיה לטניס.
    כבר יותר משני עשורים שאני חלק מעולם הטניס – תחילה כשחקן, וכיום כמאמן. במהלך הקריירה שלי עבדתי עם שחקנים בכל הרמות, כולל כאלה שהתחרו ברמות הגבוהות ביותר, אני מביא איתי ידע מעמיק וניסיון עשיר.
@@ -313,7 +318,7 @@ export function Tennis() {
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
       <div className='information-container'>
-        <ActivityInfo options={options} />
+        <ActivityInfo options={options} logo={logo} />
       </div>
       <div className='owners-container'>
         {onwners.map((owner) => {
@@ -432,6 +437,13 @@ export function Pilates() {
 
 export function Care() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+
+  const logo = {
+    regular:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733240855/WhatsApp_Image_2024-12-02_at_22.36.12-removebg-preview_jeejkc.png',
+    darkMode:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733240855/WhatsApp_Image_2024-12-02_at_22.36.12-removebg-preview_2_giphuw.png',
+  }
 
   const headText = { he: 'מרכז הטיפולים', eng: 'Care' }
   return (

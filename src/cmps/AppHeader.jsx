@@ -235,7 +235,7 @@ export function AppHeader({ bodyRef }) {
       case 'item':
         optionsToSet = [
           {
-            text: prefs.isEnglish ? 'Store' : 'חנות',
+            text: prefs.isEnglish ? 'All Items' : 'כל המוצרים',
             path: `${section}`,
           },
           {
@@ -308,7 +308,7 @@ export function AppHeader({ bodyRef }) {
       default:
         break
     }
-    console.log(optionsToSet)
+
     setOptions(optionsToSet)
   }
 

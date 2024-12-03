@@ -23,7 +23,7 @@ export function ActivityInfo({ options, logo }) {
               options.title.he}
         </span>
       )) || (
-        <div className='img-container'>
+        <div className='img-container logo'>
           <img src={prefs.isDarkMode ? logo.darkMode : logo.regular} alt='' />
         </div>
       )}
