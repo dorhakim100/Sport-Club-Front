@@ -21,6 +21,7 @@ export function ClassDetails() {
   const { classId } = useParams()
   const clas = useSelector((stateSelector) => stateSelector.classModule.class)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   const [trainers, setTrainers] = useState([])
 
@@ -49,9 +50,15 @@ export function ClassDetails() {
 
   return (
     <div className='class-details'>
+      <div className='navigation-container'>
+        {user && user.isAdmin && (
+          <Link to={`/class/edit/${clas._id}`} className='link'>
+            {prefs.isEnglish ? 'Edit' : 'עריכה'}
+          </Link>
+        )}
+      </div>
       <HeadContainer text={head} />
       <div className='class-details-container'>
-        {' '}
         <img src={clas.img} alt='' />
         <div
           className={

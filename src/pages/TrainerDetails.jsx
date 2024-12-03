@@ -33,6 +33,8 @@ export function TrainerDetails() {
 
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
+
   const navigate = useNavigate()
 
   const [head, setHead] = useState({ he: '', eng: '' })
@@ -87,6 +89,11 @@ export function TrainerDetails() {
             <KeyboardReturnIcon sx={{ color: prefs.isDarkMode && 'white' }} />
           </IconButton>
 
+          {user && user.isAdmin && (
+            <Link to={`/class/trainer/edit/${trainer._id}`} className='link'>
+              {prefs.isEnglish ? 'Edit' : 'עריכה'}
+            </Link>
+          )}
           <ButtonGroup variant='contained' aria-label='Basic button group'>
             <Link to={`/class/trainer/${trainer.prevNext.next}`}>
               <Button>

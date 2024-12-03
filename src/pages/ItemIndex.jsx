@@ -101,6 +101,7 @@ export function ItemIndex() {
         break
 
       case '/item':
+        setHeadText({ he: 'כל המוצרים', eng: 'All Items' })
         setCover(
           'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732275016/DSC06192_1_ciikqh.jpg'
         )

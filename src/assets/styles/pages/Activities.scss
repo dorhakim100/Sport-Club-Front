@@ -1,5 +1,33 @@
 .activities-page-container{
 
+    .nav-logo-container{
+        cursor: pointer;
+
+        &:hover{
+            a{
+
+                    background-color: $dark-blue;
+                    color: white;
+                
+            }
+        
+        
+            
+            a.active{
+            
+                    background-color: $dark-green-hover;
+                    color: white;
+
+            }
+        }
+    }
+
+    .img-container.logo{
+        img{
+            width: 350px;
+        }
+    }
+
     .owners-container{
         display: grid;
         gap: 4em;

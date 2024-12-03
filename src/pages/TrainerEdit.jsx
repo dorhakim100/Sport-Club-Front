@@ -184,20 +184,22 @@ export function TrainerEdit() {
     <>
       <HeadContainer text={text} />
       <section className='trainer-edit-container'>
-        <div className='img-container'>
-          {img && <img src={img} alt='' className='trainer-img-edit' />}
+        <div className='img-upload-container'>
+          <div className='img-container'>
+            {img && <img src={img} alt='' className='trainer-img-edit' />}
+          </div>
+          <LoadingButton
+            component='label'
+            role={undefined}
+            variant='contained'
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
+            loading={isLoading}
+          >
+            Upload file
+            <VisuallyHiddenInput type='file' onChange={uploadFile} />
+          </LoadingButton>
         </div>
-        <LoadingButton
-          component='label'
-          role={undefined}
-          variant='contained'
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
-          loading={isLoading}
-        >
-          Upload file
-          <VisuallyHiddenInput type='file' onChange={uploadFile} />
-        </LoadingButton>
         <form action='' className='trainer-edit-form' onSubmit={onSaveTrainer}>
           <div
             className={

@@ -339,6 +339,25 @@ nav {
 	justify-self: center;
 }
 
+.navigation-container{
+	.link{
+		background-color: $primary-light-blue;
+		padding: 0.5em;
+		border-radius: 5px;
+		color: white;
+		transition: 0.1s;
+		text-decoration: none;
+
+
+		&:hover{
+			background-color: $dark-blue;
+			color: white;
+		}
+	}
+
+
+}
+
 .page-navigation-container{
 	margin: auto;
 

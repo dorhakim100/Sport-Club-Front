@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import Divider from '@mui/material/Divider'
@@ -10,6 +10,7 @@ export function Nav({ origin, links, isMain }) {
   const openMessages = useSelector(
     (stateSelector) => stateSelector.messageModule.openLength
   )
+  const navigate = useNavigate()
 
   return (
     <nav
@@ -56,15 +57,15 @@ export function Nav({ origin, links, isMain }) {
             </div>
           )) ||
           (isMain && (
-            <div key={makeId()}>
+            <div
+              key={makeId()}
+              onClick={() => navigate(link.path)}
+              className='nav-logo-container'
+            >
               <div className={'main-link-container'}>
                 <NavLink to={link.path} key={makeId()}>
                   {prefs.isEnglish ? link.eng : link.he}
                 </NavLink>
-                {/* <img
-                  src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1730727611/discount-stamp-3_wgbcqd.png'
-                  alt=''
-                /> */}
                 <img
                   src={prefs.isDarkMode ? link.darkIcon : link.icon}
                   alt={`${link.eng} Icon`}

@@ -16,6 +16,15 @@
 }
 
 .trainer-edit-container, .class-edit-container, .coupon-edit-container{
+
+
+    @media (min-width:1050px) {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        width: fit-content;
+        
+    }
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -115,8 +124,11 @@
 }
 
 .class-edit-container{
+    min-width: fit-content;
+    width: 80vw;
+    grid-template-columns: 1fr;
     .img-container{
-
+        
         border-radius: 8px;
 
         img{
