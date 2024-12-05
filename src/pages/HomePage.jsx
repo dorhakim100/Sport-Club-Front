@@ -248,7 +248,7 @@ export function HomePage() {
           }`}
         >
           <div
-            className='schedule-container'
+            className='arrow-link-container schedule'
             onClick={() => {
               smoothScroll()
               navigate('/class')

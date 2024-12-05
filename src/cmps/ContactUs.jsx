@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
+import {
+  useNavigate,
+  useSearchParams,
+  useParams,
+  Link,
+  useLocation,
+} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { messageService } from '../services/message/message.service'
 import { socketService } from '../services/socket.service'
 import { addMessage } from '../store/actions/message.actions'
+import { makeId, smoothScroll } from '../services/util.service'
 
 import { SOCKET_EMIT_SEND_MSG } from '../services/socket.service'
 
@@ -16,9 +23,14 @@ import { Message } from '@mui/icons-material'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
 
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
+
 export function ContactUs() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const [editMessage, setEditMessage] = useState(
     messageService.getEmptyMessage()
@@ -66,61 +78,81 @@ export function ContactUs() {
           he: 'צרו קשר',
         }}
       />
-      <div
-        className={
-          prefs.isDarkMode ? 'input-container dark-mode' : 'input-container'
-        }
-      >
-        <input
-          type='text'
-          name='name'
-          id=''
-          placeholder={prefs.isEnglish ? 'Name' : 'שם'}
-          onChange={handleChange}
-          value={editMessage.name}
-        />
-        <input
-          type='text'
-          name='phone'
-          id=''
-          placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
-          onChange={handleChange}
-          value={editMessage.phone}
-          required
-        />
-        <input
-          type='text'
-          name='title'
-          id=''
-          placeholder={prefs.isEnglish ? 'Title' : 'כותרת'}
-          onChange={handleChange}
-          value={editMessage.title}
-        />
-        <textarea
-          name='content'
-          id=''
-          style={{ resize: 'none' }}
-          onChange={handleChange}
-          value={editMessage.content}
-          placeholder={prefs.isEnglish ? 'Content' : 'גוף ההודעה'}
-        />
-        <LoadingButton
-          variant='contained'
-          onClick={() => {
-            if (!editMessage.phone) {
-              showErrorMsg(
-                prefs.isEnglish
-                  ? `Phone number is required`
-                  : 'יש למלא מספר טלפון'
-              )
-              return
-            }
-            onSend()
-          }}
+      <div className='contact-cmp-container'>
+        <div
+          className={
+            prefs.isDarkMode ? 'input-container dark-mode' : 'input-container'
+          }
         >
-          {prefs.isEnglish ? 'Send' : 'שליחה'}
-        </LoadingButton>
-      </div>{' '}
+          <input
+            type='text'
+            name='name'
+            id=''
+            placeholder={prefs.isEnglish ? 'Name' : 'שם'}
+            onChange={handleChange}
+            value={editMessage.name}
+          />
+          <input
+            type='text'
+            name='phone'
+            id=''
+            placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
+            onChange={handleChange}
+            value={editMessage.phone}
+            required
+          />
+          <input
+            type='text'
+            name='title'
+            id=''
+            placeholder={prefs.isEnglish ? 'Title' : 'כותרת'}
+            onChange={handleChange}
+            value={editMessage.title}
+          />
+          <textarea
+            name='content'
+            id=''
+            style={{ resize: 'none' }}
+            onChange={handleChange}
+            value={editMessage.content}
+            placeholder={prefs.isEnglish ? 'Content' : 'גוף ההודעה'}
+          />
+          <LoadingButton
+            variant='contained'
+            onClick={() => {
+              if (!editMessage.phone) {
+                showErrorMsg(
+                  prefs.isEnglish
+                    ? `Phone number is required`
+                    : 'יש למלא מספר טלפון'
+                )
+                return
+              }
+              onSend()
+            }}
+          >
+            {prefs.isEnglish ? 'Send' : 'שליחה'}
+          </LoadingButton>
+        </div>{' '}
+        {location.pathname !== '/about/times' && (
+          <div
+            className='arrow-link-container'
+            onClick={() => {
+              smoothScroll()
+              navigate('/about/times')
+            }}
+          >
+            <Link to='/about/times' className={prefs.isDarkMode ? 'dark' : ''}>
+              {prefs.isEnglish ? 'Opening Times' : 'שעות הפתיחה'}
+              {prefs.isEnglish ? (
+                <ArrowForwardIosIcon className='arrow right' />
+              ) : (
+                <ArrowBackIosNewIcon className='arrow left' />
+              )}
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

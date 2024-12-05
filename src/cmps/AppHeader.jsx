@@ -293,6 +293,10 @@ export function AppHeader({ bodyRef }) {
             path: `${section}`,
           },
           {
+            text: prefs.isEnglish ? 'Opening times' : 'שעות הפתיחה',
+            path: `${section}/times`,
+          },
+          {
             text: prefs.isEnglish ? 'Organization' : 'העמותה',
             path: `${section}/organization`,
           },
