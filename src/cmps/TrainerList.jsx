@@ -3,6 +3,8 @@ import { NavLink, Link, Outlet } from 'react-router-dom'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import { smoothScroll } from '../services/util.service'
+
 import { Preloader } from './Preloader'
 
 import { Button } from '@mui/material'
@@ -61,7 +63,7 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
                 }
 
                 if (user && user.isAdmin) {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  smoothScroll()
                   navigate(`/class/trainer/${trainer._id}`)
                 }
               }
@@ -86,7 +88,7 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
                       if (isLoading) {
                         await waitForLoading() // Wait until isLoading becomes false
                       }
-                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                      smoothScroll()
                       navigate(`/class/trainer/edit/${trainer._id}`)
                     }}
                     className='edit-btn'
@@ -108,7 +110,7 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
                     if (isLoading) {
                       await waitForLoading() // Wait until isLoading becomes false
                     }
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                    smoothScroll()
 
                     navigate(`/class/trainer/${trainer._id}`)
                   }}

@@ -83,6 +83,7 @@ export function ItemIndex() {
 
     const types = typesParam ? typesParam.split(',') : []
     let filterToSet = {}
+
     switch (location.pathname) {
       case '/item/card':
         filterToSet = { ...filterBy, sortDir, types: ['card'], pageIdx }
@@ -90,6 +91,8 @@ export function ItemIndex() {
         setCover(
           'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733237221/DSC06141_wifl4r.jpg'
         )
+        setFilterBy(filterToSet)
+        return
         break
 
       case '/item/accessories':
@@ -98,13 +101,18 @@ export function ItemIndex() {
         setCover(
           'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733237228/DSC06193_ifenm8.jpg'
         )
+        setFilterBy(filterToSet)
+        return
         break
 
       case '/item':
+        filterToSet = { ...filterBy, sortDir, types: [], pageIdx }
         setHeadText({ he: 'כל המוצרים', eng: 'All Items' })
         setCover(
           'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732275016/DSC06192_1_ciikqh.jpg'
         )
+        setFilterBy(filterToSet)
+        return
         break
 
       default:
@@ -127,6 +135,7 @@ export function ItemIndex() {
         const max = await itemService.getMaxPage(filterBy)
 
         setMaxPage(max)
+        console.log(filterBy)
 
         // Only update searchParams if needed
         if (
@@ -141,6 +150,9 @@ export function ItemIndex() {
           })
         }
       } catch (err) {
+        showErrorMsg(
+          prefs.isEnglish ? `Error loading items` : 'טעינת מוצרים נכשלה'
+        )
         console.log(err)
       } finally {
         setIsLoading(false)
@@ -148,7 +160,7 @@ export function ItemIndex() {
     }
 
     setItems()
-  }, [filterBy, location.pathname]) // Run when filterBy changes
+  }, [filterBy]) // Run when filterBy changes
 
   async function onRemoveItem(itemId) {
     try {

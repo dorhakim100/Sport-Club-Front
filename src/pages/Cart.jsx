@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { smoothScroll } from '../services/util.service'
+
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { itemService } from '../services/item/item.service'
 import { userService } from '../services/user/user.service'
@@ -189,7 +191,7 @@ export function Cart() {
             <Button
               variant='contained'
               onClick={() => {
-                // window.scrollTo({ top: 0, behavior: 'smooth' })
+                // smoothScroll()
                 // navigate(`/user/${user._id}/cart/paying`)
                 onPay()
               }}

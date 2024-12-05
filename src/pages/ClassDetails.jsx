@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { smoothScroll } from '../services/util.service'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 import { loadClass } from '../store/actions/class.actions'
@@ -10,6 +11,7 @@ import { loadClass } from '../store/actions/class.actions'
 import { AddToCartButton } from '../cmps/AddToCartButton'
 import { Quantity } from '../cmps/Quantity.jsx'
 import { HeadContainer } from '../cmps/HeadContainer'
+import { ItemNavigation } from '../cmps/ItemNavigation'
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { IntensityRange } from '../cmps/IntensityRange'
@@ -25,17 +27,30 @@ export function ClassDetails() {
 
   const [trainers, setTrainers] = useState([])
 
+  const classFilter = useSelector(
+    (stateSelector) => stateSelector.classModule.filter
+  )
+
   const head = {
     he: clas.title.he,
     eng: clas.title.eng,
+  }
+  const [lastPage, setLastPage] = useState('')
+  const getLatestPage = () => {
+    const str = `/class?pageIdx=${classFilter.pageIdx}`
+
+    setLastPage(str)
+    return str
   }
 
   const setClass = async () => {
     try {
       setIsLoading(true)
-      const c = await loadClass(classId)
+      const c = await loadClass(classId, classFilter)
 
       const t = await classService.getClassTrainer({ ...c })
+      getLatestPage()
+
       setTrainers(t)
     } catch (err) {
       console.log(err)
@@ -50,13 +65,9 @@ export function ClassDetails() {
 
   return (
     <div className='class-details'>
-      <div className='navigation-container'>
-        {user && user.isAdmin && (
-          <Link to={`/class/edit/${clas._id}`} className='link'>
-            {prefs.isEnglish ? 'Edit' : 'עריכה'}
-          </Link>
-        )}
-      </div>
+      {clas.prevNext && (
+        <ItemNavigation item={clas} type={'class'} lastPage={lastPage} />
+      )}
       <HeadContainer text={head} />
       <div className='class-details-container'>
         <img src={clas.img} alt='' />
@@ -71,7 +82,7 @@ export function ClassDetails() {
               <Link
                 to={`/class/trainer/${trainer.id}`}
                 key={`${trainer.id}ClassDetails`}
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                onClick={() => smoothScroll()}
               >
                 {prefs.isEnglish ? trainer.name.eng : trainer.name.he}
               </Link>

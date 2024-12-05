@@ -56,16 +56,20 @@ export function SwiperCarousel({ imgs }) {
 
             <div className='img-container'>
               <img src={img.link} alt={`Slide ${index + 1}`} />
-              <div className='header-container'>
-                <div className='text'>
-                  <h2>
-                    {prefs.isEnglish ? img.text.first.eng : img.text.first.he}
-                  </h2>
-                  <h2>
-                    {prefs.isEnglish ? img.text.second.eng : img.text.second.he}
-                  </h2>
+              {img.text && (
+                <div className='header-container'>
+                  <div className='text'>
+                    <h2>
+                      {prefs.isEnglish ? img.text.first.eng : img.text.first.he}
+                    </h2>
+                    <h2>
+                      {prefs.isEnglish
+                        ? img.text.second.eng
+                        : img.text.second.he}
+                    </h2>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </SwiperSlide>
         ))}

@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
+import { smoothScroll } from '../services/util.service'
 import { Preloader } from './Preloader'
 
 import picture from '../../public/imgs/picture.jpg'
@@ -22,7 +23,7 @@ export function ItemPreview({ item }) {
   return (
     <article className='preview'>
       <Link
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => smoothScroll()}
         to={`/item/${item._id}`}
         className={prefs.isDarkMode ? 'dark-mode' : ''}
       >

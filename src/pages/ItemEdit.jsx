@@ -175,20 +175,22 @@ export function ItemEdit() {
     <>
       <HeadContainer text={text} />
       <section className='item-edit-container'>
-        <div className='item-img-container'>
-          {cover && <img src={cover} alt='' className='item-cover-edit' />}
+        <div className='upload-img-container'>
+          <div className='item-img-container'>
+            {cover && <img src={cover} alt='' className='item-cover-edit' />}
+          </div>
+          <LoadingButton
+            component='label'
+            role={undefined}
+            variant='contained'
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
+            loading={isLoading}
+          >
+            Upload file
+            <VisuallyHiddenInput type='file' onChange={uploadFile} />
+          </LoadingButton>
         </div>
-        <LoadingButton
-          component='label'
-          role={undefined}
-          variant='contained'
-          tabIndex={-1}
-          startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
-          loading={isLoading}
-        >
-          Upload file
-          <VisuallyHiddenInput type='file' onChange={uploadFile} />
-        </LoadingButton>
         <form action='' className='item-edit-form' onSubmit={onSaveItem}>
           <div
             className={
@@ -205,7 +207,7 @@ export function ItemEdit() {
               name='title'
               type='text'
               value={prefs.isEnglish ? editItem.title.eng : editItem.title.he}
-              style={{ width: 200 }}
+              // style={{ width: 200 }}
             />
           </div>{' '}
           <div

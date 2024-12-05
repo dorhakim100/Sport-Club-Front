@@ -25,9 +25,9 @@ async function query(filterBy = { pageIdx: 0 }) {
   }
 }
 
-async function getById(classId) {
+async function getById(classId, filter) {
   try {
-    const res = await httpService.get(`${KEY}/${classId}`)
+    const res = await httpService.get(`${KEY}/${classId}`, filter)
     return res
   } catch (err) {
     console.log(err)

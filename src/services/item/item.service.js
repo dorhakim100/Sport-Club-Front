@@ -33,9 +33,9 @@ async function query(
   }
 }
 
-async function getById(itemId) {
+async function getById(itemId, filter) {
   try {
-    const res = await httpService.get(`${KEY}/${itemId}`)
+    const res = await httpService.get(`${KEY}/${itemId}`, filter)
     return res
   } catch (err) {
     console.log(err)

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { updateService } from '../services/update/update.service'
 import { loadUpdates } from '../store/actions/update.actions'
+import { smoothScroll } from '../services/util.service'
 
 import {
   loadMessages,
@@ -83,7 +84,7 @@ export function MessagePreview({
       }
       onClick={() => {
         if (isHover) return
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        smoothScroll()
         navigate(`/admin/message/${message._id}`)
       }}
     >

@@ -6,6 +6,7 @@ import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 
 import { updateCart } from '../store/actions/user.actions'
+import { smoothScroll } from '../services/util.service'
 
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
@@ -50,7 +51,7 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
 
   async function onAddToCart(itemToAdd, quantity = 1) {
     if (!user) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      smoothScroll()
       navigate('/user/login')
       return
     }
@@ -99,7 +100,7 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
         <Button
           className='edit-btn'
           onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            smoothScroll()
             navigate(`/item/edit/${item._id}`)
           }}
         >

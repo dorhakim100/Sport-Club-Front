@@ -7,6 +7,7 @@ import {
   SET_ITEM,
   UPDATE_ITEM,
   ADD_ITEM_MSG,
+  SET_ITEM_FILTER,
 } from '../reducers/item.reducer'
 
 export async function loadItems(filterBy) {
@@ -14,6 +15,7 @@ export async function loadItems(filterBy) {
     const items = await itemService.query(filterBy)
 
     store.dispatch(getCmdSetItems(items))
+    store.dispatch({ type: SET_ITEM_FILTER, filter: filterBy })
     return items
   } catch (err) {
     console.log('Cannot load items', err)
@@ -21,9 +23,9 @@ export async function loadItems(filterBy) {
   }
 }
 
-export async function loadItem(itemId) {
+export async function loadItem(itemId, filter) {
   try {
-    const item = await itemService.getById(itemId)
+    const item = await itemService.getById(itemId, filter)
     store.dispatch(getCmdSetItem(item))
   } catch (err) {
     console.log('Cannot load item', err)

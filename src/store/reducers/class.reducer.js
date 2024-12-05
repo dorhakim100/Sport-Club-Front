@@ -5,10 +5,12 @@ export const SET_CLASS = 'SET_CLASS'
 export const REMOVE_CLASS = 'REMOVE_CLASS'
 export const ADD_CLASS = 'ADD_CLASS'
 export const UPDATE_CLASS = 'UPDATE_CLASS'
+export const SET_CLASS_FILTER = 'SET_CLASS_FILTER'
 
 const initialState = {
   classes: [],
   class: classService.getEmptyClass(),
+  filter: classService.getDefaultFilter(),
 }
 
 export function classReducer(state = initialState, action) {
@@ -40,6 +42,8 @@ export function classReducer(state = initialState, action) {
       )
       newState = { ...state, classes }
       break
+    case SET_CLASS_FILTER:
+      newState = { ...state, filter: action.filter }
 
     default:
   }

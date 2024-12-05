@@ -6,12 +6,18 @@ import {
   UPDATE_CLASS,
   ADD_CLASS,
   REMOVE_CLASS,
+  SET_CLASS_FILTER,
 } from '../reducers/class.reducer'
 
 export async function loadClasses(filterBy) {
   try {
     const classes = await classService.query(filterBy)
     store.dispatch(getCmdSetClasses(classes))
+    console.log(filterBy)
+    store.dispatch({
+      type: SET_CLASS_FILTER,
+      filter: filterBy,
+    })
     return classes
   } catch (err) {
     console.log('Cannot load classes', err)
@@ -19,9 +25,9 @@ export async function loadClasses(filterBy) {
   }
 }
 
-export async function loadClass(classId) {
+export async function loadClass(classId, filter) {
   try {
-    const clas = await classService.getById(classId)
+    const clas = await classService.getById(classId, filter)
     store.dispatch(getCmdSetClass(clas))
     return clas
   } catch (err) {

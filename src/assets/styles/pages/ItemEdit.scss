@@ -18,14 +18,22 @@
 .item-edit-container{
     display: flex;
     flex-direction: column;
+
+    display: grid;
+    
+    @media (min-width:1050px) {
+        grid-template-columns: repeat(2,1fr);
+        
+    }
+
     align-items: center;
     justify-items: center;
     gap: 2em;
     padding: 2em 0em 2em 0em;
     margin: auto;
     border-radius: 8px;
-
-    width: 350px;
+    
+    // width: 350px;
 
     background-color: $light-gray;
         background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
@@ -33,10 +41,22 @@
     .item-img-container{
         width: 300px;
         border-radius: 5px;
+
+
         img{
             border-radius: 5px;
-            height: 300px;
+            // height: 300px;
             object-fit: cover;
+        }
+
+        @media (min-width:1050px) {
+            width: 40vw;
+            
+            img{
+                width: 40vw;
+                
+            }
+            
         }
     }
 
@@ -52,26 +72,39 @@
     }
 
     .input-container{
+
         display: grid;
         grid-template-columns: 1fr;
         align-items: center;
-        justify-items: center;
+        // justify-items: center;
+        *{
+            width: 100%;
+
+        }
        &.types{
                 grid-template-rows: repeat(2,40px);
 
             }
   
-        input, textarea{
+            
+            textarea {
+                resize: none;
+                min-width: 300px;
+                height: 200px;
+                width: 40vw;
+            }
+            
+            input, textarea{
+                transition: 0.3s ease-out;
+            }
 
-            transition: 0.3s ease-out;
-        }
+            label{
+                text-align: start;
+            }
 
-        textarea {
-            resize: none;
-            width: 300px;
-            height: 200px;
-          }
-        
+            input{
+                max-width: 300px;
+            }
        
     }
     .quantity-container{
@@ -84,19 +117,29 @@
             justify-self: center;
         }
         justify-items: start;
+
         div{
-            display: flex;
+            display: grid;
+            grid-template-columns: auto 1fr;
             align-items: center;
             justify-items: center;
             gap: 0.5em;
+            button{
+                justify-self: center;
+                max-width: 100px;
+            }
         }
         
     }
 
-  
+  .input-container.types{
+
+      label{
+          text-align: center;
+      }
+  }
 
     .types-container{
-
         .checkbox-container{
             label{
 
