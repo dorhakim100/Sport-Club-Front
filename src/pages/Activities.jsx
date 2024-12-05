@@ -379,20 +379,57 @@ export function Pilates() {
 
   const headText = { he: 'פילאטיס מכשירים', eng: 'Reformer Pilates' }
 
+  const logo = {
+    regular:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733404109/output-onlinepngtools_3_hlpule.png',
+    darkMode:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733404392/output-onlinepngtools__3_pfhncq.png',
+  }
+
   const options = {
     img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732027475/WhatsApp_Image_2024-11-19_at_15.24.47_ihj8yf.jpg',
 
     title: { he: 'סטודיו מיטל תמיר', eng: 'Meital Tamir Studio' },
     preview: {
-      he: `ברוכים הבאים לבית הספר לשחייה שלנו, בו כל תלמיד יכול ללמוד לשחות בביטחון! בין אם אתם מתחילים או מתאמנים לרמת שחייה מתקדמת, המדריכים המנוסים שלנו מציעים ליווי אישי בסביבה בטוחה ומעודדת. הצטרפו למגוון התכניות שלנו, כולל שיעורי מתחילים, שיפור סגנון ושחייה מתקדמת. השיעורים שלנו מתוכננים כדי לעזור לשחיינים מכל הגילאים להתקדם בקצב שלהם ולהנות מהמסע. הצטרפו אלינו ותחוו את השמחה שבשחייה!
+      he: `ברוכות הבאות ל-MT
+      סטודיו לפילאטיס מכשירים בכפר שמריהו – מרחב ייחודי המוקדש לתנועה, חיזוק והעצמה אישית.
       
-      `,
-      eng: `Welcome to our swimming school, where every student can learn to swim with confidence! Whether you're a beginner or training for advanced skills, our experienced instructors provide personalized guidance in a safe and encouraging environment. Dive into our range of programs, including beginner classes, stroke improvement, and advanced techniques. Our lessons are structured to help swimmers of all ages progress at their own pace, ensuring everyone enjoys the journey. Join us and experience the joy of swimming!`,
+      הסטודיו שלנו מיועד לנשים ומציע חוויית אימון באווירה אינטימית, מרגיעה ומלאת השראה.
+      אווירה אינטימית בקבוצות קטנות שמאפשרות תשומת לב פרטנית לכל מתאמנת.
+      מורות מקצועיות בצוות מיומן המשלב ידע מעמיק ותשוקה אמיתית לעולם הפילאטיס.
+      דגש על יחס אישי, עם התאמת האימון לצרכים הייחודיים שלך, בקצב ובמטרות שאת שואפת להגיע אליהן.
+      פילאטיס מכשירים הוא הדרך המושלמת לשפר את הכוח, היציבה, והגמישות – ולהרגיש טוב יותר מבפנים ומבחוץ.
+      
+      בין אם את מתחילה את המסע שלך בעולם הפילאטיס או מתאמנת מנוסה שמחפשת מרחב מקצועי ואיכותי, הסטודיו שלנו כאן בשבילך.`,
+      eng: `
+      Welcome to MT
+A Pilates Reformer Studio in Kfar Shmaryahu – a unique space dedicated to movement, strengthening, and personal empowerment.
+
+Our studio is designed for women and offers a training experience in an intimate, relaxing, and inspiring atmosphere.
+
+Intimate Atmosphere – Small groups that allow personalized attention for every participant.
+Professional Instructors – A skilled team that combines deep knowledge with a genuine passion for the world of Pilates.
+Focus on Personal Attention – Tailoring the workout to your unique needs, pace, and goals.
+Strength and Movement – Pilates reformer is the perfect way to enhance strength, posture, and flexibility – making you feel better inside and out.
+Whether you are just beginning your Pilates journey or an experienced practitioner seeking a professional and high-quality space, our studio is here for you.`,
     },
     ending: {
-      he: `אני מזמינה אתכם להצטרף אלינו!`,
-      eng: `I invite you to join us!`,
+      he: `    זה הזמן שלך לעצור, לנשום ולהתחבר מחדש לגוף ולנפש שלך.`,
+      eng: `Take this time to pause, breathe, and reconnect with your body and mind.`,
     },
+  }
+
+  const owner = {
+    txt: {
+      he: `אני מיטל תמיר עם וותק של  20 שנה  בפילאטיס , מתמחה בליווי והעצמת נשים לשיפור הכושר הגופני, היציבה ואיכות החיים. 
+    לאורך השנים פיתחתי גישה מותאמת אישית המשלבת מקצועיות, הקשבה ומודעות, מתוך אמונה שכל אישה יכולה להגיע לתוצאות מדהימות בגוף ובנפש.`,
+      eng: `
+    I’m Meital Tamir, with 20 years of experience in Pilates, specializing in guiding and empowering women to improve their physical fitness, posture, and overall quality of life.
+Over the years, I have developed a personalized approach that combines professionalism, attentiveness, and mindfulness, driven by the belief that every woman can achieve amazing results in both body and mind.
+    `,
+    },
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732027729/WhatsApp_Image_2024-11-19_at_15.24.46_2_vj7jvc.jpg',
+    name: { he: 'מיטל תמיר', eng: 'Meital Tamir' },
   }
   const instagram =
     'https://www.instagram.com/meitaltamir_studio?igsh=OGppbjJmZmlsNnB5&utm_source=qr'
@@ -404,32 +441,25 @@ export function Pilates() {
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
       <div className='information-container'>
-        <ActivityInfo options={options} />
+        <ActivityInfo options={options} logo={logo} />
       </div>
       <div className='trainers-social-container'>
-        <div className='section'>
-          <div className='img-container hidden'>
-            <img
-              src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1732027729/WhatsApp_Image_2024-11-19_at_15.24.46_2_vj7jvc.jpg'
-              alt='Meital'
-            />
+        <div className='owner-container section'>
+          <div className='img-container'>
+            <img src={owner.img} alt='' />
           </div>
+          <p>{prefs.isEnglish ? owner.txt.eng : owner.txt.he}</p>
         </div>
-        <div className='section'>
+        {/* <div className='section'>
           <div className='text-container hidden'>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-              illo exercitationem placeat, deleniti incidunt cum nam excepturi
-              similique ducimus iusto eveniet ratione est fuga minus sapiente
-              repellendus laudantium quis ex?
-            </p>
+            <p>{prefs.isEnglish ? ownerText.eng : ownerText.he}</p>
           </div>
-        </div>
+        </div> */}
         <div className='instagram-container section hidden'>
+          <InstagramPost postUrl={instagram} />
           <b>
             {prefs.isEnglish ? 'Follow me on Instagram' : 'עקבו אחרי באינסטגרם'}
           </b>
-          <InstagramPost postUrl={instagram} />
         </div>
       </div>
     </div>

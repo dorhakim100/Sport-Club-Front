@@ -352,6 +352,7 @@ export function AppHeader({ bodyRef }) {
       'update',
       'class',
       'item',
+      'member',
       'activities',
       'about',
     ]
@@ -459,6 +460,9 @@ export function AppHeader({ bodyRef }) {
               />
             )}
           </div>
+        </NavLink>
+        <NavLink to='member' onClick={selectLink}>
+          <span>{prefs.isEnglish ? 'Member' : 'מנויים'}</span>
         </NavLink>
 
         <NavLink to='activities' onClick={selectLink}>

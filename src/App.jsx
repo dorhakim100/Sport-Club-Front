@@ -130,6 +130,8 @@ export function App() {
             <Route path='user/:userId/cart' element={<Cart />} />
             <Route path='user/:userId/cart/paying' element={<Paying />} />
 
+            <Route path='member' element={<MemberIndex />} />
+
             <Route path='user' element={<LoginSignup />}>
               <Route path='login' element={<Login />} />
               <Route path='signup' element={<Signup />} />
