@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { smoothScroll } from '../services/util.service'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -73,7 +74,7 @@ export function Cards({ trainers }) {
                 onClick={() => {
                   if (isFocused) {
                     // Navigate if the card is already focused
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                    smoothScroll()
                     navigate(`/class/trainer/${trainer._id}`)
                   } else {
                     // Focus on the card

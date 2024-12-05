@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 
 import { trainerService } from '../services/trainer/trainer.service.js'
-import { makeId } from '../services/util.service.js'
+import { makeId, smoothScroll } from '../services/util.service.js'
 import { loadTrainers } from '../store/actions/trainer.actions.js'
 import { loadUpdates } from '../store/actions/update.actions.js'
 import { updateService } from '../services/update/update.service.js'
@@ -250,7 +250,7 @@ export function HomePage() {
           <div
             className='schedule-container'
             onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' })
+              smoothScroll()
               navigate('/class')
             }}
           >
@@ -270,7 +270,7 @@ export function HomePage() {
           <div className='cards-container'>
             <Link
               to={'/class/trainer'}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => smoothScroll()}
               className={prefs.isDarkMode ? 'dark-mode' : ''}
             >
               {prefs.isEnglish ? 'Our trainers' : 'המאמנים שלנו'}
@@ -291,7 +291,7 @@ export function HomePage() {
           className='reasons-header'
           onClick={() => {
             navigate('/facilities')
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+            smoothScroll()
           }}
           style={{ cursor: 'pointer' }}
         >

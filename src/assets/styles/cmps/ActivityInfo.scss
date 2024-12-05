@@ -7,23 +7,24 @@
     justify-items: center;
 
     margin-bottom: 3em;
-
+    
     @media (max-width:550px) {
         font-size: 1.2em;
         padding: 1em;
         
     }
-
+    
     span{
         font-family: assistantBold;
         font-size: 3em;
     }
-
+    
     .small-two{
         font-size: 0.6em;
     }
-
+    
     p{
         text-align: start;
+        text-align: justify;
     }
 }

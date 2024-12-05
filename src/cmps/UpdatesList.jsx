@@ -5,6 +5,8 @@ import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
 
+import { smoothScroll } from '../services/util.service'
+
 import { setUpdateOrder } from '../store/actions/update.actions'
 import { loadUpdates, removeUpdate } from '../store/actions/update.actions'
 
@@ -179,7 +181,7 @@ function EditRemoveBtns({ update }) {
     >
       <Button
         onClick={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
+          smoothScroll()
           navigate(`/update/edit/${update._id}`)
         }}
       >

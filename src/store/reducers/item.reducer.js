@@ -6,10 +6,12 @@ export const REMOVE_ITEM = 'REMOVE_ITEM'
 export const ADD_ITEM = 'ADD_ITEM'
 export const UPDATE_ITEM = 'UPDATE_ITEM'
 export const ADD_ITEM_MSG = 'ADD_ITEM_MSG'
+export const SET_ITEM_FILTER = 'SET_ITEM_FILTER'
 
 const initialState = {
   items: [],
   item: itemService.getEmptyItem(),
+  filter: itemService.getDefaultFilter(),
 }
 
 export function itemReducer(state = initialState, action) {
@@ -44,6 +46,8 @@ export function itemReducer(state = initialState, action) {
         item: { ...state.item, msgs: [...(state.item.msgs || []), action.msg] },
       }
       break
+    case SET_ITEM_FILTER:
+      newState = { ...state, filter: action.filter }
     default:
   }
   return newState

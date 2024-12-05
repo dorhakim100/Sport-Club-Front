@@ -4,6 +4,8 @@ import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 
+import { smoothScroll } from '../services/util.service'
+
 import { AddToCartButton } from './AddToCartButton'
 
 import Button from '@mui/material/Button'
@@ -33,7 +35,7 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
           <li
             key={item._id}
             className='item-container'
-            onClick={() => {
+            onClick={(e) => {
               if (
                 e.target.closest('.add-to-cart-btn') ||
                 e.target.closest('.edit-btn')
@@ -43,7 +45,7 @@ export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
               }
               if (isHover) return
               navigate(`/item/${item._id}`)
-              window.scrollTo({ top: 0, behavior: 'smooth' })
+              smoothScroll()
             }}
           >
             <ItemPreview item={item} />

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useSearchParams, useParams, Link } from 'react-router-dom'
-import { makeId } from '../services/util.service'
+import { makeId, smoothScroll } from '../services/util.service'
 
 import { Preloader } from './Preloader'
 
@@ -16,7 +16,6 @@ export function ClassPreview({ clas, onRemoveClass }) {
 
   const [isLoaded, setIsLoaded] = useState(false)
 
-  console.log(clas)
   return (
     <div
       className='class-preview-container'
@@ -30,7 +29,7 @@ export function ClassPreview({ clas, onRemoveClass }) {
           e.stopPropagation()
           return
         }
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        smoothScroll()
         navigate(`/class/${clas._id}`)
       }}
     >
@@ -51,7 +50,7 @@ export function ClassPreview({ clas, onRemoveClass }) {
           >
             <Button
               onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+                smoothScroll()
                 navigate(`/class/edit/${clas._id}`)
               }}
               className='edit-btn'

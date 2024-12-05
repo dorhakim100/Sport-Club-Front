@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, setRemembered } from '../store/actions/user.actions'
 import { loadOpenMessages } from '../store/actions/message.actions'
+import { smoothScroll } from '../services/util.service'
 
 import { SOCKET_EVENT_ADD_MSG } from '../services/socket.service'
 
@@ -198,6 +199,7 @@ export function AppHeader({ bodyRef }) {
       delete prefsToSet.user
       setPrefs({ ...prefsToSet })
       navigate('/')
+      smoothScroll()
       showSuccessMsg(prefs.isEnglish ? `Bye now` : 'להתראות')
     } catch (err) {
       showErrorMsg(prefs.isEnglish ? 'Had error logging out' : 'בעיה בחיבור')
@@ -334,7 +336,7 @@ export function AppHeader({ bodyRef }) {
   }
 
   const selectLink = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    smoothScroll()
     setMenu(false)
   }
 

@@ -10,6 +10,7 @@ import { InstagramPost } from '../cmps/InstagramPost'
 import { ActivityInfo } from '../cmps/ActivityInfo.jsx'
 import { Cards } from '../cmps/Cards'
 import { ContactUs } from '../cmps/ContactUs'
+import { SwiperCarousel } from '../cmps/SwiperCarousel'
 
 import Divider from '@mui/material/Divider'
 import { Button } from '@mui/material'
@@ -446,9 +447,58 @@ export function Care() {
   }
 
   const headText = { he: 'מרכז הטיפולים', eng: 'Care' }
+
+  const options = {
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733031708/WhatsApp_Image_2024-10-29_at_16.16.02_2_q0eenv.jpg',
+
+    title: { he: 'האקדמיה לטניס', eng: 'Tennis Academy' },
+    preview: {
+      he: `אוסטאופתיה היא שיטת טיפול ידני המתמקדת בזיהוי וטיפול בגורמים לכאב וחוסר איזון בגוף. השיטה מבוססת על עקרונות הריפוי העצמי והקשר בין מבנה הגוף לתפקודו. האוסטאופת מאבחן באמצעות מגע והסתכלות, ללא שימוש במכשירים או תרופות, ומשיב את האיזון והתנועתיות לגוף. הטיפול מתאים לכל הגילאים ומותאם אישית למטופל.`,
+      eng: `Osteopathy is a manual therapy method focused on identifying and treating the causes of pain and imbalance in the body. It is based on the principles of self-healing and the connection between the body's structure and its function. The osteopath diagnoses through touch and observation, without using devices or medication, restoring balance and mobility to the body. The treatment is suitable for all ages and is tailored to the individual.`,
+    },
+    ending: {
+      he: `אני מזמין אותכם לנסות בעצמכם!`,
+      eng: `I invite you to try yourself!`,
+    },
+  }
+
+  const ownerText = {
+    he: `אני לאור בן שמעון, אוסטאופת מוסמך ומורה לאוסטאופתיה בווינגייט.
+    כספורטאי לשעבר (נבחרת ישראל לנוער בכדוריד) שסבל מפציעות, בחרתי לפתח את הקריירה שלי בתור מרפא, וכך הגעתי לטיפול במגע. בתחילת דרכי עבדתי בקבוצות כדורגל וספא, ולאחר מכן בקליניקה עצמאית.
+    עם השנים החלטתי להתמקצע ולהרחיב את הידע והניסיון שלי כדי שאוכל להועיל יותר למטופליי וכך הגעתי לאוסטאופתיה. אני חסיד גדול של שיטה זו ומאמין שהיא יכולה לשפר את איכות חיינו בצורה משמעותית, להחזיר תפקוד ותנועה חיוניים לנו, ולהפחית כאב.
+    בראיית העולם שלי, בחלק מהמקרים, לפני שמחליטים על טיפולים פולשניים, כדאי להיעזר באוסטאופתיה (כמובן שבמקרים רפואיים מסוימים נדרש אישור רפואי לטיפול).
+    כל מטופל/ת שמגיעים אליי אני חוקר את ההיסטוריה הגופנית שלו ע"י תשאול ובדיקות על מנת לאבחן את שורש הבעיה, ואז משתמש בלחיצות ומתיחות עדינות, הנעות ומניפולציות, שמטרתן לשחרר אזורים נוקשים וחסרי תנועה, להחזיר אותם לתפקוד תקין ולעורר תהליך של התאוששות.
+    רוב המטופלים מציגים שיפור כבר בטיפול הראשון. יש גם מטופלים קבועים שמגיעים ל'תחזוקה' ומניעה.`,
+    eng: `I am Laor Ben Shimon, a certified osteopath and osteopathy instructor at Wingate.
+
+    As a former athlete (a member of Israel’s youth national handball team) who suffered from injuries, I chose to develop my career as a healer, which led me to focus on manual therapy. Early in my journey, I worked with soccer teams and at spas, and later transitioned to running my own private clinic.
+    
+    Over the years, I decided to specialize further and expand my knowledge and experience to better help my patients, which brought me to osteopathy. I am a strong advocate of this method and believe it can significantly improve our quality of life, restore essential movement and function, and reduce pain.
+    
+    In my worldview, in certain cases, before opting for invasive treatments, osteopathy can be a beneficial first step (of course, for specific medical conditions, prior medical approval is required).
+    
+    For every patient who comes to me, I thoroughly investigate their physical history through questioning and examinations to diagnose the root cause of the issue. Then, I use gentle pressure, stretches, mobilizations, and manipulations aimed at releasing stiff and immobile areas, restoring proper function, and triggering a recovery process.
+    
+    Most patients report improvement after the very first session. Some even visit regularly for "maintenance" and prevention.`,
+  }
+  animation()
+
   return (
     <div className='care-container'>
       <HeadContainer text={headText} />
+      <DynamicCover prefs={prefs} coverSrc={options.img} />
+      <div className='information-container'>
+        <ActivityInfo options={options} logo={logo} />
+      </div>
+      <div className='owner-container section hidden'>
+        <div className='img-container'>
+          <img
+            src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1733240855/WhatsApp_Image_2024-12-02_at_22.36.12_1_ujtzsz.jpg'
+            alt=''
+          />
+        </div>
+        <p>{prefs.isEnglish ? ownerText.eng : ownerText.he}</p>
+      </div>
     </div>
   )
 }
@@ -456,21 +506,83 @@ export function Care() {
 export function SummerCamp() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const headText = { he: 'קייטנת הקיץ', eng: 'Summer Camp' }
+  const logo = {
+    regular:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
+    darkMode:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
+  }
   const options = {
     img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732541780/WhatsApp_Image_2024-10-29_at_16.16.03_1_ptejag.jpg',
 
-    title: { he: 'סטודיו מיטל תמיר', eng: 'Meital Tamir Studio' },
+    title: { he: 'קייטנת הספורט', eng: 'The Sports Camp' },
     preview: {
-      he: `ברוכים הבאים לבית הספר לשחייה שלנו, בו כל תלמיד יכול ללמוד לשחות בביטחון! בין אם אתם מתחילים או מתאמנים לרמת שחייה מתקדמת, המדריכים המנוסים שלנו מציעים ליווי אישי בסביבה בטוחה ומעודדת. הצטרפו למגוון התכניות שלנו, כולל שיעורי מתחילים, שיפור סגנון ושחייה מתקדמת. השיעורים שלנו מתוכננים כדי לעזור לשחיינים מכל הגילאים להתקדם בקצב שלהם ולהנות מהמסע. הצטרפו אלינו ותחוו את השמחה שבשחייה!
-      
-      `,
-      eng: `Welcome to our swimming school, where every student can learn to swim with confidence! Whether you're a beginner or training for advanced skills, our experienced instructors provide personalized guidance in a safe and encouraging environment. Dive into our range of programs, including beginner classes, stroke improvement, and advanced techniques. Our lessons are structured to help swimmers of all ages progress at their own pace, ensuring everyone enjoys the journey. Join us and experience the joy of swimming!`,
+      he: `הקייטנה מציעה מגוון פעילויות ספורט כמו כדורגל, כדורסל, טניס וריצה, בהובלת צוות מדריכים מקצועי ומסור. הילדים ייהנו מסביבה בטוחה ומהנה, יפתחו כישורים חברתיים ועבודת צוות, וישתתפו בתחרויות עם פרסים על הישגיהם.
+
+      התוכנית מותאמת לגילאים שונים ומשלבת הנאה, צמיחה אישית ובריאות. הקייטנה פועלת במהלך חופשות בית הספר ומאפשרת הרשמה גמישה לפי שבועות.`,
+      eng: `Our camp offers a variety of sports activities such as soccer, basketball, tennis, and running, led by a professional and dedicated team of coaches. Children will enjoy a safe and fun environment, develop social skills and teamwork, and participate in competitions with prizes for their achievements.
+
+      The program is tailored to different age groups, combining fun, personal growth, and health. The camp operates during school holidays with flexible weekly registration options.`,
+    },
+    ending: {
+      he: `הצטרפו אלינו לחופשה פעילה וחווייתית שכולה כיף וזיכרונות מתוקים!`,
+      eng: `Join us for an active, enjoyable holiday filled with great memories!`,
     },
   }
+
+  const ownerText = {
+    he: `אני לאור בן שמעון, אוסטאופת מוסמך ומורה לאוסטאופתיה בווינגייט.
+    כספורטאי לשעבר (נבחרת ישראל לנוער בכדוריד) שסבל מפציעות, בחרתי לפתח את הקריירה שלי בתור מרפא, וכך הגעתי לטיפול במגע. בתחילת דרכי עבדתי בקבוצות כדורגל וספא, ולאחר מכן בקליניקה עצמאית.
+    עם השנים החלטתי להתמקצע ולהרחיב את הידע והניסיון שלי כדי שאוכל להועיל יותר למטופליי וכך הגעתי לאוסטאופתיה. אני חסיד גדול של שיטה זו ומאמין שהיא יכולה לשפר את איכות חיינו בצורה משמעותית, להחזיר תפקוד ותנועה חיוניים לנו, ולהפחית כאב.
+    בראיית העולם שלי, בחלק מהמקרים, לפני שמחליטים על טיפולים פולשניים, כדאי להיעזר באוסטאופתיה (כמובן שבמקרים רפואיים מסוימים נדרש אישור רפואי לטיפול).
+    כל מטופל/ת שמגיעים אליי אני חוקר את ההיסטוריה הגופנית שלו ע"י תשאול ובדיקות על מנת לאבחן את שורש הבעיה, ואז משתמש בלחיצות ומתיחות עדינות, הנעות ומניפולציות, שמטרתן לשחרר אזורים נוקשים וחסרי תנועה, להחזיר אותם לתפקוד תקין ולעורר תהליך של התאוששות.
+    רוב המטופלים מציגים שיפור כבר בטיפול הראשון. יש גם מטופלים קבועים שמגיעים ל'תחזוקה' ומניעה.`,
+    eng: `I am Laor Ben Shimon, a certified osteopath and osteopathy instructor at Wingate.
+  
+    As a former athlete (a member of Israel’s youth national handball team) who suffered from injuries, I chose to develop my career as a healer, which led me to focus on manual therapy. Early in my journey, I worked with soccer teams and at spas, and later transitioned to running my own private clinic.
+    
+    Over the years, I decided to specialize further and expand my knowledge and experience to better help my patients, which brought me to osteopathy. I am a strong advocate of this method and believe it can significantly improve our quality of life, restore essential movement and function, and reduce pain.
+    
+    In my worldview, in certain cases, before opting for invasive treatments, osteopathy can be a beneficial first step (of course, for specific medical conditions, prior medical approval is required).
+    
+    For every patient who comes to me, I thoroughly investigate their physical history through questioning and examinations to diagnose the root cause of the issue. Then, I use gentle pressure, stretches, mobilizations, and manipulations aimed at releasing stiff and immobile areas, restoring proper function, and triggering a recovery process.
+    
+    Most patients report improvement after the very first session. Some even visit regularly for "maintenance" and prevention.`,
+  }
+  const imgs = [
+    {
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325433/WhatsApp_Image_2024-10-29_at_16.16.41_1_2_rvht4i.jpg',
+    },
+    {
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325437/WhatsApp_Image_2024-10-29_at_16.16.55_eu1lj6.jpg',
+    },
+    {
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325434/WhatsApp_Image_2024-10-29_at_16.16.11_1_jvclzy.jpg',
+    },
+    {
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325607/WhatsApp_Image_2024-10-29_at_16.16.42_1_b2aeei.jpg',
+    },
+    {
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325434/WhatsApp_Image_2024-10-29_at_16.16.42_2_nusldv.jpg',
+    },
+    {
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325436/WhatsApp_Image_2024-10-29_at_16.16.41_xa539c.jpg',
+    },
+  ]
+  const closerImg =
+    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325607/WhatsApp_Image_2024-10-29_at_16.16.42_1_b2aeei.jpg'
+  animation()
   return (
     <div className='camp-container'>
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
+      <div className='information-container'>
+        <ActivityInfo options={options} logo={logo} />
+      </div>
+
+      <div className='section hidden'>
+        <SwiperCarousel imgs={imgs} />
+      </div>
     </div>
   )
 }

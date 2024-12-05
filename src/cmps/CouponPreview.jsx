@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { capitalizeFirstLetter } from '../services/util.service'
+import { capitalizeFirstLetter, smoothScroll } from '../services/util.service'
 import { removeCoupon } from '../store/actions/coupon.actions'
 
 import { ActiveCouponButton } from './ActiveCouponButton'
@@ -24,7 +24,7 @@ export function CouponPreview({ coupon, setCoupons, onDeleteCoupon }) {
       onClick={() => {
         if (isHover) return
         navigate(`/admin/coupon/${coupon._id}`)
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        smoothScroll()
       }}
     >
       <b>{prefs.isEnglish ? coupon.title.eng : coupon.title.he}</b>
