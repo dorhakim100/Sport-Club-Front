@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 
 import { HomePage } from './pages/HomePage'
 import { Facilities } from './pages/Facilities'
+import { OpeningTimes } from './pages/OpeningTimes.jsx'
 import {
   AboutUs,
   Cancel,
@@ -91,8 +92,8 @@ export function App() {
             <Route path='' element={<HomePage />} />
             <Route path='facilities' element={<Facilities />} />
             <Route path='about' element={<AboutUs />}>
+              <Route path='times' element={<OpeningTimes />} />
               <Route path='cancel' element={<Cancel />} />
-              {/* <Route path='facilities' element={<Facilities />} /> */}
               <Route path='organization' element={<Organization />} />
               <Route path='accessibility' element={<AccessibilityPage />} />
             </Route>

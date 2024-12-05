@@ -450,11 +450,7 @@ Over the years, I have developed a personalized approach that combines professio
           </div>
           <p>{prefs.isEnglish ? owner.txt.eng : owner.txt.he}</p>
         </div>
-        {/* <div className='section'>
-          <div className='text-container hidden'>
-            <p>{prefs.isEnglish ? ownerText.eng : ownerText.he}</p>
-          </div>
-        </div> */}
+
         <div className='instagram-container section hidden'>
           <InstagramPost postUrl={instagram} />
           <b>

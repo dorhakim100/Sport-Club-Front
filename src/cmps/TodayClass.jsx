@@ -11,10 +11,6 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein }
-}
-
 export function TodayClass({ classes }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
@@ -112,10 +108,6 @@ export function TodayClass({ classes }) {
                     >
                       {clas.to}
                     </TableCell>
-                    {/* <TableCell align='right'>{row.calories}</TableCell>
-              <TableCell align='right'>{row.fat}</TableCell>
-              <TableCell align='right'>{row.carbs}</TableCell>
-              <TableCell align='right'>{row.protein}</TableCell> */}
                   </TableRow>
                 )
             )

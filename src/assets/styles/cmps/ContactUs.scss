@@ -9,6 +9,32 @@
         }
         
     }
+
+    .contact-cmp-container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        
+        @media (max-width:750px) {
+            
+            grid-template-columns: 1fr;
+            
+        }
+        
+
+            
+
+            .arrow-link-container{
+                @media (max-width:750px) {
+                    
+                    padding: 1em;
+                    
+                }
+
+
+            }
+
+
+    }
     .input-container{
 
         display: flex;

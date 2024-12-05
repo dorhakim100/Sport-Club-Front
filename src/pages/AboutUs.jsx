@@ -32,6 +32,11 @@ export function AboutUs() {
     //   eng: 'Team',
     // },
     {
+      path: 'times',
+      he: 'שעות הפתיחה',
+      eng: 'Opening times',
+    },
+    {
       path: 'organization',
       he: 'עמותה',
       eng: 'Organization',

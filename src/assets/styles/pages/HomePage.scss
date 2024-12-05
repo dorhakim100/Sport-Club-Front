@@ -252,81 +252,14 @@
     }
 
 
-    .schedule-container{
+    .arrow-link-container.schedule{
         grid-column: 1/2;
         grid-row: 1/2;
 
         align-self: center;
         justify-self: center;
 
-        display: grid;
-        align-items: center;
-        justify-items: center;
-        gap: 0.5em;
-        cursor: pointer;
-        
-        font-size: 3em;
-        &:hover{
-
-         .arrow{
-
-             transform: translateX(-10px);
-         }
-     }
-        @media (max-width:500px) {
-          font-size: 2.5em;
-
-
-          
-        }
-
-        img{
-          width: 300px;
-        }
-        a{
-          font-family: assistantExtraBold;
-            position: relative;
-            color: $bold-navy;
-            text-decoration: none;
-        }
-        
-        .dark{
-            color: white;
-            // text-decoration: none; /* Optional: remove underline */
-            &:visited {
-                color: white;
-    
-            }
-            
-        }
-
-        .arrow{
-            // position: absolute;
-            // top: 15px;
-            height: 40px;
-            width: 40px;
-            transition: 0.3s ease-out;
-         
-
-            &.right{
-                margin-left: 5px;
-                
-            }
-            &.left{
-                margin-right: 5px;
-            }
-        }
-
-        
-        .fire{
-            position: absolute;
-            right: 0;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-
+       
     }
     
     .cards-container{
