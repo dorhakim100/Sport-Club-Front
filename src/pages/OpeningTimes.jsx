@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { makeId } from '../services/util.service'
 
@@ -16,146 +17,305 @@ import { ContactUs } from '../cmps/ContactUs'
 export function OpeningTimes() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const text = { he: 'שעות הפתיחה', eng: 'Opening Times' }
-  const days = [
-    {
-      he: 'ראשון',
-      eng: 'Sunday',
-      times: {
-        pool: [
-          {
-            from: '06:00',
-            to: '12:00',
-          },
-          {
-            from: '15:00',
-            to: '21:00',
-          },
-        ],
-        gym: [
-          {
-            from: '06:00',
-            to: '13:00',
-          },
-          {
-            from: '16:00',
-            to: '21:00',
-          },
-        ],
+  const [days, setDays] = useState(getDefaultTimes())
+
+  function getDefaultTimes() {
+    return [
+      {
+        he: 'ראשון',
+        eng: 'Sunday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '12:00',
+            },
+            {
+              from: '15:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '13:00',
+            },
+            {
+              from: '16:00',
+              to: '21:00',
+            },
+          ],
+        },
       },
-    },
-    {
-      he: 'שני',
-      eng: 'Monday',
-      times: {
-        pool: [
-          {
-            from: '06:00',
-            to: '21:00',
-          },
-        ],
-        gym: [
-          {
-            from: '06:00',
-            to: '21:00',
-          },
-        ],
+      {
+        he: 'שני',
+        eng: 'Monday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+        },
       },
-    },
-    {
-      he: 'שלישי',
-      eng: 'Tuesday',
-      times: {
-        pool: [
-          {
-            from: '06:00',
-            to: '21:00',
-          },
-        ],
-        gym: [
-          {
-            from: '06:00',
-            to: '21:00',
-          },
-        ],
+      {
+        he: 'שלישי',
+        eng: 'Tuesday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+        },
       },
-    },
-    {
-      he: 'רביעי',
-      eng: 'Wednesday',
-      times: {
-        pool: [
-          {
-            from: '06:00',
-            to: '21:00',
-          },
-        ],
-        gym: [
-          {
-            from: '06:00',
-            to: '21:00',
-          },
-        ],
+      {
+        he: 'רביעי',
+        eng: 'Wednesday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+        },
       },
-    },
-    {
-      he: 'חמישי',
-      eng: 'Thursday',
-      times: {
-        pool: [
-          {
-            from: '06:00',
-            to: '21:00',
-          },
-        ],
-        gym: [
-          {
-            from: '06:00',
-            to: '13:00',
-          },
-          {
-            from: '16:00',
-            to: '21:00',
-          },
-        ],
+      {
+        he: 'חמישי',
+        eng: 'Thursday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '13:00',
+            },
+            {
+              from: '16:00',
+              to: '21:00',
+            },
+          ],
+        },
       },
-    },
-    {
-      he: 'שישי',
-      eng: 'Friday',
-      times: {
-        pool: [
-          {
-            from: '06:00',
-            to: '17:00',
-          },
-        ],
-        gym: [
-          {
-            from: '06:00',
-            to: '16:00',
-          },
-        ],
+      {
+        he: 'שישי',
+        eng: 'Friday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '17:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '16:00',
+            },
+          ],
+        },
       },
-    },
-    {
-      he: 'שבת',
-      eng: 'Saturday',
-      times: {
-        pool: [
-          {
-            from: '08:00',
-            to: '17:00',
-          },
-        ],
-        gym: [
-          {
-            from: '08:00',
-            to: '16:00',
-          },
-        ],
+      {
+        he: 'שבת',
+        eng: 'Saturday',
+        times: {
+          pool: [
+            {
+              from: '08:00',
+              to: '17:00',
+            },
+          ],
+          gym: [
+            {
+              from: '08:00',
+              to: '16:00',
+            },
+          ],
+        },
       },
-    },
-  ]
+    ]
+  }
+
+  function getJulyAugustTimes() {
+    return [
+      {
+        he: 'ראשון',
+        eng: 'Sunday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '12:00',
+            },
+            {
+              from: '15:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '13:00',
+            },
+            {
+              from: '16:00',
+              to: '21:00',
+            },
+          ],
+        },
+      },
+      {
+        he: 'שני',
+        eng: 'Monday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+        },
+      },
+      {
+        he: 'שלישי',
+        eng: 'Tuesday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+        },
+      },
+      {
+        he: 'רביעי',
+        eng: 'Wednesday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+        },
+      },
+      {
+        he: 'חמישי',
+        eng: 'Thursday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '21:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '13:00',
+            },
+            {
+              from: '16:00',
+              to: '21:00',
+            },
+          ],
+        },
+      },
+      {
+        he: 'שישי',
+        eng: 'Friday',
+        times: {
+          pool: [
+            {
+              from: '06:00',
+              to: '18:00',
+            },
+          ],
+          gym: [
+            {
+              from: '06:00',
+              to: '16:00',
+            },
+          ],
+        },
+      },
+      {
+        he: 'שבת',
+        eng: 'Saturday',
+        times: {
+          pool: [
+            {
+              from: '08:00',
+              to: '18:00',
+            },
+          ],
+          gym: [
+            {
+              from: '08:00',
+              to: '16:00',
+            },
+          ],
+        },
+      },
+    ]
+  }
+
+  function isInJulyOrAugust() {
+    const now = new Date() // Get current date and time
+    const month = now.getMonth() // Month is zero-based (0 = January, 6 = July, 7 = August)
+    return month === 6 || month === 7 // Check if the month is July or August
+  }
+  useEffect(() => {
+    const isWithinJulyAugust = isInJulyOrAugust()
+    if (isWithinJulyAugust) {
+      setDays(getJulyAugustTimes())
+    }
+  }, [])
 
   return (
     <div className='times-container'>
@@ -210,7 +370,7 @@ export function OpeningTimes() {
                   color: prefs.isDarkMode && 'white',
                 }}
               >
-                {prefs.isEnglish ? 'Pool' : 'בריכה'}
+                <b>{prefs.isEnglish ? 'Pool' : 'בריכה'}</b>
               </TableCell>
               {days.map((day) => {
                 return (
@@ -266,7 +426,7 @@ export function OpeningTimes() {
                   paddingRight: '0.5em',
                 }}
               >
-                {prefs.isEnglish ? 'Gym' : 'חדר הכושר'}
+                <b>{prefs.isEnglish ? 'Gym' : 'חדר הכושר'}</b>
               </TableCell>
 
               {days.map((day) => {
