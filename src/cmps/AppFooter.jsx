@@ -7,6 +7,7 @@ import { Button } from '@mui/material'
 
 import InstagramIcon from '@mui/icons-material/Instagram'
 import FacebookIcon from '@mui/icons-material/Facebook'
+import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import PlaceIcon from '@mui/icons-material/Place'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import MailIcon from '@mui/icons-material/Mail'
@@ -32,6 +33,7 @@ export function AppFooter() {
   const links = {
     facebook: 'https://www.facebook.com/moadonsportkfar/?locale=he_IL',
     instagram: 'https://www.instagram.com/moadonsport/',
+    whatsapp: 'https://wa.me/972522681757',
   }
 
   useEffect(() => {
@@ -57,6 +59,10 @@ export function AppFooter() {
       console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't copy email` : 'מייל לא הועתק')
     }
+  }
+
+  const openLink = (link) => {
+    window.open(link)
   }
 
   return (
@@ -90,17 +96,25 @@ export function AppFooter() {
       </div>
       <div className='links-container'>
         <div
-          className='facebook-container'
+          className='social-container facebook-container'
           onClick={() => {
-            window.open(links.facebook)
+            openLink(links.facebook)
           }}
         >
           <FacebookIcon />
         </div>
         <div
-          className='instagram-container'
+          className='social-container whatsapp-container'
           onClick={() => {
-            window.open(links.instagram)
+            openLink(links.whatsapp)
+          }}
+        >
+          <WhatsAppIcon />
+        </div>
+        <div
+          className='social-container instagram-container'
+          onClick={() => {
+            openLink(links.instagram)
           }}
         >
           <InstagramIcon />

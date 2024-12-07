@@ -78,7 +78,9 @@ export function SortSelect({
             gridColumn: '2/4',
           }}
         >
-          <InputLabel id='sort'>{prefs.isEnglish ? 'Sort' : 'מיון'}</InputLabel>
+          <InputLabel id='sort' sx={{}}>
+            {prefs.isEnglish ? 'Sort' : 'מיון'}
+          </InputLabel>
           <Select
             labelId='sort'
             id='sort'

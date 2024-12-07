@@ -450,13 +450,16 @@ export function AppHeader({ bodyRef }) {
             )}
           </div>
         </NavLink>
+        <NavLink to='member' onClick={selectLink}>
+          <span>{prefs.isEnglish ? 'Member' : 'מנויים'}</span>
+        </NavLink>
         <NavLink to='item' onClick={selectLink}>
           <div
             className='menu'
             onMouseEnter={handlers['item']}
             onMouseLeave={handleMouseLeave}
           >
-            <span>{prefs.isEnglish ? 'Store' : 'חנות'}</span>
+            <span>{prefs.isEnglish ? 'Store' : 'כרטיסיות וציוד'}</span>
             {isDropdownVisible && hoveredSection === 'item' && (
               <DropDown
                 options={options}
@@ -464,9 +467,6 @@ export function AppHeader({ bodyRef }) {
               />
             )}
           </div>
-        </NavLink>
-        <NavLink to='member' onClick={selectLink}>
-          <span>{prefs.isEnglish ? 'Member' : 'מנויים'}</span>
         </NavLink>
 
         <NavLink to='activities' onClick={selectLink}>

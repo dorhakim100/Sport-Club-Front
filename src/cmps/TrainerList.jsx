@@ -44,6 +44,7 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
       {trainers.map((trainer) => {
         return (
           <div
+            key={trainer._id}
             className='trainer-container'
             style={(user && user.isAdmin && { cursor: 'pointer' }) || {}}
             onClick={(event) => {

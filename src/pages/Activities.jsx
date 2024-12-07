@@ -44,7 +44,6 @@ const animation = () => {
 }
 
 const openLink = (link) => {
-  console.log(link)
   window.open(link)
 }
 export function Activities() {
