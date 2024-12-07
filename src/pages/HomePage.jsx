@@ -89,8 +89,14 @@ export function HomePage() {
   ]
 
   const preview = {
-    eng: 'Join us for a year-round experience blending the thrill of winter sports with the warmth of summer family activities. From action-packed classes to serene leisure moments, we’re here to make every season memorable.',
-    he: 'הצטרפו אלינו לחוויה ייחודית כל השנה, שמשלבת את הריגוש של ספורט החורף עם פעילויות קיץ לכל המשפחה. שיעורים מלאי אקשן לצד רגעים של רוגע ונחת - אנחנו כאן כדי להפוך כל עונה לבלתי נשכחת.',
+    eng: `The Kfar Shmaryahu Sport and Leisure Club is located in the heart of the village, surrounded by greenery and trees that blend the site with nature and pastoral tranquility.
+
+    The club serves a limited number of members, making it unique and an ideal meeting point for families for recreation, leisure, and sports.
+    
+    The club offers a variety of activities for all ages, including children's activities, shared family activities, and even unique programs for seniors.`,
+    he: `מועדון ספורט ונופש כפר שמריהו ממוקם בלב הכפר. מוקף בירק ובעצים הממזגים את המקום עם טבע ושלווה פסטורלית. המועדון משרת מספר מצומצם של מנויים, דבר ההופך
+    אותו ליחודי ולנקודת מפגש אידיאלית למשפחות למטרות בילוי, נופש וספורט. המועדון מקיים מגוון פעילויות לכל הגילאים כולל פעילויות ילדים, פעילויות משותפות לכל המשפחה
+    ואף פעילויות ייחודיות לגיל הזהב.`,
   }
 
   const mouseWheelImgs = [
@@ -148,6 +154,13 @@ export function HomePage() {
       text: {
         he: 'מתחם נינג׳ה, משחקים והפעלות לילדים',
         eng: 'Ninja Area, Games, and activities for Kids',
+      },
+    },
+    {
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733484121/45_shdnag_1_y1sfqo.jpg',
+      text: {
+        he: 'בריכת פעוטות מקורה',
+        eng: 'Covered Toddler Pool',
       },
     },
     {
@@ -297,13 +310,29 @@ export function HomePage() {
         >
           <HeadContainer
             text={{
-              eng: '9 reasons to join us',
-              he: '9 סיבות להצטרף למועדון הספורט',
+              eng: '10 reasons to join us',
+              he: '10 סיבות להצטרף למועדון הספורט',
             }}
           />
         </div>
 
         <MouseWheelCarousel imgs={mouseWheelImgs} />
+        {/* <div
+          className='arrow-link-container'
+          onClick={() => {
+            smoothScroll()
+            navigate('/item')
+          }}
+        >
+          <Link to='/item' className={prefs.isDarkMode ? 'dark' : ''}>
+            {prefs.isEnglish ? 'Store' : 'החנות'}
+            {prefs.isEnglish ? (
+              <ArrowForwardIosIcon className='arrow right' />
+            ) : (
+              <ArrowBackIosNewIcon className='arrow left' />
+            )}
+          </Link>
+        </div> */}
 
         <ContactUs />
       </div>

@@ -248,7 +248,7 @@ nav {
   }
 
   div.dark-mode{
-	label{
+	label:not(.MuiFormLabel-root){
 		background-color: $dark-gray;
 		&:hover{
 			
@@ -669,4 +669,42 @@ textarea, input{
 	}
 
 
+  }
+
+ 
+  
+  /* Firefox */
+  * {
+
+	&:hover{
+
+		// scrollbar-color: white $medium-gray;
+	}
+
+  }
+  
+  /* width */
+::-webkit-scrollbar {
+	width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	// background: $very-light-blue;
+	background: $light-gray;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	  transition: 0.1s ease;
+	background: white;
+	background: $medium-gray;
+	border-radius: 5px;
+
+  }
+  
+
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
   }

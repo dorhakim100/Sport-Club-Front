@@ -71,10 +71,19 @@
       // margin-bottom: 150px;
       padding: 2em;
       // text-align: start;
-
+      margin-top: 3em;
+      @media (min-width:600px) {
+        
+        bottom: 0px;
+      }
+      // height: 90%;
       h2{
         // font-size: clamp(3em, 3.5vw, 5.5em);
-
+        @media (max-width:800px) {
+          // font-size: 2em;
+          margin-bottom: 0px;
+        }
+        
       }
       p{
         margin-top: 2em;
@@ -82,7 +91,12 @@
         text-align: start;
         max-width: 700px;
         // font-size: clamp(1.5em, 2.5vw, 2.5em);
-
+        @media (max-width:800px) {
+          // font-size: 2em;
+          margin-top: 0px;
+          margin: 0px;
+        }
+        
       }
 
     }
