@@ -369,6 +369,7 @@ export function OpeningTimes() {
                 sx={{
                   color: prefs.isDarkMode && 'white',
                 }}
+                className={`facility-cell ${prefs.isDarkMode && 'dark-mode'}`}
               >
                 <b>{prefs.isEnglish ? 'Pool' : 'בריכה'}</b>
               </TableCell>
@@ -425,6 +426,7 @@ export function OpeningTimes() {
                   paddingLeft: '0.5em',
                   paddingRight: '0.5em',
                 }}
+                className={`facility-cell ${prefs.isDarkMode && 'dark-mode'}`}
               >
                 <b>{prefs.isEnglish ? 'Gym' : 'חדר הכושר'}</b>
               </TableCell>

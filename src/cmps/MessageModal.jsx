@@ -38,6 +38,7 @@ export function MessageModal() {
     isModal && (
       <div
         className={`modal-container visible ${prefs.isDarkMode && 'dark-mode'}`}
+        onClick={setModalFalse}
       >
         <div className='modal-message-container'>
           <IconButton
@@ -48,11 +49,17 @@ export function MessageModal() {
             <CloseIcon sx={{ color: prefs.isDarkMode ? 'white' : '' }} />
           </IconButton>
           <b>{prefs.isEnglish ? 'For you concern' : 'לידיעתכם'}</b>
-          <p>{prefs.isEnglish ? modalMessage.eng : modalMessage.he}</p>
+          <p
+            style={
+              prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }
+            }
+          >
+            {prefs.isEnglish ? modalMessage.eng : modalMessage.he}
+          </p>
 
           {modalMessage.link && (
             <Button variant='contained' onClick={navigateToLink}>
-              {prefs.isEnglish ? 'more details' : 'לפרטים נוספים'}
+              {prefs.isEnglish ? 'more details' : 'למידע נוסף'}
             </Button>
           )}
         </div>

@@ -260,7 +260,12 @@
           grid-template-columns: auto 1fr;
         }
         p{
+          text-align: start;
 
+        @media (max-width:600px) {
+          font-size: 0.8em;
+          
+      }
         }
       }
     }
