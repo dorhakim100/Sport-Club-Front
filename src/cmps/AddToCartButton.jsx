@@ -64,8 +64,8 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
 
     if (itemToAdd.types.includes('card')) {
       const messageToSet = {
-        he: `מנויים משלמים פחות`,
-        eng: `Members pay less`,
+        he: `משתלם יותר להיות מנוי!`,
+        eng: `Members pay less!`,
         link: '/member',
       }
       setModalMessage(messageToSet)

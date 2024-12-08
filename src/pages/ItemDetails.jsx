@@ -52,8 +52,8 @@ export function ItemDetails() {
     const i = await loadItem(itemId, itemFilter)
     if (i.types.includes('card')) {
       const messageToSet = {
-        he: `מנויים משלמים פחות`,
-        eng: `Members pay less`,
+        he: `משתלם יותר להיות מנוי!`,
+        eng: `Members pay less!`,
         link: '/member',
       }
       setModalMessage(messageToSet)

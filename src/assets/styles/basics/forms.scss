@@ -378,7 +378,8 @@ nav {
 	@media (max-width:600px) {
 		// margin: 0em 2em 0em 2em;
 		margin: 0px;
-		padding: 0em 2em 0em 2em;
+		padding: 1em 2em 1em 2em;
+
 		width: 100vw;
 		overflow-x: auto;
 
@@ -608,6 +609,18 @@ textarea, input{
 	cursor: pointer;
 	
 	font-size: 3em;
+
+	@media (max-width:550px) {
+		a{
+
+			font-size: 0.8em;
+		}
+
+		svg{
+
+		}
+		
+	}
 	&:hover{
 
 	 .arrow{
@@ -649,7 +662,11 @@ textarea, input{
 		width: 40px;
 		transition: 0.3s ease-out;
 	 
-
+@media (max-width:550px) {
+	height: 35px;
+	width: 35px;
+	
+}
 		&.right{
 			margin-left: 5px;
 			

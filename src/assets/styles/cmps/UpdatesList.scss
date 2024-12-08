@@ -39,11 +39,20 @@
         justify-items: start;
         transition: 0.2s ease;
         background: linear-gradient(135deg, #6ec1e440 0%, #a8e6a11e 100%); // Gradient from light blue to soft green
-            border-bottom: 1px solid $bold-navy;
-
-            font-size: 1.4em;
-    //   height: 100px;
+        border-bottom: 1px solid $bold-navy;
+        
+        font-size: 1.4em;
+        //   height: 100px;
         // max-height: calc(0.6em + 100px);
+        @media (max-width:800px) {
+            grid-template-columns: 1fr 1fr auto;
+            
+        }
+
+        @media (max-width:600px) {
+            font-size: 1em;
+            
+        }
         p{
             text-align: start;
             // text-align: justify;
