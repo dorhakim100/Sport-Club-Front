@@ -172,7 +172,7 @@ export function AboutUs() {
 
   const covers = {
     about:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946218/DSC06479_b6n2yd.jpg',
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733661469/DSC06231_tmop0u.jpg',
   }
 
   useEffect(() => {

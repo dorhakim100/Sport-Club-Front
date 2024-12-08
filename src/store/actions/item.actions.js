@@ -27,6 +27,7 @@ export async function loadItem(itemId, filter) {
   try {
     const item = await itemService.getById(itemId, filter)
     store.dispatch(getCmdSetItem(item))
+    return item
   } catch (err) {
     console.log('Cannot load item', err)
     throw err

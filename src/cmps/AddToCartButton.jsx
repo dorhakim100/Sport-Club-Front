@@ -2,6 +2,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
+import { setIsModal, setModalMessage } from '../store/actions/system.actions'
+
 import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 
@@ -59,6 +61,16 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
     const itemsIds = user.items.map((item) => {
       return item.id
     })
+
+    if (itemToAdd.types.includes('card')) {
+      const messageToSet = {
+        he: `מנויים משלמים פחות`,
+        eng: `Members pay less`,
+        link: '/member',
+      }
+      setModalMessage(messageToSet)
+      setIsModal(true)
+    }
 
     if (itemsIds.includes(itemToAdd._id)) {
       const idx = user.items.findIndex((item) => item.id === itemToAdd._id)

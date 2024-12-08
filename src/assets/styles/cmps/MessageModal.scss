@@ -1,0 +1,48 @@
+.modal-container{
+    transition: 0.2s ease-in;
+    &.dark-mode{
+        color: white;
+    }
+    .modal-message-container{
+        position: relative;
+        display: grid;
+        gap: 1em;
+        align-items: center;
+        justify-items: center;
+        opacity: 1;
+        font-family: assistantBold;
+        border-radius: 5px;
+        background-color: $light-gray;
+        background: linear-gradient(135deg, #6ec1e4fe 0%, #a8e6a196 100%); // Gradient from light blue to soft green
+
+        .exit-button{
+            position: absolute;
+            top: 0.5em;
+            inset-inline-end: 1em;
+        }
+
+        b{
+
+            font-size: 3em;
+        }
+
+        p{
+            font-size: 2em;
+        }
+        
+        padding: 2em;
+        z-index: 4;
+        
+        @media (max-width:600px) {
+            b{
+
+                font-size: 2em;
+            }
+
+            p{
+                font-size: 1em;
+            }
+            
+        }
+    }
+}

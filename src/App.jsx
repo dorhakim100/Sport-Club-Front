@@ -63,6 +63,7 @@ import { UserMsg } from './cmps/UserMsg.jsx'
 import { Loader } from './cmps/Loader'
 import { PrefsButton } from './cmps/PrefsButton.jsx'
 import { Prefs } from './cmps/Prefs.jsx'
+import { MessageModal } from './cmps/MessageModal'
 
 import './App.css'
 
@@ -83,6 +84,7 @@ export function App() {
 
   return (
     <>
+      <MessageModal />
       <UserMsg />
       <AccessibilityButton />
       <Accessibility bodyRef={bodyRef} />

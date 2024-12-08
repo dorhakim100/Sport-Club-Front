@@ -30,12 +30,24 @@ export function ItemNavigation({ item, type, lastPage }) {
         </Link>
       )}
       <ButtonGroup variant='contained' aria-label='Basic button group'>
-        <Link to={`/${type}/${item.prevNext.next}`}>
+        <Link
+          to={
+            prefs.isEnglish
+              ? `/${type}/${item.prevNext.prev}`
+              : `/${type}/${item.prevNext.next}`
+          }
+        >
           <Button>
             <NavigateBeforeIcon></NavigateBeforeIcon>
           </Button>
         </Link>
-        <Link to={`/${type}/${item.prevNext.prev}`}>
+        <Link
+          to={
+            prefs.isEnglish
+              ? `/${type}/${item.prevNext.next}`
+              : `/${type}/${item.prevNext.prev}`
+          }
+        >
           <Button>
             <NavigateNextIcon></NavigateNextIcon>
           </Button>
