@@ -8,6 +8,8 @@ import {
   SET_PREFS,
   SET_IS_ACCESSIBILITY,
   SET_IS_PREFS,
+  SET_IS_MODAL,
+  SET_MODAL_MESSAGE,
 } from '../reducers/system.reducer'
 
 export function setIsLoading(stateToSet) {
@@ -27,4 +29,11 @@ export function setIsPrefs(stateToSet) {
 
 export function setIsAccessibility(stateToSet) {
   store.dispatch({ type: SET_IS_ACCESSIBILITY, isAccessibility: stateToSet })
+}
+
+export function setIsModal(stateToSet) {
+  store.dispatch({ type: SET_IS_MODAL, isModal: stateToSet })
+}
+export function setModalMessage(messageToSet) {
+  store.dispatch({ type: SET_MODAL_MESSAGE, modalMessage: messageToSet })
 }

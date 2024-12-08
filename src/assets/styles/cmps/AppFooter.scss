@@ -115,11 +115,13 @@
         cursor: pointer;
         transition: color 0.3s;
         
-    }
-
-
-    .social-container{
+        
+      }
+      
+      
+      .social-container{
         transition: color 0.3s;
+        transition: 0.2s ease-out;
         &:hover {
             //   color: #4267B2; 
             transform: scale(1.1);

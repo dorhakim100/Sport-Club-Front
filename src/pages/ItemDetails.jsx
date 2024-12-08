@@ -12,6 +12,8 @@ import { ItemNavigation } from '../cmps/ItemNavigation'
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { ContactUs } from '../cmps/ContactUs'
+import { MessageModal } from '../cmps/MessageModal'
+import { setIsModal, setModalMessage } from '../store/actions/system.actions'
 
 export function ItemDetails() {
   const { itemId } = useParams()
@@ -45,9 +47,22 @@ export function ItemDetails() {
     return str
   }
 
-  useEffect(() => {
+  const setItem = async () => {
     getLatestPage()
-    loadItem(itemId, itemFilter)
+    const i = await loadItem(itemId, itemFilter)
+    if (i.types.includes('card')) {
+      const messageToSet = {
+        he: `מנויים משלמים פחות`,
+        eng: `Members pay less`,
+        link: '/member',
+      }
+      setModalMessage(messageToSet)
+      setIsModal(true)
+    }
+  }
+
+  useEffect(() => {
+    setItem()
   }, [itemId])
 
   async function onAddItemMsg(itemId) {

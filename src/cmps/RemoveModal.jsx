@@ -10,11 +10,7 @@ export function RemoveModal({ isModal, setIsModal, item, onRemove }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   return (
-    <div
-      className={
-        isModal ? 'remove-modal-container visible' : 'remove-modal-container'
-      }
-    >
+    <div className={isModal ? 'modal-container visible' : 'modal-container'}>
       <div className='control-container'>
         <b>{prefs.isEnglish ? 'Remove?' : 'להסיר?'}</b>
         <div className='buttons-container'>
