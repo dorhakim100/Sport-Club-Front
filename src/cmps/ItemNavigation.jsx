@@ -7,6 +7,7 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
 import IconButton from '@mui/material/IconButton'
+import { smoothScroll } from '../services/util.service'
 
 export function ItemNavigation({ item, type, lastPage }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -25,7 +26,11 @@ export function ItemNavigation({ item, type, lastPage }) {
       </IconButton>
 
       {user && user.isAdmin && (
-        <Link to={`/${type}/edit/${item._id}`} className='link'>
+        <Link
+          to={`/${type}/edit/${item._id}`}
+          className='link'
+          onClick={smoothScroll()}
+        >
           {prefs.isEnglish ? 'Edit' : 'עריכה'}
         </Link>
       )}

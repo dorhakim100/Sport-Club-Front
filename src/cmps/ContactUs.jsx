@@ -142,7 +142,11 @@ export function ContactUs() {
               navigate('/about/times')
             }}
           >
-            <Link to='/about/times' className={prefs.isDarkMode ? 'dark' : ''}>
+            <Link
+              to='/about/times'
+              className={prefs.isDarkMode ? 'dark' : ''}
+              onClick={smoothScroll}
+            >
               {prefs.isEnglish ? 'Opening Times' : 'שעות הפתיחה'}
               {prefs.isEnglish ? (
                 <ArrowForwardIosIcon className='arrow right' />

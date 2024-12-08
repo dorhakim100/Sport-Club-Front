@@ -21,7 +21,12 @@ import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import { socketService } from '../services/socket.service'
 import { userService } from '../services/user/user.service'
-import { setPrefs } from '../store/actions/system.actions'
+import {
+  setPrefs,
+  setIsPrefs,
+  setModalMessage,
+  setIsModal,
+} from '../store/actions/system.actions'
 
 export function AppHeader({ bodyRef }) {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -317,6 +322,44 @@ export function AppHeader({ bodyRef }) {
 
     setOptions(optionsToSet)
   }
+
+  const firstVisit = () => {
+    setModalMessage({
+      he: (
+        <div style={{ display: 'grid' }}>
+          <span style={{ direction: 'rtl' }}>
+            מעכשיו האתר תומך במצב כהה ובאנגלית.
+          </span>
+          <span style={{ direction: 'ltr' }}>
+            We now have both dark mode and English support.
+          </span>
+        </div>
+      ),
+      eng: (
+        <div style={{ display: 'grid' }}>
+          <span style={{ direction: 'rtl' }}>
+            האתר החדש תומך באנגלית ובמצב כהה.{' '}
+          </span>
+          <span style={{ direction: 'ltr' }}>
+            Our new site now has both dark mode and English support.{' '}
+          </span>
+        </div>
+      ),
+      func: () => {
+        setIsPrefs(true)
+        setIsModal(false)
+      },
+    })
+    setIsModal(true)
+    setPrefs({ ...prefs, isFirstTime: false })
+  }
+  useEffect(() => {
+    if (prefs.isFirstTime) {
+      setTimeout(() => {
+        firstVisit()
+      }, 2000)
+    }
+  }, [])
 
   const opacityUp = () => {
     headerRef.current.style.opacity = '1'

@@ -169,7 +169,7 @@ function getPrefs() {
   const entityType = 'sport-club-pref'
   let prefs
   if (!localStorage.getItem(entityType)) {
-    prefs = { isEnglish: false, isDarkMode: false }
+    prefs = { isEnglish: false, isDarkMode: false, isFirstTime: true }
     localStorage.setItem(entityType, JSON.stringify(prefs))
   } else {
     prefs = JSON.parse(localStorage.getItem(entityType)) || { isEnglish: false }

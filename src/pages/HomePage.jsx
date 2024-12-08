@@ -7,7 +7,13 @@ import { makeId, smoothScroll } from '../services/util.service.js'
 import { loadTrainers } from '../store/actions/trainer.actions.js'
 import { loadUpdates } from '../store/actions/update.actions.js'
 import { updateService } from '../services/update/update.service.js'
-import { setIsLoading } from '../store/actions/system.actions.js'
+import {
+  setIsLoading,
+  setIsModal,
+  setIsPrefs,
+  setModalMessage,
+  setPrefs,
+} from '../store/actions/system.actions.js'
 import { showErrorMsg } from '../services/event-bus.service.js'
 
 import { SwiperCarousel } from '../cmps/SwiperCarousel.jsx'
@@ -271,7 +277,11 @@ export function HomePage() {
               src={prefs.isDarkMode ? dumbbellsDarkMode : dumbbells}
               alt=''
             />
-            <Link to='class' className={prefs.isDarkMode ? 'dark' : ''}>
+            <Link
+              to='class'
+              className={prefs.isDarkMode ? 'dark' : ''}
+              onClick={smoothScroll}
+            >
               {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}
               {prefs.isEnglish ? (
                 <ArrowForwardIosIcon className='arrow right' />
