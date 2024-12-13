@@ -27,11 +27,11 @@ export function Cart() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
 
-  console.log(user)
-
   const [fullCart, setFullCart] = useState(null)
 
   const [coupon, setCoupon] = useState('')
+  const [originalPrice, setOriginalPrice] = useState()
+  const [discount, setDiscount] = useState()
 
   const isFirstRender = useRef(true)
 
@@ -52,20 +52,27 @@ export function Cart() {
       total
     )
     setCartTotal(cartTotal)
+    if (originalPrice) {
+      const discountToSet = originalPrice - cartTotal
+      setDiscount(discountToSet)
+    }
     return cartTotal
-  }, [cart]) // using useMemo to prevent calculating each and every render
+  }, [cart, originalPrice]) // using useMemo to prevent calculating each and every render
 
   async function setCart(discount) {
     if (cart.length === 0) return
     try {
       setIsLoading(true)
       const logged = await userService.getLoggedinUser()
-      console.log(logged)
+
       const loaded = await loadUser(logged._id)
-      console.log(loaded)
+
       const fetchedCart = await userService.getCartItems(cart)
+
       isFirstRender.current === false
       if (discount) {
+        setOriginalPrice(total)
+
         fetchedCart.forEach((item) => {
           const matchedDiscountItem = discount.items.find(
             (itemToCheck) => itemToCheck.id === item.id
@@ -99,11 +106,9 @@ export function Cart() {
           fetchedCart.splice(idx, 1, itemToModify)
         })
       }
-      console.log(user)
-      console.log(fetchedCart)
+
       setFullCart([...fetchedCart])
       const userToUpdate = { ...loaded, items: [...fetchedCart] }
-      console.log(userToUpdate)
       await updateCart(userToUpdate)
     } catch (err) {
       console.log(err)
@@ -169,7 +174,15 @@ export function Cart() {
       <div className='cart-container'>
         {fullCart && <CartList cart={cart} setCart={setCart} />}
         {fullCart && (
-          <div className='total-container'>
+          <div className='total-container' style={{ direction: 'ltr' }}>
+            {originalPrice && (
+              <div style={{ fontSize: '0.8em', display: 'grid' }}>
+                <b>₪{originalPrice}</b>
+                <b>-₪{discount}</b>
+
+                <Divider orientation='horizontal' flexItem />
+              </div>
+            )}
             <b>₪{total}</b>
             <Divider orientation='horizontal' flexItem />
             <div

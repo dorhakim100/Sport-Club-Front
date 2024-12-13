@@ -254,6 +254,10 @@
         justify-self: center;
         align-self: center;
         width: 90vw;
+        @media (min-width:600px) {
+          
+        }
+
         
         .update-banner{
           font-size: 0.9em;
@@ -261,8 +265,7 @@
         }
         p{
           text-align: start;
-
-        @media (max-width:600px) {
+          @media (max-width:600px) {
           font-size: 0.8em;
           
       }
@@ -321,7 +324,7 @@
         
         grid-column: 1/-1;
         grid-row: 2/3;
-
+        
         .update-banner{
           transition: background-color 0.3s  ease-in-out, box-shadow 0.3s ease; // Smooth transition
           background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
@@ -333,9 +336,18 @@
           text-align: start;
           
           cursor: grab;
+
+          .title-container{
+            @media (min-width:800px) {
+              
+              font-size: 1.6em;
+            }
+
+          }
           
           p{
             
+            font-size: 1.4em;
             margin-bottom: 0px;
           }
           @media (max-width:700px) {

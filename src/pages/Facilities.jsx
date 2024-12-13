@@ -111,8 +111,12 @@ export function Facilities() {
         eng: 'Mini Golf Area',
       },
       description: {
-        he: 'בלה בלה בלה בלה',
-        eng: 'lorem ipsum godurms, bla bla bla bla',
+        he: `אנו מזמינים אתכם ליהנות ממתחם מיני גולף מהנה וייחודי הכולל 8 מסלולים מעוצבים המתאימים לכל הגילאים. המתחם ממוקם בלב מועדון הספורט שלנו ומשלב חוויית ספורט, פנאי וכיף לכל המשפחה.
+
+        כל מסלול תוכנן בקפידה עם מכשולים יצירתיים ואתגריים כדי לספק חוויה מרתקת ומהנה.`,
+        eng: `We invite you to enjoy a fun and unique mini golf course featuring 8 creative tracks, designed for all ages. Nestled in the heart of our sports club, the course offers a blend of sports, leisure, and entertainment for the entire family.
+
+        Each track is carefully crafted with imaginative and challenging obstacles, ensuring an exciting and engaging experience.`,
       },
     },
     {
@@ -122,8 +126,18 @@ export function Facilities() {
         eng: 'Snookball Court',
       },
       description: {
-        he: 'בלה בלה בלה בלה',
-        eng: 'lorem ipsum godurms, bla bla bla bla',
+        he: `גלו את החוויה החדשה והמלהיבה במועדון הספורט שלנו – מגרש סנוקר-כדורגל! שילוב מושלם בין דיוק, אסטרטגיה וכיף לכל הגילאים.
+
+        המגרש תוכנן במיוחד כדי לדמות שולחן סנוקר ענק, בו משחקים כדורגל במקום כדורי סנוקר. המטרה: לכוון, לבעוט ולהכניס את הכדורים הענקיים לכיסים, בדיוק כמו במשחק סנוקר קלאסי.
+        
+        זוהי חוויה חדשנית, מאתגרת ומהנה שתשדרג כל ביקור במועדון.
+        
+        `,
+        eng: `Discover the exciting new experience at our sports club – a Snooker Football Court! A perfect combination of precision, strategy, and fun for all ages.
+
+        The court is specially designed to resemble a giant snooker table, where football replaces traditional snooker balls. The goal: aim, kick, and pocket the oversized balls just like in classic snooker.
+        
+        This innovative and challenging activity is a perfect way to elevate your visit to the club.`,
       },
     },
     {
