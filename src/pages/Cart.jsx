@@ -174,9 +174,11 @@ export function Cart() {
       <div className='cart-container'>
         {fullCart && <CartList cart={cart} setCart={setCart} />}
         {fullCart && (
-          <div className='total-container' style={{ direction: 'ltr' }}>
+          <div className='total-container'>
             {originalPrice && (
-              <div style={{ fontSize: '0.8em', display: 'grid' }}>
+              <div
+                style={{ fontSize: '0.8em', display: 'grid', direction: 'ltr' }}
+              >
                 <b>₪{originalPrice}</b>
                 <b>-₪{discount}</b>
 
