@@ -1,14 +1,24 @@
 .schedule{
 
-
+    display: grid;
+    @media (max-width:600px) {
+        display: block;
+        
+    }
 
     .icons-container{
+        padding-inline-start: 1em;
+        justify-self: start;
+        // width: fit-content;
         display: grid;
         grid-template-columns: repeat(2,auto);
+
         justify-items: center;
         margin-bottom: 1em;
+        gap: 1em;
         
         .icon-container{
+
             display: grid;
             grid-template-columns: repeat(3,auto);
             gap: 1em;
@@ -79,14 +89,16 @@
     margin-bottom: 3em;
 
     max-height: 85vh;
+    overflow: auto;
+    width: 90vw;
+
     @media (max-width:1200px) {
         font-size: 0.8em;
         
     }
     @media (max-width:850px) {
-
         width: 80vw;
-        overflow-x: auto;
+
         
     }
     @media (max-width:550px) {

@@ -74,14 +74,6 @@ export function App() {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
-  // useEffect(() => {
-  //   if (prefs.isDarkMode) {
-  //     document.getElementById('root').classList.add('dark-mode')
-  //   } else {
-  //     document.getElementById('root').classList.remove('dark-mode')
-  //   }
-  // }, [prefs.isDarkMode])
-
   return (
     <>
       <MessageModal />
