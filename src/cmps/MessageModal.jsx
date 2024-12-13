@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -18,6 +18,8 @@ export function MessageModal() {
     (stateSelector) => stateSelector.systemModule.modalMessage
   )
 
+  const [isHover, setIsHover] = useState(false)
+
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -33,7 +35,8 @@ export function MessageModal() {
     }
   }, [isModal])
 
-  const setModalFalse = () => {
+  const setModalFalse = (event) => {
+    if (isHover || event.target.closest('.modal-message-container')) return
     setIsModal(false)
     modalRef.current.style.zIndex = '-1'
   }
@@ -43,6 +46,13 @@ export function MessageModal() {
 
     smoothScroll()
     navigate(modalMessage.link)
+  }
+
+  const setHoverTrue = () => {
+    setIsHover(true)
+  }
+  const setHoverFalse = () => {
+    setIsHover(true)
   }
 
   return (
@@ -59,7 +69,11 @@ export function MessageModal() {
         // visibility: !isModal && 'hidden',
       }}
     >
-      <div className='modal-message-container'>
+      <div
+        className='modal-message-container'
+        onMouseEnter={setHoverTrue}
+        onMouseLeave={setHoverFalse}
+      >
         <IconButton
           aria-label='delete'
           className='exit-button'
