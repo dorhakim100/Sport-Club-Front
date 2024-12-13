@@ -61,12 +61,13 @@ export function MessageModal() {
         prefs.isDarkMode && 'dark-mode'
       }`}
       //   style={isModal ? { zIndex: '1' } : { zIndex: '-1' }}
-      // style={{ zIndex: '1' }}
+
       onClick={setModalFalse}
       ref={modalRef}
       style={{
         transition: 'opacity 0.3s ease-in-out',
         // visibility: !isModal && 'hidden',
+        zIndex: !isModal && '-1',
       }}
     >
       <div
@@ -94,7 +95,13 @@ export function MessageModal() {
           </Button>
         )}
         {modalMessage.func && (
-          <Button variant='contained' onClick={modalMessage.func}>
+          <Button
+            variant='contained'
+            onClick={() => {
+              modalMessage.func()
+              setModalFalse()
+            }}
+          >
             {prefs.isEnglish ? 'more details' : 'למידע נוסף'}
           </Button>
         )}
