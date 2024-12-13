@@ -35,8 +35,8 @@ export function MessageModal() {
     }
   }, [isModal])
 
-  const setModalFalse = (event) => {
-    if (isHover || event.target.closest('.modal-message-container')) return
+  const setModalFalse = () => {
+    if (isHover) return
     setIsModal(false)
     modalRef.current.style.zIndex = '-1'
   }
@@ -78,7 +78,11 @@ export function MessageModal() {
         <IconButton
           aria-label='delete'
           className='exit-button'
-          onClick={setModalFalse}
+          onClick={() => {
+            setIsModal(false)
+            modalRef.current.style.zIndex = '-1'
+          }}
+          onMouseEnter={setHoverFalse}
         >
           <CloseIcon sx={{ color: prefs.isDarkMode ? 'white' : '' }} />
         </IconButton>
@@ -90,7 +94,14 @@ export function MessageModal() {
         </p>
 
         {modalMessage.link && (
-          <Button variant='contained' onClick={navigateToLink}>
+          <Button
+            variant='contained'
+            onClick={(event) => {
+              navigateToLink()
+              setIsModal(false)
+              modalRef.current.style.zIndex = '-1'
+            }}
+          >
             {prefs.isEnglish ? 'more details' : 'למידע נוסף'}
           </Button>
         )}
@@ -99,7 +110,8 @@ export function MessageModal() {
             variant='contained'
             onClick={() => {
               modalMessage.func()
-              setModalFalse()
+              setIsModal(false)
+              modalRef.current.style.zIndex = '-1'
             }}
           >
             {prefs.isEnglish ? 'more details' : 'למידע נוסף'}
