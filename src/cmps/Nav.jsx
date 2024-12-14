@@ -19,7 +19,7 @@ export function Nav({ origin, links, isMain }) {
       }
     >
       <>
-        <NavLink to={`${origin.path}`}>
+        <NavLink to={`${origin.path}`} end>
           {prefs.isEnglish ? origin.eng : origin.he}
         </NavLink>
         {!isMain && (
