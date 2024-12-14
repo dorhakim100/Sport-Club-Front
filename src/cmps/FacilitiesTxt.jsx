@@ -22,16 +22,16 @@ export function FacilitiesTxt({ facilities }) {
     elements.forEach((el) => observer.observe(el))
 
     return () => elements.forEach((el) => observer.unobserve(el))
-  }, [prefs.isEnglish])
+  }, [prefs.isEnglish, prefs.isDarkMode])
   return (
     <div className='facilities-text-container'>
       {facilities.map((facility) => {
         return (
           <div className='facility-container section hidden' key={makeId()}>
+            <HeadContainer
+              text={{ eng: facility.title.eng, he: facility.title.he }}
+            />
             <div className='facility-content-container'>
-              <HeadContainer
-                text={{ eng: facility.title.eng, he: facility.title.he }}
-              />
               <div className='facility-txt-container'>
                 <p>
                   {prefs.isEnglish

@@ -40,7 +40,7 @@ const animation = () => {
     elements.forEach((el) => observer.observe(el))
 
     return () => elements.forEach((el) => observer.unobserve(el))
-  }, [prefs.isEnglish])
+  }, [prefs.isEnglish, prefs.isDarkMode])
 }
 
 const openLink = (link) => {
@@ -474,7 +474,7 @@ export function Care() {
   const headText = { he: 'מרכז הטיפולים', eng: 'Care' }
 
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733031708/WhatsApp_Image_2024-10-29_at_16.16.02_2_q0eenv.jpg',
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734166431/IMG_3418_1_nfnh30.jpg',
 
     title: { he: 'האקדמיה לטניס', eng: 'Tennis Academy' },
     preview: {
