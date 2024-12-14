@@ -87,7 +87,7 @@ export function Facilities() {
       },
     },
     {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732541780/WhatsApp_Image_2024-10-29_at_16.16.03_1_ptejag.jpg',
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734170964/DSC09083_djqe9w.jpg',
       title: {
         he: 'סטודיו חוגים',
         eng: 'Studio Classes',
@@ -120,7 +120,7 @@ export function Facilities() {
       },
     },
     {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732541780/WhatsApp_Image_2024-10-29_at_16.16.03_1_ptejag.jpg',
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734171156/DSC09074_hooeih.jpg',
       title: {
         he: 'מגרש סנוקרגל',
         eng: 'Snookball Court',
