@@ -11,8 +11,9 @@ import { setIsLoading, setPrefs } from '../store/actions/system.actions'
 
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import { RememberMeButton } from './RememberMeButton'
 
-export function LoginSignupForm({ isSignup }) {
+export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
@@ -21,7 +22,7 @@ export function LoginSignupForm({ isSignup }) {
 
   const [isShown, setIsShown] = useState(false)
 
-  const [isRemember, setIsRemember] = useState(false)
+  // const [isRemember, setIsRemember] = useState(false)
 
   const [width, setWidth] = useState()
 
@@ -299,21 +300,10 @@ export function LoginSignupForm({ isSignup }) {
             className={`input-container ${prefs.isDarkMode && 'dark-mode'}`}
             style={{}}
           >
-            <div className='checkbox-container'>
-              <input
-                type='checkbox'
-                name=''
-                id='isRemember'
-                checked={isRemember}
-                onChange={() => {
-                  console.log(isRemember)
-                  setIsRemember((prev) => (prev = !prev))
-                }}
-              />
-              <label htmlFor='isRemember'>
-                {prefs.isEnglish ? 'Remember me' : 'זכור משתמש'}
-              </label>
-            </div>
+            <RememberMeButton
+              isRemember={isRemember}
+              setIsRemember={setIsRemember}
+            />
             <Button variant='contained' type='submit' disabled={isSubmitting}>
               {(isSignup && (prefs.isEnglish ? 'Signup' : 'רישום')) ||
                 (prefs.isEnglish ? 'Login' : 'חיבור')}
