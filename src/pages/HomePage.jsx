@@ -41,7 +41,7 @@ export function HomePage() {
     {
       id: makeId(),
       title: 'Pool',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002513/34_gdwu4o.jpg',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352231/34_gdwu4o.jpg',
       text: {
         first: { he: 'בריכה חצי אולימפית', eng: 'Half Olympic Pool' },
         second: {
@@ -53,7 +53,7 @@ export function HomePage() {
     {
       id: makeId(),
       title: 'Gym',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947256/DSC06048_risthm.jpg',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352231/DSC06048_risthm_r8f74a.jpg',
       text: {
         first: { he: 'חדר הכושר', eng: 'Our gym' },
         second: {
@@ -65,7 +65,7 @@ export function HomePage() {
     {
       id: makeId(),
       title: 'Courts',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731949255/DSC06197_vctg4k.jpg',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352231/DSC06197_vctg4k_vqbkyd.jpg',
       text: {
         first: { he: 'מתחם מגרשי טניס', eng: 'Tennis complex' },
         second: { he: 'הכולל שלושה מגרשים', eng: 'Three courts' },
@@ -74,7 +74,7 @@ export function HomePage() {
     {
       id: makeId(),
       title: 'Studio',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732343251/DSC06024_rr6o6a.jpg',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352231/DSC06024_rr6o6a_rh7xya.jpg',
       text: {
         first: { he: 'סטודיו לחוגים', eng: 'Class studio' },
         second: { he: 'בקבוצות קטנות', eng: 'Small and personal groups' },
@@ -83,7 +83,7 @@ export function HomePage() {
     {
       id: makeId(),
       title: 'Child Activity',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002559/HPIM0595_iiklas.jpg',
+      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352230/HPIM0595_iiklas.jpg',
       text: {
         first: { he: 'פעילויות לילדים', eng: 'Activities for kids' },
         second: {
@@ -226,12 +226,6 @@ export function HomePage() {
           !prefs.isEnglish && 'rtl'
         }`}
       >
-        {/* <img
-          src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002473/20_rjsrgf.jpg'
-          alt=''
-          className='background-img'
-        /> */}
-
         <div
           className={prefs.isEnglish ? 'text-container' : 'text-container rtl'}
         >
@@ -327,22 +321,6 @@ export function HomePage() {
         </div>
 
         <MouseWheelCarousel imgs={mouseWheelImgs} />
-        {/* <div
-          className='arrow-link-container'
-          onClick={() => {
-            smoothScroll()
-            navigate('/item')
-          }}
-        >
-          <Link to='/item' className={prefs.isDarkMode ? 'dark' : ''}>
-            {prefs.isEnglish ? 'Store' : 'החנות'}
-            {prefs.isEnglish ? (
-              <ArrowForwardIosIcon className='arrow right' />
-            ) : (
-              <ArrowBackIosNewIcon className='arrow left' />
-            )}
-          </Link>
-        </div> */}
 
         <ContactUs />
       </div>
