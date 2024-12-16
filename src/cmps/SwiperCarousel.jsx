@@ -25,37 +25,25 @@ export function SwiperCarousel({ imgs }) {
   return (
     <>
       <Swiper
-        style={{
-          '--swiper-navigation-color': '#4CAF50',
-          '--swiper-pagination-color': '#fff',
-          direction: 'rtl',
-        }}
-        // loop={true}
-        spaceBetween={10}
-        // navigation={true}
-        thumbs={{
-          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
-        }}
+        style={{ direction: 'rtl' }}
         autoplay={{
           delay: 3500, // Delay between transitions (in milliseconds)
           disableOnInteraction: false, // Continue autoplay after user interactions
         }}
-        // pagination={{
-        //   clickable: false,
-        // }}
-        modules={[FreeMode, Navigation, Thumbs, Autoplay]} // Include the Autoplay module
+        modules={[Thumbs, Autoplay]} // Include the Autoplay module
         className='home-swiper'
       >
         {imgs.map((img, index) => (
-          <SwiperSlide key={img.id} className='home-slide'>
+          <SwiperSlide key={`${img.id}Main`} className='home-slide'>
             <img
               src={img.link}
               alt={`Slide ${index + 1}Blur`}
               className='blur'
+              loading='lazy'
             />
 
             <div className='img-container'>
-              <img src={img.link} alt={`Slide ${index + 1}`} />
+              <img src={img.link} alt={`Slide ${index + 1}`} loading='lazy' />
               {img.text && (
                 <div className='header-container'>
                   <div className='text'>
@@ -86,11 +74,12 @@ export function SwiperCarousel({ imgs }) {
         className='mySwiper'
       >
         {imgs.map((img, index) => (
-          <SwiperSlide key={img.id}>
+          <SwiperSlide key={`${img.id}Nav`}>
             <img
               src={img.link}
               alt={`Thumbnail ${index + 1}`}
               className='nav-img'
+              loading='lazy' // Lazy load images
             />
           </SwiperSlide>
         ))}
