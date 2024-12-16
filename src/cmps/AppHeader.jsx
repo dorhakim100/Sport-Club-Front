@@ -28,7 +28,7 @@ import {
   setIsModal,
 } from '../store/actions/system.actions'
 
-export function AppHeader({ bodyRef }) {
+export function AppHeader() {
   const user = useSelector((storeState) => storeState.userModule.user)
   const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
 

@@ -83,7 +83,7 @@ export function App() {
       <PrefsButton />
       <Prefs bodyRef={bodyRef} />
       <Loader />
-      <AppHeader bodyRef={bodyRef} />
+      <AppHeader />
       <main
         className='main-container'
         style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
