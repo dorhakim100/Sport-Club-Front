@@ -8,6 +8,7 @@ import { login } from '../store/actions/user.actions'
 import { LoginSignupForm } from '../cmps/LoginSignupForm'
 import { showErrorMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
+import { GoogleLoginCmp } from '../cmps/GoogleLoginCmp'
 
 export function Login() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)

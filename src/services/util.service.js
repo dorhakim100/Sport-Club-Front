@@ -142,3 +142,15 @@ export function getTodayDayName() {
 export function smoothScroll() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
+
+export const parseJwt = (token) => {
+  const base64Url = token.split('.')[1] // Extract payload
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/') // Replace JWT-specific chars
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
+      .join('') // Decode Base64
+  )
+  return JSON.parse(jsonPayload) // Parse the payload into JSON
+}
