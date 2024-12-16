@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
 import { parseJwt } from '../services/util.service'
 import { showErrorMsg } from '../services/event-bus.service'
 
@@ -8,9 +9,8 @@ export function GoogleLoginCmp({ handleGoogleLogin }) {
   const clientID = import.meta.env.VITE_GOOGLE_ID
 
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
-
-  const handleLoginSuccess = (response) => {
-    console.log('Login successful:', response)
+  const [isRemember, setIsRemember] = useState(false)
+  const handleLoginSuccess = async (response) => {
     const { email, name: fullname } = parseJwt(response.credential)
 
     const cred = {
@@ -18,7 +18,12 @@ export function GoogleLoginCmp({ handleGoogleLogin }) {
       fullname: fullname,
       isGoogle: true,
     }
-    handleGoogleLogin(cred)
+    try {
+      await handleGoogleLogin(cred)
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(prefs.isEnglish ? `Couldn't login` : 'חיבור נכשל')
+    }
   }
 
   const handleLoginError = (error) => {

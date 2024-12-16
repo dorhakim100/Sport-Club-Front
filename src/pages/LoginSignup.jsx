@@ -1,15 +1,24 @@
 import { Outlet } from 'react-router'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { GoogleLoginCmp } from '../cmps/GoogleLoginCmp'
+import { setIsLoading } from '../store/actions/system.actions'
+import { login } from '../store/actions/user.actions'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { setPrefs } from '../store/actions/system.actions'
 
 import Divider from '@mui/material/Divider'
 import { HeadContainer } from '../cmps/HeadContainer'
+import { RememberMeButton } from '../cmps/RememberMeButton'
 
 export function LoginSignup() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const location = useLocation()
+  const navigate = useNavigate()
+  const isRemember = useSelector(
+    (stateSelector) => stateSelector.userModule.isRemember
+  )
 
   const [text, setText] = useState({
     he: 'חיבור',
@@ -17,7 +26,6 @@ export function LoginSignup() {
   })
 
   useEffect(() => {
-    console.log(location.pathname)
     switch (location.pathname) {
       case '/user/signup':
         setText({
@@ -37,8 +45,20 @@ export function LoginSignup() {
     }
   }, [location.pathname])
 
-  const handleGoogleLogin = async (cred) => {
-    console.log(cred)
+  const handleGoogleLogin = async (credentials) => {
+    try {
+      setIsLoading(true)
+      const userRes = await login({ ...credentials })
+      if (isRemember) {
+        setPrefs({ ...prefs, user: { _id: userRes._id } })
+      }
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(prefs.isEnglish ? `Couldn't login` : 'חיבור לא הצליח')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -51,6 +71,7 @@ export function LoginSignup() {
       <HeadContainer text={text} />
       <div className={`login-container ${prefs.isDarkMode && 'dark-mode'}`}>
         <GoogleLoginCmp handleGoogleLogin={handleGoogleLogin} />
+        <RememberMeButton />
         <Divider
           orientation='horizontal'
           flexItem

@@ -8,14 +8,20 @@
     // margin: auto;
     // width: 50%;
     h2{
+
         font-size: 2em;
     }
 	padding: 1em;
     form{
-        margin-top: 2em;
+
+
         // min-width:300px;
         // width: 40vw;
         display: grid;
+        @media (max-width:600px) {
+            display: block;
+            
+        }
         justify-items: center;
 
     }

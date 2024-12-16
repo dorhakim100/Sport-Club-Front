@@ -11,6 +11,7 @@ import {
   SET_WATCHED_USER,
   UPDATE_CART,
   SET_TOTAL,
+  SET_IS_REMEMBER,
   // SET_PREFS,
 } from '../reducers/user.reducer'
 import { setPrefs } from './system.actions'
@@ -39,7 +40,7 @@ export async function removeUser(userId) {
 export async function login(credentials) {
   try {
     const user = await userService.login(credentials)
-    console.log(user)
+
     const cart = [...user.items] || []
 
     store.dispatch({ type: UPDATE_CART, cart: cart })
@@ -125,6 +126,9 @@ export async function updateCart(user) {
 
 export function setCartTotal(total) {
   store.dispatch({ type: SET_TOTAL, total })
+}
+export function setIsRemember(stateToSet) {
+  store.dispatch({ type: SET_IS_REMEMBER, isRemember: stateToSet })
 }
 
 // export function setPrefs(prefs) {

@@ -333,6 +333,8 @@ nav {
 		justify-self: start;
 
 	}
+
+
 }
 
 .password-container{
@@ -341,6 +343,14 @@ nav {
 	// width: 100%;
 	// margin: auto;
 	justify-self: center;
+
+	@media (max-width:400px) {
+		button{
+			// grid-row: 2/3;
+			// display: none;
+		}
+		
+	}
 }
 
 .navigation-container{

@@ -1,11 +1,17 @@
 .login-container{
     display: grid;
+    @media (max-width:600px) {
+        display: block;
+        
+    }
     // grid-template-columns: repeat(2,1fr);
     width: 300px;
     justify-self: center;
     .google-login-container{
         justify-items: center;
+
     }
+
 
     padding: 2em; // Space inside the box
     border-radius: 8px; // Smooth corners
