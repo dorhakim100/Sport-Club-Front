@@ -45,8 +45,9 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
         return (
           <div
             key={trainer._id}
-            className='trainer-container'
-            style={(user && user.isAdmin && { cursor: 'pointer' }) || {}}
+            className={`trainer-container ${
+              user && user.isAdmin && 'clickable'
+            }`}
             onClick={(event) => {
               // Define a function that resolves when isLoading becomes false
 

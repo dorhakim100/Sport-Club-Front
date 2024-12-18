@@ -86,10 +86,7 @@ export function AppFooter() {
           onClick={handleCopyToClipboard}
         >
           <MailIcon />
-          <span
-            style={{ cursor: 'pointer' }}
-            className={prefs.isDarkMode ? 'dark-mode' : ''}
-          >
+          <span className={`clickable ${prefs.isDarkMode && 'dark-mode'}`}>
             {email}
           </span>
         </div>
