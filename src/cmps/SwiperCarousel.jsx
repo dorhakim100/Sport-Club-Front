@@ -40,7 +40,7 @@ export function SwiperCarousel({ imgs }) {
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]} // Include the Autoplay module
-        className='home-swiper'
+        className='home-swiper shadow-text'
       >
         {imgs.map((img, index) => (
           <SwiperSlide key={`${makeId()}Main`} className='home-slide'>
