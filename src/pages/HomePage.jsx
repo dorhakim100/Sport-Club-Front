@@ -93,7 +93,11 @@ export function HomePage() {
           className={`gradient-container ${prefs.isDarkMode && 'dark-mode'}`}
         ></div>
         <div
-          className={prefs.isEnglish ? 'text-container' : 'text-container rtl'}
+          className={
+            prefs.isEnglish
+              ? 'text-container shadow-text'
+              : 'text-container rtl shadow-text'
+          }
         >
           <h2>
             {prefs.isEnglish
