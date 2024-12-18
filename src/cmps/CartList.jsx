@@ -11,12 +11,14 @@ import { Quantity } from './Quantity'
 import { CartItem } from './CartItem'
 
 import Divider from '@mui/material/Divider'
-import { makeId } from '../services/util.service'
+import { makeId, smoothScroll } from '../services/util.service'
 
 export function CartList({ cart, setCart }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [quantity, setQuantity] = useState(1)
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -26,7 +28,9 @@ export function CartList({ cart, setCart }) {
             <div className='cart-item' key={`${item.id}Cart`}>
               {/* {index !== 0 && <Divider orientation='horizontal' flexItem />} */}
               <CartItem item={item} />
-              <Divider orientation='horizontal' flexItem />
+              {index !== cart.length - 1 && (
+                <Divider orientation='horizontal' flexItem />
+              )}
               {/* {cart.length === 1 && (
                 <Divider orientation='horizontal' flexItem />
               )} */}

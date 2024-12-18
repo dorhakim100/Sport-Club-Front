@@ -201,7 +201,9 @@ export function Swimming() {
           <img src={whatsapp} alt='' />
           <Button
             variant='contained'
-            className={prefs.isDarkMode ? 'dark-mode' : ''}
+            className={
+              prefs.isDarkMode ? 'dark-mode shadow-text' : 'shadow-text'
+            }
           >
             {prefs.isEnglish ? 'WhatsApp' : 'וואצאפ'} -{' '}
             <span style={{ fontFamily: 'assistantRegular' }}>
@@ -348,7 +350,9 @@ export function Tennis() {
           <img src={whatsapp} alt='' />
           <Button
             variant='contained'
-            className={prefs.isDarkMode ? 'dark-mode' : ''}
+            className={
+              prefs.isDarkMode ? 'dark-mode shadow-text' : 'shadow-text'
+            }
           >
             {prefs.isEnglish ? 'WhatsApp' : 'וואצאפ'} -{' '}
             <span style={{ fontFamily: 'assistantRegular' }}>

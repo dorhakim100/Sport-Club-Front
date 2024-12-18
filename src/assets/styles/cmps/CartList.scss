@@ -13,11 +13,15 @@
         background-color: $light-gray;
         background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
         border-radius: 5px;
-        padding: 1em;
+        // padding: 1em;
         @media (max-width:500px) {
         
             max-width: 90vw;
             justify-self: center;
+        }
+        .MuiDivider-flexItem{
+
+            margin: 0em 1em;
         }
 
 
@@ -28,11 +32,18 @@
             justify-items: start;
             gap: 1em;
             border-radius: 5px;
-            margin: 0.5em 0em 0.5em 0em;
-
+            padding: 1em;
             position: relative;
+            transition: 0.2s ease;
+            cursor: pointer;
 
             // border-right: 2px solid red;
+
+            &:hover{
+                color: white;
+                background-color: #23404c8e;
+
+            }
 
             @media (max-width:620px) {
                 grid-template-columns: auto auto;
