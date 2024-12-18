@@ -25,12 +25,21 @@ export function SwiperCarousel({ imgs }) {
   return (
     <>
       <Swiper
-        style={{ direction: 'rtl' }}
+        // style={{ direction: 'rtl' }}
         autoplay={{
           delay: 3500, // Delay between transitions (in milliseconds)
           disableOnInteraction: false, // Continue autoplay after user interactions
         }}
-        modules={[Thumbs, Autoplay]} // Include the Autoplay module
+        style={{
+          direction: 'rtl',
+        }}
+        // loop={true}
+        spaceBetween={10}
+        // navigation={true}
+        thumbs={{
+          swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+        }}
+        modules={[FreeMode, Navigation, Thumbs, Autoplay]} // Include the Autoplay module
         className='home-swiper'
       >
         {imgs.map((img, index) => (

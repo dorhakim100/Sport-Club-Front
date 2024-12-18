@@ -29,13 +29,13 @@ import dumbbellsDarkMode from '/public/imgs/yoga-dark-mode.svg'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
+import mouseWheelImgs from '/public/jsons/HomePage/MouseWheel/MouseWheel.json'
+
 export function HomePage() {
   const navigate = useNavigate()
   const prefs = useSelector((state) => state.systemModule.prefs)
   const trainers = useSelector((state) => state.trainerModule.trainers)
   const updates = useSelector((state) => state.updateModule.updates)
-
-  const [isUpdatesHover, setIsUpdatesHover] = useState(false)
 
   const imgs = [
     {
@@ -105,91 +105,20 @@ export function HomePage() {
     ואף פעילויות ייחודיות לגיל הזהב.`,
   }
 
-  const mouseWheelImgs = [
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947258/DSC06129_dxs8kb.jpg',
-      text: {
-        he: 'בריכה חצי אולימפית, מחוממת ומקורה',
-        eng: 'Semi-Olympic Pool - 7 Swimming Lanes',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946217/DSC06063_bwttoj.jpg',
-      text: {
-        he: 'חדר כושר חדיש ומאובזר, אימונים באווירה אישית',
-        eng: 'Modern and Fully Equipped Gym',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731947117/DSC06370_1_obeicj.jpg',
-      text: {
-        he: 'בית ספר לטניס',
-        eng: 'Tennis school',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946647/DSC06225_pvjmhd.jpg',
-      text: {
-        he: 'סטודיו חוגים בקבוצות קטנות',
-        eng: 'Personalized Studio Classes',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946648/DSC06537_guaopk.jpg',
-      text: {
-        he: 'מתחם מיני גולף עם 8 מסלולים',
-        eng: 'Mini Golf Area with 8 Tracks',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946217/DSC06444_pmpgpf.jpg',
-      text: {
-        he: 'מגרש סנוקרגל ייחודי ומהנה',
-        eng: 'Unique and Fun Snookball Court',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946219/DSC06189_yuuula.jpg',
-      text: {
-        he: 'מסעדה באווירה כפרית',
-        eng: 'Charming Restaurant with a Rustic Atmosphere',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1731946219/DSC06487_nuowb1.jpg',
-      text: {
-        he: 'מתחם נינג׳ה, משחקים והפעלות לילדים',
-        eng: 'Ninja Area, Games, and activities for Kids',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733484121/45_shdnag_1_y1sfqo.jpg',
-      text: {
-        he: 'בריכת פעוטות מקורה',
-        eng: 'Covered Toddler Pool',
-      },
-    },
-    {
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732274704/DSC09047_gxxqfy.jpg',
-      text: {
-        he: 'חניה גדולה, נוחה וללא תשלום',
-        eng: 'Large, Convenient, and Free Parking Lot',
-      },
-    },
-  ]
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const t = await loadTrainers({
-          ...trainerService.getDefaultFilter(),
-          isRandom: true,
-        })
-        await loadUpdates(updateService.getDefaultFilter())
+        const [trainers, updates] = await Promise.all([
+          loadTrainers({
+            ...trainerService.getDefaultFilter(),
+            isRandom: true,
+          }),
+          loadUpdates(updateService.getDefaultFilter()),
+        ])
       } catch (err) {
         showErrorMsg(
-          prefs.isEnglish ? `Couldn't load data` : 'טעינת נתונים נכשלה'
+          prefs.isEnglish ? "Couldn't load data" : 'טעינת נתונים נכשלה'
         )
       } finally {
         setIsLoading(false)
@@ -224,8 +153,11 @@ export function HomePage() {
       <div
         className={`main-header-container background-img section hidden ${
           !prefs.isEnglish && 'rtl'
-        }`}
+        } `}
       >
+        <div
+          className={`gradient-container ${prefs.isDarkMode && 'dark-mode'}`}
+        ></div>
         <div
           className={prefs.isEnglish ? 'text-container' : 'text-container rtl'}
         >
@@ -294,13 +226,9 @@ export function HomePage() {
             </Link>
             <Cards trainers={trainers} />
           </div>
-          <div
-            className='updates-carousel-container'
-            onMouseEnter={() => setIsUpdatesHover(true)}
-            onMouseLeave={() => setIsUpdatesHover(false)}
-          >
+          <div className='updates-carousel-container'>
             <b>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</b>
-            <Updates isHover={isUpdatesHover} updates={updates} />
+            <Updates updates={updates} />
           </div>
         </div>
 

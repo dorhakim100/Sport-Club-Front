@@ -12,7 +12,7 @@ import 'swiper/css/navigation'
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 
-export function Updates({ isHover, updates }) {
+export function Updates({ updates }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
 
@@ -24,12 +24,6 @@ export function Updates({ isHover, updates }) {
   }
 
   const swiperRef = useRef()
-
-  useEffect(() => {
-    if (isHover) {
-      //   swiperRef.autoplay.stop()
-    }
-  }, [isHover])
 
   return (
     <>

@@ -97,7 +97,7 @@ export function Cards({ trainers }) {
                     height: windowDimensions.width >= 1050 ? '400px' : '275px',
                   }}
                 />{' '}
-                <span>
+                <span className='shadow-text'>
                   {prefs.isEnglish ? trainer.name.eng : trainer.name.he}
                 </span>
               </div>

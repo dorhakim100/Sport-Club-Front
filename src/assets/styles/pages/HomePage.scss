@@ -13,8 +13,12 @@
     height: 100vh;  
     width: 100%; 
 
+
+
+    color: $bold-navy;
     color: $light-gray;
-    
+
+  
     
     &::after {
       content: '';
@@ -23,10 +27,33 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 60%, transparent);
+      // background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+      background: linear-gradient(to top, #c0e6f23c 60%, transparent);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 60%, transparent);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 30%, transparent);
+      // background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 60%, transparent);
 
       z-index: -1;
+    }
+
+    .gradient-container{
+  
+      height: 100vh;  
+      width: 100%; 
+      &::before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;  
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 90%, $neutral-gray 100%);
+        
+      }
+      &.dark-mode::before{
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 90%, $bold-navy 100%);
+        
+      }
     }
   }
   .section {
@@ -88,8 +115,9 @@
       p{
         margin-top: 2em;
         font-size: 1.5em;
-        text-align: start;
+        text-align: justify;
         max-width: 700px;
+        // color: $bold-navy;
         // font-size: clamp(1.5em, 2.5vw, 2.5em);
         @media (max-width:800px) {
           // font-size: 2em;
@@ -148,6 +176,7 @@
 
 
   .home-carousel{
+	  text-shadow: black 1px 0 5px;
 
     @media (max-width:500px) {
       // width: 90vw;
@@ -199,15 +228,20 @@
         .text{
           h2{
             margin-bottom: 0px;
+            transition: 0.3s ease;
           }
           margin-bottom: 1em;
         }
 
-        @media (max-width:700px) {
+        @media (max-width:1220px) {
+
+          font-size: 0.8em;
+        }
+        @media (max-width:980px) {
 
           font-size: 0.7em;
         }
-        @media (max-width:500px) {
+        @media (max-width:750px) {
 
           font-size: 0.5em;
         }
