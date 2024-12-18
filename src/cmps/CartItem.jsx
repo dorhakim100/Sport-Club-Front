@@ -12,15 +12,29 @@ import { Quantity } from './Quantity'
 
 import Divider from '@mui/material/Divider'
 import { setIsLoading } from '../store/actions/system.actions'
+import { smoothScroll } from '../services/util.service'
 
 export function CartItem({ item }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [quantity, setQuantity] = useState(item.quantity)
 
+  const [isHover, setIsHover] = useState(false)
+
   const isFirstRender = useRef(true)
 
   const navigate = useNavigate()
+
+  const navigateToItem = (event) => {
+    if (isHover) return
+
+    if (event.target.closest('.quantity-container')) {
+      event.stopPropagation()
+      return
+    }
+    smoothScroll()
+    navigate(`/item/${item.id}`)
+  }
 
   useEffect(() => {
     const updateItemQuantity = async () => {
@@ -28,7 +42,7 @@ export function CartItem({ item }) {
         (itemToUpdate) => itemToUpdate.id === item.id
       )
       user.items.splice(idx, 1, { ...item, quantity: quantity })
-      console.log(user)
+
       const userToUpdate = { ...user }
 
       try {
@@ -49,19 +63,22 @@ export function CartItem({ item }) {
       <div
         className={`item-container ${item.isDiscount && 'discount'}`}
         key={`${item.id}Cart`}
+        onClick={navigateToItem}
       >
         <img
           src={item.cover}
           alt=''
-          onClick={() => navigate(`/item/${item.id}`)}
+          // onClick={() => navigate(`/item/${item.id}`)}
         />
         <div className='title-container'>
-          <Link
+          {/* <Link
             to={`/item/${item.id}`}
             className={prefs.isDarkMode ? 'dark-mode' : ''}
-          >
+          > */}
+          <b onClick={navigateToItem}>
             {prefs.isEnglish ? item.title.eng : item.title.he}
-          </Link>
+          </b>
+          {/* </Link> */}
           <span>₪{item.price}</span>
         </div>
         <Quantity

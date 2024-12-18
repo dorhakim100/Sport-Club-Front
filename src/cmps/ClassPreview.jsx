@@ -22,13 +22,7 @@ export function ClassPreview({ clas, onRemoveClass }) {
       key={clas._id}
       onClick={(event) => {
         if (isHover) return
-        if (
-          event.target.closest('.edit-btn') ||
-          event.target.closest('.remove-btn')
-        ) {
-          e.stopPropagation()
-          return
-        }
+
         smoothScroll()
         navigate(`/class/${clas._id}`)
       }}
