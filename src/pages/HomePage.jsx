@@ -30,80 +30,14 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
 import mouseWheelImgs from '/public/jsons/HomePage/MouseWheel/MouseWheel.json'
+import carouselImgs from '/public/jsons/HomePage/Carousel/Carousel.json'
+import preview from '/public/jsons/HomePage/Preview/Preview.json'
 
 export function HomePage() {
   const navigate = useNavigate()
   const prefs = useSelector((state) => state.systemModule.prefs)
   const trainers = useSelector((state) => state.trainerModule.trainers)
   const updates = useSelector((state) => state.updateModule.updates)
-
-  const imgs = [
-    {
-      id: makeId(),
-      title: 'Pool',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352231/34_gdwu4o.jpg',
-      text: {
-        first: { he: 'בריכה חצי אולימפית', eng: 'Half Olympic Pool' },
-        second: {
-          he: 'מחוממת ומקורה, פעילה בכל ימות השנה',
-          eng: 'Heated and covered, active all year round',
-        },
-      },
-    },
-    {
-      id: makeId(),
-      title: 'Gym',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352231/DSC06048_risthm_r8f74a.jpg',
-      text: {
-        first: { he: 'חדר הכושר', eng: 'Our gym' },
-        second: {
-          he: 'ציוד מתקדם, יחס אישי',
-          eng: 'Advanced equipment, personalized attention',
-        },
-      },
-    },
-    {
-      id: makeId(),
-      title: 'Courts',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352231/DSC06197_vctg4k_vqbkyd.jpg',
-      text: {
-        first: { he: 'מתחם מגרשי טניס', eng: 'Tennis complex' },
-        second: { he: 'הכולל שלושה מגרשים', eng: 'Three courts' },
-      },
-    },
-    {
-      id: makeId(),
-      title: 'Studio',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352231/DSC06024_rr6o6a_rh7xya.jpg',
-      text: {
-        first: { he: 'סטודיו לחוגים', eng: 'Class studio' },
-        second: { he: 'בקבוצות קטנות', eng: 'Small and personal groups' },
-      },
-    },
-    {
-      id: makeId(),
-      title: 'Child Activity',
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734352230/HPIM0595_iiklas.jpg',
-      text: {
-        first: { he: 'פעילויות לילדים', eng: 'Activities for kids' },
-        second: {
-          he: 'קייטנות מתחמי משחק והפעלות',
-          eng: 'Summer camp, play areas for kids',
-        },
-      },
-    },
-  ]
-
-  const preview = {
-    eng: `The Kfar Shmaryahu Sport and Leisure Club is located in the heart of the village, surrounded by greenery and trees that blend the site with nature and pastoral tranquility.
-
-    The club serves a limited number of members, making it unique and an ideal meeting point for families for recreation, leisure, and sports.
-    
-    The club offers a variety of activities for all ages, including children's activities, shared family activities, and even unique programs for seniors.`,
-    he: `מועדון ספורט ונופש כפר שמריהו ממוקם בלב הכפר. מוקף בירק ובעצים הממזגים את המקום עם טבע ושלווה פסטורלית. המועדון משרת מספר מצומצם של מנויים, דבר ההופך
-    אותו ליחודי ולנקודת מפגש אידיאלית למשפחות למטרות בילוי, נופש וספורט. המועדון מקיים מגוון פעילויות לכל הגילאים כולל פעילויות ילדים, פעילויות משותפות לכל המשפחה
-    ואף פעילויות ייחודיות לגיל הזהב.`,
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -184,7 +118,7 @@ export function HomePage() {
           } text-container`}
         ></div>
         <div className='home-carousel'>
-          <SwiperCarousel imgs={imgs} />
+          <SwiperCarousel imgs={carouselImgs} />
         </div>
 
         <div
@@ -233,12 +167,11 @@ export function HomePage() {
         </div>
 
         <div
-          className='reasons-header'
+          className='reasons-header clickable'
           onClick={() => {
             navigate('/facilities')
             smoothScroll()
           }}
-          style={{ cursor: 'pointer' }}
         >
           <HeadContainer
             text={{

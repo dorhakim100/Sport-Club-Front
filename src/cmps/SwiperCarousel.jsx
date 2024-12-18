@@ -43,7 +43,7 @@ export function SwiperCarousel({ imgs }) {
         className='home-swiper'
       >
         {imgs.map((img, index) => (
-          <SwiperSlide key={`${img.id}Main`} className='home-slide'>
+          <SwiperSlide key={`${makeId()}Main`} className='home-slide'>
             <img
               src={img.link}
               alt={`Slide ${index + 1}Blur`}
@@ -83,7 +83,7 @@ export function SwiperCarousel({ imgs }) {
         className='mySwiper'
       >
         {imgs.map((img, index) => (
-          <SwiperSlide key={`${img.id}Nav`}>
+          <SwiperSlide key={`${makeId()}Nav`}>
             <img
               src={img.link}
               alt={`Thumbnail ${index + 1}`}
