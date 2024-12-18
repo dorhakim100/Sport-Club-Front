@@ -44,8 +44,9 @@ export function MouseWheelCarousel({ imgs }) {
                   maxHeight: '600px',
                   minHeight: '300px',
                 }}
+                loading='lazy'
               />
-              <span style={{ color: 'white' }}>
+              <span style={{ color: 'white' }} className='shadow-text'>
                 {prefs.isEnglish ? slide.text.eng : slide.text.he}
               </span>
             </SwiperSlide>

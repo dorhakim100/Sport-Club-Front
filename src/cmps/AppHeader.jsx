@@ -328,10 +328,10 @@ export function AppHeader() {
       he: (
         <div style={{ display: 'grid' }}>
           <span style={{ direction: 'rtl' }}>
-            מעכשיו האתר תומך במצב כהה ובאנגלית.
+            מעכשיו האתר תומך במצב כהה ושפה האנגלית.
           </span>
           <span style={{ direction: 'ltr' }}>
-            We now have both dark mode and English support.
+            We now have both dark mode and English version.
           </span>
         </div>
       ),

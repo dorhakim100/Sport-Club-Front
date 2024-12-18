@@ -496,8 +496,6 @@ function AccessibilityText() {
       <p>
         תמיר ישבי
         <br />
-        טל: 050-8833262
-        <br />
         אימייל: sportclub.kfar@gmail.com
         <br />
         עודכן לאחרונה בתאריך 08/11/2021

@@ -149,6 +149,7 @@ export function Schedule() {
       <Nav origin={origin} links={links} />
 
       <HeadContainer text={{ he: 'מערכת החוגים', eng: 'Schedule' }} />
+
       <div className='icons-container'>
         <div className='icon-container'>
           <b>{prefs.isEnglish ? 'Morning' : 'בוקר'}</b>

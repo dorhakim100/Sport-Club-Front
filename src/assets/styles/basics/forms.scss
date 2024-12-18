@@ -551,9 +551,11 @@ textarea, input{
       font-size: 0.8em;
       // text-shadow: $soft-green 1px 0 5px;
 
+	  text-shadow: black 1px 0 5px;
       h2:last-of-type{
-
-        text-shadow: $dark-green 1px 0 5px;
+		  
+		//   text-shadow: $bold-navy 1px 0 5px;
+        // text-shadow: $dark-green 1px 0 5px;
 
       }
     }
@@ -695,6 +697,12 @@ textarea, input{
 		transition: transform 0.3s ease, opacity 0.3s ease;
 	}
 
+
+  }
+
+  .shadow-text{
+
+	text-shadow: black 1px 0 5px;
 
   }
 
