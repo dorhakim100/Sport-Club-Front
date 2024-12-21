@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setIsLoading } from '../store/actions/system.actions.js'
-import { updateCart } from '../store/actions/user.actions.js'
+import { setOriginalPrice, updateCart } from '../store/actions/user.actions.js'
 
 import { RemoveModal } from './RemoveModal.jsx'
 
@@ -13,7 +13,13 @@ import RemoveIcon from '@mui/icons-material/Remove'
 export function Quantity({ quantity, setQuantity, isCart, item }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
-  console.log(user)
+  const originalItem = useSelector(
+    (stateSelector) => stateSelector.userModule.originalItem
+  )
+  const originalPrice = useSelector(
+    (stateSelector) => stateSelector.userModule.originalPrice
+  )
+
   const [isModal, setIsModal] = useState(false)
 
   const onSetQuantity = (diff) => {
@@ -21,6 +27,17 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
     if (quantity === 1 && diff === -1 && isCart) {
       setIsModal(true)
       return
+    }
+
+    let priceToSet
+    if (originalItem.id && originalItem.id === item.id) {
+      console.log(item)
+      priceToSet = originalPrice + originalItem.price * diff
+
+      setOriginalPrice(priceToSet)
+    } else {
+      priceToSet = originalPrice + item.price * diff
+      setOriginalPrice(priceToSet)
     }
     setQuantity((prev) => prev + diff)
   }

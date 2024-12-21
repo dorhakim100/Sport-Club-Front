@@ -11,6 +11,7 @@ import 'swiper/css/navigation'
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import { smoothScroll } from '../services/util.service'
 
 export function Updates({ updates }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -24,6 +25,11 @@ export function Updates({ updates }) {
   }
 
   const swiperRef = useRef()
+
+  const navigateToUpdates = () => {
+    navigate('/update')
+    smoothScroll()
+  }
 
   return (
     <>
@@ -54,6 +60,7 @@ export function Updates({ updates }) {
                 prefs.isDarkMode ? 'update-banner dark-mode' : 'update-banner'
               }
               key={update._id}
+              onClick={navigateToUpdates}
             >
               <div className='title-container'>
                 <b>{update.title}</b>
