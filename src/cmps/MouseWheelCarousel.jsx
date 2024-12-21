@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -13,9 +13,36 @@ import { makeId } from '../services/util.service'
 
 export function MouseWheelCarousel({ imgs }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+
+  const swiperRef = useRef(null)
+
+  useEffect(() => {
+    const handleWheel = (event) => {
+      const swiper = swiperRef.current.swiper
+
+      if (swiper.isEnd || swiper.isBeginning) {
+        // Allow the scroll to propagate to the page container
+        swiper.params.mousewheel.releaseOnEdges = true
+      } else {
+        swiper.params.mousewheel.releaseOnEdges = false
+      }
+    }
+
+    const swiperInstance = swiperRef.current.swiper
+
+    if (swiperInstance) {
+      swiperInstance.el.addEventListener('wheel', handleWheel)
+    }
+    return () => {
+      if (swiperInstance.el) {
+        swiperInstance.el.removeEventListener('wheel', handleWheel)
+      }
+    }
+  }, [])
   return (
     <>
       <Swiper
+        ref={swiperRef}
         direction={'vertical'}
         slidesPerView={1}
         spaceBetween={30}
@@ -34,7 +61,7 @@ export function MouseWheelCarousel({ imgs }) {
       >
         {imgs.map((slide) => {
           return (
-            <SwiperSlide key={makeId()} className='mouse-wheel'>
+            <SwiperSlide key={makeId()} className='mouse-wheel carousel-text'>
               <img
                 src={slide.img}
                 alt=''

@@ -48,27 +48,34 @@
     
     .options-container{
         border-radius: 5px;
-    }
-    
-    li {
-        padding: 14px;
-        transition: all linear 0.3s;
         
-        &:hover{
-            background: gray;
-            cursor: pointer;
-            color: #fff;
-            
-        }
-        
-        &:first-of-type{
-            border-top-left-radius: 8px;
-            
-        }
-        &:last-of-type{
+        &.dark-mode{
 
-            border-bottom-left-radius: 8px;
-
+            li:hover{
+                
+                color: white;
+                background-color: $very-dark-blue;
+                
+            }
+        }
+        li {
+            padding: 14px;
+            transition: all linear 0.1s;
+            
+            &:hover{
+                background-color: $light-gray;
+            }
+            
+            
+            &:first-of-type{
+                border-top-left-radius: 8px;
+                
+            }
+            &:last-of-type{
+                
+                border-bottom-left-radius: 8px;
+                
+            }
         }
     }
     li.active {

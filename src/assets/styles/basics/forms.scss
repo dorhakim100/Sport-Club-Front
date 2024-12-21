@@ -390,7 +390,7 @@ nav {
 		margin: 0px;
 		padding: 1em 2em 1em 2em;
 
-		width: 100vw;
+		// width: 100vw;
 		overflow-x: auto;
 
 	}
@@ -708,6 +708,22 @@ textarea, input{
 
   .clickable{
 	cursor: pointer;
+  }
+
+  .carousel-text{
+
+	@media (max-width:1220px) {
+
+		font-size: 0.8em;
+	  }
+	  @media (max-width:980px) {
+
+		font-size: 0.7em;
+	  }
+	  @media (max-width:750px) {
+
+		font-size: 0.5em;
+	  }
   }
  
   

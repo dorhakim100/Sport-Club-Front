@@ -61,7 +61,9 @@ export function CartItem({ item }) {
   return (
     <>
       <div
-        className={`item-container ${item.isDiscount && 'discount'}`}
+        className={`item-container ${prefs.isDarkMode && 'dark-mode'} ${
+          item.isDiscount ? 'discount' : ''
+        }`}
         key={`${item.id}Cart`}
         onClick={navigateToItem}
       >

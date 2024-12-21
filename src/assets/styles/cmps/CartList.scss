@@ -31,17 +31,27 @@
             align-items: center;
             justify-items: start;
             gap: 1em;
-            border-radius: 5px;
+            // border-radius: 5px;
             padding: 1em;
             position: relative;
             transition: 0.2s ease;
             cursor: pointer;
 
+       
+
             // border-right: 2px solid red;
+
+
 
             &:hover{
                 color: white;
+                background-color: #4a849d8e;
+
+            }
+            &.dark-mode:hover{
+                color: white;
                 background-color: #23404c8e;
+
 
             }
 
