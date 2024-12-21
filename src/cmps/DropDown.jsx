@@ -42,7 +42,7 @@ export function DropDown({
       onMouseLeave={handleMouseLeave}
       ref={dropdownRef}
     >
-      <ul className='options-container'>
+      <ul className={`options-container ${prefs.isDarkMode && 'dark-mode'}`}>
         {options.map((option) => {
           return (
             <li

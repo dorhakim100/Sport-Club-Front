@@ -16,7 +16,7 @@ import { ContactUs } from '../cmps/ContactUs'
 export function UserDetails() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const params = useParams()
-  const user = useSelector((storeState) => storeState.userModule.watchedUser)
+  const user = useSelector((storeState) => storeState.userModule.user)
   const [userName, setUserName] = useState({ he: '', eng: '' })
 
   useEffect(() => {

@@ -40,7 +40,7 @@ export function SwiperCarousel({ imgs }) {
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Navigation, Thumbs, Autoplay]} // Include the Autoplay module
-        className='home-swiper shadow-text'
+        className='home-swiper shadow-text carousel-text'
       >
         {imgs.map((img, index) => (
           <SwiperSlide key={`${makeId()}Main`} className='home-slide'>
@@ -54,7 +54,7 @@ export function SwiperCarousel({ imgs }) {
             <div className='img-container'>
               <img src={img.link} alt={`Slide ${index + 1}`} loading='lazy' />
               {img.text && (
-                <div className='header-container'>
+                <div className='header-container carousel-text'>
                   <div className='text'>
                     <h2>
                       {prefs.isEnglish ? img.text.first.eng : img.text.first.he}

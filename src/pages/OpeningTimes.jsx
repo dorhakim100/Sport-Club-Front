@@ -28,7 +28,7 @@ export function OpeningTimes() {
           pool: [
             {
               from: '06:00',
-              to: '12:00',
+              to: '13:00',
             },
             {
               from: '15:00',
