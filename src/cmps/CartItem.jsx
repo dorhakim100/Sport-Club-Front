@@ -28,7 +28,10 @@ export function CartItem({ item }) {
   const navigateToItem = (event) => {
     if (isHover) return
 
-    if (event.target.closest('.quantity-container')) {
+    if (
+      event.target.closest('.quantity-container') ||
+      event.target.closest('.control-container')
+    ) {
       event.stopPropagation()
       return
     }

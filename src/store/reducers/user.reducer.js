@@ -13,6 +13,8 @@ export const SET_CART = 'SET_CART'
 export const UPDATE_CART = 'UPDATE_CART'
 export const SET_TOTAL = 'SET_TOTAL'
 export const SET_IS_REMEMBER = 'SET_IS_REMEMBER'
+export const SET_ORIGINAL_ITEM = 'SET_ORIGINAL_ITEM'
+export const SET_ORIGINAL_PRICE = 'SET_ORIGINAL_PRICE'
 
 const initialState = {
   count: 10,
@@ -22,6 +24,8 @@ const initialState = {
   cart: userService.getLoggedinCart() || [],
   total: 0,
   isRemember: false,
+  originalItem: {},
+  originalPrice: null,
 }
 
 export function userReducer(state = initialState, action) {
@@ -61,8 +65,16 @@ export function userReducer(state = initialState, action) {
       break
     case SET_TOTAL:
       newState = { ...state, total: action.total }
+      break
     case SET_IS_REMEMBER:
       newState = { ...state, isRemember: action.isRemember }
+      break
+    case SET_ORIGINAL_ITEM:
+      newState = { ...state, originalItem: action.originalItem }
+      break
+    case SET_ORIGINAL_PRICE:
+      newState = { ...state, originalPrice: action.originalPrice }
+      break
     default:
   }
   // For debug:

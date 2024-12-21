@@ -1,6 +1,6 @@
 .list-header{
     display: grid;
-    grid-template-columns: 150px 1fr 100px;
+    grid-template-columns: 150px 1fr 160px;
     gap: 0.8em;
 
     font-family: assistantBold;
@@ -8,6 +8,7 @@
 
     text-align: start;
     align-items: center;
+
 
     padding: 1em;
 
@@ -22,6 +23,10 @@
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 1em;
+    span{
+
+        min-width: fit-content;
+    }
 }
 
 .coupon-container{

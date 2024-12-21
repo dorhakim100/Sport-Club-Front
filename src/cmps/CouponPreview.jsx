@@ -29,7 +29,7 @@ export function CouponPreview({ coupon, setCoupons, onDeleteCoupon }) {
     >
       <b>{prefs.isEnglish ? coupon.title.eng : coupon.title.he}</b>
       <div className='info-container'>
-        <span>{coupon.key}</span>
+        <span>{coupon.code}</span>
 
         <span>{`${(coupon.type === 'fixed' && '₪') || ''}${coupon.amount}${
           (coupon.type === 'percentage' && '%') || ''

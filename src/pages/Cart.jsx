@@ -20,18 +20,26 @@ import { Button } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import { makeId } from '../services/util.service'
 import { orderService } from '../services/order/order.service'
+import { setOriginalItem } from '../store/actions/user.actions'
+import { setOriginalPrice } from '../store/actions/user.actions'
 
 export function Cart() {
   const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const originalPrice = useSelector(
+    (stateSelector) => stateSelector.userModule.originalPrice
+  )
+
   const navigate = useNavigate()
 
   const [fullCart, setFullCart] = useState(null)
 
   const [coupon, setCoupon] = useState('')
-  const [originalPrice, setOriginalPrice] = useState()
+  // const [originalPrice, setOriginalPrice] = useState()
   const [discount, setDiscount] = useState()
+  const isDiscount = useRef(false)
+  const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0)
 
   const isFirstRender = useRef(true)
 
@@ -52,12 +60,15 @@ export function Cart() {
       total
     )
     setCartTotal(cartTotal)
-    if (originalPrice) {
+    console.log(isDiscount)
+    if (isDiscount.current) {
+      console.log(originalPrice)
       const discountToSet = originalPrice - cartTotal
+      console.log(discountToSet)
       setDiscount(discountToSet)
     }
     return cartTotal
-  }, [cart, originalPrice]) // using useMemo to prevent calculating each and every render
+  }, [cart]) // using useMemo to prevent calculating each and every render
 
   async function setCart(discount) {
     if (cart.length === 0) return
@@ -70,9 +81,13 @@ export function Cart() {
       const fetchedCart = await userService.getCartItems(cart)
 
       isFirstRender.current === false
+      // setOriginalPrice(total)
       if (discount) {
+        console.log(total)
         setOriginalPrice(total)
-
+        // setPriceBeforeDiscount(total)
+        // setOriginalPrice(total)
+        isDiscount.current = true
         fetchedCart.forEach((item) => {
           const matchedDiscountItem = discount.items.find(
             (itemToCheck) => itemToCheck.id === item.id
@@ -84,6 +99,7 @@ export function Cart() {
             (cartItem) => cartItem.id === item.id
           )
           let itemToModify = fetchedCart[idx]
+          setOriginalItem(fetchedCart[idx])
 
           if (discount.type === 'fixed') {
             itemToModify = {
@@ -175,7 +191,7 @@ export function Cart() {
         {fullCart && <CartList cart={cart} setCart={setCart} />}
         {fullCart && (
           <div className='total-container'>
-            {originalPrice && (
+            {isDiscount.current && (
               <div
                 style={{ fontSize: '0.8em', display: 'grid', direction: 'ltr' }}
               >

@@ -82,6 +82,15 @@ export function HomePage() {
     return () => elements.forEach((el) => observer.unobserve(el))
   }, [prefs.isEnglish])
 
+  const navigateToClass = () => {
+    smoothScroll()
+    navigate('/class')
+  }
+  const navigateToFacilities = () => {
+    smoothScroll()
+    navigate('/facilities')
+  }
+
   return (
     <section className='home-container'>
       <div
@@ -132,10 +141,7 @@ export function HomePage() {
         >
           <div
             className='arrow-link-container schedule'
-            onClick={() => {
-              smoothScroll()
-              navigate('/class')
-            }}
+            onClick={navigateToClass}
           >
             <img
               src={prefs.isDarkMode ? dumbbellsDarkMode : dumbbells}
@@ -157,7 +163,7 @@ export function HomePage() {
           <div className='cards-container'>
             <Link
               to={'/class/trainer'}
-              onClick={() => smoothScroll()}
+              onClick={smoothScroll}
               className={prefs.isDarkMode ? 'dark-mode' : ''}
             >
               {prefs.isEnglish ? 'Our trainers' : 'המאמנים שלנו'}
@@ -172,10 +178,7 @@ export function HomePage() {
 
         <div
           className='reasons-header clickable'
-          onClick={() => {
-            navigate('/facilities')
-            smoothScroll()
-          }}
+          onClick={navigateToFacilities}
         >
           <HeadContainer
             text={{
