@@ -189,10 +189,10 @@ export function ItemIndex() {
     <main className='item-index'>
       <header className='item-index-header'>
         <h2>{prefs.isEnglish ? 'Store' : 'חנות'}</h2>
-        <Nav origin={origin} links={links} />
         <div className='cover-container'>
           <DynamicCover coverSrc={cover} prefs={prefs} />
         </div>
+        <Nav origin={origin} links={links} />
         <HeadContainer text={headText} />
       </header>
       <div className='control-container'>

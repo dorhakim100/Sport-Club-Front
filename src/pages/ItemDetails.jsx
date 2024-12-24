@@ -9,6 +9,7 @@ import { loadItem, addItemMsg } from '../store/actions/item.actions'
 import { AddToCartButton } from '../cmps/AddToCartButton'
 import { Quantity } from '../cmps/Quantity.jsx'
 import { ItemNavigation } from '../cmps/ItemNavigation'
+import { MemberTypes } from '../cmps/MemberTypes'
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { ContactUs } from '../cmps/ContactUs'
@@ -26,6 +27,27 @@ export function ItemDetails() {
   const itemFilter = useSelector(
     (stateSelector) => stateSelector.itemModule.filter
   )
+
+  const types = [
+    {
+      index: 0,
+      title: { he: 'מנוי קיץ', eng: 'Summer' },
+      preview: { he: 'מאי עד אוקטובר', eng: `May to October` },
+      class: 'summer',
+    },
+    {
+      index: 1,
+      title: { he: 'מנוי שנתי', eng: 'All Year' },
+      preview: { he: 'כל השנה, במחיר הכי משתלם', eng: `All year, best price` },
+      class: 'year',
+    },
+    {
+      index: 2,
+      title: { he: 'מנוי חורף', eng: 'Winter' },
+      preview: { he: 'אוקטובר עד אפריל', eng: `October to April` },
+      class: 'winter',
+    },
+  ]
 
   const getLatestPage = () => {
     let types = ''
@@ -55,6 +77,7 @@ export function ItemDetails() {
         he: `משתלם יותר להיות מנוי!`,
         eng: `Members pay less!`,
         link: '/member',
+        extra: <MemberTypes />,
       }
       setModalMessage(messageToSet)
       setIsModal(true)

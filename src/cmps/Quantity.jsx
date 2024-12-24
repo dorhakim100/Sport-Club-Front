@@ -53,7 +53,9 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
       (itemToRemove) => itemToRemove.id === item.id
     )
     user.items.splice(idx, 1)
-    console.log(user)
+    if (originalItem.id && originalItem.id === item.id) {
+      setOriginalPrice(null)
+    }
 
     try {
       setIsLoading(true)
@@ -80,6 +82,7 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
           id=''
           value={quantity}
           onChange={handleChange}
+          disabled
         />
         <button>
           <RemoveIcon onClick={() => onSetQuantity(-1)} />

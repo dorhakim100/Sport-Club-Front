@@ -1,0 +1,126 @@
+.member-types-container{
+    // height: 50vh;
+    align-items: center;
+    justify-self: center;
+    // margin: auto;
+    // width: 50%;
+    direction: rtl;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(100px,300px ));
+    // gap: 1em; 
+    @media (min-width: 600px) {
+        gap: 3em;
+    }
+    @media (min-width: 1200px) {
+        gap: 6em;
+    }
+    
+    
+    .type-container {
+        min-height: 100px;
+        height: calc(10vw);
+        // border: 1px solid white;
+        display: grid;
+        place-items: center; // More concise than display + align-items
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        color: black;
+        border-radius: 8px; // Slightly more rounded for a modern look
+        cursor: pointer;
+        
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+
+        font-size: 0.5em;
+        
+        @media (min-height:800px) {
+            font-size: 0.7em;
+            
+        }
+        
+        span{
+
+            
+        }
+        &:hover {
+            z-index: 2;
+        }
+    
+        &:first-of-type {
+            transform: rotate(2deg);
+    
+            &:hover {
+                transform: rotate(5deg) scale(1.1);
+            }
+        }
+    
+        &.center {
+            transform: translateY(-2em);
+    
+            &:hover {
+                transform: scale(1.1) translateY(-2em);
+            }
+        }
+    
+        &:last-of-type {
+            transform: rotate(-2deg);
+    
+            &:hover {
+                transform: rotate(-5deg) scale(1.1);
+            }
+        }
+    
+        &.summer {
+            background-color: $light-yellow;
+    
+            &:hover {
+                background-color: $morning-yellow;
+            }
+    
+            &.dark-mode {
+                background-color: darken($light-yellow, 10%);
+            }
+        }
+    
+        &.year {
+            background-color: $soft-green;
+    
+            &:hover {
+                background-color: $dark-green;
+            }
+    
+            &.dark-mode {
+                background-color: darken($soft-green, 10%);
+            }
+        }
+    
+        &.winter {
+            background-color: $soft-light-blue;
+    
+            &:hover {
+                background-color: $soft-blue;
+            }
+    
+            &.dark-mode {
+                background-color: darken($soft-light-blue, 10%);
+            }
+        }
+
+        b{
+            // position: relative;
+            // &::after{
+            //     content: '';
+            //     position: absolute;
+            //     // width: 100px;
+
+            //     height: 2px;
+            //     background-color: $bold-navy;
+            //     bottom: -3px;
+            //     bottom: -1em;
+            //     left: 0;
+            //     right: 0px;
+            //     border-radius: 8px;
+            // }
+        }
+    }
+    
+}
