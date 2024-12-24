@@ -38,8 +38,14 @@
             font-size: 2em;
         }
         
-        padding: 2em;
+        padding: 1em;
         z-index: 4;
+        
+        @media (min-height:800px) {
+
+            padding: 2em;
+            
+        }
         
         @media (max-width:600px) {
             b{

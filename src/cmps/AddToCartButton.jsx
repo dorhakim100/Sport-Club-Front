@@ -10,6 +10,8 @@ import { ItemPreview } from './ItemPreview'
 import { updateCart } from '../store/actions/user.actions'
 import { smoothScroll } from '../services/util.service'
 
+import { MemberTypes } from './MemberTypes'
+
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import { setIsLoading } from '../store/actions/system.actions'
@@ -67,6 +69,7 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
         he: `משתלם יותר להיות מנוי!`,
         eng: `Members pay less!`,
         link: '/member',
+        extra: <MemberTypes />,
       }
       setModalMessage(messageToSet)
       setIsModal(true)

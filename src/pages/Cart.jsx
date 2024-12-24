@@ -191,7 +191,7 @@ export function Cart() {
         {fullCart && <CartList cart={cart} setCart={setCart} />}
         {fullCart && (
           <div className='total-container'>
-            {isDiscount.current && (
+            {isDiscount.current && originalPrice && (
               <div
                 style={{ fontSize: '0.8em', display: 'grid', direction: 'ltr' }}
               >

@@ -18,7 +18,6 @@ export function CartItem({ item }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [quantity, setQuantity] = useState(item.quantity)
-
   const [isHover, setIsHover] = useState(false)
 
   const isFirstRender = useRef(true)

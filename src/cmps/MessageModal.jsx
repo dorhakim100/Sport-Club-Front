@@ -92,7 +92,7 @@ export function MessageModal() {
         >
           {prefs.isEnglish ? modalMessage.eng : modalMessage.he}
         </p>
-
+        {modalMessage.extra && modalMessage.extra}
         {modalMessage.link && (
           <Button
             variant='contained'

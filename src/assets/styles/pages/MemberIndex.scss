@@ -1,0 +1,29 @@
+.member-index-container{
+    display: grid;
+    gap: 2em;
+
+}
+
+
+
+.member-texts-container{
+
+    display: grid;
+    gap: 2em;
+
+    .member-container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        align-items: center;
+        gap: 2em;
+
+        &.year{
+            grid-row: 1/2;
+        }
+        
+        &.second{
+            grid-row: 2/3;
+
+        }
+    }
+}
