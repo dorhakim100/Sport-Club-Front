@@ -206,6 +206,11 @@
             }
         }
 
+        .shadow-text{
+            text-shadow: black 2px 0 3px;
+
+        }
+
         @media (min-width:1300px) {
             justify-self: start;
             

@@ -23,6 +23,7 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
   const [isModal, setIsModal] = useState(false)
 
   const onSetQuantity = (diff) => {
+    console.log(item)
     if (quantity === 1 && diff === -1 && !isCart) return
     if (quantity === 1 && diff === -1 && isCart) {
       setIsModal(true)

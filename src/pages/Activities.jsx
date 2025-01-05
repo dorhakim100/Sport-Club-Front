@@ -547,10 +547,10 @@ export function SummerCamp() {
     title: { he: 'קייטנת הספורט', eng: 'The Sports Camp' },
     preview: {
       he: `הקייטנה מציעה מגוון פעילויות ספורט כמו כדורגל, כדורסל, טניס וריצה, בהובלת צוות מדריכים מקצועי ומסור. הילדים ייהנו מסביבה בטוחה ומהנה, יפתחו כישורים חברתיים ועבודת צוות, וישתתפו בתחרויות עם פרסים על הישגיהם.
-
+      
       התוכנית מותאמת לגילאים שונים ומשלבת הנאה, צמיחה אישית ובריאות. הקייטנה פועלת במהלך חופשות בית הספר ומאפשרת הרשמה גמישה לפי שבועות.`,
       eng: `Our camp offers a variety of sports activities such as soccer, basketball, tennis, and running, led by a professional and dedicated team of coaches. Children will enjoy a safe and fun environment, develop social skills and teamwork, and participate in competitions with prizes for their achievements.
-
+      
       The program is tailored to different age groups, combining fun, personal growth, and health. The camp operates during school holidays with flexible weekly registration options.`,
     },
     ending: {
@@ -567,7 +567,7 @@ export function SummerCamp() {
     כל מטופל/ת שמגיעים אליי אני חוקר את ההיסטוריה הגופנית שלו ע"י תשאול ובדיקות על מנת לאבחן את שורש הבעיה, ואז משתמש בלחיצות ומתיחות עדינות, הנעות ומניפולציות, שמטרתן לשחרר אזורים נוקשים וחסרי תנועה, להחזיר אותם לתפקוד תקין ולעורר תהליך של התאוששות.
     רוב המטופלים מציגים שיפור כבר בטיפול הראשון. יש גם מטופלים קבועים שמגיעים ל'תחזוקה' ומניעה.`,
     eng: `I am Laor Ben Shimon, a certified osteopath and osteopathy instructor at Wingate.
-  
+    
     As a former athlete (a member of Israel’s youth national handball team) who suffered from injuries, I chose to develop my career as a healer, which led me to focus on manual therapy. Early in my journey, I worked with soccer teams and at spas, and later transitioned to running my own private clinic.
     
     Over the years, I decided to specialize further and expand my knowledge and experience to better help my patients, which brought me to osteopathy. I am a strong advocate of this method and believe it can significantly improve our quality of life, restore essential movement and function, and reduce pain.
@@ -619,9 +619,37 @@ export function SummerCamp() {
 export function Restaurant() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const headText = { he: 'שף הכפר', eng: 'Restaurant' }
+  const options = {
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735057090/D-48_e8maer.jpg',
+
+    title: { he: 'קייטנת הספורט', eng: 'The Sports Camp' },
+    preview: {
+      he: `שף הכפר הוא גן ארועים וקייטרינג הממוקם בקאנטרי כפר שמריהו בשרון, באווירה כפרית ופסטורלית, לאירוע חלבי או בשרי 
+
+      כל תפריט מורכב בהתאמה אישית מחומרי גלם טריים ומובחרים לארוע שלך ע״י שף דודו ברעם, שף המקום. `,
+      eng: `Chef HaKfar is an event venue and catering service located in the countryside of Kfar Shmaryahu in the Sharon region. It offers a rustic and pastoral atmosphere, perfect for either dairy or meat-based events.
+
+      Every menu is custom-crafted for your event using fresh, high-quality ingredients by Chef Dudu Baram, the venue's chef.`,
+    },
+    ending: {
+      he: `בקרו אצלנו!`,
+      eng: `Visit us!`,
+    },
+  }
+  const logo = {
+    regular:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735057610/openart-8f0af741-854f-4363-8e82-2455e51d96c1_qqpbun.png',
+    darkMode:
+      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735057610/openart-8f0af741-854f-4363-8e82-2455e51d96c1_qqpbun.png',
+  }
+  animation()
   return (
     <div className='restaurant-container'>
       <HeadContainer text={headText} />
+      <DynamicCover prefs={prefs} coverSrc={options.img} />
+      <div className='information-container'>
+        <ActivityInfo options={options} logo={logo} />
+      </div>
     </div>
   )
 }

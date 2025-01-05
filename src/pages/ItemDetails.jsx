@@ -111,7 +111,11 @@ export function ItemDetails() {
           <b>{prefs.isEnglish ? item.title.eng : item.title.he}</b>
           <div className='price-container'>
             <b>₪{item.price}</b>
-            <Quantity quantity={quantity} setQuantity={setQuantity} />
+            <Quantity
+              quantity={quantity}
+              setQuantity={setQuantity}
+              item={item}
+            />
           </div>
           <AddToCartButton item={{ ...item }} quantity={quantity} />
         </div>
