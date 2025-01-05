@@ -78,6 +78,11 @@
     
             &.dark-mode {
                 background-color: darken($light-yellow, 10%);
+                &:hover{
+
+
+                    background-color: darken($light-yellow, 20%);
+                }
             }
         }
     
@@ -90,6 +95,10 @@
     
             &.dark-mode {
                 background-color: darken($soft-green, 10%);
+                &:hover{
+                    background-color: darken($soft-green, 20%);
+
+                }
             }
         }
     
@@ -102,6 +111,11 @@
     
             &.dark-mode {
                 background-color: darken($soft-light-blue, 10%);
+                &:hover{
+
+                    background-color: darken($soft-light-blue, 20%);
+
+                }
             }
         }
 
