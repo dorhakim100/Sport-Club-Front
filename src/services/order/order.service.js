@@ -4,6 +4,11 @@ import { userService } from '../user/user.service'
 
 const KEY = 'order'
 
+const BASE_URL =
+  process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:3030/api/'
+const BASE_ORDER_URL =
+  process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:5173/'
+
 export const orderService = {
   query,
   getById,
@@ -86,15 +91,21 @@ function getEmptyOrder() {
 }
 
 async function createNewOrderLink(order) {
-  if (!order?.amount || !order?.id) {
+  if (!order?.amount || !order?._id) {
     throw new Error('Invalid order data: amount and id are required.')
   }
 
   try {
-    const response = await fetch('/api/payment/initiate', {
+    const response = await fetch(`${BASE_URL}payment/initiate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount: order.amount, orderId: order.id }),
+      body: JSON.stringify({
+        amount: order.amount,
+        orderId: order._id,
+        user: order.user,
+        goodUrl: `${BASE_ORDER_URL}order/success`,
+        badUrl: `${BASE_ORDER_URL}order/error`,
+      }),
     })
 
     if (!response.ok) {
@@ -107,7 +118,6 @@ async function createNewOrderLink(order) {
     }
 
     const result = await response.json()
-
     if (result.paymentUrl) {
       return result.paymentUrl
     } else {

@@ -11,7 +11,7 @@ import { AddToCartButton } from './AddToCartButton'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
-export function ItemList({ items, onRemoveItem, onUpdateItem, isGrid }) {
+export function ItemList({ items, onRemoveItem, isGrid }) {
   const navigate = useNavigate()
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   function shouldShowActionBtns(item) {
