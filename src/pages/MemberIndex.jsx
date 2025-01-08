@@ -21,10 +21,17 @@ export function MemberIndex() {
     eng: 'Members',
   }
 
+  const text = {
+    he: `אנו מציעים 3 סוגי מנוי, בהתאם לצרכים של כל אחד ואחת`,
+    eng: `We offer three kinds of memberships, depending on each and everyone's needs.`,
+  }
+
   return (
     <div className='member-index-container'>
-      <HeadContainer text={head} />
+      <h2>{prefs.isEnglish ? head.eng : head.he}</h2>
+      {/* <HeadContainer text={head} /> */}
       {/* <VisibleCards /> */}
+      {/* <b className='member-text'>{prefs.isEnglish ? text.eng : text.he}</b> */}
 
       <MemberText />
     </div>

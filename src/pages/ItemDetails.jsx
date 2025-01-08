@@ -64,7 +64,7 @@ export function ItemDetails() {
     const str = `/item${
       itemFilter.types.length === 1 ? `/${itemFilter.types[0]}` : ''
     }?pageIdx=${itemFilter.pageIdx}&types=${typesStr}`
-    console.log(str)
+
     setLastPage(str)
     return str
   }
@@ -88,25 +88,12 @@ export function ItemDetails() {
     setItem()
   }, [itemId])
 
-  async function onAddItemMsg(itemId) {
-    try {
-      await addItemMsg(itemId, 'bla bla ' + parseInt(Math.random() * 10))
-      showSuccessMsg(`Item msg added`)
-    } catch (err) {
-      showErrorMsg('Cannot add item msg')
-    }
-  }
-
   return (
     <>
       {item.prevNext && (
         <ItemNavigation item={item} type={'item'} lastPage={lastPage} />
       )}
       <section className='item-details-container'>
-        {/* <Link to='/item' className={prefs.isDarkMode && 'dark-mode'}>
-          {prefs.isEnglish ? `Back to list` : 'חזרה לתפריט'}
-          <ArrowBackIosNewIcon />
-        </Link> */}
         <div className='title-container'>
           <b>{prefs.isEnglish ? item.title.eng : item.title.he}</b>
           <div className='price-container'>

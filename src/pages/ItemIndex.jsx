@@ -135,7 +135,6 @@ export function ItemIndex() {
         const max = await itemService.getMaxPage(filterBy)
 
         setMaxPage(max)
-        console.log(filterBy)
 
         // Only update searchParams if needed
         if (
@@ -171,20 +170,6 @@ export function ItemIndex() {
     }
   }
 
-  async function onUpdateItem(item) {
-    // const speed = +prompt('New speed?', item.speed)
-    // if (speed === 0 || speed === item.speed) return
-
-    // const itemToSave = { ...item, speed }
-
-    try {
-      // const savedItem = await updateItem(itemToSave)
-      showSuccessMsg(`Item updated, new speed: ${savedItem.speed}`)
-    } catch (err) {
-      showErrorMsg('Cannot update item')
-    }
-  }
-
   return (
     <main className='item-index'>
       <header className='item-index-header'>
@@ -203,28 +188,11 @@ export function ItemIndex() {
           setIsGrid={setIsGrid}
           maxPage={maxPage}
         />
-        {/* {userService.getLoggedinUser() && (
-          <Button variant='contained' onClick={onAddItem}>
-            Add Item
-          </Button>
-        )} */}
       </div>
 
-      <ItemList
-        items={items}
-        onRemoveItem={onRemoveItem}
-        onUpdateItem={onUpdateItem}
-        isGrid={isGrid}
-      />
+      <ItemList items={items} onRemoveItem={onRemoveItem} isGrid={isGrid} />
 
       <ContactUs />
     </main>
   )
-}
-
-export function CardIndex() {
-  return <div className='card-index'></div>
-}
-export function AccessoriesIndex() {
-  return <div className='accessories-index'></div>
 }

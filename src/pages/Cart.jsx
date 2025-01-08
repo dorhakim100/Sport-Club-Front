@@ -163,8 +163,13 @@ export function Cart() {
 
   async function onPay() {
     try {
+      setIsLoading(true)
       const order = createOrder()
       const url = await orderService.createNewOrderLink(order)
+      console.log(url)
+      setIsLoading(false)
+      // return
+      openLink(url)
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't start payment` : 'לא ניתן להתחיל תשלום'
@@ -181,6 +186,10 @@ export function Cart() {
     }
 
     return order
+  }
+
+  const openLink = (link) => {
+    window.open(link)
   }
 
   return (

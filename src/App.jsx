@@ -27,7 +27,7 @@ import {
   Restaurant,
   Pilates,
 } from './pages/Activities.jsx'
-import { ItemIndex, CardIndex, AccessoriesIndex } from './pages/ItemIndex'
+import { ItemIndex } from './pages/ItemIndex'
 import { ItemDetails } from './pages/ItemDetails'
 import { ItemEdit } from './pages/ItemEdit.jsx'
 
@@ -54,6 +54,9 @@ import { MemberIndex } from './pages/MemberIndex.jsx'
 
 import { CouponIndex } from './pages/CouponIndex.jsx'
 import { CouponEdit } from './pages/CouponEdit.jsx'
+
+import { SuccessPage } from './pages/SuccessPage.jsx'
+import { ErrorPage } from './pages/ErrorPage.jsx'
 
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
@@ -122,10 +125,7 @@ export function App() {
               <Route path='camp' element={<SummerCamp />} />
               <Route path='restaurant' element={<Restaurant />} />
             </Route>
-            <Route path='item' element={<ItemIndex />}>
-              <Route path='card' element={<CardIndex />} />
-              <Route path='accessories' element={<AccessoriesIndex />} />
-            </Route>
+            <Route path='item' element={<ItemIndex />} />
 
             <Route path='item/:itemId' element={<ItemDetails />} />
             <Route path='item/edit/:itemId' element={<ItemEdit />} />
@@ -153,6 +153,8 @@ export function App() {
               <Route path='coupon' element={<CouponIndex />} />
               <Route path='coupon/edit/:couponId' element={<CouponEdit />} />
             </Route>
+            <Route path='payment/success' element={<SuccessPage />} />
+            <Route path='payment/error' element={<ErrorPage />} />
           </Routes>
         </section>
         <AppFooter />
