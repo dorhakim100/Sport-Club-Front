@@ -52,6 +52,17 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
           ? 'Invalid email'
           : 'דואר אלקטרוני לא תקין'
       }
+      if (!values.phone) {
+        errors.phone = prefs.isEnglish ? 'Required' : 'הכרחי'
+      } else if (
+        !/^\+?\d{1,4}[\s.-]?\(?\d{1,4}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,4}$/.test(
+          values.phone
+        )
+      ) {
+        errors.phone = prefs.isEnglish
+          ? 'Invalid phone number'
+          : 'מספר טלפון לא תקין'
+      }
       if (!values.username) {
         errors.username = prefs.isEnglish ? 'Required' : 'הכרחי'
       } else if (values.username.length < 2) {
@@ -118,7 +129,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
     //   showErrorMsg('Login first')
     //   return
     // }
-    const { email, username, password, fullname } = values
+    const { email, username, password, fullname, phone } = values
     let cred
     if (isSignup) {
       cred = {
@@ -126,6 +137,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
         username,
         password,
         fullname,
+        phone,
       }
     } else {
       cred = {
@@ -294,6 +306,25 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
                 />
               </div>
               <span>{errors.email && touched.email && errors.email}</span>
+            </div>
+          )}
+          {isSignup && (
+            <div
+              className={`input-container phone ${
+                prefs.isDarkMode ? 'dark-mode' : ''
+              } ${errors.phone && touched.phone ? 'error' : ''}`}
+            >
+              <div className='phone-container'>
+                <input
+                  type='phone'
+                  name='phone'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.phone}
+                  placeholder={prefs.isEnglish ? 'Phone number' : 'מספר טלפון'}
+                />
+              </div>
+              <span>{errors.phone && touched.phone && errors.phone}</span>
             </div>
           )}
           <div

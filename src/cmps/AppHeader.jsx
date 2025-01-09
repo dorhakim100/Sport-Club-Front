@@ -175,6 +175,8 @@ export function AppHeader() {
     const setRememberedUser = async () => {
       try {
         const remembered = await userService.getRememberedUser()
+        console.log(remembered)
+
         if (!remembered) return
 
         setRemembered(remembered)
