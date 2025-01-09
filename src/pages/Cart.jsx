@@ -19,7 +19,7 @@ import { setCartTotal } from '../store/actions/user.actions'
 import { Button } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import { makeId } from '../services/util.service'
-import { orderService } from '../services/order/order.service'
+import { paymentService } from '../services/payment/payment.service'
 import { setOriginalItem } from '../store/actions/user.actions'
 import { setOriginalPrice } from '../store/actions/user.actions'
 
@@ -165,12 +165,13 @@ export function Cart() {
     try {
       setIsLoading(true)
       const order = createOrder()
-      const url = await orderService.createNewOrderLink(order)
+      const url = await paymentService.createNewOrderLink(order)
       console.log(url)
       setIsLoading(false)
       // return
-      openLink(url)
+      openPelecardLink(url)
     } catch (err) {
+      console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't start payment` : 'לא ניתן להתחיל תשלום'
       )
@@ -179,17 +180,23 @@ export function Cart() {
 
   const createOrder = () => {
     const order = {
-      ...orderService.getEmptyOrder(),
+      ...paymentService.getEmptyOrder(),
       items: cart,
       amount: total,
-      user: { id: user._id, name: user.fullname },
+      user: {
+        id: user._id,
+        name: user.fullname,
+        phone: user.phone,
+        email: user.email,
+      },
     }
 
     return order
   }
 
-  const openLink = (link) => {
-    window.open(link)
+  const openPelecardLink = (link) => {
+    // window.open(link)
+    window.location.href = link
   }
 
   return (

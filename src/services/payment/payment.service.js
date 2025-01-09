@@ -2,14 +2,14 @@ import { httpService } from '../http.service'
 import { makeId } from '../util.service'
 import { userService } from '../user/user.service'
 
-const KEY = 'order'
+const KEY = 'payment'
 
 const BASE_URL =
   process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:3030/api/'
 const BASE_ORDER_URL =
   process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:5173/'
 
-export const orderService = {
+export const paymentService = {
   query,
   getById,
   save,
@@ -49,13 +49,14 @@ async function remove(orderId) {
     throw err
   }
 }
-async function save(order) {
+async function save(payment) {
   try {
     var savedOrder
-    if (order._id) {
-      savedOrder = await httpService.put(`${KEY}/${order._id}`, order)
+    if (payment._id) {
+      savedOrder = await httpService.put(`${KEY}/${payment._id}`, payment)
     } else {
-      savedOrder = await httpService.post(KEY, order)
+      console.log(payment)
+      savedOrder = await httpService.post(`${KEY}/add`, payment)
     }
     return savedOrder
   } catch (err) {
@@ -105,6 +106,7 @@ async function createNewOrderLink(order) {
         user: order.user,
         goodUrl: `${BASE_ORDER_URL}order/success`,
         badUrl: `${BASE_ORDER_URL}order/error`,
+        items: order.items,
       }),
     })
 
