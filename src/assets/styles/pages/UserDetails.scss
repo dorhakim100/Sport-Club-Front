@@ -1,13 +1,18 @@
 .user-details {
-    
-    .list-container{
-        display: grid;
-        gap: 2em;
 
-        b{
+    .orders-list-container{
+        display: grid;
+        gap: 1em;
+        .hello-text{
             font-size: 1.5em;
             justify-self: start;
+
         }
+    }
+    
+    .list-container{
+
+
     }
     
     .no-orders-container{

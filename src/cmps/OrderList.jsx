@@ -12,43 +12,38 @@ import { setIsLoading } from '../store/actions/system.actions.js'
 import { paymentService } from '../services/payment/payment.service.js'
 import { loadPayments } from '../store/actions/payment.actions.js'
 
-export function OrderList({ user }) {
+import Divider from '@mui/material/Divider'
+
+export function OrderList({ user, orders }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const text = {
     he: 'הזמנות',
     eng: 'Orders',
   }
 
-  useEffect(() => {
-    const loadOrders = async () => {
-      const filter = { ...filterBy, ordersIds: user.ordersIds }
-      setFilterBy(filter)
-      try {
-        setIsLoading(true)
-        const o = await loadPayments(filter)
-      } catch (err) {
-        showErrorMsg(
-          prefs.isEnglish ? `Couldn't show orders` : `תקלה בהצגת הזמנות`
-        )
-      } finally {
-        setIsLoading(false)
-      }
-    }
-  }, [user])
+  useEffect(() => {}, [user])
 
   return (
     <div className='orders-list-container'>
       <HeadContainer text={text} />
+      <b className='hello-text'>
+        {prefs.isEnglish ? `Hello, ${user.fullname}` : `שלום, ${user.fullname}`}
+      </b>
       <div className='list-container'>
-        <b>
-          {prefs.isEnglish
-            ? `Hello, ${user.fullname}`
-            : `שלום, ${user.fullname}`}
-        </b>
         {user.ordersIds.length > 0 ? (
-          user.ordersIds.map((orderId) => {
+          orders.map((order, index) => {
             return (
-              <OrderPreview orderId={orderId} key={`${orderId}${makeId()}`} />
+              <>
+                <OrderPreview order={order} key={`${order._id}${makeId()}`} />
+
+                {/* {order.length > 1 && index !== orders.length - 1 && (
+                <Divider
+                  orientation='horizontal'
+                  flexItem
+                  key={`${order._id}Divider`}
+                />
+                  )} */}
+              </>
             )
           })
         ) : (

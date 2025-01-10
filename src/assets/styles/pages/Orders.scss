@@ -1,0 +1,72 @@
+.orders-list-container{
+
+
+    .list-container{
+        display: grid;
+        gap: 1em;
+    }
+
+}
+
+
+.order-container{
+
+    display: grid;
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-rows: 2em minmax(100px,1fr);
+    gap: 0.5em;
+
+    border: 1px solid white;
+
+    padding: 1em;
+
+
+
+    .is-ready-container{
+        grid-column: 1/-1;
+        display: grid;
+        align-items: center;
+        grid-template-rows: auto;
+        grid-template-columns: 100px 1fr 100px;
+        span:last-of-type{
+            grid-column: 3/4;
+        }
+
+    }
+    
+    .order-num-container,.order-total-container{
+        display: grid;
+        align-items: center;
+
+        // justify-items: start;
+
+        
+    }
+    
+    .order-total-container{
+        // justify-items: end;
+
+
+    }
+    
+    .items-container{
+
+
+        justify-self: start;
+        display: grid;
+        gap: 1em;
+        width: 100%;
+        text-align: start;
+
+        .item-container{
+            b{
+
+                cursor: pointer;
+                height: fit-content;
+            }
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+}

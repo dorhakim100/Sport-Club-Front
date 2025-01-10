@@ -44,6 +44,7 @@ export function SuccessPage() {
     const pelecardTransactionId = params.get('PelecardTransactionId')
     const userId = params.get('UserKey')
     const itemsString = params.get('ParamX')
+    const amount = params.get('AmountParam')
 
     // Check if the necessary parameters exist
     if (!pelecardTransactionId || !userId || !itemsString) {
@@ -69,6 +70,7 @@ export function SuccessPage() {
         userId,
         items,
         pelecardTransactionId,
+        amount,
       }
 
       // Save the payment
