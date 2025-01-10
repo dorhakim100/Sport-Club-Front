@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { loadUser } from '../store/actions/user.actions'
 import { store } from '../store/store'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { paymentService } from '../services/payment/payment.service'
 
 // import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from '../services/socket.service'
 
@@ -12,6 +13,7 @@ import { HeadContainer } from '../cmps/HeadContainer'
 import { OrderList } from '../cmps/OrderList.jsx'
 import { setIsLoading } from '../store/actions/system.actions'
 import { ContactUs } from '../cmps/ContactUs'
+import { loadPayments } from '../store/actions/payment.actions'
 
 export function UserDetails() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -19,13 +21,22 @@ export function UserDetails() {
   const user = useSelector((storeState) => storeState.userModule.user)
   const [userName, setUserName] = useState({ he: '', eng: '' })
 
+  const [filterBy, setFilterBy] = useState(paymentService.getDefaultFilter())
+  const orders = useSelector(
+    (stateSelector) => stateSelector.paymentModule.payments
+  )
+  console.log(orders)
+
   useEffect(() => {
     const setUser = async () => {
       try {
         setIsLoading(true)
         const u = await loadUser(params.userId)
-        console.log(u)
         setUserName({ he: u.fullname, eng: u.fullname })
+
+        const filter = { ...filterBy, ordersIds: u.ordersIds }
+        setFilterBy(filter)
+        await loadPayments(filter)
       } catch (err) {
         showErrorMsg(
           prefs.isEnglish
@@ -58,7 +69,7 @@ export function UserDetails() {
       {user && !user.isAdmin && (
         <div>
           {/* <HeadContainer text={userName} /> */}
-          <OrderList user={user} />
+          <OrderList user={user} orders={orders} />
         </div>
       )}
       <ContactUs />

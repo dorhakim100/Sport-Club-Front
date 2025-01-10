@@ -49,13 +49,13 @@ async function remove(orderId) {
     throw err
   }
 }
+
 async function save(payment) {
   try {
     var savedOrder
     if (payment._id) {
       savedOrder = await httpService.put(`${KEY}/${payment._id}`, payment)
     } else {
-      console.log(payment)
       savedOrder = await httpService.post(`${KEY}/add`, payment)
     }
     return savedOrder
@@ -66,7 +66,14 @@ async function save(payment) {
 }
 
 function getDefaultFilter() {
-  return { types: [], pageIdx: 0, iaAll: true }
+  return {
+    ordersIds: [],
+    pageIdx: 0,
+    iaAll: true,
+    txt: '',
+    onlyPending: false,
+    sortDir: 1,
+  }
 }
 
 async function getMaxPage() {
@@ -86,7 +93,8 @@ function getEmptyOrder() {
     user: { id: '' },
     items: [],
     amount: '',
-
+    orderNum: '',
+    isReady: false,
     createdAt: Date.now(),
   }
 }
