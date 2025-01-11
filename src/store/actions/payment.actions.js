@@ -4,6 +4,7 @@ import {
   SET_PAYMENTS,
   SET_PAYMENT,
   UPDATE_PAYMENT,
+  SET_OPEN_PAYMENTS,
 } from '../reducers/payment.reducer'
 
 export async function loadPayments(filterBy) {
@@ -27,6 +28,20 @@ export async function updatePayment(payment) {
     return savedPayment
   } catch (err) {
     console.log('Cannot save payment', err)
+    throw err
+  }
+}
+
+export async function loadOpenPayments() {
+  try {
+    const openPayments = await paymentService.getOpenOrders()
+
+    store.dispatch({
+      type: SET_OPEN_PAYMENTS,
+      openLength: openPayments,
+    })
+  } catch (err) {
+    console.log(err)
     throw err
   }
 }

@@ -9,6 +9,10 @@ import { showErrorMsg } from '../services/event-bus.service'
 import { paymentService } from '../services/payment/payment.service'
 import { setEmptyCart } from '../store/actions/user.actions'
 import { updateCart } from '../store/actions/user.actions'
+import {
+  SOCKET_EVENT_ADD_ORDER,
+  socketService,
+} from '../services/socket.service'
 
 export function SuccessPage() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -62,7 +66,6 @@ export function SuccessPage() {
       )
       return
     }
-    console.log(cart)
 
     try {
       const payment = {
@@ -75,6 +78,8 @@ export function SuccessPage() {
       // Save the payment
       const savedUser = await paymentService.save(payment)
       console.log(savedUser)
+
+      socketService.emit(SOCKET_EVENT_ADD_ORDER, payment)
 
       // Update the cart after saving the payment
       updateCart(savedUser)

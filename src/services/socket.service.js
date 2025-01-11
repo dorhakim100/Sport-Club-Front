@@ -3,6 +3,11 @@ import { userService } from './user/user.service'
 
 export const SOCKET_EVENT_ADD_MSG = 'add-msg'
 export const SOCKET_EMIT_SEND_MSG = 'send-msg'
+
+export const SOCKET_EVENT_ADD_ORDER = 'make-order'
+// export const SOCKET_EVENT_ADD_ORDER = 'add-order'
+export const SOCKET_EVENT_MAKE_ORDER = 'make-order'
+
 export const SOCKET_EMIT_SET_TOPIC = 'chat-set-topic'
 export const SOCKET_EMIT_USER_WATCH = 'user-watch'
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
