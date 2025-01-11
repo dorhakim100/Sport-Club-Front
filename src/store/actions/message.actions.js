@@ -9,6 +9,7 @@ import {
   UPDATE_MESSAGE,
   SET_OPEN_MESSAGES,
 } from '../reducers/message.reducer'
+import { paymentService } from '../../services/payment/payment.service'
 
 export async function loadMessages(filterBy) {
   try {
@@ -85,12 +86,15 @@ export async function updateMessage(messageToUpdate) {
 
 export async function loadOpenMessages() {
   try {
-    const open = await messageService.getOpenMessages()
-    console.log(open)
+    const openMessages = await messageService.getOpenMessages()
+    // const openPayments = await paymentService.getOpenOrders()
+    // const open = openMessages + openPayments
+    // const open = await messageService.getOpenMessages()
     store.dispatch({
       type: SET_OPEN_MESSAGES,
-      openLength: open,
+      openLength: openMessages,
     })
+    return open
   } catch (err) {
     console.log(err)
     throw err

@@ -20,6 +20,7 @@ export const paymentService = {
   getMaxPage,
   getEmptyOrder,
   createNewOrderLink,
+  getOpenOrders,
 }
 
 async function query(filterBy = { pageIdx: 0, types: [] }) {
@@ -163,6 +164,20 @@ async function cancelOrderTransaction({ confirmationKey, uniqueKey, total }) {
     return result.message
   } catch (err) {
     console.error('An error occurred while canceling the transaction:', err)
+    throw err
+  }
+}
+
+async function getOpenOrders() {
+  try {
+    // var messages = await storageService.query(STORAGE_KEY)
+
+    // const unDone = messages.filter((message) => message.isDone === false)
+    // return unDone.length
+    const length = await httpService.get('payment/openLength')
+    return length
+  } catch (err) {
+    console.log(err)
     throw err
   }
 }

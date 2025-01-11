@@ -4,10 +4,12 @@ export const SET_PAYMENTS = 'SET_PAYMENTS'
 export const SET_PAYMENT = 'SET_PAYMENT'
 export const REMOVE_PAYMENT = 'REMOVE_PAYMENT'
 export const UPDATE_PAYMENT = 'UPDATE_PAYMENT'
+export const SET_OPEN_PAYMENTS = 'SET_OPEN_PAYMENTS'
 
 const initialState = {
   payments: [],
   payment: paymentService.getEmptyOrder(),
+  openLength: 0,
 }
 
 export function paymentReducer(state = initialState, action) {
@@ -36,7 +38,9 @@ export function paymentReducer(state = initialState, action) {
       )
       newState = { ...state, payments }
       break
-
+    case SET_OPEN_PAYMENTS:
+      newState = { ...state, openLength: action.openLength }
+      break
     default:
   }
   return newState

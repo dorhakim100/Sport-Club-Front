@@ -9,7 +9,10 @@ import { login, logout, setRemembered } from '../store/actions/user.actions'
 import { loadOpenMessages } from '../store/actions/message.actions'
 import { smoothScroll } from '../services/util.service'
 
-import { SOCKET_EVENT_ADD_MSG } from '../services/socket.service'
+import {
+  SOCKET_EVENT_ADD_MSG,
+  SOCKET_EVENT_ADD_ORDER,
+} from '../services/socket.service'
 
 import { DropDown } from '../cmps/DropDown.jsx'
 
@@ -27,6 +30,7 @@ import {
   setModalMessage,
   setIsModal,
 } from '../store/actions/system.actions'
+import { loadOpenPayments } from '../store/actions/payment.actions'
 
 export function AppHeader() {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -37,6 +41,10 @@ export function AppHeader() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const openMessages = useSelector(
     (stateSelector) => stateSelector.messageModule.openLength
+  )
+
+  const openOrders = useSelector(
+    (stateSelector) => stateSelector.paymentModule.openLength
   )
 
   const [logo, setLogo] = useState(
@@ -98,6 +106,7 @@ export function AppHeader() {
           socketService.on(SOCKET_EVENT_ADD_MSG, async () => {
             try {
               await loadOpenMessages()
+
               showSuccessMsg(
                 prefs.isEnglish ? `New message received` : 'הודעה חדשה התקבלה'
               )
@@ -113,14 +122,39 @@ export function AppHeader() {
         )
       }
     }
+    const setOrders = async () => {
+      if (!user) return
+      try {
+        if (user && user.isAdmin) {
+          await loadOpenPayments()
+          socketService.on(SOCKET_EVENT_ADD_ORDER, async () => {
+            try {
+              await loadOpenPayments()
+
+              showSuccessMsg(
+                prefs.isEnglish ? `New order received` : 'הזמנה חדשה התקבלה'
+              )
+            } catch (err) {
+              console.log(`Couldn't load socket event`)
+            }
+          })
+        }
+      } catch (err) {
+        console.log(err)
+        showErrorMsg(
+          prefs.isEnglish ? `Orders couldn't be load` : 'הזמנות לא נטענו'
+        )
+      }
+    }
     setTasks()
+    setOrders()
   }, [user])
 
   const openTasks = useMemo(() => {
     let open
-    open = openMessages
+    open = openMessages + openOrders
     return open
-  }, [openMessages])
+  }, [openMessages, openOrders])
 
   const cartLength = useMemo(() => {
     let length = 0
