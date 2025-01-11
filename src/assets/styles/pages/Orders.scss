@@ -1,5 +1,10 @@
 .orders-list-container{
 
+    .controller-container{
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
 
     .list-container{
         display: grid;
@@ -12,23 +17,76 @@
 .order-container{
 
     display: grid;
-    grid-template-columns: 100px 1fr 100px;
-    grid-template-rows: 2em minmax(100px,1fr);
+    grid-template-columns: 150px 1fr 100px;
+    grid-template-rows:  80px minmax(100px,1fr);
     gap: 0.5em;
+    
+    @media (max-width:600px) {
+        grid-template-columns: 75px 1fr 50px;
+        
+    }
 
-    border: 1px solid white;
-
+    border-radius: 3px;
+    
     padding: 1em;
+    transition: 0.2s ease;
+    // outline: 2px solid $medium-gray;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;   
+
+    // background-color: $light-gray;
+    background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+    
+    &:hover{
+        
+
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+    
+    &.dark-mode{
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        &:hover{
+
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;    
+           }
+        
+        // outline: 1px solid $light-gray;
+    }
 
 
-
-    .is-ready-container{
+    .date-is-ready-container{
         grid-column: 1/-1;
         display: grid;
         align-items: center;
         grid-template-rows: auto;
-        grid-template-columns: 100px 1fr 100px;
-        span:last-of-type{
+        grid-template-columns: 150px 1fr 100px;
+        @media (max-width:600px) {
+            // grid-template-columns: 75px 1fr 50px;
+            
+        }
+        .is-ready-container{
+            justify-self: center;
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            justify-items: center;
+            width: fit-content;
+            img{
+                width: 50px;
+                
+                @media (max-width:600px) {
+                    width: 30px;
+                    
+                    
+                }
+            }
+
+            &.admin{
+                cursor: pointer;
+            }
+        }
+
+        span{
             grid-column: 3/4;
         }
 
@@ -54,9 +112,18 @@
 
         justify-self: start;
         display: grid;
+        display: flex;
+        flex-wrap: wrap;
+
+        @media (max-width:600px) {
+            display: grid;
+            
+        }
+
         gap: 1em;
         width: 100%;
         text-align: start;
+        width: fit-content;
 
         .item-container{
             b{
@@ -65,7 +132,13 @@
                 height: fit-content;
             }
             display: flex;
+            gap: 2em;
             justify-content: space-between;
+            padding: 0px 0.5em 0px 0.5em;
+
+            .quantity-container{
+                direction: ltr;
+            }
         }
     }
 

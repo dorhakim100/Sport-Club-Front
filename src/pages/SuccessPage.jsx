@@ -35,7 +35,6 @@ export function SuccessPage() {
   }, [])
 
   const addPayment = async () => {
-    console.log('called')
     const url = location.search
 
     const params = new URLSearchParams(url)
@@ -43,11 +42,10 @@ export function SuccessPage() {
     // Extract values from the URL
     const pelecardTransactionId = params.get('PelecardTransactionId')
     const userId = params.get('UserKey')
-    const itemsString = params.get('ParamX')
-    const amount = params.get('AmountParam')
+    const cartString = params.get('ParamX')
 
     // Check if the necessary parameters exist
-    if (!pelecardTransactionId || !userId || !itemsString) {
+    if (!pelecardTransactionId || !userId || !cartString) {
       showErrorMsg(
         prefs.isEnglish ? 'Missing required parameters' : 'חסרים פרמטרים דרושים'
       )
@@ -55,22 +53,23 @@ export function SuccessPage() {
     }
 
     // Parse the ParamX (items) string to an array
-    let items
+    let cart
     try {
-      items = JSON.parse(itemsString)
+      cart = JSON.parse(cartString)
     } catch (error) {
       showErrorMsg(
-        prefs.isEnglish ? 'Invalid items format' : 'פורמט פריטים לא תקין'
+        prefs.isEnglish ? 'Invalid cart format' : 'פורמט פריטים לא תקין'
       )
       return
     }
+    console.log(cart)
 
     try {
       const payment = {
         userId,
-        items,
+        items: cart.items,
         pelecardTransactionId,
-        amount,
+        amount: +cart.amount,
       }
 
       // Save the payment

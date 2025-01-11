@@ -4,6 +4,8 @@ import { userService } from '../user/user.service'
 
 const KEY = 'payment'
 
+const PAGE_SIZE = 6
+
 const BASE_URL =
   process.env.NODE_ENV === 'production' ? '/api/' : '//localhost:3030/api/'
 const BASE_ORDER_URL =
@@ -76,9 +78,9 @@ function getDefaultFilter() {
   }
 }
 
-async function getMaxPage() {
+async function getMaxPage(filter) {
   try {
-    var orders = await query({ isAll: true })
+    var orders = await query({ ...filter, isAll: true })
     let maxPage = orders.length / PAGE_SIZE
     maxPage = Math.ceil(maxPage)
     return maxPage
