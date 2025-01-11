@@ -14,6 +14,7 @@ import { OrderList } from '../cmps/OrderList.jsx'
 import { setIsLoading } from '../store/actions/system.actions'
 import { ContactUs } from '../cmps/ContactUs'
 import { loadPayments } from '../store/actions/payment.actions'
+import { Controller } from '../cmps/Controller'
 
 export function UserDetails() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -22,46 +23,41 @@ export function UserDetails() {
   const [userName, setUserName] = useState({ he: '', eng: '' })
 
   const [filterBy, setFilterBy] = useState(paymentService.getDefaultFilter())
+  const [maxPage, setMax] = useState()
   const orders = useSelector(
     (stateSelector) => stateSelector.paymentModule.payments
   )
-  console.log(orders)
 
   useEffect(() => {
-    const setUser = async () => {
-      try {
-        setIsLoading(true)
-        const u = await loadUser(params.userId)
-        setUserName({ he: u.fullname, eng: u.fullname })
-
-        const filter = { ...filterBy, ordersIds: u.ordersIds }
-        setFilterBy(filter)
-        await loadPayments(filter)
-      } catch (err) {
-        showErrorMsg(
-          prefs.isEnglish
-            ? `Couldn't show user details`
-            : 'לא היה ניתן להציג משתמש'
-        )
-      } finally {
-        setIsLoading(false)
-      }
-    }
     setUser()
-
-    // socketService.emit(SOCKET_EMIT_USER_WATCH, params.id)
-    // socketService.on(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
-
-    return () => {
-      // socketService.off(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
-    }
   }, [params.id])
 
-  function onUserUpdate(user) {
-    showSuccessMsg(
-      `This user ${user.fullname} just got updated from socket, new score: ${user.score}`
-    )
-    store.dispatch({ type: 'SET_WATCHED_USER', user })
+  useEffect(() => {
+    console.log(filterBy)
+    loadPayments(filterBy)
+  }, [filterBy])
+
+  async function setUser() {
+    try {
+      setIsLoading(true)
+      const u = await loadUser(params.userId)
+      setUserName({ he: u.fullname, eng: u.fullname })
+
+      const filter = { ...filterBy, ordersIds: u.ordersIds }
+      const m = await paymentService.getMaxPage(filter)
+
+      setFilterBy(filter)
+      setMax(m)
+      await loadPayments(filter)
+    } catch (err) {
+      showErrorMsg(
+        prefs.isEnglish
+          ? `Couldn't show user details`
+          : 'לא היה ניתן להציג משתמש'
+      )
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -69,7 +65,13 @@ export function UserDetails() {
       {user && !user.isAdmin && (
         <div>
           {/* <HeadContainer text={userName} /> */}
-          <OrderList user={user} orders={orders} />
+          <OrderList
+            user={user}
+            orders={orders}
+            maxPage={maxPage}
+            filter={filterBy}
+            setFilterBy={setFilterBy}
+          />
         </div>
       )}
       <ContactUs />
