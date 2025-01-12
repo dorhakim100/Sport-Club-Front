@@ -10,7 +10,7 @@ import { paymentService } from '../services/payment/payment.service'
 import { setEmptyCart } from '../store/actions/user.actions'
 import { updateCart } from '../store/actions/user.actions'
 import {
-  SOCKET_EVENT_ADD_ORDER,
+  SOCKET_EVENT_MAKE_ORDER,
   socketService,
 } from '../services/socket.service'
 
@@ -78,7 +78,7 @@ export function SuccessPage() {
       // Save the payment
       const savedUser = await paymentService.save(payment)
 
-      socketService.emit(SOCKET_EVENT_ADD_ORDER, payment)
+      socketService.emit(SOCKET_EVENT_MAKE_ORDER, payment)
 
       // Update the cart after saving the payment
       updateCart(savedUser)
