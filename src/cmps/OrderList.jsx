@@ -12,6 +12,7 @@ import { setIsLoading } from '../store/actions/system.actions.js'
 import { paymentService } from '../services/payment/payment.service.js'
 import { loadPayments } from '../store/actions/payment.actions.js'
 import { Controller } from './Controller.jsx'
+import { OrderFilter } from './OrderFilter.jsx'
 
 import Divider from '@mui/material/Divider'
 import { Button } from '@mui/material'
@@ -60,6 +61,11 @@ export function OrderList({
                 : `שלום, ${user.fullname}`}
             </b>
           )}
+          <OrderFilter
+            filter={filter}
+            maxPage={maxPage}
+            setFilter={setFilterBy}
+          />
         </>
       )}
       <div className='list-container'>

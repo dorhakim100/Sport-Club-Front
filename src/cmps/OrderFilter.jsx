@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import { setIsLoading } from '../store/actions/system.actions'
 
@@ -26,6 +26,7 @@ import { debounce } from '../services/util.service'
 export function OrderFilter({ filter, setFilter, maxPage }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [editFilter, setEditFilter] = useState(filter)
   const debouncedSetFilter = useRef(debounce(setFilter, 500))
 
@@ -60,7 +61,9 @@ export function OrderFilter({ filter, setFilter, maxPage }) {
   }
 
   return (
-    <div className='order-filter-container'>
+    <div
+      className={`order-filter-container ${user && user.isAdmin && 'admin'}`}
+    >
       <div className='controller-container'>
         <Controller filter={filter} maxPage={maxPage} setFilter={setFilter} />
       </div>
@@ -90,24 +93,26 @@ export function OrderFilter({ filter, setFilter, maxPage }) {
           isMessages={true}
         />
       </div>
-      <div
-        className={
-          prefs.isDarkMode
-            ? 'checkbox-container dark-mode'
-            : 'checkbox-container'
-        }
-      >
-        <label htmlFor={`setOnlyPending`}>
-          {prefs.isEnglish ? 'Only Pending' : 'לא בוצעו'}
-        </label>
-        <input
-          type='checkbox'
-          name='onlyPending'
-          id={`setOnlyPending`}
-          onChange={handleChange}
-          checked={filter.onlyPending}
-        />
-      </div>{' '}
+      {user && user.isAdmin && (
+        <div
+          className={
+            prefs.isDarkMode
+              ? 'checkbox-container dark-mode'
+              : 'checkbox-container'
+          }
+        >
+          <label htmlFor={`setOnlyPending`}>
+            {prefs.isEnglish ? 'Only Pending' : 'לא בוצעו'}
+          </label>
+          <input
+            type='checkbox'
+            name='onlyPending'
+            id={`setOnlyPending`}
+            onChange={handleChange}
+            checked={filter.onlyPending}
+          />
+        </div>
+      )}
     </div>
   )
 }
