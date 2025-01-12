@@ -33,7 +33,6 @@ export function UserDetails() {
   }, [params.id])
 
   useEffect(() => {
-    console.log(filterBy)
     loadPayments(filterBy)
   }, [filterBy])
 

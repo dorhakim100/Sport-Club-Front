@@ -119,7 +119,7 @@ function getEmptyClass() {
 
 function getClassTrainer(clas) {
   const trainers = []
-  console.log(clas)
+
   clas.occurrences.forEach((occur) => {
     if (trainers.some((trainer) => trainer.id === occur.trainer.id)) return
 

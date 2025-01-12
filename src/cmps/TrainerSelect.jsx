@@ -82,7 +82,6 @@ export function TrainerSelect({
     setEditClass(classToSet)
   }
   useEffect(() => {
-    console.log(occur)
     const trainerToSet = trainers.find(
       (trainer) => trainer._id === occur.trainer.id
     )

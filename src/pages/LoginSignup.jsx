@@ -78,7 +78,7 @@ export function LoginSignup() {
           style={
             prefs.isDarkMode
               ? { backgroundColor: '#787878', margin: '2em 0em' }
-              : {}
+              : { margin: '2em 0em' }
           }
         />
         <Outlet />

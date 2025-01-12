@@ -763,3 +763,15 @@ textarea, input{
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
   }
+
+  .orders-list-container{
+    display: grid;
+    gap: 1em;
+
+}
+
+  .hello-text{
+	font-size: 1.5em;
+	justify-self: start;
+
+}

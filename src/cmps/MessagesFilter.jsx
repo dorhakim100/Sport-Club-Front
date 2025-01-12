@@ -100,7 +100,6 @@ export function MessagesFilter({
           disabled={idsToRemove.length === 0}
           color='primary'
           onClick={() => {
-            console.log('bla')
             if (idsToRemove.length === 0) return
             onRemoveBulk(idsToRemove)
           }}

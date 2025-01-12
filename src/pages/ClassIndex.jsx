@@ -91,7 +91,7 @@ export function ClassIndex() {
       setMaxPage(max)
 
       // Update searchParams if necessary
-      console.log(filter)
+
       const currentPageIdx = searchParams.get('pageIdx') || 0
 
       if (currentPageIdx !== filter.pageIdx.toString()) {

@@ -33,10 +33,6 @@ export function UpdateControl({
 
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
-  useEffect(() => {
-    // console.log(updates)
-  }, [updates])
-
   async function onCancelEdit() {
     try {
       setIsLoading(true)
@@ -50,22 +46,6 @@ export function UpdateControl({
       setIsLoading(false)
     }
   }
-
-  // async function onSaveOrder() {
-  //   try {
-  //     setIsLoading(true)
-  //     setDragEdit(false)
-  //     await updateService.saveUpdatesOrder([...updates].reverse())
-  //     const defaultFilter = updateService.getDefaultFilter()
-  //     setFilter({ ...defaultFilter })
-  //     showSuccessMsg(prefs.isEnglish ? 'Order saved' : 'סדר נשמר')
-  //   } catch (err) {
-  //     console.log(err)
-  //     showErrorMsg(prefs.isEnglish ? `Couldn't save order` : 'סדר לא נשמר')
-  //   } finally {
-  //     setIsLoading(false)
-  //   }
-  // }
 
   async function onSaveOrder() {
     try {

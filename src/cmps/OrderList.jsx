@@ -18,7 +18,14 @@ import { Button } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
-export function OrderList({ user, orders, maxPage, filter, setFilterBy }) {
+export function OrderList({
+  user,
+  orders,
+  maxPage,
+  filter,
+  setFilterBy,
+  updateOrder,
+}) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const text = {
     he: 'הזמנות',
@@ -26,7 +33,7 @@ export function OrderList({ user, orders, maxPage, filter, setFilterBy }) {
   }
 
   const setSort = () => {
-    setFilterBy({ ...filter, sortDir: filter.sortDir * -1 })
+    setFilterBy({ ...filter, sortDir: filter.sortDir * -1, pageIdx: 0 })
   }
 
   const sortText = () => {
@@ -43,40 +50,56 @@ export function OrderList({ user, orders, maxPage, filter, setFilterBy }) {
 
   return (
     <div className='orders-list-container'>
-      <HeadContainer text={text} />
-      <b className='hello-text'>
-        {prefs.isEnglish ? `Hello, ${user.fullname}` : `שלום, ${user.fullname}`}
-      </b>
-      <div className='controller-container'>
-        <Controller filter={filter} maxPage={maxPage} setFilter={setFilterBy} />
-        <Button variant='contained' onClick={setSort}>
-          {prefs.isEnglish ? sortText().eng : sortText().he}
-          {filter.sortDir === 1 ? (
-            <KeyboardArrowDownIcon />
-          ) : (
-            <KeyboardArrowUpIcon />
+      {location.pathname !== '/admin/order' && (
+        <>
+          <HeadContainer text={text} />
+          {user && (
+            <b className='hello-text'>
+              {prefs.isEnglish
+                ? `Hello, ${user.fullname}`
+                : `שלום, ${user.fullname}`}
+            </b>
           )}
-        </Button>
-      </div>
+        </>
+      )}
       <div className='list-container'>
-        {user.ordersIds.length > 0 ? (
+        {orders.length > 0 ? (
           orders.map((order, index) => {
             return (
-              <OrderPreview order={order} key={`${order._id}${makeId()}`} />
+              <OrderPreview
+                order={order}
+                key={`${order._id}${makeId()}`}
+                updateOrder={updateOrder}
+              />
             )
           })
+        ) : user && !user.isAdmin ? (
+          <NoOrders />
         ) : (
-          <div className='no-orders-container'>
-            <Link to={'/item'} className={prefs.isDarkMode ? 'dark-mode' : ''}>
-              {prefs.isEnglish ? 'Create an order first' : 'יש לבצע הזמנה'}
-            </Link>
-            <img
-              src={prefs.isDarkMode ? emptyCartDarkMode : emptyCart}
-              alt=''
-            />
-          </div>
+          <AdminNoOrders />
         )}
       </div>
+    </div>
+  )
+}
+
+function NoOrders() {
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  return (
+    <div className='no-orders-container'>
+      <Link to={'/item'} className={prefs.isDarkMode ? 'dark-mode' : ''}>
+        {prefs.isEnglish ? 'Create an order first' : 'יש לבצע הזמנה'}
+      </Link>
+      <img src={prefs.isDarkMode ? emptyCartDarkMode : emptyCart} alt='' />
+    </div>
+  )
+}
+
+function AdminNoOrders() {
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  return (
+    <div className='no-orders-container'>
+      <b>{prefs.isEnglish ? 'No available orders yet...' : 'אין הזמנות...'}</b>
     </div>
   )
 }

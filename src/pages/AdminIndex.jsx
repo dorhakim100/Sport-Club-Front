@@ -12,6 +12,7 @@ import { classService } from '../services/class/class.service'
 import { showErrorMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
+import { updatePayment } from '../store/actions/payment.actions'
 
 export function AdminIndex() {
   const navigate = useNavigate()
@@ -21,6 +22,10 @@ export function AdminIndex() {
   const user = useSelector((storeState) => storeState.userModule.user)
   const users = useSelector((storeState) => storeState.userModule.users)
   const isLoading = useSelector((storeState) => storeState.userModule.isLoading)
+
+  const openOrders = useSelector(
+    (stateSelector) => stateSelector.paymentModule.openLength
+  )
 
   const [classes, setClasses] = useState([])
 
@@ -94,7 +99,7 @@ export function AdminIndex() {
       {isLoading && 'Loading...'}
       {location.pathname === '/admin' && (
         <div className='admin-interface-container'>
-          <Percentage percentages={68} />
+          <Percentage percentages={openOrders} />
           <div className='today-class-container'>
             <HeadContainer
               text={{ he: 'שיעורים היום', eng: `Today's classes` }}
@@ -105,18 +110,6 @@ export function AdminIndex() {
         </div>
       )}
 
-      {/* {users && (
-        <ul>
-          {users.map((user) => (
-            <li key={user._id}>
-              <pre>{JSON.stringify(user, null, 2)}</pre>
-              <button onClick={() => removeUser(user._id)}>
-                Remove {user.username}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )} */}
       <Outlet />
     </section>
   )
