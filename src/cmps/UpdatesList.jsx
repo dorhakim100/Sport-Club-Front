@@ -33,10 +33,6 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
     setOrderedUpdates(updates)
   }, [updates])
 
-  useEffect(() => {
-    // console.log(position)
-  }, [position])
-
   const onDragEnd = async (result) => {
     if (!isDragEdit) return
     const { source, destination } = result

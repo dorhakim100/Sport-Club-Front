@@ -23,7 +23,6 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
   const [isModal, setIsModal] = useState(false)
 
   const onSetQuantity = (diff) => {
-    console.log(item)
     if (quantity === 1 && diff === -1 && !isCart) return
     if (quantity === 1 && diff === -1 && isCart) {
       setIsModal(true)
@@ -32,7 +31,6 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
 
     let priceToSet
     if (originalItem.id && originalItem.id === item.id) {
-      console.log(item)
       priceToSet = originalPrice + originalItem.price * diff
 
       setOriginalPrice(priceToSet)
@@ -61,9 +59,11 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
     try {
       setIsLoading(true)
       const saved = await updateCart({ ...user })
-      console.log(saved)
     } catch (err) {
       console.log(err)
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't remove from cart` : 'לא היה ניתן להסיר מוצר'
+      )
     } finally {
       setIsLoading(false)
       setIsModal(false)

@@ -77,7 +77,6 @@ export function SuccessPage() {
 
       // Save the payment
       const savedUser = await paymentService.save(payment)
-      console.log(savedUser)
 
       socketService.emit(SOCKET_EVENT_ADD_ORDER, payment)
 

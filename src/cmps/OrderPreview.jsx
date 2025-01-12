@@ -2,17 +2,38 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { smoothScroll } from '../services/util.service'
+import { updatePayment } from '../store/actions/payment.actions'
 
 import pending from '/public/imgs/pending.svg'
 import pendingDarkMode from '/public/imgs/pending-dark-mode.svg'
 import ready from '/public/imgs/ready.svg'
 import readyDarkMode from '/public/imgs/ready-dark-mode.svg'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { setIsLoading } from '../store/actions/system.actions'
 
-export function OrderPreview({ order }) {
-  console.log(order)
+export function OrderPreview({ order, updateOrder }) {
   const navigate = useNavigate()
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+
+  const onUpdateOrder = async () => {
+    if (!user.isAdmin) return
+    try {
+      setIsLoading(true)
+      updateOrder({ ...order, isReady: !order.isReady })
+
+      showSuccessMsg(
+        prefs.isEnglish ? `Order updated successfully` : 'הזמנה עודכנה בהצלחה'
+      )
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't update order` : 'לא היה ניתן לעדכן הזמנה'
+      )
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className={`order-container ${prefs.isDarkMode && 'dark-mode'}`}>
@@ -21,8 +42,10 @@ export function OrderPreview({ order }) {
           className={`is-ready-container ${
             user && user.isAdmin ? 'admin' : ''
           }`}
+          onClick={onUpdateOrder}
         >
-          <IsPendingSvg order={order} />
+          {order.isReady ? <ReadySvg /> : <PendingSvg />}
+
           <span>
             {order.isReady
               ? prefs.isEnglish
@@ -32,6 +55,11 @@ export function OrderPreview({ order }) {
               ? `Pending`
               : `בטיפול`}
           </span>
+        </div>
+        <div className='details-container'>
+          <b>{order.user.fullname}</b>
+          <span>-</span>
+          <b>{order.user.phone}</b>
         </div>
         <span>{new Date(order.createdAt).toLocaleDateString('he')}</span>
       </div>
@@ -74,21 +102,13 @@ export function OrderPreview({ order }) {
   )
 }
 
-function IsPendingSvg({ order }) {
+function PendingSvg() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
-  return (
-    <img
-      src={
-        order.isReady
-          ? prefs.isDarkMode
-            ? readyDarkMode
-            : ready
-          : prefs.isDarkMode
-          ? pendingDarkMode
-          : pending
-      }
-      alt=''
-    />
-  )
+  return <img src={prefs.isDarkMode ? pendingDarkMode : pending} alt='' />
+}
+
+function ReadySvg() {
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  return <img src={prefs.isDarkMode ? readyDarkMode : ready} alt='' />
 }

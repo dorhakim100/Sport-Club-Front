@@ -173,7 +173,7 @@ export function Schedule() {
       >
         {daysOfWeek.map((day) => {
           let counter = [1, 2, 3, 4, 5, 6]
-          // counter.length = 5
+
           return (
             <div className='day-container' key={`${makeId()}${day}`}>
               <div className='hour-container day'>
@@ -212,70 +212,10 @@ export function Schedule() {
                   )
                 )
               })}
-              {/* {counter.map((count) => {
-                console.log(occurrs)
-                return occurrs.map((occur, index, array) => {
-                  console.log(index)
-                  if (occur.day === day) {
-                    // array.splice(index, 1)
-                    return (
-                      <div className='hour-container'>
-                        <b>
-                          {prefs.isEnglish ? occur.title.eng : occur.title.he}
-                        </b>
-                        <span>
-                          {prefs.isEnglish
-                            ? occur.trainer.name.eng
-                            : occur.trainer.name.he}
-                        </span>
-                        <span
-                          style={{ direction: 'ltr' }}
-                        >{`${occur.from}-${occur.to}`}</span>
-                      </div>
-                    )
-                  } else {
-                    return (
-                      <div className='hour-container'>
-                        <span>1</span>
-                        <span>1</span>
-                        <span>1</span>
-                      </div>
-                    )
-                  }
-                })
-
-              })} */}
-              {/* <div className='hour-container'>{counter++}</div>
-              <div className='hour-container'>{counter++}</div>
-              <div className='hour-container'>{counter++}</div>
-              <div className='hour-container'>{counter++}</div>
-              <div className='hour-container'>{counter++}</div>
-              <div className='hour-container'>{counter++}</div> */}
             </div>
           )
         })}
       </div>
-
-      {/* {
-        <div className='schedule-img-container' key={schedule._id}>
-          <img src={schedule.link} alt='' />
-        </div>
-      } */}
-      {/* {user && user.isAdmin && (
-        <div className='control-container'>
-          <LoadingButton
-            component='label'
-            role={undefined}
-            variant='contained'
-            tabIndex={-1}
-            startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
-            loading={isLoading}
-          >
-            Upload file
-            <VisuallyHiddenInput type='file' onChange={uploadFile} />
-          </LoadingButton>
-        </div>
-      )} */}
     </section>
   )
 }

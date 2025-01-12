@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom'
+import {
+  useNavigate,
+  useSearchParams,
+  useParams,
+  useLocation,
+} from 'react-router-dom'
 
 import { onPageNavigation } from '../services/util.service'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
@@ -14,6 +19,7 @@ export function Controller({ filter, setFilter, maxPage, onAdd }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+  const location = useLocation()
 
   return (
     <div className='class-navigation-container'>
@@ -46,7 +52,7 @@ export function Controller({ filter, setFilter, maxPage, onAdd }) {
           <ArrowForwardIosIcon />
         </Button>
       </ButtonGroup>
-      {user && user.isAdmin && (
+      {user && user.isAdmin && location.pathname !== '/admin/order' && (
         <Button variant='contained' onClick={onAdd}>
           {prefs.isEnglish ? 'Add' : 'הוסף'}
         </Button>

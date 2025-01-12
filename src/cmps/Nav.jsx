@@ -10,6 +10,9 @@ export function Nav({ origin, links, isMain }) {
   const openMessages = useSelector(
     (stateSelector) => stateSelector.messageModule.openLength
   )
+  const openOrders = useSelector(
+    (stateSelector) => stateSelector.paymentModule.openLength
+  )
   const navigate = useNavigate()
 
   return (
@@ -45,7 +48,9 @@ export function Nav({ origin, links, isMain }) {
                 {link.path === 'message' && openMessages > 0 && (
                   <span>{openMessages}</span>
                 )}
-                {link.path === 'order' && 0 > 0 && <span>0</span>}
+                {link.path === 'order' && openOrders > 0 && (
+                  <span>{openOrders}</span>
+                )}
               </NavLink>
               {index + 1 < links.length && (
                 <Divider

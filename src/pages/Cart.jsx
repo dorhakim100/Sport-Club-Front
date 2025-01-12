@@ -60,11 +60,10 @@ export function Cart() {
       total
     )
     setCartTotal(cartTotal)
-    console.log(isDiscount)
+
     if (isDiscount.current) {
-      console.log(originalPrice)
       const discountToSet = originalPrice - cartTotal
-      console.log(discountToSet)
+
       setDiscount(discountToSet)
     }
     return cartTotal
@@ -83,7 +82,6 @@ export function Cart() {
       isFirstRender.current === false
       // setOriginalPrice(total)
       if (discount) {
-        console.log(total)
         setOriginalPrice(total)
         // setPriceBeforeDiscount(total)
         // setOriginalPrice(total)

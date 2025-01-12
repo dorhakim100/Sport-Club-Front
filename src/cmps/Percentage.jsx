@@ -3,10 +3,24 @@ import { Doughnut } from 'react-chartjs-2'
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'
 Chart.register(ArcElement, Tooltip, Legend)
 
+import { useSelector } from 'react-redux'
+
 export function Percentage({ percentages }) {
-  percentages = Math.floor(percentages)
+  const openMessages = useSelector(
+    (stateSelector) => stateSelector.messageModule.openLength
+  )
+  const openOrders = useSelector(
+    (stateSelector) => stateSelector.paymentModule.openLength
+  )
+
+  percentages = openOrders / (openOrders + openMessages)
+  percentages = Math.floor(percentages * 100)
+  console.log(percentages)
+
+  const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+
   const data = {
-    labels: ['Completed', 'Pending'],
+    labels: prefs.isEnglish ? ['Orders', 'Messages'] : ['הזמנות', 'הודעות'],
     datasets: [
       {
         label: 'Tasks Completion',
