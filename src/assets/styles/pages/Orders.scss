@@ -1,11 +1,15 @@
 .order-filter-container{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(3,1fr);
     align-items: center;
     // justify-items: center;
     gap: 1em;
     margin-bottom: 1em;
     direction: rtl;
+
+    &.admin{
+        grid-template-columns: repeat(4,1fr);
+    }
     
     .controller-container{
         grid-column: 1/2;
@@ -16,6 +20,8 @@
         grid-row: 1/2;
         
     }
+
+
     @media (max-width:750px) {
         grid-template-columns: repeat(2,1fr);
         grid-template-rows: repeat(3,1fr);
