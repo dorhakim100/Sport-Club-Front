@@ -126,9 +126,10 @@
           padding: 0.5em;
 
           @media (max-width:1100px) {
-            // .class-button-group{
-            //   grid-row: 2/3;
-            // }
+            .class-button-group{
+              grid-row: 2/3;
+
+            }
             
           }
 

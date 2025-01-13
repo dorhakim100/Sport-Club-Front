@@ -70,6 +70,16 @@ export function ContactUs() {
     }
   }
 
+  const handleNavigation = (event) => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate('/about/times')
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+
   return (
     <div className='contact-us-container'>
       <HeadContainer
@@ -135,17 +145,11 @@ export function ContactUs() {
           </LoadingButton>
         </div>{' '}
         {location.pathname !== '/about/times' && (
-          <div
-            className='arrow-link-container'
-            onClick={() => {
-              smoothScroll()
-              navigate('/about/times')
-            }}
-          >
+          <div className='arrow-link-container' onClick={handleNavigation}>
             <Link
               to='/about/times'
               className={prefs.isDarkMode ? 'dark' : ''}
-              onClick={smoothScroll}
+              onClick={handleNavigation}
             >
               {prefs.isEnglish ? 'Opening Times' : 'שעות הפתיחה'}
               {prefs.isEnglish ? (

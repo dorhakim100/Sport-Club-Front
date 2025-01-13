@@ -55,8 +55,13 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
 
   async function onAddToCart(itemToAdd, quantity = 1) {
     if (!user) {
+      // support for safari browsers
+      event.preventDefault() // Stop the link from navigating immediately
       smoothScroll()
-      navigate('/user/login')
+
+      setTimeout(() => {
+        navigate('/user/login')
+      }, 300) // Adjust time based on your smoothScroll timing
       return
     }
 

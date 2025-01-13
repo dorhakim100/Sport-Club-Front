@@ -1,16 +1,23 @@
 .times-container{
-
+    
     table{
         position: relative;
+
     }
     .facility-cell{
+  
         min-width: 80px;
         background-color: white;
         &.dark-mode{
             background-color: $very-dark-blue;
         }
-        position: sticky;
-        inset-inline-start: 0px;
+
+        &.scrolled{
+
+            position: sticky;
+            inset-inline-start: 0px;
+        }
+
     }
 
     th{
