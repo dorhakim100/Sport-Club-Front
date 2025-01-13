@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { makeId } from '../services/util.service'
 
@@ -18,6 +18,26 @@ export function OpeningTimes() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const text = { he: 'שעות הפתיחה', eng: 'Opening Times' }
   const [days, setDays] = useState(getDefaultTimes())
+
+  const tableRef = useRef()
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Detecting scroll direction based on language preference
+      let scrollPos
+
+      if (prefs.isEnglish) {
+        scrollPos = tableRef.current.scrollLeft
+        setIsScrolled(scrollPos > 0)
+      } else {
+        scrollPos = tableRef.current.scrollLeft
+
+        setIsScrolled(scrollPos < 1)
+      }
+    }
+    tableRef.current.addEventListener('scroll', handleScroll)
+  }, [setIsScrolled, prefs.isEnglish])
 
   function getDefaultTimes() {
     return [
@@ -320,7 +340,7 @@ export function OpeningTimes() {
   return (
     <div className='times-container'>
       <HeadContainer text={text} />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} ref={tableRef}>
         <Table
           sx={{
             backgroundColor: prefs.isDarkMode && '#263039',
@@ -369,7 +389,9 @@ export function OpeningTimes() {
                 sx={{
                   color: prefs.isDarkMode && 'white',
                 }}
-                className={`facility-cell ${prefs.isDarkMode && 'dark-mode'}`}
+                className={`facility-cell ${prefs.isDarkMode && 'dark-mode'} ${
+                  isScrolled ? 'scrolled' : ''
+                }`}
               >
                 <b>{prefs.isEnglish ? 'Pool' : 'בריכה'}</b>
               </TableCell>
@@ -426,7 +448,9 @@ export function OpeningTimes() {
                   paddingLeft: '0.5em',
                   paddingRight: '0.5em',
                 }}
-                className={`facility-cell ${prefs.isDarkMode && 'dark-mode'}`}
+                className={`facility-cell ${prefs.isDarkMode && 'dark-mode'} ${
+                  isScrolled ? 'scrolled' : ''
+                }`}
               >
                 <b>{prefs.isEnglish ? 'Gym' : 'חדר הכושר'}</b>
               </TableCell>
