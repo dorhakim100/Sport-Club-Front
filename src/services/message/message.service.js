@@ -25,9 +25,10 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
   }
 }
 
-async function getById(messageId) {
+async function getById(messageId, messageFilter) {
   try {
-    const res = await httpService.get(`${KEY}/${messageId}`)
+    console.log(messageFilter)
+    const res = await httpService.get(`${KEY}/${messageId}`, messageFilter)
     return res
   } catch (err) {
     console.log(err)

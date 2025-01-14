@@ -67,6 +67,8 @@ export function OrderIndex() {
     try {
       setIsLoading(true)
       await loadPayments(filter)
+      const m = await paymentService.getMaxPage(filter)
+      setMax(m)
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't show orders` : 'לא היה ניתן להציג הזמנות'

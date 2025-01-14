@@ -91,7 +91,12 @@ export function ItemDetails() {
   return (
     <>
       {item.prevNext && (
-        <ItemNavigation item={item} type={'item'} lastPage={lastPage} />
+        <ItemNavigation
+          item={item}
+          type={'item'}
+          lastPage={lastPage}
+          isEdit={true}
+        />
       )}
       <section className='item-details-container'>
         <div className='title-container'>

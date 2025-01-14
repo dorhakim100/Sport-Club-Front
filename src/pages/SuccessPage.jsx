@@ -7,7 +7,7 @@ import Lottie from 'react-lottie'
 import animationData from '/public/imgs/success.json'
 import { showErrorMsg } from '../services/event-bus.service'
 import { paymentService } from '../services/payment/payment.service'
-import { setEmptyCart } from '../store/actions/user.actions'
+import { loadUser, setEmptyCart } from '../store/actions/user.actions'
 import { updateCart } from '../store/actions/user.actions'
 import {
   SOCKET_EVENT_MAKE_ORDER,
@@ -17,6 +17,8 @@ import {
 export function SuccessPage() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+
+  const [num, setNum] = useState(0)
 
   const [isDone, setIsDone] = useState(false)
 
@@ -76,12 +78,15 @@ export function SuccessPage() {
       }
 
       // Save the payment
-      const savedUser = await paymentService.save(payment)
-
+      const savedOrder = await paymentService.save(payment)
+      setNum(savedOrder.orderNum)
       socketService.emit(SOCKET_EVENT_MAKE_ORDER, payment)
-
+      const savedUser = await loadUser(userId)
+      console.log(savedUser)
+      const newOrders = savedUser.ordersIds
+      newOrders.push(savedOrder._id)
       // Update the cart after saving the payment
-      updateCart(savedUser)
+      updateCart({ ...savedUser, items: [], ordersIds: newOrders })
     } catch (err) {
       console.error(err)
       showErrorMsg(prefs.isEnglish ? 'There was an error' : 'הייתה תקלה')
@@ -96,10 +101,11 @@ export function SuccessPage() {
           ? ` Your payment has been processed successfully.`
           : `התשלום עבר בהצלחה`}
       </p> */}
+      <b>{prefs.isEnglish ? `Order Num: ${num}` : `מס׳ הזמנה: ${num}`}</b>
       <p>
         {prefs.isEnglish
           ? `One of our team will soon take care of it`
-          : `אחד מאיתנו כבר מתחיל לטפל בהזמנה`}
+          : `אחד מאיתנו כבר מתחיל לטפל בה`}
       </p>
 
       <Lottie options={defaultOptions} height={200} width={200} />

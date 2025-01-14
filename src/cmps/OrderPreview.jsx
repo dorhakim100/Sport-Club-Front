@@ -10,6 +10,7 @@ import ready from '/public/imgs/ready.svg'
 import readyDarkMode from '/public/imgs/ready-dark-mode.svg'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
+import Divider from '@mui/material/Divider'
 
 export function OrderPreview({ order, updateOrder }) {
   const navigate = useNavigate()
@@ -34,10 +35,15 @@ export function OrderPreview({ order, updateOrder }) {
       setIsLoading(false)
     }
   }
+  console.log(order)
 
   return (
-    <div className={`order-container ${prefs.isDarkMode && 'dark-mode'}`}>
-      <div className='date-is-ready-container'>
+    <div
+      className={`order-container ${prefs.isDarkMode && 'dark-mode'} ${
+        order.isReady ? 'ready' : ''
+      }`}
+    >
+      <div className={`date-is-ready-container`}>
         <div
           className={`is-ready-container ${
             user && user.isAdmin ? 'admin' : ''
@@ -56,11 +62,13 @@ export function OrderPreview({ order, updateOrder }) {
               : `בטיפול`}
           </span>
         </div>
-        <div className='details-container'>
-          <b>{order.user.fullname}</b>
-          <span>-</span>
-          <b>{order.user.phone}</b>
-        </div>
+        {user && user.isAdmin && (
+          <div className='details-container'>
+            <b>{order.user.fullname}</b>
+            <span>-</span>
+            <b>{order.user.phone}</b>
+          </div>
+        )}
         <span>{new Date(order.createdAt).toLocaleDateString('he')}</span>
       </div>
 
@@ -69,7 +77,7 @@ export function OrderPreview({ order, updateOrder }) {
         <span>{order.orderNum}</span>
       </div>
       <div className='items-container'>
-        {order.items.map((item, index) => {
+        {order.items.map((item, index, items) => {
           return (
             <div
               className={`item-container ${prefs.isDarkMode && 'dark-mode'}`}
@@ -88,6 +96,13 @@ export function OrderPreview({ order, updateOrder }) {
                 <span>{item.quantity}</span>
                 {!prefs.isEnglish && <span>x</span>}
               </div>
+              {index + 1 < items.length && (
+                <Divider
+                  style={prefs.isDarkMode ? { backgroundColor: 'white' } : {}}
+                  orientation='vertical'
+                  flexItem
+                />
+              )}
             </div>
           )
         })}

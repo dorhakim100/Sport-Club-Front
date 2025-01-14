@@ -66,7 +66,12 @@ export function ClassDetails() {
   return (
     <div className='class-details'>
       {clas.prevNext && (
-        <ItemNavigation item={clas} type={'class'} lastPage={lastPage} />
+        <ItemNavigation
+          item={clas}
+          type={'class'}
+          lastPage={lastPage}
+          isEdit={true}
+        />
       )}
       <HeadContainer text={head} />
       <div className='class-details-container'>

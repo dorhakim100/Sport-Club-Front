@@ -8,12 +8,17 @@ import {
   REMOVE_MESSAGES,
   UPDATE_MESSAGE,
   SET_OPEN_MESSAGES,
+  SET_MESSAGES_FILTER,
 } from '../reducers/message.reducer'
 import { paymentService } from '../../services/payment/payment.service'
 
 export async function loadMessages(filterBy) {
   try {
     const messages = await messageService.query(filterBy)
+    store.dispatch({
+      type: SET_MESSAGES_FILTER,
+      filter: filterBy,
+    })
     store.dispatch(getCmdSetMessages(messages))
     return messages
   } catch (err) {
@@ -22,9 +27,9 @@ export async function loadMessages(filterBy) {
   }
 }
 
-export async function loadMessage(messageId) {
+export async function loadMessage(messageId, filter) {
   try {
-    const message = await messageService.getById(messageId)
+    const message = await messageService.getById(messageId, filter)
 
     store.dispatch(getCmdSetMessage(message))
     return message

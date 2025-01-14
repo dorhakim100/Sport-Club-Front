@@ -42,6 +42,16 @@ export function Cards({ trainers }) {
     }
   }
 
+  const navigateToTrainer = (trainerId) => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate(`/class/trainer/${trainerId}`)
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+
   return (
     <>
       <Swiper
@@ -74,8 +84,7 @@ export function Cards({ trainers }) {
                 onClick={() => {
                   if (isFocused) {
                     // Navigate if the card is already focused
-                    smoothScroll()
-                    navigate(`/class/trainer/${trainer._id}`)
+                    navigateToTrainer(trainer._id)
                   } else {
                     // Focus on the card
                     swiperInstance?.slideTo(index)

@@ -11,6 +11,7 @@ import { DoneMessageButton } from '../cmps/DoneMessageButton'
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { setIsLoading } from '../store/actions/system.actions'
+import { ItemNavigation } from '../cmps/ItemNavigation'
 
 export function MessageDetails() {
   const navigate = useNavigate()
@@ -21,12 +22,17 @@ export function MessageDetails() {
   const message = useSelector(
     (stateSelector) => stateSelector.messageModule.message
   )
+  console.log(message)
+
+  const messageFilter = useSelector(
+    (stateSelector) => stateSelector.messageModule.filter
+  )
   const [date, setDate] = useState()
 
   const setMessage = async () => {
     try {
       setIsLoading(true)
-      const m = await loadMessage(messageId)
+      const m = await loadMessage(messageId, messageFilter)
       const d = new Date(m.createdAt)
 
       setDate(d)
@@ -46,6 +52,14 @@ export function MessageDetails() {
   return (
     <div className='page-container message-details'>
       <div className='message-details-container'>
+        {message.prevNext && (
+          <ItemNavigation
+            item={message}
+            type={'admin/message'}
+            lastPage={'/admin/message'}
+            isEdit={false}
+          />
+        )}
         <div className='sender-details-container'>
           <b>{message.title} </b>
           {/* <div

@@ -48,7 +48,7 @@
 
         }
         .checkbox-container{
-            grid-column: 2/3;
+            grid-column: 2/5;
             grid-row: 3/4;
 
            
@@ -85,6 +85,8 @@
     grid-template-rows:  80px minmax(100px,1fr);
     gap: 0.5em;
     font-size: 1.2em;
+
+    transition: 0.2s ease;
     
     @media (max-width:600px) {
         grid-template-columns: 75px 1fr 50px;
@@ -95,6 +97,7 @@
     
     padding: 1em;
     transition: 0.2s ease;
+
     // outline: 2px solid $medium-gray;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;   
 
@@ -117,6 +120,18 @@
         
         // outline: 1px solid $light-gray;
     }
+    border-bottom: 20px solid darken($light-yellow,10%);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    &.ready{
+        border-bottom: 20px solid darken($soft-green,10%);
+        .date-is-ready-container{
+            .is-ready-container{
+
+                // background-color: $soft-green;
+            }
+        }
+    }
 
 
     .date-is-ready-container{
@@ -130,6 +145,17 @@
             
         }
         .is-ready-container{
+            // padding: 0.5em;
+            // border-radius: 5px;
+
+            // transition: 0.2s ease;
+
+            // background-color: $light-yellow;
+
+
+
+
+
             justify-self: center;
             display: grid;
             grid-template-columns: 50px 1fr;
@@ -221,6 +247,7 @@
         width: fit-content;
 
         .item-container{
+            height: fit-content;
             b{
 
                 cursor: pointer;
@@ -233,6 +260,13 @@
 
             .quantity-container{
                 direction: ltr;
+            }
+
+            @media (max-width:600px) {
+                .MuiDivider-vertical{
+                    display: none;
+                }
+                
             }
         }
     }

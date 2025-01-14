@@ -30,6 +30,16 @@ export function OrderFilter({ filter, setFilter, maxPage }) {
   const [editFilter, setEditFilter] = useState(filter)
   const debouncedSetFilter = useRef(debounce(setFilter, 500))
 
+  const searchPlaceholder = {
+    he: {
+      admin: 'שם, מספר טלפון, מס׳ הזמנה',
+      noAdmin: 'מס׳ הזמנה',
+    },
+    eng: {
+      admin: 'Name, Phone number, Order num',
+      noAdmin: 'Order num',
+    },
+  }
   useEffect(() => {
     // setFilter({ ...editFilter })
   }, [editFilter])
@@ -62,15 +72,17 @@ export function OrderFilter({ filter, setFilter, maxPage }) {
 
   return (
     <div
-      className={`order-filter-container ${user && user.isAdmin && 'admin'}`}
+      className={`order-filter-container ${
+        user && user.isAdmin ? 'admin' : ''
+      }`}
     >
       <div className='controller-container'>
         <Controller filter={filter} maxPage={maxPage} setFilter={setFilter} />
       </div>
       <div
-        className={
-          prefs.isDarkMode ? 'input-container dark-mode' : 'input-container'
-        }
+        className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''} ${
+          prefs.isEnglish ? 'ltr' : 'rtl'
+        }`}
       >
         <input
           type='search'
@@ -80,12 +92,16 @@ export function OrderFilter({ filter, setFilter, maxPage }) {
           }}
           placeholder={
             prefs.isEnglish
-              ? 'Name, Phone number, Order num'
-              : 'שם, מספר טלפון, מס׳ הזמנה'
+              ? user && user.isAdmin
+                ? searchPlaceholder.eng.admin
+                : searchPlaceholder.eng.noAdmin
+              : user && user.isAdmin
+              ? searchPlaceholder.he.admin
+              : searchPlaceholder.he.noAdmin
           }
         />
       </div>
-      <div className='sort-container'>
+      <div className={`sort-container ${prefs.isEnglish ? 'ltr' : 'rtl'}`}>
         <SortSelect
           prefs={prefs}
           filterToEdit={filter}

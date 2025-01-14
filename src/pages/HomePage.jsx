@@ -83,12 +83,40 @@ export function HomePage() {
   }, [prefs.isEnglish])
 
   const navigateToClass = () => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
-    navigate('/class')
+
+    setTimeout(() => {
+      navigate('/class')
+    }, 300) // Adjust time based on your smoothScroll timing
   }
   const navigateToFacilities = () => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
-    navigate('/facilities')
+
+    setTimeout(() => {
+      navigate('/facilities')
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+  const navigateToUpdates = () => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate('/update')
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+  const navigateToTrainers = () => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate('/class/trainer')
+    }, 300) // Adjust time based on your smoothScroll timing
   }
 
   return (
@@ -161,18 +189,17 @@ export function HomePage() {
             </Link>
           </div>
           <div className='cards-container'>
-            <Link
-              to={'/class/trainer'}
-              onClick={smoothScroll}
+            <b
+              onClick={navigateToTrainers}
               className={prefs.isDarkMode ? 'dark-mode' : ''}
             >
               {prefs.isEnglish ? 'Our trainers' : 'המאמנים שלנו'}
-            </Link>
+            </b>
             <Cards trainers={trainers} />
           </div>
           <div className='updates-carousel-container'>
             <b>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</b>
-            <Updates updates={updates} />
+            <Updates updates={updates} navigateToUpdates={navigateToUpdates} />
           </div>
         </div>
 
