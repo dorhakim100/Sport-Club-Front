@@ -92,6 +92,7 @@ export function TrainerDetails() {
           item={trainer}
           type={'class/trainer'}
           lastPage={lastPage}
+          isEdit={true}
         />
       )}
       <HeadContainer text={head} />

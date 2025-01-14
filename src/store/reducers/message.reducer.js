@@ -7,12 +7,14 @@ export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
 export const SET_OPEN_MESSAGES = 'SET_OPEN_MESSAGES'
 export const REMOVE_MESSAGES = 'REMOVE_MESSAGES'
+export const SET_MESSAGES_FILTER = 'SET_MESSAGES_FILTER'
 
 const initialState = {
   messages: [],
   message: messageService.getEmptyMessage(),
   openLength: 0,
   bulkIds: [],
+  filter: messageService.getDefaultFilter(),
 }
 
 export function messageReducer(state = initialState, action) {
@@ -55,6 +57,9 @@ export function messageReducer(state = initialState, action) {
 
     case SET_OPEN_MESSAGES:
       newState = { ...state, openLength: action.openLength }
+      break
+    case SET_MESSAGES_FILTER:
+      newState = { ...state, filter: action.filter }
       break
     default:
   }

@@ -134,6 +134,7 @@ export function MessagesFilter({
         className='page-controller-container'
       >
         <Button
+          disabled={maxPage === filter.pageIdx + 1}
           onClick={() => {
             onPageNavigation(1, filter, setFilter, maxPage)
           }}

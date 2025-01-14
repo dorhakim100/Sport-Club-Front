@@ -13,7 +13,7 @@ import 'swiper/css/navigation'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import { smoothScroll } from '../services/util.service'
 
-export function Updates({ updates }) {
+export function Updates({ updates, navigateToUpdates }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const navigate = useNavigate()
 
@@ -25,11 +25,6 @@ export function Updates({ updates }) {
   }
 
   const swiperRef = useRef()
-
-  const navigateToUpdates = () => {
-    navigate('/update')
-    smoothScroll()
-  }
 
   return (
     <>

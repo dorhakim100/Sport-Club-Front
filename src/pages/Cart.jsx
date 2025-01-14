@@ -131,17 +131,6 @@ export function Cart() {
     }
   }
 
-  function onCheckout() {
-    try {
-      setIsLoading(true)
-    } catch (err) {
-      console.log(err)
-      showErrorMsg(prefs.isEnglish ? `Could't checkout` : 'שגיאה')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   async function onEnterCoupon({ target }) {
     try {
       setIsLoading(true)
