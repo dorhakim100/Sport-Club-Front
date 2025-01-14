@@ -89,7 +89,7 @@ export function ItemIndex() {
         filterToSet = { ...filterBy, sortDir, types: ['card'], pageIdx }
         setHeadText({ he: 'כרטיסיות', eng: 'Cards' })
         setCover(
-          'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733237221/DSC06141_wifl4r.jpg'
+          'https://res.cloudinary.com/dnxi70mfs/image/upload/v1736865230/DJI_0571_result_hlwlde.webp'
         )
         setFilterBy(filterToSet)
         return

@@ -36,10 +36,7 @@ export function MemberText() {
                 dignissimos rerum mollitia amet necessitatibus aspernatur!
               </p>
             </div>
-            <img
-              src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1733237228/DSC06193_ifenm8.jpg'
-              alt=''
-            />
+            <img src={type.img} alt='' />
           </div>
         )
       })}
