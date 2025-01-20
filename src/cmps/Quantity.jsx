@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { setIsLoading } from '../store/actions/system.actions.js'
 import { setOriginalPrice, updateCart } from '../store/actions/user.actions.js'
 

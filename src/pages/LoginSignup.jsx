@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { GoogleLoginCmp } from '../cmps/GoogleLoginCmp'
 import { setIsLoading } from '../store/actions/system.actions'
 import { login } from '../store/actions/user.actions'
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg } from '../services/event-bus.service'
 import { setPrefs } from '../store/actions/system.actions'
 
 import Divider from '@mui/material/Divider'
@@ -49,6 +49,7 @@ export function LoginSignup() {
     try {
       setIsLoading(true)
       const userRes = await login({ ...credentials })
+
       if (isRemember) {
         setPrefs({ ...prefs, user: { _id: userRes._id } })
       }

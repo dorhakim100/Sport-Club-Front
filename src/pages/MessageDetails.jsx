@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg } from '../services/event-bus.service'
 import { loadMessage } from '../store/actions/message.actions'
 
-import { ContactUs } from '../cmps/ContactUs'
 import { DoneMessageButton } from '../cmps/DoneMessageButton'
 
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { setIsLoading } from '../store/actions/system.actions'
 import { ItemNavigation } from '../cmps/ItemNavigation'
 

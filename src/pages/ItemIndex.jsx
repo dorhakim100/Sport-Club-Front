@@ -1,25 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import {
-  useNavigate,
-  useSearchParams,
-  useParams,
-  useLocation,
-} from 'react-router-dom'
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 
-import {
-  loadItems,
-  addItem,
-  updateItem,
-  removeItem,
-  addItemMsg,
-} from '../store/actions/item.actions'
+import { loadItems, removeItem } from '../store/actions/item.actions'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { itemService } from '../services/item/item.service'
-import { userService } from '../services/user/user.service'
-
-import { useEffectUpdate } from '../customHooks/useEffectUpdate'
 
 import { ItemList } from '../cmps/ItemList'
 import { ItemFilter } from '../cmps/ItemFilter'
@@ -29,8 +15,6 @@ import { HeadContainer } from '../cmps/HeadContainer'
 import { DynamicCover } from '../cmps/DynamicCover'
 import { ContactUs } from '../cmps/ContactUs'
 import { Nav } from '../cmps/Nav'
-
-import { Button } from '@mui/material'
 
 export function ItemIndex() {
   const navigate = useNavigate()

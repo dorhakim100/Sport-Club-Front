@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+
 export function makeId(length = 6) {
   var txt = ''
   var possible =
@@ -153,4 +156,22 @@ export const parseJwt = (token) => {
       .join('') // Decode Base64
   )
   return JSON.parse(jsonPayload) // Parse the payload into JSON
+}
+
+export function textAnimation(prefs) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+        // entry.target.classList.remove('hidden')
+      } else {
+        entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
+      }
+    })
+  })
+
+  const elements = document.querySelectorAll('.section')
+  elements.forEach((el) => observer.observe(el))
+
+  return () => elements.forEach((el) => observer.unobserve(el))
 }

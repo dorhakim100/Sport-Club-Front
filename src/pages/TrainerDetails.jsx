@@ -8,22 +8,14 @@ import {
   makeId,
   smoothScroll,
 } from '../services/util.service'
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg } from '../services/event-bus.service'
 import { loadTrainer } from '../store/actions/trainer.actions'
 
 import { HeadContainer } from '../cmps/HeadContainer'
 
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { setIsLoading } from '../store/actions/system.actions'
 import { ContactUs } from '../cmps/ContactUs'
 import { ItemNavigation } from '../cmps/ItemNavigation'
-
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn'
-import NavigateNextIcon from '@mui/icons-material/NavigateNext'
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
-import IconButton from '@mui/material/IconButton'
 
 export function TrainerDetails() {
   const { trainerId } = useParams()
@@ -36,11 +28,9 @@ export function TrainerDetails() {
     (stateSelector) => stateSelector.trainerModule.filter
   )
 
+  console.log(trainerFilter)
+
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
-
-  const user = useSelector((stateSelector) => stateSelector.userModule.user)
-
-  const navigate = useNavigate()
 
   const [head, setHead] = useState({ he: '', eng: '' })
 

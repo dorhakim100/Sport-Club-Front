@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -12,36 +12,13 @@ import { Cards } from '../cmps/Cards'
 import { ContactUs } from '../cmps/ContactUs'
 import { SwiperCarousel } from '../cmps/SwiperCarousel'
 
-import Divider from '@mui/material/Divider'
 import { Button } from '@mui/material'
 
 import whatsapp from '/public/imgs/whatsapp.svg'
 import { showErrorMsg } from '../services/event-bus.service'
 import { loadTrainers } from '../store/actions/trainer.actions'
 import { trainerService } from '../services/trainer/trainer.service'
-import { makeId } from '../services/util.service'
-
-const animation = () => {
-  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
-          // entry.target.classList.remove('hidden')
-        } else {
-          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
-        }
-      })
-    })
-
-    const elements = document.querySelectorAll('.section')
-    elements.forEach((el) => observer.observe(el))
-
-    return () => elements.forEach((el) => observer.unobserve(el))
-  }, [prefs.isEnglish, prefs.isDarkMode])
-}
+import { makeId, textAnimation } from '../services/util.service'
 
 const openLink = (link) => {
   window.open(link)
@@ -49,6 +26,9 @@ const openLink = (link) => {
 export function Activities() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const location = useLocation()
+  useEffect(() => {
+    textAnimation(prefs)
+  }, [prefs.isEnglish, prefs.isDarkMode])
 
   const origin = {
     path: '/activities',
@@ -157,7 +137,9 @@ export function Swimming() {
 
   const [trainers, setTrainers] = useState([])
 
-  animation()
+  useEffect(() => {
+    textAnimation(prefs)
+  }, [prefs.isDarkMode, prefs.isEnglish])
 
   useEffect(() => {
     const loadSwimmingTrainers = async () => {
@@ -296,7 +278,9 @@ export function Tennis() {
 
   const [trainers, setTrainers] = useState([])
 
-  animation()
+  useEffect(() => {
+    textAnimation(prefs)
+  }, [prefs.isDarkMode, prefs.isEnglish])
 
   useEffect(() => {
     const loadTennisTrainers = async () => {
@@ -437,7 +421,9 @@ Over the years, I have developed a personalized approach that combines professio
   const instagram =
     'https://www.instagram.com/meitaltamir_studio?igsh=OGppbjJmZmlsNnB5&utm_source=qr'
 
-  animation()
+  useEffect(() => {
+    textAnimation(prefs)
+  }, [prefs.isDarkMode, prefs.isEnglish])
 
   return (
     <div className='pilates-container'>
@@ -510,7 +496,9 @@ export function Care() {
     
     Most patients report improvement after the very first session. Some even visit regularly for "maintenance" and prevention.`,
   }
-  animation()
+  useEffect(() => {
+    textAnimation(prefs)
+  }, [prefs.isDarkMode, prefs.isEnglish])
 
   return (
     <div className='care-container'>
@@ -600,7 +588,9 @@ export function SummerCamp() {
   ]
   const closerImg =
     'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325607/WhatsApp_Image_2024-10-29_at_16.16.42_1_b2aeei.jpg'
-  animation()
+  useEffect(() => {
+    textAnimation(prefs)
+  }, [prefs.isDarkMode, prefs.isEnglish])
   return (
     <div className='camp-container'>
       <HeadContainer text={headText} />
@@ -642,7 +632,9 @@ export function Restaurant() {
     darkMode:
       'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735057610/openart-8f0af741-854f-4363-8e82-2455e51d96c1_qqpbun.png',
   }
-  animation()
+  useEffect(() => {
+    textAnimation(prefs)
+  }, [prefs.isDarkMode, prefs.isEnglish])
   return (
     <div className='restaurant-container'>
       <HeadContainer text={headText} />

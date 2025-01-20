@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink, Link, Outlet } from 'react-router-dom'
-import {
-  useNavigate,
-  useParams,
-  useLocation,
-  useSearchParams,
-} from 'react-router-dom'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { classService } from '../services/class/class.service'
 
 import {
   addClass,
-  loadClass,
   loadClasses,
   removeClass,
-  updateClass,
 } from '../store/actions/class.actions'
 import { setIsLoading } from '../store/actions/system.actions'
 
@@ -25,8 +17,6 @@ import { Nav } from '../cmps/Nav'
 import { ClassList } from '../cmps/ClassList.jsx'
 import { Controller } from '../cmps/Controller.jsx'
 import { HeadContainer } from '../cmps/HeadContainer'
-
-import Divider from '@mui/material/Divider'
 
 export function ClassIndex() {
   const location = useLocation()

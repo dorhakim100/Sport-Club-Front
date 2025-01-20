@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate, useSearchParams, useParams, Link } from 'react-router-dom'
-import { makeId, smoothScroll } from '../services/util.service'
+import { useNavigate } from 'react-router-dom'
+import { smoothScroll } from '../services/util.service'
 
 import { Preloader } from './Preloader'
 

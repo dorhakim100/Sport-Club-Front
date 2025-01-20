@@ -1,27 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { updateService } from '../services/update/update.service'
-import { loadUpdates } from '../store/actions/update.actions'
 import { smoothScroll } from '../services/util.service'
 
-import {
-  loadMessages,
-  loadOpenMessages,
-} from '../store/actions/message.actions'
-import { messageService } from '../services/message/message.service'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { updateMessage } from '../store/actions/message.actions'
 
-import { HeadContainer } from '../cmps/HeadContainer'
-import { MessagesFilter } from '../cmps/MessagesFilter.jsx'
-import { MessagesList } from '../cmps/MessagesList.jsx'
 import { DoneMessageButton } from '../cmps/DoneMessageButton.jsx'
 
-import { Button } from '@mui/material'
-import { LoadingButton } from '@mui/lab'
-import DeleteIcon from '@mui/icons-material/Delete'
 import Checkbox from '@mui/material/Checkbox'
 
 export function MessagePreview({

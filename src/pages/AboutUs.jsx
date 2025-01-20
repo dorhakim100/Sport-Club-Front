@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import { Nav } from '../cmps/Nav'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { GoogleMapCmp } from '../cmps/GoogleMapCmp.jsx'
 
-import Divider from '@mui/material/Divider'
-import { makeId } from '../services/util.service'
+import { textAnimation } from '../services/util.service'
 import { DynamicCover } from '../cmps/DynamicCover'
 import { ContactUs } from '../cmps/ContactUs'
 import { AccordionCmp } from '../cmps/AccordionCmp'
@@ -16,8 +14,6 @@ import { AccordionCmp } from '../cmps/AccordionCmp'
 export function AboutUs() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const location = useLocation()
-
-  function onTellMeMore() {}
 
   const origin = {
     path: '/about',
@@ -176,24 +172,7 @@ export function AboutUs() {
   }
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          const timeout = index + 1
-          setTimeout(() => {
-            entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
-          }, 100)
-          // entry.target.classList.remove('hidden')
-        } else {
-          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
-        }
-      })
-    })
-
-    const elements = document.querySelectorAll('.section')
-    elements.forEach((el) => observer.observe(el))
-
-    return () => elements.forEach((el) => observer.unobserve(el))
+    textAnimation(prefs)
   }, [prefs.isEnglish, location.pathname])
 
   return (

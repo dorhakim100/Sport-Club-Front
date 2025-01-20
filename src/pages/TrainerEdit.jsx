@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { styled } from '@mui/material/styles'
 import LoadingButton from '@mui/lab/LoadingButton'
@@ -16,8 +16,6 @@ import { uploadService } from '../services/upload.service.js'
 import { capitalizeFirstLetter } from '../services/util.service.js'
 
 import { HeadContainer } from '../cmps/HeadContainer.jsx'
-
-import { Button } from '@mui/material'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',

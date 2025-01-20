@@ -1,8 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { HeadContainer } from '../cmps/HeadContainer'
 import { makeId, smoothScroll } from '../services/util.service'
 
 import types from '/public/jsons/Members/Members.json'

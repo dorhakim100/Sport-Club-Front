@@ -1,11 +1,10 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 import { setIsModal, setModalMessage } from '../store/actions/system.actions'
 
 import { userService } from '../services/user/user.service'
-import { ItemPreview } from './ItemPreview'
 
 import { updateCart } from '../store/actions/user.actions'
 import { smoothScroll } from '../services/util.service'

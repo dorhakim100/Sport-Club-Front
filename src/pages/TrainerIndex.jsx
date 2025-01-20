@@ -1,33 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { NavLink, Link, Outlet } from 'react-router-dom'
-import {
-  useNavigate,
-  useParams,
-  useLocation,
-  useSearchParams,
-} from 'react-router-dom'
+import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { trainerService } from '../services/trainer/trainer.service'
 
-import { useEffectUpdate } from '../customHooks/useEffectUpdate'
 import {
   loadTrainers,
   addTrainer,
-  updateTrainer,
   removeTrainer,
 } from '../store/actions/trainer.actions'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-
-import { userService } from '../services/user/user.service'
 
 import { Nav } from '../cmps/Nav'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { TrainerFilter } from '../cmps/TrainerFilter.jsx'
 import { TrainerList } from '../cmps/TrainerList.jsx'
 
-import Divider from '@mui/material/Divider'
 import { Button } from '@mui/material'
 import { setIsLoading } from '../store/actions/system.actions'
 

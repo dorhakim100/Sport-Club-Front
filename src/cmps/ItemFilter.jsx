@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useSelector } from 'react-redux'
-import { userService } from '../services/user/user.service'
 
 import { onPageNavigation } from '../services/util.service'
 
@@ -16,14 +15,9 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { addItem } from '../store/actions/item.actions'
 
 import { SortSelect } from './SortSelect'
-import { Loader } from './Loader'
 
-import PropTypes from 'prop-types'
-import Slider, { SliderThumb } from '@mui/material/Slider'
+import Slider from '@mui/material/Slider'
 import { styled } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-import Tooltip from '@mui/material/Tooltip'
-import Box from '@mui/material/Box'
 import { itemService } from '../services/item/item.service'
 
 export function ItemFilter({

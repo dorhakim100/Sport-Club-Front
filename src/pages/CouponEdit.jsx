@@ -2,25 +2,21 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { useEffect, useState, useRef } from 'react'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 import { setIsLoading } from '../store/actions/system.actions.js'
-import { makeId } from '../services/util.service.js'
+
 import { couponService } from '../services/coupon/coupon.service.js'
 import { updateCoupon } from '../store/actions/coupon.actions'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { uploadService } from '../services/upload.service.js'
-import { capitalizeFirstLetter } from '../services/util.service.js'
+
 import { itemService } from '../services/item/item.service.js'
 
 import { HeadContainer } from '../cmps/HeadContainer.jsx'
 import { Switch } from '../cmps/Switch.jsx'
-
-import { Button } from '@mui/material'
-import { loadItems } from '../store/actions/item.actions.js'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',

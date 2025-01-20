@@ -1,25 +1,23 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { styled } from '@mui/material/styles'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 import { setIsLoading } from '../store/actions/system.actions.js'
-import { makeId } from '../services/util.service.js'
 import { classService } from '../services/class/class.service.js'
 import { loadTrainers } from '../store/actions/trainer.actions.js'
-import { updateClass, loadClass } from '../store/actions/class.actions.js'
+import { updateClass } from '../store/actions/class.actions.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { uploadService } from '../services/upload.service.js'
-import { capitalizeFirstLetter } from '../services/util.service.js'
+import { trainerService } from '../services/trainer/trainer.service.js'
 
 import { HeadContainer } from '../cmps/HeadContainer.jsx'
 import { DaySelector } from '../cmps/DaySelector.jsx'
 
-import { Button } from '@mui/material'
 import { IntensityRange } from '../cmps/IntensityRange.jsx'
 
 const VisuallyHiddenInput = styled('input')({
@@ -70,7 +68,7 @@ export function ClassEdit() {
       setIsLoading(true)
       const clas = await classService.getById(classId)
 
-      await loadTrainers({ isAll: true })
+      await loadTrainers({ ...trainerService.getDefaultFilter, isAll: true })
       const t = classService.getClassTrainer(clas)
       setClassTrainers(t)
       setEditClass({ ...clas })

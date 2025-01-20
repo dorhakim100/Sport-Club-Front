@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { smoothScroll } from '../services/util.service'
-import { updatePayment } from '../store/actions/payment.actions'
 
 import pending from '/public/imgs/pending.svg'
 import pendingDarkMode from '/public/imgs/pending-dark-mode.svg'

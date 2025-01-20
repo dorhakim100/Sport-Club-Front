@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
 import { Button } from '@mui/material'
@@ -16,13 +16,12 @@ import { RememberMeButton } from './RememberMeButton'
 export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+
   const navigate = useNavigate()
   let initialValues
   let validate
 
   const [isShown, setIsShown] = useState(false)
-
-  // const [isRemember, setIsRemember] = useState(false)
 
   const [width, setWidth] = useState()
 
@@ -158,6 +157,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
         navigate('/')
       } else {
         const logged = await login(cred)
+        console.log('isRemember:', isRemember)
         if (isRemember) {
           setPrefs({ ...prefs, user: { _id: logged._id } })
         }

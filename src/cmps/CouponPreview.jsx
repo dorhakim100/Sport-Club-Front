@@ -2,12 +2,10 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { capitalizeFirstLetter, smoothScroll } from '../services/util.service'
-import { removeCoupon } from '../store/actions/coupon.actions'
+import { smoothScroll } from '../services/util.service'
 
 import { ActiveCouponButton } from './ActiveCouponButton'
 
-import { Button } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import IconButton from '@mui/material/IconButton'
 import EditIcon from '@mui/icons-material/Edit'

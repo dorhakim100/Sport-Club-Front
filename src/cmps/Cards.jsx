@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-// Import Swiper React components
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { smoothScroll } from '../services/util.service'
 
-// Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/effect-cards'
 
-// import required modules
 import { EffectCards, Navigation } from 'swiper/modules'
 
 export function Cards({ trainers }) {

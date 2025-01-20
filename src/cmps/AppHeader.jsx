@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useState, useEffect, useRef, useMemo } from 'react'
 
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, setRemembered } from '../store/actions/user.actions'
 import { loadOpenMessages } from '../store/actions/message.actions'
@@ -16,7 +16,6 @@ import {
 
 import { DropDown } from '../cmps/DropDown.jsx'
 
-import Divider from '@mui/material/Divider'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 import { Button } from '@mui/material'

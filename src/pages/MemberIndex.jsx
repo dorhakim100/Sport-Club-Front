@@ -1,17 +1,13 @@
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { HeadContainer } from '../cmps/HeadContainer'
-import { VisibleCards } from '../cmps/VisibleCards.jsx'
-import { MemberTypes } from '../cmps/MemberTypes.jsx'
+import { textAnimation } from '../services/util.service'
+
 import { MemberText } from '../cmps/MemberText.jsx'
+import { ContactUs } from '../cmps/ContactUs'
 
-import { showErrorMsg } from '../services/event-bus.service'
-import { setIsLoading } from '../store/actions/system.actions'
-
-import { Button } from '@mui/material'
-import { LoadingButton } from '@mui/lab'
+import text from '/public/jsons/Members/MemberIndex.json'
 
 export function MemberIndex() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -21,19 +17,31 @@ export function MemberIndex() {
     eng: 'Members',
   }
 
-  const text = {
-    he: `אנו מציעים 3 סוגי מנוי, בהתאם לצרכים של כל אחד ואחת`,
-    eng: `We offer three kinds of memberships, depending on each and everyone's needs.`,
-  }
+  const splitText = (prefs.isEnglish ? text.eng : text.he).split('\n')
+
+  useEffect(() => {
+    textAnimation(prefs)
+  }, [prefs.isEnglish, prefs.isDarkMode])
 
   return (
     <div className='member-index-container'>
       <h2>{prefs.isEnglish ? head.eng : head.he}</h2>
+      <div className='member-preview-container section hidden'>
+        {splitText.map((line, index) => (
+          // Render each line, and add a <br> tag after each one except the last
+          <p key={index}>
+            {line}
+            {index < splitText.length - 1 && <br />}
+          </p>
+        ))}
+      </div>
+
       {/* <HeadContainer text={head} /> */}
       {/* <VisibleCards /> */}
       {/* <b className='member-text'>{prefs.isEnglish ? text.eng : text.he}</b> */}
 
       <MemberText />
+      <ContactUs />
     </div>
   )
 }

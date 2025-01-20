@@ -1,24 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
-import { updateService } from '../services/update/update.service'
-import { loadUpdates } from '../store/actions/update.actions'
-
-import { setIsLoading } from '../store/actions/system.actions'
 import { onPageNavigation } from '../services/util.service'
 import { debounce } from '../services/util.service'
 
 import { SortSelect } from './SortSelect'
 
 import { Button } from '@mui/material'
-import { LoadingButton } from '@mui/lab'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import IconButton from '@mui/material/IconButton'
-import Stack from '@mui/material/Stack'
 import DeleteIcon from '@mui/icons-material/Delete'
 import UndoIcon from '@mui/icons-material/Undo'
 import {
@@ -39,8 +32,8 @@ export function MessagesFilter({
     (stateSelector) => stateSelector.systemModule.isLoading
   )
 
-  const updates = useSelector(
-    (stateSelector) => stateSelector.updateModule.updates
+  const messages = useSelector(
+    (stateSelector) => stateSelector.messageModule.messages
   )
 
   const [editFilter, setEditFilter] = useState(filter)
@@ -134,7 +127,7 @@ export function MessagesFilter({
         className='page-controller-container'
       >
         <Button
-          disabled={maxPage === filter.pageIdx + 1}
+          disabled={messages.length === 0 || filter.pageIdx + 1 === maxPage}
           onClick={() => {
             onPageNavigation(1, filter, setFilter, maxPage)
           }}

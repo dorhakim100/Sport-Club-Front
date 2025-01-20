@@ -1,17 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { itemService } from '../services/item/item.service'
-import { userService } from '../services/user/user.service'
-import { updateCart } from '../store/actions/user.actions'
-
-import { Quantity } from './Quantity'
 import { CartItem } from './CartItem'
 
 import Divider from '@mui/material/Divider'
-import { makeId, smoothScroll } from '../services/util.service'
 
 export function CartList({ cart, setCart }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)

@@ -1,21 +1,13 @@
 import * as React from 'react'
 import Accordion from '@mui/material/Accordion'
-import AccordionActions from '@mui/material/AccordionActions'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import Button from '@mui/material/Button'
 
 import { useEffect } from 'react'
-import { HeadContainer } from './HeadContainer'
 
 import { useSelector } from 'react-redux'
 import { makeId } from '../services/util.service'
-
-// $bold-navy: #2C3E50;
-// $very-light-blue: #dff9ff;
-// $very-dark-blue: #263039;
-// $darkest-blue:#181e24;
 
 export function AccordionCmp({ options }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)

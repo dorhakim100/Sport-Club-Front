@@ -1,14 +1,12 @@
-import { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 
-import { userService } from '../services/user/user.service'
 import { login } from '../store/actions/user.actions'
 
 import { LoginSignupForm } from '../cmps/LoginSignupForm'
 import { showErrorMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
-import { GoogleLoginCmp } from '../cmps/GoogleLoginCmp'
 
 export function Login() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -18,6 +16,10 @@ export function Login() {
     password: '',
     fullname: '',
   })
+
+  const isRemember = useSelector(
+    (stateSelector) => stateSelector.userModule.isRemember
+  )
 
   const navigate = useNavigate()
 
@@ -55,7 +57,7 @@ export function Login() {
   return (
     <div className='login-form' onSubmit={onLogin}>
       <h2>{prefs.isEnglish ? 'Login' : 'חיבור'}</h2>
-      <LoginSignupForm />
+      <LoginSignupForm isRemember={isRemember} />
     </div>
   )
 }
