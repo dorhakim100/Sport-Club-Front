@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hello-pangea/dnd": "^17.0.0",
@@ -27,6 +28,7 @@
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
+    "expo-cli": "^6.3.12",
     "formik": "^2.4.6",
     "lottie-web": "^5.12.2",
     "react": "^18.3.1",

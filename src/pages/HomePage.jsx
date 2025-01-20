@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 
 import { trainerService } from '../services/trainer/trainer.service.js'
-import { makeId, smoothScroll } from '../services/util.service.js'
+import { smoothScroll, textAnimation } from '../services/util.service.js'
 import { loadTrainers } from '../store/actions/trainer.actions.js'
 import { loadUpdates } from '../store/actions/update.actions.js'
 import { updateService } from '../services/update/update.service.js'
-import {
-  setIsLoading,
-  setIsModal,
-  setIsPrefs,
-  setModalMessage,
-  setPrefs,
-} from '../store/actions/system.actions.js'
+import { setIsLoading } from '../store/actions/system.actions.js'
 import { showErrorMsg } from '../services/event-bus.service.js'
 
 import { SwiperCarousel } from '../cmps/SwiperCarousel.jsx'
@@ -62,25 +56,8 @@ export function HomePage() {
   }, [prefs.isEnglish])
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          const timeout = index + 1
-          setTimeout(() => {
-            entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
-          }, 300)
-          // entry.target.classList.remove('hidden')
-        } else {
-          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
-        }
-      })
-    })
-
-    const elements = document.querySelectorAll('.section')
-    elements.forEach((el) => observer.observe(el))
-
-    return () => elements.forEach((el) => observer.unobserve(el))
-  }, [prefs.isEnglish])
+    textAnimation(prefs)
+  }, [prefs.isEnglish, prefs.isDarkMode])
 
   const navigateToClass = () => {
     // support for safari browsers

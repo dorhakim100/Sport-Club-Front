@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
 
-import { AccordionCmp } from '../cmps/AccordionCmp.jsx'
 import { FacilitiesTxt } from '../cmps/FacilitiesTxt.jsx'
 import { ContactUs } from '../cmps/ContactUs.jsx'
 

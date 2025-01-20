@@ -1,25 +1,17 @@
 import { useState, useEffect } from 'react'
-import {
-  useNavigate,
-  useSearchParams,
-  useParams,
-  Link,
-  useLocation,
-} from 'react-router-dom'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { messageService } from '../services/message/message.service'
 import { socketService } from '../services/socket.service'
 import { addMessage } from '../store/actions/message.actions'
-import { makeId, smoothScroll } from '../services/util.service'
+import { smoothScroll } from '../services/util.service'
 
 import { SOCKET_EMIT_SEND_MSG } from '../services/socket.service'
 
 import { HeadContainer } from './HeadContainer'
 
-import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
-import { Message } from '@mui/icons-material'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
 

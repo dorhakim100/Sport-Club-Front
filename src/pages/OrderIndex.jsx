@@ -1,14 +1,10 @@
-import { Nav } from '../cmps/Nav'
-
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-import { updateService } from '../services/update/update.service'
-import { loadUpdates } from '../store/actions/update.actions'
 import { paymentService } from '../services/payment/payment.service'
 import { setIsLoading } from '../store/actions/system.actions'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { showErrorMsg } from '../services/event-bus.service'
 import {
   loadOpenPayments,
   loadPayments,
@@ -18,9 +14,6 @@ import { updatePayment } from '../store/actions/payment.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { OrderList } from '../cmps/OrderList'
 import { OrderFilter } from '../cmps/OrderFilter.jsx'
-
-import { Button } from '@mui/material'
-import { LoadingButton } from '@mui/lab'
 
 export function OrderIndex() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)

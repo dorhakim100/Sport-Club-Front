@@ -1,11 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
 import { smoothScroll } from '../services/util.service'
 import { Preloader } from './Preloader'
-
-import picture from '../../public/imgs/picture.jpg'
 
 export function ItemPreview({ item }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)

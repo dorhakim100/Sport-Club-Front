@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { NavLink, Link, Outlet } from 'react-router-dom'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { smoothScroll } from '../services/util.service'
 
-import { Preloader } from './Preloader'
-
 import { Button } from '@mui/material'
 import ButtonGroup from '@mui/material/ButtonGroup'
-import { showSuccessMsg } from '../services/event-bus.service'
 
 export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)

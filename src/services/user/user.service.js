@@ -68,7 +68,6 @@ async function update(user) {
 
 async function login(userCred) {
   try {
-    console.log(userCred)
     const user = await httpService.post('auth/login', userCred)
     if (user) return saveLoggedinUser(user)
   } catch (err) {
@@ -180,6 +179,7 @@ function getPrefs() {
 }
 
 function setPrefs(prefs) {
+  console.log(prefs)
   const entityType = 'sport-club-pref'
   localStorage.setItem(entityType, JSON.stringify(prefs))
 }

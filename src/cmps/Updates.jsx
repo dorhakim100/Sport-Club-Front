@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -11,7 +12,6 @@ import 'swiper/css/navigation'
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
-import { smoothScroll } from '../services/util.service'
 
 export function Updates({ updates, navigateToUpdates }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)

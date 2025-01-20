@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { NavLink, Link, Outlet } from 'react-router-dom'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import React from 'react'
 import { useSelector } from 'react-redux'
 
 export function TrainerFilter({ filter, setFilter }) {

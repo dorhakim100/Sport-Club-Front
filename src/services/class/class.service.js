@@ -88,6 +88,7 @@ function getEmptyClass() {
     },
     intensity: 1,
     occurrences: [],
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1737376990/DALL_E_2025-01-20_14.42.49_-_Create_a_default_empty_profile_image_for_a_sports_studio_class_setting._The_image_should_feature_the_silhouette_of_a_group_of_adults_in_various_sports_cjx8y2.webp',
   }
 }
 

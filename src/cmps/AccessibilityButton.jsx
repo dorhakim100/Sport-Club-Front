@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { setIsAccessibility } from '../store/actions/system.actions'

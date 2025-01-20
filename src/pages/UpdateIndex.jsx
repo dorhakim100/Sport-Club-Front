@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
 import { useSelector } from 'react-redux'
 
 import { updateService } from '../services/update/update.service'
@@ -11,8 +11,6 @@ import { UpdatesList } from '../cmps/UpdatesList.jsx'
 import { UpdateControl } from '../cmps/UpdateControl.jsx'
 import { ContactUs } from '../cmps/ContactUs'
 
-import { Button } from '@mui/material'
-import { LoadingButton } from '@mui/lab'
 import { setIsLoading } from '../store/actions/system.actions'
 import { showErrorMsg } from '../services/event-bus.service'
 

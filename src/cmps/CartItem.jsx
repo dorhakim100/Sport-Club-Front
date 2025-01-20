@@ -1,16 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate, Link } from 'react-router-dom'
-
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { itemService } from '../services/item/item.service'
-import { userService } from '../services/user/user.service'
+import { useNavigate } from 'react-router-dom'
 
 import { updateCart } from '../store/actions/user.actions'
 
 import { Quantity } from './Quantity'
 
-import Divider from '@mui/material/Divider'
 import { setIsLoading } from '../store/actions/system.actions'
 import { smoothScroll } from '../services/util.service'
 

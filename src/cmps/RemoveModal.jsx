@@ -1,9 +1,6 @@
 import { useSelector } from 'react-redux'
 
-import { updateCart } from '../store/actions/user.actions'
-
 import { Button } from '@mui/material'
-import { setIsLoading } from '../store/actions/system.actions'
 
 export function RemoveModal({ isModal, setIsModal, item, onRemove }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)

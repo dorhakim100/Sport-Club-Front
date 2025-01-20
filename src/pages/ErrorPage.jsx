@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import Lottie from 'react-lottie'
 import animationData from '/public/imgs/error.json'

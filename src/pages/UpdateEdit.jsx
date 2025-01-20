@@ -1,17 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 import { updateService } from '../services/update/update.service'
 import { setIsLoading } from '../store/actions/system.actions'
-// import { loadUpdate } from '../store/actions/update.actions'
 import { saveUpdate } from '../store/actions/update.actions'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
-import { Button } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 
 export function UpdateEdit() {

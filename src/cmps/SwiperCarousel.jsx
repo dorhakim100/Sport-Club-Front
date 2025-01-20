@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -10,13 +10,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 
 // Import required modules
-import {
-  FreeMode,
-  Navigation,
-  Thumbs,
-  Autoplay,
-  Pagination,
-} from 'swiper/modules'
+import { FreeMode, Navigation, Thumbs, Autoplay } from 'swiper/modules'
 import { makeId } from '../services/util.service'
 
 export function SwiperCarousel({ imgs }) {

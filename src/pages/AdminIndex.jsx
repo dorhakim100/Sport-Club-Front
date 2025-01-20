@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { loadUsers, removeUser } from '../store/actions/user.actions'
+import { loadUsers } from '../store/actions/user.actions'
 import { useNavigate, Outlet, useLocation } from 'react-router'
 
 import { Nav } from '../cmps/Nav'
@@ -12,7 +12,6 @@ import { classService } from '../services/class/class.service'
 import { showErrorMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
-import { updatePayment } from '../store/actions/payment.actions'
 
 export function AdminIndex() {
   const navigate = useNavigate()

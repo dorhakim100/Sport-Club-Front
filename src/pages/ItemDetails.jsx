@@ -1,19 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { loadItem, addItemMsg } from '../store/actions/item.actions'
+import { loadItem } from '../store/actions/item.actions'
 
 import { AddToCartButton } from '../cmps/AddToCartButton'
 import { Quantity } from '../cmps/Quantity.jsx'
 import { ItemNavigation } from '../cmps/ItemNavigation'
 import { MemberTypes } from '../cmps/MemberTypes'
 
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { ContactUs } from '../cmps/ContactUs'
-import { MessageModal } from '../cmps/MessageModal'
 import { setIsModal, setModalMessage } from '../store/actions/system.actions'
 
 export function ItemDetails() {

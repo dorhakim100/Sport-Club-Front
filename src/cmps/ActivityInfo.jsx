@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
 
 export function ActivityInfo({ options, logo }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)

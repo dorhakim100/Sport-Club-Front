@@ -4,16 +4,12 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { smoothScroll } from '../services/util.service'
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 import { loadClass } from '../store/actions/class.actions'
 
-import { AddToCartButton } from '../cmps/AddToCartButton'
-import { Quantity } from '../cmps/Quantity.jsx'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { ItemNavigation } from '../cmps/ItemNavigation'
 
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import { IntensityRange } from '../cmps/IntensityRange'
 import { ContactUs } from '../cmps/ContactUs'
 import { classService } from '../services/class/class.service'

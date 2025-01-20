@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { userService } from '../services/user/user.service'
 import { ItemPreview } from './ItemPreview'
 import { useSelector } from 'react-redux'
@@ -7,9 +7,6 @@ import { useState } from 'react'
 import { smoothScroll } from '../services/util.service'
 
 import { AddToCartButton } from './AddToCartButton'
-
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
 
 export function ItemList({ items, onRemoveItem, isGrid }) {
   const navigate = useNavigate()

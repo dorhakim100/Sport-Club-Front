@@ -1,27 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { makeId } from '../services/util.service'
+import { makeId, textAnimation } from '../services/util.service'
 
 import { HeadContainer } from './HeadContainer'
 
 export function FacilitiesTxt({ facilities }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
-          // entry.target.classList.remove('hidden')
-        } else {
-          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
-        }
-      })
-    })
-
-    const elements = document.querySelectorAll('.section')
-    elements.forEach((el) => observer.observe(el))
-
-    return () => elements.forEach((el) => observer.unobserve(el))
+    textAnimation(prefs)
   }, [prefs.isEnglish, prefs.isDarkMode])
   return (
     <div className='facilities-text-container'>

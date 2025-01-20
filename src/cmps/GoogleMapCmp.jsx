@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 

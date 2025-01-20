@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
 import { updateService } from '../services/update/update.service'
 import { loadUpdates } from '../store/actions/update.actions'
@@ -124,6 +122,7 @@ export function UpdateControl({
             onClick={() => {
               onPageNavigation(1, filter, setFilter, maxPage)
             }}
+            disabled={filter.pageIdx + 1 === maxPage}
           >
             <ArrowBackIosNewIcon />
           </Button>

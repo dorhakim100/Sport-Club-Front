@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import Lottie from 'react-lottie'
 import animationData from '/public/imgs/success.json'
 import { showErrorMsg } from '../services/event-bus.service'
 import { paymentService } from '../services/payment/payment.service'
-import { loadUser, setEmptyCart } from '../store/actions/user.actions'
+import { loadUser } from '../store/actions/user.actions'
 import { updateCart } from '../store/actions/user.actions'
 import {
   SOCKET_EVENT_MAKE_ORDER,
