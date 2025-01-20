@@ -565,7 +565,7 @@ textarea, input{
     *{
 		filter: blur(0px);
       
-      opacity: 0;
+    //   opacity: 0;
     }
     .text-container{
       font-size: 0.8em;
@@ -593,41 +593,7 @@ textarea, input{
   }
 
    
-  .show{
-    
-    left: 0px;
-    
-    filter: blur(0px);
-    *{
-		filter: blur(0px);
-      
-      opacity: 1;
-      
-    }
-    .text-container{
-      right: 0px;
-      // background-color: blue;
-    }
-    
-  }
-  
-  .show-rtl {
-    filter: blur(0px);
-    
-    .text-container.rtl {
-		transform: translate(0);
-		right: 0;
-		left: 0;
-    }
-    .text-container{
-		left: 0px;
-    }
-    *{
-		
-		filter: blur(0px);
-      opacity: 1;
-    }
-  }
+ 
 
   .arrow-link-container{
 	align-self: center;
@@ -808,3 +774,38 @@ textarea, input{
 .ltr {
 	direction: ltr;
 }
+ .show{
+    
+    left: 0px;
+    
+    filter: blur(0px);
+    *{
+		filter: blur(0px);
+      
+      opacity: 1;
+      
+    }
+    .text-container{
+      right: 0px;
+      // background-color: blue;
+    }
+    
+  }
+  
+  .show-rtl {
+    filter: blur(0px);
+    
+    .text-container.rtl {
+		transform: translate(0);
+		right: 0;
+		left: 0;
+    }
+    .text-container{
+		left: 0px;
+    }
+    *{
+		
+		filter: blur(0px);
+      opacity: 1;
+    }
+  }

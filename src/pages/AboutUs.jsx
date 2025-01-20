@@ -174,8 +174,23 @@ export function AboutUs() {
   }
 
   useEffect(() => {
-    textAnimation(prefs)
-  }, [prefs.isEnglish, location.pathname])
+    const observer = new IntersectionObserver((entries) => {
+      console.log(entries)
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+          // entry.target.classList.remove('hidden')
+        } else {
+          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
+        }
+      })
+    })
+
+    const elements = document.querySelectorAll('.section')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => elements.forEach((el) => observer.unobserve(el))
+  }, [prefs.isEnglish, prefs.isDarkMode])
 
   return (
     <section className='about-container'>
