@@ -92,7 +92,7 @@ async function getMaxPage() {
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
   }
 }
 
@@ -148,7 +148,7 @@ async function getOccurrences() {
     })
     return allOccurrences
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }

@@ -41,7 +41,7 @@ export function UpdateEdit() {
       setEditUpdate({ ...update })
       setUpdate({ ...update })
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg('Cannot load update')
       navigate('/admin/update')
     } finally {
@@ -60,7 +60,7 @@ export function UpdateEdit() {
         prefs.isEnglish ? 'Update added successfully' : 'עדכון נוסף בהצלחה'
       )
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Update couldn't be added` : 'עדכון לא נוסף'
       )

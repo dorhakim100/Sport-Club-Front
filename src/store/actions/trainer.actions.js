@@ -19,7 +19,7 @@ export async function loadTrainers(filterBy) {
     })
     return trainers
   } catch (err) {
-    console.log('Cannot load trainers', err)
+    // console.log('Cannot load trainers', err)
     throw err
   }
 }
@@ -33,7 +33,7 @@ export async function loadTrainer(
     store.dispatch(getCmdSetTrainer(trainer))
     return trainer
   } catch (err) {
-    console.log('Cannot load trainer', err)
+    // console.log('Cannot load trainer', err)
     throw err
   }
 }
@@ -43,7 +43,7 @@ export async function removeTrainer(trainerId) {
     await trainerService.remove(trainerId)
     store.dispatch(getCmdRemoveTrainer(trainerId))
   } catch (err) {
-    console.log('Cannot remove trainer', err)
+    // console.log('Cannot remove trainer', err)
     throw err
   }
 }
@@ -54,7 +54,7 @@ export async function addTrainer(trainer) {
     store.dispatch(getCmdAddTrainer(savedTrainer))
     return savedTrainer
   } catch (err) {
-    console.log('Cannot add trainer', err)
+    // console.log('Cannot add trainer', err)
     throw err
   }
 }
@@ -65,7 +65,7 @@ export async function updateTrainer(trainer) {
     store.dispatch(getCmdUpdateTrainer(savedTrainer))
     return savedTrainer
   } catch (err) {
-    console.log('Cannot save trainer', err)
+    // console.log('Cannot save trainer', err)
     throw err
   }
 }

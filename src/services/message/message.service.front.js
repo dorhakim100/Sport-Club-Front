@@ -102,7 +102,7 @@ async function getMaxPage() {
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
   }
 }
 
@@ -128,7 +128,7 @@ async function getOpenMessages() {
     const unDone = messages.filter((message) => message.isDone === false)
     return unDone.length
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }

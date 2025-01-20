@@ -14,20 +14,18 @@ export async function loadCoupons(filterBy) {
     store.dispatch(getCmdSetCoupons(coupons))
     return coupons
   } catch (err) {
-    console.log('Cannot load coupons', err)
+    // console.log('Cannot load coupons', err)
     throw err
   }
 }
 
 export async function loadCoupon(couponId) {
   try {
-    console.log(couponId)
     const coupon = await couponService.getById(couponId)
-    console.log(coupon)
     store.dispatch(getCmdSetCoupon(coupon))
     return coupon
   } catch (err) {
-    console.log('Cannot load coupon', err)
+    // console.log('Cannot load coupon', err)
     throw err
   }
 }
@@ -37,7 +35,7 @@ export async function removeCoupon(couponId) {
     await couponService.remove(couponId)
     store.dispatch(getCmdRemoveCoupon(couponId))
   } catch (err) {
-    console.log('Cannot remove coupon', err)
+    // console.log('Cannot remove coupon', err)
     throw err
   }
 }
@@ -48,7 +46,7 @@ export async function addCoupon(coupon) {
     store.dispatch(getCmdAddCoupon(savedCoupon))
     return savedCoupon
   } catch (err) {
-    console.log('Cannot add coupon', err)
+    // console.log('Cannot add coupon', err)
     throw err
   }
 }
@@ -59,7 +57,7 @@ export async function updateCoupon(coupon) {
     store.dispatch(getCmdUpdateCoupon(savedCoupon))
     return savedCoupon
   } catch (err) {
-    console.log('Cannot save coupon', err)
+    // console.log('Cannot save coupon', err)
     throw err
   }
 }

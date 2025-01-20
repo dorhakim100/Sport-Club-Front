@@ -13,7 +13,7 @@ export async function loadUpdates(filter) {
     const updates = await updateService.query(filter)
     store.dispatch({ type: SET_UPDATES, updates })
   } catch (err) {
-    console.log('UpdateActions: err in loadUpdates', err)
+    // console.log('UpdateActions: err in loadUpdates', err)
     throw err
   }
 }
@@ -23,7 +23,7 @@ export async function addUpdate(update) {
     const addedUpdate = await updateService.add(update)
     store.dispatch(getActionAddReview(addedUpdate))
   } catch (err) {
-    console.log('UpdateActions: err in addUpdate', err)
+    // console.log('UpdateActions: err in addUpdate', err)
     throw err
   }
 }
@@ -33,7 +33,7 @@ export async function removeUpdate(reviewId) {
     await updateService.remove(reviewId)
     store.dispatch(getActionRemoveUpdate(reviewId))
   } catch (err) {
-    console.log('UpdateActions: err in removeUpdate', err)
+    // console.log('UpdateActions: err in removeUpdate', err)
     throw err
   }
 }
@@ -43,7 +43,7 @@ export async function loadUpdate(updateId) {
     const update = await updateService.getById(updateId)
     store.dispatch({ type: LOAD_UPDATE, update })
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -57,7 +57,7 @@ export async function saveUpdate(newUpdate) {
     // }
     return saved
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }

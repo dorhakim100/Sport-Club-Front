@@ -17,10 +17,9 @@ export const trainerService = {
 async function query(filterBy = { pageIdx: 0, types: [] }) {
   try {
     const res = await httpService.get(KEY, filterBy)
-    console.log(res)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -30,7 +29,7 @@ async function getById(trainerId, trainerFilter) {
     const res = await httpService.get(`${KEY}/${trainerId}`, trainerFilter)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -39,7 +38,7 @@ async function remove(trainerId) {
   try {
     return await httpService.delete(`${KEY}/${trainerId}`)
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -53,7 +52,7 @@ async function save(trainer) {
     }
     return savedTrainer
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -69,7 +68,7 @@ async function getMaxPage() {
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
   }
 }
 
@@ -85,17 +84,4 @@ function getEmptyTrainer() {
     },
     experience: '01-01-2000',
   }
-}
-
-function _setNextPrevBookId(book) {
-  return storageService.query(BOOK_KEY).then((books) => {
-    const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
-    const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0]
-    const prevBook = books[bookIdx - 1]
-      ? books[bookIdx - 1]
-      : books[books.length - 1]
-    book.nextBookId = nextBook.id
-    book.prevBookId = prevBook.id
-    return book
-  })
 }

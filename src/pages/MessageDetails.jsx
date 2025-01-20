@@ -19,7 +19,6 @@ export function MessageDetails() {
   const message = useSelector(
     (stateSelector) => stateSelector.messageModule.message
   )
-  console.log(message)
 
   const messageFilter = useSelector(
     (stateSelector) => stateSelector.messageModule.filter

@@ -38,7 +38,7 @@ export function UpdateIndex() {
       const max = await updateService.getMaxPage()
       setMaxPage(max)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't load updates` : 'טעינת עדכונים נכשלה'
       )

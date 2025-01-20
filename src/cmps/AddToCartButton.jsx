@@ -103,7 +103,7 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
       await updateCart(user)
       showSuccessMsg(prefs.isEnglish ? 'Item added to cart' : 'מוצר נוסף לעגלה')
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
     } finally {
       setIsLoading(false)
     }

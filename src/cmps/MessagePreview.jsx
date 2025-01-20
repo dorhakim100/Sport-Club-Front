@@ -37,7 +37,7 @@ export function MessagePreview({
           : 'סימון הודעה בוצע בהצלחה'
       )
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't mark message` : 'פעולה לא הצליחה'
       )

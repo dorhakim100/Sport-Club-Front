@@ -52,7 +52,7 @@ export function AppFooter() {
       await navigator.clipboard.writeText(email)
       showSuccessMsg(prefs.isEnglish ? 'Email copied' : 'מייל הועתק')
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't copy email` : 'מייל לא הועתק')
     }
   }

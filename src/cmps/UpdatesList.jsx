@@ -164,7 +164,7 @@ function EditRemoveBtns({ update }) {
       showSuccessMsg(prefs.isEnglish ? 'Update removed' : 'עדכון הוסר')
       await loadUpdates()
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't remove` : 'עדכון לא הוסר')
     }
   }

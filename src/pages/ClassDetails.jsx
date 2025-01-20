@@ -49,7 +49,7 @@ export function ClassDetails() {
 
       setTrainers(t)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
     } finally {
       setIsLoading(false)
     }

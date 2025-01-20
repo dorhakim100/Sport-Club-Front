@@ -20,18 +20,17 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
     const res = await httpService.get(KEY, filterBy)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
 
 async function getById(messageId, messageFilter) {
   try {
-    console.log(messageFilter)
     const res = await httpService.get(`${KEY}/${messageId}`, messageFilter)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -40,7 +39,7 @@ async function remove(messageId) {
   try {
     return await httpService.delete(`${KEY}/${messageId}`)
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -49,7 +48,7 @@ async function removeBulk(messageIds) {
   try {
     return await httpService.delete(`${KEY}/bulkDelete`, { data: messageIds })
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -65,7 +64,7 @@ async function save(message) {
     }
     return savedMessage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -83,7 +82,8 @@ async function getMaxPage(filter) {
 
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
+    throw err
   }
 }
 
@@ -107,7 +107,7 @@ async function getOpenMessages() {
     const length = await httpService.get('message/openLength')
     return length
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }

@@ -81,7 +81,6 @@ export function SuccessPage() {
       setNum(savedOrder.orderNum)
       socketService.emit(SOCKET_EVENT_MAKE_ORDER, payment)
       const savedUser = await loadUser(userId)
-      console.log(savedUser)
       const newOrders = savedUser.ordersIds
       newOrders.push(savedOrder._id)
       // Update the cart after saving the payment

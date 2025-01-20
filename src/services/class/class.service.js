@@ -20,7 +20,7 @@ async function query(filterBy = { pageIdx: 0 }) {
     const res = await httpService.get(KEY, filterBy)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -30,7 +30,7 @@ async function getById(classId, filter) {
     const res = await httpService.get(`${KEY}/${classId}`, filter)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -39,7 +39,7 @@ async function remove(classId) {
   try {
     return await httpService.delete(`${KEY}/${classId}`)
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -53,7 +53,7 @@ async function save(clas) {
     }
     return savedCoupon
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -66,7 +66,7 @@ async function getMaxPage() {
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
   }
 }
 
@@ -107,7 +107,7 @@ async function getClassTrainer(clas) {
     const res = await httpService.get(`${KEY}/${classId}/trainers`)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -135,7 +135,7 @@ async function getOccurrences(filter = { isAll: true }) {
     // })
     // return allOccurrences
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }

@@ -66,7 +66,7 @@ export function TrainerEdit() {
       setTrainer({ ...trainer })
       setImg(trainer.img)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg('Cannot load trainer')
       navigate('/trainer')
     } finally {
@@ -144,7 +144,7 @@ export function TrainerEdit() {
         prefs.isEnglish ? 'Trainer edited successfully' : 'מאמן נערך בהצלחה'
       )
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish
           ? `Trainer couldn't be edited`
@@ -169,7 +169,7 @@ export function TrainerEdit() {
       setImg(ImgSrc)
       setEditTrainer({ ...editTrainer, img: ImgSrc })
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't upload image` : 'לא היה ניתן לעלות תמונה'
       )

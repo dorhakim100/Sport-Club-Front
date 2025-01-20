@@ -46,7 +46,7 @@ export function CartItem({ item }) {
         setIsLoading(true)
         const saved = await updateCart(userToUpdate)
       } catch (err) {
-        console.log(err)
+        // // console.log(err)
       } finally {
         setIsLoading(false)
       }

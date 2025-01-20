@@ -103,7 +103,7 @@ export function ItemFilter({
       showSuccessMsg(`Item added`)
       navigate(`/item/edit/${savedItem._id}`)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg('Cannot add item')
     }
   }

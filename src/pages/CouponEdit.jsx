@@ -64,7 +64,7 @@ export function CouponEdit() {
       setCoupon({ ...coupon })
       await getItems()
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg('Cannot load coupon')
       navigate('/coupon')
     } finally {
@@ -179,7 +179,7 @@ export function CouponEdit() {
         prefs.isEnglish ? 'Coupon edited successfully' : 'קופון נערך בהצלחה'
       )
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish
           ? `Coupon couldn't be edited`
@@ -204,7 +204,7 @@ export function CouponEdit() {
       setImg(ImgSrc)
       setEditCoupon({ ...editCoupon, img: ImgSrc })
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't upload image` : 'לא היה ניתן לעלות תמונה'
       )

@@ -11,11 +11,10 @@ export async function loadPayments(filterBy) {
   try {
     const payments = await paymentService.query(filterBy)
     store.dispatch(getCmdSetPayments(payments))
-    console.log(filterBy)
 
     return payments
   } catch (err) {
-    console.log('Cannot load payments', err)
+    // console.log('Cannot load payments', err)
     throw err
   }
 }
@@ -27,7 +26,7 @@ export async function updatePayment(payment) {
     store.dispatch(getCmdUpdatePayment(savedPayment))
     return savedPayment
   } catch (err) {
-    console.log('Cannot save payment', err)
+    // console.log('Cannot save payment', err)
     throw err
   }
 }
@@ -41,7 +40,7 @@ export async function loadOpenPayments() {
       openLength: openPayments,
     })
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }

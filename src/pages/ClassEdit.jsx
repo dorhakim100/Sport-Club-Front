@@ -75,7 +75,7 @@ export function ClassEdit() {
       setClas({ ...clas })
       setImg(clas.img)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg('Cannot load class')
       navigate('/class')
     } finally {
@@ -156,7 +156,7 @@ export function ClassEdit() {
         prefs.isEnglish ? 'Class edited successfully' : 'שיעור נערך בהצלחה'
       )
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Class couldn't be edited` : 'לא היה ניתן לערוך שיעור'
       )
@@ -179,7 +179,7 @@ export function ClassEdit() {
       setImg(ImgSrc)
       setEditClass({ ...editClass, img: ImgSrc })
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't upload image` : 'לא היה ניתן לעלות תמונה'
       )

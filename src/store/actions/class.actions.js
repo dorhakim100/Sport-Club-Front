@@ -13,14 +13,13 @@ export async function loadClasses(filterBy) {
   try {
     const classes = await classService.query(filterBy)
     store.dispatch(getCmdSetClasses(classes))
-    console.log(filterBy)
     store.dispatch({
       type: SET_CLASS_FILTER,
       filter: filterBy,
     })
     return classes
   } catch (err) {
-    console.log('Cannot load classes', err)
+    // console.log('Cannot load classes', err)
     throw err
   }
 }
@@ -31,7 +30,7 @@ export async function loadClass(classId, filter) {
     store.dispatch(getCmdSetClass(clas))
     return clas
   } catch (err) {
-    console.log('Cannot load class', err)
+    // console.log('Cannot load class', err)
     throw err
   }
 }
@@ -41,7 +40,7 @@ export async function removeClass(classId) {
     await classService.remove(classId)
     store.dispatch(getCmdRemoveClass(classId))
   } catch (err) {
-    console.log('Cannot remove class', err)
+    // console.log('Cannot remove class', err)
     throw err
   }
 }
@@ -52,7 +51,7 @@ export async function addClass(clas) {
     store.dispatch(getCmdAddClass(savedClass))
     return savedClass
   } catch (err) {
-    console.log('Cannot add class', err)
+    // console.log('Cannot add class', err)
     throw err
   }
 }
@@ -64,7 +63,7 @@ export async function updateClass(clas) {
     store.dispatch(getCmdUpdateClass(savedClass))
     return savedClass
   } catch (err) {
-    console.log('Cannot save class', err)
+    // console.log('Cannot save class', err)
     throw err
   }
 }

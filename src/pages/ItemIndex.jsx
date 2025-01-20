@@ -136,7 +136,7 @@ export function ItemIndex() {
         showErrorMsg(
           prefs.isEnglish ? `Error loading items` : 'טעינת מוצרים נכשלה'
         )
-        console.log(err)
+        // // console.log(err)
       } finally {
         setIsLoading(false)
       }
