@@ -141,7 +141,7 @@ async function getMaxPage(filterBy) {
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
   }
 }
 

@@ -29,7 +29,7 @@ async function query(filterBy = { pageIdx: 0, types: [] }) {
 
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -39,7 +39,7 @@ async function getById(orderId) {
     const res = await httpService.get(`${KEY}/${orderId}`)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -48,7 +48,7 @@ async function remove(orderId) {
   try {
     return await httpService.delete(`${KEY}/${orderId}`)
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -63,7 +63,7 @@ async function save(payment) {
     }
     return savedOrder
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -86,7 +86,7 @@ async function getMaxPage(filter) {
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
   }
 }
 
@@ -160,10 +160,9 @@ async function cancelOrderTransaction({ confirmationKey, uniqueKey, total }) {
     }
 
     const result = await response.json()
-    console.log('Cancellation successful:', result.message)
     return result.message
   } catch (err) {
-    console.error('An error occurred while canceling the transaction:', err)
+    // console.error('An error occurred while canceling the transaction:', err)
     throw err
   }
 }
@@ -177,7 +176,7 @@ async function getOpenOrders() {
     const length = await httpService.get('payment/openLength')
     return length
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }

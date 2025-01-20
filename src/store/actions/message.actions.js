@@ -22,7 +22,7 @@ export async function loadMessages(filterBy) {
     store.dispatch(getCmdSetMessages(messages))
     return messages
   } catch (err) {
-    console.log('Cannot load messages', err)
+    // console.log('Cannot load messages', err)
     throw err
   }
 }
@@ -34,7 +34,7 @@ export async function loadMessage(messageId, filter) {
     store.dispatch(getCmdSetMessage(message))
     return message
   } catch (err) {
-    console.log('Cannot load message', err)
+    // console.log('Cannot load message', err)
     throw err
   }
 }
@@ -45,7 +45,7 @@ export async function removeMessage(messageId) {
 
     // store.dispatch(getCmdRemoveMessage(messageId))
   } catch (err) {
-    console.log('Cannot remove message', err)
+    // console.log('Cannot remove message', err)
     throw err
   }
 }
@@ -56,7 +56,7 @@ export async function removeMessages(ids) {
 
     store.dispatch({ type: REMOVE_MESSAGES, bulkIds: ids })
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -67,7 +67,7 @@ export async function addMessage(message) {
     store.dispatch(getCmdAddMessage(savedMessage))
     return savedMessage
   } catch (err) {
-    console.log('Cannot add message', err)
+    // console.log('Cannot add message', err)
     throw err
   }
 }
@@ -84,7 +84,7 @@ export async function updateMessage(messageToUpdate) {
 
     return updatedMessage
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -101,7 +101,7 @@ export async function loadOpenMessages() {
     })
     return open
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }

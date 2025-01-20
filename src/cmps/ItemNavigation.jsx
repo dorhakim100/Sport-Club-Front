@@ -15,19 +15,12 @@ export function ItemNavigation({ item, type, lastPage, isEdit }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const navigate = useNavigate()
   const location = useLocation()
-  console.log(location)
 
   const [isDisabledFirst, setIsDisabledFirst] = useState(false)
   const [isDisabledSecond, setIsDisabledSecond] = useState(false)
-  console.log(item)
-  console.log(isDisabledFirst)
-  console.log(isDisabledSecond)
+
   useEffect(() => {
     const setDisabled = () => {
-      console.log(item.prevNext.next)
-      console.log(item._id)
-      console.log(isDisabledFirst)
-      console.log(isDisabledSecond)
       if (item.prevNext.next === item._id) {
         setIsDisabledFirst(true)
       }

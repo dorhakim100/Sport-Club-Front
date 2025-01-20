@@ -28,7 +28,7 @@ async function query(
 
     return items
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -38,7 +38,7 @@ async function getById(itemId, filter) {
     const res = await httpService.get(`${KEY}/${itemId}`, filter)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -47,7 +47,7 @@ async function remove(itemId) {
   try {
     return await httpService.delete(`${KEY}/${itemId}`)
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -61,7 +61,7 @@ async function save(item) {
     }
     return savedItem
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -97,6 +97,6 @@ async function getMaxPage(filterBy) {
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
   }
 }

@@ -21,7 +21,7 @@ export function GoogleLoginCmp({ handleGoogleLogin }) {
     try {
       await handleGoogleLogin(cred)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't login` : 'חיבור נכשל')
     }
   }

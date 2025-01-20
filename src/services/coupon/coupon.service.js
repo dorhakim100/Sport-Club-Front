@@ -19,7 +19,7 @@ async function query(filterBy = { pageIdx: 0, txt: '' }) {
     const res = await httpService.get(KEY, filterBy)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -29,7 +29,7 @@ async function getById(couponId) {
     const res = await httpService.get(`${KEY}/${couponId}`)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -38,7 +38,7 @@ async function remove(couponId) {
   try {
     return await httpService.delete(`${KEY}/${couponId}`)
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -52,7 +52,7 @@ async function save(coupon) {
     }
     return savedCoupon
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -65,7 +65,7 @@ async function getMaxPage() {
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
   }
 }
 
@@ -100,7 +100,7 @@ async function getDiscount(couponCode) {
     const res = await httpService.get('coupon/allActive', { code: couponCode })
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }

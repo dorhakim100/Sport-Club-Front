@@ -430,13 +430,29 @@ nav {
 
 	font-family: assistantBold;
 
+	h3{
+		span{
+
+			background-color: $light-gray;
+		}
+	}
+	
+	&.dark-mode{
+		h3{
+			span{
+	
+				background-color: $bold-navy;
+			}
+		}
+		
+	}
 	@media (max-width:500px) {
 		width: 80vw;
 		margin: 0 auto;
 		
 		h3{
 			
-			text{
+			span{
 				width: 50vw;
 				font-size: 0.8em;
 
@@ -453,7 +469,7 @@ nav {
         position: relative;
         background-color: transparent;
     
-        text{
+        span{
 			@media (min-width:500px) {
 				
 				padding: 0 1em; /* Horizontal padding for the span */
@@ -461,8 +477,11 @@ nav {
             transition: background-color 0.3s ease;
             position: relative; /* Make it relative to adjust positioning */
             z-index: 1; 
+		
     
         }
+
+
     
         &::after {
             content: '';

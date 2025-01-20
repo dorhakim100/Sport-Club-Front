@@ -25,7 +25,7 @@ export function OrderPreview({ order, updateOrder }) {
         prefs.isEnglish ? `Order updated successfully` : 'הזמנה עודכנה בהצלחה'
       )
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't update order` : 'לא היה ניתן לעדכן הזמנה'
       )
@@ -33,7 +33,6 @@ export function OrderPreview({ order, updateOrder }) {
       setIsLoading(false)
     }
   }
-  console.log(order)
 
   return (
     <div

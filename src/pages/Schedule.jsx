@@ -66,7 +66,7 @@ export function Schedule() {
       setSchedule({ ...schedules[schedules.length - 1] })
       return schedules
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
     }
   }
 
@@ -96,7 +96,7 @@ export function Schedule() {
 
       setSchedule({ ...saved })
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't upload image` : 'העלאת תמונה נכשלה'
       )

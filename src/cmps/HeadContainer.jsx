@@ -6,9 +6,9 @@ export function HeadContainer({ text }) {
   const langText = prefs.isEnglish ? text.eng : text.he
 
   return (
-    <div className='head-container'>
+    <div className={`head-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
       <h3>
-        <text
+        <span
           style={
             prefs.isDarkMode
               ? { backgroundColor: '#2C3E50' }
@@ -16,7 +16,7 @@ export function HeadContainer({ text }) {
           }
         >
           {langText}
-        </text>
+        </span>
       </h3>
     </div>
   )

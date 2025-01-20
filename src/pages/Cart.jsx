@@ -125,7 +125,7 @@ export function Cart() {
       const userToUpdate = { ...loaded, items: [...fetchedCart] }
       await updateCart(userToUpdate)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
     } finally {
       setIsLoading(false)
     }
@@ -153,12 +153,12 @@ export function Cart() {
       setIsLoading(true)
       const order = createOrder()
       const url = await paymentService.createNewOrderLink(order)
-      console.log(url)
+
       setIsLoading(false)
       // return
       openPelecardLink(url)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't start payment` : 'לא ניתן להתחיל תשלום'
       )

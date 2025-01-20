@@ -55,7 +55,7 @@ export function LoginSignup() {
       }
       navigate('/')
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't login` : 'חיבור לא הצליח')
     } finally {
       setIsLoading(false)

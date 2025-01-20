@@ -39,7 +39,7 @@ export function AddUpdate({ setUpdates }) {
       )
       await setUpdates()
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Update couldn't be added` : 'עדכון לא נשמר'
       )

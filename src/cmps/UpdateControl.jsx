@@ -39,7 +39,7 @@ export function UpdateControl({
       const defaultFilter = updateService.getDefaultFilter()
       setFilter({ ...defaultFilter })
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
     } finally {
       setIsLoading(false)
     }
@@ -61,7 +61,7 @@ export function UpdateControl({
       setFilter({ ...defaultFilter })
       showSuccessMsg(prefs.isEnglish ? 'Order saved' : 'סדר נשמר')
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't save order` : 'סדר לא נשמר')
     } finally {
       setIsLoading(false)

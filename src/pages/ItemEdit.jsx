@@ -65,7 +65,7 @@ export function ItemEdit() {
       setItem({ ...item })
       setCover(item.cover)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg('Cannot load item')
       navigate('/item')
     } finally {
@@ -143,7 +143,7 @@ export function ItemEdit() {
         prefs.isEnglish ? 'Item edited successfully' : 'מוצר נערך בהצלחה'
       )
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Item couldn't be edited` : 'מוצר לא נערך')
     } finally {
       setIsLoading(false)
@@ -164,7 +164,7 @@ export function ItemEdit() {
       setCover(coverSrc)
       setEditItem({ ...editItem, cover: coverSrc })
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(`Couldn't upload image`)
     } finally {
       setIsLoading(false)

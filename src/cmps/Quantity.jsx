@@ -58,7 +58,7 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
       setIsLoading(true)
       const saved = await updateCart({ ...user })
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't remove from cart` : 'לא היה ניתן להסיר מוצר'
       )

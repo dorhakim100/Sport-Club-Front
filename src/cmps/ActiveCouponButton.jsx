@@ -20,7 +20,7 @@ export function ActiveCouponButton({ coupon, setIsHover, setChange }) {
           : 'סימון הודעה בוצע בהצלחה'
       )
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't mark coupon` : 'פעולה לא הצליחה')
     }
   }

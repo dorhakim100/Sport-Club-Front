@@ -110,12 +110,12 @@ export function AppHeader() {
                 prefs.isEnglish ? `New message received` : 'הודעה חדשה התקבלה'
               )
             } catch (err) {
-              console.log(`Couldn't load socket event`)
+              // console.log(`Couldn't load socket event`)
             }
           })
         }
       } catch (err) {
-        console.log(err)
+        // // console.log(err)
         showErrorMsg(
           prefs.isEnglish ? `Tasks couldn't be load` : 'משימות לא נטענו'
         )
@@ -134,12 +134,12 @@ export function AppHeader() {
                 prefs.isEnglish ? `New order received` : 'הזמנה חדשה התקבלה'
               )
             } catch (err) {
-              console.log(`Couldn't load socket event`)
+              // console.log(`Couldn't load socket event`)
             }
           })
         }
       } catch (err) {
-        console.log(err)
+        // // console.log(err)
         showErrorMsg(
           prefs.isEnglish ? `Orders couldn't be load` : 'הזמנות לא נטענו'
         )
@@ -208,7 +208,6 @@ export function AppHeader() {
     const setRememberedUser = async () => {
       try {
         const remembered = await userService.getRememberedUser()
-        console.log(remembered)
 
         if (!remembered) return
 
@@ -221,7 +220,7 @@ export function AppHeader() {
         }
         await login(cred)
       } catch (err) {
-        console.log(err)
+        // // console.log(err)
         showErrorMsg(
           prefs.isEnglish
             ? `Couldn't load saved user`

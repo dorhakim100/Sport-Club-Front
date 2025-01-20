@@ -24,7 +24,8 @@ export async function loadUsers() {
     const users = await userService.getUsers()
     store.dispatch({ type: SET_USERS, users })
   } catch (err) {
-    console.log('UserActions: err in loadUsers', err)
+    // console.log('UserActions: err in loadUsers', err)
+    throw err
   } finally {
     store.dispatch({ type: LOADING_DONE })
   }
@@ -35,7 +36,8 @@ export async function removeUser(userId) {
     await userService.remove(userId)
     store.dispatch({ type: REMOVE_USER, userId })
   } catch (err) {
-    console.log('UserActions: err in removeUser', err)
+    // console.log('UserActions: err in removeUser', err)
+    throw err
   }
 }
 
@@ -53,7 +55,7 @@ export async function login(credentials) {
     // socketService.login(user._id)
     return user
   } catch (err) {
-    console.log('Cannot login', err)
+    // console.log('Cannot login', err)
     throw err
   }
 }
@@ -78,7 +80,7 @@ export async function signup(credentials) {
     // socketService.login(user._id)
     return user
   } catch (err) {
-    console.log('Cannot signup', err)
+    // console.log('Cannot signup', err)
     throw err
   }
 }
@@ -93,7 +95,7 @@ export async function logout() {
 
     // socketService.logout()
   } catch (err) {
-    console.log('Cannot logout', err)
+    // console.log('Cannot logout', err)
     throw err
   }
 }
@@ -106,7 +108,8 @@ export async function loadUser(userId) {
     return user
   } catch (err) {
     showErrorMsg('Cannot load user')
-    console.log('Cannot load user', err)
+    throw err
+    // console.log('Cannot load user', err)
   }
 }
 
@@ -120,7 +123,7 @@ export async function updateCart(user) {
     const saved = await userService.update(user)
     return saved
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }

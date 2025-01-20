@@ -91,7 +91,7 @@ export function ClassIndex() {
       }
       return c
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't load classes` : 'טעינת שיעורים נכשלה'
       )
@@ -126,7 +126,7 @@ export function ClassIndex() {
       showSuccessMsg(prefs.isEnglish ? `Class added` : 'שיעור נוסף')
       navigate(`/class/edit/${savedClass._id}`)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Cannot add class` : 'פעולה לא בוצעה')
     }
   }

@@ -28,6 +28,7 @@ export function SwiperCarousel({ imgs }) {
           direction: 'rtl',
         }}
         // loop={true}
+        loop={false}
         spaceBetween={10}
         // navigation={true}
         thumbs={{
@@ -68,7 +69,7 @@ export function SwiperCarousel({ imgs }) {
 
       <Swiper
         onSwiper={setThumbsSwiper} // Set the thumbsSwiper reference here
-        loop={true}
+        loop={false}
         spaceBetween={10}
         slidesPerView={imgs.length}
         freeMode={true}

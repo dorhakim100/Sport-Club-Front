@@ -55,7 +55,7 @@ export function ContactUs() {
       setEditMessage(messageService.getEmptyMessage())
       socketService.emit(SOCKET_EMIT_SEND_MSG, addedMessage)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Could't send message` : 'הודעה לא נשלחה')
     } finally {
       setIsLoading(false)

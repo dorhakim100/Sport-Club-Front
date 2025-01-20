@@ -16,7 +16,7 @@ async function query(filterBy = { pageIdx: 0, isAll: false }) {
     const res = await httpService.get(KEY, filterBy)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -26,7 +26,7 @@ async function getById(updateId) {
     const res = await httpService.get(`${KEY}/${updateId}`)
     return res
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -35,7 +35,7 @@ async function remove(updateId) {
   try {
     return await httpService.delete(`${KEY}/${updateId}`)
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -49,7 +49,7 @@ async function save(update) {
     }
     return savedUpdate
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }
@@ -63,7 +63,8 @@ async function getMaxPage() {
 
     return maxPage
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
+    throw err
   }
 }
 
@@ -71,7 +72,7 @@ async function saveUpdatesOrder(updates) {
   try {
     const res = await httpService.put(`${KEY}/reorder`, updates)
   } catch (err) {
-    console.log(err)
+    // // console.log(err)
     throw err
   }
 }

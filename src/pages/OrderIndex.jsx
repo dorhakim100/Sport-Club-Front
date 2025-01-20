@@ -101,7 +101,7 @@ export function OrderIndex() {
       await loadPayments({ ...filterBy, isAdmin: true })
       await loadOpenPayments()
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       throw err
     }
   }

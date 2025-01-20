@@ -28,8 +28,6 @@ export function TrainerDetails() {
     (stateSelector) => stateSelector.trainerModule.filter
   )
 
-  console.log(trainerFilter)
-
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
   const [head, setHead] = useState({ he: '', eng: '' })
@@ -62,7 +60,7 @@ export function TrainerDetails() {
         })
         getLatestPage()
       } catch (err) {
-        console.log(err)
+        // // console.log(err)
         showErrorMsg(
           prefs.isEnglish ? `Couldn't show trainers` : 'טעינת מאמנים נכשלה'
         )

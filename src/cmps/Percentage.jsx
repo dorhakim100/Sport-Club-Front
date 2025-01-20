@@ -15,7 +15,6 @@ export function Percentage({ percentages }) {
 
   percentages = openOrders / (openOrders + openMessages)
   percentages = Math.floor(percentages * 100)
-  console.log(percentages)
 
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 

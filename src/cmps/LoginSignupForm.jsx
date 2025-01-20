@@ -157,7 +157,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
         navigate('/')
       } else {
         const logged = await login(cred)
-        console.log('isRemember:', isRemember)
+
         if (isRemember) {
           setPrefs({ ...prefs, user: { _id: logged._id } })
         }
@@ -167,7 +167,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
         navigate('/')
       }
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't login` : 'לא היה ניתן להתחבר')
     } finally {
       setIsLoading(false)

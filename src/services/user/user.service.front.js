@@ -28,7 +28,7 @@ async function getUsers() {
       return user
     })
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -37,7 +37,7 @@ async function getById(userId) {
   try {
     return await storageService.get('user', userId)
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -46,7 +46,7 @@ async function remove(userId) {
   try {
     return await storageService.remove('user', userId)
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -64,7 +64,7 @@ async function update(userToUpdate) {
 
     return savedUser
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -92,7 +92,7 @@ async function login(userCred) {
       throw err
     }
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -109,7 +109,7 @@ async function signup(userCred) {
     const user = await storageService.post('user', userCred)
     return saveLoggedinUser(user)
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -118,7 +118,7 @@ async function logout() {
   try {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -127,7 +127,7 @@ function getLoggedinUser() {
   try {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -147,7 +147,7 @@ function saveLoggedinUser(user) {
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -179,7 +179,7 @@ function getPrefs() {
 
     return prefs
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -189,7 +189,7 @@ function setPrefs(prefs) {
     const entityType = 'sport-club-pref'
     localStorage.setItem(entityType, JSON.stringify(prefs))
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -202,7 +202,7 @@ function getLoggedinCart() {
 
     return cart
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -228,7 +228,7 @@ async function getCartItems(cart) {
 
     return itemsToReturn
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }
@@ -251,7 +251,7 @@ async function _createAdmin() {
 
     const newUser = await storageService.post('user', userCred)
   } catch (err) {
-    console.log(err)
+    // console.log(err)
     throw err
   }
 }

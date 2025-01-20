@@ -18,7 +18,7 @@ export async function loadItems(filterBy) {
     store.dispatch({ type: SET_ITEM_FILTER, filter: filterBy })
     return items
   } catch (err) {
-    console.log('Cannot load items', err)
+    // console.log('Cannot load items', err)
     throw err
   }
 }
@@ -29,7 +29,7 @@ export async function loadItem(itemId, filter) {
     store.dispatch(getCmdSetItem(item))
     return item
   } catch (err) {
-    console.log('Cannot load item', err)
+    // console.log('Cannot load item', err)
     throw err
   }
 }
@@ -39,7 +39,7 @@ export async function removeItem(itemId) {
     await itemService.remove(itemId)
     store.dispatch(getCmdRemoveItem(itemId))
   } catch (err) {
-    console.log('Cannot remove item', err)
+    // console.log('Cannot remove item', err)
     throw err
   }
 }
@@ -50,7 +50,7 @@ export async function addItem(item) {
     store.dispatch(getCmdAddItem(savedItem))
     return savedItem
   } catch (err) {
-    console.log('Cannot add item', err)
+    // console.log('Cannot add item', err)
     throw err
   }
 }
@@ -61,7 +61,7 @@ export async function updateItem(item) {
     store.dispatch(getCmdUpdateItem(savedItem))
     return savedItem
   } catch (err) {
-    console.log('Cannot save item', err)
+    // console.log('Cannot save item', err)
     throw err
   }
 }
@@ -72,7 +72,7 @@ export async function addItemMsg(itemId, txt) {
     store.dispatch(getCmdAddItemMsg(msg))
     return msg
   } catch (err) {
-    console.log('Cannot add item msg', err)
+    // console.log('Cannot add item msg', err)
     throw err
   }
 }

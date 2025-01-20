@@ -108,7 +108,7 @@ export function TrainerIndex() {
         setHasMore(false)
       }
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't load trainers` : 'טעינת מאמנים נכשלה'
       )
@@ -189,7 +189,7 @@ export function TrainerIndex() {
       showSuccessMsg(prefs.isEnglish ? `Trainer added` : 'מאמן נוסף')
       navigate(`/class/trainer/edit/${savedTrainer._id}`)
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Cannot add trainer` : 'פעולה לא בוצעה')
     }
   }

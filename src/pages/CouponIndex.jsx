@@ -68,7 +68,7 @@ export function CouponIndex() {
       showSuccessMsg(prefs.isEnglish ? 'Coupon removed' : 'קופון הוסר')
       await setCoupons()
     } catch (err) {
-      console.log(err)
+      // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't remove coupon` : 'קופון לא הוסר')
     } finally {
       setIsLoading(false)
