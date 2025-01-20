@@ -27,7 +27,22 @@ export function Activities() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const location = useLocation()
   useEffect(() => {
-    textAnimation(prefs)
+    const observer = new IntersectionObserver((entries) => {
+      console.log(entries)
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+          // entry.target.classList.remove('hidden')
+        } else {
+          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
+        }
+      })
+    })
+
+    const elements = document.querySelectorAll('.section')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => elements.forEach((el) => observer.unobserve(el))
   }, [prefs.isEnglish, prefs.isDarkMode])
 
   const origin = {
@@ -279,8 +294,23 @@ export function Tennis() {
   const [trainers, setTrainers] = useState([])
 
   useEffect(() => {
-    textAnimation(prefs)
-  }, [prefs.isDarkMode, prefs.isEnglish])
+    const observer = new IntersectionObserver((entries) => {
+      console.log(entries)
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+          // entry.target.classList.remove('hidden')
+        } else {
+          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
+        }
+      })
+    })
+
+    const elements = document.querySelectorAll('.section')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => elements.forEach((el) => observer.unobserve(el))
+  }, [prefs.isEnglish, prefs.isDarkMode])
 
   useEffect(() => {
     const loadTennisTrainers = async () => {
@@ -497,8 +527,23 @@ export function Care() {
     Most patients report improvement after the very first session. Some even visit regularly for "maintenance" and prevention.`,
   }
   useEffect(() => {
-    textAnimation(prefs)
-  }, [prefs.isDarkMode, prefs.isEnglish])
+    const observer = new IntersectionObserver((entries) => {
+      console.log(entries)
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+          // entry.target.classList.remove('hidden')
+        } else {
+          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
+        }
+      })
+    })
+
+    const elements = document.querySelectorAll('.section')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => elements.forEach((el) => observer.unobserve(el))
+  }, [prefs.isEnglish, prefs.isDarkMode])
 
   return (
     <div className='care-container'>
@@ -633,8 +678,23 @@ export function Restaurant() {
       'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735057610/openart-8f0af741-854f-4363-8e82-2455e51d96c1_qqpbun.png',
   }
   useEffect(() => {
-    textAnimation(prefs)
-  }, [prefs.isDarkMode, prefs.isEnglish])
+    const observer = new IntersectionObserver((entries) => {
+      console.log(entries)
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+          // entry.target.classList.remove('hidden')
+        } else {
+          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
+        }
+      })
+    })
+
+    const elements = document.querySelectorAll('.section')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => elements.forEach((el) => observer.unobserve(el))
+  }, [prefs.isEnglish, prefs.isDarkMode])
   return (
     <div className='restaurant-container'>
       <HeadContainer text={headText} />

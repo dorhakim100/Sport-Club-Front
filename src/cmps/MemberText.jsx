@@ -17,16 +17,31 @@ export function MemberText() {
     return month >= 4 && month <= 7 ? 'summer' : 'winter'
   }
 
-  useEffect(() => {
-    textAnimation(prefs)
-  }, [prefs.isEnglish, prefs.isDarkMode])
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver((entries) => {
+  //     console.log(entries)
+  //     entries.forEach((entry) => {
+  //       if (entry.isIntersecting) {
+  //         entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
+  //         // entry.target.classList.remove('hidden')
+  //       } else {
+  //         entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
+  //       }
+  //     })
+  //   })
+
+  //   const elements = document.querySelectorAll('.section')
+  //   elements.forEach((el) => observer.observe(el))
+
+  //   return () => elements.forEach((el) => observer.unobserve(el))
+  // }, [prefs.isEnglish, prefs.isDarkMode])
 
   return (
     <div className='member-texts-container'>
       {types.map((type) => {
         return (
           <div
-            className={`member-container section hidden ${type.class} ${
+            className={`member-container ${type.class} ${
               type.class === getCurrMember() ? 'second' : ''
             } `}
             key={makeId()}
