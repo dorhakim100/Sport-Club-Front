@@ -416,8 +416,15 @@ export function AppHeader() {
     setMenu(false)
   }
 
-  const selectLink = () => {
+  const selectLink = (path) => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
+
+    setTimeout(() => {
+      navigate(path)
+    }, 300) // Adjust time based on your smoothScroll timing
+    return
     setMenu(false)
   }
 
@@ -513,17 +520,22 @@ export function AppHeader() {
           style={scrolled ? { top: '100px' } : { top: '148px' }}
           onMouseLeave={checkHoverOptionsButton}
         >
-          <NavLink ref={logoRef} to='/' className='logo' onClick={selectLink}>
+          <NavLink
+            ref={logoRef}
+            to='/'
+            className='logo'
+            onClick={() => selectLink('/')}
+          >
             <img src={logo} alt='' />
           </NavLink>
-          <NavLink to='facilities' onClick={selectLink}>
+          <NavLink to='facilities' onClick={() => selectLink('/facilities')}>
             <span>{prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
           </NavLink>
-          <NavLink to='update' onClick={selectLink}>
+          <NavLink to='update' onClick={() => selectLink('/update')}>
             <span>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</span>
           </NavLink>
 
-          <NavLink to='class' onClick={selectLink}>
+          <NavLink to='class' onClick={() => selectLink('/class')}>
             <div
               className='menu'
               onMouseEnter={handlers['class']}
@@ -538,10 +550,10 @@ export function AppHeader() {
               )}
             </div>
           </NavLink>
-          <NavLink to='member' onClick={selectLink}>
+          <NavLink to='member' onClick={() => selectLink('/member')}>
             <span>{prefs.isEnglish ? 'Member' : 'מנויים'}</span>
           </NavLink>
-          <NavLink to='item' onClick={selectLink}>
+          <NavLink to='item' onClick={() => selectLink('/')}>
             <div
               className='menu'
               onMouseEnter={handlers['item']}
@@ -557,7 +569,7 @@ export function AppHeader() {
             </div>
           </NavLink>
 
-          <NavLink to='activities' onClick={selectLink}>
+          <NavLink to='activities' onClick={() => selectLink('/activities')}>
             <div
               className='menu'
               onMouseEnter={handlers['activities']}
@@ -573,7 +585,7 @@ export function AppHeader() {
             </div>
           </NavLink>
 
-          <NavLink to='about' onClick={selectLink}>
+          <NavLink to='about' onClick={() => selectLink('/about')}>
             <div
               className='menu'
               onMouseEnter={handlers['about']}
@@ -590,7 +602,7 @@ export function AppHeader() {
           </NavLink>
 
           {user?.isAdmin && (
-            <NavLink to='/admin' onClick={selectLink}>
+            <NavLink to='/admin' onClick={() => selectLink('/admin')}>
               {' '}
               <Button variant='contained' className='notification-btn'>
                 {openTasks > 0 && <span>{openTasks}</span>}
@@ -603,7 +615,7 @@ export function AppHeader() {
             <NavLink
               to='user/login'
               className='login-link'
-              onClick={selectLink}
+              onClick={() => selectLink('/user/login')}
             >
               {prefs.isEnglish ? 'Login' : 'כניסה'}
             </NavLink>
@@ -612,7 +624,10 @@ export function AppHeader() {
           {user && (
             <div className='user-info'>
               {!user.isAdmin ? (
-                <Link to={`user/${user._id}`} onClick={selectLink}>
+                <Link
+                  to={`user/${user._id}`}
+                  onClick={() => selectLink(`/user/${user._id}`)}
+                >
                   {user.fullname}
                 </Link>
               ) : (
@@ -622,7 +637,7 @@ export function AppHeader() {
                 <Link to={`/user/${user._id}/cart`}>
                   <Button
                     variant='contained'
-                    onClick={selectLink}
+                    onClick={() => selectLink(`/user/${user._id}/cart`)}
                     className='notification-btn'
                   >
                     {cart && cart.length > 0 && <span>{cartLength}</span>}
@@ -637,7 +652,12 @@ export function AppHeader() {
           )}
         </nav>
         {windowDimensions.width <= 1050 && (
-          <NavLink to='/' className='logo' onClick={selectLink} ref={logoRef}>
+          <NavLink
+            to='/'
+            className='logo'
+            onClick={() => selectLink('/')}
+            ref={logoRef}
+          >
             <img
               src={logo}
               alt=''

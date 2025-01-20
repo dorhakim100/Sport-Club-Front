@@ -35,6 +35,16 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
     })
   }
 
+  const navigateToTrainer = (trainerId) => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate(`/class/trainer/${trainerId}`)
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+
   return (
     <div className='trainers-list-container'>
       {trainers.map((trainer) => {
@@ -86,8 +96,7 @@ export function TrainerList({ trainers, onRemoveTrainer, filter, setFilter }) {
                       if (isLoading) {
                         await waitForLoading() // Wait until isLoading becomes false
                       }
-                      smoothScroll()
-                      navigate(`/class/trainer/edit/${trainer._id}`)
+                      navigateToTrainer(trainer._id)
                     }}
                     className='edit-btn'
                   >

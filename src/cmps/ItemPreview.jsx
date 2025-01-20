@@ -18,10 +18,20 @@ export function ItemPreview({ item }) {
     }
   }, [])
 
+  const navigateToItem = () => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate(`/item/${item._id}`)
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+
   return (
     <article className='preview'>
       <Link
-        onClick={() => smoothScroll()}
+        onClick={navigateToItem}
         to={`/item/${item._id}`}
         className={prefs.isDarkMode ? 'dark-mode' : ''}
       >
