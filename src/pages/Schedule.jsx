@@ -183,6 +183,7 @@ export function Schedule() {
                   occur.day === day && (
                     <div
                       className={`hour-container ${getFromTime(occur.from)}`}
+                      key={`${makeId()}`}
                     >
                       <div className='occurrence-container'>
                         <b>
