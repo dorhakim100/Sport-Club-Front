@@ -433,7 +433,7 @@ nav {
 	h3{
 		span{
 
-			background-color: $light-gray;
+			background-color: $neutral-gray;
 		}
 	}
 	
@@ -721,10 +721,16 @@ textarea, input{
   }
 
   .shadow-text{
+	  text-shadow: black 4.5px 0 5px;
+	  
+	}
+	.carousel-text{
 
-	text-shadow: black 4.5px 0 5px;
-
-  }
+		.shadow-text{
+			
+			color: white;
+		}
+	}
 
   .clickable{
 	cursor: pointer;

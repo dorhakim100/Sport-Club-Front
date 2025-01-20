@@ -11,6 +11,8 @@ import { DynamicCover } from '../cmps/DynamicCover'
 import { ContactUs } from '../cmps/ContactUs'
 import { AccordionCmp } from '../cmps/AccordionCmp'
 
+import Amota from '/public/jsons/Amota/Amota.json'
+
 export function AboutUs() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const location = useLocation()
@@ -255,14 +257,18 @@ export function Cancel() {
 export function Organization() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const headText = { eng: 'Organization', he: 'עמותה' }
+
+  const splitText = (prefs.isEnglish ? Amota.eng : Amota.he).split('\n')
   return (
     <section>
       <HeadContainer text={headText} />
-      <ul>
-        <li>Save the day</li>
-        <li>Spread some love</li>
-        <li>Take over the world</li>
-      </ul>
+      {splitText.map((line, index) => (
+        // Render each line, and add a <br> tag after each one except the last
+        <p key={index}>
+          {line}
+          {index < splitText.length - 1 && <br />}
+        </p>
+      ))}
     </section>
   )
 }

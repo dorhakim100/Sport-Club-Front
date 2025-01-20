@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 
@@ -29,23 +30,24 @@ export function GoogleMapCmp() {
     language: 'he',
   })
 
-  const [map, setMap] = React.useState(null)
+  // const [map, setMap] = React.useState(null)
+  const mapRef = useRef()
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center)
-    map.fitBounds(bounds)
+    // mapRef.current.fitBounds(bounds)
 
-    map.setZoom(15) // Adjust the zoom level here as needed
-    setMap(map)
+    // mapRef.current.setZoom(15) // Adjust the zoom level here as needed
+    // setMap(map)
   }, [])
 
   setTimeout(() => {
-    map.setZoom(15) // Set a specific zoom after a brief delay
+    // mapRef.current.setZoom(15) // Set a specific zoom after a brief delay
   }, 300) // Adjust the delay as needed
 
   const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
+    // setMap(null)
   }, [])
 
   return isLoaded ? (
@@ -56,6 +58,7 @@ export function GoogleMapCmp() {
         zoom={15}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        ref={mapRef}
       >
         {/* Child components, such as markers, info windows, etc. */}
         <></>
