@@ -174,22 +174,7 @@ export function AboutUs() {
   }
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      console.log(entries)
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
-          // entry.target.classList.remove('hidden')
-        } else {
-          entry.target.classList.remove(prefs.isEnglish ? 'show' : 'show-rtl')
-        }
-      })
-    })
-
-    const elements = document.querySelectorAll('.section')
-    elements.forEach((el) => observer.observe(el))
-
-    return () => elements.forEach((el) => observer.unobserve(el))
+    textAnimation(prefs)
   }, [prefs.isEnglish, prefs.isDarkMode])
 
   return (
@@ -202,18 +187,18 @@ export function AboutUs() {
           <HeadContainer text={headText} />
           <div className='about-page-container'>
             <div className='about-text-container'>
-              <div className='section'>
-                <p className='hidden'>
+              <div className='section hidden'>
+                <p className=''>
                   {prefs.isEnglish ? preview1.eng : preview1.he}
                 </p>
               </div>
-              <div className='section'>
-                <p className='hidden'>
+              <div className='section hidden'>
+                <p className=''>
                   {prefs.isEnglish ? preview2.eng : preview2.he}
                 </p>
               </div>
             </div>
-            <div className='offer-container'>
+            <div className='offer-container section hidden'>
               <HeadContainer
                 text={{ eng: 'What we offer', he: 'מה במועדון' }}
               />
@@ -227,14 +212,14 @@ export function AboutUs() {
                   )
                 })}
               </ul> */}
-              <div className='section'>
+              <div className='section hidden'>
                 <AccordionCmp options={offers} />
               </div>
             </div>
             {/* <div className='section hidden'> */}
             <DynamicCover coverSrc={covers.about} prefs={prefs} />
             <GoogleMapCmp />
-            <div className='section end-container'>
+            <div className='section hidden end-container'>
               <p>
                 {prefs.isEnglish
                   ? `We invite you to invest in your Wellbeing all year-round for both body and soul, with sports and leisure activities for the entire family.`
