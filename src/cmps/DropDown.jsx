@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { makeId } from '../services/util.service.js'
+import { makeId, smoothScroll } from '../services/util.service.js'
 
 export function DropDown({ options, setDropdownVisible }) {
   const [selectedOption, setSelectedOption] = useState(null)
@@ -46,9 +46,15 @@ export function DropDown({ options, setDropdownVisible }) {
               }
               key={makeId()}
               onClick={(ev) => {
-                ev.preventDefault()
+                ev.preventDefault() // Stop the link from navigating immediately
                 handleOptionClick()
-                navigate(option.path)
+                // support for safari browsers
+
+                smoothScroll()
+
+                setTimeout(() => {
+                  navigate(`/${option.path}`)
+                }, 300) // Adjust time based on your smoothScroll timing
               }}
             >
               {option.text}
