@@ -258,7 +258,10 @@
 }    
 
 .app-header.sticky{
-    font-size: 0.7em;
+    &:not(.mobile){
+
+        font-size: 0.7em;
+    }
     left: 0;
     right: 0;
     top: 0;

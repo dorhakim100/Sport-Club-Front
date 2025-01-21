@@ -170,17 +170,8 @@ export function AppHeader() {
 
     if (scrollY > 0) {
       setScrolled(true)
-      // headerRef.current.style.transition = '0.3s ease'
-      // logoRef.current.style.transform = 'scale(0.8)' // Shrinks logo to 80% size
-      // headerRef.current.style.opacity = '0.8'
-      // headerRef.current.style.opacity = '0.8'
-      // headerRef.current.style.transition = '0.1s ease-in'
     } else if (scrollY === 0) {
       setScrolled(false)
-      // headerRef.current.style.transition = '0.3s ease'
-      // logoRef.current.style.transform = 'scale(1)' // Resets logo to original size
-
-      // headerRef.current.style.opacity = '1'
     }
   }
 
@@ -426,8 +417,8 @@ export function AppHeader() {
     event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
 
-    return
     setMenu(false)
+    return
   }
 
   const clickOnLogout = () => {
@@ -472,7 +463,15 @@ export function AppHeader() {
         ></div>
       )}
       <header
-        className={scrolled ? 'app-header sticky full' : 'app-header full'}
+        className={
+          scrolled
+            ? `app-header sticky full ${
+                windowDimensions.width <= 1050 ? 'mobile' : ''
+              }`
+            : `app-header full ${
+                windowDimensions.width <= 1050 ? 'mobile' : ''
+              }`
+        }
         onClick={removeDropdown}
         ref={headerRef}
         onMouseEnter={opacityUp}
