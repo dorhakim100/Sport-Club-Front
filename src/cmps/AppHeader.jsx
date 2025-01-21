@@ -233,13 +233,18 @@ export function AppHeader() {
 
   async function onLogout() {
     try {
+      event.preventDefault() // Stop the link from navigating immediately
       await logout()
       const prefsToSet = prefs
       delete prefsToSet.user
       setPrefs({ ...prefsToSet })
-      navigate('/')
+      // support for safari browsers
       smoothScroll()
       showSuccessMsg(prefs.isEnglish ? `Bye now` : 'להתראות')
+
+      setTimeout(() => {
+        navigate('/')
+      }, 300) // Adjust time based on your smoothScroll timing
     } catch (err) {
       showErrorMsg(prefs.isEnglish ? 'Had error logging out' : 'בעיה בחיבור')
     }
@@ -421,9 +426,6 @@ export function AppHeader() {
     event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
 
-    setTimeout(() => {
-      navigate(path)
-    }, 300) // Adjust time based on your smoothScroll timing
     return
     setMenu(false)
   }
@@ -624,17 +626,17 @@ export function AppHeader() {
           {user && (
             <div className='user-info'>
               {!user.isAdmin ? (
-                <Link
+                <NavLink
                   to={`user/${user._id}`}
                   onClick={() => selectLink(`/user/${user._id}`)}
                 >
                   {user.fullname}
-                </Link>
+                </NavLink>
               ) : (
                 <b style={{ color: '#4A90E2' }}>{user.fullname}</b>
               )}
               {!user.isAdmin && (
-                <Link to={`/user/${user._id}/cart`}>
+                <NavLink to={`/user/${user._id}/cart`}>
                   <Button
                     variant='contained'
                     onClick={() => selectLink(`/user/${user._id}/cart`)}
@@ -643,7 +645,7 @@ export function AppHeader() {
                     {cart && cart.length > 0 && <span>{cartLength}</span>}
                     <ShoppingCartIcon />
                   </Button>
-                </Link>
+                </NavLink>
               )}
               <Button onClick={clickOnLogout} variant='contained'>
                 {prefs.isEnglish ? 'Logout' : 'יציאה'}

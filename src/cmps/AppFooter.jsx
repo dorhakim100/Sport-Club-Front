@@ -113,9 +113,7 @@ export function AppFooter() {
           <InstagramIcon />
         </div>
       </div>
-      <div className='times-container'>
-        {/* <Link to={'/about'}>שעות פתיחה</Link> */}
-      </div>
+
       <span>{rights} &copy; 2024</span>
     </footer>
   )
