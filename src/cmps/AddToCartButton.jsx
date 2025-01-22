@@ -21,7 +21,9 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const navigate = useNavigate()
   const [isAdmin, setIsAdmin] = useState(false)
-
+  const isLoading = useSelector(
+    (stateSelector) => stateSelector.systemModule.isLoading
+  )
   useEffect(() => {
     const setActionButtons = async () => {
       try {
@@ -122,15 +124,21 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
             smoothScroll()
             navigate(`/item/edit/${item._id}`)
           }}
+          disabled={isLoading}
         >
           {prefs.isEnglish ? 'Edit' : 'עריכה'}
         </Button>
-        <Button className='edit-btn' onClick={() => onRemoveItem(item._id)}>
+        <Button
+          disabled={isLoading}
+          className='edit-btn'
+          onClick={() => onRemoveItem(item._id)}
+        >
           {prefs.isEnglish ? 'Remove' : 'הסרה'}
         </Button>
       </ButtonGroup>
     )) || (
       <Button
+        disabled={isLoading}
         className='add-to-cart-btn'
         variant='contained'
         onClick={() => onAddToCart(item, quantity)}

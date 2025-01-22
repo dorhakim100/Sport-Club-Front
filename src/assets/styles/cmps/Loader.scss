@@ -4,7 +4,19 @@
     right: 1em;
     z-index: 1000;
     img{
-        width: 100px;
-
+        width: 300px;
+        
+        @media (max-width:800px) {
+            
+            width: 200px;
+            
+        }
+        @media (max-width:600px) {
+            
+            width: 150px;
+            
+        }
     }
+
+
 }
