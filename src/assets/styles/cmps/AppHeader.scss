@@ -175,7 +175,8 @@
         }
         @media (max-width:1050px) {
             nav.small-header{
-
+                max-height: calc(100vh - 125px);
+                overflow-y: auto;
                 top: 125px;
             }
             
