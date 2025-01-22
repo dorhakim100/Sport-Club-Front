@@ -159,9 +159,7 @@ export const parseJwt = (token) => {
 }
 
 export function textAnimation(prefs) {
-  console.log(prefs)
   const observer = new IntersectionObserver((entries) => {
-    console.log(entries)
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add(prefs.isEnglish ? 'show' : 'show-rtl')
