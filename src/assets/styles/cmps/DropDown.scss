@@ -4,6 +4,8 @@
     @media (max-width:1050px) {
         position: relative;
         text-align: center;
+        overflow-y: auto;
+        max-height: calc(100vh - 100px);
         
     }
 }
