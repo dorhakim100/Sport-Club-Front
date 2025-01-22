@@ -1,13 +1,19 @@
 .menu{
     position: 'relative';
     text-align: start;
+    @media (max-width:1050px) {
+        position: relative;
+        text-align: center;
+        
+    }
 }
  .dropdown-menu.ltr{
      border-top-left-radius: 0px;
      border-bottom-left-radius: 0px;
      border-top-right-radius: 8px;
      border-bottom-right-radius: 8px;
-     
+
+
      li{
          &:first-of-type{
              border-top-right-radius: 8px;
@@ -34,8 +40,15 @@
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 
-   
+    @media (max-width:1050px) {
+        position: relative;
 
+        text-align: center;
+        
+    }
+    
+    
+    
     &:hover{
         opacity: 1;
     }
@@ -48,14 +61,23 @@
     
     .options-container{
         border-radius: 5px;
-        
-        &.dark-mode{
+        @media (max-width:1050px) {
 
+          
+        }
+        &.dark-mode{
+            
             li:hover{
                 
                 color: white;
                 background-color: $very-dark-blue;
-                
+                @media (max-width:1050px) {
+                    
+                    &:hover{
+                        color: $bold-navy;
+                        background-color: $light-gray;
+                    }
+                }
             }
         }
         li {
@@ -76,6 +98,17 @@
                 border-bottom-left-radius: 8px;
                 
             }
+            @media (max-width:1050px) {
+                width: '100%';
+                position: relative;
+                color: $dark-blue;
+                background-color: $light-gray;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+                &:hover{
+                
+                    background-color: $light-gray;
+                }
+            }
         }
     }
     li.active {
@@ -83,9 +116,20 @@
         color: $bold-navy;
         background-color: $primary-light-blue;
         &:hover{
-
+            
             color: $dark-green-hover;
         }
+        
+        @media (max-width:1050px) {
+
+            color: $dark-green;
+            background-color: $light-gray;
+            &:hover{
+                
+                background-color: $light-gray;
+            }
+        }
+
     }
 
   }

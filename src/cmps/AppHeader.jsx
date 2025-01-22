@@ -242,6 +242,13 @@ export function AppHeader() {
   }
 
   const handleMouseEnter = (section) => {
+    // if (windowDimensions.width <= 1050) return
+    setHoveredSection(section)
+    setDropdownVisible(true)
+  }
+
+  const handleMobileSectionClick = (section) => {
+    console.log(section)
     setHoveredSection(section)
     setDropdownVisible(true)
   }
@@ -536,7 +543,14 @@ export function AppHeader() {
             <span>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</span>
           </NavLink>
 
-          <NavLink to='class' onClick={() => selectLink('/class')}>
+          <NavLink
+            to='class'
+            onClick={() => {
+              if (windowDimensions.width <= 1050) return
+
+              selectLink('/class')
+            }}
+          >
             <div
               className='menu'
               onMouseEnter={handlers['class']}
