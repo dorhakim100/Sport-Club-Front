@@ -558,6 +558,15 @@ textarea, input{
 	font-family: assistantRegular;
 }
 
+input[type="tel"] {
+	&.hebrew::placeholder{
+		
+				direction: rtl; /* Set the direction of the placeholder text */
+				text-align: right; /* Align the placeholder text */
+	}
+  }
+  
+
 .hidden {
     transition: 0.8s ease-out;
     left: -300px;
