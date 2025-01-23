@@ -102,6 +102,7 @@ export function ContactUs() {
             onChange={handleChange}
             value={editMessage.phone}
             required
+            className={!prefs.isEnglish ? 'hebrew' : ''}
           />
           <input
             type='text'

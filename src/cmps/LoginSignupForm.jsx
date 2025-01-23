@@ -323,6 +323,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
                   onBlur={handleBlur}
                   value={values.phone}
                   placeholder={prefs.isEnglish ? 'Phone number' : 'מספר טלפון'}
+                  className={!prefs.isEnglish ? 'hebrew' : ''}
                 />
               </div>
               <span>{errors.phone && touched.phone && errors.phone}</span>
