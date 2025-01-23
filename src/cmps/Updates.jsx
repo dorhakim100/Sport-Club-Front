@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
@@ -25,6 +25,21 @@ export function Updates({ updates, navigateToUpdates }) {
   }
 
   const swiperRef = useRef()
+
+  const [width, setWidth] = useState()
+
+  useEffect(() => {
+    setWidth(getWindowDimensions().width)
+  }, [window.innerWidth])
+
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window
+
+    return {
+      width,
+      height,
+    }
+  }
 
   return (
     <>
@@ -65,7 +80,12 @@ export function Updates({ updates, navigateToUpdates }) {
                     : new Date(update.createdAt).toLocaleString('he')}
                 </span>
               </div>
-              <p>{update.content}</p>
+              <div className='update-content-container'>
+                <p className={width <= 600 ? 'mobile' : ''}>{update.content}</p>
+                {width <= 600 && (
+                  <span>{prefs.isEnglish ? 'Read more...' : 'קרא עוד...'}</span>
+                )}
+              </div>
             </SwiperSlide>
           )
         })}
