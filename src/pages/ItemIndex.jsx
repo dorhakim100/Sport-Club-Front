@@ -16,6 +16,8 @@ import { DynamicCover } from '../cmps/DynamicCover'
 import { ContactUs } from '../cmps/ContactUs'
 import { Nav } from '../cmps/Nav'
 
+import { setModalMessage, setIsModal } from '../store/actions/system.actions'
+
 export function ItemIndex() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -153,6 +155,15 @@ export function ItemIndex() {
       showErrorMsg('Cannot remove item')
     }
   }
+
+  useEffect(() => {
+    const messageToSet = {
+      he: `בימים הקרובים הזמנות דרך האתר יהיו פעילות`,
+      eng: `In the following days orders from our site will be available`,
+    }
+    setModalMessage(messageToSet)
+    setIsModal(true)
+  }, []) // to remove once it's available
 
   return (
     <main className='item-index'>

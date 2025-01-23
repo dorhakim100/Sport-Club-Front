@@ -45,9 +45,9 @@
       &:hover {
         background-color: $medium-gray;
         box-shadow: rgba(60, 64, 67, 0.4) 0px 4px 6px; // Stronger shadow on hover
-        a {
-          font-family: assistantBold;
-        }
+      }
+      a {
+        font-family: assistantBold;
       }
       .preview{
         // justify-self: start;
