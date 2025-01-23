@@ -64,11 +64,12 @@
             text-align: start;
         }
 
-        .quantity-container{
-          font-size: 0.5em;
+        .price-container{
+          // font-size: 0.5em;
+          direction: rtl;
           display: flex;
           gap: 0.5em;
-          opacity: 0;
+          // opacity: 0;
 
         }
   
@@ -184,7 +185,7 @@
 
       align-self: center;
       display: grid;
-      grid-template-rows: 120px auto 1fr;
+      grid-template-rows: auto auto 1fr;
       grid-template-columns: 1fr;
       align-items: center;
       justify-items: center;
