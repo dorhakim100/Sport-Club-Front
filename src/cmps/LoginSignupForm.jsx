@@ -128,6 +128,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
     //   showErrorMsg('Login first')
     //   return
     // }
+    console.log(values)
     const { email, username, password, fullname, phone } = values
     let cred
     if (isSignup) {
@@ -316,7 +317,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
             >
               <div className='phone-container'>
                 <input
-                  type='phone'
+                  type='tel'
                   name='phone'
                   onChange={handleChange}
                   onBlur={handleBlur}

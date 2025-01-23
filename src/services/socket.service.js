@@ -18,12 +18,12 @@ export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
 
-// const baseUrl =
-//   process.env.NODE_ENV === 'production'
-//     ? 'www.moadonsport.com'
-//     : '//localhost:3030'
+const baseUrl =
+  process.env.NODE_ENV === 'production'
+    ? 'https://www.moadonsport.com/'
+    : '//localhost:3030'
 
-const baseUrl = 'https://www.moadonsport.com/'
+// const baseUrl = 'https://www.moadonsport.com/'
 
 export const socketService = createSocketService()
 // export const socketService = createDummySocketService()

@@ -39,15 +39,8 @@ export function ItemPreview({ item }) {
       </Link>
       {/* {user && user.isAdmin && typeof item.quantity === 'number' && ( */}
 
-      <div
-        className={
-          user && user.isAdmin && typeof item.stockQuantity === 'number'
-            ? 'quantity-container visible'
-            : 'quantity-container'
-        }
-      >
-        <span>{prefs.isEnglish ? 'Quantity:' : 'מלאי:'}</span>
-        <span>{item.stockQuantity}</span>
+      <div className={'price-container'}>
+        <span>₪{item.price}</span>
       </div>
 
       {/* )} */}

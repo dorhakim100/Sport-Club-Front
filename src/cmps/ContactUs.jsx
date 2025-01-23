@@ -95,8 +95,8 @@ export function ContactUs() {
             value={editMessage.name}
           />
           <input
-            type='text'
             name='phone'
+            type='tel'
             id=''
             placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
             onChange={handleChange}
