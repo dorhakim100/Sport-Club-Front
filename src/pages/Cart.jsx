@@ -13,7 +13,11 @@ import { couponService } from '../services/coupon/coupon.service'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { CartList } from '../cmps/CartList.jsx'
 import { loadUser, updateCart } from '../store/actions/user.actions'
-import { setIsLoading } from '../store/actions/system.actions'
+import {
+  setIsLoading,
+  setIsModal,
+  setModalMessage,
+} from '../store/actions/system.actions'
 import { setCartTotal } from '../store/actions/user.actions'
 
 import { Button } from '@mui/material'
@@ -150,6 +154,14 @@ export function Cart() {
 
   async function onPay() {
     try {
+      const messageToSet = {
+        he: `בימים הקרובים הזמנות דרך האתר יהיו פעילות`,
+        eng: `In the following days orders from our site will be available`,
+      }
+      setModalMessage(messageToSet)
+      setIsModal(true)
+      return // till actual payments are ready
+
       setIsLoading(true)
       const order = createOrder()
       const url = await paymentService.createNewOrderLink(order)
