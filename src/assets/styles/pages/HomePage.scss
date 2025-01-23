@@ -289,7 +289,7 @@
           font-size: 0.9em;
           grid-template-columns: auto 1fr;
         }
-        p{
+        .update-content-container{
           text-align: start;
           @media (max-width:600px) {
           font-size: 0.8em;
@@ -371,7 +371,7 @@
 
           }
           
-          p{
+          .update-content-container{
             
             font-size: 1.4em;
             margin-bottom: 0px;
@@ -386,7 +386,7 @@
               grid-row: 1/2;
             }
             
-            p{
+            .update-content-container{
               align-self: start;
               grid-column: 3/4;
               grid-row: 1/2;
@@ -397,6 +397,14 @@
               overflow-y: hidden;
 
             }
+
+            p.mobile{
+              white-space: nowrap;       /* Prevent wrapping to multiple lines */
+              overflow: hidden;          /* Hide the overflowing text */
+              text-overflow: ellipsis;
+              // width: 150px;
+            }
+            
             
           }
           
