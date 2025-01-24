@@ -175,7 +175,7 @@ export function AboutUs() {
 
   useEffect(() => {
     textAnimation(prefs)
-  }, [prefs.isEnglish, prefs.isDarkMode])
+  }, [prefs.isEnglish, prefs.isDarkMode, location.pathname])
 
   return (
     <section className='about-container'>
