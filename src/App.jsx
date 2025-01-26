@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import React from 'react'
-import { Routes, Route, useLocation } from 'react-router'
+import { Routes, Route, useLocation, Navigate } from 'react-router'
 
 import { useSelector } from 'react-redux'
 
@@ -158,6 +158,27 @@ export function App() {
             </Route>
             <Route path='payment/success' element={<SuccessPage />} />
             <Route path='payment/error' element={<ErrorPage />} />
+
+            {/* Redirect Old Paths */}
+            <Route
+              path='/חוגים/מערכת-חוגים/'
+              element={<Navigate to='/class/schedule' replace />}
+            />
+            <Route
+              path='/אודות/שעות-פעילות/'
+              element={<Navigate to='/about/times' replace />}
+            />
+            <Route
+              path='/בריכה/'
+              element={<Navigate to='/facilities' replace />}
+            />
+            <Route
+              path='/אודות/מתקנים/'
+              element={<Navigate to='/facilities' replace />}
+            />
+
+            {/* Catch-All Redirect to Home */}
+            <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
         </section>
         <AppFooter />
