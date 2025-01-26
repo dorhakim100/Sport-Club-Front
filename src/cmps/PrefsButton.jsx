@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { setIsPrefs } from '../store/actions/system.actions'
 
 import SettingsIcon from '@mui/icons-material/Settings'
+import TranslateIcon from '@mui/icons-material/Translate'
 
 export function PrefsButton() {
   const isVisible = useSelector((storeState) => storeState.systemModule.isPrefs)
@@ -21,7 +22,8 @@ export function PrefsButton() {
         setIsPrefs(!isVisible)
       }}
     >
-      <SettingsIcon />
+      <TranslateIcon />
+      <SettingsIcon className='settings-btn' />
     </button>
   )
 }

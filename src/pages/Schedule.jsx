@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-
+import { Button } from '@mui/material'
 import { classService } from '../services/class/class.service'
 import { uploadService } from '../services/upload.service'
 import { setIsLoading } from '../store/actions/system.actions'
+import { showErrorMsg } from '../services/event-bus.service'
 import {
   capitalizeFirstLetter,
   translateDayToHebrew,
@@ -17,6 +18,7 @@ import { HeadContainer } from '../cmps/HeadContainer'
 import { makeId } from '../services/util.service'
 import WbSunnyIcon from '@mui/icons-material/WbSunny'
 import BedtimeIcon from '@mui/icons-material/Bedtime'
+import PrintIcon from '@mui/icons-material/Print'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -43,6 +45,8 @@ export function Schedule() {
 
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [filter, setFilter] = useState({ pageIds: 0, isAll: false })
+
+  const scheduleRef = useRef()
 
   const daysOfWeek = [
     'sunday',
@@ -138,6 +142,111 @@ export function Schedule() {
     return state
   }
 
+  const onPrintSchedule = () => {
+    const schedule = scheduleRef.current
+    if (!schedule) {
+      showErrorMsg(prefs.isEnglish ? `Couldn't print` : 'לא היה ניתן להדפיס')
+      return
+    }
+
+    const printWindow = window.open('', 'PRINT', 'width=600,height=400')
+
+    printWindow.document.write(`
+    <html>
+      <head>
+        <title>Print</title>
+        <style>
+
+        @page {
+          size: A4 landscape; /* Use A4 landscape size */
+          margin: 0; /* Remove default browser margins */
+        }
+
+        .schedule-container {
+          page-break-inside: avoid;
+        }
+        .day-container {
+          page-break-inside: avoid; 
+        }
+
+        .schedule-container {
+          gap: 0; 
+          padding: 0;
+        }
+        .day-container {
+          padding: 2px;
+          margin: 0;
+        }
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+        /* All the above so the schedule will fit in only one page */
+      
+        /* Add styles for the printed content */
+        .schedule-container{
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          justify-items:'center';
+          align-items:'center';
+          max-width: 297mm; 
+          direction:${prefs.isEnglish ? 'ltr' : 'rtl'};
+          text-align:'center';
+        }
+        .day-container {
+          border: 1px solid #ccc;
+          padding: 5px;
+          box-sizing: border-box;
+          text-align:'center';
+        }
+        
+        .hour-container {
+          border-bottom: 1px solid #ddd;
+          margin-bottom: 10px;
+          padding: 5px;
+          box-sizing: border-box;
+          text-align:'center';
+        }
+        
+        .occurrence-container {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          text-align:'center';
+        }
+        
+        b {
+          font-size: 14px;
+          margin-bottom: 5px;
+          text-align:'center';
+        }
+        
+        .time-container {
+          font-size: 12px;
+          text-align:'center';
+        }
+
+        
+        /* Hide icons completely for printing */
+        .icon {
+          width:5mm;
+        }
+      </style>
+      
+      </head>
+      <body>
+        ${schedule.outerHTML}
+      </body>
+    </html>
+  `)
+
+    printWindow.document.close()
+    printWindow.focus()
+    printWindow.print()
+    printWindow.close()
+  }
+
   return (
     <section className='schedule'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
@@ -145,23 +254,32 @@ export function Schedule() {
 
       <HeadContainer text={{ he: 'מערכת החוגים', eng: 'Schedule' }} />
 
-      <div className='icons-container'>
-        <div className='icon-container'>
-          <b>{prefs.isEnglish ? 'Morning' : 'בוקר'}</b>
-          <b>-</b>
-          <div className='icon morning'>
-            <WbSunnyIcon />
+      <div className='controller-container'>
+        <div className='icons-container'>
+          <div className='icon-container'>
+            <b>{prefs.isEnglish ? 'Morning' : 'בוקר'}</b>
+            <b>-</b>
+            <div className='icon morning'>
+              <WbSunnyIcon />
+            </div>
+          </div>
+          <div className='icon-container'>
+            <b>{prefs.isEnglish ? 'Evening' : 'ערב'}</b>
+            <b>-</b>
+            <div className='icon evening'>
+              <BedtimeIcon />
+            </div>
           </div>
         </div>
-        <div className='icon-container'>
-          <b>{prefs.isEnglish ? 'Evening' : 'ערב'}</b>
-          <b>-</b>
-          <div className='icon evening'>
-            <BedtimeIcon />
-          </div>
+        <div className='print-container'>
+          <Button variant='contained' onClick={onPrintSchedule}>
+            {prefs.isEnglish ? 'Print' : 'הדפסה'}
+            <PrintIcon />
+          </Button>
         </div>
       </div>
       <div
+        ref={scheduleRef}
         className={`schedule-container ${prefs.isEnglish ? '' : 'rtl'} ${
           prefs.isDarkMode ? 'dark-mode' : ''
         }`}
