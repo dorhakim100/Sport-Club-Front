@@ -128,7 +128,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
     //   showErrorMsg('Login first')
     //   return
     // }
-    console.log(values)
+
     const { email, username, password, fullname, phone } = values
     let cred
     if (isSignup) {

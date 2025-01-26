@@ -6,6 +6,28 @@
         
     }
 
+    .controller-container{
+        font-size: 1.5em;
+        display: flex;
+        gap: 1em;
+
+        @media (max-width:750px) {
+            font-size: 1em;
+            
+        }
+        button{
+            font-size: 0.8em;
+            display: flex;
+            gap: 0.5em;
+            @media (max-width:750px) {
+                font-size: 1em;
+                
+            }
+        }
+
+
+    }
+
     .icons-container{
         padding-inline-start: 1em;
         justify-self: start;
@@ -420,3 +442,106 @@
     // }
 }
 }
+
+@media print {
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 10px; /* Smaller font size to fit more content */
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+        max-width: 297mm; /* Fit within A4 landscape width */
+    }
+    
+    .schedule {
+        display: block;
+        //   width: 100%;
+        
+      margin: 0;
+      padding: 0;
+      max-width: 150mm; /* Fit within A4 landscape width */
+    }
+    
+    .controller-container, 
+    nav, 
+    .print-container, 
+    .icons-container, h2,h3 {
+        display: none; /* Hide controls and navigation for a cleaner print */
+    }
+
+
+    
+    .schedule-container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr); /* Ensure 6 equal columns */
+        // max-width: 297mm; /* Fit within A4 landscape width */
+        gap: 1px; /* Minimal spacing between columns */
+        // margin: 0 auto;
+        overflow: visible;
+        
+        .day-container {
+            border: 1px solid #ccc; /* Add subtle borders for separation */
+            padding: 2px; /* Reduce padding for a tighter fit */
+            page-break-inside: avoid; /* Prevent splitting days across pages */
+            width: 49.5mm;
+            .hour-container {
+                border-bottom: 1px solid #ddd;
+                // padding: 2px; /* Tighten padding further */
+                width: 49.5mm;
+                
+                &:last-of-type {
+                    border-bottom: none;
+                }
+                
+                .occurrence-container {
+              width: 49.5mm;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              
+              b {
+                width: 49.5mm;
+                font-size: 12px; /* Smaller text for titles */
+                margin-bottom: 3px;
+            }
+            
+            .time-container {
+                width: 49.5mm;
+                font-size: 10px; /* Smaller text for time */
+            }
+            
+            .icon {
+                width: 49.5mm;
+                display: none; /* Hide icons in the printed version */
+            }
+        }
+    }
+    
+    width: 49.5mm;
+        &.day {
+          background-color: #f9f9f9; /* Light background for day headers */
+          font-weight: bold;
+          text-align: center;
+          font-size: 14px; /* Slightly larger font for day titles */
+        }
+      }
+    }
+  
+    /* Landscape-specific styles */
+    @page {
+      size: A4 landscape;
+      margin: 10mm; /* Adjust margins to maximize space */
+    }
+  
+    /* Remove unnecessary elements from print */
+    header, footer, button, .no-print {
+      display: none !important;
+    }
+  
+    /* Ensure RTL layouts are respected */
+    .rtl {
+      direction: rtl;
+    }
+  }
+  

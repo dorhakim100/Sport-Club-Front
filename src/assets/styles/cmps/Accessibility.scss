@@ -109,7 +109,7 @@
       transition: 0.2s ease-out;
     }
     &:hover {
-      svg{
+      .settings-btn{
 
         animation: spin 0.5s linear forwards;
       }
