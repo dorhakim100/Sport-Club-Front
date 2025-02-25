@@ -31,7 +31,7 @@ export function ItemList({ items, onRemoveItem, isGrid }) {
         {items.map((item) => (
           <li
             key={item._id}
-            className='item-container'
+            className={`item-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}
             onClick={(e) => {
               if (
                 e.target.closest('.add-to-cart-btn') ||
