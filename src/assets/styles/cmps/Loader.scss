@@ -1,21 +1,23 @@
 .loader-container{
     position: fixed;
-    bottom: 1em;
-    right: 1em;
+    bottom: 0em;
+    right: 0em;
     z-index: 1000;
-    img{
-        width: 300px;
+    width: 450px;
+    padding: 0px;
+    
+    @media (max-width:1100px) {
         
-        @media (max-width:800px) {
-            
-            width: 200px;
-            
-        }
-        @media (max-width:600px) {
-            
-            width: 150px;
-            
-        }
+        width: 350px;
+        
+    }
+    @media (max-width:600px) {
+        
+        width: 150px;
+        width: 250px;
+        
+    }
+    img{
     }
 
 
