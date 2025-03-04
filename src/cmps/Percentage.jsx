@@ -13,7 +13,10 @@ export function Percentage({ percentages }) {
     (stateSelector) => stateSelector.paymentModule.openLength
   )
 
-  percentages = openOrders / (openOrders + openMessages)
+  percentages =
+    openOrders + openMessages === 0
+      ? 0
+      : openOrders / (openOrders + openMessages)
   percentages = Math.floor(percentages * 100)
 
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
