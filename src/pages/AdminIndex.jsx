@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { loadUsers } from '../store/actions/user.actions'
 import { useNavigate, Outlet, useLocation } from 'react-router'
+import Lottie from 'react-lottie'
 
 import { Nav } from '../cmps/Nav'
 import { Percentage } from '../cmps/Percentage'
@@ -13,9 +14,14 @@ import { showErrorMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
 
+import noTasks from '../../public/imgs/no-tasks.json'
+import noTasksDark from '../../public/imgs/no-tasks-dark-mode.json'
+
 export function AdminIndex() {
   const navigate = useNavigate()
   const location = useLocation()
+
+  const [animation, setAnimation] = useState(noTasks)
 
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -24,6 +30,9 @@ export function AdminIndex() {
 
   const openOrders = useSelector(
     (stateSelector) => stateSelector.paymentModule.openLength
+  )
+  const openMessages = useSelector(
+    (stateSelector) => stateSelector.messageModule.openLength
   )
 
   const [classes, setClasses] = useState([])
@@ -62,6 +71,10 @@ export function AdminIndex() {
     checkUser()
   }, [])
 
+  useEffect(() => {
+    prefs.isDarkMode ? setAnimation(noTasksDark) : setAnimation(noTasks)
+  }, [prefs.isDarkMode])
+
   const origin = {
     path: '/admin',
     he: 'מנהל',
@@ -91,6 +104,14 @@ export function AdminIndex() {
     },
   ]
 
+  const defaultOptions = {
+    loop: false,
+    autoplay: true, // Animation will autoplay
+    animationData: animation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
   return (
     <section className='admin'>
       <h2>{prefs.isEnglish ? origin.eng : origin.he}</h2>
@@ -98,7 +119,18 @@ export function AdminIndex() {
       {isLoading && 'Loading...'}
       {location.pathname === '/admin' && (
         <div className='admin-interface-container'>
-          <Percentage percentages={openOrders} />
+          {(openOrders + openMessages !== 0 && (
+            <Percentage percentages={openOrders} />
+          )) || (
+            <div className='tasks-animation-container'>
+              <Lottie
+                options={defaultOptions}
+                width={'fit-content'}
+                height={'fit-content'}
+              />
+              <b>{prefs.isEnglish ? `No tasks` : 'אין משימות פתוחות'}</b>
+            </div>
+          )}
           <div className='today-class-container'>
             <HeadContainer
               text={{ he: 'שיעורים היום', eng: `Today's classes` }}

@@ -5,9 +5,17 @@
     // justify-items: center;
     gap: 1em;
 
-    @media (max-width:705px) {
+    @media (max-width:800px) {
         grid-template-columns: 1fr;
         
+    }
+
+    .tasks-animation-container{
+        display: flex;
+        flex-direction: column;
+
+   
+
     }
     
     .chart-container{
