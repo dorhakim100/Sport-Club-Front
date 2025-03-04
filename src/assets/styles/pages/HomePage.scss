@@ -11,9 +11,9 @@
     background-position: center;
     background-repeat: no-repeat;
     
-    height: 100vh;  
     width: 100%; 
 
+    height: calc(100vh + 128px);
 
 
     color: $bold-navy;
@@ -41,7 +41,8 @@
   
       height: 100vh;  
       width: 100%; 
-      height: calc(100vh + 128px);
+      // height: calc(100vh + 128px);
+      // padding-top: 128px;
 
       &::before{
         content: "";
@@ -118,8 +119,16 @@
         @media (max-width:550px) {
           font-size: 3em;
         }
+        @media (min-width:1200px) {
+          font-size: 4em;
+          
+        }
         @media (min-width:1400px) {
           font-size: 5em;
+          
+        }
+        @media (min-width:1600px) {
+          font-size: 6em;
 
         }
 
@@ -143,10 +152,21 @@
           margin: 0px;
         }
         
+        
+        @media (min-width:1200px) {
+          font-size: 1.6em;
+          
+        }
         @media (min-width:1400px) {
           font-size: 1.8em;
   
         }
+
+        @media (min-width:1600px) {
+          font-size: 2em;
+
+        }
+
         @media (max-height:650px) {
           font-size: 1.2em;
 
