@@ -247,12 +247,6 @@ export function AppHeader() {
     setDropdownVisible(true)
   }
 
-  const handleMobileSectionClick = (section) => {
-    console.log(section)
-    setHoveredSection(section)
-    setDropdownVisible(true)
-  }
-
   const handleMouseLeave = () => {
     setDropdownVisible(false)
   }
