@@ -59,7 +59,7 @@ export function HomePage() {
     textAnimation(prefs)
   }, [prefs.isEnglish, prefs.isDarkMode])
 
-  const navigateToClass = () => {
+  const navigateToClass = (event) => {
     // support for safari browsers
     event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
@@ -68,7 +68,7 @@ export function HomePage() {
       navigate('/class')
     }, 300) // Adjust time based on your smoothScroll timing
   }
-  const navigateToFacilities = () => {
+  const navigateToFacilities = (event) => {
     // support for safari browsers
     event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
@@ -77,7 +77,7 @@ export function HomePage() {
       navigate('/facilities')
     }, 300) // Adjust time based on your smoothScroll timing
   }
-  const navigateToUpdates = () => {
+  const navigateToUpdates = (event) => {
     // support for safari browsers
     event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
@@ -86,7 +86,7 @@ export function HomePage() {
       navigate('/update')
     }, 300) // Adjust time based on your smoothScroll timing
   }
-  const navigateToTrainers = () => {
+  const navigateToTrainers = (event) => {
     // support for safari browsers
     event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
@@ -121,7 +121,7 @@ export function HomePage() {
 
           <h2>
             {prefs.isEnglish
-              ? 'Your choise for the good life'
+              ? 'Your choice for the good life'
               : 'הבחירה שלכם לחיים הטובים'}
           </h2>
 
