@@ -11,15 +11,27 @@ import { AddToCartButton } from './AddToCartButton'
 export function ItemList({ items, onRemoveItem, isGrid }) {
   const navigate = useNavigate()
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
-  function shouldShowActionBtns(item) {
-    const user = userService.getLoggedinUser()
-
-    if (!user) return false
-    if (user.isAdmin) return true
-    // return item.owner?._id === user._id
-  }
 
   const [isHover, setIsHover] = useState(false)
+
+  const setIsHoverTrue = () => {
+    setIsHover(true)
+  }
+  const setIsHoverFalse = () => {
+    setIsHover(false)
+  }
+
+  const handleClick = (e) => {
+    const itemId = e.currentTarget.dataset.id
+
+    if (e.target.closest('.add-to-cart-btn') || e.target.closest('.edit-btn')) {
+      e.stopPropagation()
+      return
+    }
+    if (isHover) return
+    navigate(`/item/${itemId}`)
+    smoothScroll()
+  }
 
   return (
     <section>
@@ -31,26 +43,16 @@ export function ItemList({ items, onRemoveItem, isGrid }) {
         {items.map((item) => (
           <li
             key={item._id}
+            data-id={item._id}
             className={`item-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}
-            onClick={(e) => {
-              if (
-                e.target.closest('.add-to-cart-btn') ||
-                e.target.closest('.edit-btn')
-              ) {
-                e.stopPropagation()
-                return
-              }
-              if (isHover) return
-              navigate(`/item/${item._id}`)
-              smoothScroll()
-            }}
+            onClick={handleClick}
           >
             <ItemPreview item={item} />
             <div
               className='actions'
               style={{ direction: 'ltr' }}
-              onMouseEnter={() => setIsHover(true)}
-              onMouseLeave={() => setIsHover(false)}
+              onMouseEnter={setIsHoverTrue}
+              onMouseLeave={setIsHoverFalse}
             >
               <AddToCartButton item={item} onRemoveItem={onRemoveItem} />
             </div>
