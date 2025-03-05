@@ -636,10 +636,18 @@ export function AppHeader() {
                   to={`user/${user._id}`}
                   onClick={() => selectLink(`/user/${user._id}`)}
                 >
-                  {user.fullname}
+                  <b style={{ color: '#4A90E2' }}>{user.fullname}</b>
                 </NavLink>
               ) : (
-                <b style={{ color: '#4A90E2' }}>{user.fullname}</b>
+                <b
+                  style={
+                    windowDimensions.width <= 1050
+                      ? { color: '#2C3E50' }
+                      : { color: '#4A90E2' }
+                  }
+                >
+                  {user.fullname}
+                </b>
               )}
               {!user.isAdmin && (
                 <NavLink to={`/user/${user._id}/cart`}>

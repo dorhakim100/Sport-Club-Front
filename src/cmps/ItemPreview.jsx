@@ -20,12 +20,16 @@ export function ItemPreview({ item }) {
 
   const navigateToItem = () => {
     // support for safari browsers
-    event.preventDefault() // Stop the link from navigating immediately
+    // event.preventDefault() // Stop the link from navigating immediately
     smoothScroll()
 
     setTimeout(() => {
       navigate(`/item/${item._id}`)
     }, 300) // Adjust time based on your smoothScroll timing
+  }
+
+  const setIsLoadedTrue = () => {
+    setIsLoaded(true)
   }
 
   return (
@@ -37,23 +41,14 @@ export function ItemPreview({ item }) {
       >
         {prefs.isEnglish ? item.title.eng : item.title.he}
       </Link>
-      {/* {user && user.isAdmin && typeof item.quantity === 'number' && ( */}
 
       <div className={'price-container'}>
         <span>₪{item.price}</span>
       </div>
 
-      {/* )} */}
       <div className='img-container'>
         {!isLoaded && <Preloader img={item.cover} />}
-        <img
-          src={item.cover}
-          alt=''
-          onLoad={() => {
-            setIsLoaded(true)
-          }}
-        />
-        {/* <img src={item.cover} alt='' /> */}
+        <img src={item.cover} alt='' onLoad={setIsLoadedTrue} />
       </div>
     </article>
   )

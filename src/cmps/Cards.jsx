@@ -16,6 +16,8 @@ export function Cards({ trainers }) {
   const [swiperInstance, setSwiperInstance] = useState([])
   const [activeIndex, setActiveIndex] = useState(0)
 
+  const [size, setSize] = useState(400)
+
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions()
   )
@@ -28,6 +30,14 @@ export function Cards({ trainers }) {
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
+    }
+  }, [windowDimensions])
+
+  useEffect(() => {
+    if (windowDimensions.width <= 1050) {
+      setSize(275)
+    } else {
+      setSize(400)
     }
   }, [windowDimensions])
 
@@ -57,11 +67,24 @@ export function Cards({ trainers }) {
         grabCursor={true}
         modules={[EffectCards, Navigation]}
         className='cards'
+        breakpoints={{
+          1050: {
+            width: 400,
+            height: 400,
+          },
+          0: {
+            width: 275,
+            height: 275,
+          },
+        }}
         style={{
-          width: windowDimensions.width >= 1050 ? '400px' : '275px',
-          height: windowDimensions.width >= 1050 ? '400px' : '275px',
+          // width: windowDimensions.width >= 1050 ? '400px' : '275px',
+          // height: windowDimensions.width >= 1050 ? '400px' : '275px',
+          width: size,
+          height: size,
           margin: '0px',
           direction: 'rtl',
+          // direction: 'ltr',
         }}
         navigation={true}
         onSlideChange={(swiper) => {
@@ -92,16 +115,16 @@ export function Cards({ trainers }) {
                 <div
                   className='gradient-container'
                   style={{
-                    width: windowDimensions.width >= 1050 ? '400px' : '275px',
-                    height: windowDimensions.width >= 1050 ? '400px' : '275px',
+                    width: size,
+                    height: size,
                   }}
                 ></div>
                 <img
                   src={trainer.img}
                   alt=''
                   style={{
-                    width: windowDimensions.width >= 1050 ? '400px' : '275px',
-                    height: windowDimensions.width >= 1050 ? '400px' : '275px',
+                    width: size,
+                    height: size,
                   }}
                 />{' '}
                 <span className='shadow-text'>
