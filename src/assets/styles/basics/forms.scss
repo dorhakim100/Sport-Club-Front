@@ -577,20 +577,21 @@ input[type="tel"] {
     //   opacity: 0;
     }
     .text-container{
-      font-size: 0.8em;
+      font-size: 0.7em;
       // text-shadow: $soft-green 1px 0 5px;
-
-	//   text-shadow: black 1px 0 5px;
+	  
+	  //   text-shadow: black 1px 0 5px;
       h2:last-of-type{
 		  
-		//   text-shadow: $bold-navy 1px 0 5px;
-        // text-shadow: $dark-green 1px 0 5px;
-
-      }
+		  //   text-shadow: $bold-navy 1px 0 5px;
+		  // text-shadow: $dark-green 1px 0 5px;
+		  
+		}
     }
     
     &.rtl {
-      left: 0;
+		font-size: 1.1em;
+		left: 0;
     }
     
     .text-container.rtl {
