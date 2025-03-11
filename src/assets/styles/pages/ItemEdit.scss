@@ -38,6 +38,12 @@
     background-color: $light-gray;
         background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
 
+    .upload-img-container{
+        display: grid;
+        justify-items: center;
+        gap: 1em;
+    }
+
     .item-img-container{
         width: 300px;
         border-radius: 5px;
@@ -149,5 +155,23 @@
         display: flex;
         gap: 2em;
         font-size: 1.2em;
+    }
+}
+
+.add-option-container{
+    display: grid;
+    justify-items: center;
+    gap: 0.8em;
+
+
+    .MuiTextField-root{
+        direction: rtl;
+    }
+
+    .option-container{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        gap: 0.5em;
     }
 }

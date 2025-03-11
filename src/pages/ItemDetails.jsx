@@ -8,6 +8,7 @@ import { AddToCartButton } from '../cmps/AddToCartButton'
 import { Quantity } from '../cmps/Quantity.jsx'
 import { ItemNavigation } from '../cmps/ItemNavigation'
 import { MemberTypes } from '../cmps/MemberTypes'
+import { ItemOptions } from '../cmps/ItemOptions.jsx'
 
 import { ContactUs } from '../cmps/ContactUs'
 import { setIsModal, setModalMessage } from '../store/actions/system.actions'
@@ -19,6 +20,8 @@ export function ItemDetails() {
   const [quantity, setQuantity] = useState(1)
 
   const [lastPage, setLastPage] = useState('')
+
+  const [isOptionSelected, setIsOptionSelected] = useState(false)
 
   const itemFilter = useSelector(
     (stateSelector) => stateSelector.itemModule.filter
@@ -68,6 +71,7 @@ export function ItemDetails() {
   const setItem = async () => {
     getLatestPage()
     const i = await loadItem(itemId, itemFilter)
+    if (!i.options) setIsOptionSelected(true)
     if (i.types.includes('card')) {
       const messageToSet = {
         he: `משתלם יותר להיות מנוי!`,
@@ -83,6 +87,10 @@ export function ItemDetails() {
   useEffect(() => {
     setItem()
   }, [itemId])
+
+  const setItemOption = (option) => {
+    option ? setIsOptionSelected(true) : setIsOptionSelected(false)
+  }
 
   return (
     <>
@@ -105,7 +113,14 @@ export function ItemDetails() {
               item={item}
             />
           </div>
-          <AddToCartButton item={{ ...item }} quantity={quantity} />
+          {item.options && (
+            <ItemOptions options={item.options} setItemOption={setItemOption} />
+          )}
+          <AddToCartButton
+            item={{ ...item }}
+            quantity={quantity}
+            isOptionSelected={isOptionSelected}
+          />
         </div>
         <div className='img-container'>
           <img src={item.cover} alt='' />

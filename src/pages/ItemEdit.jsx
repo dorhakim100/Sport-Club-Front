@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
 import { useEffect, useState, useRef } from 'react'
-import { Button } from '@mui/material'
+import { Button, containerClasses } from '@mui/material'
+import { IconButton } from '@mui/material'
+import TextField from '@mui/material/TextField'
+import { Checkbox, Input } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { styled } from '@mui/material/styles'
 import LoadingButton from '@mui/lab/LoadingButton'
@@ -14,9 +17,17 @@ import { updateItem } from '../store/actions/item.actions.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { uploadService } from '../services/upload.service.js'
 import { makeId } from '../services/util.service.js'
-import { setIsLoading } from '../store/actions/system.actions.js'
+import {
+  setIsLoading,
+  setIsModal,
+  setModalMessage,
+} from '../store/actions/system.actions.js'
 
 import { HeadContainer } from '../cmps/HeadContainer.jsx'
+
+import InputAdornment from '@mui/material/InputAdornment'
+import AccountCircle from '@mui/icons-material/AccountCircle'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 // import '../css/ItemEdit.css'
 const VisuallyHiddenInput = styled('input')({
@@ -46,6 +57,9 @@ export function ItemEdit() {
   const [editItem, setEditItem] = useState(itemService.getEmptyItem())
   const [cover, setCover] = useState(null)
 
+  const [isOptions, setIsOptions] = useState(false)
+  const [options, setOptions] = useState([])
+
   const text = {
     he: 'מוצר',
     eng: 'Item',
@@ -63,6 +77,10 @@ export function ItemEdit() {
 
       setEditItem({ ...item })
       setItem({ ...item })
+      if (item.options) {
+        setIsOptions(true)
+        setOptions(item.options)
+      }
       setCover(item.cover)
     } catch (err) {
       // // console.log(err)
@@ -134,11 +152,27 @@ export function ItemEdit() {
 
   async function onSaveItem(ev) {
     ev.preventDefault()
+    if (
+      isOptions &&
+      options.find((option) => !option.title.he || !option.title.eng)
+    ) {
+      const messageToSet = {
+        he: 'יש להוסיף סוג פריט גם בעברית וגם באנגלית',
+        eng: `Item option must be added in both Hebrew and English`,
+      }
+      setModalMessage(messageToSet)
+      setIsModal(true)
+      return
+    }
     const { name, price, types } = editItem
 
     setIsLoading(true)
     try {
-      const savedItem = await updateItem(editItem)
+      let savedItem
+      isOptions
+        ? (savedItem = await updateItem({ ...editItem, options }))
+        : (savedItem = await updateItem(editItem))
+
       showSuccessMsg(
         prefs.isEnglish ? 'Item edited successfully' : 'מוצר נערך בהצלחה'
       )
@@ -171,6 +205,36 @@ export function ItemEdit() {
     }
   }
 
+  const setOptionValue = (optionId, value) => {
+    const idxToSet = options.findIndex((option) => option.id === optionId)
+    let optionToSet
+    let key
+    prefs.isEnglish ? (key = 'eng') : (key = 'he')
+
+    optionToSet = {
+      ...options[idxToSet],
+      title: { ...options[idxToSet].title, [key]: value },
+    }
+
+    options.splice(idxToSet, 1, optionToSet)
+    setOptions([...options])
+  }
+
+  const _getEmptyOption = () => {
+    return { title: { he: '', eng: '' }, id: makeId() }
+  }
+
+  const onAddOption = () => {
+    setOptions((prev) => [...prev, _getEmptyOption()])
+  }
+
+  const onRemoveOption = (optionId) => {
+    const newOptions = options.filter((option) => option.id !== optionId)
+
+    setOptions(newOptions)
+    if (!newOptions.length) setIsOptions(false)
+  }
+
   return (
     <>
       <HeadContainer text={text} />
@@ -184,10 +248,14 @@ export function ItemEdit() {
             role={undefined}
             variant='contained'
             tabIndex={-1}
-            startIcon={<CloudUploadIcon sx={{ ml: 1 }} />}
+            startIcon={
+              <CloudUploadIcon sx={prefs.isEnglish ? { ml: 1 } : { ml: 2 }} />
+            }
             loading={isLoading}
+            sx={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
           >
-            Upload file
+            {prefs.isEnglish ? 'Upload file' : 'בחירת קובץ'}
+
             <VisuallyHiddenInput type='file' onChange={uploadFile} />
           </LoadingButton>
         </div>
@@ -245,6 +313,126 @@ export function ItemEdit() {
               }
             />
           </div>
+          <div className='is-options-container'>
+            <Checkbox
+              id='options'
+              checked={isOptions}
+              onChange={({ target }) => {
+                setOptions([_getEmptyOption()])
+                setIsOptions(target.checked)
+              }}
+              sx={
+                prefs.isDarkMode
+                  ? {
+                      color: 'lightblue', // base color for dark mode
+                      '&.Mui-checked': {
+                        color: 'lightblue', // color when checked
+                      },
+                      '&:hover': {
+                        backgroundColor: 'rgba(173, 216, 230, 0.1)', // subtle light blue hover effect
+                      },
+                    }
+                  : {}
+              }
+            />
+            <label htmlFor='options'>
+              {prefs.isEnglish ? 'Item type' : 'סוג פריט'}
+            </label>
+          </div>
+          {isOptions && (
+            <div className='add-option-container'>
+              {options.map((option) => {
+                return (
+                  <div className='option-container' key={option.id}>
+                    <TextField
+                      onChange={({ target }) =>
+                        setOptionValue(option.id, target.value)
+                      }
+                      label={prefs.isEnglish ? 'Option' : 'סוג'}
+                      variant='outlined'
+                      InputLabelProps={{
+                        sx: prefs.isEnglish
+                          ? {}
+                          : {
+                              right: 25, // Position the label at the right edge
+                              left: 'auto', // Disable left positioning
+                              '&.MuiInputLabel-shrink': {
+                                transformOrigin: 'top right',
+                                right: 30, // Position the label at the right edge
+                                left: 'auto', // Disable left positioning
+                              },
+                            },
+                      }}
+                      InputProps={{
+                        inputProps: {
+                          dir: prefs.isEnglish ? 'ltr' : 'rtl', // Keep the input text direction RTL
+                        },
+                      }}
+                      sx={
+                        prefs.isDarkMode
+                          ? {
+                              '& .MuiOutlinedInput-root': {
+                                color: 'white',
+                                '& fieldset': {
+                                  borderColor: 'lightblue',
+                                },
+                                '&:hover fieldset': {
+                                  borderColor: 'lightblue',
+                                },
+                                '&.Mui-focused fieldset': {
+                                  borderColor: 'lightblue',
+                                },
+                                // Adjust the legend (notched outline) for RTL
+                                '& legend': !prefs.isEnglish
+                                  ? {
+                                      textAlign: 'right',
+                                      direction: 'rtl',
+                                      transformOrigin: 'top right',
+                                    }
+                                  : {},
+                              },
+                              '& .MuiInputLabel-root': {
+                                color: 'lightblue',
+                                '&.Mui-focused': {
+                                  color: 'lightblue',
+                                },
+                              },
+                            }
+                          : {
+                              '& legend': !prefs.isEnglish
+                                ? {
+                                    textAlign: 'right',
+                                    direction: 'rtl',
+                                    transformOrigin: 'top right',
+                                  }
+                                : {},
+                            }
+                      }
+                      value={
+                        prefs.isEnglish
+                          ? options.find(
+                              (optionToFind) => optionToFind.id === option.id
+                            ).title.eng
+                          : options.find(
+                              (optionToFind) => optionToFind.id === option.id
+                            ).title.he
+                      }
+                    />
+                    <IconButton
+                      aria-label='delete'
+                      onClick={() => onRemoveOption(option.id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </div>
+                )
+              })}
+
+              <Button variant='contained' onClick={onAddOption}>
+                {prefs.isEnglish ? 'Add' : 'הוסף'}
+              </Button>
+            </div>
+          )}
           {(typeof editItem.stockQuantity === 'number' && (
             <div className='input-container quantity'>
               <label htmlFor=''>

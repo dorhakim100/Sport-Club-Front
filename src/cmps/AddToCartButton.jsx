@@ -16,7 +16,12 @@ import ButtonGroup from '@mui/material/ButtonGroup'
 import { setIsLoading } from '../store/actions/system.actions'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
-export function AddToCartButton({ item, quantity, onRemoveItem }) {
+export function AddToCartButton({
+  item,
+  quantity,
+  onRemoveItem,
+  isOptionSelected,
+}) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const navigate = useNavigate()
@@ -63,6 +68,17 @@ export function AddToCartButton({ item, quantity, onRemoveItem }) {
       setTimeout(() => {
         navigate('/user/login')
       }, 300) // Adjust time based on your smoothScroll timing
+      return
+    }
+
+    if (item.options && !isOptionSelected) {
+      const messageToSet = {
+        he: `יש לבחור סוג פריט בדף הפריט`,
+        eng: `Item option must be selected at item page`,
+        link: `/item/${item._id}`,
+      }
+      setModalMessage(messageToSet)
+      setIsModal(true)
       return
     }
 
