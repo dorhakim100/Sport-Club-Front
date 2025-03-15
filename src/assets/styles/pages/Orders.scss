@@ -254,12 +254,33 @@
                 height: fit-content;
             }
             display: flex;
-            gap: 2em;
+            gap: 1em;
             justify-content: space-between;
             padding: 0px 0.5em 0px 0.5em;
+            
+            @media (max-width:800px) {
+                gap: 0.5em;
+                font-size: 0.8em;
+                padding: 0px 0em 0px 0em;
+            }
 
             .quantity-container{
-                direction: ltr;
+                .sum-container{
+
+                    direction: ltr;
+                }
+                display: flex;
+                gap: 0.4em;
+
+                .option-container{
+                    display: flex;
+                    gap: 0.3em;
+                }
+                
+                .option-quantity-container{
+
+                    direction: ltr;
+                }
             }
 
             @media (max-width:600px) {

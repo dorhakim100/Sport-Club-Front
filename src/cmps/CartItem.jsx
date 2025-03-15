@@ -8,6 +8,7 @@ import { Quantity } from './Quantity'
 
 import { setIsLoading } from '../store/actions/system.actions'
 import { smoothScroll } from '../services/util.service'
+import { showErrorMsg } from '../services/event-bus.service'
 
 export function CartItem({ item }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -38,6 +39,16 @@ export function CartItem({ item }) {
       const idx = user.items.findIndex(
         (itemToUpdate) => itemToUpdate.id === item.id
       )
+
+      if (item.options && item.options.length) {
+        const diff = quantity - user.items[idx].quantity
+
+        const idToAdd = item.options[item.options.length - 1]
+        if (diff > 0) {
+          item.options.push(idToAdd)
+        } else if (diff < 0) item.options.splice(item.options.length - 1, 1)
+      }
+
       user.items.splice(idx, 1, { ...item, quantity: quantity })
 
       const userToUpdate = { ...user }
@@ -46,6 +57,11 @@ export function CartItem({ item }) {
         setIsLoading(true)
         const saved = await updateCart(userToUpdate)
       } catch (err) {
+        showErrorMsg(
+          prefs.isEnglish
+            ? `Couldn't change quantity`
+            : 'לא היה ניתן לשנות כמות'
+        )
         // // console.log(err)
       } finally {
         setIsLoading(false)

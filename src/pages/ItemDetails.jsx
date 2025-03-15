@@ -22,6 +22,7 @@ export function ItemDetails() {
   const [lastPage, setLastPage] = useState('')
 
   const [isOptionSelected, setIsOptionSelected] = useState(false)
+  const [selectedOption, setSelectedOption] = useState()
 
   const itemFilter = useSelector(
     (stateSelector) => stateSelector.itemModule.filter
@@ -90,6 +91,7 @@ export function ItemDetails() {
 
   const setItemOption = (option) => {
     option ? setIsOptionSelected(true) : setIsOptionSelected(false)
+    option ? setSelectedOption(option) : setSelectedOption(null)
   }
 
   return (
@@ -113,13 +115,20 @@ export function ItemDetails() {
               item={item}
             />
           </div>
-          {item.options && (
-            <ItemOptions options={item.options} setItemOption={setItemOption} />
+          {item.options && item.options.length > 0 && (
+            <div className='options-section-container'>
+              <b>{prefs.isEnglish ? 'Item options' : 'סוג פריט'}</b>
+              <ItemOptions
+                options={item.options}
+                setItemOption={setItemOption}
+              />
+            </div>
           )}
           <AddToCartButton
             item={{ ...item }}
             quantity={quantity}
             isOptionSelected={isOptionSelected}
+            selectedOption={selectedOption}
           />
         </div>
         <div className='img-container'>

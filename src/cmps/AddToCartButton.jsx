@@ -21,6 +21,7 @@ export function AddToCartButton({
   quantity,
   onRemoveItem,
   isOptionSelected,
+  selectedOption,
 }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
@@ -71,7 +72,7 @@ export function AddToCartButton({
       return
     }
 
-    if (item.options && !isOptionSelected) {
+    if (item.optionsIds && !isOptionSelected) {
       const messageToSet = {
         he: `יש לבחור סוג פריט בדף הפריט`,
         eng: `Item option must be selected at item page`,
@@ -97,22 +98,47 @@ export function AddToCartButton({
       setIsModal(true)
     }
 
+    // console.log('item.options:', item.options)
+    // console.log('isOptionSelected:', isOptionSelected)
+
+    if (!isOptionSelected) selectedOption = null
+
+    let optionsToSet
     if (itemsIds.includes(itemToAdd._id)) {
       const idx = user.items.findIndex((item) => item.id === itemToAdd._id)
       let newQuantity
+      const cartItem = user.items[idx]
       if (quantity === 1) {
-        newQuantity = user.items[idx].quantity + 1
+        newQuantity = cartItem.quantity + 1
       } else {
-        newQuantity = user.items[idx].quantity + quantity
+        newQuantity = cartItem.quantity + quantity
       }
+
+      const itemOptions = cartItem.options
+      // const optionIdx = itemOptions.findIndex((option)=>option.id===selectedOption)
+      // if(itemOptions && optionIdx !== -1){
+
+      //   user.items[idx].options.splice(optionIdx,1,{
+      //     id:selectedOption,
+      //     quantity:newQuantity
+      //   })
+
+      // }
+
+      for (let i = 0; i < quantity; i++) {
+        itemOptions.push(selectedOption)
+      }
+
       user.items.splice(idx, 1, {
         id: itemToAdd._id,
         quantity: newQuantity,
+        options: [...itemOptions],
       })
     } else {
       user.items.push({
         id: itemToAdd._id,
         quantity: quantity || 1,
+        options: [selectedOption],
       })
     }
 

@@ -194,7 +194,13 @@ async function getCartItems(cart) {
     const cartItems = await httpService.get(`item/cart`, cart)
     const cartToReturn = cartItems.map((item) => {
       const integerQuantity = +item.quantity
-      return { ...item, quantity: integerQuantity }
+      const foundItem = cart.find((itemToFind) => itemToFind.id === item.id)
+
+      return {
+        ...item,
+        quantity: integerQuantity,
+        options: foundItem.options,
+      }
     })
     return cartToReturn
   } catch (err) {
