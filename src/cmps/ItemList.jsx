@@ -22,6 +22,8 @@ export function ItemList({ items, onRemoveItem, isGrid }) {
   }
 
   const handleClick = (e) => {
+    // support for safari browsers
+    e.preventDefault() // Stop the link from navigating immediately
     const itemId = e.currentTarget.dataset.id
 
     if (e.target.closest('.add-to-cart-btn') || e.target.closest('.edit-btn')) {
@@ -29,7 +31,9 @@ export function ItemList({ items, onRemoveItem, isGrid }) {
       return
     }
     if (isHover) return
-    navigate(`/item/${itemId}`)
+    setTimeout(() => {
+      navigate(`/item/${itemId}`)
+    }, 300) // Adjust time based on your smoothScroll timing
     smoothScroll()
   }
 
