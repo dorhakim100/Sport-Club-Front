@@ -71,7 +71,12 @@
                 
             }
 
+            b{
+                justify-self: start;
+            }
+
             input{
+                justify-self: end;
                 text-align: center;
                 &:focus {
                     border-color: #3182ce; // Highlight color on focus
@@ -84,6 +89,7 @@
             }
 
 
+
             input[type="number"]::-webkit-outer-spin-button,
             input[type="number"]::-webkit-inner-spin-button {
                 -webkit-appearance: none;
@@ -94,6 +100,38 @@
             input[type="number"] {
             -moz-appearance: textfield;
 
+            }
+        }
+        
+        .options-section-container{
+            display: grid;
+            justify-self: start;
+            button{
+                
+                font-size: 1.2em;
+                @media (max-width:1500px) {
+                    font-size: 0.9em;
+                    
+                }
+                @media (max-width:1150px) {
+                    font-size: 0.8em;
+                    
+                }
+            }
+            b{
+
+                font-size: 2em;
+                transition: 0.1s ease;
+                
+                @media (max-width:1500px) {
+                    font-size: 1.5em;
+                    
+                }
+                @media (max-width:1150px) {
+                    font-size: 1em;
+                    
+                }
+    
             }
         }
 

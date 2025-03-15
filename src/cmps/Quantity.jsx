@@ -72,8 +72,8 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
     <>
       <div className='quantity-container'>
         <span>{prefs.isEnglish ? 'Quantity' : 'כמות'}</span>
-        <button>
-          <AddIcon onClick={() => onSetQuantity(1)} />
+        <button onClick={() => onSetQuantity(1)}>
+          <AddIcon />
         </button>
         <input
           type='number'
@@ -83,8 +83,8 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
           onChange={handleChange}
           disabled
         />
-        <button>
-          <RemoveIcon onClick={() => onSetQuantity(-1)} />
+        <button onClick={() => onSetQuantity(-1)}>
+          <RemoveIcon />
         </button>
       </div>
 

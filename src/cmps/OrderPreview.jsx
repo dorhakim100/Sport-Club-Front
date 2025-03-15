@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { smoothScroll } from '../services/util.service'
+import { makeId, smoothScroll } from '../services/util.service'
 
 import pending from '/public/imgs/pending.svg'
 import pendingDarkMode from '/public/imgs/pending-dark-mode.svg'
@@ -9,11 +9,14 @@ import readyDarkMode from '/public/imgs/ready-dark-mode.svg'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
 import Divider from '@mui/material/Divider'
+import { useEffect, useState } from 'react'
 
 export function OrderPreview({ order, updateOrder }) {
   const navigate = useNavigate()
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
+
+  const [isReady, setIsReady] = useState(false)
 
   const onUpdateOrder = async () => {
     if (!user.isAdmin) return
@@ -33,6 +36,30 @@ export function OrderPreview({ order, updateOrder }) {
       setIsLoading(false)
     }
   }
+
+  // useEffect(() => {
+  //   order.items.map((item) => {
+  //     if (item.options && item.options.length > 0) {
+  //       const optionsQuantity = item.options.reduce((accu, option) => {
+  //         console.log(accu)
+  //         console.log(option)
+  //         accu[option] ? accu[option]++ : (accu[option] = 1)
+
+  //         return accu
+  //       }, {})
+  //       console.log(optionsQuantity)
+  //       const result = Object.keys(optionsQuantity).map((key) => ({
+  //         id: key, // or use `id` if you prefer, e.g., id: key
+  //         quantity: optionsQuantity[key],
+  //       }))
+  //       // console.log(result)
+  //       item.options = result
+  //     }
+  //   })
+  //   // console.log(order)
+  //   // console.log(order)
+  //   setIsReady(true)
+  // }, [])
 
   return (
     <div
@@ -89,9 +116,44 @@ export function OrderPreview({ order, updateOrder }) {
                 {prefs.isEnglish ? item.title.eng : item.title.he}
               </b>
               <div className='quantity-container'>
-                {prefs.isEnglish && <span>x</span>}
-                <span>{item.quantity}</span>
-                {!prefs.isEnglish && <span>x</span>}
+                <div className='sum-container'>
+                  <span>{prefs.isEnglish && <span>x</span>}</span>
+                  <span>{item.quantity}</span>
+                  <span> {!prefs.isEnglish && <span>x</span>}</span>
+                </div>
+                {item.options && item.options[0] && (
+                  <>
+                    <span>-</span>
+                    <div className='options-container'>
+                      {item.options.map((option) => {
+                        if (option)
+                          return (
+                            <div
+                              className='option-container'
+                              key={`${option}Order${makeId()}`}
+                            >
+                              <span>
+                                {prefs.isEnglish
+                                  ? option.title.eng
+                                  : option.title.he}
+                              </span>
+                              {option.quantity !== 1 && (
+                                <div className='option-quantity-container'>
+                                  <span>
+                                    {prefs.isEnglish && <span>x</span>}
+                                  </span>
+                                  <span>{option.quantity}</span>
+                                  <span>
+                                    {!prefs.isEnglish && <span>x</span>}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                          )
+                      })}
+                    </div>
+                  </>
+                )}
               </div>
               {index + 1 < items.length && (
                 <Divider

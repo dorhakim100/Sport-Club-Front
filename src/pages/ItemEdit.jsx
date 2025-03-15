@@ -169,9 +169,12 @@ export function ItemEdit() {
     setIsLoading(true)
     try {
       let savedItem
-      isOptions
-        ? (savedItem = await updateItem({ ...editItem, options }))
-        : (savedItem = await updateItem(editItem))
+
+      if (isOptions) {
+        savedItem = await updateItem({ ...editItem, options })
+      } else {
+        savedItem = await updateItem({ ...editItem, options: [] })
+      }
 
       showSuccessMsg(
         prefs.isEnglish ? 'Item edited successfully' : 'מוצר נערך בהצלחה'
