@@ -7,7 +7,11 @@ import { smoothScroll, textAnimation } from '../services/util.service.js'
 import { loadTrainers } from '../store/actions/trainer.actions.js'
 import { loadUpdates } from '../store/actions/update.actions.js'
 import { updateService } from '../services/update/update.service.js'
-import { setIsLoading } from '../store/actions/system.actions.js'
+import {
+  setIsLoading,
+  setIsModal,
+  setModalMessage,
+} from '../store/actions/system.actions.js'
 import { showErrorMsg } from '../services/event-bus.service.js'
 
 import { SwiperCarousel } from '../cmps/SwiperCarousel.jsx'
@@ -26,12 +30,15 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import mouseWheelImgs from '/public/jsons/HomePage/MouseWheel/MouseWheel.json'
 import carouselImgs from '/public/jsons/HomePage/Carousel/Carousel.json'
 import preview from '/public/jsons/HomePage/Preview/Preview.json'
+import { userService } from '../services/user/user.service.js'
 
 export function HomePage() {
   const navigate = useNavigate()
   const prefs = useSelector((state) => state.systemModule.prefs)
   const trainers = useSelector((state) => state.trainerModule.trainers)
   const updates = useSelector((state) => state.updateModule.updates)
+
+  const user = useSelector((storeState) => storeState.userModule.user)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,6 +65,35 @@ export function HomePage() {
   useEffect(() => {
     textAnimation(prefs)
   }, [prefs.isEnglish, prefs.isDarkMode])
+
+  useEffect(() => {
+    const setMessageUpdate = async () => {
+      try {
+        setIsLoading(true)
+        const user = await userService.getLoggedinUser()
+        if (user && user.isAdmin) return
+        const update = await updateService.getLastUpdateMessage()
+        const messageToSet = {
+          he: update.title,
+          eng: update.title,
+          link: `/update`,
+        }
+
+        setModalMessage(messageToSet)
+        setIsModal(true)
+      } catch (err) {
+        showErrorMsg(
+          prefs.isEnglish
+            ? `Couldn't set update message`
+            : 'לא היה ניתן להציג הודעה'
+        )
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    setMessageUpdate()
+  }, [])
 
   const navigateToClass = (event) => {
     // support for safari browsers

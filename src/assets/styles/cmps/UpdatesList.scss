@@ -44,6 +44,24 @@
         font-size: 1.4em;
         //   height: 100px;
         // max-height: calc(0.6em + 100px);
+
+        &.message-update{
+               // Use a slightly less transparent gradient to stand out a bit more.
+            background: linear-gradient(135deg, #6ec1e4b0 0%, #a8e6a1b0 100%);
+            // A subtle border that uses a lightened version of your bold-navy (or choose a contrasting color)
+            border: 1px solid lighten($bold-navy, 10%);
+            // A gentle shadow to add depth
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            // Optionally, a slight scale up for visual emphasis (comment out if too much)
+            // transform: scale(1.02);
+
+            &.dark-mode{
+
+                text-shadow: black 1px 0 3px;
+            }
+        }
+
+
         @media (max-width:800px) {
             grid-template-columns: 1fr 1fr auto;
             
@@ -61,8 +79,8 @@
         }
         &:first-of-type{
               
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
         }
         
         &:last-of-type{
@@ -75,6 +93,12 @@
             text-align: start;
    
 
+        }
+
+        .admin-control-container{
+            display: grid;
+            justify-items: center;
+            gap: 1em;
         }
 
           

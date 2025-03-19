@@ -10,6 +10,7 @@ export const updateService = {
   getMaxPage,
   saveUpdatesOrder,
   getDefaultFilter,
+  getLastUpdateMessage,
 }
 async function query(filterBy = { pageIdx: 0, isAll: false }) {
   try {
@@ -50,6 +51,14 @@ async function save(update) {
     return savedUpdate
   } catch (err) {
     // // console.log(err)
+    throw err
+  }
+}
+
+async function getLastUpdateMessage() {
+  try {
+    return await httpService.get(`${KEY}/messageUpdate`)
+  } catch (err) {
     throw err
   }
 }
