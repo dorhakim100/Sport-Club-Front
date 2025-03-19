@@ -4,10 +4,13 @@ import { useSelector } from 'react-redux'
 import { setPrefs } from '../store/actions/system.actions'
 import { setIsPrefs } from '../store/actions/system.actions'
 
+import { DarkModeSwitch } from './DarkModeSwitch'
+
 import CloseIcon from '@mui/icons-material/Close'
 import LanguageIcon from '@mui/icons-material/Language'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
+import { LanguageSwitch } from './LanguageSwitch'
 
 export function Prefs({ bodyRef }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -34,7 +37,7 @@ export function Prefs({ bodyRef }) {
         const newLang = !prefs.isEnglish
         newPrefs = { ...prefs, isEnglish: newLang }
         setPrefs(newPrefs)
-        setIsPrefs(false)
+        closePrefsModal()
         return
 
       case 'darkMode':
@@ -42,7 +45,7 @@ export function Prefs({ bodyRef }) {
         newPrefs = { ...prefs, isDarkMode: newMode }
         setDarkMode(newMode)
         setPrefs(newPrefs)
-        setIsPrefs(false)
+        closePrefsModal()
         return
 
       default:
@@ -50,12 +53,25 @@ export function Prefs({ bodyRef }) {
     }
   }
 
+  const closePrefsModal = () => setIsPrefs(false)
+
   return (
-    <div className={`prefs-panel ${isVisible ? 'visible' : ''}`}>
-      <div className='close-container' onClick={() => setIsPrefs(false)}>
+    <div
+      className={`prefs-panel ${isVisible ? 'visible' : ''}`}
+      // onMouseLeave={closePrefsModal}
+    >
+      <div className='close-container' onClick={closePrefsModal}>
         <CloseIcon />
       </div>
       <div className='prefs-control'>
+        {/* <LanguageSwitch
+          onClick={() => onSetPrefs('lang')}
+          checked={!prefs.isEnglish}
+        />
+        <DarkModeSwitch
+          onClick={() => onSetPrefs('darkMode')}
+          checked={prefs.isDarkMode}
+        /> */}
         <button onClick={() => onSetPrefs('lang')}>
           {prefs.isEnglish ? 'Hebrew' : 'אנגלית'}
           <LanguageIcon />

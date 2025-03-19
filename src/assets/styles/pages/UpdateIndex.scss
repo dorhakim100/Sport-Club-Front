@@ -6,6 +6,7 @@
     gap: 1em;
     position: static;
 
+
     @media (max-width:1200px) {
             
      display: block;       
@@ -17,6 +18,8 @@
         grid-template-columns: repeat(2,1fr);
         align-items: center;
         justify-items: center;
+
+
     }
 
     .page-idx-container{
@@ -38,6 +41,7 @@
         display: grid;
         justify-items: center;
         gap: 1em;
+        max-width: 600px;
         input{
             
             // width: 500px;

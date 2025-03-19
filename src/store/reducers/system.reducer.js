@@ -7,6 +7,7 @@ export const SET_IS_PREFS = 'SET_IS_PREFS'
 export const SET_PREFS = 'SET_PREFS'
 export const SET_IS_MODAL = 'SET_IS_MODAL'
 export const SET_MODAL_MESSAGE = 'SET_MODAL_MESSAGE'
+export const SET_SHOWED_UPDATE_MESSAGE = 'SET_SHOWED_UPDATE_MESSAGE'
 
 const initialState = {
   isLoading: false,
@@ -17,6 +18,7 @@ const initialState = {
     'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729158737/%D7%97%D7%95%D7%92%D7%99%D7%9D_%D7%97%D7%93%D7%A9_%D7%9E%D7%A2%D7%95%D7%93%D7%9B%D7%9F_8-2024-1_kceouw.png',
   isModal: false,
   modalMessage: { he: '', eng: '' },
+  showedUpdateMessage: false,
 }
 
 export function systemReducer(state = initialState, action = {}) {
@@ -35,6 +37,8 @@ export function systemReducer(state = initialState, action = {}) {
       return { ...state, isModal: action.isModal }
     case SET_MODAL_MESSAGE:
       return { ...state, modalMessage: action.modalMessage }
+    case SET_SHOWED_UPDATE_MESSAGE:
+      return { ...state, showedUpdateMessage: action.showedUpdateMessage }
     default:
       return state
   }

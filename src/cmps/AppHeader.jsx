@@ -530,11 +530,11 @@ export function AppHeader() {
           >
             <img src={logo} alt='' />
           </NavLink>
-          <NavLink to='facilities' onClick={() => selectLink('/facilities')}>
-            <span>{prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
-          </NavLink>
           <NavLink to='update' onClick={() => selectLink('/update')}>
             <span>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</span>
+          </NavLink>
+          <NavLink to='facilities' onClick={() => selectLink('/facilities')}>
+            <span>{prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
           </NavLink>
 
           <NavLink to='class' onClick={() => selectLink('/class')}>

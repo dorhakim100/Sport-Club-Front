@@ -1,6 +1,7 @@
 .accessibility-panel, .prefs-panel {
     display: flex;
     flex-direction: column;
+    // gap: 1em;
     position: absolute;
     top: 11em;
     // right: -300px;
@@ -62,6 +63,11 @@
   .prefs-panel{
     left: auto;
     right: -300px;
+    // padding: 2em;
+
+    .MuiSwitch-sizeMedium{
+      margin: 0.5em;
+    }
   }
 
   .prefs-panel.visible{

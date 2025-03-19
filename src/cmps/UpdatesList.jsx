@@ -90,10 +90,18 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
       if (selectedId !== updateId) {
         setSelectedId(updateId)
 
-        await saveUpdate({ ...originalUpdate, isMessage: true })
+        await saveUpdate({
+          ...originalUpdate,
+          isMessage: true,
+          isOnlyMessage: true,
+        })
       } else {
         setSelectedId(null)
-        await saveUpdate({ ...originalUpdate, isMessage: false })
+        await saveUpdate({
+          ...originalUpdate,
+          isMessage: false,
+          isOnlyMessage: true,
+        })
       }
     } catch (err) {
       showErrorMsg(

@@ -10,6 +10,7 @@ import {
   SET_IS_PREFS,
   SET_IS_MODAL,
   SET_MODAL_MESSAGE,
+  SET_SHOWED_UPDATE_MESSAGE,
 } from '../reducers/system.reducer'
 
 export function setIsLoading(stateToSet) {
@@ -25,6 +26,13 @@ export function setPrefs(prefsToSet) {
 }
 export function setIsPrefs(stateToSet) {
   store.dispatch({ type: SET_IS_PREFS, isPrefs: stateToSet })
+}
+export function setIsShowedUpdateMessage(stateToSet) {
+  sessionStorage.setItem('showedUpdateMessage', stateToSet)
+  store.dispatch({
+    type: SET_SHOWED_UPDATE_MESSAGE,
+    showedUpdateMessage: stateToSet,
+  })
 }
 
 export function setIsAccessibility(stateToSet) {

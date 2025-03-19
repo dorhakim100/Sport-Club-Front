@@ -10,7 +10,9 @@ import { updateService } from '../services/update/update.service.js'
 import {
   setIsLoading,
   setIsModal,
+  setIsShowedUpdateMessage,
   setModalMessage,
+  setPrefs,
 } from '../store/actions/system.actions.js'
 import { showErrorMsg } from '../services/event-bus.service.js'
 
@@ -78,7 +80,7 @@ export function HomePage() {
           eng: update.title,
           link: `/update`,
         }
-
+        setIsShowedUpdateMessage(true)
         setModalMessage(messageToSet)
         setIsModal(true)
       } catch (err) {
@@ -91,8 +93,7 @@ export function HomePage() {
         setIsLoading(false)
       }
     }
-
-    setMessageUpdate()
+    if (!sessionStorage.getItem('showedUpdateMessage')) setMessageUpdate()
   }, [])
 
   const navigateToClass = (event) => {
