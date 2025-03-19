@@ -39,6 +39,7 @@
         }
         
         padding: 1em;
+        min-width: 300px;
         z-index: 4;
         
         @media (min-height:800px) {
@@ -50,11 +51,11 @@
         @media (max-width:600px) {
             b{
 
-                font-size: 2em;
+                font-size: 2.2em;
             }
 
             p{
-                font-size: 1em;
+                font-size: 1.2em;
             }
             
         }
