@@ -117,8 +117,8 @@
     grid-template-columns: repeat(3,1fr);
 
     @media (max-width:1000px) {
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr)); // Responsive grid
         
-        grid-template-columns: repeat(auto-fill, minmax(275px, 1fr)); // Responsive grid
     }
     gap: 1em; // Increased gap for better spacing
     // margin: 2em auto;
