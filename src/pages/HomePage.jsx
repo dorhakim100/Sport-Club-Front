@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
+import Lottie from 'react-lottie'
 
 import { trainerService } from '../services/trainer/trainer.service.js'
 import { smoothScroll, textAnimation } from '../services/util.service.js'
@@ -33,6 +34,17 @@ import mouseWheelImgs from '/public/jsons/HomePage/MouseWheel/MouseWheel.json'
 import carouselImgs from '/public/jsons/HomePage/Carousel/Carousel.json'
 import preview from '/public/jsons/HomePage/Preview/Preview.json'
 import { userService } from '../services/user/user.service.js'
+
+import notification from '../../public/imgs/notification.json'
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true, // Animation will autoplay
+  animationData: notification,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+}
 
 export function HomePage() {
   const navigate = useNavigate()
@@ -213,6 +225,13 @@ export function HomePage() {
             <Cards trainers={trainers} />
           </div>
           <div className='updates-carousel-container'>
+            <div className='animation'>
+              <Lottie
+                options={defaultOptions}
+                width={'100px'}
+                height={'100px'}
+              />
+            </div>
             <b>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</b>
             <Updates updates={updates} navigateToUpdates={navigateToUpdates} />
           </div>
