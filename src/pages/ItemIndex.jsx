@@ -16,6 +16,10 @@ import { DynamicCover } from '../cmps/DynamicCover'
 import { ContactUs } from '../cmps/ContactUs'
 import { Nav } from '../cmps/Nav'
 
+import mainCover from '../../public/imgs/items-main.webp'
+import cardsCover from '../../public/imgs/items-cards.webp'
+import accessoriesCover from '../../public/imgs/items-accessories.webp'
+
 import { setModalMessage, setIsModal } from '../store/actions/system.actions'
 
 export function ItemIndex() {
@@ -38,9 +42,7 @@ export function ItemIndex() {
   const [isGrid, setIsGrid] = useState(true)
 
   const [headText, setHeadText] = useState({ he: 'מוצרים', eng: 'Items' })
-  const [cover, setCover] = useState(
-    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732275016/DSC06192_1_ciikqh.jpg'
-  )
+  const [cover, setCover] = useState(mainCover)
 
   const origin = {
     path: '/item',
@@ -74,9 +76,7 @@ export function ItemIndex() {
       case '/item/card':
         filterToSet = { ...filterBy, sortDir, types: ['card'], pageIdx }
         setHeadText({ he: 'כרטיסיות', eng: 'Cards' })
-        setCover(
-          'https://res.cloudinary.com/dnxi70mfs/image/upload/v1736865230/DJI_0571_result_hlwlde.webp'
-        )
+        setCover(cardsCover)
         setFilterBy(filterToSet)
         return
         break
@@ -84,9 +84,7 @@ export function ItemIndex() {
       case '/item/accessories':
         filterToSet = { ...filterBy, sortDir, types: ['accessories'], pageIdx }
         setHeadText({ he: 'אביזרים', eng: 'Accessories' })
-        setCover(
-          'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733237228/DSC06193_ifenm8.jpg'
-        )
+        setCover(accessoriesCover)
         setFilterBy(filterToSet)
         return
         break
@@ -94,9 +92,7 @@ export function ItemIndex() {
       case '/item':
         filterToSet = { ...filterBy, sortDir, types: [], pageIdx }
         setHeadText({ he: 'כל המוצרים', eng: 'All Items' })
-        setCover(
-          'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732275016/DSC06192_1_ciikqh.jpg'
-        )
+        setCover(mainCover)
         setFilterBy(filterToSet)
         return
         break
