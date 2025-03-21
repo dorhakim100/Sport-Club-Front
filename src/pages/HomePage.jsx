@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import Lottie from 'react-lottie'
@@ -36,8 +36,10 @@ import preview from '/public/jsons/HomePage/Preview/Preview.json'
 import { userService } from '../services/user/user.service.js'
 
 import notification from '../../public/imgs/notification.json'
+import squat from '../../public/imgs/squat.json'
+import squatDarkMode from '../../public/imgs/squat-dark-mode.json'
 
-const defaultOptions = {
+const defaultOptionsNotifications = {
   loop: true,
   autoplay: true, // Animation will autoplay
   animationData: notification,
@@ -53,6 +55,17 @@ export function HomePage() {
   const updates = useSelector((state) => state.updateModule.updates)
 
   const user = useSelector((storeState) => storeState.userModule.user)
+
+  const [squatAnimation, setSquatAnimation] = useState(squat)
+
+  const classAnimationOptions = {
+    loop: true,
+    autoplay: true, // Animation will autoplay
+    animationData: squatAnimation,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,6 +91,11 @@ export function HomePage() {
 
   useEffect(() => {
     textAnimation(prefs)
+    if (prefs.isDarkMode) {
+      setSquatAnimation(squatDarkMode)
+    } else {
+      setSquatAnimation(squat)
+    }
   }, [prefs.isEnglish, prefs.isDarkMode])
 
   useEffect(() => {
@@ -198,9 +216,14 @@ export function HomePage() {
             className='arrow-link-container schedule'
             onClick={navigateToClass}
           >
-            <img
+            {/* <img
               src={prefs.isDarkMode ? dumbbellsDarkMode : dumbbells}
               alt=''
+            /> */}
+            <Lottie
+              options={classAnimationOptions}
+              width={'80%'}
+              height={'100%'}
             />
             <Link
               to='class'
@@ -227,7 +250,7 @@ export function HomePage() {
           <div className='updates-carousel-container'>
             <div className='animation'>
               <Lottie
-                options={defaultOptions}
+                options={defaultOptionsNotifications}
                 width={'100px'}
                 height={'100px'}
               />
