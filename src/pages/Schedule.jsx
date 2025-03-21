@@ -193,6 +193,7 @@ export function Schedule() {
           max-width: 297mm; 
           direction:${prefs.isEnglish ? 'ltr' : 'rtl'};
           text-align:'center';
+          margin:20px
         }
         .day-container {
           border: 1px solid #ccc;
@@ -203,7 +204,7 @@ export function Schedule() {
         
         .hour-container {
           border-bottom: 1px solid #ddd;
-          margin-bottom: 10px;
+          margin-bottom: 8px;
           padding: 3px;
           box-sizing: border-box;
           text-align:'center';
