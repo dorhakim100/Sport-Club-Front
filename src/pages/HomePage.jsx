@@ -75,6 +75,7 @@ export function HomePage() {
         const user = await userService.getLoggedinUser()
         if (user && user.isAdmin) return
         const update = await updateService.getLastUpdateMessage()
+        if (!update) return
         const messageToSet = {
           he: update.title,
           eng: update.title,
