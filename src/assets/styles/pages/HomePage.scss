@@ -370,11 +370,41 @@
     }
     
     .updates-carousel-container{
+      
+      grid-column: 1/-1;
+      grid-row: 2/3;
+
+      @media (min-width:600px) {
         
-        grid-column: 1/-1;
-        grid-row: 2/3;
+                display: grid;
+                grid-template-columns: repeat(2,auto);
+                grid-template-rows: repeat(2,auto);
+                align-items: center;
+        
+      }
+
+
+
+        .animation{
+          grid-row: 1/-1;
+          align-self: center;
+
+          @media (max-width:600px) {
+            display: none;
+            
+          }
+        }
+
+
+        
+
+
         
         .update-banner{
+
+
+
+
           transition: background-color 0.3s  ease-in-out, box-shadow 0.3s ease; // Smooth transition
           background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
           
@@ -458,6 +488,10 @@
         }
         
         
+      }
+
+      .updates-carousel{
+        grid-column: 2/-1;
       }
       
       .updates-carousel.dark-mode{
