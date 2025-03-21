@@ -196,7 +196,7 @@ export function Schedule() {
         }
         .day-container {
           border: 1px solid #ccc;
-          padding: 5px;
+          padding: 3px;
           box-sizing: border-box;
           text-align:'center';
         }
@@ -204,7 +204,7 @@ export function Schedule() {
         .hour-container {
           border-bottom: 1px solid #ddd;
           margin-bottom: 10px;
-          padding: 5px;
+          padding: 3px;
           box-sizing: border-box;
           text-align:'center';
         }
