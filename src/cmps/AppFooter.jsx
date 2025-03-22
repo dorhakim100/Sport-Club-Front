@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import InstagramIcon from '@mui/icons-material/Instagram'
 import FacebookIcon from '@mui/icons-material/Facebook'
@@ -8,9 +9,10 @@ import PlaceIcon from '@mui/icons-material/Place'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import MailIcon from '@mui/icons-material/Mail'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { smoothScroll } from '../services/util.service'
 
 export function AppFooter() {
-  const count = useSelector((storeState) => storeState.userModule.count)
+  const navigate = useNavigate()
 
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
 
@@ -61,10 +63,19 @@ export function AppFooter() {
     window.open(link)
   }
 
+  const navigateToAbout = (event) => {
+    event.preventDefault() // Stop the link from navigating immediately
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate('/about')
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+
   return (
     <footer className='app-footer full' ref={footerRef}>
       <div className='contact-container'>
-        <div className='method-container address'>
+        <div className='method-container address' onClick={navigateToAbout}>
           <PlaceIcon />
           <span>{address}</span>
         </div>
