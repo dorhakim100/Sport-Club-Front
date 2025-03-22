@@ -18,9 +18,7 @@ export function AppFooter() {
 
   const footerRef = useRef()
 
-  const address = prefs.isEnglish
-    ? 'Keren hayesod 19, Kfar Shmaryahu'
-    : 'קרן היסוד 19, כפר שמריהו'
+  const address = prefs.isEnglish ? 'Keren hayesod 19,' : 'קרן היסוד 19,'
 
   const phone = '09-958-0404'
   const email = 'service.kfar@gmail.com'
@@ -72,21 +70,23 @@ export function AppFooter() {
     }, 300) // Adjust time based on your smoothScroll timing
   }
 
+  const call = () => {
+    window.location.href = 'tel:099580404'
+  }
+
   return (
     <footer className='app-footer full' ref={footerRef}>
       <div className='contact-container'>
         <div className='method-container address' onClick={navigateToAbout}>
           <PlaceIcon />
-          <span>{address}</span>
+          <div className='address-container'>
+            <span>{address}</span>
+            <span>{prefs.isEnglish ? 'Kfar Shmaryahu' : 'כפר שמריהו'}</span>
+          </div>
         </div>
-        <div className='method-container phone'>
+        <div className='method-container phone' onClick={call}>
           <LocalPhoneIcon />
-          <a
-            href='tel:099580404'
-            className={prefs.isDarkMode ? 'dark-mode' : ''}
-          >
-            {phone}
-          </a>
+          <span className={prefs.isDarkMode ? 'dark-mode' : ''}>{phone}</span>
         </div>
         <div
           className={`method-container email`}
