@@ -37,7 +37,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 
 import InfoIcon from '@mui/icons-material/Info'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
-
+import LogoutIcon from '@mui/icons-material/Logout'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi'
 import RecentActorsIcon from '@mui/icons-material/RecentActors'
@@ -54,6 +54,7 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
 import AccessibilityIcon from '@mui/icons-material/Accessibility'
 import DoDisturbIcon from '@mui/icons-material/DoDisturb'
 import LoginIcon from '@mui/icons-material/Login'
+import PersonIcon from '@mui/icons-material/Person'
 
 import ListSubheader from '@mui/material/ListSubheader'
 import List from '@mui/material/List'
@@ -77,6 +78,7 @@ import {
   setIsAccessibility,
 } from '../store/actions/system.actions'
 import { loadOpenPayments } from '../store/actions/payment.actions'
+import { Logout } from '@mui/icons-material'
 
 export function AppHeader() {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -900,36 +902,64 @@ export function AppHeader() {
               {links.map((link, index) => {
                 if (
                   (link.to === 'admin' && !user) ||
-                  (link.to === 'asmin' && !user.isAdmin)
+                  (link.to === 'admin' && !user.isAdmin)
                 )
                   return (
-                    <ListItemButton
-                      sx={{
-                        textAlign: 'start',
-                        '&:hover': {
-                          backgroundColor: prefs.isDarkMode ? '#111' : '',
-                        },
-                      }}
-                      key={'LoginOption'}
-                      onClick={() => {
-                        setMenu(false)
-                        delayedNavigate('/user/login')
-                      }}
-                    >
-                      <ListItemIcon
+                    <div key={'LoginOption'}>
+                      <ListItemButton
                         sx={{
-                          color: prefs.isDarkMode ? '#fff' : '',
+                          textAlign: 'start',
+                          '&:hover': {
+                            backgroundColor: prefs.isDarkMode ? '#111' : '',
+                          },
+                        }}
+                        onClick={() => {
+                          setMenu(false)
+                          if (!user) delayedNavigate('/user/login')
+                          else delayedNavigate(`/user/${user._id}`)
                         }}
                       >
-                        <LoginIcon />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={prefs.isEnglish ? 'Login' : 'כניסה'}
-                      />
-                    </ListItemButton>
+                        <ListItemIcon
+                          sx={{
+                            color: prefs.isDarkMode ? '#fff' : '',
+                          }}
+                        >
+                          {user ? <PersonIcon /> : <LoginIcon />}
+                        </ListItemIcon>
+                        {user ? (
+                          <ListItemText primary={user.fullname} />
+                        ) : (
+                          <ListItemText
+                            primary={prefs.isEnglish ? 'Login' : 'כניסה'}
+                          />
+                        )}
+                      </ListItemButton>
+                      {user && (
+                        <ListItemButton
+                          sx={{
+                            textAlign: 'start',
+                            '&:hover': {
+                              backgroundColor: prefs.isDarkMode ? '#111' : '',
+                            },
+                          }}
+                          onClick={onLogout}
+                        >
+                          <ListItemIcon
+                            sx={{
+                              color: prefs.isDarkMode ? '#fff' : '',
+                            }}
+                          >
+                            <LogoutIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={prefs.isEnglish ? 'Logout' : 'יציאה'}
+                          />
+                        </ListItemButton>
+                      )}
+                    </div>
                   )
                 return link.dropdown ? (
-                  <>
+                  <div key={`${index}Link`}>
                     <ListItemButton
                       sx={{
                         textAlign: 'start',
@@ -937,7 +967,6 @@ export function AppHeader() {
                           backgroundColor: prefs.isDarkMode ? '#111' : '',
                         },
                       }}
-                      key={`${index}Link`}
                       onClick={() => handleMenuItemClick(link.id)}
                     >
                       <ListItemIcon
@@ -1004,7 +1033,7 @@ export function AppHeader() {
                         }}
                       />
                     )}
-                  </>
+                  </div>
                 ) : (
                   <ListItemButton
                     sx={{
@@ -1013,9 +1042,10 @@ export function AppHeader() {
                         backgroundColor: prefs.isDarkMode ? '#111' : '',
                       },
                     }}
-                    key={index}
+                    key={`${index}ButtonLink`}
                     onClick={() => {
                       setMenu(false)
+
                       delayedNavigate(`/${link.to}`)
                     }}
                   >
@@ -1060,7 +1090,7 @@ export function AppHeader() {
               <NavLink
                 to={link.to}
                 onClick={() => selectLink(`/${link.to}`)}
-                key={index}
+                key={`${index}Link`}
               >
                 {(link.dropdown && (
                   <div
