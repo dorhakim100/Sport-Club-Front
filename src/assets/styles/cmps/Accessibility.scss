@@ -1,165 +1,158 @@
-.accessibility-panel, .prefs-panel {
-    display: flex;
-    flex-direction: column;
-    // gap: 1em;
-    position: absolute;
-    top: 11em;
-    // right: -300px;
-    left: -300px;
-    transition: right 0.3s ease;
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    z-index: 1000;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    position: fixed;
-    transition: 0.2s ease-in;
-    // translate: 150%;
-    // padding: 2em;
-    @media (min-width:1020px) {
-      // top: 15em;
-      // transform: scale(1.2);
-      padding: 1em;
-      .close-container{
-        transform: scale(1.2);
-
-      }
-      button{
-        font-size: 1.2em;
-      }
+.accessibility-panel,
+.prefs-panel {
+  display: flex;
+  flex-direction: column;
+  // gap: 1em;
+  position: absolute;
+  top: 11em;
+  // right: -300px;
+  left: -300px;
+  transition: right 0.3s ease;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  z-index: 1000;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  position: fixed;
+  transition: 0.2s ease-in;
+  // translate: 150%;
+  // padding: 2em;
+  @media (min-width: 1020px) {
+    // top: 15em;
+    // transform: scale(1.2);
+    padding: 1em;
+    .close-container {
+      transform: scale(1.2);
     }
-    .close-container{
-        align-self: end;
-        // position: absolute;
-        background-color: $light-gray;
-        border-radius: 50%;
-        height: 20px;
-        width: 20px;
-        cursor: pointer;
-        transition: 0.1s ease;
-        display: flex;
-        align-items: center;
-        justify-items: center;
-
-        svg{
-            // font-size: 0.8em;
-            width: 20px;
-
-        }
-        
-        &:hover{
-            background-color: $medium-red;
-            background-color: $light-red;
-        }
-
-    }
-  }
-  
-  .accessibility-panel.visible {
-    left: 1em;
-  }
-
-  .prefs-panel{
-    left: auto;
-    right: -300px;
-    // padding: 2em;
-
-    .MuiSwitch-sizeMedium{
-      margin: 0.5em;
-    }
-  }
-
-  .prefs-panel.visible{
-    right: 1em;
-  }
-  
-
-    .accessibility-btn, .prefs-button {
-        position: fixed;
-        left: 1em;
-        top: 9em;
-      // width: 80px;
-      z-index: 1000;
-      border-radius: 5px;
-      transition: 0.1s ease;  
-      
-      &:hover{
-        
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      }
-      
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px;
-      @media (min-width:1020px) {
-        
-        // padding: 1.5em;
-
-        svg{
-          font-size: 2.5em;
-        }
-      }
-    cursor: pointer;
-  }
-
-  .prefs-button{
-    right: 1em;
-    left: auto;
-  }
-
-  .prefs-button{
-    // transition: transform 0.6s ease-in-out;
-    svg{
-      transition: 0.2s ease-out;
-    }
-    &:hover {
-      .settings-btn{
-
-        animation: spin 0.5s linear forwards;
-      }
-      // transform: rotateY(180deg);
-    }
-  }
-
-
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(90deg);
-    }
-  }
-  
-  .accessibility-controls, .prefs-control {
-    display: flex;
-    flex-direction: column;
-    
     button {
-        display: flex;
-        align-items: center;
-        justify-items: center;
-        justify-content: space-between;
-        gap: 0.5em;
-        margin: 5px 0;
-        padding: 8px;
-        border-radius: 5px;
-        border: none;
-        background-color: #007bff;
-        color: white;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;   
-        cursor: pointer;
-
-        &:hover{
-          background-color: #0056b3;
-
-        }
+      font-size: 1.2em;
     }
-    
+  }
+  .close-container {
+    align-self: end;
+    // position: absolute;
+    background-color: $light-gray;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    transition: 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
+    svg {
+      // font-size: 0.8em;
+      width: 20px;
+    }
+
+    &:hover {
+      background-color: $medium-red;
+      background-color: $light-red;
+    }
+  }
 }
 
+.accessibility-panel.visible {
+  left: 1em;
+}
 
-  
+.prefs-panel {
+  left: auto;
+  right: -300px;
+  // padding: 2em;
+
+  .MuiSwitch-sizeMedium {
+    margin: 0.5em;
+  }
+}
+
+.prefs-panel.visible {
+  right: 1em;
+}
+
+.accessibility-btn,
+.prefs-button {
+  position: fixed;
+  left: 1em;
+  top: 9em;
+  // width: 80px;
+  z-index: 1000;
+  border-radius: 5px;
+  transition: 0.1s ease;
+
+  @media (max-width: 1150px) {
+    display: none;
+  }
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  @media (min-width: 1020px) {
+    // padding: 1.5em;
+
+    svg {
+      font-size: 2.5em;
+    }
+  }
+  cursor: pointer;
+}
+
+.prefs-button {
+  right: 1em;
+  left: auto;
+}
+
+.prefs-button {
+  // transition: transform 0.6s ease-in-out;
+  svg {
+    transition: 0.2s ease-out;
+  }
+  &:hover {
+    .settings-btn {
+      animation: spin 0.5s linear forwards;
+    }
+    // transform: rotateY(180deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+.accessibility-controls,
+.prefs-control {
+  display: flex;
+  flex-direction: column;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}

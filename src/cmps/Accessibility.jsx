@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { setIsAccessibility } from '../store/actions/system.actions'
+import { setIsAccessibility, setIsPrefs } from '../store/actions/system.actions'
 
 import TextIncreaseIcon from '@mui/icons-material/TextIncrease'
 import TextDecreaseIcon from '@mui/icons-material/TextDecrease'
@@ -13,6 +13,7 @@ import LinkIcon from '@mui/icons-material/Link'
 import SpellcheckIcon from '@mui/icons-material/Spellcheck'
 import RestartAltIcon from '@mui/icons-material/RestartAlt'
 import CloseIcon from '@mui/icons-material/Close'
+import { set } from 'date-fns'
 
 export function Accessibility({ bodyRef }) {
   const isVisible = useSelector(
@@ -123,60 +124,68 @@ export function Accessibility({ bodyRef }) {
     }
   }
 
+  const closeModals = () => {
+    setIsPrefs(false)
+    setIsAccessibility(false)
+  }
+
   return (
-    <div className={`accessibility-panel ${isVisible ? 'visible' : ''}`}>
-      <div
-        tabIndex='0' /* Ensures the div can capture key events */
-        className='close-container'
-        onClick={() => setIsAccessibility(false)}
-        // onKeyDown={handleKeyDown}
-      >
-        <CloseIcon />
-      </div>
-      <div className='accessibility-controls'>
-        <button onClick={increaseTextSize}>
-          {prefs.isEnglish ? 'Increase Text Size' : 'הגדל טקסט'}
-          <TextIncreaseIcon />
-        </button>
-        <button onClick={decreaseTextSize}>
-          {prefs.isEnglish ? 'Decrease Text Size' : 'הקטן טקסט'}
-          <TextDecreaseIcon />
-        </button>
-        <button onClick={() => setGrayScale((prev) => !prev)}>
-          {prefs.isEnglish ? 'Gray Scale' : 'גווני אפור'}
-          <FilterBAndWIcon />
-        </button>
-        <button onClick={() => setHighContrast((prev) => !prev)}>
-          {prefs.isEnglish ? 'High Contrast' : 'ניגודיות גבוהה'}
-          <ContrastIcon />
-        </button>
-        <button onClick={() => setReverseContrast((prev) => !prev)}>
-          {prefs.isEnglish ? 'Reverse Contrast' : 'ניגודיות הפוכה'}
-          <VisibilityIcon />
-        </button>
-        <button
-          onClick={() => {
-            setWhiteBackground((prev) => !prev)
-          }}
+    <>
+      {isVisible && <div className='overlay' onClick={closeModals}></div>}
+      <div className={`accessibility-panel ${isVisible ? 'visible' : ''}`}>
+        <div
+          tabIndex='0' /* Ensures the div can capture key events */
+          className='close-container'
+          onClick={() => setIsAccessibility(false)}
+          // onKeyDown={handleKeyDown}
         >
-          {prefs.isEnglish ? 'White Background' : 'רקע בהיר'}
-          <LightModeIcon />
-        </button>
-        <button onClick={() => setUnderlineLinks((prev) => !prev)}>
-          {prefs.isEnglish ? 'Underline Links' : 'הדגשת קישורים'}
-          <LinkIcon />
-        </button>
-        <button onClick={() => setReadableFont((prev) => !prev)}>
-          {prefs.isEnglish ? 'Readable Font' : 'פונט קריא'}
-          <SpellcheckIcon />
-        </button>
-        <button onClick={resetStyles}>
-          {prefs.isEnglish ? 'Reset' : 'איפוס'} <RestartAltIcon />
-        </button>
-      </div>
-      {underlineLinks && (
-        <style>{`a { text-decoration: underline !important; }`}</style>
-      )}
-    </div>
+          <CloseIcon />
+        </div>
+        <div className='accessibility-controls'>
+          <button onClick={increaseTextSize}>
+            {prefs.isEnglish ? 'Increase Text Size' : 'הגדל טקסט'}
+            <TextIncreaseIcon />
+          </button>
+          <button onClick={decreaseTextSize}>
+            {prefs.isEnglish ? 'Decrease Text Size' : 'הקטן טקסט'}
+            <TextDecreaseIcon />
+          </button>
+          <button onClick={() => setGrayScale((prev) => !prev)}>
+            {prefs.isEnglish ? 'Gray Scale' : 'גווני אפור'}
+            <FilterBAndWIcon />
+          </button>
+          <button onClick={() => setHighContrast((prev) => !prev)}>
+            {prefs.isEnglish ? 'High Contrast' : 'ניגודיות גבוהה'}
+            <ContrastIcon />
+          </button>
+          <button onClick={() => setReverseContrast((prev) => !prev)}>
+            {prefs.isEnglish ? 'Reverse Contrast' : 'ניגודיות הפוכה'}
+            <VisibilityIcon />
+          </button>
+          <button
+            onClick={() => {
+              setWhiteBackground((prev) => !prev)
+            }}
+          >
+            {prefs.isEnglish ? 'White Background' : 'רקע בהיר'}
+            <LightModeIcon />
+          </button>
+          <button onClick={() => setUnderlineLinks((prev) => !prev)}>
+            {prefs.isEnglish ? 'Underline Links' : 'הדגשת קישורים'}
+            <LinkIcon />
+          </button>
+          <button onClick={() => setReadableFont((prev) => !prev)}>
+            {prefs.isEnglish ? 'Readable Font' : 'פונט קריא'}
+            <SpellcheckIcon />
+          </button>
+          <button onClick={resetStyles}>
+            {prefs.isEnglish ? 'Reset' : 'איפוס'} <RestartAltIcon />
+          </button>
+        </div>
+        {underlineLinks && (
+          <style>{`a { text-decoration: underline !important; }`}</style>
+        )}
+      </div>{' '}
+    </>
   )
 }

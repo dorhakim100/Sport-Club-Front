@@ -21,6 +21,52 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
+import IconButton from '@mui/material/IconButton'
+import SettingsIcon from '@mui/icons-material/Settings'
+import AccessibleIcon from '@mui/icons-material/Accessible'
+
+// list
+
+import Menu from '@mui/material/Menu'
+
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
+
+import EventNoteIcon from '@mui/icons-material/EventNote'
+import CardMembershipIcon from '@mui/icons-material/CardMembership'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
+
+import InfoIcon from '@mui/icons-material/Info'
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings'
+
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi'
+import RecentActorsIcon from '@mui/icons-material/RecentActors'
+import MoreIcon from '@mui/icons-material/More'
+import PoolIcon from '@mui/icons-material/Pool'
+import SportsTennisIcon from '@mui/icons-material/SportsTennis'
+import SelfImprovementIcon from '@mui/icons-material/SelfImprovement'
+import SpaIcon from '@mui/icons-material/Spa'
+import CabinIcon from '@mui/icons-material/Cabin'
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
+import MyLocationIcon from '@mui/icons-material/MyLocation'
+import QueryBuilderIcon from '@mui/icons-material/QueryBuilder'
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary'
+import AccessibilityIcon from '@mui/icons-material/Accessibility'
+import DoDisturbIcon from '@mui/icons-material/DoDisturb'
+import LoginIcon from '@mui/icons-material/Login'
+
+import ListSubheader from '@mui/material/ListSubheader'
+import List from '@mui/material/List'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
+import Collapse from '@mui/material/Collapse'
+
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+
+import Divider from '@mui/material/Divider'
+
 import { socketService } from '../services/socket.service'
 import { userService } from '../services/user/user.service'
 import {
@@ -28,6 +74,7 @@ import {
   setIsPrefs,
   setModalMessage,
   setIsModal,
+  setIsAccessibility,
 } from '../store/actions/system.actions'
 import { loadOpenPayments } from '../store/actions/payment.actions'
 
@@ -56,14 +103,31 @@ export function AppHeader() {
 
   const [scrolled, setScrolled] = useState(false)
   const headerRef = useRef()
-  const waterRef = useRef()
+
   const logoRef = useRef()
+
+  const isPrefs = useSelector(
+    (stateSelector) => stateSelector.systemModule.isPrefs
+  )
+  const isAccessibility = useSelector(
+    (stateSelector) => stateSelector.systemModule.isAccessibility
+  )
 
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions()
   )
 
   const [menu, setMenu] = useState(false)
+
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+    setMenu(false)
+  }
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -230,8 +294,8 @@ export function AppHeader() {
       delete prefsToSet.user
       setPrefs({ ...prefsToSet })
       // support for safari browsers
-      smoothScroll()
       showSuccessMsg(prefs.isEnglish ? `Bye now` : 'להתראות')
+      smoothScroll()
 
       setTimeout(() => {
         navigate('/')
@@ -242,7 +306,7 @@ export function AppHeader() {
   }
 
   const handleMouseEnter = (section) => {
-    // if (windowDimensions.width <= 1050) return
+    // if (windowDimensions.width <= 1150) return
     setHoveredSection(section)
     setDropdownVisible(true)
   }
@@ -316,14 +380,6 @@ export function AppHeader() {
         break
       case 'about':
         optionsToSet = [
-          // {
-          //   text: prefs.isEnglish ? 'Facilities' : 'מתקני המועדון',
-          //   path: `${section}/facilities`,
-          // },
-          // {
-          //   text: prefs.isEnglish ? 'Our Team' : 'צוות המועדון',
-          //   path: `${section}/team`,
-          // },
           {
             text: prefs.isEnglish ? 'About us' : 'אודותינו',
             path: `${section}`,
@@ -404,7 +460,10 @@ export function AppHeader() {
     }
   }
 
-  const toggleMenu = () => {
+  const toggleMenu = (event) => {
+    // if (!menu) {
+    // } else setMenuRef(null)
+    setAnchorEl(event.currentTarget)
     setMenu((prev) => (prev = !prev))
   }
 
@@ -455,6 +514,268 @@ export function AppHeader() {
     setMenu(false)
   }
 
+  const delayedNavigate = (path) => {
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate(path)
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+  const handleMenuItemClick = (linkId) => {
+    // setOpenDropdown(!openDropdown)
+    setLinks((prevLinks) =>
+      prevLinks.map((link) =>
+        // link.id === linkId ? { ...link, isOpen: !link.isOpen } : link
+        link.id === linkId
+          ? { ...link, isOpen: !link.isOpen }
+          : { ...link, isOpen: false }
+      )
+    )
+  }
+  const [links, setLinks] = useState([
+    {
+      id: 1,
+      title: { eng: 'Updates', he: 'עדכונים' },
+      to: 'update',
+      onClick: () => {
+        delayedNavigate('/update')
+      },
+      dropdown: false,
+      icon: <NotificationsNoneIcon />,
+    },
+    {
+      id: 2,
+      title: { eng: 'Facilities', he: 'מתקני המועדון' },
+      to: 'facilities',
+      onClick: () => {
+        delayedNavigate('/facilities')
+      },
+      dropdown: false,
+      icon: <PoolIcon />,
+    },
+    {
+      id: 3,
+      title: { eng: 'Class', he: 'חוגים' },
+      to: 'class',
+      onClick: () => {
+        selectLink('/class')
+      },
+      dropdown: [
+        {
+          title: { eng: 'Classes', he: 'שיעורים' },
+          path: `class`,
+          icon: <SelfImprovementIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/class')
+          },
+        },
+        {
+          title: { eng: 'Schedule', he: 'מערכת החוגים' },
+          path: `class/schedule`,
+          icon: <CalendarTodayIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/class/schedule')
+          },
+        },
+        {
+          title: { eng: 'Our Trainers', he: 'צוות המדריכים שלנו' },
+          path: `class/trainer`,
+          icon: <SportsKabaddiIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/class/trainer')
+          },
+        },
+      ],
+      isOpen: false,
+      icon: <EventNoteIcon />,
+    },
+    {
+      id: 4,
+      title: { eng: 'Member', he: 'מנויים' },
+      to: 'member',
+      onClick: () => {
+        delayedNavigate('/member')
+      },
+      dropdown: false,
+      icon: <CardMembershipIcon />,
+    },
+    {
+      id: 5,
+      title: { eng: 'Store', he: 'כרטיסיות וציוד' },
+      to: 'item',
+      onClick: () => {
+        selectLink('/item')
+      },
+      dropdown: [
+        {
+          title: { eng: 'All Items', he: 'כל המוצרים' },
+          path: `item`,
+          icon: <AddShoppingCartIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/item')
+          },
+        },
+        {
+          title: { eng: 'Cards', he: 'כרטיסיות' },
+          path: `item/card`,
+          icon: <RecentActorsIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/item/card')
+          },
+        },
+        {
+          title: { eng: 'Accessories', he: 'אביזרים' },
+          path: `item/accessories`,
+          icon: <MoreIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/item/accessories')
+          },
+        },
+      ],
+      isOpen: false,
+      icon: <AddShoppingCartIcon />,
+    },
+    {
+      id: 6,
+      title: { eng: 'Activities', he: 'פעילויות' },
+      to: 'activities',
+      onClick: () => {
+        selectLink('/activities')
+      },
+      dropdown: [
+        {
+          title: { eng: 'Swimming School', he: 'בית הספר לשחייה' },
+          path: `activities/swimming`,
+          icon: <PoolIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/activities/swimming')
+          },
+        },
+        {
+          title: { eng: 'Tennis Academy', he: 'האקדמיה לטניס' },
+          path: `activities/tennis`,
+          icon: <SportsTennisIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/activities/tennis')
+          },
+        },
+        {
+          title: { eng: 'Reformer Pilates', he: 'פילאטיס מכשירים' },
+          path: `activities/pilates`,
+          icon: <SelfImprovementIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/activities/pilates')
+          },
+        },
+        {
+          title: { eng: 'Care Center', he: 'מרכז הטיפולים' },
+          path: `activities/care`,
+          icon: <SpaIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/activities/care')
+          },
+        },
+        {
+          title: { eng: 'Summer Camp', he: 'קייטנת הקיץ' },
+          path: `activities/camp`,
+          icon: <CabinIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/activities/camp')
+          },
+        },
+        {
+          title: { eng: 'Restaurant', he: 'שף הכפר' },
+          path: `activities/restaurant`,
+          icon: <RestaurantMenuIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/activities/restaurant')
+          },
+        },
+      ],
+      isOpen: false,
+      icon: <SportsTennisIcon />,
+    },
+    {
+      id: 7,
+      title: { eng: 'About', he: 'אודות' },
+      to: 'about',
+      onClick: () => {
+        selectLink('/about')
+      },
+      dropdown: [
+        {
+          title: { eng: 'About us', he: 'אודותינו' },
+          path: `about`,
+          icon: <MyLocationIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/about')
+          },
+        },
+        {
+          title: { eng: 'Opening times', he: 'שעות הפתיחה' },
+          path: `about/times`,
+          icon: <QueryBuilderIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/about/times')
+          },
+        },
+        {
+          title: { eng: 'Organization', he: 'העמותה' },
+          path: `about/organization`,
+          icon: <LocalLibraryIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/about/organization')
+          },
+        },
+        {
+          title: { eng: 'Accessibility', he: 'נגישות' },
+          path: `about/accessibility`,
+          icon: <AccessibilityIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/about/accessibility')
+          },
+        },
+        {
+          title: { eng: 'Cenceling', he: 'ביטולים' },
+          path: `about/cancel`,
+          icon: <DoDisturbIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/about/cancel')
+          },
+        },
+      ],
+      isOpen: false,
+      icon: <InfoIcon />,
+    },
+    {
+      id: 8,
+      title: { eng: 'Admin', he: 'מנהל' },
+      to: 'admin',
+      onClick: () => {
+        selectLink('/admin')
+      },
+      dropdown: false,
+      icon: <AdminPanelSettingsIcon />,
+    },
+  ])
+
   return (
     <>
       {menu && (
@@ -467,10 +788,10 @@ export function AppHeader() {
         className={
           scrolled
             ? `app-header sticky full ${
-                windowDimensions.width <= 1050 ? 'mobile' : ''
+                windowDimensions.width <= 1150 ? 'mobile' : ''
               }`
             : `app-header full ${
-                windowDimensions.width <= 1050 ? 'mobile' : ''
+                windowDimensions.width <= 1150 ? 'mobile' : ''
               }`
         }
         onClick={removeDropdown}
@@ -482,44 +803,243 @@ export function AppHeader() {
             ? {
                 direction: 'ltr',
                 opacity: scrolled ? '0.8' : '',
-                paddingLeft: windowDimensions.width <= 1050 && '1.5em',
+                paddingLeft: windowDimensions.width <= 1150 && '1.5em',
               }
             : {
                 direction: 'rtl',
                 opacity: scrolled ? '0.8' : '',
-                paddingRight: windowDimensions.width <= 1050 && '1.5em',
+                paddingRight: windowDimensions.width <= 1150 && '1.5em',
               }
         }
       >
         {' '}
-        {windowDimensions.width <= 1050 && (
-          <Button
-            variant='contained'
-            onClick={toggleMenu}
-            className='notification-btn menu-btn'
+        {windowDimensions.width <= 1150 && (
+          <div
+            className={`header-buttons-container ${
+              prefs.isDarkMode ? 'dark-mode' : ''
+            }`}
           >
-            {(menu && (
-              <>
-                {user && user.isAdmin && openTasks > 0 && (
-                  <span>{openTasks}</span>
-                )}
-                <MenuOpenIcon />
-              </>
-            )) || (
-              <>
-                {user && user.isAdmin && openTasks > 0 && (
-                  <span>{openTasks}</span>
-                )}
-                <MenuIcon />
-              </>
-            )}
-          </Button>
+            <IconButton
+              variant='contained'
+              onClick={toggleMenu}
+              className='notification-btn menu-btn'
+            >
+              {(menu && (
+                <>
+                  {user && user.isAdmin && openTasks > 0 && (
+                    <span>{openTasks}</span>
+                  )}
+                  <MenuOpenIcon />
+                </>
+              )) || (
+                <>
+                  {user && user.isAdmin && openTasks > 0 && (
+                    <span>{openTasks}</span>
+                  )}
+                  <MenuIcon />
+                </>
+              )}
+            </IconButton>
+            <IconButton onClick={() => setIsPrefs(!isPrefs)}>
+              <SettingsIcon></SettingsIcon>
+            </IconButton>
+            <IconButton onClick={() => setIsAccessibility(!isAccessibility)}>
+              <AccessibleIcon></AccessibleIcon>
+            </IconButton>
+          </div>
+        )}
+        {windowDimensions.width <= 1150 && (
+          <Menu
+            id='basic-menu'
+            anchorEl={anchorEl}
+            open={menu}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            disableScrollLock
+            PaperProps={{
+              sx: {
+                bgcolor: prefs.isDarkMode ? '#222' : '#fff',
+                color: prefs.isDarkMode ? '#fff' : '#000',
+                minWidth: 200,
+              },
+            }}
+          >
+            <List
+              sx={{
+                width: '100%',
+                maxWidth: 360,
+                bgcolor: 'background.paper',
+                // display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'stretch',
+                direction: prefs.isEnglish ? 'ltr' : 'rtl',
+
+                bgcolor: prefs.isDarkMode ? '#222' : '#fff',
+                color: prefs.isDarkMode ? '#fff' : '#000',
+                minWidth: 230,
+              }}
+              component='nav'
+              aria-labelledby='nested-list-subheader'
+              subheader={
+                <ListSubheader
+                  component='div'
+                  id='nested-list-subheader'
+                  // sx={{ alignSelf: 'center' }}
+                  sx={{
+                    fontSize: '1.2em',
+                    backgroundColor: prefs.isDarkMode ? '#222' : '#fff',
+                    color: prefs.isDarkMode ? '#fff' : '#000',
+                  }}
+                >
+                  {prefs.isEnglish ? 'Menu' : 'תפריט'}
+                </ListSubheader>
+              }
+            >
+              {links.map((link, index) => {
+                if (
+                  (link.to === 'admin' && !user) ||
+                  (link.to === 'asmin' && !user.isAdmin)
+                )
+                  return (
+                    <ListItemButton
+                      sx={{
+                        textAlign: 'start',
+                        '&:hover': {
+                          backgroundColor: prefs.isDarkMode ? '#111' : '',
+                        },
+                      }}
+                      key={'LoginOption'}
+                      onClick={() => {
+                        setMenu(false)
+                        delayedNavigate('/user/login')
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          color: prefs.isDarkMode ? '#fff' : '',
+                        }}
+                      >
+                        <LoginIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={prefs.isEnglish ? 'Login' : 'כניסה'}
+                      />
+                    </ListItemButton>
+                  )
+                return link.dropdown ? (
+                  <>
+                    <ListItemButton
+                      sx={{
+                        textAlign: 'start',
+                        '&:hover': {
+                          backgroundColor: prefs.isDarkMode ? '#111' : '',
+                        },
+                      }}
+                      key={`${index}Link`}
+                      onClick={() => handleMenuItemClick(link.id)}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          color: prefs.isDarkMode ? '#fff' : '',
+                        }}
+                      >
+                        {link.icon}
+                      </ListItemIcon>
+
+                      <ListItemText
+                        primary={
+                          prefs.isEnglish ? link.title.eng : link.title.he
+                        }
+                      />
+                      {link.isOpen ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                    {link.isOpen && (
+                      <Divider
+                        orientation='horizontal'
+                        flexItem
+                        sx={{
+                          backgroundColor: prefs.isDarkMode ? '#fff' : '',
+                        }}
+                      />
+                    )}
+                    <Collapse in={link.isOpen} timeout='auto' unmountOnExit>
+                      <List component='div' disablePadding>
+                        {link.dropdown.map((option, index) => {
+                          return (
+                            <ListItemButton
+                              sx={{ pl: 4 }}
+                              key={`${index}Dropdown`}
+                              onClick={option.onClick}
+                            >
+                              <ListItemIcon
+                                sx={{
+                                  color: prefs.isDarkMode ? '#fff' : '',
+                                }}
+                              >
+                                {option.icon}
+                              </ListItemIcon>
+                              <ListItemText
+                                primary={
+                                  prefs.isEnglish
+                                    ? option.title.eng
+                                    : option.title.he
+                                }
+                                sx={{
+                                  textAlign: prefs.isEnglish ? 'left' : 'right',
+                                }}
+                              />
+                            </ListItemButton>
+                          )
+                        })}
+                      </List>
+                    </Collapse>
+                    {link.isOpen && (
+                      <Divider
+                        orientation='horizontal'
+                        flexItem
+                        sx={{
+                          backgroundColor: prefs.isDarkMode ? '#fff' : '',
+                        }}
+                      />
+                    )}
+                  </>
+                ) : (
+                  <ListItemButton
+                    sx={{
+                      textAlign: 'start',
+                      '&:hover': {
+                        backgroundColor: prefs.isDarkMode ? '#111' : '',
+                      },
+                    }}
+                    key={index}
+                    onClick={() => {
+                      setMenu(false)
+                      delayedNavigate(`/${link.to}`)
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        color: prefs.isDarkMode ? '#fff' : '',
+                      }}
+                    >
+                      {link.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={prefs.isEnglish ? link.title.eng : link.title.he}
+                    />
+                  </ListItemButton>
+                )
+              })}
+            </List>
+          </Menu>
         )}
         <nav
           className={`${scrolled ? 'small-header' : ''} ${
             menu ? 'shown' : ''
           } ${menu && prefs.isEnglish ? 'ltr' : ''}`}
-          style={scrolled ? { top: '100px' } : { top: '148px' }}
+          style={scrolled ? { top: '100px' } : { top: '128px' }}
           onMouseLeave={checkHoverOptionsButton}
         >
           <NavLink
@@ -530,88 +1050,42 @@ export function AppHeader() {
           >
             <img src={logo} alt='' />
           </NavLink>
-          <NavLink to='update' onClick={() => selectLink('/update')}>
-            <span>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</span>
-          </NavLink>
-          <NavLink to='facilities' onClick={() => selectLink('/facilities')}>
-            <span>{prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</span>
-          </NavLink>
-
-          <NavLink to='class' onClick={() => selectLink('/class')}>
-            <div
-              className='menu'
-              onMouseEnter={handlers['class']}
-              onMouseLeave={removeDropdown}
-            >
-              <span>{prefs.isEnglish ? 'Class' : 'חוגים'}</span>
-              {isDropdownVisible && hoveredSection === 'class' && (
-                <DropDown
-                  options={options}
-                  setDropdownVisible={setDropdownVisible}
-                />
-              )}
-            </div>
-          </NavLink>
-          <NavLink to='member' onClick={() => selectLink('/member')}>
-            <span>{prefs.isEnglish ? 'Member' : 'מנויים'}</span>
-          </NavLink>
-          <NavLink to='item' onClick={() => selectLink('/')}>
-            <div
-              className='menu'
-              onMouseEnter={handlers['item']}
-              onMouseLeave={handleMouseLeave}
-            >
-              <span>{prefs.isEnglish ? 'Store' : 'כרטיסיות וציוד'}</span>
-              {isDropdownVisible && hoveredSection === 'item' && (
-                <DropDown
-                  options={options}
-                  setDropdownVisible={setDropdownVisible}
-                />
-              )}
-            </div>
-          </NavLink>
-
-          <NavLink to='activities' onClick={() => selectLink('/activities')}>
-            <div
-              className='menu'
-              onMouseEnter={handlers['activities']}
-              onMouseLeave={handleMouseLeave}
-            >
-              <span>{prefs.isEnglish ? 'Activities' : 'פעילויות'}</span>
-              {isDropdownVisible && hoveredSection === 'activities' && (
-                <DropDown
-                  options={options}
-                  setDropdownVisible={setDropdownVisible}
-                />
-              )}
-            </div>
-          </NavLink>
-
-          <NavLink to='about' onClick={() => selectLink('/about')}>
-            <div
-              className='menu'
-              onMouseEnter={handlers['about']}
-              onMouseLeave={handleMouseLeave}
-            >
-              <span>{prefs.isEnglish ? 'About' : 'אודות'}</span>
-              {isDropdownVisible && hoveredSection === 'about' && (
-                <DropDown
-                  options={options}
-                  setDropdownVisible={setDropdownVisible}
-                />
-              )}
-            </div>
-          </NavLink>
-
-          {user?.isAdmin && (
-            <NavLink to='/admin' onClick={() => selectLink('/admin')}>
-              {' '}
-              <Button variant='contained' className='notification-btn'>
-                {openTasks > 0 && <span>{openTasks}</span>}
-                {prefs.isEnglish ? 'Admin' : 'מנהל'}
-              </Button>
-            </NavLink>
-          )}
+          {links.map((link, index) => {
+            if (
+              (link.to === 'admin' && !user) ||
+              (link.to === 'asmin' && !user.isAdmin)
+            )
+              return
+            return (
+              <NavLink
+                to={link.to}
+                onClick={() => selectLink(`/${link.to}`)}
+                key={index}
+              >
+                {(link.dropdown && (
+                  <div
+                    className='menu'
+                    onMouseEnter={handlers[link.to]}
+                    onMouseLeave={removeDropdown}
+                  >
+                    <span>
+                      {prefs.isEnglish ? link.title.eng : link.title.he}
+                    </span>
+                    {isDropdownVisible && hoveredSection === link.to && (
+                      <DropDown
+                        options={options}
+                        setDropdownVisible={setDropdownVisible}
+                      />
+                    )}
+                  </div>
+                )) || (
+                  <span>
+                    {prefs.isEnglish ? link.title.eng : link.title.he}
+                  </span>
+                )}
+              </NavLink>
+            )
+          })}
 
           {!user && (
             <NavLink
@@ -635,7 +1109,7 @@ export function AppHeader() {
               ) : (
                 <b
                   style={
-                    windowDimensions.width <= 1050
+                    windowDimensions.width <= 1150
                       ? { color: '#2C3E50' }
                       : { color: '#4A90E2' }
                   }
@@ -661,7 +1135,7 @@ export function AppHeader() {
             </div>
           )}
         </nav>
-        {windowDimensions.width <= 1050 && (
+        {windowDimensions.width <= 1150 && (
           <NavLink
             to='/'
             className='logo'
@@ -675,7 +1149,7 @@ export function AppHeader() {
                 prefs.isEnglish
                   ? { transition: '0.3s ease' }
                   : {
-                      paddingLeft: windowDimensions.width <= 1050 && '1.5em',
+                      paddingLeft: windowDimensions.width <= 1150 && '0.5em',
                       transition: '0.3s ease',
                     }
               }

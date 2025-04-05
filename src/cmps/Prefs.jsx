@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { setPrefs } from '../store/actions/system.actions'
+import { setIsAccessibility, setPrefs } from '../store/actions/system.actions'
 import { setIsPrefs } from '../store/actions/system.actions'
 
 import { DarkModeSwitch } from './DarkModeSwitch'
@@ -55,38 +55,46 @@ export function Prefs({ bodyRef }) {
 
   const closePrefsModal = () => setIsPrefs(false)
 
+  const closeModals = () => {
+    setIsPrefs(false)
+    setIsAccessibility(false)
+  }
+
   return (
-    <div
-      className={`prefs-panel ${isVisible ? 'visible' : ''}`}
-      // onMouseLeave={closePrefsModal}
-    >
-      <div className='close-container' onClick={closePrefsModal}>
-        <CloseIcon />
-      </div>
-      <div className='prefs-control'>
-        {/* <LanguageSwitch
+    <>
+      {isVisible && <div className='overlay' onClick={closeModals}></div>}
+      <div
+        className={`prefs-panel ${isVisible ? 'visible' : ''}`}
+        // onMouseLeave={closePrefsModal}
+      >
+        <div className='close-container' onClick={closePrefsModal}>
+          <CloseIcon />
+        </div>
+        <div className='prefs-control'>
+          {/* <LanguageSwitch
           onClick={() => onSetPrefs('lang')}
           checked={!prefs.isEnglish}
-        />
-        <DarkModeSwitch
+          />
+          <DarkModeSwitch
           onClick={() => onSetPrefs('darkMode')}
           checked={prefs.isDarkMode}
         /> */}
-        <button onClick={() => onSetPrefs('lang')}>
-          {prefs.isEnglish ? 'Hebrew' : 'אנגלית'}
-          <LanguageIcon />
-        </button>
-        <button onClick={() => onSetPrefs('darkMode')}>
-          {prefs.isDarkMode
-            ? prefs.isEnglish
-              ? 'Light mode'
-              : 'מסך בהיר'
-            : prefs.isEnglish
-            ? 'Dark mode'
-            : 'מסך כהה'}
-          {prefs.isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}{' '}
-        </button>
+          <button onClick={() => onSetPrefs('lang')}>
+            {prefs.isEnglish ? 'Hebrew' : 'אנגלית'}
+            <LanguageIcon />
+          </button>
+          <button onClick={() => onSetPrefs('darkMode')}>
+            {prefs.isDarkMode
+              ? prefs.isEnglish
+                ? 'Light mode'
+                : 'מסך בהיר'
+              : prefs.isEnglish
+              ? 'Dark mode'
+              : 'מסך כהה'}
+            {prefs.isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}{' '}
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
