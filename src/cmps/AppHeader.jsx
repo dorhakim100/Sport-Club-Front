@@ -942,6 +942,32 @@ export function AppHeader() {
                               backgroundColor: prefs.isDarkMode ? '#111' : '',
                             },
                           }}
+                          onClick={() => {
+                            setMenu(false)
+
+                            delayedNavigate(`/user/${user._id}/cart`)
+                          }}
+                        >
+                          <ListItemIcon
+                            sx={{
+                              color: prefs.isDarkMode ? '#fff' : '',
+                            }}
+                          >
+                            <ShoppingCartIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={prefs.isEnglish ? 'Cart' : 'עגלת קניות'}
+                          />
+                        </ListItemButton>
+                      )}
+                      {user && (
+                        <ListItemButton
+                          sx={{
+                            textAlign: 'start',
+                            '&:hover': {
+                              backgroundColor: prefs.isDarkMode ? '#111' : '',
+                            },
+                          }}
                           onClick={onLogout}
                         >
                           <ListItemIcon
