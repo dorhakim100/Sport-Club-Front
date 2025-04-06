@@ -80,6 +80,7 @@ export function ContactUs() {
           he: 'צרו קשר',
         }}
       />
+
       <div className='contact-cmp-container'>
         <div
           className={

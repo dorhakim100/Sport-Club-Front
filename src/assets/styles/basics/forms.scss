@@ -462,6 +462,7 @@ div.dark-mode {
     height: fit-content;
 
     width: 25px;
+    // height: 25px;
 
     color: $bold-navy;
 
@@ -469,14 +470,59 @@ div.dark-mode {
     background-color: $light-red;
     font-family: assistantBold;
 
+    span {
+    }
+
     // font-size: 1.2em;
+  }
+
+  b {
+    font-family: assistantBold;
   }
 }
 
-b {
-  font-family: assistantBold;
-}
+.notification {
+  &:hover {
+    span {
+      // color: white;
+      // background-color: $medium-red;
+    }
+  }
+  &:not(.list) {
+    position: absolute;
+  }
+  top: -10px;
+  right: -10px;
+  transition: 0.2s ease-out;
+  display: flex;
+  align-items: center;
+  justify-items: center;
 
+  // width: fit-content;
+  // height: fit-content;
+
+  width: 1.5em;
+  height: 1.5em;
+
+  color: $bold-navy;
+
+  border-radius: 50%;
+  background-color: $light-red;
+  font-family: assistantBold;
+  span {
+    margin: 0 auto;
+    // padding: 3px;
+
+    // font-size: 1.2em;
+  }
+}
+.notification-link {
+  position: relative;
+  div {
+    top: -12px;
+    right: -15px;
+  }
+}
 p,
 span,
 b {
