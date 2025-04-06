@@ -343,41 +343,98 @@ export function Schedule() {
   //   </html>
   // `
 
+  // const onDownloadSchedule = async () => {
+  //   const el = scheduleRef.current
+
+  //   if (!el) return
+  //   await document.fonts.ready
+  //   el.classList.add('light‑mode‑pdf')
+
+  //   // 1. Save original styles
+  //   const origOverflowX = el.style.overflowX
+  //   const origWidth = el.style.width
+
+  //   // 2. Expand to full content
+  //   el.style.overflowX = 'visible'
+  //   el.style.width = `${el.scrollWidth}px`
+
+  //   el.style.height = '850px'
+
+  //   // 3. Snapshot the full-width element
+  //   const canvas = await html2canvas(el, { scale: 3, backgroundColor: '#fff' })
+
+  //   // 4. Restore original styles
+  //   el.style.overflowX = origOverflowX
+  //   el.style.width = origWidth
+  //   el.classList.remove('light‑mode‑pdf')
+
+  //   // 5. Build PDF as before
+  //   const imgData = canvas.toDataURL('image/jpeg', 0.98)
+  //   const pdf = new jsPDF({
+  //     orientation: 'landscape',
+  //     unit: 'mm',
+  //     format: 'a4',
+  //   })
+  //   const imgProps = pdf.getImageProperties(imgData)
+  //   const pdfWidth = pdf.internal.pageSize.getWidth()
+  //   const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+
+  //   pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight)
+  //   pdf.save('schedule.pdf')
+  // }
+
   const onDownloadSchedule = async () => {
     const el = scheduleRef.current
-
     if (!el) return
+
     await document.fonts.ready
     el.classList.add('light‑mode‑pdf')
 
-    // 1. Save original styles
-    const origOverflowX = el.style.overflowX
-    const origWidth = el.style.width
+    // save original inline styles
+    const orig = {
+      overflowX: el.style.overflowX,
+      width: el.style.width,
+      height: el.style.height,
+      minHeight: el.style.minHeight,
+      maxHeight: el.style.maxHeight,
+    }
 
-    // 2. Expand to full content
+    // force full width & 850px height
+    const targetW = el.scrollWidth
+    const targetH = 850
     el.style.overflowX = 'visible'
-    el.style.width = `${el.scrollWidth}px`
+    el.style.width = `${targetW}px`
+    el.style.height = `${targetH}px`
+    el.style.minHeight = `${targetH}px`
+    el.style.maxHeight = 'none'
 
-    // 3. Snapshot the full-width element
-    const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#fff' })
+    // snapshot with forced “desktop” window size
+    const canvas = await html2canvas(el, {
+      scale: 3,
+      backgroundColor: '#fff',
+      // trick html2canvas into a large viewport:
+      width: targetW,
+      height: targetH,
 
-    // 4. Restore original styles
-    el.style.overflowX = origOverflowX
-    el.style.width = origWidth
+      windowHeight: targetH,
+    })
+
+    // restore
+    Object.assign(el.style, orig)
     el.classList.remove('light‑mode‑pdf')
 
-    // 5. Build PDF as before
+    // build PDF
     const imgData = canvas.toDataURL('image/jpeg', 0.98)
     const pdf = new jsPDF({
       orientation: 'landscape',
       unit: 'mm',
       format: 'a4',
     })
-    const imgProps = pdf.getImageProperties(imgData)
-    const pdfWidth = pdf.internal.pageSize.getWidth()
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+    const props = pdf.getImageProperties(imgData)
+    const pdfW = pdf.internal.pageSize.getWidth()
+    const pdfH = (props.height * pdfW) / props.width
 
-    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight)
+    pdf.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH)
     pdf.save('schedule.pdf')
   }
 
