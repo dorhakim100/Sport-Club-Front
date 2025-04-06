@@ -824,19 +824,23 @@ export function AppHeader() {
             <IconButton
               variant='contained'
               onClick={toggleMenu}
-              className='notification-btn menu-btn'
+              className='menu-btn'
             >
               {(menu && (
                 <>
                   {user && user.isAdmin && openTasks > 0 && (
-                    <span>{openTasks}</span>
+                    <div className='notification'>
+                      <span>{openTasks}</span>
+                    </div>
                   )}
                   <MenuOpenIcon />
                 </>
               )) || (
                 <>
                   {user && user.isAdmin && openTasks > 0 && (
-                    <span>{openTasks}</span>
+                    <div className='notification'>
+                      <span>{openTasks}</span>
+                    </div>
                   )}
                   <MenuIcon />
                 </>
@@ -1085,6 +1089,15 @@ export function AppHeader() {
                     <ListItemText
                       primary={prefs.isEnglish ? link.title.eng : link.title.he}
                     />
+                    {link.to === 'admin' &&
+                      user &&
+                      user.isAdmin &&
+                      openTasks > 0 && (
+                        <div className='notification list'>
+                          {' '}
+                          <span>{openTasks}</span>
+                        </div>
+                      )}
                   </ListItemButton>
                 )
               })}
@@ -1109,7 +1122,7 @@ export function AppHeader() {
           {links.map((link, index) => {
             if (
               (link.to === 'admin' && !user) ||
-              (link.to === 'asmin' && !user.isAdmin)
+              (link.to === 'admin' && !user.isAdmin)
             )
               return
             return (
@@ -1134,11 +1147,22 @@ export function AppHeader() {
                       />
                     )}
                   </div>
-                )) || (
-                  <span>
-                    {prefs.isEnglish ? link.title.eng : link.title.he}
-                  </span>
-                )}
+                )) ||
+                  (link.to === 'admin' &&
+                  user &&
+                  user.isAdmin &&
+                  openTasks > 0 ? (
+                    <span className='notification-link'>
+                      {prefs.isEnglish ? link.title.eng : link.title.he}
+                      <div className='notification'>
+                        <span>{openTasks}</span>
+                      </div>
+                    </span>
+                  ) : (
+                    <span>
+                      {prefs.isEnglish ? link.title.eng : link.title.he}
+                    </span>
+                  ))}
               </NavLink>
             )
           })}

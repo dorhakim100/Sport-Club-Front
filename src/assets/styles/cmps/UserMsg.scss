@@ -1,62 +1,59 @@
 .user-msg {
-    position: fixed;
-    top: 170px;
-    right: 0.2em;
-    // right: 50em;
+  position: fixed;
+  top: 170px;
+  right: 0.2em;
+  // right: 50em;
 
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    padding: .2em;
-    padding-inline-end: 20px;
-    // background-color: $very-light-blue;
-    background-color: white;
+  //   padding: 0.2em;
+  //   padding-inline-end: 20px;
+  // background-color: $very-light-blue;
+  //   background-color: white;
 
-    border-radius: 10px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+  border-radius: 10px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 
-    color:$bold-navy;
-    font-size: .9em;
-    min-width: 150px;
+  color: $bold-navy;
+  font-size: 0.9em;
+  min-width: 150px;
 
-    opacity: 0;
-    translate: 150%;
-    transition: 600ms;
-    opacity: 1;
-    z-index: 1000;
+  opacity: 0;
+  translate: 150%;
+  transition: 600ms;
+  opacity: 1;
+  z-index: 10000;
 
-    font-family: assistantBold;
+  font-family: assistantBold;
 }
 
 .user-msg.visible {
-    opacity: 1;
-    translate: 0;
+  opacity: 1;
+  translate: 0;
 }
 
 .user-msg button {
-    background-color: $light-gray;
-    // padding: 1px 6px;
-    
-    border:0;
-    border-radius: 50%;
-    color: $bold-navy;
+  background-color: $light-gray;
+  // padding: 1px 6px;
 
-    transition: 0.2s ease;
-    
-    &:hover{
-        background-color: $light-red;
+  border: 0;
+  border-radius: 50%;
+  color: $bold-navy;
 
-    }
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: $light-red;
+  }
 }
 
 .user-msg.success {
-    // background-color: $dark-green;
-    border-bottom: 4px solid $dark-green;
-
+  // background-color: $dark-green;
+  // border-bottom: 4px solid $dark-green;
 }
 .user-msg.error {
-
-    border-bottom: 4px solid $light-red;
-    // background-color: $medium-red;
+  // border-bottom: 4px solid $light-red;
+  // background-color: $medium-red;
 }
