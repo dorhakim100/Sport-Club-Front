@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Button } from '@mui/material'
 import { classService } from '../services/class/class.service'
 import { uploadService } from '../services/upload.service'
-import { setIsLoading } from '../store/actions/system.actions'
+import { setIsLoading, setPrefs } from '../store/actions/system.actions'
 import { showErrorMsg } from '../services/event-bus.service'
 import {
   capitalizeFirstLetter,
@@ -19,6 +19,10 @@ import { makeId } from '../services/util.service'
 import WbSunnyIcon from '@mui/icons-material/WbSunny'
 import BedtimeIcon from '@mui/icons-material/Bedtime'
 import PrintIcon from '@mui/icons-material/Print'
+import DownloadIcon from '@mui/icons-material/Download'
+
+import html2canvas from 'html2canvas'
+import { jsPDF } from 'jspdf'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -245,7 +249,136 @@ export function Schedule() {
     printWindow.document.close()
     printWindow.focus()
     printWindow.print()
+
     printWindow.close()
+  }
+
+  // const download = `
+  //   <html>
+  //     <head>
+  //       <title>Print</title>
+  //       <style>
+
+  //       @page {
+  //         size: A4 landscape; /* Use A4 landscape size */
+  //         margin: 0; /* Remove default browser margins */
+  //       }
+
+  //       .schedule-container {
+  //         page-break-inside: avoid;
+  //       }
+  //       .day-container {
+  //         page-break-inside: avoid;
+  //       }
+
+  //       .schedule-container {
+  //         gap: 0;
+  //         padding: 0;
+  //       }
+  //       .day-container {
+  //         padding: 2px;
+  //         margin: 0;
+  //       }
+  //       body {
+  //         font-family: Arial, sans-serif;
+  //         margin: 0;
+  //         padding: 0;
+  //       }
+  //       /* All the above so the schedule will fit in only one page */
+
+  //       /* Add styles for the printed content */
+  //       .schedule-container{
+  //         display: grid;
+  //         grid-template-columns: repeat(6, 1fr);
+  //         justify-items:'center';
+  //         align-items:'center';
+  //         max-width: 297mm;
+  //         direction:${prefs.isEnglish ? 'ltr' : 'rtl'};
+  //         text-align:'center';
+  //         margin:20px
+  //       }
+  //       .day-container {
+  //         border: 1px solid #ccc;
+  //         padding: 3px;
+  //         box-sizing: border-box;
+  //         text-align:'center';
+  //       }
+
+  //       .hour-container {
+  //         border-bottom: 1px solid #ddd;
+  //         margin-bottom: 8px;
+  //         padding: 3px;
+  //         box-sizing: border-box;
+  //         text-align:'center';
+  //       }
+
+  //       .occurrence-container {
+  //         display: flex;
+  //         flex-direction: column;
+  //         gap: 5px;
+  //         text-align:'center';
+  //       }
+
+  //       b {
+  //         font-size: 14px;
+  //         margin-bottom: 5px;
+  //         text-align:'center';
+  //       }
+
+  //       .time-container {
+  //         font-size: 12px;
+  //         text-align:'center';
+  //       }
+
+  //       /* Hide icons completely for printing */
+  //       .icon {
+  //         width:5mm;
+  //       }
+  //     </style>
+
+  //     </head>
+  //     <body>
+  //       ${el.outerHTML}
+  //     </body>
+  //   </html>
+  // `
+
+  const onDownloadSchedule = async () => {
+    const el = scheduleRef.current
+
+    if (!el) return
+    await document.fonts.ready
+    el.classList.add('light‑mode‑pdf')
+
+    // 1. Save original styles
+    const origOverflowX = el.style.overflowX
+    const origWidth = el.style.width
+
+    // 2. Expand to full content
+    el.style.overflowX = 'visible'
+    el.style.width = `${el.scrollWidth}px`
+
+    // 3. Snapshot the full-width element
+    const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#fff' })
+
+    // 4. Restore original styles
+    el.style.overflowX = origOverflowX
+    el.style.width = origWidth
+    el.classList.remove('light‑mode‑pdf')
+
+    // 5. Build PDF as before
+    const imgData = canvas.toDataURL('image/jpeg', 0.98)
+    const pdf = new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: 'a4',
+    })
+    const imgProps = pdf.getImageProperties(imgData)
+    const pdfWidth = pdf.internal.pageSize.getWidth()
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
+
+    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight)
+    pdf.save('schedule.pdf')
   }
 
   return (
@@ -271,6 +404,12 @@ export function Schedule() {
               <BedtimeIcon />
             </div>
           </div>
+        </div>
+        <div className='download-container'>
+          <Button variant='contained' onClick={onDownloadSchedule}>
+            {prefs.isEnglish ? 'Download' : 'הורדה'}
+            <DownloadIcon />
+          </Button>
         </div>
         <div className='print-container'>
           <Button variant='contained' onClick={onPrintSchedule}>
