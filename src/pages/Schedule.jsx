@@ -49,7 +49,9 @@ export function Schedule() {
 
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const [filter, setFilter] = useState({ pageIds: 0, isAll: false })
-
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  )
   const scheduleRef = useRef()
 
   const daysOfWeek = [
@@ -383,6 +385,17 @@ export function Schedule() {
   //   pdf.save('schedule.pdf')
   // }
 
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions())
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [windowDimensions])
+
   const onDownloadSchedule = async () => {
     const el = scheduleRef.current
     if (!el) return
@@ -401,7 +414,10 @@ export function Schedule() {
 
     // force full width & 850px height
     const targetW = el.scrollWidth
-    const targetH = 850
+    let targetH
+
+    windowDimensions.width > 600 ? (targetH = 1200) : (targetH = 850)
+
     el.style.overflowX = 'visible'
     el.style.width = `${targetW}px`
     el.style.height = `${targetH}px`
@@ -413,7 +429,7 @@ export function Schedule() {
       scale: 3,
       backgroundColor: '#fff',
       // trick html2canvas into a large viewport:
-      width: targetW,
+      // width: targetW,
       height: targetH,
 
       windowHeight: targetH,
@@ -436,6 +452,15 @@ export function Schedule() {
 
     pdf.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH)
     pdf.save('schedule.pdf')
+  }
+
+  function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window
+
+    return {
+      width,
+      height,
+    }
   }
 
   return (
