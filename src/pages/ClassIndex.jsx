@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -12,6 +12,7 @@ import {
 import { setIsLoading } from '../store/actions/system.actions'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { debounce } from '../services/util.service'
 
 import { Nav } from '../cmps/Nav'
 import { ClassList } from '../cmps/ClassList.jsx'
@@ -55,16 +56,24 @@ export function ClassIndex() {
 
   const [filter, setFilter] = useState({
     pageIdx: +searchParams.get('pageIdx'),
+    intensity: searchParams.get('intensity') || '',
     isAll: false,
+    txt: searchParams.get('txt') || '',
   })
+
+  const debouncedSetFilter = useRef(debounce(setFilter, 500))
+
+  const [editFilter, setEditFilter] = useState(classService.getDefaultFilter())
 
   const [maxPage, setMaxPage] = useState()
 
   useEffect(() => {
     const pageIdx = +searchParams.get('pageIdx') || 0
 
-    const filterToSet = { ...filter, pageIdx }
+    const txt = searchParams.get('txt')
+    const intensity = +searchParams.get('intensity') || ''
 
+    const filterToSet = { ...filter, pageIdx, txt, intensity }
     // Only update filter if it's different
     if (JSON.stringify(filter) !== JSON.stringify(filterToSet)) {
       setFilter(filterToSet)
@@ -77,15 +86,25 @@ export function ClassIndex() {
       setIsLoading(true)
       const c = await loadClasses(filter) // Load classes with the current filter
 
-      const max = await classService.getMaxPage()
+      const max = await classService.getMaxPage(filter)
       setMaxPage(max)
 
       // Update searchParams if necessary
 
       const currentPageIdx = searchParams.get('pageIdx') || 0
+      const currentTxt = searchParams.get('txt') || ''
+      const currentIntensity = searchParams.get('intensity') || ''
 
-      if (currentPageIdx !== filter.pageIdx.toString()) {
+      const paramsFilter = {
+        pageIdx: currentPageIdx,
+        txt: currentTxt,
+        intensity: currentIntensity,
+      }
+
+      if (JSON.stringify(filter) !== JSON.stringify(paramsFilter)) {
         setSearchParams({
+          txt: filter.txt || '',
+          intensity: filter.intensity || '',
           pageIdx: filter.pageIdx.toString(),
         })
       }
@@ -131,18 +150,96 @@ export function ClassIndex() {
     }
   }
 
+  function handleChange({ target }) {
+    const field = target.name
+    const value = target.value
+    const type = target.type || target.name
+
+    switch (type) {
+      case 'search':
+        setEditFilter({ ...editFilter, txt: value })
+        debouncedSetFilter.current((prevFilter) => ({
+          ...prevFilter,
+          txt: value,
+          pageIdx: 0,
+        }))
+        break
+
+      case 'intensity':
+        setEditFilter({ ...editFilter, intensity: value })
+        debouncedSetFilter.current((prevFilter) => ({
+          ...prevFilter,
+          intensity: value,
+          pageIdx: 0,
+        }))
+        break
+
+      default:
+        break
+    }
+  }
+
   return (
     <section className='class-page-container'>
       <h2>{prefs.isEnglish ? 'Class' : 'שיעורים'}</h2>
       <Nav origin={origin} links={links} />
       <HeadContainer text={head} />
-      <Controller
-        filter={filter}
-        setFilter={setFilter}
-        maxPage={maxPage}
-        onAdd={onAddClass}
-      />
+      <div className='filter-container'>
+        <Controller
+          filter={filter}
+          setFilter={setFilter}
+          maxPage={maxPage}
+          onAdd={onAddClass}
+        />
+        <div
+          className={
+            prefs.isDarkMode ? 'input-container dark-mode' : 'input-container'
+          }
+        >
+          <input
+            type='search'
+            value={editFilter.txt}
+            onChange={(event) => {
+              handleChange(event)
+            }}
+            placeholder={prefs.isEnglish ? 'Class name' : 'שם השיעור'}
+          />
+        </div>
+        <div className='intensity-container'>
+          <span>
+            {prefs.isEnglish ? 'Max Intensity level' : 'דרגת קושי מקסימלית'}
+          </span>
+          <IntensitySlider handleChange={handleChange} />
+        </div>
+      </div>
       <ClassList classes={classes} onRemoveClass={onRemoveClass} />
     </section>
+  )
+}
+
+import Box from '@mui/material/Box'
+import Slider from '@mui/material/Slider'
+
+function valuetext(value) {
+  return `${value}`
+}
+
+function IntensitySlider({ handleChange }) {
+  return (
+    <Box sx={{ width: 300 }}>
+      <Slider
+        aria-label='Temperature'
+        onChange={handleChange}
+        defaultValue={5}
+        getAriaValueText={valuetext}
+        valueLabelDisplay='auto'
+        shiftStep={1}
+        step={1}
+        marks
+        min={1}
+        max={5}
+        name='intensity'
+      />
+    </Box>
   )
 }

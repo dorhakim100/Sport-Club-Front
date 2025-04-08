@@ -15,7 +15,7 @@ export const classService = {
   getOccurrences,
 }
 
-async function query(filterBy = { pageIdx: 0 }) {
+async function query(filterBy = { pageIdx: 0, txt: '' }) {
   try {
     const res = await httpService.get(KEY, filterBy)
     return res
@@ -58,11 +58,13 @@ async function save(clas) {
   }
 }
 
-async function getMaxPage() {
+async function getMaxPage(filter) {
   const PAGE_SIZE = 6
   try {
-    var classes = await query({ isAll: true })
+    var classes = await query({ ...filter, isAll: true })
+
     let maxPage = classes.length / PAGE_SIZE
+
     maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
@@ -71,7 +73,7 @@ async function getMaxPage() {
 }
 
 function getDefaultFilter() {
-  return { types: [], pageIdx: 0, iaAll: true }
+  return { types: [], txt: '', intensity: '', pageIdx: 0, iaAll: true }
 }
 
 function getEmptyClass() {
