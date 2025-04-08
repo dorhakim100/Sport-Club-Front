@@ -516,11 +516,21 @@ div.dark-mode {
     // font-size: 1.2em;
   }
 }
+
 .notification-link {
   position: relative;
   div {
-    top: -12px;
-    right: -15px;
+    top: -14px;
+    right: -20px;
+  }
+}
+.small-header {
+  .notification-link {
+    position: relative;
+    div {
+      top: -10px;
+      right: -15px;
+    }
   }
 }
 p,
