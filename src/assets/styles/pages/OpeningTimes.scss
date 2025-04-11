@@ -1,37 +1,95 @@
-.times-container{
-    
-    table{
-        position: relative;
+.times-container {
+  table {
+    position: relative;
+  }
 
-    }
-    .facility-cell{
-  
-        min-width: 80px;
-        background-color: white;
-        &.dark-mode{
-            background-color: $very-dark-blue;
-        }
-
-        &.scrolled{
-
-            position: sticky;
-            inset-inline-start: 0px;
-        }
-
-    }
-
-    th{
-        @media (min-width:1100px) {
-            font-size: 1.3em;
-            
-        }
-
+  .day-title-container.edit-mode {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 1em;
+  }
+  .hour-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2em;
+  }
+  .facility-cell {
+    min-width: 80px;
+    background-color: white;
+    &.dark-mode {
+      background-color: $very-dark-blue;
     }
 
-    td{
-        @media (min-width:1100px) {
-            font-size: 1.2em;
-            
-        }
+    &.scrolled {
+      position: sticky;
+      inset-inline-start: 0px;
     }
+  }
+
+  .from-to-container {
+    direction: ltr;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
+
+  th {
+    @media (min-width: 1100px) {
+      font-size: 1.3em;
+    }
+    z-index: 3;
+  }
+
+  td {
+    @media (min-width: 1100px) {
+      font-size: 1.2em;
+    }
+  }
+}
+
+.from-to-container {
+  display: grid;
+  grid-template-columns: 150px 20px 150px;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+}
+
+.time-picker-container {
+  position: absolute;
+  top: 500px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  //   bottom: 0;
+  //   top: 0;
+  //   height: 100vh;
+  //   left: 0;
+  //   right: 0;
+  z-index: 1000;
+
+  background-color: white;
+  width: fit-content;
+
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  border-radius: 8px;
+  padding: 0.5em;
+  &.dark-mode {
+    background-color: $dark-gray;
+  }
+
+  @media (max-width: 600px) {
+    // height: calc(100vh + 300px);
+    width: 352px;
+    top: 600px;
+  }
+
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
+  .input-container {
+    width: 300px;
+  }
 }
