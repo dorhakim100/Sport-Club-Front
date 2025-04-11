@@ -34,12 +34,10 @@ export function SuccessPage() {
   }
 
   useEffect(() => {
-    return () => {
-      addPayment()
-    }
+    addPayment()
   }, [])
 
-  const addPayment = async () => {
+  async function addPayment() {
     const url = location.search
 
     const params = new URLSearchParams(url)
