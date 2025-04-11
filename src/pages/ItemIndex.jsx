@@ -152,14 +152,14 @@ export function ItemIndex() {
     }
   }
 
-  useEffect(() => {
-    const messageToSet = {
-      he: `בימים הקרובים הזמנות דרך האתר יהיו פעילות`,
-      eng: `In the following days orders from our site will be available`,
-    }
-    setModalMessage(messageToSet)
-    setIsModal(true)
-  }, []) // to remove once it's available
+  // useEffect(() => {
+  //   const messageToSet = {
+  //     he: `בימים הקרובים הזמנות דרך האתר יהיו פעילות`,
+  //     eng: `In the following days orders from our site will be available`,
+  //   }
+  //   setModalMessage(messageToSet)
+  //   setIsModal(true)
+  // }, []) // to remove once it's available
 
   return (
     <main className='item-index'>

@@ -153,16 +153,17 @@ export function Cart() {
 
   async function onPay() {
     try {
-      const messageToSet = {
-        he: `בימים הקרובים הזמנות דרך האתר יהיו פעילות`,
-        eng: `In the following days orders from our site will be available`,
-      }
-      setModalMessage(messageToSet)
-      setIsModal(true)
-      return // till actual payments are ready
+      // const messageToSet = {
+      //   he: `בימים הקרובים הזמנות דרך האתר יהיו פעילות`,
+      //   eng: `In the following days orders from our site will be available`,
+      // }
+      // setModalMessage(messageToSet)
+      // setIsModal(true)
+      // return // till actual payments are ready
 
       setIsLoading(true)
       const order = createOrder()
+
       const url = await paymentService.createNewOrderLink(order)
 
       setIsLoading(false)
