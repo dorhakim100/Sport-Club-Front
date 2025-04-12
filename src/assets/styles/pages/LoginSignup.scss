@@ -1,30 +1,26 @@
-.login-container{
-    display: grid;
-    margin: auto;
-    @media (max-width:600px) {
-        display: block;
-        
-    }
-    // grid-template-columns: repeat(2,1fr);
-    width: 300px;
-    justify-self: center;
-    .google-login-container{
-        justify-items: center;
+.login-container {
+  display: grid;
+  margin: auto;
+  @media (max-width: 600px) {
+    display: block;
+  }
+  // grid-template-columns: repeat(2,1fr);
+  width: 330px;
+  justify-self: center;
+  .google-login-container {
+    justify-items: center;
+  }
 
-    }
+  padding: 2em; // Space inside the box
+  border-radius: 8px; // Smooth corners
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Subtle shadow
+  max-width: 450px; // Limit width
+  width: 100%; // Full width for smaller screens
 
+  text-align: center; // Center text
+  background-color: white;
 
-    padding: 2em; // Space inside the box
-    border-radius: 8px; // Smooth corners
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Subtle shadow
-    max-width: 400px; // Limit width
-    width: 100%; // Full width for smaller screens
-    text-align: center; // Center text
-    background-color: white;
-
-    &.dark-mode{
-
-        background-color: $very-dark-blue;
-    }
-
+  &.dark-mode {
+    background-color: $very-dark-blue;
+  }
 }

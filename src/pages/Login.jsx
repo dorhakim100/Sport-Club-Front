@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useSelector } from 'react-redux'
 
@@ -22,6 +22,26 @@ export function Login() {
   )
 
   const navigate = useNavigate()
+
+  const [logo, setLogo] = useState(
+    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+  )
+
+  const setLogoMode = () => {
+    if (prefs.isDarkMode) {
+      setLogo(
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729070986/logoDarkMode_i25wgx.png'
+      )
+    } else {
+      setLogo(
+        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+      )
+    }
+  }
+
+  useEffect(() => {
+    setLogoMode()
+  }, [prefs.isDarkMode])
 
   // useEffect(() => {
   //   loadUsers()
@@ -56,6 +76,8 @@ export function Login() {
 
   return (
     <div className='login-form' onSubmit={onLogin}>
+      <img src={logo} alt='logo' width='100%' style={{ maxWidth: '100px' }} />
+
       <h2>{prefs.isEnglish ? 'Login' : 'חיבור'}</h2>
       <LoginSignupForm isRemember={isRemember} />
     </div>

@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Formik } from 'formik'
-import { Button } from '@mui/material'
+import Button from '@mui/material/Button'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { login, signup } from '../store/actions/user.actions'
 import { setIsLoading, setPrefs } from '../store/actions/system.actions'
@@ -337,7 +337,12 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
               isRemember={isRemember}
               setIsRemember={setIsRemember}
             />
-            <Button variant='contained' type='submit' disabled={isSubmitting}>
+            <Button
+              variant='contained'
+              type='submit'
+              disabled={isSubmitting}
+              fullWidth
+            >
               {(isSignup && (prefs.isEnglish ? 'Signup' : 'רישום')) ||
                 (prefs.isEnglish ? 'Login' : 'חיבור')}
             </Button>
