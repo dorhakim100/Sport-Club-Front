@@ -71,8 +71,8 @@ export function LoginSignup() {
       </nav>
       <HeadContainer text={text} />
       <div className={`login-container ${prefs.isDarkMode && 'dark-mode'}`}>
-        <GoogleLoginCmp handleGoogleLogin={handleGoogleLogin} />
-        <RememberMeButton />
+        <Outlet />
+
         <Divider
           orientation='horizontal'
           flexItem
@@ -82,7 +82,8 @@ export function LoginSignup() {
               : { margin: '2em 0em' }
           }
         />
-        <Outlet />
+        <GoogleLoginCmp handleGoogleLogin={handleGoogleLogin} />
+        <RememberMeButton />
       </div>
     </div>
   )
