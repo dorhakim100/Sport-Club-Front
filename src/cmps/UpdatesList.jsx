@@ -191,8 +191,8 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                       <b>{update.title}</b>
                       <span>
                         {prefs.isEnglish
-                          ? new Date(update.createdAt).toLocaleString('eng')
-                          : new Date(update.createdAt).toLocaleString('he')}
+                          ? new Date(update.createdAt).toLocaleDateString('eng')
+                          : new Date(update.createdAt).toLocaleDateString('he')}
                       </span>
                     </div>
                     <p>{update.content}</p>

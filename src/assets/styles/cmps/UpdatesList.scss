@@ -1,135 +1,130 @@
-.updates-container{
-    display: grid;
-    grid-template-rows: repeat(6,1fr);
-    background-color: $light-gray;
+.updates-container {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  background-color: $light-gray;
 
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 3px, rgba(60, 64, 67, 0.15) 0px 1px 3px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 3px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px;
+  // min-height: 100px;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease; // Smooth transition
+
+  background: linear-gradient(
+    135deg,
+    #6ec1e48e 0%,
+    #a8e6a147 100%
+  ); // Gradient from light blue to soft green
+
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+
+  // max-height: calc(0.6em * 2 + 600px);
+  //   height: 600px;
+  overflow-y: auto;
+
+  &:first-of-type {
+  }
+
+  &:last-of-type {
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  position: relative; /* Ensure proper positioning */
+  box-sizing: border-box;
+
+  // align-items: start;
+
+  .update-container {
     // min-height: 100px;
-    transition: background-color 0.3s  ease-in-out, box-shadow 0.3s ease; // Smooth transition
-    
-    background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
-    
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+    padding: 0.6em; // Slight increase for better spacing
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    gap: 1em;
+    align-items: center;
+    justify-items: start;
+    transition: 0.2s ease;
+    background: linear-gradient(
+      135deg,
+      #6ec1e440 0%,
+      #a8e6a11e 100%
+    ); // Gradient from light blue to soft green
+    border-bottom: 1px solid $bold-navy;
 
-    // max-height: calc(0.6em * 2 + 600px);
-    height: 600px;
-    overflow-y: auto;
+    font-size: 1.4em;
+    //   height: 100px;
+    // max-height: calc(0.6em + 100px);
 
-    &:first-of-type{
-    }
-    
-    &:last-of-type{
-        border-bottom-right-radius: 8px;
-        border-bottom-left-radius: 8px;
-        
-    }
-    
-    position: relative; /* Ensure proper positioning */
-    box-sizing: border-box; 
+    &.message-update {
+      // Use a slightly less transparent gradient to stand out a bit more.
+      background: linear-gradient(135deg, #6ec1e4b0 0%, #a8e6a1b0 100%);
+      // A subtle border that uses a lightened version of your bold-navy (or choose a contrasting color)
+      border: 1px solid lighten($bold-navy, 10%);
+      // A gentle shadow to add depth
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      // Optionally, a slight scale up for visual emphasis (comment out if too much)
+      // transform: scale(1.02);
 
-    // align-items: start;
-    
-    .update-container{
-        padding: 0.6em; // Slight increase for better spacing
-        display: grid;
-        grid-template-columns: 200px 1fr auto;
-        gap: 1em;
-        align-items: center;
-        justify-items: start;
-        transition: 0.2s ease;
-        background: linear-gradient(135deg, #6ec1e440 0%, #a8e6a11e 100%); // Gradient from light blue to soft green
-        border-bottom: 1px solid $bold-navy;
-        
-        font-size: 1.4em;
-        //   height: 100px;
-        // max-height: calc(0.6em + 100px);
-
-        &.message-update{
-               // Use a slightly less transparent gradient to stand out a bit more.
-            background: linear-gradient(135deg, #6ec1e4b0 0%, #a8e6a1b0 100%);
-            // A subtle border that uses a lightened version of your bold-navy (or choose a contrasting color)
-            border: 1px solid lighten($bold-navy, 10%);
-            // A gentle shadow to add depth
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-            // Optionally, a slight scale up for visual emphasis (comment out if too much)
-            // transform: scale(1.02);
-
-            &.dark-mode{
-
-                text-shadow: black 1px 0 2px;
-            }
-        }
-
-
-        @media (max-width:800px) {
-            grid-template-columns: 1fr 1fr auto;
-            
-        }
-
-        @media (max-width:600px) {
-            font-size: 1em;
-            
-        }
-        p{
-            text-align: start;
-            // text-align: justify;
-
-            margin: 0px;
-        }
-        &:first-of-type{
-              
-            border-top-right-radius: 8px;
-            border-top-left-radius: 8px;
-        }
-        
-        &:last-of-type{
-            border-bottom-right-radius: 8px;
-            border-bottom-left-radius: 8px;
-            
-        }
-        .title-container{
-            display: grid;
-            text-align: start;
-   
-
-        }
-
-        .admin-control-container{
-            display: grid;
-            justify-items: center;
-            gap: 1em;
-        }
-
-          
-    }
-    .dragging {
-      cursor: grabbing;
-      opacity: 0.8;
-      z-index: 9999;
-
-        border-bottom: 2px solid $dark-blue;
-    }
-    
-    .update-container.dragging {
-        // padding: 0.2em;
-    }
-    
-    .update-container.draggable{
-        cursor: grab;
-
-        &:hover{
-    
-            background-color: $medium-gray;
-        }
-    }
-    
-    .update-container.dragging{
-        
-        
+      &.dark-mode {
+        text-shadow: black 1px 0 2px;
       }
+    }
 
-    
-    
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr 1fr auto;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 1em;
+    }
+    p {
+      text-align: start;
+      // text-align: justify;
+
+      margin: 0px;
+    }
+    &:first-of-type {
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+    }
+
+    &:last-of-type {
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+    .title-container {
+      display: grid;
+      text-align: start;
+      b {
+        font-family: assistantBold;
+      }
+    }
+
+    .admin-control-container {
+      display: grid;
+      justify-items: center;
+      gap: 1em;
+    }
+  }
+  .dragging {
+    cursor: grabbing;
+    opacity: 0.8;
+    z-index: 9999;
+
+    border-bottom: 2px solid $dark-blue;
+  }
+
+  .update-container.dragging {
+    // padding: 0.2em;
+  }
+
+  .update-container.draggable {
+    cursor: grab;
+
+    &:hover {
+      background-color: $medium-gray;
+    }
+  }
+
+  .update-container.dragging {
+  }
 }
-
