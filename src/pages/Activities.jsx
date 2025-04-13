@@ -89,7 +89,7 @@ export function Activities() {
   return (
     <section className='activities-page-container'>
       <h2>{prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}</h2>
-      <Nav origin={origin} links={links} isMain={true} />
+      <Nav origin={false} links={links} isMain={true} />
 
       <section>
         {/* {location.pathname === '/activities' && <HeadContainer text={head} />} */}

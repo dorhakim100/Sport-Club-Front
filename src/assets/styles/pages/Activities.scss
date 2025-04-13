@@ -1,249 +1,216 @@
-.activities-page-container{
+.activities-page-container {
+  .nav-logo-container {
+    cursor: pointer;
 
-    .nav-logo-container{
-        cursor: pointer;
+    &:hover {
+      a {
+        background-color: $dark-blue;
+        color: white;
+      }
 
-        &:hover{
-            a{
+      a.active {
+        background-color: $dark-green-hover;
+        color: white;
+      }
+    }
+  }
 
-                    background-color: $dark-blue;
-                    color: white;
-                
-            }
-        
-        
-            
-            a.active{
-            
-                    background-color: $dark-green-hover;
-                    color: white;
+  .img-container.logo {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    img {
+      width: 350px;
+    }
+  }
 
-            }
-        }
+  .owners-container {
+    display: grid;
+    gap: 4em;
+  }
+
+  .owner-container {
+    justify-self: center;
+
+    display: grid;
+    grid-template-columns: 35vw 1fr;
+    justify-items: center;
+    gap: 1em;
+    // width: 1000px;
+    max-width: 1400px;
+
+    @media (max-width: 1050px) {
+      grid-template-columns: 1fr;
+      gap: 2em;
     }
 
-    .img-container.logo{
-        img{
-            width: 350px;
+    .img-container {
+      // height: calc(30vw);
+      // width: 30vw;
+      border-radius: 50%;
+      justify-self: start;
+
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+        height: calc(30vw);
+        width: 30vw;
+        max-width: 500px;
+        max-height: 500px;
+      }
+
+      @media (max-width: 1050px) {
+        width: 300px;
+        height: 300px;
+        img {
+          width: 300px;
+          height: 300px;
         }
+      }
     }
 
-    .owners-container{
-        display: grid;
-        gap: 4em;
-    }
-
-    .owner-container{
-        justify-self: center;
-
-        display: grid;
-        grid-template-columns: 35vw 1fr;
-        justify-items: center;
-        gap: 1em;
-        // width: 1000px;
-        max-width: 1400px;
-    
-
-        @media (max-width:1050px) {
-            grid-template-columns: 1fr;
-            gap: 2em;
-
-        }
-        
-        .img-container{
-            // height: calc(30vw);
-            // width: 30vw;
-            border-radius: 50%;
-            justify-self: start;
-            
-            img{
-                border-radius: 50%;
-                object-fit: cover;
-                height: calc(30vw);
-                width: 30vw;
-                max-width: 500px;
-                max-height: 500px;
-            }
-       
-            @media (max-width:1050px) {
-                width: 300px;
-                height: 300px;
-                img{
-                    width: 300px;
-                    height: 300px;
-
-                }
-    
-            }
-        }
-
-        p{
-
-            text-align: justify;
-            align-self: center;
-            font-size: 1.8em;
-            justify-self: end;
-            @media (max-width:750px) {
-                font-size: 1em;
-                padding: 1em;
-                
-            }
-        }
-
-        .img-container, p{
-            @media (max-width:1050px) {
-
-                justify-self: center;
-
-            
-        }
-        }
-    }
-
-    .trainers-social-container{
-        justify-self: center;
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        gap: 5em 1em;
-        // gap: 10em;
-        text-align: start;
+    p {
+      text-align: justify;
+      align-self: center;
+      font-size: 1.8em;
+      justify-self: end;
+      @media (max-width: 750px) {
+        font-size: 1em;
         padding: 1em;
-        width: 100%;
-        max-width: 1400px;
-        .section{
-            display: grid;
-            justify-items: center;
-        }
-
-        .cards-container{
-            justify-self: center;
-        }
-
-        .img-container{
-            align-self: center;
-            width: 30vw;
-            min-width: 350px;
-            padding: 1em;
-            height: fit-content;
-            img{
-                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-                border-radius: 50%;
-            }
-       
-        }
-
-        @media (max-width:1300px) {
-
-            grid-template-columns: 1fr;
-            gap: 3em;
-            justify-items: center;
-            padding: 0px;
-        }
-    }
-    .cards-container{
-        justify-self: start;
-        justify-items: center;
-        align-items: start;
-        // height: 60vh;
-
-        @media (max-width:1300px) {
-            grid-row: 1/2;
-            
-        }
-    }
-    
-    .instagram-container{
-        justify-self: end;
-        display: grid;
-        gap: 1em;
-
-        @media (min-width:1300px) {
-            justify-self: end;
-
-                }
-        @media (max-width:1300px) {
-
-
-            grid-row: 2/3;
-                }
-
-
-        b{
-            transition: 0.2s ease;
-        }
-
-        &:hover{
-            b{
-
-                transform: scale(1.1);
-            }
-        }
-    }
-    .cards-container, .instagram-container{
-
-        @media (max-width:1300px) {
-            
-            justify-self: center; 
-        }
+      }
     }
 
-    .whatsapp-container{
+    .img-container,
+    p {
+      @media (max-width: 1050px) {
         justify-self: center;
-        display: grid;
-        align-items: center;
-        justify-items: center;
-        gap: 1em;
-        font-size: 2em;
-        transition: 0.2s ease;
-        cursor: pointer;   
-                 width: 200px;
+      }
+    }
+  }
 
-        &:hover{
-            transform: scale(1.05);
-            button{
-
-                background-color: #1DAE5C;
-            }
-        }
-
-        .shadow-text{
-            text-shadow: black 2px 0 3px;
-
-        }
-
-        @media (min-width:1300px) {
-            justify-self: start;
-            
-        }
-        @media (max-width:1300px) {
-            // justify-self: start;
-            grid-row: 3/4;
-            grid-column: 1/-1;
-        }
-        button{
-            background-color: #25D366;
-            font-family: assistantBold;
-
-
-        }
-
-        img{
-        }
+  .trainers-social-container {
+    justify-self: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 5em 1em;
+    // gap: 10em;
+    text-align: start;
+    padding: 1em;
+    width: 100%;
+    max-width: 1400px;
+    .section {
+      display: grid;
+      justify-items: center;
     }
 
-
-    .pilates-container{
-
-        .instagram-container{
-            grid-column: 1/-1;
-            justify-self: center;
-
-       
-        }
+    .cards-container {
+      justify-self: center;
     }
 
+    .img-container {
+      align-self: center;
+      width: 30vw;
+      min-width: 350px;
+      padding: 1em;
+      height: fit-content;
+      img {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+          rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        border-radius: 50%;
+      }
+    }
 
+    @media (max-width: 1300px) {
+      grid-template-columns: 1fr;
+      gap: 3em;
+      justify-items: center;
+      padding: 0px;
+    }
+  }
+  .cards-container {
+    justify-self: start;
+    justify-items: center;
+    align-items: start;
+    // height: 60vh;
 
+    @media (max-width: 1300px) {
+      grid-row: 1/2;
+    }
+  }
+
+  .instagram-container {
+    justify-self: end;
+    display: grid;
+    gap: 1em;
+
+    @media (min-width: 1300px) {
+      justify-self: end;
+    }
+    @media (max-width: 1300px) {
+      grid-row: 2/3;
+    }
+
+    b {
+      transition: 0.2s ease;
+    }
+
+    &:hover {
+      b {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .cards-container,
+  .instagram-container {
+    @media (max-width: 1300px) {
+      justify-self: center;
+    }
+  }
+
+  .whatsapp-container {
+    justify-self: center;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 1em;
+    font-size: 2em;
+    transition: 0.2s ease;
+    cursor: pointer;
+    width: 200px;
+
+    &:hover {
+      transform: scale(1.05);
+      button {
+        background-color: #1dae5c;
+      }
+    }
+
+    .shadow-text {
+      text-shadow: black 2px 0 3px;
+    }
+
+    @media (min-width: 1300px) {
+      justify-self: start;
+    }
+    @media (max-width: 1300px) {
+      // justify-self: start;
+      grid-row: 3/4;
+      grid-column: 1/-1;
+    }
+    button {
+      background-color: #25d366;
+      font-family: assistantBold;
+    }
+
+    img {
+    }
+  }
+
+  .pilates-container {
+    .instagram-container {
+      grid-column: 1/-1;
+      justify-self: center;
+    }
+  }
 }

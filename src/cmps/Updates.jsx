@@ -76,15 +76,16 @@ export function Updates({ updates, navigateToUpdates }) {
                 <b>{update.title}</b>
                 <span>
                   {prefs.isEnglish
-                    ? new Date(update.createdAt).toLocaleString('eng')
-                    : new Date(update.createdAt).toLocaleString('he')}
+                    ? new Date(update.createdAt).toLocaleDateString('eng')
+                    : new Date(update.createdAt).toLocaleDateString('he')}
                 </span>
               </div>
               <div className='update-content-container'>
-                <p className={width <= 600 ? 'mobile' : ''}>{update.content}</p>
-                {width <= 600 && (
-                  <span>{prefs.isEnglish ? 'Read more...' : 'קרא עוד...'}</span>
-                )}
+                <p className={width <= 800 ? 'mobile' : ''}>{update.content}</p>
+
+                <span className='read-more'>
+                  {prefs.isEnglish ? 'Read more...' : 'קרא עוד...'}
+                </span>
               </div>
             </SwiperSlide>
           )

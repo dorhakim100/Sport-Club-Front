@@ -38,6 +38,7 @@ import { userService } from '../services/user/user.service.js'
 import notification from '../../public/imgs/notification.json'
 import squat from '../../public/imgs/squat.json'
 import squatDarkMode from '../../public/imgs/squat-dark-mode.json'
+import { DynamicCover } from '../cmps/DynamicCover.jsx'
 
 const defaultOptionsNotifications = {
   loop: true,
@@ -220,23 +221,31 @@ export function HomePage() {
               src={prefs.isDarkMode ? dumbbellsDarkMode : dumbbells}
               alt=''
             /> */}
-            <Lottie
+            {/* <Lottie
               options={classAnimationOptions}
               width={'80%'}
               height={'100%'}
-            />
-            <Link
-              to='class'
-              className={prefs.isDarkMode ? 'dark' : ''}
-              onClick={smoothScroll}
-            >
-              {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}
-              {prefs.isEnglish ? (
-                <ArrowForwardIosIcon className='arrow right' />
-              ) : (
-                <ArrowBackIosNewIcon className='arrow left' />
-              )}
-            </Link>
+            /> */}
+            <div className='img-container'>
+              <img
+                src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1744526378/DSC09079_result_przawo.webp'
+                alt=''
+                className='class-img'
+              />
+
+              <Link
+                to='class'
+                className={prefs.isDarkMode ? 'dark' : ''}
+                onClick={smoothScroll}
+              >
+                {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}
+                {prefs.isEnglish ? (
+                  <ArrowForwardIosIcon className='arrow right' />
+                ) : (
+                  <ArrowBackIosNewIcon className='arrow left' />
+                )}
+              </Link>
+            </div>
           </div>
           <div className='cards-container'>
             <b

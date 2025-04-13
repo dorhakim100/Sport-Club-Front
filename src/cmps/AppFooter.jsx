@@ -10,6 +10,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import MailIcon from '@mui/icons-material/Mail'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { smoothScroll } from '../services/util.service'
+import Divider from '@mui/material/Divider'
 
 export function AppFooter() {
   const navigate = useNavigate()
@@ -107,6 +108,13 @@ export function AppFooter() {
         >
           <FacebookIcon />
         </div>
+        <Divider
+          orientation='vertical'
+          flexItem
+          sx={{
+            backgroundColor: prefs.isDarkMode ? '#fff' : '',
+          }}
+        />
         <div
           className='social-container whatsapp-container'
           onClick={() => {
@@ -115,6 +123,13 @@ export function AppFooter() {
         >
           <WhatsAppIcon />
         </div>
+        <Divider
+          orientation='vertical'
+          flexItem
+          sx={{
+            backgroundColor: prefs.isDarkMode ? '#fff' : '',
+          }}
+        />
         <div
           className='social-container instagram-container'
           onClick={() => {
@@ -125,7 +140,7 @@ export function AppFooter() {
         </div>
       </div>
 
-      <span>{rights} &copy; 2024</span>
+      {/* <span>{rights} &copy; 2024</span> */}
     </footer>
   )
 }
