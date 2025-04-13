@@ -415,43 +415,43 @@ export function AppHeader() {
     setOptions(optionsToSet)
   }
 
-  const firstVisit = () => {
-    setModalMessage({
-      he: (
-        <div style={{ display: 'grid' }}>
-          <span style={{ direction: 'rtl' }}>
-            מעכשיו האתר תומך במצב כהה ושפה האנגלית.
-          </span>
-          <span style={{ direction: 'ltr' }}>
-            We now have both dark mode and English version.
-          </span>
-        </div>
-      ),
-      eng: (
-        <div style={{ display: 'grid' }}>
-          <span style={{ direction: 'rtl' }}>
-            האתר החדש תומך באנגלית ובמצב כהה.{' '}
-          </span>
-          <span style={{ direction: 'ltr' }}>
-            Our new site now has both dark mode and English support.{' '}
-          </span>
-        </div>
-      ),
-      func: () => {
-        setIsPrefs(true)
-        setIsModal(false)
-      },
-    })
-    setIsModal(true)
-    setPrefs({ ...prefs, isFirstTime: false })
-  }
-  useEffect(() => {
-    if (prefs.isFirstTime) {
-      setTimeout(() => {
-        firstVisit()
-      }, 2000)
-    }
-  }, [])
+  // const firstVisit = () => {
+  //   setModalMessage({
+  //     he: (
+  //       <div style={{ display: 'grid' }}>
+  //         <span style={{ direction: 'rtl' }}>
+  //           מעכשיו האתר תומך במצב כהה ושפה האנגלית.
+  //         </span>
+  //         <span style={{ direction: 'ltr' }}>
+  //           We now have both dark mode and English version.
+  //         </span>
+  //       </div>
+  //     ),
+  //     eng: (
+  //       <div style={{ display: 'grid' }}>
+  //         <span style={{ direction: 'rtl' }}>
+  //           האתר החדש תומך באנגלית ובמצב כהה.{' '}
+  //         </span>
+  //         <span style={{ direction: 'ltr' }}>
+  //           Our new site now has both dark mode and English support.{' '}
+  //         </span>
+  //       </div>
+  //     ),
+  //     func: () => {
+  //       setIsPrefs(true)
+  //       setIsModal(false)
+  //     },
+  //   })
+  //   setIsModal(true)
+  //   setPrefs({ ...prefs, isFirstTime: false })
+  // }
+  // useEffect(() => {
+  //   if (prefs.isFirstTime) {
+  //     setTimeout(() => {
+  //       firstVisit()
+  //     }, 2000)
+  //   }
+  // }, [])
 
   const opacityUp = () => {
     headerRef.current.style.opacity = '1'
@@ -549,7 +549,7 @@ export function AppHeader() {
       icon: <AdminPanelSettingsIcon />,
     },
     {
-      id: 1,
+      id: 0,
       title: { eng: 'Updates', he: 'עדכונים' },
       to: 'update',
       onClick: () => {
@@ -559,17 +559,17 @@ export function AppHeader() {
       icon: <NotificationsNoneIcon />,
     },
     {
-      id: 2,
-      title: { eng: 'Facilities', he: 'מתקני המועדון' },
-      to: 'facilities',
+      id: 1,
+      title: { eng: 'Opening times', he: 'שעות הפתיחה' },
+      to: `about/times`,
+      icon: <QueryBuilderIcon />,
       onClick: () => {
-        delayedNavigate('/facilities')
+        // setMenu(false)
+        delayedNavigate('/about/times')
       },
-      dropdown: false,
-      icon: <PoolIcon />,
     },
     {
-      id: 3,
+      id: 2,
       title: { eng: 'Class', he: 'חוגים' },
       to: 'class',
       onClick: () => {
@@ -606,6 +606,16 @@ export function AppHeader() {
       ],
       isOpen: false,
       icon: <EventNoteIcon />,
+    },
+    {
+      id: 3,
+      title: { eng: 'Facilities', he: 'מתקני המועדון' },
+      to: 'facilities',
+      onClick: () => {
+        delayedNavigate('/facilities')
+      },
+      dropdown: false,
+      icon: <PoolIcon />,
     },
     {
       id: 4,
@@ -837,7 +847,7 @@ export function AppHeader() {
                       <span>{openTasks}</span>
                     </div>
                   )) ||
-                    (cart && cart.length > 0 && (
+                    (user && cart && cart.length > 0 && (
                       <div className='notification'>
                         {' '}
                         <span>{cartLength}</span>
@@ -852,7 +862,7 @@ export function AppHeader() {
                       <span>{openTasks}</span>
                     </div>
                   )) ||
-                    (cart && cart.length > 0 && (
+                    (user && cart && cart.length > 0 && (
                       <div className='notification'>
                         {' '}
                         <span>{cartLength}</span>
@@ -879,7 +889,7 @@ export function AppHeader() {
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
-            disableScrollLock
+            // disableScrollLock={false}
             PaperProps={{
               sx: {
                 bgcolor: prefs.isDarkMode ? '#222' : '#fff',
@@ -925,7 +935,14 @@ export function AppHeader() {
                   (link.to === 'admin' && !user.isAdmin)
                 )
                   return (
-                    <div key={'LoginOption'}>
+                    <div key={`${index}Login`}>
+                      <Divider
+                        orientation='horizontal'
+                        flexItem
+                        sx={{
+                          backgroundColor: prefs.isDarkMode ? '#fff' : '',
+                        }}
+                      />
                       <ListItemButton
                         sx={{
                           textAlign: 'start',
@@ -1007,7 +1024,14 @@ export function AppHeader() {
                             primary={prefs.isEnglish ? 'Logout' : 'יציאה'}
                           />
                         </ListItemButton>
-                      )}
+                      )}{' '}
+                      <Divider
+                        orientation='horizontal'
+                        flexItem
+                        sx={{
+                          backgroundColor: prefs.isDarkMode ? '#fff' : '',
+                        }}
+                      />
                     </div>
                   )
                 return link.dropdown ? (
@@ -1087,7 +1111,16 @@ export function AppHeader() {
                     )}
                   </div>
                 ) : (
-                  <>
+                  <div key={`${index}Link`}>
+                    {link.to === 'admin' && (
+                      <Divider
+                        orientation='horizontal'
+                        flexItem
+                        sx={{
+                          backgroundColor: prefs.isDarkMode ? '#fff' : '',
+                        }}
+                      />
+                    )}
                     <ListItemButton
                       sx={{
                         textAlign: 'start',
@@ -1146,7 +1179,16 @@ export function AppHeader() {
                         />
                       </ListItemButton>
                     )}
-                  </>
+                    {link.to === 'admin' && (
+                      <Divider
+                        orientation='horizontal'
+                        flexItem
+                        sx={{
+                          backgroundColor: prefs.isDarkMode ? '#fff' : '',
+                        }}
+                      />
+                    )}
+                  </div>
                 )
               })}
             </List>

@@ -34,7 +34,8 @@ export function TrainerFilter({ filter, setFilter }) {
       const idx = filter.types.findIndex((type) => type === checkedButton)
       filter.types.splice(idx, 1)
     } else {
-      filter.types.push(checkedButton)
+      // filter.types.push(checkedButton)
+      filter.types = [checkedButton]
     }
 
     setFilter({ ...filter, pageIdx: 0 })

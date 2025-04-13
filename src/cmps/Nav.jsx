@@ -22,9 +22,11 @@ export function Nav({ origin, links, isMain }) {
       }
     >
       <>
-        <NavLink to={`${origin.path}`} end>
-          {prefs.isEnglish ? origin.eng : origin.he}
-        </NavLink>
+        {origin && (
+          <NavLink to={`${origin.path}`} end>
+            {prefs.isEnglish ? origin.eng : origin.he}
+          </NavLink>
+        )}
         {!isMain && (
           <Divider
             style={prefs.isDarkMode ? { backgroundColor: '#787878' } : {}}

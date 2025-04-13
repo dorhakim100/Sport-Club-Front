@@ -24,11 +24,6 @@ export function AboutUs() {
   }
 
   const links = [
-    // {
-    //   path: 'team',
-    //   he: 'צוות המועדון',
-    //   eng: 'Team',
-    // },
     {
       path: 'times',
       he: 'שעות הפתיחה',
@@ -262,6 +257,7 @@ export function Organization() {
   return (
     <section>
       <HeadContainer text={headText} />
+      <DynamicCover coverSrc={Amota.cover} prefs={prefs} />
       {splitText.map((line, index) => (
         // Render each line, and add a <br> tag after each one except the last
         <p key={index}>
