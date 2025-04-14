@@ -36,7 +36,7 @@ import preview from '/public/jsons/HomePage/Preview/Preview.json'
 import { userService } from '../services/user/user.service.js'
 
 import notification from '../../public/imgs/notification.json'
-import squat from '../../public/imgs/squat.json'
+// import squat from '../../public/imgs/squat.json'
 import squatDarkMode from '../../public/imgs/squat-dark-mode.json'
 import { DynamicCover } from '../cmps/DynamicCover.jsx'
 
@@ -57,7 +57,7 @@ export function HomePage() {
 
   const user = useSelector((storeState) => storeState.userModule.user)
 
-  const [squatAnimation, setSquatAnimation] = useState(squat)
+  const [squatAnimation, setSquatAnimation] = useState(squatDarkMode)
 
   const classAnimationOptions = {
     loop: true,
@@ -92,11 +92,11 @@ export function HomePage() {
 
   useEffect(() => {
     textAnimation(prefs)
-    if (prefs.isDarkMode) {
-      setSquatAnimation(squatDarkMode)
-    } else {
-      setSquatAnimation(squat)
-    }
+    // if (prefs.isDarkMode) {
+    //   setSquatAnimation(squatDarkMode)
+    // } else {
+    //   setSquatAnimation(squat)
+    // }
   }, [prefs.isEnglish, prefs.isDarkMode])
 
   useEffect(() => {
@@ -221,12 +221,14 @@ export function HomePage() {
               src={prefs.isDarkMode ? dumbbellsDarkMode : dumbbells}
               alt=''
             /> */}
-            {/* <Lottie
-              options={classAnimationOptions}
-              width={'80%'}
-              height={'100%'}
-            /> */}
             <div className='img-container'>
+              <div className='animation-container'>
+                <Lottie
+                  options={classAnimationOptions}
+                  width={'50%'}
+                  height={'50%'}
+                />
+              </div>
               <img
                 src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1744526378/DSC09079_result_przawo.webp'
                 alt=''
@@ -235,7 +237,10 @@ export function HomePage() {
 
               <Link
                 to='class'
-                className={prefs.isDarkMode ? 'dark' : ''}
+                className={
+                  prefs.isDarkMode ? 'shadow-text dark' : 'shadow-text'
+                }
+                // className='shadow-text'
                 onClick={smoothScroll}
               >
                 {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}

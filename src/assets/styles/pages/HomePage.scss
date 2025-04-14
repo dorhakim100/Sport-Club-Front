@@ -278,16 +278,28 @@
         position: relative;
 
         height: 400px;
+
+        .animation-container {
+          position: absolute;
+          z-index: 10;
+          bottom: 1em;
+        }
         // object-fit: scale-down;
         a {
           color: white;
           position: absolute;
-          bottom: 0.5em;
+          bottom: 0em;
           left: 0;
           right: 0;
           width: 100%;
           text-align: center;
           z-index: 2; /* Ensure the text is above the gradient overlay */
+          background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.6) 60%,
+            transparent
+          );
+          border-radius: 8px;
         }
 
         .class-img {
@@ -310,7 +322,7 @@
           /* Adjusted gradient to provide a dark overlay for better text contrast */
           background: linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.6) 30%,
+            rgba(0, 0, 0, 0.6) 20%,
             transparent
           );
 
