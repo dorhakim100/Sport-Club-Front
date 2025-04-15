@@ -66,6 +66,7 @@ import Collapse from '@mui/material/Collapse'
 
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
+import HomeIcon from '@mui/icons-material/Home'
 
 import Divider from '@mui/material/Divider'
 
@@ -539,7 +540,7 @@ export function AppHeader() {
   }
   const [links, setLinks] = useState([
     {
-      id: 8,
+      id: 9,
       title: { eng: 'Admin', he: 'מנהל' },
       to: 'admin',
       onClick: () => {
@@ -550,6 +551,16 @@ export function AppHeader() {
     },
     {
       id: 0,
+      title: { eng: 'Home', he: 'בית' },
+      to: '',
+      onClick: () => {
+        delayedNavigate('')
+      },
+      dropdown: false,
+      icon: <HomeIcon />,
+    },
+    {
+      id: 1,
       title: { eng: 'Updates', he: 'עדכונים' },
       to: 'update',
       onClick: () => {
@@ -559,7 +570,7 @@ export function AppHeader() {
       icon: <NotificationsNoneIcon />,
     },
     {
-      id: 1,
+      id: 2,
       title: { eng: 'Opening times', he: 'שעות הפתיחה' },
       to: `about/times`,
       icon: <QueryBuilderIcon />,
@@ -569,7 +580,7 @@ export function AppHeader() {
       },
     },
     {
-      id: 2,
+      id: 3,
       title: { eng: 'Class', he: 'חוגים' },
       to: 'class',
       onClick: () => {
@@ -608,7 +619,7 @@ export function AppHeader() {
       icon: <EventNoteIcon />,
     },
     {
-      id: 3,
+      id: 4,
       title: { eng: 'Facilities', he: 'מתקני המועדון' },
       to: 'facilities',
       onClick: () => {
@@ -618,7 +629,7 @@ export function AppHeader() {
       icon: <PoolIcon />,
     },
     {
-      id: 4,
+      id: 5,
       title: { eng: 'Member', he: 'מנויים' },
       to: 'member',
       onClick: () => {
@@ -628,7 +639,7 @@ export function AppHeader() {
       icon: <CardMembershipIcon />,
     },
     {
-      id: 5,
+      id: 6,
       title: { eng: 'Store', he: 'כרטיסיות וציוד' },
       to: 'item',
       onClick: () => {
@@ -668,7 +679,7 @@ export function AppHeader() {
       isOpen: false,
     },
     {
-      id: 6,
+      id: 7,
       title: { eng: 'Activities', he: 'פעילויות' },
       to: 'activities',
       onClick: () => {
@@ -734,7 +745,7 @@ export function AppHeader() {
       icon: <SportsTennisIcon />,
     },
     {
-      id: 7,
+      id: 8,
       title: { eng: 'About', he: 'אודות' },
       to: 'about',
       onClick: () => {
@@ -1215,6 +1226,7 @@ export function AppHeader() {
               (link.to === 'admin' && !user.isAdmin)
             )
               return
+            if (link.to === '') return
             return (
               <NavLink
                 to={link.to}
