@@ -159,9 +159,14 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
       } else {
         const logged = await login(cred)
 
-        if (isRemember) {
-          setPrefs({ ...prefs, user: { _id: logged._id } })
-        }
+        if (isRemember)
+          setPrefs({
+            ...prefs,
+            user: prefs.user
+              ? { ...prefs.user, _id: logged._id }
+              : { _id: logged._id },
+          })
+
         showSuccessMsg(
           prefs.isEnglish ? 'Loged in successfully' : 'חיבור בוצע בהצלחה'
         )

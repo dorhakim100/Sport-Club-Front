@@ -53,11 +53,9 @@ export function UserDetails() {
       setFilterBy(filter)
       setMax(m)
       await loadPayments(filter)
-
-      if (sessionStorage.getItem('loggedinUser')) {
-        const sessionUser = JSON.parse(sessionStorage.getItem('loggedinUser'))
-
-        if (sessionUser.imgUrl) setGoogleImg(sessionUser.imgUrl)
+      console.log(prefs)
+      if (prefs.user && prefs.user.imgUrl) {
+        setGoogleImg(prefs.user.imgUrl)
       }
     } catch (err) {
       showErrorMsg(
