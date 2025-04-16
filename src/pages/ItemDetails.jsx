@@ -13,6 +13,8 @@ import { ItemOptions } from '../cmps/ItemOptions.jsx'
 import { ContactUs } from '../cmps/ContactUs'
 import { setIsModal, setModalMessage } from '../store/actions/system.actions'
 
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+
 export function ItemDetails() {
   const { itemId } = useParams()
   const item = useSelector((storeState) => storeState.itemModule.item)
@@ -94,6 +96,24 @@ export function ItemDetails() {
     option ? setSelectedOption(option) : setSelectedOption(null)
   }
 
+  const modifyCards = (itemPreview) => {
+    console.log(itemPreview)
+    if (!item.types.includes('card'))
+      return <p>{prefs.isEnglish ? itemPreview.eng : itemPreview.he}</p>
+    let itemPreviewStr = prefs.isEnglish ? itemPreview.eng : itemPreview.he
+    const bullets = itemPreviewStr.split('.')
+    console.log(bullets)
+    return bullets.map((bullet, index) => {
+      if (index !== bullets.length - 1)
+        return (
+          <div className='bullet-container' key={`${index}Bullet`}>
+            <CheckCircleOutlineIcon />
+            <span>{bullet}</span>
+          </div>
+        )
+    })
+  }
+
   return (
     <>
       {item.prevNext && (
@@ -134,9 +154,7 @@ export function ItemDetails() {
         <div className='img-container'>
           <img src={item.cover} alt='' />
         </div>
-        <div className='preview-container'>
-          <p>{prefs.isEnglish ? item.preview.eng : item.preview.he}</p>
-        </div>
+        <div className='preview-container'>{modifyCards(item.preview)}</div>
       </section>
       <ContactUs />
     </>
