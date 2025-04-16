@@ -11,11 +11,16 @@ export function GoogleLoginCmp({ handleGoogleLogin }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const [isRemember, setIsRemember] = useState(false)
   const handleLoginSuccess = async (response) => {
-    const { email, name: fullname } = parseJwt(response.credential)
+    const {
+      email,
+      name: fullname,
+      picture: imgUrl,
+    } = parseJwt(response.credential)
 
     const cred = {
       username: email,
-      fullname: fullname,
+      fullname,
+      imgUrl,
       isGoogle: true,
     }
     try {

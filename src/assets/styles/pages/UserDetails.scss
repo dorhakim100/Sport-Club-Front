@@ -1,49 +1,97 @@
-
 .user-details {
+  .user-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    font-size: 2em;
+    gap: 1em;
 
-    
-    .list-container{
-
-
+    @media (max-width: 1040px) {
+      font-size: 1.5em;
     }
-    
-    .no-orders-container{
-        
-        a{
 
-            font-size: 1.5em;
-            font-family: assistantBold;
-            transition: 0.2s ease;
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      gap: 1em;
+      justify-items: center;
 
-            &:visited{
-                color: $dark-blue;
-                
-                &:hover{
-                    color: $bold-navy;
-                }
-            }
-            
-            &.dark-mode{
-                
-                &:visited{
-
-                    color: white;
-                }
-                &:hover{
-
-                    color: $light-gray;
-                }
-
-            }
-        }
-
-        display: grid;
-        justify-items: center;
-        gap: 2em;
-        img{
-            margin-right: 4em;
-            width: 50vw;
-            max-width: 400px;
-        }
+      .img-container {
+        grid-row: 1/2;
+      }
     }
+    .details-container {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      .detail-container {
+        display: flex;
+        align-items: center;
+        justify-items: start;
+        gap: 0.5em;
+      }
+      b {
+        font-family: assistantBold;
+      }
+      span {
+        // font-size: 1.1em;
+      }
+    }
+
+    img {
+      border-radius: 50%;
+      max-width: 300px;
+      width: 100%;
+    }
+  }
+
+  .edit-container {
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    @media (max-width: 600px) {
+      //   justify-items: center;
+      grid-template-columns: 1fr;
+    }
+    // justify-items: start;
+    form {
+      display: grid;
+    }
+  }
+
+  .list-container {
+  }
+
+  .no-orders-container {
+    a {
+      font-size: 1.5em;
+      font-family: assistantBold;
+      transition: 0.2s ease;
+
+      &:visited {
+        color: $dark-blue;
+
+        &:hover {
+          color: $bold-navy;
+        }
+      }
+
+      &.dark-mode {
+        &:visited {
+          color: white;
+        }
+        &:hover {
+          color: $light-gray;
+        }
+      }
+    }
+
+    display: grid;
+    justify-items: center;
+    gap: 2em;
+    img {
+      margin-right: 4em;
+      width: 50vw;
+      max-width: 400px;
+    }
+  }
 }

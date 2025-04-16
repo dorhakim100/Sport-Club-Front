@@ -2,15 +2,19 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { loadUser } from '../store/actions/user.actions'
+import { loadUser, updateUser } from '../store/actions/user.actions'
 
-import { showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { paymentService } from '../services/payment/payment.service'
 
-import { OrderList } from '../cmps/OrderList.jsx'
 import { setIsLoading } from '../store/actions/system.actions'
 import { ContactUs } from '../cmps/ContactUs'
 import { loadPayments } from '../store/actions/payment.actions'
+import { OrderList } from '../cmps/OrderList.jsx'
+import { HeadContainer } from '../cmps/HeadContainer'
+
+import { Button } from '@mui/material'
+import { capitalizeFirstLetter } from '../services/util.service'
 
 export function UserDetails() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -24,6 +28,10 @@ export function UserDetails() {
     (stateSelector) => stateSelector.paymentModule.payments
   )
 
+  const [editUser, setEditUser] = useState({ phone: '', newPassword: '' })
+
+  const [googleImg, setGoogleImg] = useState('')
+
   useEffect(() => {
     setUser()
   }, [params.id])
@@ -36,6 +44,7 @@ export function UserDetails() {
     try {
       setIsLoading(true)
       const u = await loadUser(params.userId)
+
       setUserName({ he: u.fullname, eng: u.fullname })
 
       const filter = { ...filterBy, ordersIds: u.ordersIds }
@@ -44,6 +53,12 @@ export function UserDetails() {
       setFilterBy(filter)
       setMax(m)
       await loadPayments(filter)
+
+      if (sessionStorage.getItem('loggedinUser')) {
+        const sessionUser = JSON.parse(sessionStorage.getItem('loggedinUser'))
+
+        if (sessionUser.imgUrl) setGoogleImg(sessionUser.imgUrl)
+      }
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish
@@ -54,12 +69,160 @@ export function UserDetails() {
       setIsLoading(false)
     }
   }
+  const editText = {
+    he: 'עריכה',
+    eng: 'Edit',
+  }
+  const userText = {
+    he: 'משתמש',
+    eng: 'User',
+  }
+
+  const renderUserDetails = () => {
+    const elements = []
+    for (const key in user) {
+      if (
+        user.hasOwnProperty(key) &&
+        key !== '_id' &&
+        key !== 'isAdmin' &&
+        key !== 'ordersIds' &&
+        key !== 'items' &&
+        key !== 'img' &&
+        key !== 'imgUrl'
+      ) {
+        if (!prefs.isEnglish) {
+          let hebrewKey
+          switch (key) {
+            case 'fullname':
+              hebrewKey = 'שם מלא'
+              break
+            case 'username':
+              hebrewKey = 'שם משתמש'
+              break
+            case 'email':
+              hebrewKey = 'אימייל'
+              break
+            case 'phone':
+              hebrewKey = 'מספר טלפון'
+              break
+
+            default:
+              break
+          }
+          elements.push(
+            <div className='detail-container' key={`${key}he`}>
+              <b>{`${hebrewKey}:`}</b>
+              <span> {user[key]}</span>
+            </div>
+          )
+        } else {
+          elements.push(
+            <div className='detail-container' key={`${key}eng`}>
+              <b>{`${capitalizeFirstLetter(key)}:`}</b>
+              <span> {user[key]}</span>
+            </div>
+          )
+        }
+      }
+    }
+    return elements
+  }
+
+  const onUpdateUser = async (event) => {
+    event.preventDefault()
+
+    if (editUser.newPassword.length && editUser.newPassword.length < 6)
+      return showErrorMsg(
+        prefs.isEnglish
+          ? 'New password must be more than 6 letters'
+          : 'סיסמא חדשה חייבת להיות יותר מ6 תווים'
+      )
+
+    const userToUpdate = {
+      ...user,
+      phone: editUser.phone ? editUser.phone : user.phone,
+      password: editUser.newPassword ? editUser.newPassword : null,
+    }
+
+    try {
+      await updateUser(userToUpdate)
+      showSuccessMsg(
+        prefs.isEnglish ? 'Update successful' : 'עדכון בוצע בהצלחה'
+      )
+    } catch (err) {
+      console.log(err)
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't save changes` : 'לא היה ניתן לשמור'
+      )
+    }
+  }
+
+  const handleChange = (event) => {
+    const { target } = event
+
+    const { name, value } = target
+
+    setEditUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
 
   return (
     <section className='user-details'>
       {user && !user.isAdmin && (
         <div>
-          {/* <HeadContainer text={userName} /> */}
+          <HeadContainer text={userText} />
+          <div className='user-container'>
+            <div className='details-container'>
+              {user && renderUserDetails()}
+            </div>
+            <div className='img-container'>
+              <img
+                src={
+                  googleImg ||
+                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+                }
+                alt='userImg'
+              />
+            </div>
+          </div>
+          <HeadContainer text={editText} />
+          <div className='edit-container'>
+            <form action='' onSubmit={onUpdateUser}>
+              <div
+                className={`input-container ${
+                  prefs.isDarkMode ? 'dark-mode' : ''
+                }`}
+              >
+                <input
+                  type='search'
+                  id='phone'
+                  name='phone'
+                  value={editUser.phone}
+                  onChange={handleChange}
+                  placeholder={prefs.isEnglish ? 'Phone number' : 'מספר טלפון'}
+                />
+              </div>
+              <div
+                className={`input-container ${
+                  prefs.isDarkMode ? 'dark-mode' : ''
+                }`}
+              >
+                <input
+                  id='newPassword'
+                  type='search'
+                  name='newPassword'
+                  value={editUser.newPassword}
+                  onChange={handleChange}
+                  placeholder={prefs.isEnglish ? 'New password' : 'סיסמא חדשה'}
+                />
+              </div>
+              <Button variant='contained' type='submit'>
+                {prefs.isEnglish ? 'Submit' : 'אישור'}
+              </Button>
+            </form>
+          </div>
           <OrderList
             user={user}
             orders={orders}

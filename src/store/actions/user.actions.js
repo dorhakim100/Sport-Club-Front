@@ -48,6 +48,7 @@ export async function login(credentials) {
     const cart = [...user.items] || []
 
     store.dispatch({ type: UPDATE_CART, cart: cart })
+
     store.dispatch({
       type: SET_USER,
       user: user,
@@ -56,6 +57,22 @@ export async function login(credentials) {
     return user
   } catch (err) {
     // console.log('Cannot login', err)
+    throw err
+  }
+}
+
+export async function updateUser(userToUpdate) {
+  try {
+    const saved = await userService.update(userToUpdate)
+
+    store.dispatch({
+      type: SET_USER,
+      user: saved,
+    })
+
+    // return saved
+  } catch (err) {
+    // console.log(err);
     throw err
   }
 }

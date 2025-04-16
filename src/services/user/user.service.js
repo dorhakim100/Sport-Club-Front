@@ -67,6 +67,7 @@ async function update(user) {
 async function login(userCred) {
   try {
     const user = await httpService.post('auth/login', userCred)
+
     if (user) return saveLoggedinUser(user)
   } catch (err) {
     // console.log(err)
@@ -142,6 +143,7 @@ function saveLoggedinUser(user) {
     imgUrl: user.imgUrl,
     isAdmin: user.isAdmin,
     email: user.email,
+    phone: user.phone,
     ordersIds: user.ordersIds,
     items: user.items,
     phone: user.phone,
@@ -160,6 +162,7 @@ function getEmptyUser() {
     ordersIds: [],
     items: [],
     email: '',
+    phone: '',
   }
 }
 

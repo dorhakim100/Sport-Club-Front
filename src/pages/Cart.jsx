@@ -153,13 +153,16 @@ export function Cart() {
 
   async function onPay() {
     try {
-      // const messageToSet = {
-      //   he: `בימים הקרובים הזמנות דרך האתר יהיו פעילות`,
-      //   eng: `In the following days orders from our site will be available`,
-      // }
-      // setModalMessage(messageToSet)
-      // setIsModal(true)
-      // return // till actual payments are ready
+      if (!user.phone || user.phone.length === 0 || user.phone === '') {
+        const messageToSet = {
+          he: 'יש להוסיף מספר טלפון לפני ביצוע הזמנה',
+          eng: `A phone number must be added before placing an order`,
+          link: `/user/${user._id}`,
+        }
+        setModalMessage(messageToSet)
+        setIsModal(true)
+        return
+      }
 
       setIsLoading(true)
       const order = createOrder()
