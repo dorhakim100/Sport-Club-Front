@@ -48,11 +48,20 @@ export function LoginSignup() {
   const handleGoogleLogin = async (credentials) => {
     try {
       setIsLoading(true)
+
       const userRes = await login({ ...credentials })
 
-      if (isRemember) {
-        setPrefs({ ...prefs, user: { _id: userRes._id } })
+      const updatedUser = {
+        ...prefs.user,
+        ...(userRes.imgUrl && { imgUrl: userRes.imgUrl }),
+        ...(isRemember && userRes._id && { _id: userRes._id }),
       }
+
+      setPrefs({
+        ...prefs,
+        user: updatedUser,
+      })
+
       navigate('/')
     } catch (err) {
       // // console.log(err)
