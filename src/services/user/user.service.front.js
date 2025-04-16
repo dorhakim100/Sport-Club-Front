@@ -141,6 +141,7 @@ function saveLoggedinUser(user) {
       imgUrl: user.imgUrl,
       isAdmin: user.isAdmin,
       email: user.email,
+      phone: user.phone,
       ordersIds: user.ordersIds,
       items: user.items,
     }

@@ -90,7 +90,7 @@ export function ContactUs() {
           <input
             type='text'
             name='name'
-            id=''
+            id={`nameContactUs`}
             placeholder={prefs.isEnglish ? 'Name' : 'שם'}
             onChange={handleChange}
             value={editMessage.name}
@@ -98,7 +98,7 @@ export function ContactUs() {
           <input
             name='phone'
             type='tel'
-            id=''
+            id={`phoneContactUs`}
             placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
             onChange={handleChange}
             value={editMessage.phone}
@@ -108,14 +108,14 @@ export function ContactUs() {
           <input
             type='text'
             name='title'
-            id=''
+            id={`titleContactUs`}
             placeholder={prefs.isEnglish ? 'Title' : 'כותרת'}
             onChange={handleChange}
             value={editMessage.title}
           />
           <textarea
             name='content'
-            id=''
+            id={`contentContactUs`}
             style={{ resize: 'none' }}
             onChange={handleChange}
             value={editMessage.content}
