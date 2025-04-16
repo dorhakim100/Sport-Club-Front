@@ -97,12 +97,11 @@ export function ItemDetails() {
   }
 
   const modifyCards = (itemPreview) => {
-    console.log(itemPreview)
     if (!item.types.includes('card'))
       return <p>{prefs.isEnglish ? itemPreview.eng : itemPreview.he}</p>
     let itemPreviewStr = prefs.isEnglish ? itemPreview.eng : itemPreview.he
     const bullets = itemPreviewStr.split('.')
-    console.log(bullets)
+
     return bullets.map((bullet, index) => {
       if (index !== bullets.length - 1)
         return (
