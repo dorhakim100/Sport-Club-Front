@@ -122,6 +122,16 @@
     ); // Gradient from light blue to soft green
     // background-color: $medium-gray;
   }
+
+  .checkbox-container:has(input:checked) {
+    label {
+      background-color: $dark-green;
+
+      &:hover {
+        background-color: $dark-green-hover;
+      }
+    }
+  }
 }
 
 .message-container.done.dark-mode {
