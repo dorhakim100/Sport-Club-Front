@@ -52,7 +52,7 @@ export function MessageModal() {
     setIsHover(true)
   }
   const setHoverFalse = () => {
-    setIsHover(true)
+    setIsHover(false)
   }
 
   return (
@@ -105,17 +105,34 @@ export function MessageModal() {
             {prefs.isEnglish ? 'more details' : 'למידע נוסף'}
           </Button>
         )}
-        {modalMessage.func && (
-          <Button
-            variant='contained'
-            onClick={() => {
-              modalMessage.func()
-              setIsModal(false)
-              modalRef.current.style.zIndex = '-1'
-            }}
-          >
-            {prefs.isEnglish ? 'more details' : 'למידע נוסף'}
-          </Button>
+        {modalMessage.buttons && (
+          <div className='modal-message-buttons-container'>
+            {modalMessage.buttons.map((button, index) => {
+              return (
+                <Button
+                  variant={index === 0 ? 'outlined' : 'contained'}
+                  key={`modalMessageButton${index}`}
+                  sx={{
+                    color: '#fff', // Light blue text color
+                    borderColor: '#fff',
+                    transition: '0.3s ease-out',
+                    '&:hover': {
+                      // backgroundColor: 'rgba(110, 193, 228, 0.5)', // Light blue transparent hover background
+                      // borderColor: '#9E9E9E', // Slightly darker border on hover
+                      // color: '#2C3E50',
+                    },
+                  }}
+                  onClick={() => {
+                    button.func()
+                    setIsModal(false)
+                    modalRef.current.style.zIndex = '-1'
+                  }}
+                >
+                  {prefs.isEnglish ? button.title.eng : button.title.he}
+                </Button>
+              )
+            })}
+          </div>
         )}
       </div>
     </div>

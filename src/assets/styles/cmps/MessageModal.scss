@@ -1,63 +1,67 @@
-.modal-container{
-    transition: 0.2s ease-in;
-    opacity: 0;
-    // z-index: -1;
-    &.visible{
-        opacity: 1;
-        // z-index: 1;
+.modal-container {
+  transition: 0.2s ease-in;
+  opacity: 0;
+  // z-index: -1;
+  &.visible {
+    opacity: 1;
+    // z-index: 1;
+  }
+  &.dark-mode {
+    color: white;
+  }
+  .modal-message-container {
+    margin-left: 1em;
+    margin-right: 1em;
+    position: relative;
+    display: grid;
+    gap: 1em;
+    align-items: center;
+    justify-items: center;
+    opacity: 1;
+    font-family: assistantBold;
+    border-radius: 5px;
+    background-color: $light-gray;
+    background: linear-gradient(
+      135deg,
+      #6ec1e4fe 0%,
+      #a8e6a196 100%
+    ); // Gradient from light blue to soft green
+
+    .exit-button {
+      position: absolute;
+      top: 0.5em;
+      inset-inline-end: 1em;
     }
-    &.dark-mode{
-        color: white;
+
+    b {
+      font-size: 3em;
     }
-    .modal-message-container{
-        margin-left: 1em;
-        margin-right: 1em;
-        position: relative;
-        display: grid;
-        gap: 1em;
-        align-items: center;
-        justify-items: center;
-        opacity: 1;
-        font-family: assistantBold;
-        border-radius: 5px;
-        background-color: $light-gray;
-        background: linear-gradient(135deg, #6ec1e4fe 0%, #a8e6a196 100%); // Gradient from light blue to soft green
 
-        .exit-button{
-            position: absolute;
-            top: 0.5em;
-            inset-inline-end: 1em;
-        }
-
-        b{
-
-            font-size: 3em;
-        }
-
-        p{
-            font-size: 2em;
-        }
-        
-        padding: 1em;
-        min-width: 300px;
-        z-index: 4;
-        
-        @media (min-height:800px) {
-
-            padding: 2em;
-            
-        }
-        
-        @media (max-width:600px) {
-            b{
-
-                font-size: 2.2em;
-            }
-
-            p{
-                font-size: 1.2em;
-            }
-            
-        }
+    p {
+      font-size: 2em;
     }
+
+    padding: 1em;
+    min-width: 300px;
+    z-index: 4;
+
+    @media (min-height: 800px) {
+      padding: 2em;
+    }
+
+    @media (max-width: 600px) {
+      b {
+        font-size: 2.2em;
+      }
+
+      p {
+        font-size: 1.2em;
+      }
+    }
+  }
+
+  .modal-message-buttons-container {
+    display: flex;
+    gap: 1em;
+  }
 }
