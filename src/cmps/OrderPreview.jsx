@@ -169,15 +169,43 @@ export function OrderPreview({ order, updateOrder }) {
             <div className='progress-container'>
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox checked={order.isReady} />}
+                  control={
+                    <Checkbox
+                      checked={order.isReady}
+                      sx={{
+                        color: prefs.isDarkMode ? '#fff' : '',
+                        '&.Mui-checked': {
+                          color: prefs.isDarkMode
+                            ? 'rgb(130.7142857143, 219.2857142857, 120.7142857143)'
+                            : '#4caf50',
+                        },
+                        '&:hover': {
+                          backgroundColor: 'rgba(76, 175, 80, 0.08)', // subtle hover ripple
+                        },
+                      }}
+                    />
+                  }
                   label={prefs.isEnglish ? 'Ready' : 'מוכן לאיסוף'}
-                  // onChange={() => onUpdateOrder('isReady')}
                   onClick={setModalTrueReady}
                 />
                 <FormControlLabel
-                  control={<Checkbox checked={order.isDelivered} />}
+                  control={
+                    <Checkbox
+                      checked={order.isDelivered}
+                      sx={{
+                        color: prefs.isDarkMode ? '#fff' : '',
+                        '&.Mui-checked': {
+                          color: prefs.isDarkMode
+                            ? 'rgb(130.7142857143, 219.2857142857, 120.7142857143)'
+                            : '#4caf50',
+                        },
+                        '&:hover': {
+                          backgroundColor: 'rgba(76, 175, 80, 0.08)',
+                        },
+                      }}
+                    />
+                  }
                   label={prefs.isEnglish ? 'Taken' : 'נאסף'}
-                  // onChange={() => onUpdateOrder('isDelivered')}
                   onClick={setModalTrueDelivered}
                 />
               </FormGroup>

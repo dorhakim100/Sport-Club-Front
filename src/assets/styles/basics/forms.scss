@@ -241,16 +241,16 @@ input[type='number'] {
 }
 
 div.dark-mode {
-  label:not(.MuiFormLabel-root) {
+  label:not(.MuiFormLabel-root):not(.MuiFormControlLabel-root) {
     background-color: $dark-gray;
     &:hover {
       background-color: $very-dark-gray;
     }
   }
   div {
-    &:has(input:checked) label {
-      background-color: $dark-blue;
-      color: white;
+    &:has(input:checked) label:not(.MuiFormControlLabel-root) {
+      // background-color: $dark-blue;
+      // color: white;
 
       &:hover {
         background-color: $bold-navy;
