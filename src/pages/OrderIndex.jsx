@@ -14,6 +14,10 @@ import { updatePayment } from '../store/actions/payment.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { OrderList } from '../cmps/OrderList'
 import { OrderFilter } from '../cmps/OrderFilter.jsx'
+import {
+  socketService,
+  SOCKET_EVENT_ADD_ORDER,
+} from '../services/socket.service'
 
 export function OrderIndex() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -29,6 +33,22 @@ export function OrderIndex() {
   useEffect(() => {
     setUser()
   }, [params.id])
+
+  useEffect(() => {
+    const handleOrderUpdate = async () => {
+      try {
+        setPayments(paymentService.getDefaultFilter())
+        // in the future maybe add regular user's socket update
+      } catch (err) {
+        // console.log(`Couldn't load socket event`)
+      }
+    }
+    if (user && user.isAdmin)
+      socketService.on(SOCKET_EVENT_ADD_ORDER, handleOrderUpdate)
+    return () => {
+      socketService.off(SOCKET_EVENT_ADD_ORDER, handleOrderUpdate)
+    }
+  }, [])
 
   useEffect(() => {
     if (!user || !user.isAdmin) return

@@ -23,8 +23,6 @@ const baseUrl =
     ? 'https://www.moadonsport.com/'
     : '//localhost:3030'
 
-// const baseUrl = 'https://www.moadonsport.com/'
-
 export const socketService = createSocketService()
 // export const socketService = createDummySocketService()
 
