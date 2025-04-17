@@ -53,7 +53,7 @@ export function UserDetails() {
       setFilterBy(filter)
       setMax(m)
       await loadPayments(filter)
-      console.log(prefs)
+
       if (prefs.user && prefs.user.imgUrl) {
         setGoogleImg(prefs.user.imgUrl)
       }

@@ -1,62 +1,62 @@
-.modal-container{
-    position: fixed;
+.modal-container {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  &.order {
+    background-color: rgba(0, 0, 0, 0.07);
+  }
+  opacity: 0;
 
+  display: grid;
+  align-items: center;
+  justify-items: center;
 
-    background-color: rgba(0, 0, 0, 0.502);
-    opacity: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-    
+  z-index: 2;
+
+  .control-container {
+    display: grid;
+    gap: 1em;
+    align-items: center;
+    justify-items: center;
+    opacity: 1;
+    font-family: assistantBold;
+    border-radius: 5px;
+    background-color: $light-gray;
+    background: linear-gradient(
+      135deg,
+      #6ec1e4fe 0%,
+      #a8e6a196 100%
+    ); // Gradient from light blue to soft green
+
+    padding: 2em;
+    z-index: 4;
+
+    .buttons-container {
+      display: flex;
+      gap: 0.5em;
+    }
+  }
+}
+
+.modal-container.visible {
+  opacity: 1;
+  .control-container {
     display: grid;
     align-items: center;
     justify-items: center;
-    
-    
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    
-    z-index: 2;
-    
-    .control-container{
-        display: grid;
-        gap: 1em;
-        align-items: center;
-        justify-items: center;
-        opacity: 1;
-        font-family: assistantBold;
-        border-radius: 5px;
-        background-color: $light-gray;
-        background: linear-gradient(135deg, #6ec1e4fe 0%, #a8e6a196 100%); // Gradient from light blue to soft green
-
-
-        padding: 2em;
-        z-index: 4;
-
-        .buttons-container{
-            display: flex;
-            gap: 0.5em;
-        }
-
-    }
-}
-
-.modal-container.visible{
     opacity: 1;
-    .control-container{
-        display: grid;
-        align-items: center;
-        justify-items: center;
-        opacity: 1;
-    
-        border-radius: 5px;
-    
-        background-color: $medium-gray;
-        // background-color: blue;
-        // background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
-        // background-color: aqua;
-        transform: scale(1.5);
-        padding: 2em;
-    
-    }
+
+    border-radius: 5px;
+
+    background-color: $medium-gray;
+    // background-color: blue;
+    // background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
+    // background-color: aqua;
+    transform: scale(1.5);
+    padding: 2em;
+  }
 }

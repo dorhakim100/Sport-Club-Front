@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { setIsLoading } from '../store/actions/system.actions.js'
+import {
+  setIsLoading,
+  setIsModal,
+  setModalMessage,
+} from '../store/actions/system.actions.js'
 import { setOriginalPrice, updateCart } from '../store/actions/user.actions.js'
 
-import { RemoveModal } from './RemoveModal.jsx'
+import { ConfirmModal } from './ConfirmModal.jsx'
 
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
@@ -18,12 +22,28 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
     (stateSelector) => stateSelector.userModule.originalPrice
   )
 
-  const [isModal, setIsModal] = useState(false)
+  // const [isModal, setIsModal] = useState(false)
 
   const onSetQuantity = (diff) => {
     if (quantity === 1 && diff === -1 && !isCart) return
     if (quantity === 1 && diff === -1 && isCart) {
       setIsModal(true)
+      const messageToSet = {
+        he: 'להסיר מוצר?',
+        eng: `Remove item?`,
+
+        buttons: [
+          {
+            title: { he: 'ביטול', eng: 'Cancel' },
+            func: () => setIsModal(false),
+          },
+          {
+            title: { he: 'אישור', eng: 'Confirm' },
+            func: onRemoveFromCart,
+          },
+        ],
+      }
+      setModalMessage(messageToSet)
       return
     }
 
@@ -88,14 +108,14 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
         </button>
       </div>
 
-      {isModal && (
-        <RemoveModal
+      {/* {isModal && (
+        <ConfirmModal
           isModal={isModal}
           setIsModal={setIsModal}
           item={item}
           onRemove={onRemoveFromCart}
         />
-      )}
+      )} */}
     </>
   )
 }

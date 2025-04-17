@@ -2,17 +2,35 @@ import { useSelector } from 'react-redux'
 
 import { Button } from '@mui/material'
 
-export function RemoveModal({ isModal, setIsModal, item, onRemove }) {
+export function ConfirmModal({
+  isModal,
+  setIsModal,
+  onRemove,
+  textObject = {
+    title: { he: 'להסיר?', eng: 'Remove?' },
+    cancelButton: { he: 'ביטול', eng: 'Cancel' },
+    submitButton: { he: 'להסיר', eng: 'Remove' },
+  },
+  page,
+}) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   return (
-    <div className={isModal ? 'modal-container visible' : 'modal-container'}>
+    <div
+      className={
+        isModal
+          ? `modal-container visible ${page ? page : ''}`
+          : 'modal-container'
+      }
+    >
       <div className='control-container'>
-        <b>{prefs.isEnglish ? 'Remove?' : 'להסיר?'}</b>
+        <b>{prefs.isEnglish ? textObject.title.eng : textObject.title.he}</b>
         <div className='buttons-container'>
           <Button variant='contained' onClick={onRemove}>
-            {prefs.isEnglish ? 'Remove' : 'להסיר'}
+            {prefs.isEnglish
+              ? textObject.submitButton.eng
+              : textObject.submitButton.he}
           </Button>
           <Button
             variant='outlined'
@@ -40,7 +58,9 @@ export function RemoveModal({ isModal, setIsModal, item, onRemove }) {
                   }
             }
           >
-            {prefs.isEnglish ? 'Cancel' : 'ביטול'}
+            {prefs.isEnglish
+              ? textObject.cancelButton.eng
+              : textObject.cancelButton.he}
           </Button>
         </div>
       </div>
