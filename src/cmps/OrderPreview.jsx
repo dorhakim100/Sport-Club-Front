@@ -186,7 +186,11 @@ export function OrderPreview({ order, updateOrder }) {
                     />
                   }
                   label={prefs.isEnglish ? 'Ready' : 'מוכן לאיסוף'}
-                  onClick={setModalTrueReady}
+                  onClick={(e) => {
+                    e.preventDefault()
+
+                    setModalTrueReady()
+                  }}
                 />
                 <FormControlLabel
                   control={
@@ -206,7 +210,11 @@ export function OrderPreview({ order, updateOrder }) {
                     />
                   }
                   label={prefs.isEnglish ? 'Taken' : 'נאסף'}
-                  onClick={setModalTrueDelivered}
+                  onClick={(e) => {
+                    e.preventDefault()
+
+                    setModalTrueDelivered()
+                  }}
                 />
               </FormGroup>
             </div>
