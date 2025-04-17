@@ -249,8 +249,8 @@ div.dark-mode {
   }
   div {
     &:has(input:checked) label:not(.MuiFormControlLabel-root) {
-      // background-color: $dark-blue;
-      // color: white;
+      background-color: $dark-blue;
+      color: white;
 
       &:hover {
         background-color: $bold-navy;

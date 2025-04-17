@@ -1085,7 +1085,14 @@ export function AppHeader() {
                         {link.dropdown.map((option, index) => {
                           return (
                             <ListItemButton
-                              sx={{ pl: 4 }}
+                              sx={{
+                                pl: 4,
+                                '&:hover': {
+                                  backgroundColor: prefs.isDarkMode
+                                    ? '#111'
+                                    : '',
+                                },
+                              }}
                               key={`${index}Dropdown`}
                               onClick={option.onClick}
                             >
