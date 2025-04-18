@@ -37,14 +37,14 @@ export function OrderIndex() {
   useEffect(() => {
     const handleOrderUpdate = async () => {
       try {
-        setPayments(paymentService.getDefaultFilter())
+        setPayments({ ...filterBy, isAdmin: true, pageIdx: 0 })
         // in the future maybe add regular user's socket update
       } catch (err) {
         // console.log(`Couldn't load socket event`)
       }
     }
-    if (user && user.isAdmin)
-      socketService.on(SOCKET_EVENT_ADD_ORDER, handleOrderUpdate)
+
+    socketService.on(SOCKET_EVENT_ADD_ORDER, handleOrderUpdate)
     return () => {
       socketService.off(SOCKET_EVENT_ADD_ORDER, handleOrderUpdate)
     }

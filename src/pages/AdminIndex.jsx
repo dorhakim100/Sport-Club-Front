@@ -48,7 +48,6 @@ export function AdminIndex() {
         navigate('/')
         return
       }
-      loadUsers()
     }
     const setTodayClasses = async () => {
       try {
@@ -97,6 +96,11 @@ export function AdminIndex() {
     //   he: 'מנויים חדשים',
     //   eng: 'New Members',
     // },
+    {
+      path: 'user',
+      he: 'משתמשים',
+      eng: 'Users',
+    },
     {
       path: 'coupon',
       he: 'קופונים',

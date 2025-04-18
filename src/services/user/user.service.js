@@ -11,6 +11,7 @@ export const userService = {
   remove,
   update,
   getLoggedinUser,
+  getDefaultFilter,
   saveLoggedinUser,
   getEmptyUser,
   getPrefs,
@@ -20,9 +21,9 @@ export const userService = {
   getRememberedUser,
 }
 
-async function getUsers() {
+async function getUsers(filter) {
   try {
-    const users = await httpService.get(`user`)
+    const users = await httpService.get(`user`, filter)
     return users
   } catch (err) {
     // console.log(err)
@@ -167,6 +168,14 @@ function getEmptyUser() {
     items: [],
     email: '',
     phone: '',
+  }
+}
+
+function getDefaultFilter() {
+  return {
+    txt: '',
+    calledUserId: '',
+    pageIdx: 0,
   }
 }
 

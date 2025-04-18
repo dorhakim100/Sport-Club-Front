@@ -15,14 +15,16 @@ import {
   // SET_PREFS,
   SET_ORIGINAL_ITEM,
   SET_ORIGINAL_PRICE,
+  SET_FILTER,
 } from '../reducers/user.reducer'
 import { setPrefs } from './system.actions'
 
-export async function loadUsers() {
+export async function loadUsers(filter) {
   try {
-    store.dispatch({ type: LOADING_START })
-    const users = await userService.getUsers()
+    store.dispatch({ type: SET_FILTER, filter })
+    const users = await userService.getUsers(filter)
     store.dispatch({ type: SET_USERS, users })
+    return users
   } catch (err) {
     // console.log('UserActions: err in loadUsers', err)
     throw err
