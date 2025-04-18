@@ -36,6 +36,7 @@ import { Login } from './pages/Login.jsx'
 import { Signup } from './pages/Signup.jsx'
 import { UserDetails } from './pages/UserDetails'
 import { AdminIndex } from './pages/AdminIndex'
+import { UserIndex } from './pages/UserIndex.jsx'
 
 import { UpdateIndex } from './pages/UpdateIndex.jsx'
 import { UpdateEdit } from './pages/UpdateEdit.jsx'
@@ -152,7 +153,7 @@ export function App() {
               <Route path='message' element={<MessageIndex />} />
               <Route path='message/:messageId' element={<MessageDetails />} />
               <Route path='order' element={<OrderIndex />} />
-              <Route path='member' element={<MemberIndex />} />
+              <Route path='user' element={<UserIndex />} />
               <Route path='coupon' element={<CouponIndex />} />
               <Route path='coupon/edit/:couponId' element={<CouponEdit />} />
             </Route>

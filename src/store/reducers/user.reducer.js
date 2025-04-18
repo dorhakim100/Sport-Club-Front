@@ -15,11 +15,13 @@ export const SET_TOTAL = 'SET_TOTAL'
 export const SET_IS_REMEMBER = 'SET_IS_REMEMBER'
 export const SET_ORIGINAL_ITEM = 'SET_ORIGINAL_ITEM'
 export const SET_ORIGINAL_PRICE = 'SET_ORIGINAL_PRICE'
+export const SET_FILTER = 'SET_FILTER'
 
 const initialState = {
   count: 10,
   user: null,
   users: [],
+  filter: userService.getDefaultFilter(),
   watchedUser: null,
   cart: userService.getLoggedinCart() || [],
   total: 0,
@@ -51,6 +53,9 @@ export function userReducer(state = initialState, action) {
         ...state,
         users: state.users.filter((user) => user._id !== action.userId),
       }
+      break
+    case SET_FILTER:
+      newState = { ...state, filter: action.filter }
       break
     case SET_USERS:
       newState = { ...state, users: action.users }
