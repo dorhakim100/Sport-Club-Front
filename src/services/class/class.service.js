@@ -59,13 +59,9 @@ async function save(clas) {
 }
 
 async function getMaxPage(filter) {
-  const PAGE_SIZE = 6
   try {
-    var classes = await query({ ...filter, isAll: true })
+    var maxPage = await query({ ...filter, isAll: true, isMax: true })
 
-    let maxPage = classes.length / PAGE_SIZE
-
-    maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
     // // console.log(err)

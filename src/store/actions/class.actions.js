@@ -12,6 +12,7 @@ import {
 export async function loadClasses(filterBy) {
   try {
     const classes = await classService.query(filterBy)
+
     store.dispatch(getCmdSetClasses(classes))
     store.dispatch({
       type: SET_CLASS_FILTER,

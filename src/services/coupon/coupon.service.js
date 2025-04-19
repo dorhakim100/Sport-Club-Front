@@ -58,11 +58,9 @@ async function save(coupon) {
 }
 
 async function getMaxPage() {
-  const PAGE_SIZE = 6
   try {
-    var coupons = await query({ isAll: true })
-    let maxPage = coupons.length / PAGE_SIZE
-    maxPage = Math.ceil(maxPage)
+    var maxPage = await query({ isAll: true, isMax: true })
+
     return maxPage
   } catch (err) {
     // // console.log(err)
