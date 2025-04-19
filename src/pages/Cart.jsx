@@ -85,7 +85,25 @@ export function Cart() {
 
       isFirstRender.current === false
       // setOriginalPrice(total)
-      if (discount) {
+
+      if (loaded.memberStatus.expiry > Date.now()) {
+        fetchedCart.forEach((item) => {
+          if (item.types.includes('card')) {
+            const idx = fetchedCart.findIndex(
+              (cartItem) => cartItem.id === item.id
+            )
+            let itemToModify = fetchedCart[idx]
+            setOriginalItem(fetchedCart[idx])
+
+            itemToModify = {
+              ...itemToModify,
+              price: 500,
+              isDiscount: true,
+            }
+            fetchedCart.splice(idx, 1, itemToModify)
+          }
+        })
+      } else if (discount) {
         setOriginalPrice(total)
         // setPriceBeforeDiscount(total)
         // setOriginalPrice(total)
@@ -124,6 +142,7 @@ export function Cart() {
           fetchedCart.splice(idx, 1, itemToModify)
         })
       }
+
       setFullCart([...fetchedCart])
       const userToUpdate = { ...loaded, items: [...fetchedCart] }
       await updateCart(userToUpdate)
