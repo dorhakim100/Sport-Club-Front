@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import dayjs from 'dayjs'
 
 import {
   loadUser,
@@ -27,6 +28,7 @@ export function UserDetails() {
   const watchedUser = useSelector(
     (storeState) => storeState.userModule.watchedUser
   )
+
   const [userName, setUserName] = useState({ he: '', eng: '' })
 
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
@@ -87,51 +89,92 @@ export function UserDetails() {
 
   const renderUserDetails = () => {
     const elements = []
+
+    // Mapping of keys to their Hebrew translations
+    const translations = {
+      fullname: 'שם מלא',
+      username: 'שם משתמש',
+      email: 'אימייל',
+      phone: 'מספר טלפון',
+      memberStatus: 'מנוי בתוקף',
+    }
+
+    const renderDetail = (key, label, value, isMember) => {
+      console.log(key)
+      return (
+        <div
+          className={`detail-container ${
+            key === 'memberStatus' ? (isMember ? 'active' : 'not-active') : ''
+          }`}
+          key={key}
+        >
+          <b>{label}:</b>
+          <span> {value}</span>
+        </div>
+      )
+    }
+
     for (const key in watchedUser) {
       if (
         watchedUser.hasOwnProperty(key) &&
-        key !== '_id' &&
-        key !== 'isAdmin' &&
-        key !== 'ordersIds' &&
-        key !== 'items' &&
-        key !== 'img' &&
-        key !== 'imgUrl'
+        !['_id', 'isAdmin', 'ordersIds', 'items', 'img', 'imgUrl'].includes(key)
       ) {
+        // If not English, use Hebrew translation
         if (!prefs.isEnglish) {
-          let hebrewKey
-          switch (key) {
-            case 'fullname':
-              hebrewKey = 'שם מלא'
-              break
-            case 'username':
-              hebrewKey = 'שם משתמש'
-              break
-            case 'email':
-              hebrewKey = 'אימייל'
-              break
-            case 'phone':
-              hebrewKey = 'מספר טלפון'
-              break
+          const hebrewKey = translations[key] || capitalizeFirstLetter(key)
 
-            default:
-              break
+          if (key === 'memberStatus') {
+            elements.push(
+              renderDetail(
+                `${key}`,
+                `${hebrewKey}`,
+                watchedUser?.memberStatus.expiry > Date.now()
+                  ? dayjs(watchedUser?.memberStatus.expiry).format('DD/MM/YYYY')
+                  : `לא ${
+                      watchedUser?.memberStatus.expiry
+                        ? `(${dayjs(watchedUser?.memberStatus.expiry).format(
+                            'DD/MM/YYYY'
+                          )})`
+                        : ''
+                    }`,
+                watchedUser?.memberStatus.expiry > Date.now()
+              )
+            )
+          } else {
+            elements.push(renderDetail(`${key}`, hebrewKey, watchedUser[key]))
           }
-          elements.push(
-            <div className='detail-container' key={`${key}he`}>
-              <b>{`${hebrewKey}:`}</b>
-              <span> {watchedUser[key]}</span>
-            </div>
-          )
         } else {
-          elements.push(
-            <div className='detail-container' key={`${key}eng`}>
-              <b>{`${capitalizeFirstLetter(key)}:`}</b>
-              <span> {watchedUser[key]}</span>
-            </div>
-          )
+          // English rendering
+          if (key === 'memberStatus') {
+            elements.push(
+              renderDetail(
+                `${key}`,
+                'Member',
+                watchedUser?.memberStatus.expiry > Date.now()
+                  ? dayjs(watchedUser?.memberStatus.expiry).format('DD/MM/YYYY')
+                  : `Not ${
+                      watchedUser?.memberStatus.expiry
+                        ? `(${dayjs(watchedUser?.memberStatus.expiry).format(
+                            'DD/MM/YYYY'
+                          )})`
+                        : ''
+                    }`,
+                watchedUser?.memberStatus.expiry > Date.now()
+              )
+            )
+          } else {
+            elements.push(
+              renderDetail(
+                `${key}eng`,
+                capitalizeFirstLetter(key),
+                watchedUser[key]
+              )
+            )
+          }
         }
       }
     }
+
     return elements
   }
 

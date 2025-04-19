@@ -97,7 +97,10 @@ async function signup(userCred) {
     if (!userCred.imgUrl)
       userCred.imgUrl =
         'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-    userCred.score = 10000
+    userCred.memberStatus = {
+      isMember: false,
+      expiry: '',
+    }
 
     userCred.ordersIds = []
     if (!userCred.items) userCred.items = []

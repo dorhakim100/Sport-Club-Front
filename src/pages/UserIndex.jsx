@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { HeadContainer } from '../cmps/HeadContainer'
-import { loadUsers } from '../store/actions/user.actions'
+import { loadUsers, updateUser } from '../store/actions/user.actions'
 import { userService } from '../services/user/user.service'
 import { showErrorMsg } from '../services/event-bus.service'
 import { useSelector } from 'react-redux'
@@ -56,6 +56,20 @@ export function UserIndex() {
     }
   }
 
+  const handleMemberChange = async (userToSave) => {
+    try {
+      setIsLoading(true)
+      await updateUser(userToSave)
+      await setUsers(filter)
+    } catch (err) {
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't update user` : 'לא היה ניתן לעדכן משתמש'
+      )
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className='user-index-container'>
       <HeadContainer text={text} />
@@ -68,7 +82,13 @@ export function UserIndex() {
         }`}
       >
         {users.map((user) => {
-          return <UserPreview user={user} key={user._id} />
+          return (
+            <UserPreview
+              user={user}
+              key={user._id}
+              handleMemberChange={handleMemberChange}
+            />
+          )
         })}
       </div>
     </div>

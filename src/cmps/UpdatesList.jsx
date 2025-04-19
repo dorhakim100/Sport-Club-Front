@@ -204,6 +204,11 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                           // onChange={() => onSetUpdateMessage(update._id)}
                           onClick={() => onSetUpdateMessage(update._id)}
                           color={prefs.isDarkMode ? 'secondary' : 'primary'}
+                          sx={{
+                            '.MuiSwitch-colorSecondary': {
+                              color: 'white',
+                            },
+                          }}
                         />
                         <EditRemoveBtns update={update} />
                       </div>
