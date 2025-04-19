@@ -25,13 +25,49 @@
 
   .list-container.users {
     .list-item-container.user {
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto 1fr auto 1fr;
+      min-height: 100px;
+
+      @media (max-width: 800px) {
+        grid-template-columns: auto 100px auto 1fr;
+      }
 
       .img-container {
         width: 50px;
-
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+          rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        border-radius: 50%;
         img {
           border-radius: 50%;
+        }
+      }
+
+      label {
+        margin-inline-start: 0px;
+        background-color: transparent;
+      }
+
+      .switch-container {
+        padding: 0 0.5em;
+      }
+
+      .date-picker-container {
+        display: flex;
+        gap: 1em;
+        align-items: center;
+      }
+      .member-indicator {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+          rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        &.active {
+          background-color: $dark-green;
+        }
+
+        &.not-active {
+          background-color: $medium-red;
         }
       }
     }
