@@ -23,11 +23,7 @@ export function UserIndex() {
   const filter = useSelector((stateSelector) => stateSelector.userModule.filter)
 
   const [filterBy, setFilterBy] = useState(userService.getDefaultFilter())
-  const [maxPage, setMaxPage] = useState()
-
-  useEffect(() => {
-    setUsers()
-  }, [])
+  const [maxPage, setMaxPage] = useState(0)
 
   useEffect(() => {
     setUsers(filterBy)
@@ -37,10 +33,7 @@ export function UserIndex() {
     try {
       setIsLoading(true)
       const loggedIn = await userService.getLoggedinUser()
-      if (!user) {
-        // navigate('/')
-        // return
-      }
+
       if (!loggedIn || !loggedIn.isAdmin) {
         navigate('/')
         return
@@ -51,6 +44,7 @@ export function UserIndex() {
         ...filterBy,
         calledUserId: loggedIn._id,
       })
+
       setMaxPage(m)
     } catch (err) {
       //   console.log(err)
@@ -65,8 +59,9 @@ export function UserIndex() {
   return (
     <div className='user-index-container'>
       <HeadContainer text={text} />
-      <Controller filter={filter} setFilter={setFilterBy} maxPage={maxPage} />
-      <UserFilter setFilter={setFilterBy} />
+
+      <UserFilter setFilter={setFilterBy} filter={filter} maxPage={maxPage} />
+
       <div
         className={`list-container users ${
           prefs.isDarkMode ? 'dark-mode' : ''

@@ -177,6 +177,7 @@ function getDefaultFilter() {
   return {
     txt: '',
     calledUserId: '',
+    onlyMembers: false,
     pageIdx: 0,
   }
 }
