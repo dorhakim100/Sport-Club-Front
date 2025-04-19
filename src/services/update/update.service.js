@@ -66,9 +66,7 @@ async function getLastUpdateMessage() {
 async function getMaxPage() {
   const PAGE_SIZE = 6
   try {
-    var items = await query({ isAll: true })
-    let maxPage = items.length / PAGE_SIZE
-    maxPage = Math.ceil(maxPage)
+    var maxPage = await query({ isAll: true, isMax: true })
 
     return maxPage
   } catch (err) {

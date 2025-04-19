@@ -81,9 +81,9 @@ function getDefaultFilter() {
 
 async function getMaxPage(filter) {
   try {
-    var orders = await query({ ...filter, isAll: true })
-    let maxPage = orders.length / PAGE_SIZE
-    maxPage = Math.ceil(maxPage)
+    var maxPage = await query({ ...filter, isAll: true, isMax: true })
+    // let maxPage = orders.length / PAGE_SIZE
+    // maxPage = Math.ceil(maxPage)
     return maxPage
   } catch (err) {
     // // console.log(err)
