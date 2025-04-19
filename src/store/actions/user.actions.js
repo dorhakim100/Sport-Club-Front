@@ -67,16 +67,28 @@ export async function updateUser(userToUpdate) {
   try {
     const saved = await userService.update(userToUpdate)
 
-    store.dispatch({
-      type: SET_USER,
-      user: saved,
-    })
-
-    // return saved
+    return saved
   } catch (err) {
     // console.log(err);
     throw err
   }
+}
+
+export function updateStoreUser(saved) {
+  store.dispatch({
+    type: SET_USER,
+    user: saved,
+  })
+  store.dispatch({
+    type: SET_WATCHED_USER,
+    user: saved,
+  })
+}
+export function updateStoreWatchedUser(saved) {
+  store.dispatch({
+    type: SET_WATCHED_USER,
+    user: saved,
+  })
 }
 
 export function setRemembered(user) {
@@ -123,7 +135,7 @@ export async function loadUser(userId) {
   try {
     const user = await userService.getById(userId)
     // store.dispatch({ type: SET_WATCHED_USER, user })
-    store.dispatch({ type: SET_USER, user })
+    store.dispatch({ type: SET_WATCHED_USER, user })
     return user
   } catch (err) {
     showErrorMsg('Cannot load user')

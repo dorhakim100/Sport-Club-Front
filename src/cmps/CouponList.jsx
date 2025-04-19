@@ -6,7 +6,7 @@ export function CouponList({ coupons, setCoupons, onDeleteCoupon }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
   return (
-    <div className='coupon-list-container'>
+    <div className='list-container coupon'>
       <div className='list-header'>
         <b>{prefs.isEnglish ? 'Title' : 'כותרת'}</b>
         <div className='info-container'>

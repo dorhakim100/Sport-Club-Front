@@ -45,7 +45,7 @@ export function Controller({ filter, setFilter, maxPage, onAdd }) {
           <ArrowForwardIosIcon />
         </Button>
       </ButtonGroup>
-      {user && user.isAdmin && location.pathname !== '/admin/order' && (
+      {onAdd && (
         <Button variant='contained' onClick={onAdd}>
           {prefs.isEnglish ? 'Add' : 'הוסף'}
         </Button>

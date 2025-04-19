@@ -63,11 +63,11 @@ export function MessagePreview({
       className={
         message.isDone
           ? prefs.isDarkMode
-            ? 'message-container done dark-mode'
-            : 'message-container done'
+            ? 'list-item-container message done dark-mode'
+            : 'list-item-container message done'
           : prefs.isDarkMode
-          ? 'message-container dark-mode'
-          : 'message-container'
+          ? 'list-item-container message dark-mode'
+          : 'list-item-container message'
       }
       onClick={() => {
         if (isHover) return

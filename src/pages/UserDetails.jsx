@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import { loadUser, updateUser } from '../store/actions/user.actions'
+import {
+  loadUser,
+  updateStoreUser,
+  updateStoreWatchedUser,
+  updateUser,
+} from '../store/actions/user.actions'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { paymentService } from '../services/payment/payment.service'
@@ -19,8 +24,12 @@ import { capitalizeFirstLetter } from '../services/util.service'
 export function UserDetails() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const params = useParams()
-  const user = useSelector((storeState) => storeState.userModule.user)
+  const watchedUser = useSelector(
+    (storeState) => storeState.userModule.watchedUser
+  )
   const [userName, setUserName] = useState({ he: '', eng: '' })
+
+  const user = useSelector((stateSelector) => stateSelector.userModule.user)
 
   const [filterBy, setFilterBy] = useState(paymentService.getDefaultFilter())
   const [maxPage, setMax] = useState()
@@ -54,7 +63,7 @@ export function UserDetails() {
       setMax(m)
       await loadPayments(filter)
 
-      if (prefs.user && prefs.user.imgUrl) {
+      if (user && !user.isAdmin && prefs.user && prefs.user.imgUrl) {
         setGoogleImg(prefs.user.imgUrl)
       }
     } catch (err) {
@@ -78,9 +87,9 @@ export function UserDetails() {
 
   const renderUserDetails = () => {
     const elements = []
-    for (const key in user) {
+    for (const key in watchedUser) {
       if (
-        user.hasOwnProperty(key) &&
+        watchedUser.hasOwnProperty(key) &&
         key !== '_id' &&
         key !== 'isAdmin' &&
         key !== 'ordersIds' &&
@@ -110,14 +119,14 @@ export function UserDetails() {
           elements.push(
             <div className='detail-container' key={`${key}he`}>
               <b>{`${hebrewKey}:`}</b>
-              <span> {user[key]}</span>
+              <span> {watchedUser[key]}</span>
             </div>
           )
         } else {
           elements.push(
             <div className='detail-container' key={`${key}eng`}>
               <b>{`${capitalizeFirstLetter(key)}:`}</b>
-              <span> {user[key]}</span>
+              <span> {watchedUser[key]}</span>
             </div>
           )
         }
@@ -137,13 +146,15 @@ export function UserDetails() {
       )
 
     const userToUpdate = {
-      ...user,
-      phone: editUser.phone ? editUser.phone : user.phone,
+      ...watchedUser,
+      phone: editUser.phone ? editUser.phone : watchedUser.phone,
       password: editUser.newPassword ? editUser.newPassword : null,
     }
 
     try {
-      await updateUser(userToUpdate)
+      const saved = await updateUser(userToUpdate)
+      if (user._id === watchedUser._id) updateStoreUser(saved)
+      else updateStoreWatchedUser(saved)
       showSuccessMsg(
         prefs.isEnglish ? 'Update successful' : 'עדכון בוצע בהצלחה'
       )
@@ -168,17 +179,18 @@ export function UserDetails() {
 
   return (
     <section className='user-details'>
-      {user && !user.isAdmin && (
+      {watchedUser && !watchedUser.isAdmin && (
         <div>
           <HeadContainer text={userText} />
           <div className='user-container'>
             <div className='details-container'>
-              {user && renderUserDetails()}
+              {watchedUser && renderUserDetails()}
             </div>
             <div className='img-container'>
               <img
                 src={
                   googleImg ||
+                  watchedUser.imgUrl ||
                   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
                 }
                 alt='userImg'
@@ -222,7 +234,7 @@ export function UserDetails() {
             </form>
           </div>
           <OrderList
-            user={user}
+            user={watchedUser}
             orders={orders}
             maxPage={maxPage}
             filter={filterBy}

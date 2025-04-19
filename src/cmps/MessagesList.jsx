@@ -7,7 +7,7 @@ export function MessagesList({
   setIdsToRemove,
 }) {
   return (
-    <div className='messages-list-container'>
+    <div className='list-container messages'>
       {messages.map((message) => {
         return (
           <MessagePreview
