@@ -1,0 +1,13 @@
+.user-index-container {
+  .list-container.users {
+    .list-item-container.user {
+      grid-template-columns: auto 1fr;
+      .img-container {
+        width: 50px;
+        img {
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}

@@ -57,7 +57,7 @@ export function OrderList({
           />
         </>
       )}
-      <div className='list-container'>
+      <div className='list-container order'>
         {orders.length > 0 ? (
           orders.map((order, index) => {
             return (

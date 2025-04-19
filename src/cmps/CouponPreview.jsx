@@ -17,7 +17,7 @@ export function CouponPreview({ coupon, setCoupons, onDeleteCoupon }) {
 
   return (
     <div
-      className='coupon-container'
+      className='list-item-container coupon'
       // key={coupon._id}
       onClick={() => {
         if (isHover) return
