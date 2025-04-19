@@ -1,9 +1,35 @@
 .user-index-container {
+  .filter-container {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-items: start;
+
+    @media (max-width: 800px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      .input-container {
+        grid-column: 1/-1;
+        grid-row: 1/2;
+        // max-width: 500px;
+        justify-self: center;
+      }
+    }
+
+    .input-container {
+      @media (min-width: 800px) {
+        max-width: 350px;
+      }
+    }
+  }
+
   .list-container.users {
     .list-item-container.user {
       grid-template-columns: auto 1fr;
+
       .img-container {
         width: 50px;
+
         img {
           border-radius: 50%;
         }

@@ -894,3 +894,7 @@ input[type='tel'] {
   border-color: #ccc !important;
   /* …any other overrides… */
 }
+
+.MuiFormControlLabel-label {
+  user-select: none;
+}

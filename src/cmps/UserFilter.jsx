@@ -2,9 +2,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import { debounce } from '../services/util.service'
 import { userService } from '../services/user/user.service'
 import { useSelector } from 'react-redux'
+import FormGroup from '@mui/material/FormGroup'
 
-export function UserFilter({ setFilter }) {
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+import { Controller } from './Controller'
+
+export function UserFilter({ setFilter, maxPage }) {
   const [editFilter, setEditFilter] = useState(userService.getDefaultFilter())
+
+  const filter = useSelector((stateSelector) => stateSelector.userModule.filter)
 
   const debouncedSetFilter = useRef(debounce(setFilter, 500))
 
@@ -25,9 +32,10 @@ export function UserFilter({ setFilter }) {
         }))
         break
       case 'checkbox':
-        let newOnlyPending = filter.onlyPending
-        newOnlyPending = !newOnlyPending
-        setFilter({ ...editFilter, onlyPending: newOnlyPending })
+        let newOnlyMembers = filter.onlyMembers
+        newOnlyMembers = !newOnlyMembers
+        setEditFilter({ ...editFilter, onlyMembers: newOnlyMembers })
+        setFilter({ ...editFilter, onlyMembers: newOnlyMembers })
 
         break
 
@@ -37,7 +45,8 @@ export function UserFilter({ setFilter }) {
   }
 
   return (
-    <div>
+    <div className='filter-container'>
+      <Controller filter={filter} setFilter={setFilter} maxPage={maxPage} />
       <div className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
         <input
           type='search'
@@ -47,6 +56,26 @@ export function UserFilter({ setFilter }) {
           }
         />
       </div>
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={editFilter.onlyMembers}
+            sx={{
+              color: prefs.isDarkMode ? '#fff' : '',
+              '&.Mui-checked': {
+                color: prefs.isDarkMode
+                  ? 'rgb(130.7142857143, 219.2857142857, 120.7142857143)'
+                  : '#4caf50',
+              },
+              '&:hover': {
+                backgroundColor: 'rgba(76, 175, 80, 0.08)', // subtle hover ripple
+              },
+            }}
+          />
+        }
+        label={prefs.isEnglish ? 'Only members' : 'מנויים בלבד'}
+        onChange={handleChange}
+      />
     </div>
   )
 }
