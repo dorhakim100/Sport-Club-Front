@@ -23,6 +23,7 @@ export function UserIndex() {
   const filter = useSelector((stateSelector) => stateSelector.userModule.filter)
 
   const [filterBy, setFilterBy] = useState(userService.getDefaultFilter())
+  const [maxPage, setMaxPage] = useState()
 
   useEffect(() => {
     setUsers()
@@ -46,8 +47,13 @@ export function UserIndex() {
       }
 
       const u = await loadUsers({ ...filterBy, calledUserId: loggedIn._id })
+      const m = await userService.getMaxPage({
+        ...filterBy,
+        calledUserId: loggedIn._id,
+      })
+      setMaxPage(m)
     } catch (err) {
-      console.log(err)
+      //   console.log(err)
       showErrorMsg(
         prefs.isenglish ? `Couldn't load users` : 'לא ניתן היה לטעון משתמשים'
       )
@@ -59,7 +65,7 @@ export function UserIndex() {
   return (
     <div className='user-index-container'>
       <HeadContainer text={text} />
-      <Controller filter={filter} setFilter={setFilterBy} />
+      <Controller filter={filter} setFilter={setFilterBy} maxPage={maxPage} />
       <UserFilter setFilter={setFilterBy} />
       <div
         className={`list-container users ${

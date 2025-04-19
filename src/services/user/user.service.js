@@ -19,11 +19,13 @@ export const userService = {
   getLoggedinCart,
   getCartItems,
   getRememberedUser,
+  getMaxPage,
 }
 
 async function getUsers(filter) {
   try {
     const users = await httpService.get(`user`, filter)
+
     return users
   } catch (err) {
     // console.log(err)
@@ -256,6 +258,21 @@ async function getRememberedUser() {
     } else {
       return null
     }
+  } catch (err) {
+    // console.log(err)
+    throw err
+  }
+}
+
+async function getMaxPage(filter) {
+  const PAGE_SIZE = 6
+  try {
+    var maxPage = await getUsers({ ...filter, isAll: true, isMax: true })
+
+    // let maxPage = messages.length / PAGE_SIZE
+    // maxPage = Math.ceil(maxPage)
+
+    return maxPage
   } catch (err) {
     // console.log(err)
     throw err
