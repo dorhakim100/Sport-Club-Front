@@ -20,6 +20,11 @@ import {
   removeMessages,
 } from '../store/actions/message.actions'
 
+import FormGroup from '@mui/material/FormGroup'
+
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+
 export function MessagesFilter({
   filter,
   setFilter,
@@ -177,11 +182,31 @@ export function MessagesFilter({
       <div
         className={
           prefs.isDarkMode
-            ? 'checkbox-container dark-mode'
-            : 'checkbox-container'
+            ? 'mui-checkbox-container dark-mode'
+            : 'mui-checkbox-container'
         }
       >
-        <label htmlFor={`setOnlyDone`}>
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={editFilter.onlyMembers}
+              sx={{
+                color: prefs.isDarkMode ? '#fff' : '',
+                '&.Mui-checked': {
+                  color: prefs.isDarkMode
+                    ? 'rgb(130.7142857143, 219.2857142857, 120.7142857143)'
+                    : '#4caf50',
+                },
+                '&:hover': {
+                  backgroundColor: 'rgba(76, 175, 80, 0.08)', // subtle hover ripple
+                },
+              }}
+            />
+          }
+          label={prefs.isEnglish ? 'Only pending' : 'לא בוצעו בלבד'}
+          onChange={handleChange}
+        />
+        {/* <label htmlFor={`setOnlyDone`}>
           {prefs.isEnglish ? 'Not done' : 'לא בוצעו'}
         </label>
         <input
@@ -190,7 +215,7 @@ export function MessagesFilter({
           id={`setOnlyDone`}
           onChange={handleChange}
           checked={filter.onlyDone}
-        />
+        /> */}
       </div>
     </div>
   )

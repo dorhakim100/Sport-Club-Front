@@ -6,6 +6,9 @@ import { Controller } from './Controller'
 
 import { debounce } from '../services/util.service'
 
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
+
 export function OrderFilter({ filter, setFilter, maxPage }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
@@ -96,11 +99,42 @@ export function OrderFilter({ filter, setFilter, maxPage }) {
         <div
           className={
             prefs.isDarkMode
-              ? 'checkbox-container dark-mode'
-              : 'checkbox-container'
+              ? 'mui-checkbox-container dark-mode'
+              : 'mui-checkbox-container'
           }
         >
-          <label htmlFor={`setOnlyPending`}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={editFilter.onlyMembers}
+                sx={{
+                  color: prefs.isDarkMode ? '#fff' : '',
+                  '&.Mui-checked': {
+                    color: prefs.isDarkMode
+                      ? 'rgb(130.7142857143, 219.2857142857, 120.7142857143)'
+                      : '#4caf50',
+                  },
+                  '&:hover': {
+                    backgroundColor: 'rgba(76, 175, 80, 0.08)', // subtle hover ripple
+                  },
+                }}
+              />
+            }
+            label={prefs.isEnglish ? 'Only pending' : 'לא בוצעו בלבד'}
+            onChange={handleChange}
+          />
+          {/* <label htmlFor={`setOnlyDone`}>
+          {prefs.isEnglish ? 'Not done' : 'לא בוצעו'}
+        </label>
+        <input
+          type='checkbox'
+          name='onlyDone'
+          id={`setOnlyDone`}
+          onChange={handleChange}
+          checked={filter.onlyDone}
+        /> */}
+
+          {/* <label htmlFor={`setOnlyPending`}>
             {prefs.isEnglish ? 'Only Pending' : 'לא בוצעו'}
           </label>
           <input
@@ -109,7 +143,7 @@ export function OrderFilter({ filter, setFilter, maxPage }) {
             id={`setOnlyPending`}
             onChange={handleChange}
             checked={filter.onlyPending}
-          />
+          /> */}
         </div>
       )}
     </div>
