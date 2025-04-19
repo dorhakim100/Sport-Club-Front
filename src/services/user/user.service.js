@@ -157,6 +157,11 @@ function saveLoggedinUser(user) {
     ordersIds: user.ordersIds,
     items: user.items,
     phone: user.phone,
+    imgUrl: user.imgUrl,
+    memberStatus: user.memberStatus || {
+      isMember: false,
+      expiry: '',
+    },
   }
 
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
@@ -173,6 +178,11 @@ function getEmptyUser() {
     items: [],
     email: '',
     phone: '',
+    imgUrl: '',
+    memberStatus: {
+      isMember: false,
+      expiry: '',
+    },
   }
 }
 
@@ -231,18 +241,28 @@ async function getCartItems(cart) {
   }
 }
 
+async function getRememberedById(userId) {
+  try {
+    const user = await httpService.get(`user/rememberMe/${userId}`)
+    return user
+  } catch (err) {
+    // console.log(err)
+    throw err
+  }
+}
+
 async function getRememberedUser() {
   const sessionUser = JSON.parse(
     sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
   )
 
   try {
-    // if (sessionUser) {
-    //   const retrievedUser = await getById(sessionUser._id)
-    //   console.log(retrievedUser)
+    if (sessionUser) {
+      const retrievedUser = await getRememberedById(sessionUser._id)
+      // console.log(retrievedUser)
 
-    //   return saveLoggedinUser(retrievedUser)
-    // }
+      return saveLoggedinUser(retrievedUser)
+    }
     const prefs = getPrefs()
     if (!prefs.user) return
     const userId = prefs.user._id ? prefs.user._id : null
@@ -254,7 +274,7 @@ async function getRememberedUser() {
       // }
       // const user = await login(cred)
 
-      const user = await getById(userId)
+      const user = await getRememberedById(userId)
       // const user = await loginToken()
       if (user) {
         return saveLoggedinUser(user)
