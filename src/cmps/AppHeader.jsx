@@ -480,10 +480,10 @@ export function AppHeader() {
 
   const selectLink = (path) => {
     // support for safari browsers
-    event.preventDefault() // Stop the link from navigating immediately
-    smoothScroll()
 
     setMenu(false)
+    delayedNavigate(path)
+
     return
   }
 
