@@ -127,16 +127,21 @@ export function UserDetails() {
               renderDetail(
                 `${key}`,
                 `${hebrewKey}`,
-                watchedUser?.memberStatus.expiry > Date.now()
+                watchedUser.memberStatus.isMember &&
+                  watchedUser?.memberStatus.expiry > Date.now()
                   ? dayjs(watchedUser?.memberStatus.expiry).format('DD/MM/YYYY')
                   : `לא ${
-                      watchedUser?.memberStatus.expiry
-                        ? `(${dayjs(watchedUser?.memberStatus.expiry).format(
-                            'DD/MM/YYYY'
-                          )})`
-                        : ''
-                    }`,
-                watchedUser?.memberStatus.expiry > Date.now()
+                      // watchedUser?.memberStatus.expiry
+                      //   ? `(${dayjs(watchedUser?.memberStatus.expiry).format(
+                      //       'DD/MM/YYYY'
+                      //     )})`
+                      //   : ''
+                      ''
+                    }
+                    
+                    `,
+                watchedUser.memberStatus.isMember &&
+                  watchedUser?.memberStatus.expiry > Date.now()
               )
             )
           } else {
@@ -149,16 +154,21 @@ export function UserDetails() {
               renderDetail(
                 `${key}`,
                 'Member',
-                watchedUser?.memberStatus.expiry > Date.now()
+                watchedUser.memberStatus.isMember &&
+                  watchedUser?.memberStatus.expiry > Date.now()
                   ? dayjs(watchedUser?.memberStatus.expiry).format('DD/MM/YYYY')
-                  : `Not ${
-                      watchedUser?.memberStatus.expiry
-                        ? `(${dayjs(watchedUser?.memberStatus.expiry).format(
-                            'DD/MM/YYYY'
-                          )})`
-                        : ''
-                    }`,
-                watchedUser?.memberStatus.expiry > Date.now()
+                  : `Not 
+                  ${
+                    // watchedUser?.memberStatus.expiry
+                    //   ? `(${dayjs(watchedUser?.memberStatus.expiry).format(
+                    //       'DD/MM/YYYY'
+                    //     )})`
+                    //   : ''
+                    ''
+                  }
+                    `,
+                watchedUser.memberStatus.isMember &&
+                  watchedUser?.memberStatus.expiry > Date.now()
               )
             )
           } else {

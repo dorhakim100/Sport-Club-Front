@@ -86,7 +86,10 @@ export function Cart() {
       isFirstRender.current === false
       // setOriginalPrice(total)
 
-      if (loaded.memberStatus.expiry > Date.now()) {
+      if (
+        loaded.memberStatus.isMember &&
+        loaded.memberStatus.expiry > Date.now()
+      ) {
         fetchedCart.forEach((item) => {
           if (item.types.includes('card')) {
             const idx = fetchedCart.findIndex(
