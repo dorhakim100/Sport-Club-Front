@@ -57,10 +57,11 @@ async function update(user) {
     const { _id } = user
     const savedUser = await httpService.put(`user/${_id}`, user)
     // When admin updates other user's details, do not update loggedinUser
-    // const loggedinUser = getLoggedinUser() // Might not work because its defined in the main service???
-    // if (loggedinUser._id === user._id) saveLoggedinUser(savedUser)
+    const loggedinUser = await getLoggedinUser() // Might not work because its defined in the main service???
 
-    return saveLoggedinUser(savedUser)
+    if (loggedinUser._id === user._id) saveLoggedinUser(savedUser)
+
+    // return saveLoggedinUser(savedUser)
   } catch (err) {
     // console.log(err)
     throw err

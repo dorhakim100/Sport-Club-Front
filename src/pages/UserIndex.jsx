@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { loadUsers, updateUser } from '../store/actions/user.actions'
 import { userService } from '../services/user/user.service'
-import { showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { useSelector } from 'react-redux'
 import { setIsLoading } from '../store/actions/system.actions'
 
@@ -40,6 +40,7 @@ export function UserIndex() {
       }
 
       const u = await loadUsers({ ...filterBy, calledUserId: loggedIn._id })
+
       const m = await userService.getMaxPage({
         ...filterBy,
         calledUserId: loggedIn._id,
@@ -59,8 +60,13 @@ export function UserIndex() {
   const handleMemberChange = async (userToSave) => {
     try {
       setIsLoading(true)
+
       await updateUser(userToSave)
+
       await setUsers(filter)
+      showSuccessMsg(
+        prefs.isEnglish ? `User updated successfully` : 'משתמש נערך בהצלחה'
+      )
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't update user` : 'לא היה ניתן לעדכן משתמש'

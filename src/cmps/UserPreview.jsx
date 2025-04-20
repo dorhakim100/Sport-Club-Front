@@ -73,7 +73,21 @@ export function UserPreview({ user, handleMemberChange }) {
               onChange={handleOnMemberChange}
               sx={{
                 '.MuiSwitch-colorSecondary': {
-                  color: 'white',
+                  color: '#fff',
+                },
+                '.MuiSwitch-colorPrimary': {
+                  color: '#fff',
+                },
+                '& .MuiSwitch-track': {
+                  // backgroundColor: '#888', // body color when off
+                },
+                // checked track
+                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                  backgroundColor: prefs.isDarkMode ? '#7de372' : '#4CAF50', // body color
+                },
+                // disabled track (optional)
+                '& .Mui-disabled + .MuiSwitch-track': {
+                  backgroundColor: '#ccc',
                 },
               }}
             />
