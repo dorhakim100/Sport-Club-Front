@@ -9,6 +9,7 @@ import { DoneMessageButton } from '../cmps/DoneMessageButton'
 
 import { setIsLoading } from '../store/actions/system.actions'
 import { ItemNavigation } from '../cmps/ItemNavigation'
+import { Divider } from '@mui/material'
 
 export function MessageDetails() {
   const navigate = useNavigate()
@@ -47,7 +48,11 @@ export function MessageDetails() {
 
   return (
     <div className='page-container message-details'>
-      <div className='message-details-container'>
+      <div
+        className={`message-details-container ${
+          prefs.isDarkMode ? 'dark-mode' : ''
+        } ${!message.isDone ? 'pending' : ''}`}
+      >
         {message.prevNext && (
           <ItemNavigation
             item={message}
@@ -85,6 +90,13 @@ export function MessageDetails() {
             </span>
           )}
         </div>
+        <Divider
+          orientation='horizontal'
+          flexItem
+          sx={{
+            backgroundColor: prefs.isDarkMode ? '#fff' : '',
+          }}
+        />
 
         <div className='sender-info-container'>
           <b className='sender-info name'>{message.name}</b>

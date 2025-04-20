@@ -1,61 +1,80 @@
-.message-details-container{
+.message-details {
+  margin: 0px;
+  padding-top: 2em;
+  min-height: 100vh;
+}
+
+.message-details-container {
+  display: grid;
+  gap: 1em;
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6ec1e41d 0%, #a8e6a16b 100%);
+
+  &.dark-mode {
+    // background: linear-gradient(135deg, #4ca1c61d 0%, #7caf773b 100%);
+    background: none;
+    background-color: $very-dark-blue;
+  }
+
+  border-right: 20px solid darken($soft-green, 10%);
+  &.pending {
+    border-right: 20px solid darken($light-yellow, 10%);
+
+    &.done {
+    }
+    .sender-info-container {
+      font-family: assistantBold;
+    }
+  }
+
+  .sender-details-container {
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    font-family: assistantBold;
+
+    b {
+      justify-self: start;
+      font-size: 2.5em;
+    }
+
+    .checkbox-container {
+      // justify-self: center;
+      font-size: 1.1rem;
+      label {
+        // width: 45px;
+      }
+    }
+
+    .checkbox-container:has(input:checked) {
+      label {
+        background-color: $dark-green;
+
+        &:hover {
+          background-color: $dark-green-hover;
+        }
+      }
+    }
+
+    span {
+      justify-self: end;
+      font-size: 1.5em;
+    }
+  }
+
+  .sender-info-container {
+    justify-self: start;
+    display: flex;
     gap: 1em;
+    // font-family: assistantBold;
 
-    .sender-details-container{
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
-        align-items: center;
+    font-size: 1.5em;
+  }
 
-        b{
-            justify-self: start;
-            font-size: 2.5em;
-        }
-
-        .checkbox-container{
-            // justify-self: center;
-            font-size: 1.1rem;
-            label{
-    
-                // width: 45px;
-            }
-        }
-    
-        .checkbox-container:has(input:checked){
-            label{
-                background-color: $dark-green;
-    
-                &:hover{
-                    background-color: $dark-green-hover;
-                }
-            }
-    
-    
-        }
-
-        span{
-            justify-self: end;
-            font-size: 1.5em;
-        }
-
-
-
-    }
-
-    .sender-info-container{
-        justify-self: start;
-        display: flex;
-        gap: 1em;
-
-        font-size: 1.5em;
-    }
-    
-    p{
-        justify-self: start;
-        font-size: 1.3em;
-
-    }
-
-
-
+  p {
+    justify-self: start;
+    font-size: 1.3em;
+  }
 }
