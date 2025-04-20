@@ -58,6 +58,10 @@
           rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
         background-color: $soft-green;
+
+        &.dark-mode {
+          background-color: $dark-green;
+        }
       }
       &.not-active {
         background-color: $dark-red;

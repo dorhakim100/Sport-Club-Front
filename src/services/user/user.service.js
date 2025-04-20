@@ -61,6 +61,8 @@ async function update(user) {
 
     if (loggedinUser._id === user._id) saveLoggedinUser(savedUser)
 
+    delete savedUser.password
+    return savedUser
     // return saveLoggedinUser(savedUser)
   } catch (err) {
     // console.log(err)

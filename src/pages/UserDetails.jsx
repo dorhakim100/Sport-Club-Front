@@ -100,12 +100,11 @@ export function UserDetails() {
     }
 
     const renderDetail = (key, label, value, isMember) => {
-      console.log(key)
       return (
         <div
           className={`detail-container ${
             key === 'memberStatus' ? (isMember ? 'active' : 'not-active') : ''
-          }`}
+          } ${prefs.isDarkMode ? 'dark-mode' : ''}`}
           key={key}
         >
           <b>{label}:</b>
