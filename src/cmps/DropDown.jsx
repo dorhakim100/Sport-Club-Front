@@ -47,11 +47,10 @@ export function DropDown({ options, setDropdownVisible }) {
               key={makeId()}
               onClick={(ev) => {
                 ev.preventDefault() // Stop the link from navigating immediately
+                ev.stopPropagation()
                 handleOptionClick()
-                // support for safari browsers
-
+                // // support for safari browsers
                 smoothScroll()
-
                 setTimeout(() => {
                   navigate(`/${option.path}`)
                 }, 300) // Adjust time based on your smoothScroll timing
