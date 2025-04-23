@@ -296,7 +296,7 @@ export function OpeningTimes() {
                 )}
               </TableCell>
 
-              {days.map((day) => {
+              {days.map((day, index) => {
                 if (day.dayName)
                   return (
                     <TableCell
@@ -304,6 +304,12 @@ export function OpeningTimes() {
                       key={makeId()}
                       sx={{
                         color: prefs.isDarkMode && 'white',
+                        borderLeft: '0px',
+                        borderRight:
+                          index === (prefs.isEnglish ? days.length - 1 : 0)
+                            ? '0px'
+                            : 'transparent 1px solid',
+                        borderColor: prefs.IsDarkMode ? '#fff' : '#e0e0e0',
                       }}
                     >
                       <div
@@ -359,7 +365,7 @@ export function OpeningTimes() {
               >
                 <b>{prefs.isEnglish ? 'Pool' : 'בריכה'}</b>
               </TableCell>
-              {days.map((day) => {
+              {days.map((day, index) => {
                 let facilityName = 'pool'
                 return (
                   <TableCell
@@ -369,6 +375,13 @@ export function OpeningTimes() {
                     key={makeId()}
                     sx={{
                       color: prefs.isDarkMode && 'white',
+                      borderLeft: '0px',
+                      borderRight:
+                        index === (prefs.isEnglish ? days.length - 1 : 0)
+                          ? '0px'
+                          : 'transparent 1px solid',
+                      borderColor: prefs.IsDarkMode ? '#fff' : '#e0e0e0',
+                      borderBottom: '0px',
                     }}
                   >
                     {day.times.pool.map((time, index) => {
@@ -428,9 +441,11 @@ export function OpeningTimes() {
             </TableRow>
             <TableRow
               key={makeId()}
-              sx={{
-                '&:last-child td, &:last-child th': { border: 0 },
-              }}
+              sx={
+                {
+                  // '&:last-child td, &:last-child th': { border: 0 },
+                }
+              }
             >
               <TableCell
                 component='th'
@@ -441,6 +456,7 @@ export function OpeningTimes() {
                   padding: '0px',
                   paddingLeft: '0.5em',
                   paddingRight: '0.5em',
+                  borderBottom: '0px',
                 }}
                 className={`facility-cell ${prefs.isDarkMode && 'dark-mode'} ${
                   isScrolled ? 'scrolled' : ''
@@ -449,7 +465,7 @@ export function OpeningTimes() {
                 <b>{prefs.isEnglish ? 'Gym' : 'חדר הכושר'}</b>
               </TableCell>
 
-              {days.map((day) => {
+              {days.map((day, index) => {
                 let facilityName = 'gym'
                 return (
                   <TableCell
@@ -459,9 +475,14 @@ export function OpeningTimes() {
                     key={makeId()}
                     sx={{
                       color: prefs.isDarkMode && 'white',
-
-                      // display: 'flex',
-                      // flexDirection: 'column',
+                      border: 'black 1px solid',
+                      borderLeft: '0px',
+                      borderRight:
+                        index === (prefs.isEnglish ? days.length - 1 : 0)
+                          ? '0px'
+                          : 'transparent 1px solid',
+                      borderColor: prefs.IsDarkMode ? '#fff' : '#e0e0e0',
+                      borderBottom: '0px',
                     }}
                   >
                     {day.times.gym.map((time, index) => {
