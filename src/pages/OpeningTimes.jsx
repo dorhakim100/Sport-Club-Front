@@ -261,6 +261,8 @@ export function OpeningTimes() {
                 key={makeId()}
                 sx={{
                   color: prefs.isDarkMode && 'white',
+                  borderLeft: prefs.isEnglish ? '0px' : 'transparent 1px solid',
+                  borderColor: prefs.IsDarkMode ? '#fff' : '#e0e0e0',
                 }}
               >
                 {user && user.isAdmin && (
@@ -358,6 +360,8 @@ export function OpeningTimes() {
                 align='center'
                 sx={{
                   color: prefs.isDarkMode && 'white',
+                  borderLeft: prefs.isEnglish ? '0px' : 'transparent 1px solid',
+                  borderColor: prefs.IsDarkMode ? '#fff' : '#e0e0e0',
                 }}
                 className={`facility-cell ${prefs.isDarkMode && 'dark-mode'} ${
                   isScrolled ? 'scrolled' : ''
@@ -457,6 +461,8 @@ export function OpeningTimes() {
                   paddingLeft: '0.5em',
                   paddingRight: '0.5em',
                   borderBottom: '0px',
+                  borderLeft: prefs.isEnglish ? '0px' : 'transparent 1px solid',
+                  borderColor: prefs.IsDarkMode ? '#fff' : '#e0e0e0',
                 }}
                 className={`facility-cell ${prefs.isDarkMode && 'dark-mode'} ${
                   isScrolled ? 'scrolled' : ''
