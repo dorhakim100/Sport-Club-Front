@@ -11,9 +11,9 @@ export function Facilities() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const facilities = facilitiesJson
 
-  useEffect(() => {
-    textAnimation(prefs)
-  }, [prefs.isEnglish, prefs.isDarkMode])
+  // useEffect(() => {
+  //   textAnimation(prefs)
+  // }, [prefs.isEnglish, prefs.isDarkMode])
   return (
     <section className='facilities-container'>
       <h2> {prefs.isEnglish ? 'Facilities' : 'מתקני המועדון'}</h2>
