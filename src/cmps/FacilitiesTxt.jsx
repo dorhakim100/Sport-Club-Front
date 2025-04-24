@@ -7,13 +7,19 @@ import { HeadContainer } from './HeadContainer'
 export function FacilitiesTxt({ facilities }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   useEffect(() => {
-    textAnimation(prefs)
+    // textAnimation(prefs)
   }, [prefs.isEnglish, prefs.isDarkMode])
+  const animation = false
   return (
     <div className='facilities-text-container'>
       {facilities.map((facility) => {
         return (
-          <div className='facility-container section hidden' key={makeId()}>
+          <div
+            className={`facility-container section ${
+              animation ? 'hidden' : ''
+            }`}
+            key={makeId()}
+          >
             <HeadContainer
               text={{ eng: facility.title.eng, he: facility.title.he }}
             />

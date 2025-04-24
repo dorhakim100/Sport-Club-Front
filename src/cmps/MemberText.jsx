@@ -18,6 +18,8 @@ export function MemberText() {
   }
   const types = typesJson
 
+  const animation = false
+
   useEffect(() => {
     textAnimation(prefs)
   }, [prefs.isEnglish, prefs.isDarkMode])
@@ -34,11 +36,15 @@ export function MemberText() {
           >
             <div className='text-container'>
               <HeadContainer text={type.title} />
-              <p className='section hidden'>
+              <p className={`section ${animation ? 'hidden' : ''}`}>
                 {prefs.isEnglish ? type.description.eng : type.description.he}
               </p>
             </div>
-            <img src={type.img} alt='' className='section hidden' />
+            <img
+              src={type.img}
+              alt=''
+              className={`section ${animation ? 'hidden' : ''}`}
+            />
           </div>
         )
       })}
