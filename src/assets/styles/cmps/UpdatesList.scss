@@ -81,6 +81,10 @@
       // text-align: justify;
 
       margin: 0px;
+
+      @media (max-width: 600px) {
+        min-width: 100px;
+      }
     }
     &:first-of-type {
       border-top-right-radius: 8px;
