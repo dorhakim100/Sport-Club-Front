@@ -63,9 +63,9 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       // Optionally, a slight scale up for visual emphasis (comment out if too much)
       // transform: scale(1.02);
-
+      font-family: assistantBold;
       &.dark-mode {
-        text-shadow: black 1px 0 2px;
+        text-shadow: black 1px 1px 3px;
       }
     }
 
