@@ -325,8 +325,7 @@ export function OpeningTimes() {
                         {!isEdit && (
                           <b>
                             {day.extra &&
-                              day.extra[prefs.isEnglish ? 'eng' : 'he'] !==
-                                '' && <span>-</span>}
+                              day.extra[prefs.isEnglish ? 'eng' : 'he'] !== ''}
                             {day.extra
                               ? day.extra[prefs.isEnglish ? 'eng' : 'he']
                                 ? day.extra[prefs.isEnglish ? 'eng' : 'he']
