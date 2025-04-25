@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import Divider from '@mui/material/Divider'
@@ -15,12 +15,10 @@ export function Nav({ origin, links, isMain }) {
   )
   const navigate = useNavigate()
 
+  const location = useLocation()
+
   return (
-    <nav
-      className={
-        isMain ? 'page-navigation-container main' : 'page-navigation-container'
-      }
-    >
+    <nav className={`page-navigation-container ${isMain ? 'main' : ''}`}>
       <>
         {origin && (
           <NavLink to={`${origin.path}`} end>

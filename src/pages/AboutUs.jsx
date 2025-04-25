@@ -260,7 +260,7 @@ export function Organization() {
       <DynamicCover coverSrc={Amota.cover} prefs={prefs} />
       {splitText.map((line, index) => (
         // Render each line, and add a <br> tag after each one except the last
-        <p key={index}>
+        <p key={index} className='amota'>
           {line}
           {index < splitText.length - 1 && <br />}
         </p>

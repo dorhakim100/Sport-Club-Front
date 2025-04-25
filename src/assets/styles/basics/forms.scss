@@ -19,7 +19,7 @@ button {
 
 nav.main {
   display: grid;
-
+  justify-self: center;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
 
@@ -29,6 +29,9 @@ nav.main {
   justify-items: center;
   // gap: 3em;
 
+  @media (max-width: 400px) {
+    width: 350px;
+  }
   @media (max-width: 740px) {
     // display: block;
     grid-template-columns: 1fr 1fr;
@@ -46,6 +49,7 @@ nav.main {
     a {
       font-size: 0.8em;
     }
+    // overflow-x: hidden;
   }
 
   :first-child {
@@ -60,10 +64,11 @@ nav.main {
       grid-column: 1/-1;
       grid-row: 2/3;
       align-self: center;
+      // justify-self: center;
     }
 
     img {
-      width: 150px;
+      width: 100px;
       grid-column: 1/-1;
       justify-self: center;
       // height: 80px;
@@ -241,14 +246,20 @@ input[type='number'] {
 }
 
 div.dark-mode {
-  label:not(.MuiFormLabel-root):not(.MuiFormControlLabel-root) {
+  label:not(.MuiFormLabel-root):not(.MuiFormControlLabel-root):not(
+      .MuiInputLabel-root
+    ) {
     background-color: $dark-gray;
     &:hover {
       background-color: $very-dark-gray;
     }
   }
   div {
-    &:has(input:checked) label:not(.MuiFormControlLabel-root) {
+    label {
+      color: white;
+    }
+    &:has(input:checked)
+      label:not(.MuiFormControlLabel-root):not(.MuiInputLabel-root) {
       background-color: $dark-blue;
       color: white;
 
@@ -462,7 +473,7 @@ div.dark-mode {
   // margin: 3em;
   @media (max-width: 500px) {
     margin: 10px;
-    margin: 0em 1.5em 2em 1em;
+    margin: 0em 1.5em 2em 1.5em;
   }
 }
 

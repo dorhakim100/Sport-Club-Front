@@ -229,11 +229,11 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                           onClick={() => onSetUpdateMessage(update._id)}
                           color={prefs.isDarkMode ? 'secondary' : 'primary'}
                           sx={{
-                            '.MuiSwitch-colorSecondary': {
+                            '.MuiSwitch-colorSecondary.Mui-checked': {
                               color: '#fff',
                             },
                             '.MuiSwitch-colorPrimary': {
-                              color: '#fff',
+                              // color: '#fff',
                             },
                             '& .MuiSwitch-track': {
                               // backgroundColor: '#888', // body color when off
@@ -244,7 +244,7 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                               {
                                 backgroundColor: prefs.isDarkMode
                                   ? '#7de372'
-                                  : '#4CAF50', // body color
+                                  : '', // body color
                               },
                             // disabled track (optional)
                             '& .Mui-disabled + .MuiSwitch-track': {
