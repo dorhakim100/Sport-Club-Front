@@ -136,6 +136,16 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
     }
   }
 
+  const navigateToLink = (event, link) => {
+    // support for safari browsers
+    event.preventDefault() // Stop the link from navigating immediately
+    smoothScroll()
+
+    setTimeout(() => {
+      navigate(link)
+    }, 300) // Adjust time based on your smoothScroll timing
+  }
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId='updatesList' direction='vertical'>
@@ -220,7 +230,7 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                       </span>
                     </div>
                     <p>{update.content}</p>
-                    {user && user.isAdmin && (
+                    {(user && user.isAdmin && (
                       <div className='admin-control-container'>
                         <Switch
                           {...label}
@@ -264,7 +274,17 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                           }
                         />
                       </div>
-                    )}
+                    )) ||
+                      (update.link && (
+                        <Button
+                          variant='contained'
+                          onClick={(event) =>
+                            navigateToLink(event, update.link)
+                          }
+                        >
+                          {prefs.isEnglish ? 'More info' : 'עוד מידע'}
+                        </Button>
+                      ))}
                   </div>
                 )
               })}
