@@ -7,24 +7,19 @@ import { HeadContainer } from './HeadContainer'
 export function FacilitiesTxt({ facilities }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   useEffect(() => {
-    // textAnimation(prefs)
+    textAnimation(prefs)
   }, [prefs.isEnglish, prefs.isDarkMode])
-  const animation = false
+
   return (
     <div className='facilities-text-container'>
       {facilities.map((facility) => {
         return (
-          <div
-            className={`facility-container section ${
-              animation ? 'hidden' : ''
-            }`}
-            key={makeId()}
-          >
+          <div className={`facility-container`} key={facility.type}>
             <HeadContainer
               text={{ eng: facility.title.eng, he: facility.title.he }}
             />
             <div className='facility-content-container'>
-              <div className='facility-txt-container'>
+              <div className='facility-txt-container section hidden'>
                 <p>
                   {prefs.isEnglish
                     ? facility.description.eng
@@ -32,7 +27,11 @@ export function FacilitiesTxt({ facilities }) {
                 </p>
               </div>
             </div>
-            <img src={facility.img} alt='' />
+            <img
+              src={facility.img}
+              className='section hidden'
+              alt={facility.type}
+            />
           </div>
         )
       })}
