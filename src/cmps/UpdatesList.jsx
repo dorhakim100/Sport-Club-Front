@@ -11,6 +11,9 @@ import { saveUpdate, setUpdateOrder } from '../store/actions/update.actions'
 import { loadUpdates, removeUpdate } from '../store/actions/update.actions'
 
 import { AddToCartButton } from './AddToCartButton'
+import { CustomSelect } from './CustomSelect'
+
+import { routes } from '../routes/routes'
 
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
@@ -32,6 +35,8 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 })
 
   const [selectedId, setSelectedId] = useState(null)
+
+  const [list, setList] = useState(routes)
 
   useEffect(() => {
     setOrderedUpdates(updates)
@@ -112,6 +117,25 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
     }
   }
 
+  const onSetUpdateLink = async (update, link) => {
+    try {
+      let updateToSave
+      setIsLoading(true)
+      if (!link || link === '') updateToSave = { ...update, link: null }
+      else updateToSave = { ...update, link }
+      await saveUpdate(updateToSave)
+      showSuccessMsg(
+        prefs.isEnglish ? 'Update edited successfully' : 'עדכון נערך בהצלחה'
+      )
+    } catch (err) {
+      showErrorMsg(
+        prefs.isEnglish ? `Couldn't edit update` : 'לא היה ניתן לערוך עדכון'
+      )
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId='updatesList' direction='vertical'>
@@ -170,7 +194,7 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                           <p>{update.content}</p>
                           {/* {user && user.isAdmin && (
                             <EditRemoveBtns update={update} />
-                          )} */}
+                          )} */}{' '}
                         </div>
                       )
                     }}
@@ -229,6 +253,16 @@ export function UpdatesList({ updates, isDragEdit, loadUpdates }) {
                           }}
                         />
                         <EditRemoveBtns update={update} />
+                        <CustomSelect
+                          options={list}
+                          onSelectChange={(value) =>
+                            onSetUpdateLink(update, value)
+                          }
+                          initLabel={
+                            list.find((link) => link.value === update.link)
+                              ?.title ?? { he: 'לינק לעמוד', eng: 'Page link' }
+                          }
+                        />
                       </div>
                     )}
                   </div>
