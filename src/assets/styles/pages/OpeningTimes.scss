@@ -3,8 +3,22 @@
     position: relative;
   }
 
-  .day-title-container.edit-mode {
+  .day-title-container {
     display: grid;
+    grid-template-rows: repeat(2, 1fr);
+
+    b:nth-child(1) {
+      grid-row: 1/-1;
+    }
+
+    b:nth-child(2) {
+      font-size: 1em;
+      font-family: assistantRegular;
+    }
+  }
+
+  .day-title-container.edit-mode {
+    grid-template-rows: 1fr;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     gap: 1em;
