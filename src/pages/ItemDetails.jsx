@@ -14,6 +14,7 @@ import { ContactUs } from '../cmps/ContactUs'
 import { setIsModal, setModalMessage } from '../store/actions/system.actions'
 
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
+import { CustomCarousel } from '../cmps/CustomCarousel.jsx'
 
 export function ItemDetails() {
   const { itemId } = useParams()
@@ -30,6 +31,7 @@ export function ItemDetails() {
     (stateSelector) => stateSelector.itemModule.filter
   )
 
+  const [imgs, setImgs] = useState([{ link: '' }])
   const types = [
     {
       index: 0,
@@ -74,6 +76,9 @@ export function ItemDetails() {
   const setItem = async () => {
     getLatestPage()
     const i = await loadItem(itemId, itemFilter)
+    console.log(i)
+
+    setImgs([...i.imgs])
     if (!i.options) setIsOptionSelected(true)
     if (i.types.includes('card')) {
       const messageToSet = {
@@ -151,7 +156,8 @@ export function ItemDetails() {
           />
         </div>
         <div className='img-container'>
-          <img src={item.cover} alt='' />
+          {/* <img src={item.cover} alt='' /> */}
+          <CustomCarousel imgs={imgs} />
         </div>
         <div className='preview-container'>{modifyCards(item.preview)}</div>
       </section>

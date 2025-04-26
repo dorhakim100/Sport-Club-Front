@@ -1,34 +1,29 @@
-
-
 .swiper {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    border-radius: 5px;
-    margin-top: 0.5em;
-    user-select: none;
-    
-  }
+  border-radius: 5px;
+  margin-top: 0.5em;
+  user-select: none;
+}
 
-  .swiper-button-next,
+.swiper-button-next,
 .swiper-button-prev {
   background-color: $dark-green; /* Set the background color */
   border-radius: 50%; /* Optional: Make buttons round */
   width: 60px; /* Set width */
   height: 60px; /* Set height */
   transition: 0.3s ease-out;
-  
-  
+
   display: flex; /* Align icon */
   justify-content: center; /* Center icon */
   align-items: center; /* Center icon */
-  
-  &:hover{
-      background-color: $dark-green-hover;
 
+  &:hover {
+    background-color: $dark-green-hover;
   }
 
-  &::after{
+  &::after {
     font-size: 2em;
   }
 }
@@ -38,178 +33,152 @@
 .swiper-button-prev::after {
   color: white; /* Change arrow color to white */
 }
-  
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    
-    
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    position: relative;
 
-    
-    img {
-      
-        height: 350px;
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
 
-        object-fit: scale-down;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    }
+  position: relative;
+
+  img {
+    height: 350px;
+
+    object-fit: scale-down;
   }
- 
+}
 
 body {
-    // background: #000;
-    color: #000;
+  // background: #000;
+  color: #000;
 }
 
 .swiper {
-    width: 100%;
-    height: 300px;
+  width: 100%;
+  height: 300px;
 
-    margin-left: auto;
-    margin-right: auto;
-    
-  }
-  
-  .swiper-slide {
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .mySwiper2 {
-  }
-  
-  .home-swiper{
-    position: relative;
-    // height: 500px;
-    width: auto;
-
-    @media (max-width:980px) {
-            // height: 200px;
-
-            height: 300px;
-            
- 
-    }
-        height: calc(30vw);
-    max-height: 500px;
-  }
-  
-  .home-slide{
-
-    // position: absolute;
-    // height: 80%;
-    // max-width: 1080px;
-    
-    // max-width: 1080px;
-    
-    // overflow: hidden;
-    // height: 500px;
-    margin: 0px;
-
-
-    
-    @media (max-width:550px) {
-      // height: 200px;
-
-      .header-container{
-        // height: 500px;
-      }
-      
-      .blur, .img-container, img{
-        height: 100px;
-
-        
-      }
-      
-    }
-    
-    .blur{
-      
-      filter: blur(30px); /* Adjust blur level */
-      height: 500px;
-      z-index: 1;
-      
-    }
-    
-    .img-container{
-      z-index: 2;
-      position: absolute;
-      height: 500px;
-      // width: 90%;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-items: center;
-      
-      
-      img{
-        height: 100%;
-
-        max-width: 1080px;
-        max-width: 2080px;
-        width: 80vw;
-        // object-fit: cover;
-        // object-fit: contain;
-      }
-    }
-    
-    img{
-      
-
-      // position: absolute;
-      // width: 100px;
-      // width: 108px;
-
-      // left: 50px;
-    }
-
-  }
-  
-  .mySwiper {
-    height: 20%;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-  
-  .mySwiper .swiper-slide {
-    // width: 25%;
-    // height: 100%;
-    height: 80px;
-    object-fit: cover;
-    opacity: 0.4;
-
-
-
-  }
-  
-  .mySwiper .swiper-slide-thumb-active {
-    opacity: 1;
-  }
-  
-  .swiper-slide img {
-    // display: block;
-    // width: 100%;
-    // height: 100%;
-    // height: 20vh;
-    // width: 10vw;
-    
-    // object-fit: cover;
-    // object-fit: scale-down;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.nav-img{
-    height: 10vh;
-    width: auto;
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
 
-    
+.mySwiper2 {
+}
+
+.home-swiper {
+  position: relative;
+  // height: 500px;
+  width: auto;
+
+  @media (max-width: 980px) {
+    // height: 200px;
+
+    height: 300px;
   }
-  
+  height: calc(30vw);
+  max-height: 500px;
+}
 
-  
+.home-slide {
+  // position: absolute;
+  // height: 80%;
+  // max-width: 1080px;
+
+  // max-width: 1080px;
+
+  // overflow: hidden;
+  // height: 500px;
+  margin: 0px;
+
+  @media (max-width: 550px) {
+    // height: 200px;
+
+    .header-container {
+      // height: 500px;
+    }
+
+    .blur,
+    .img-container,
+    img {
+      height: 100px;
+    }
+  }
+
+  .blur {
+    filter: blur(30px); /* Adjust blur level */
+    height: 500px;
+    z-index: 1;
+  }
+
+  .img-container {
+    z-index: 2;
+    position: absolute;
+    height: 500px;
+    // width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
+    img {
+      height: 100%;
+
+      max-width: 1080px;
+      max-width: 2080px;
+      width: 80vw;
+      // object-fit: cover;
+      // object-fit: contain;
+    }
+  }
+
+  img {
+    // position: absolute;
+    // width: 100px;
+    // width: 108px;
+
+    // left: 50px;
+  }
+}
+
+.mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  // width: 25%;
+  // height: 100%;
+  height: 80px;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  // display: block;
+  // width: 100%;
+  // height: 100%;
+  // height: 20vh;
+  // width: 10vw;
+
+  // object-fit: cover;
+  // object-fit: scale-down;
+}
+
+.nav-img {
+  height: 10vh;
+  width: auto;
+}
