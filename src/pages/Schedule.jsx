@@ -8,6 +8,7 @@ import { showErrorMsg } from '../services/event-bus.service'
 import {
   capitalizeFirstLetter,
   translateDayToHebrew,
+  getWindowDimensions,
 } from '../services/util.service'
 
 import { Nav } from '../cmps/Nav'
@@ -452,15 +453,6 @@ export function Schedule() {
 
     pdf.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH)
     pdf.save('schedule.pdf')
-  }
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window
-
-    return {
-      width,
-      height,
-    }
   }
 
   return (

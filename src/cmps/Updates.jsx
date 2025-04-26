@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { getWindowDimensions } from '../services/util.service'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -31,15 +32,6 @@ export function Updates({ updates, navigateToUpdates }) {
   useEffect(() => {
     setWidth(getWindowDimensions().width)
   }, [window.innerWidth])
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window
-
-    return {
-      width,
-      height,
-    }
-  }
 
   return (
     <>

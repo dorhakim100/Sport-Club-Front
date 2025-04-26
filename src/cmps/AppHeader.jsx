@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { login, logout, setRemembered } from '../store/actions/user.actions'
 import { loadOpenMessages } from '../store/actions/message.actions'
-import { smoothScroll } from '../services/util.service'
+import { smoothScroll, getWindowDimensions } from '../services/util.service'
 
 import {
   SOCKET_EVENT_ADD_MSG,
@@ -152,15 +152,6 @@ export function AppHeader() {
       window.removeEventListener('resize', handleResize)
     }
   }, [windowDimensions])
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window
-
-    return {
-      width,
-      height,
-    }
-  }
 
   useEffect(() => {
     setHeaderDarkMode()

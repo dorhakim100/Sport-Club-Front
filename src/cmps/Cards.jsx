@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { smoothScroll } from '../services/util.service'
+import { smoothScroll, getWindowDimensions } from '../services/util.service'
 
 import 'swiper/css'
 import 'swiper/css/effect-cards'
@@ -40,15 +40,6 @@ export function Cards({ trainers }) {
       setSize(400)
     }
   }, [windowDimensions])
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window
-
-    return {
-      width,
-      height,
-    }
-  }
 
   const navigateToTrainer = (trainerId) => {
     // support for safari browsers

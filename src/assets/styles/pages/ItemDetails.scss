@@ -11,6 +11,7 @@
     grid-template-columns: 1fr;
 
     .img-container {
+      padding: 1em;
       grid-row: 1/2;
     }
   }
@@ -38,6 +39,7 @@
     b {
       font-size: 4em;
       transition: 0.1s ease;
+      font-family: assistantBold;
 
       @media (max-width: 1500px) {
         font-size: 3em;
@@ -115,6 +117,7 @@
 
   .img-container {
     align-self: center;
+    padding: 2em;
     img {
       border-radius: 5px;
     }
