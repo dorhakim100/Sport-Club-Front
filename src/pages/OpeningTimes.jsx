@@ -303,7 +303,7 @@ export function OpeningTimes() {
                   return (
                     <TableCell
                       align='center'
-                      key={`${day.dayName}-cell`}
+                      key={`${day._id}-cell-day`}
                       sx={{
                         color: prefs.isDarkMode && 'white',
                         borderLeft: '0px',
@@ -375,7 +375,7 @@ export function OpeningTimes() {
                     component='th'
                     scope='row'
                     align='center'
-                    key={`${day.dayName}-pool-cell`}
+                    key={`${day._id}-pool-cell`}
                     sx={{
                       color: prefs.isDarkMode && 'white',
                       borderLeft: '0px',
@@ -387,53 +387,57 @@ export function OpeningTimes() {
                       borderBottom: '0px',
                     }}
                   >
-                    {day.times.pool.map((time, index) => {
-                      return (
-                        <div
-                          className='hour-container'
-                          key={`pool-${day.dayName}-${index}`}
-                        >
-                          {isEdit ? (
-                            <>
-                              <AdminButtons
-                                onEditTime={onEditTime}
-                                onDeleteTime={onDeleteTime}
-                                day={day}
-                                facilityName={facilityName}
-                                index={index}
-                              />
-                              <CustomTimePicker
-                                from={time.from}
-                                to={time.to}
-                                day={day}
-                                facilityName={facilityName}
-                                index={index}
-                                handleTimeChange={handleTimeChange}
-                              />
-                            </>
-                          ) : (
-                            <div
-                              align='center'
-                              style={{
-                                display: 'grid',
-                                color: prefs.isDarkMode && 'white',
-                                borderBottom: 'none',
-                                padding: '0px',
-                                paddingTop: '0.5em',
-                                paddingBottom: '0.5em',
-                                fontSize: '1.3em',
-                              }}
-                            >
-                              <div className='time'>
-                                <span>{time.from}</span>
-                                <span>-</span>
-                                <span>{time.to}</span>
+                    {day.times.pool.length === 0 ? (
+                      <b>{prefs.isEnglish ? 'Closed' : 'סגור'}</b>
+                    ) : (
+                      day.times.pool.map((time, index) => {
+                        return (
+                          <div
+                            className='hour-container'
+                            key={`pool-${day._id}-${index}`}
+                          >
+                            {isEdit ? (
+                              <>
+                                <AdminButtons
+                                  onEditTime={onEditTime}
+                                  onDeleteTime={onDeleteTime}
+                                  day={day}
+                                  facilityName={facilityName}
+                                  index={index}
+                                />
+                                <CustomTimePicker
+                                  from={time.from}
+                                  to={time.to}
+                                  day={day}
+                                  facilityName={facilityName}
+                                  index={index}
+                                  handleTimeChange={handleTimeChange}
+                                />
+                              </>
+                            ) : (
+                              <div
+                                align='center'
+                                style={{
+                                  display: 'grid',
+                                  color: prefs.isDarkMode && 'white',
+                                  borderBottom: 'none',
+                                  padding: '0px',
+                                  paddingTop: '0.5em',
+                                  paddingBottom: '0.5em',
+                                  fontSize: '1.3em',
+                                }}
+                              >
+                                <div className='time'>
+                                  <span>{time.from}</span>
+                                  <span>-</span>
+                                  <span>{time.to}</span>
+                                </div>
                               </div>
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
+                            )}
+                          </div>
+                        )
+                      })
+                    )}
                     {isEdit && (
                       <AdminAddButton
                         onAddTime={onAddTime}
@@ -480,7 +484,7 @@ export function OpeningTimes() {
                     component='th'
                     scope='row'
                     align='center'
-                    key={`gym-${day.dayName}-${index}`}
+                    key={`gym-${day._id}-${index}`}
                     sx={{
                       color: prefs.isDarkMode && 'white',
                       border: 'black 1px solid',
@@ -493,10 +497,10 @@ export function OpeningTimes() {
                       borderBottom: '0px',
                     }}
                   >
-                    {day.times.gym.map((time, index) => {
-                      if (day.times.gym.length === 0)
-                        return <b>{prefs.isEnglish ? 'Closed' : 'סגור'}</b>
-                      else
+                    {day.times.gym.length === 0 ? (
+                      <b>{prefs.isEnglish ? 'Closed' : 'סגור'}</b>
+                    ) : (
+                      day.times.gym.map((time, index) => {
                         return (
                           <div className='hour-container' key={index}>
                             {isEdit ? (
@@ -537,7 +541,8 @@ export function OpeningTimes() {
                             )}
                           </div>
                         )
-                    })}
+                      })
+                    )}
 
                     {isEdit && (
                       <AdminAddButton
