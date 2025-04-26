@@ -175,3 +175,12 @@ export function textAnimation(prefs) {
 
   return () => elements.forEach((el) => observer.unobserve(el))
 }
+
+export function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window
+
+  return {
+    width,
+    height,
+  }
+}

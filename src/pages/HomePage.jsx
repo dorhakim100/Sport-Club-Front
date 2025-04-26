@@ -4,7 +4,11 @@ import { useNavigate, Link } from 'react-router-dom'
 import Lottie from 'react-lottie'
 
 import { trainerService } from '../services/trainer/trainer.service.js'
-import { smoothScroll, textAnimation } from '../services/util.service.js'
+import {
+  smoothScroll,
+  textAnimation,
+  getWindowDimensions,
+} from '../services/util.service.js'
 import { loadTrainers } from '../store/actions/trainer.actions.js'
 import { loadUpdates } from '../store/actions/update.actions.js'
 import { updateService } from '../services/update/update.service.js'
@@ -58,6 +62,10 @@ export function HomePage() {
   const user = useSelector((storeState) => storeState.userModule.user)
 
   const [squatAnimation, setSquatAnimation] = useState(squatDarkMode)
+
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  )
 
   const classAnimationOptions = {
     loop: true,
@@ -127,6 +135,17 @@ export function HomePage() {
     }
     if (!sessionStorage.getItem('showedUpdateMessage')) setMessageUpdate()
   }, [])
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions())
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [windowDimensions])
 
   const navigateToClass = (event) => {
     // support for safari browsers
@@ -225,8 +244,8 @@ export function HomePage() {
               <div className='animation-container'>
                 <Lottie
                   options={classAnimationOptions}
-                  width={'50%'}
-                  height={'50%'}
+                  width={windowDimensions.width < 480 ? '80%' : '50%'}
+                  height={windowDimensions.width < 480 ? '80%' : '50%'}
                 />
               </div>
               <img

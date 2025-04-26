@@ -258,7 +258,7 @@ export function OpeningTimes() {
             <TableRow>
               <TableCell
                 align='center'
-                key={makeId()}
+                key={'edit-cell'}
                 sx={{
                   color: prefs.isDarkMode && 'white',
                   borderLeft: prefs.isEnglish ? '0px' : 'transparent 1px solid',
@@ -303,7 +303,7 @@ export function OpeningTimes() {
                   return (
                     <TableCell
                       align='center'
-                      key={makeId()}
+                      key={`${day.dayName}-cell`}
                       sx={{
                         color: prefs.isDarkMode && 'white',
                         borderLeft: '0px',
@@ -348,7 +348,7 @@ export function OpeningTimes() {
           </TableHead>
           <TableBody>
             <TableRow
-              key={makeId()}
+              key={`pool-cell`}
               sx={{
                 '&:last-child td, &:last-child th': { border: 0 },
               }}
@@ -375,7 +375,7 @@ export function OpeningTimes() {
                     component='th'
                     scope='row'
                     align='center'
-                    key={makeId()}
+                    key={`${day.dayName}-pool-cell`}
                     sx={{
                       color: prefs.isDarkMode && 'white',
                       borderLeft: '0px',
@@ -389,7 +389,10 @@ export function OpeningTimes() {
                   >
                     {day.times.pool.map((time, index) => {
                       return (
-                        <div className='hour-container' key={index}>
+                        <div
+                          className='hour-container'
+                          key={`pool-${day.dayName}-${index}`}
+                        >
                           {isEdit ? (
                             <>
                               <AdminButtons
@@ -443,7 +446,7 @@ export function OpeningTimes() {
               })}
             </TableRow>
             <TableRow
-              key={makeId()}
+              key={`gym-cell`}
               sx={
                 {
                   // '&:last-child td, &:last-child th': { border: 0 },
@@ -477,7 +480,7 @@ export function OpeningTimes() {
                     component='th'
                     scope='row'
                     align='center'
-                    key={makeId()}
+                    key={`gym-${day.dayName}-${index}`}
                     sx={{
                       color: prefs.isDarkMode && 'white',
                       border: 'black 1px solid',
@@ -661,6 +664,8 @@ function AdminAddButton({ onAddTime, dayId, facilityName }) {
     )
 }
 
+import CheckIcon from '@mui/icons-material/Check'
+
 function HolidayInput({ day, onUpdate }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   // We store the input value locally
@@ -678,6 +683,13 @@ function HolidayInput({ day, onUpdate }) {
     onUpdate(day._id, localValue)
   }
 
+  const onSaveClick = () => {
+    if (!localValue) return
+    showSuccessMsg(
+      prefs.isEnglish ? 'Holiday added successfully' : 'חג נוסף בהצלחה'
+    )
+  }
+
   return (
     <div
       className={
@@ -685,6 +697,9 @@ function HolidayInput({ day, onUpdate }) {
       }
       style={{
         direction: prefs.isEnglish ? 'ltr' : 'rtl',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5em',
       }}
     >
       <input
@@ -695,6 +710,9 @@ function HolidayInput({ day, onUpdate }) {
         placeholder={prefs.isEnglish ? 'Holiday' : 'חג'}
         onBlur={handleBlur}
       />
+      <IconButton onClick={onSaveClick}>
+        <CheckIcon />
+      </IconButton>
     </div>
   )
 }

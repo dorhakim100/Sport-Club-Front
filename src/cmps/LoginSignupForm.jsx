@@ -8,6 +8,7 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { login, signup } from '../store/actions/user.actions'
 import { setIsLoading, setPrefs } from '../store/actions/system.actions'
 // import { addComment } from '../store/actions/comment.actions'
+import { getWindowDimensions } from '../services/util.service'
 
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
@@ -28,15 +29,6 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
   useEffect(() => {
     setWidth(getWindowDimensions().width)
   }, [window.innerWidth])
-
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window
-
-    return {
-      width,
-      height,
-    }
-  }
 
   if (isSignup) {
     initialValues = { email: '', password: '', username: '', fullname: '' }
