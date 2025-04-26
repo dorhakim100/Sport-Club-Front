@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -16,6 +17,7 @@ import { makeId } from '../services/util.service'
 export function CustomCarousel({ imgs }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null) // Initialize thumbsSwiper state
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const location = useLocation()
   return (
     <Swiper
       autoplay={{
@@ -37,9 +39,9 @@ export function CustomCarousel({ imgs }) {
       className='item-details-swiper'
     >
       {imgs.map((img, index) => (
-        <SwiperSlide key={`${makeId()}Main`}>
+        <SwiperSlide key={`${location.pathname}-${index}`}>
           <div className='img-container'>
-            <img src={img} alt={`Slide ${index + 1}`} loading='lazy' />
+            <img src={img} alt={`${index + 1}`} />
           </div>
         </SwiperSlide>
       ))}

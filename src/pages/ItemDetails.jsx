@@ -76,7 +76,6 @@ export function ItemDetails() {
   const setItem = async () => {
     getLatestPage()
     const i = await loadItem(itemId, itemFilter)
-    console.log(i)
 
     setImgs([...i.imgs])
     if (!i.options) setIsOptionSelected(true)
