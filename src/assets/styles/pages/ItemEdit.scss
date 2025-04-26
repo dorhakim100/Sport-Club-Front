@@ -1,177 +1,229 @@
-@media (max-width:500px) {
-    .page-container{
-        // margin: 0px;
-        // margin: auto;
-        // width: 100%;
-    }
-    
-    .item-edit-container{
-        
-        margin: auto;
-        width: 100%;
-        margin-top: 1em;
-        margin-bottom: 1em;
-    }
-    
-}
-
-.item-edit-container{
-    display: flex;
-    flex-direction: column;
-
-    display: grid;
-    
-    @media (min-width:1050px) {
-        grid-template-columns: repeat(2,1fr);
-        
-    }
-
-    align-items: center;
-    justify-items: center;
-    gap: 2em;
-    padding: 2em 0em 2em 0em;
-    margin: auto;
-    border-radius: 8px;
-    
-    // width: 350px;
-
-    background-color: $light-gray;
-        background: linear-gradient(135deg, #6ec1e48e 0%, #a8e6a147 100%); // Gradient from light blue to soft green
-
-    .upload-img-container{
-        display: grid;
-        justify-items: center;
-        gap: 1em;
-    }
-
-    .item-img-container{
-        width: 300px;
-        border-radius: 5px;
-
-
-        img{
-            border-radius: 5px;
-            // height: 300px;
-            object-fit: cover;
-        }
-
-        @media (min-width:1050px) {
-            width: 40vw;
-            
-            img{
-                width: 40vw;
-                
-            }
-            
-        }
-    }
-
-    .upload-button-container{
-        gap: 1em;
-    }
-
-    .item-edit-form{
-        display: grid;
-        align-items: center;
-        justify-items: center;
-        gap: 1em;
-    }
-
-    .input-container{
-
-        display: grid;
-        grid-template-columns: 1fr;
-        align-items: center;
-        // justify-items: center;
-        *{
-            width: 100%;
-
-        }
-       &.types{
-                grid-template-rows: repeat(2,40px);
-
-            }
-  
-            
-            textarea {
-                resize: none;
-                min-width: 300px;
-                height: 200px;
-                width: 40vw;
-            }
-            
-            input, textarea{
-                transition: 0.3s ease-out;
-            }
-
-            label{
-                text-align: start;
-            }
-
-            input{
-                max-width: 300px;
-            }
-       
-    }
-    .quantity-container{
-        padding: 1em;
-    }
-    
-    .input-container.quantity{
-
-        label{
-            justify-self: center;
-        }
-        justify-items: start;
-
-        div{
-            display: grid;
-            grid-template-columns: auto 1fr;
-            align-items: center;
-            justify-items: center;
-            gap: 0.5em;
-            button{
-                justify-self: center;
-                max-width: 100px;
-            }
-        }
-        
-    }
-
-  .input-container.types{
-
-      label{
-          text-align: center;
-      }
+@media (max-width: 500px) {
+  .page-container {
+    // margin: 0px;
+    // margin: auto;
+    // width: 100%;
   }
 
-    .types-container{
-        .checkbox-container{
-            label{
-
-                transition: 0.3s ease-out;
-            }
-        }
-        display: flex;
-        gap: 2em;
-        font-size: 1.2em;
-    }
+  .item-edit-container {
+    margin: auto;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
 }
 
-.add-option-container{
+.item-edit-container {
+  display: flex;
+  flex-direction: column;
+
+  display: grid;
+
+  @media (min-width: 1050px) {
+    // grid-template-columns: repeat(2, 1fr);
+  }
+
+  align-items: center;
+  justify-items: center;
+  gap: 2em;
+  padding: 2em 0em 2em 0em;
+  margin: auto;
+  border-radius: 8px;
+
+  // width: 350px;
+
+  background-color: $light-gray;
+  background: linear-gradient(
+    135deg,
+    #6ec1e48e 0%,
+    #a8e6a147 100%
+  ); // Gradient from light blue to soft green
+
+  .upload-img-container {
+    padding: 1em;
+    // display: grid;
     display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    @media (max-width: 1000px) {
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(275px, 1fr)
+      ); // Responsive grid
+    }
+    align-items: center;
+    gap: 1em;
+  }
+
+  .item-img-container {
+    width: 300px;
+    border-radius: 5px;
+    position: relative;
+    transition: 0.2s ease-out;
+
+    &.dragged {
+      outline: 5px solid $dark-green;
+      cursor: grabbing !important;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      opacity: 0.8;
+      transform: scale(1.05);
+      z-index: 1000;
+      user-select: none;
+      transition: box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
+      .delete-icon {
+        color: #fff;
+      }
+    }
+    &::after {
+      opacity: 0;
+      content: '';
+      position: absolute;
+      background: linear-gradient(to bottom, #c0e6f23c 60%, transparent);
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 60%,
+        transparent
+      );
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5) 30%,
+        transparent
+      );
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      // background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+      // background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 60%, transparent);
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    .delete-icon {
+      position: absolute;
+      right: 1em;
+      top: 0.5em;
+      z-index: 2;
+    }
+    img {
+      border-radius: 5px;
+      // height: 300px;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    @media (min-width: 1050px) {
+      //   width: 40vw;
+
+      img {
+        // width: 40vw;
+      }
+    }
+  }
+
+  .upload-button-container {
+    gap: 1em;
+  }
+
+  .item-edit-form {
+    display: grid;
+    align-items: center;
     justify-items: center;
-    gap: 0.8em;
+    gap: 1em;
+  }
 
-
-    .MuiTextField-root{
-        direction: rtl;
+  .input-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    // justify-items: center;
+    * {
+      width: 100%;
+    }
+    &.types {
+      grid-template-rows: repeat(2, 40px);
     }
 
-    .option-container{
-        display: flex;
-        align-items: center;
-        justify-items: center;
-        gap: 0.5em;
+    textarea {
+      resize: none;
+      min-width: 300px;
+      height: 200px;
+      width: 40vw;
     }
+
+    input,
+    textarea {
+      transition: 0.3s ease-out;
+    }
+
+    label {
+      text-align: start;
+    }
+
+    input {
+      max-width: 300px;
+    }
+  }
+  .quantity-container {
+    padding: 1em;
+  }
+
+  .input-container.quantity {
+    label {
+      justify-self: center;
+    }
+    justify-items: start;
+
+    div {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      justify-items: center;
+      gap: 0.5em;
+      button {
+        justify-self: center;
+        max-width: 100px;
+      }
+    }
+  }
+
+  .input-container.types {
+    label {
+      text-align: center;
+    }
+  }
+
+  .types-container {
+    .checkbox-container {
+      label {
+        transition: 0.3s ease-out;
+      }
+    }
+    display: flex;
+    gap: 2em;
+    font-size: 1.2em;
+  }
+}
+
+.add-option-container {
+  display: grid;
+  justify-items: center;
+  gap: 0.8em;
+
+  .MuiTextField-root {
+    direction: rtl;
+  }
+
+  .option-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 0.5em;
+  }
 }

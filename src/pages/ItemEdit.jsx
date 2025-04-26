@@ -10,13 +10,14 @@ import { Checkbox, Input } from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { styled } from '@mui/material/styles'
 import LoadingButton from '@mui/lab/LoadingButton'
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 
 import { itemService } from '../services/item/item.service.js'
 import { updateItem } from '../store/actions/item.actions.js'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { uploadService } from '../services/upload.service.js'
-import { makeId } from '../services/util.service.js'
+import { makeId, getWindowDimensions } from '../services/util.service.js'
 import {
   setIsLoading,
   setIsModal,
@@ -28,6 +29,7 @@ import { HeadContainer } from '../cmps/HeadContainer.jsx'
 import InputAdornment from '@mui/material/InputAdornment'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 
 // import '../css/ItemEdit.css'
 const VisuallyHiddenInput = styled('input')({
@@ -56,13 +58,19 @@ export function ItemEdit() {
   const [item, setItem] = useState({ types: [] })
   const [editItem, setEditItem] = useState(itemService.getEmptyItem())
   const [cover, setCover] = useState(null)
+  const [imgs, setImgs] = useState([])
 
   const [isOptions, setIsOptions] = useState(false)
   const [options, setOptions] = useState([])
+  const [dragging, setDragging] = useState(false)
+  const [offset, setOffset] = useState({ x: 0, y: 0 })
 
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  )
   const text = {
-    he: 'מוצר',
-    eng: 'Item',
+    he: 'עריכת מוצר',
+    eng: 'Item Edit',
   }
 
   useEffect(() => {
@@ -81,7 +89,8 @@ export function ItemEdit() {
         setIsOptions(true)
         setOptions(item.options)
       }
-      setCover(item.cover)
+      // setCover(item.imgs[0])
+      setImgs(item.imgs)
     } catch (err) {
       // // console.log(err)
       showErrorMsg('Cannot load item')
@@ -187,19 +196,18 @@ export function ItemEdit() {
     }
   }
 
-  function renderCover({ target }) {
-    const coverSrc = target.value
-    setCover(coverSrc)
-  }
-
   async function uploadFile(ev) {
     setIsLoading(true)
     try {
       const res = await uploadService.uploadImg(ev)
 
       const coverSrc = res.url
-      setCover(coverSrc)
-      setEditItem({ ...editItem, cover: coverSrc })
+      // setCover(coverSrc)
+      setImgs([...imgs, coverSrc])
+      setEditItem({ ...editItem, imgs: [...imgs, coverSrc] })
+      showSuccessMsg(
+        prefs.isEnglish ? 'Img added successfully' : 'תמונה נוספה בהצלחה'
+      )
     } catch (err) {
       // // console.log(err)
       showErrorMsg(`Couldn't upload image`)
@@ -238,30 +246,156 @@ export function ItemEdit() {
     if (!newOptions.length) setIsOptions(false)
   }
 
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions())
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [windowDimensions])
+
+  const onDragEnd = async (result) => {
+    const { source, destination } = result
+
+    if (!destination) return // If dropped outside the list, ignore
+
+    if (source.index !== destination.index) {
+      const reorderedImgs = Array.from(imgs)
+      const [removed] = reorderedImgs.splice(source.index, 1)
+
+      reorderedImgs.splice(destination.index, 0, removed)
+      setImgs([...reorderedImgs])
+      setEditItem({ ...item, imgs: [...reorderedImgs] })
+    }
+  }
+
+  const handleDragStart = (e) => {
+    const rect = e.target.getBoundingClientRect()
+    setOffset({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
+    setDragging(true)
+  }
+
+  const handleDrag = (e) => {
+    if (!isDragEdit) return
+
+    if (dragging) {
+      setPosition({
+        x: e.clientX - offset.x + window.scrollX, // Adjust for horizontal scroll
+        y: e.clientY - offset.y + window.scrollY, // Adjust for vertical scroll
+      })
+    }
+  }
+
   return (
     <>
       <HeadContainer text={text} />
       <section className='item-edit-container'>
-        <div className='upload-img-container'>
-          <div className='item-img-container'>
-            {cover && <img src={cover} alt='' className='item-cover-edit' />}
-          </div>
-          <LoadingButton
-            component='label'
-            role={undefined}
-            variant='contained'
-            tabIndex={-1}
-            startIcon={
-              <CloudUploadIcon sx={prefs.isEnglish ? { ml: 1 } : { ml: 2 }} />
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable
+            droppableId={`${item._id}-imgs`}
+            direction={
+              windowDimensions.width <= 1000 ? 'vertical' : 'horizontal'
             }
-            loading={isLoading}
-            sx={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
           >
-            {prefs.isEnglish ? 'Upload file' : 'בחירת קובץ'}
+            {(provided) => {
+              return (
+                <div
+                  className={'upload-img-container'}
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  style={{
+                    // display: 'flex',
+                    direction: 'ltr',
+                    // flexDirection: 'row-reverse',
+                    // overflowX: 'auto',
+                  }}
+                >
+                  {imgs.map((img, index) => {
+                    return (
+                      <Draggable
+                        key={`${item.title.eng}-img-${index}`}
+                        draggableId={`${item._id}-imgs-${index}`}
+                        index={index}
+                      >
+                        {(provided, snapshot) => {
+                          if (snapshot.isDragging) {
+                            const offset = { x: 0, y: window.scrollY } // your fixed container left/top position
+                            const x =
+                              provided.draggableProps.style.left - offset.x
+                            const y =
+                              provided.draggableProps.style.top + offset.y
+                            provided.draggableProps.style.left = x
+                            provided.draggableProps.style.top = y
+                          }
+                          return (
+                            <div
+                              className={`item-img-container ${
+                                snapshot.isDragging ? 'dragged' : ''
+                              }`}
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              onDragStart={() => handleDragStart()}
+                              onDrag={handleDrag}
+                            >
+                              {/* <div className='img-overlay'></div> */}
+                              <IconButton
+                                className='delete-icon'
+                                onClick={() => {
+                                  imgs.splice(index, 1)
+                                  const newImges = [...imgs]
+                                  setImgs(newImges)
+                                  setEditItem({ ...editItem, imgs: newImges })
+                                  showSuccessMsg(
+                                    prefs.isEnglish
+                                      ? 'Img removed successfully'
+                                      : 'תמונה הוסרה בהצלחה'
+                                  )
+                                }}
+                              >
+                                <DeleteIcon />
+                              </IconButton>
+                              <img
+                                src={img}
+                                alt=''
+                                className='item-cover-edit'
+                              />
+                            </div>
+                          )
+                        }}
+                      </Draggable>
+                    )
+                  })}
 
-            <VisuallyHiddenInput type='file' onChange={uploadFile} />
-          </LoadingButton>
-        </div>
+                  {/* <div className='item-img-container'>
+            {cover && <img src={cover} alt='' className='item-cover-edit' />}
+          </div> */}
+                </div>
+              )
+            }}
+          </Droppable>
+        </DragDropContext>
+        <LoadingButton
+          component='label'
+          role={undefined}
+          variant='contained'
+          tabIndex={-1}
+          startIcon={
+            <CloudUploadIcon sx={prefs.isEnglish ? { ml: 1 } : { ml: 2 }} />
+          }
+          loading={isLoading}
+          sx={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
+        >
+          {prefs.isEnglish ? 'Upload file' : 'בחירת קובץ'}
+
+          <VisuallyHiddenInput type='file' onChange={uploadFile} />
+        </LoadingButton>
         <form action='' className='item-edit-form' onSubmit={onSaveItem}>
           <div
             className={

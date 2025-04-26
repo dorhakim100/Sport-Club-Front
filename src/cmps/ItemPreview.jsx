@@ -48,7 +48,7 @@ export function ItemPreview({ item }) {
 
       <div className='img-container'>
         {!isLoaded && <Preloader img={item.cover} />}
-        <img src={item.cover} alt='' onLoad={setIsLoadedTrue} />
+        <img src={item.imgs[0]} alt='' onLoad={setIsLoadedTrue} />
       </div>
     </article>
   )
