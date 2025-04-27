@@ -1,9 +1,12 @@
 .login-container {
   display: grid;
   margin: auto;
+
   @media (max-width: 600px) {
     display: block;
+    padding: 1em; // Space inside the box
   }
+  padding: 2em;
   // grid-template-columns: repeat(2,1fr);
   width: 330px;
   justify-self: center;
@@ -11,7 +14,6 @@
     justify-items: center;
   }
 
-  padding: 2em; // Space inside the box
   border-radius: 8px; // Smooth corners
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Subtle shadow
   max-width: 450px; // Limit width
@@ -19,6 +21,7 @@
 
   text-align: center; // Center text
   background-color: white;
+  align-items: center;
 
   &.dark-mode {
     background-color: $very-dark-blue;
