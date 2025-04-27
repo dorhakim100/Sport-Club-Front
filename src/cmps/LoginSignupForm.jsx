@@ -13,6 +13,7 @@ import { getWindowDimensions } from '../services/util.service'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { RememberMeButton } from './RememberMeButton'
+import { IconButton } from '@mui/material'
 
 export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
@@ -253,9 +254,13 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
                 onBlur={handleBlur}
                 value={values.password}
                 placeholder={prefs.isEnglish ? 'Password' : 'סיסמא'}
+                typeof='password'
               />
-              <Button
+              <IconButton
                 variant='contained'
+                sx={{
+                  color: prefs.isDarkMode ? '#fff' : '',
+                }}
                 onClick={() => {
                   if (width > 800) {
                     return
@@ -281,7 +286,7 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
                 }}
               >
                 {isShown ? <VisibilityOffIcon /> : <VisibilityIcon />}
-              </Button>
+              </IconButton>
             </div>
             <span>
               {errors.password && touched.password && errors.password}
