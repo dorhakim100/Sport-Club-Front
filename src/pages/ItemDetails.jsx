@@ -15,6 +15,7 @@ import { setIsModal, setModalMessage } from '../store/actions/system.actions'
 
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { CustomCarousel } from '../cmps/CustomCarousel.jsx'
+import { Divider } from '@mui/material'
 
 export function ItemDetails() {
   const { itemId } = useParams()
@@ -158,6 +159,15 @@ export function ItemDetails() {
           {/* <img src={item.cover} alt='' /> */}
           <CustomCarousel imgs={imgs} />
         </div>
+        <Divider
+          orientation='horizontal'
+          flexItem
+          sx={{
+            backgroundColor: prefs.isDarkMode ? '#fff' : '',
+            gridColumn: '1 / -1',
+            marginTop: '1em',
+          }}
+        />
         <div className='preview-container'>{modifyCards(item.preview)}</div>
       </section>
       <ContactUs />
