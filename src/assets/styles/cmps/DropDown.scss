@@ -29,7 +29,7 @@
 }
 .dropdown-menu {
   z-index: 2;
-  background: #fff;
+  //   background: #fff;
   box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
   transition: all linear 0.3s;
   position: absolute;
@@ -52,9 +52,11 @@
     li {
       padding: 14px;
       transition: all linear 0.1s;
+      background-color: #fff;
 
       &:hover {
         background-color: $light-gray;
+        background-color: #eeeeee;
       }
 
       &:first-of-type {
@@ -68,12 +70,6 @@
       li:hover {
         color: white;
         background-color: $very-dark-blue;
-        @media (max-width: 1050px) {
-          &:hover {
-            color: $bold-navy;
-            background-color: $light-gray;
-          }
-        }
       }
     }
   }
