@@ -33,11 +33,13 @@ export function DropDown({ options, setDropdownVisible }) {
 
   return (
     <div
-      className={prefs.isEnglish ? 'dropdown-menu ltr' : 'dropdown-menu'}
+      className={`dropdown-menu ${prefs.isEnglish ? 'ltr' : ''}`}
       onMouseLeave={handleMouseLeave}
       ref={dropdownRef}
     >
-      <ul className={`options-container ${prefs.isDarkMode && 'dark-mode'}`}>
+      <ul
+        className={`options-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}
+      >
         {options.map((option) => {
           return (
             <li
