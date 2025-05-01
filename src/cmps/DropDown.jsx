@@ -56,11 +56,7 @@ export function DropDown({ options, setDropdownVisible }) {
                 }, 300) // Adjust time based on your smoothScroll timing
               }}
               style={{
-                '.&:hover': {
-                  color: prefs.isDarkMode ? 'white' : 'black',
-                  backgroundColor: prefs.isDarkMode ? '#425c77' : 'white',
-                  transition: 'background-color 0.3s ease, color 0.3s ease',
-                },
+                padding: '10px 20px',
               }}
             >
               {option.text}
