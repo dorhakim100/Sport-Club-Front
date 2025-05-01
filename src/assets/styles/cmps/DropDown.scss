@@ -67,9 +67,22 @@
       }
     }
     &.dark-mode {
+      li {
+        background-color: $very-dark-blue;
+        color: #fff;
+        &.active {
+          color: $dark-green;
+          background-color: $darkest-blue;
+        }
+      }
       li:hover {
         color: white;
         background-color: $very-dark-blue;
+        background-color: $darkest-blue;
+        &.active {
+          background-color: $darkest-blue;
+          color: $dark-green;
+        }
       }
     }
   }
@@ -78,8 +91,10 @@
     color: $bold-navy;
     background-color: $primary-light-blue;
     &:hover {
-      color: white;
-      background-color: $dark-blue;
+      color: $bold-navy;
+      background-color: $primary-light-blue;
+      //   color: white;
+      //   background-color: $dark-blue;
     }
 
     // @media (max-width:1050px) {
