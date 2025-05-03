@@ -160,6 +160,7 @@ export function Cart() {
     try {
       setIsLoading(true)
       const res = await couponService.getDiscount(coupon)
+
       await setCart(res)
       showSuccessMsg(
         prefs.isEnglish ? 'Coupon added successfully' : 'קופון נוסף בהצלחה'
@@ -199,6 +200,8 @@ export function Cart() {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't start payment` : 'לא ניתן להתחיל תשלום'
       )
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -213,6 +216,7 @@ export function Cart() {
         phone: user.phone,
         email: user.email,
       },
+      coupon: coupon,
     }
 
     return order
@@ -243,21 +247,25 @@ export function Cart() {
             )}
             <b>₪{total}</b>
             <Divider orientation='horizontal' flexItem />
-            <div
-              className={`input-container ${
-                prefs.isDarkMode && 'dark-mode'
-              } enter-code-container`}
-            >
-              <input
-                type='search'
-                placeholder={prefs.isEnglish ? 'Coupon code' : 'קוד קופון'}
-                onChange={(event) => setCoupon(event.target.value)}
-                value={coupon}
-              />
-              <Button variant='contained' onClick={onEnterCoupon}>
-                {prefs.isEnglish ? 'Enter' : 'אישור'}
-              </Button>
-            </div>
+            {!discount && (
+              <div className='discount-container'>
+                <div
+                  className={`input-container ${
+                    prefs.isDarkMode && 'dark-mode'
+                  } enter-code-container`}
+                >
+                  <input
+                    type='search'
+                    placeholder={prefs.isEnglish ? 'Coupon code' : 'קוד קופון'}
+                    onChange={(event) => setCoupon(event.target.value)}
+                    value={coupon}
+                  />
+                  <Button variant='contained' onClick={onEnterCoupon}>
+                    {prefs.isEnglish ? 'Enter' : 'אישור'}
+                  </Button>
+                </div>
+              </div>
+            )}
 
             <Button
               variant='contained'
