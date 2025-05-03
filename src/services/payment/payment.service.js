@@ -118,6 +118,7 @@ async function createNewOrderLink(order) {
         goodUrl: `${BASE_ORDER_URL}order/success`,
         badUrl: `${BASE_ORDER_URL}order/error`,
         items: order.items,
+        coupon: order.coupon,
       }),
     })
 

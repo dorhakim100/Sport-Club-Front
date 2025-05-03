@@ -72,7 +72,10 @@ export function AddToCartButton({
       return
     }
 
-    if (item.optionsIds && !isOptionSelected) {
+    if (
+      (item.options && !isOptionSelected) ||
+      (item.optionsIds && !isOptionSelected)
+    ) {
       const messageToSet = {
         he: `יש לבחור סוג פריט בדף הפריט`,
         eng: `Item option must be selected at item page`,
