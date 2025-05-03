@@ -57,6 +57,8 @@ export function LoginSignup() {
         ...(isRemember && userRes._id && { _id: userRes._id }),
       }
 
+      // console.log(updatedUser)
+
       setPrefs({
         ...prefs,
         user: updatedUser,

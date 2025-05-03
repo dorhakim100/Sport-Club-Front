@@ -55,8 +55,12 @@ async function remove(userId) {
 async function update(user) {
   try {
     const { _id } = user
+
     const savedUser = await httpService.put(`user/${_id}`, user)
     // When admin updates other user's details, do not update loggedinUser
+    // console.log(savedUser)
+    // return
+
     const loggedinUser = await getLoggedinUser() // Might not work because its defined in the main service???
 
     if (loggedinUser._id === user._id) saveLoggedinUser(savedUser)
@@ -73,7 +77,7 @@ async function update(user) {
 async function login(userCred) {
   try {
     const user = await httpService.post('auth/login', userCred)
-
+    // console.log(user)
     if (user) {
       const saved = saveLoggedinUser(user)
       if (userCred.imgUrl) user.imgUrl = userCred.imgUrl
@@ -130,9 +134,7 @@ async function getLoggedinUser() {
   try {
     const remembered = await getRememberedUser()
 
-    if (remembered) {
-      return saveLoggedinUser(remembered)
-    } else {
+    if (!remembered) {
       const logged = JSON.parse(
         sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)
       )
@@ -141,7 +143,9 @@ async function getLoggedinUser() {
       const retrieved = await getById(logged._id)
 
       return saveLoggedinUser(retrieved)
+      return
     }
+    return saveLoggedinUser(remembered)
   } catch (err) {
     // console.log(err)
     throw err
@@ -159,8 +163,6 @@ function saveLoggedinUser(user) {
     phone: user.phone,
     ordersIds: user.ordersIds,
     items: user.items,
-    phone: user.phone,
-    imgUrl: user.imgUrl,
     memberStatus: user.memberStatus || {
       isMember: false,
       expiry: '',
@@ -262,11 +264,12 @@ async function getRememberedUser() {
   try {
     if (sessionUser) {
       const retrievedUser = await getRememberedById(sessionUser._id)
-      // console.log(retrievedUser)
+      console.log(retrievedUser)
 
       return saveLoggedinUser(retrievedUser)
     }
     const prefs = getPrefs()
+
     if (!prefs.user) return
     const userId = prefs.user._id ? prefs.user._id : null
     if (userId) {
@@ -279,10 +282,9 @@ async function getRememberedUser() {
 
       const user = await getRememberedById(userId)
       // const user = await loginToken()
-      if (user) {
-        return saveLoggedinUser(user)
-      }
+      if (user) return saveLoggedinUser(user)
     } else {
+      throw new Error('No userId found in prefs')
       return null
     }
   } catch (err) {
