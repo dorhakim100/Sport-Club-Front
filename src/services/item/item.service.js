@@ -73,7 +73,7 @@ function getEmptyItem() {
     title: { he: '', eng: '' },
     preview: { he: '', eng: '' },
     types: [],
-    cover: '',
+    imgs: [],
     optionIds: [],
   }
 }

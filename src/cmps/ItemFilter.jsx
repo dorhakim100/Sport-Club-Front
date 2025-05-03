@@ -100,6 +100,7 @@ export function ItemFilter({
     delete item._id
     try {
       const savedItem = await addItem(item)
+
       showSuccessMsg(`Item added`)
       navigate(`/item/edit/${savedItem._id}`)
     } catch (err) {
