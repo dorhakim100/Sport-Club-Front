@@ -124,11 +124,12 @@ export function HomePage() {
         setModalMessage(messageToSet)
         setIsModal(true)
       } catch (err) {
-        showErrorMsg(
-          prefs.isEnglish
-            ? `Couldn't set update message`
-            : 'לא היה ניתן להציג הודעה'
-        )
+        // console.log(err)
+        // showErrorMsg(
+        //   prefs.isEnglish
+        //     ? `Couldn't set update message`
+        //     : 'לא היה ניתן להציג הודעה'
+        // )
       } finally {
         setIsLoading(false)
       }
