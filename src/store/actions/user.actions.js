@@ -133,7 +133,9 @@ export async function logout() {
 
 export async function loadUser(userId) {
   try {
+    // debugger
     const user = await userService.getById(userId)
+
     // store.dispatch({ type: SET_WATCHED_USER, user })
     store.dispatch({ type: SET_WATCHED_USER, user })
     return user

@@ -63,7 +63,7 @@ export function Cart() {
       (accu, item) => accu + item.price * item.quantity,
       total
     )
-    setCartTotal(cartTotal)
+    // setCartTotal(cartTotal)
 
     if (isDiscount.current) {
       const discountToSet = originalPrice - cartTotal
@@ -150,7 +150,7 @@ export function Cart() {
       const userToUpdate = { ...loaded, items: [...fetchedCart] }
       await updateCart(userToUpdate)
     } catch (err) {
-      // // console.log(err)
+      // console.log(err)
     } finally {
       setIsLoading(false)
     }
