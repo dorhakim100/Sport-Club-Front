@@ -74,6 +74,7 @@ function getEmptyItem() {
     preview: { he: '', eng: '' },
     types: [],
     cover: '',
+    optionIds: [],
   }
 }
 
