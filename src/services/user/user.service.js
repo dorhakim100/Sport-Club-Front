@@ -264,7 +264,6 @@ async function getRememberedUser() {
   try {
     if (sessionUser) {
       const retrievedUser = await getRememberedById(sessionUser._id)
-      console.log(retrievedUser)
 
       return saveLoggedinUser(retrievedUser)
     }
