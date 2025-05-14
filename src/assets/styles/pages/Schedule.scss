@@ -86,6 +86,7 @@
 
     overflow-x: auto;
 
+    overflow-y: hidden;
     @media (max-width: 750px) {
       overflow-y: hidden;
       // grid-template-columns: repeat(6,120px);
@@ -101,10 +102,14 @@
 
     margin: auto;
     margin-bottom: 3em;
+    margin-bottom: 0px;
 
     max-height: 85vh;
-    overflow: auto;
+    // height: fit-content;
+    // overflow: auto;
     width: 90vw;
+
+    padding: 1.5em 0em;
 
     @media (max-width: 1200px) {
       font-size: 0.8em;
@@ -121,7 +126,6 @@
     @media (max-width: 550px) {
       font-size: 0.7em;
     }
-
     .day-container {
       display: grid;
       &:first-of-type {
