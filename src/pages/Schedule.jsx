@@ -452,7 +452,17 @@ export function Schedule() {
     const pdfH = (props.height * pdfW) / props.width
 
     pdf.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH)
-    pdf.save('schedule.pdf')
+    const now = new Date()
+
+    const monthYear = prefs.isEnglish
+      ? `Schedule - ${now.toLocaleString('en-US', {
+          month: 'long',
+        })} ${now.getFullYear()}`
+      : `מערכת החוגים - ${now.toLocaleString('he-IL', {
+          month: 'long',
+        })} ${now.getFullYear()}`
+
+    pdf.save(`${monthYear}.pdf`)
   }
 
   return (

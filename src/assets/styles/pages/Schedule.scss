@@ -1,4 +1,6 @@
 .schedule {
+  font-size: 16px !important;
+
   display: grid;
   @media (max-width: 600px) {
     display: block;
@@ -152,6 +154,7 @@
       .hour-container {
         // padding: 0.5em;
         font-size: 0.9em;
+        // font-size: 14px !important;
 
         display: grid;
         align-items: center;
@@ -163,6 +166,9 @@
         height: 100%;
         min-height: fit-content;
         padding: 10px;
+        @media (min-width: 700px) {
+          min-height: 100px;
+        }
 
         span {
           margin-bottom: 0.3em;
