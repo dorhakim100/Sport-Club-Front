@@ -1,4 +1,4 @@
-# 🏆 Kfar Smharyahoo Sport Club Website
+# Kfar Smharyahoo Sport Club Website
 
 ## 📌 Introduction
 
