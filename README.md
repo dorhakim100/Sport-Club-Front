@@ -40,10 +40,20 @@ To get the project running on your local machine:
    npm run dev
    ```
 
+## Pictures
+
+<img width="2038" alt="Screenshot 2025-05-18 at 17 30 01" src="https://github.com/user-attachments/assets/7e3957f3-b6de-49c5-9e2c-114de44a3cbd" />
+
+<img width="2038" alt="Screenshot_2025-05-18_at_17 30 12" src="https://github.com/user-attachments/assets/758fcae7-3fa5-4546-be0c-081770457dcf" />
+<img width="393" alt="Screenshot_2025-05-18_at_18 10 08" src="https://github.com/user-attachments/assets/c06e621b-11cb-4a00-9e43-5df2eecc63e1" />
+<img width="2036" alt="Screenshot 2025-05-18 at 17 30 28" src="https://github.com/user-attachments/assets/87c5c257-07d5-4aa6-965d-a6d8cbf553a4" />
+<img width="2041" alt="Screenshot 2025-05-18 at 18 28 50" src="https://github.com/user-attachments/assets/417a69dc-9580-4628-b2ff-9e810abf005d" />
+<img width="394" alt="Screenshot 2025-05-18 at 18 12 20" src="https://github.com/user-attachments/assets/47585f68-f482-4785-9c51-a98aec87c712" />
+
+
 ## 🌐 Links
 
-- **Live Site (Initial):** [Sport Club - Kfar](https://sportclub-kfar.onrender.com)
-- **Live Site (Future Domain):** [Moadon Sport](https://moadonsport.com/)
+- **Live Site:** [Moadon Sport](https://moadonsport.com/)
 - **Backend Repository:** [SportClub-Backend](https://github.com/dorhakim100/SportClub-BackEnd)
 
 ## 📜 License
