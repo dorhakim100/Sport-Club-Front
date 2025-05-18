@@ -104,7 +104,7 @@
     margin-bottom: 3em;
     margin-bottom: 0px;
 
-    max-height: 85vh;
+    // max-height: 85vh;
     // height: fit-content;
     // overflow: auto;
     width: 90vw;
@@ -136,7 +136,7 @@
       // transition:  0.3s ease;
       grid-template-rows: 100px;
 
-      max-height: 80vh;
+      // max-height: 80vh;
 
       &:last-of-type {
         border-top-right-radius: 5px;
@@ -169,7 +169,7 @@
         // min-height: fit-content;
         height: 100%;
         min-height: fit-content;
-        padding: 10px;
+        // padding: 10px;
         // @media (min-width: 700px) {
         //   min-height: 100px;
         // }
@@ -186,7 +186,7 @@
         .occurrence-container {
           min-height: fit-content;
 
-          // padding: 10px;
+          padding: 5px;
           display: grid;
           grid-template-rows: repeat(3, auto);
         }
@@ -210,6 +210,11 @@
           grid-template-rows: 1fr;
           background-color: $light-gray;
           color: $dark-green;
+        }
+
+        &.day-name {
+          font-size: 1.5em;
+          font-family: assistantBold;
         }
 
         &:nth-of-type(2n):not(.day) {

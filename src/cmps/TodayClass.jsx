@@ -22,6 +22,7 @@ export function TodayClass({ classes }) {
           backgroundColor: prefs.isDarkMode && '#263039',
         }}
         aria-label='simple table'
+        className='class-table'
       >
         <TableHead>
           <TableRow>

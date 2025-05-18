@@ -513,7 +513,7 @@ export function Schedule() {
 
           return (
             <div className='day-container' key={`${makeId()}${day}`}>
-              <div className='hour-container day'>
+              <div className='hour-container day day-name'>
                 <b>
                   {prefs.isEnglish
                     ? capitalizeFirstLetter(day)
