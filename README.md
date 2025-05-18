@@ -4,6 +4,11 @@
 
 Welcome to the **official repository** for the Kfar Smharyahoo Sport Club website. The app offers a an interface for club members and new potential customers, developed and built with the sport club manager to address the club's needs. It ensures a great user experience on all devices, developed with great UX and modern designs in mind.
 
+## 🌐 Links
+
+- **Live Site:** [Moadon Sport](https://moadonsport.com/)
+- **Backend Repository:** [SportClub-Backend](https://github.com/dorhakim100/SportClub-BackEnd)
+
 ## 🚀 Technologies
 
 This project uses a range of technologies and libraries:
@@ -61,10 +66,6 @@ To get the project running on your local machine:
 <img width="394" alt="Item Page - Mobile" src="https://github.com/user-attachments/assets/47585f68-f482-4785-9c51-a98aec87c712" />
 
 
-## 🌐 Links
-
-- **Live Site:** [Moadon Sport](https://moadonsport.com/)
-- **Backend Repository:** [SportClub-Backend](https://github.com/dorhakim100/SportClub-BackEnd)
 
 ## 📜 License
 
