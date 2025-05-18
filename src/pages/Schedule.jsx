@@ -174,6 +174,7 @@ export function Schedule() {
         }
         .day-container {
           page-break-inside: avoid; 
+
         }
 
         .schedule-container {
