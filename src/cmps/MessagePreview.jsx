@@ -69,8 +69,14 @@ export function MessagePreview({
           ? 'list-item-container message dark-mode'
           : 'list-item-container message'
       }
-      onClick={() => {
-        if (isHover) return
+      onClick={(e) => {
+        if (
+          isHover ||
+          e.target.closest('.checkbox-container') ||
+          e.target.closest('.checkbox-container-check')
+        )
+          return
+
         smoothScroll()
         navigate(`/admin/message/${message._id}`)
       }}
@@ -78,6 +84,7 @@ export function MessagePreview({
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
+        className='checkbox-container-check'
       >
         {/* <input type='checkbox' name='' id='' /> */}
         <Checkbox
