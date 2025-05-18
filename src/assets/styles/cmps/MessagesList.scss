@@ -3,6 +3,30 @@
   border: 0px;
   //   padding-bottom: 0px;
   //   padding-top: 0px;
+
+  @media (max-width: 800px) {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: auto 1fr auto;
+    padding: 10px;
+    div:first-of-type {
+      grid-row: 1/-1;
+      grid-column: 1/2;
+      align-self: center;
+    }
+    .checkbox-container {
+      grid-row: 1/-1;
+      grid-column: 3/4;
+      align-self: center;
+    }
+
+    span,
+    p {
+      grid-column: 2/3;
+      text-align: start;
+      // font-size: 0.9em;
+    }
+  }
+
   &:first-of-type {
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
