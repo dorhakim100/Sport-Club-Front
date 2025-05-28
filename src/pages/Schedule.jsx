@@ -304,22 +304,7 @@ export function Schedule() {
           overflow: hidden;
         }
 
-        /* Watermark sports figures */
-        body::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f0f0f0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>'),
-                          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f0f0f0"><path d="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/></svg>');
-          background-repeat: no-repeat;
-          background-position: 10% 90%, 90% 10%;
-          background-size: 100px;
-          opacity: 0.1;
-          z-index: -1;
-        }
+
 
         .header {
           text-align: center;
@@ -408,16 +393,23 @@ export function Schedule() {
 
         .occurrence-container b {
           color: #2C3E50;
-          font-size: 11px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          font-size: 14px;
+          // white-space: nowrap;
+          // overflow: hidden;
+          // text-overflow: ellipsis;
         }
-
+        
         .time-container {
           color: #4A90E2;
           font-weight: 500;
+          font-size: 12px;
+        }
+        .occurrence-container span {
+          color: #2C3E50;
           font-size: 10px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .icon {
@@ -508,35 +500,14 @@ export function Schedule() {
       z-index: 1;
     `
 
-    // Add SVG sports icons as background
-    const sportsIcons = [
-      { x: '10%', y: '85%', icon: '🏊‍♂️' },
-      { x: '90%', y: '15%', icon: '🎾' },
-      { x: '15%', y: '10%', icon: '🧘‍♀️' },
-      { x: '85%', y: '90%', icon: '💪' },
-    ]
-
-    sportsIcons.forEach(({ x, y, icon }) => {
-      const iconElement = document.createElement('div')
-      iconElement.style.cssText = `
-        position: absolute;
-        left: ${x};
-        top: ${y};
-        font-size: 80px;
-        transform: translate(-50%, -50%);
-      `
-      iconElement.textContent = icon
-      watermark.appendChild(iconElement)
-    })
-
     wrapper.appendChild(watermark)
 
     // Create and style the header
     const header = document.createElement('div')
     header.style.cssText = `
       text-align: center;
-      margin: 20px 0;
-      padding: 15px;
+      margin: 5px 0;
+      padding: 10px;
       background: linear-gradient(135deg, #4A90E2 0%, #2C3E50 100%);
       color: white;
       border-radius: 8px;
@@ -571,7 +542,7 @@ export function Schedule() {
       margin: 0;
       font-size: 28px;
       font-weight: 500;
-      font-family: ${prefs.isEnglish ? 'Roboto' : 'Heebo'};
+      // font-family: ${prefs.isEnglish ? 'Roboto' : 'Heebo'};
     `
     title.textContent = prefs.isEnglish ? 'Class Schedule' : 'מערכת החוגים'
 
@@ -580,7 +551,8 @@ export function Schedule() {
       margin: 5px 0 0;
       font-size: 18px;
       opacity: 0.9;
-      font-family: ${prefs.isEnglish ? 'Roboto' : 'Heebo'};
+      text-align: center;
+      // font-family: ${prefs.isEnglish ? 'Roboto' : 'Heebo'};
     `
     subtitle.textContent = monthYear
 
@@ -591,11 +563,14 @@ export function Schedule() {
     const scheduleClone = el.cloneNode(true)
     scheduleClone.style.cssText = `
       background-color: white;
-      padding: 20px;
+      padding: 10px;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       z-index: 2;
       position: relative;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+
     `
 
     // Add opening hours as a row in the schedule
@@ -603,6 +578,13 @@ export function Schedule() {
     const isJulyOrAugust = [6, 7].includes(new Date().getMonth())
 
     dayContainers.forEach((container, index) => {
+      // container.style.display = 'flex'
+      // container.style.flexDirection = 'column'
+      // container.style.height = '100%'
+      // container.style.height = '600px'
+      container.style.display = 'grid'
+      container.style.display = 'flex'
+      // console.log(container)
       if (index === 4 || index === 5) {
         // Thursday and Friday
         const openingHoursRow = document.createElement('div')
@@ -617,6 +599,12 @@ export function Schedule() {
           color: #2C3E50;
           margin-top: auto;
           height: 180px;
+
+          // display: grid;
+          // align-self: end;
+          justify-self: stretch;
+
+
         `
 
         const content =
@@ -706,10 +694,6 @@ export function Schedule() {
             </table>
           </div>`
 
-        // Make the container flex to push the hours to the bottom
-        container.style.display = 'flex'
-        container.style.flexDirection = 'column'
-
         openingHoursRow.innerHTML = content
         container.appendChild(openingHoursRow)
       }
@@ -721,6 +705,9 @@ export function Schedule() {
         border: 1px solid #e0e0e0;
         border-radius: 6px;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
       `
     })
 
@@ -729,10 +716,18 @@ export function Schedule() {
         background: linear-gradient(to right, #2C3E50, #3498db);
         color: white;
         padding: 8px;
+        font-weight: bold;
         text-align: center;
+        font-size: 24px;
       `
     })
-
+    // const hourContainers = scheduleClone.querySelectorAll('.hour-container')
+    //   hourContainers.forEach((hourContainer) => {
+    //     hourContainer.style = `
+    //       display: grid;
+    //       grid-template-columns: 1fr;
+    //     `
+    //   })
     scheduleClone.querySelectorAll('.hour-container').forEach((hour) => {
       if (hour.classList.contains('morning')) {
         hour.style.background =
@@ -741,6 +736,30 @@ export function Schedule() {
         hour.style.background =
           'linear-gradient(45deg, #e9ecef 0%, #f8f9fa 100%)'
       }
+      hour.style.padding = '5px'
+      hour
+        .querySelectorAll('.occurrence-container')
+        .forEach((occurrence, lineIndex, array) => {
+          occurrence.style.position = 'relative'
+          occurrence.style.display = 'grid'
+          occurrence.style.gridTemplateColumns = '1fr'
+          occurrence.style.gap = '0.2em'
+          occurrence.style.textAlign = 'center'
+          occurrence.style.padding = '5px 10px'
+          // occurrence.style.padding = '0, 5px'
+          occurrence.style.fontSize = '12px'
+          const elClassName = occurrence.querySelector('b')
+          elClassName.style.fontSize = '16px'
+          elClassName.style.fontWeight = 'bold'
+          const elIcon = occurrence.querySelector('.icon')
+          elIcon.querySelector('svg').style.fontSize = '18px'
+          elIcon.style.position = 'absolute'
+          elIcon.style.right = '2px'
+          elIcon.style.top = '2px'
+          elIcon.style.height = '18px'
+        })
+      // hour.style.display = 'grid'
+      // hour.style.gridTemplateColumns = '1fr'
     })
 
     // Add elements to wrapper
