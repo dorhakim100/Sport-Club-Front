@@ -157,235 +157,316 @@ export function Schedule() {
     }
 
     const printWindow = window.open('', 'PRINT', 'width=600,height=400')
+    const now = new Date()
+    const monthYear = prefs.isEnglish
+      ? `${now.toLocaleString('en-US', { month: 'long' })} ${now.getFullYear()}`
+      : `${now.toLocaleString('he-IL', { month: 'long' })} ${now.getFullYear()}`
+
+    // Clone the schedule and add opening hours
+    const scheduleClone = schedule.cloneNode(true)
+    const dayContainers = scheduleClone.querySelectorAll('.day-container')
+    const isJulyOrAugust = [6, 7].includes(new Date().getMonth())
+
+    dayContainers.forEach((container, index) => {
+      if (index === 4 || index === 5) {
+        // Thursday and Friday
+        const openingHoursRow = document.createElement('div')
+        openingHoursRow.className = 'hour-container'
+        openingHoursRow.style.cssText = `
+          background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+          border: 1px solid #e0e0e0;
+          border-radius: 6px;
+          margin: 5px;
+          padding: 8px;
+          font-size: 11px;
+          color: #2C3E50;
+          margin-top: auto;
+          height: 180px;
+        `
+
+        const content =
+          index === 4
+            ? // Pool times (Thursday cell)
+              `<div style="height: 100%; display: flex; flex-direction: column; text-align: ${
+                prefs.isEnglish ? 'left' : 'right'
+              }; direction: ${prefs.isEnglish ? 'ltr' : 'rtl'}">
+            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 11px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
+              ${prefs.isEnglish ? 'Pool Hours' : 'שעות בריכה'}
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Sun' : 'ראשון'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">
+                  06:00-13:00<br>15:00-21:00
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Mon-Thu' : 'שני-חמישי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">06:00-21:00</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Fri' : 'שישי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">06:00-${
+                  isJulyOrAugust ? '18:00' : '17:00'
+                }</td>
+              </tr>
+              <tr>
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Sat' : 'שבת'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">08:00-${
+                  isJulyOrAugust ? '18:00' : '17:00'
+                }</td>
+              </tr>
+            </table>
+          </div>`
+            : // Gym times (Friday cell)
+              `<div style="height: 100%; display: flex; flex-direction: column; text-align: ${
+                prefs.isEnglish ? 'left' : 'right'
+              }; direction: ${prefs.isEnglish ? 'ltr' : 'rtl'}">
+            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 11px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
+              ${prefs.isEnglish ? 'Gym Hours' : 'שעות חדר כושר'}
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Sun' : 'ראשון'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">
+                  06:00-13:00<br>16:00-21:00
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Mon-Wed' : 'שני-רביעי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">06:00-21:00</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Thu' : 'חמישי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">
+                  06:00-13:00<br>16:00-21:00
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Fri' : 'שישי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">06:00-16:00</td>
+              </tr>
+              <tr>
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Sat' : 'שבת'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">08:00-16:00</td>
+              </tr>
+            </table>
+          </div>`
+
+        // Make the container flex to push the hours to the bottom
+        container.style.display = 'flex'
+        container.style.flexDirection = 'column'
+
+        openingHoursRow.innerHTML = content
+        container.appendChild(openingHoursRow)
+      }
+    })
 
     printWindow.document.write(`
     <html>
       <head>
-        <title>Print</title>
+        <title>${
+          prefs.isEnglish ? 'Class Schedule' : 'מערכת החוגים'
+        } - ${monthYear}</title>
         <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
 
         @page {
-          size: A4 landscape; /* Use A4 landscape size */
-          margin: 0; /* Remove default browser margins */
+          size: A4 landscape;
+          margin: 5mm;
         }
 
-        .schedule-container {
-          page-break-inside: avoid;
-        }
-        .day-container {
-          page-break-inside: avoid; 
-
-        }
-
-        .schedule-container {
-          gap: 0; 
-          padding: 0;
-        }
-        .day-container {
-          padding: 2px;
-          margin: 0;
-        }
         body {
-          font-family: Arial, sans-serif;
+          font-family: ${prefs.isEnglish ? 'Roboto' : 'Heebo'}, sans-serif;
           margin: 0;
-          padding: 0;
+          padding: 10px;
+          background-color: #f5f5f5;
+          position: relative;
+          overflow: hidden;
         }
-        /* All the above so the schedule will fit in only one page */
-      
-        /* Add styles for the printed content */
-        .schedule-container{
+
+        /* Watermark sports figures */
+        body::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f0f0f0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>'),
+                          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f0f0f0"><path d="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z"/></svg>');
+          background-repeat: no-repeat;
+          background-position: 10% 90%, 90% 10%;
+          background-size: 100px;
+          opacity: 0.1;
+          z-index: -1;
+        }
+
+        .header {
+          text-align: center;
+          margin: 5px 0 10px;
+          padding: 8px;
+          background: linear-gradient(135deg, #4A90E2 0%, #2C3E50 100%);
+          color: white;
+          border-radius: 8px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .header::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.1) 50%, transparent 55%);
+          animation: shine 2s infinite;
+        }
+
+        .header h1 {
+          margin: 0;
+          font-size: 20px;
+          font-weight: 500;
+        }
+
+        .header p {
+          margin: 3px 0 0;
+          font-size: 14px;
+          opacity: 0.9;
+        }
+
+        .schedule-container {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
-          justify-items:'center';
-          align-items:'center';
-          max-width: 297mm; 
-          direction:${prefs.isEnglish ? 'ltr' : 'rtl'};
-          text-align:'center';
-          margin:20px
+          gap: 1px;
+          background-color: white;
+          padding: 10px;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          direction: ${prefs.isEnglish ? 'ltr' : 'rtl'};
+          page-break-inside: avoid;
+          max-height: calc(100vh - 100px);
         }
+
         .day-container {
-          border: 1px solid #ccc;
-          padding: 3px;
-          box-sizing: border-box;
-          text-align:'center';
+          border: 1px solid #e0e0e0;
+          border-radius: 4px;
+          overflow: hidden;
+          background-color: white;
+          page-break-inside: avoid;
         }
-        
+
+        .day-name {
+          background: linear-gradient(to right, #2C3E50, #3498db);
+          color: white;
+          padding: 6px;
+          text-align: center;
+          font-weight: bold;
+          font-size: 12px;
+        }
+
         .hour-container {
-          border-bottom: 1px solid #ddd;
-          margin-bottom: 8px;
-          padding: 3px;
-          box-sizing: border-box;
-          text-align:'center';
+          padding: 6px;
+          border-bottom: 1px solid #eee;
+          transition: background-color 0.3s;
         }
-        
+
+        .hour-container.morning {
+          background: linear-gradient(45deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .hour-container.evening {
+          background: linear-gradient(45deg, #e9ecef 0%, #f8f9fa 100%);
+        }
+
         .occurrence-container {
           display: flex;
           flex-direction: column;
-          gap: 5px;
-          text-align:'center';
-        }
-        
-        b {
-          font-size: 14px;
-          margin-bottom: 5px;
-          text-align:'center';
-        }
-        
-        .time-container {
-          font-size: 12px;
-          text-align:'center';
+          gap: 2px;
+          text-align: center;
         }
 
-        
-        /* Hide icons completely for printing */
-        .icon {
-          width:5mm;
+        .occurrence-container b {
+          color: #2C3E50;
+          font-size: 11px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
-      </style>
-      
+
+        .time-container {
+          color: #4A90E2;
+          font-weight: 500;
+          font-size: 10px;
+        }
+
+        .icon {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          margin: 0 auto;
+        }
+
+        .icon.morning svg {
+          color: #f39c12;
+        }
+
+        .icon.evening svg {
+          color: #34495e;
+        }
+
+        @media print {
+          body {
+            background-color: white;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+
+          .schedule-container {
+            box-shadow: none;
+          }
+
+          .header::after {
+            display: none;
+          }
+        }
+        </style>
       </head>
       <body>
-        ${schedule.outerHTML}
+        <div class="header">
+          <h1>${prefs.isEnglish ? 'Class Schedule' : 'מערכת החוגים'}</h1>
+          <p>${monthYear}</p>
+        </div>
+        ${scheduleClone.outerHTML}
       </body>
     </html>
-  `)
+    `)
 
     printWindow.document.close()
     printWindow.focus()
     printWindow.print()
-
     printWindow.close()
   }
-
-  // const download = `
-  //   <html>
-  //     <head>
-  //       <title>Print</title>
-  //       <style>
-
-  //       @page {
-  //         size: A4 landscape; /* Use A4 landscape size */
-  //         margin: 0; /* Remove default browser margins */
-  //       }
-
-  //       .schedule-container {
-  //         page-break-inside: avoid;
-  //       }
-  //       .day-container {
-  //         page-break-inside: avoid;
-  //       }
-
-  //       .schedule-container {
-  //         gap: 0;
-  //         padding: 0;
-  //       }
-  //       .day-container {
-  //         padding: 2px;
-  //         margin: 0;
-  //       }
-  //       body {
-  //         font-family: Arial, sans-serif;
-  //         margin: 0;
-  //         padding: 0;
-  //       }
-  //       /* All the above so the schedule will fit in only one page */
-
-  //       /* Add styles for the printed content */
-  //       .schedule-container{
-  //         display: grid;
-  //         grid-template-columns: repeat(6, 1fr);
-  //         justify-items:'center';
-  //         align-items:'center';
-  //         max-width: 297mm;
-  //         direction:${prefs.isEnglish ? 'ltr' : 'rtl'};
-  //         text-align:'center';
-  //         margin:20px
-  //       }
-  //       .day-container {
-  //         border: 1px solid #ccc;
-  //         padding: 3px;
-  //         box-sizing: border-box;
-  //         text-align:'center';
-  //       }
-
-  //       .hour-container {
-  //         border-bottom: 1px solid #ddd;
-  //         margin-bottom: 8px;
-  //         padding: 3px;
-  //         box-sizing: border-box;
-  //         text-align:'center';
-  //       }
-
-  //       .occurrence-container {
-  //         display: flex;
-  //         flex-direction: column;
-  //         gap: 5px;
-  //         text-align:'center';
-  //       }
-
-  //       b {
-  //         font-size: 14px;
-  //         margin-bottom: 5px;
-  //         text-align:'center';
-  //       }
-
-  //       .time-container {
-  //         font-size: 12px;
-  //         text-align:'center';
-  //       }
-
-  //       /* Hide icons completely for printing */
-  //       .icon {
-  //         width:5mm;
-  //       }
-  //     </style>
-
-  //     </head>
-  //     <body>
-  //       ${el.outerHTML}
-  //     </body>
-  //   </html>
-  // `
-
-  // const onDownloadSchedule = async () => {
-  //   const el = scheduleRef.current
-
-  //   if (!el) return
-  //   await document.fonts.ready
-  //   el.classList.add('light‑mode‑pdf')
-
-  //   // 1. Save original styles
-  //   const origOverflowX = el.style.overflowX
-  //   const origWidth = el.style.width
-
-  //   // 2. Expand to full content
-  //   el.style.overflowX = 'visible'
-  //   el.style.width = `${el.scrollWidth}px`
-
-  //   el.style.height = '850px'
-
-  //   // 3. Snapshot the full-width element
-  //   const canvas = await html2canvas(el, { scale: 3, backgroundColor: '#fff' })
-
-  //   // 4. Restore original styles
-  //   el.style.overflowX = origOverflowX
-  //   el.style.width = origWidth
-  //   el.classList.remove('light‑mode‑pdf')
-
-  //   // 5. Build PDF as before
-  //   const imgData = canvas.toDataURL('image/jpeg', 0.98)
-  //   const pdf = new jsPDF({
-  //     orientation: 'landscape',
-  //     unit: 'mm',
-  //     format: 'a4',
-  //   })
-  //   const imgProps = pdf.getImageProperties(imgData)
-  //   const pdfWidth = pdf.internal.pageSize.getWidth()
-  //   const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
-
-  //   pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight)
-  //   pdf.save('schedule.pdf')
-  // }
 
   useEffect(() => {
     function handleResize() {
@@ -403,67 +484,301 @@ export function Schedule() {
     if (!el) return
 
     await document.fonts.ready
-    el.classList.add('light‑mode‑pdf')
 
-    // save original inline styles
-    const orig = {
-      overflowX: el.style.overflowX,
-      width: el.style.width,
-      height: el.style.height,
-      minHeight: el.style.minHeight,
-      maxHeight: el.style.maxHeight,
-    }
+    // Create a wrapper div for the header and schedule
+    const wrapper = document.createElement('div')
+    wrapper.style.cssText = `
+      background-color: #f5f5f5;
+      padding: 20px;
+      position: relative;
+      width: 1123px; /* A4 Landscape width at 300 DPI */
+      height: 794px; /* A4 Landscape height at 300 DPI */
+    `
 
-    // force full width & 850px height
-    const targetW = el.scrollWidth
-    let targetH
+    // Add sports figure watermarks
+    const watermark = document.createElement('div')
+    watermark.style.cssText = `
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 1;
+    `
 
-    windowDimensions.width > 600 ? (targetH = 1200) : (targetH = 850)
+    // Add SVG sports icons as background
+    const sportsIcons = [
+      { x: '10%', y: '85%', icon: '🏊‍♂️' },
+      { x: '90%', y: '15%', icon: '🎾' },
+      { x: '15%', y: '10%', icon: '🧘‍♀️' },
+      { x: '85%', y: '90%', icon: '💪' },
+    ]
 
-    el.style.overflowX = 'visible'
-    el.style.width = `${targetW}px`
-    el.style.height = `${targetH}px`
-    el.style.minHeight = `${targetH}px`
-    el.style.maxHeight = 'none'
-
-    // snapshot with forced “desktop” window size
-    const canvas = await html2canvas(el, {
-      scale: 3,
-      backgroundColor: '#fff',
-      // trick html2canvas into a large viewport:
-      // width: targetW,
-      height: targetH,
-
-      windowHeight: targetH,
+    sportsIcons.forEach(({ x, y, icon }) => {
+      const iconElement = document.createElement('div')
+      iconElement.style.cssText = `
+        position: absolute;
+        left: ${x};
+        top: ${y};
+        font-size: 80px;
+        transform: translate(-50%, -50%);
+      `
+      iconElement.textContent = icon
+      watermark.appendChild(iconElement)
     })
 
-    // restore
-    Object.assign(el.style, orig)
-    el.classList.remove('light‑mode‑pdf')
+    wrapper.appendChild(watermark)
 
-    // build PDF
-    const imgData = canvas.toDataURL('image/jpeg', 0.98)
+    // Create and style the header
+    const header = document.createElement('div')
+    header.style.cssText = `
+      text-align: center;
+      margin: 20px 0;
+      padding: 15px;
+      background: linear-gradient(135deg, #4A90E2 0%, #2C3E50 100%);
+      color: white;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    `
+
+    // Add decorative line to header
+    const decorativeLine = document.createElement('div')
+    decorativeLine.style.cssText = `
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(to right, 
+        transparent 0%,
+        rgba(255,255,255,0.5) 50%,
+        transparent 100%
+      );
+    `
+    header.appendChild(decorativeLine)
+
+    const now = new Date()
+    const monthYear = prefs.isEnglish
+      ? `${now.toLocaleString('en-US', { month: 'long' })} ${now.getFullYear()}`
+      : `${now.toLocaleString('he-IL', { month: 'long' })} ${now.getFullYear()}`
+
+    const title = document.createElement('h1')
+    title.style.cssText = `
+      margin: 0;
+      font-size: 28px;
+      font-weight: 500;
+      font-family: ${prefs.isEnglish ? 'Roboto' : 'Heebo'};
+    `
+    title.textContent = prefs.isEnglish ? 'Class Schedule' : 'מערכת החוגים'
+
+    const subtitle = document.createElement('p')
+    subtitle.style.cssText = `
+      margin: 5px 0 0;
+      font-size: 18px;
+      opacity: 0.9;
+      font-family: ${prefs.isEnglish ? 'Roboto' : 'Heebo'};
+    `
+    subtitle.textContent = monthYear
+
+    header.appendChild(title)
+    header.appendChild(subtitle)
+
+    // Clone and style the schedule
+    const scheduleClone = el.cloneNode(true)
+    scheduleClone.style.cssText = `
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 2;
+      position: relative;
+    `
+
+    // Add opening hours as a row in the schedule
+    const dayContainers = scheduleClone.querySelectorAll('.day-container')
+    const isJulyOrAugust = [6, 7].includes(new Date().getMonth())
+
+    dayContainers.forEach((container, index) => {
+      if (index === 4 || index === 5) {
+        // Thursday and Friday
+        const openingHoursRow = document.createElement('div')
+        openingHoursRow.className = 'hour-container'
+        openingHoursRow.style.cssText = `
+          background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+          border: 1px solid #e0e0e0;
+          border-radius: 6px;
+          margin: 5px;
+          padding: 8px;
+          font-size: 11px;
+          color: #2C3E50;
+          margin-top: auto;
+          height: 180px;
+        `
+
+        const content =
+          index === 4
+            ? // Pool times (Thursday cell)
+              `<div style="height: 100%; display: flex; flex-direction: column; text-align: ${
+                prefs.isEnglish ? 'left' : 'right'
+              }; direction: ${prefs.isEnglish ? 'ltr' : 'rtl'}">
+            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 11px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
+              ${prefs.isEnglish ? 'Pool Hours' : 'שעות בריכה'}
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Sun' : 'ראשון'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">
+                  06:00-13:00<br>15:00-21:00
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Mon-Thu' : 'שני-חמישי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">06:00-21:00</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Fri' : 'שישי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">06:00-${
+                  isJulyOrAugust ? '18:00' : '17:00'
+                }</td>
+              </tr>
+              <tr>
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Sat' : 'שבת'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">08:00-${
+                  isJulyOrAugust ? '18:00' : '17:00'
+                }</td>
+              </tr>
+            </table>
+          </div>`
+            : // Gym times (Friday cell)
+              `<div style="height: 100%; display: flex; flex-direction: column; text-align: ${
+                prefs.isEnglish ? 'left' : 'right'
+              }; direction: ${prefs.isEnglish ? 'ltr' : 'rtl'}">
+            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 11px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
+              ${prefs.isEnglish ? 'Gym Hours' : 'שעות חדר כושר'}
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Sun' : 'ראשון'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">
+                  06:00-13:00<br>16:00-21:00
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Mon-Wed' : 'שני-רביעי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">06:00-21:00</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Thu' : 'חמישי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">
+                  06:00-13:00<br>16:00-21:00
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #f0f0f0">
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Fri' : 'שישי'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">06:00-16:00</td>
+              </tr>
+              <tr>
+                <td style="padding: 3px; vertical-align: top;"><strong>${
+                  prefs.isEnglish ? 'Sat' : 'שבת'
+                }</strong></td>
+                <td style="padding: 3px; text-align: center;">08:00-16:00</td>
+              </tr>
+            </table>
+          </div>`
+
+        // Make the container flex to push the hours to the bottom
+        container.style.display = 'flex'
+        container.style.flexDirection = 'column'
+
+        openingHoursRow.innerHTML = content
+        container.appendChild(openingHoursRow)
+      }
+    })
+
+    // Style schedule elements
+    scheduleClone.querySelectorAll('.day-container').forEach((day) => {
+      day.style.cssText = `
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        overflow: hidden;
+      `
+    })
+
+    scheduleClone.querySelectorAll('.day-name').forEach((dayName) => {
+      dayName.style.cssText = `
+        background: linear-gradient(to right, #2C3E50, #3498db);
+        color: white;
+        padding: 8px;
+        text-align: center;
+      `
+    })
+
+    scheduleClone.querySelectorAll('.hour-container').forEach((hour) => {
+      if (hour.classList.contains('morning')) {
+        hour.style.background =
+          'linear-gradient(45deg, #f8f9fa 0%, #ffffff 100%)'
+      } else if (hour.classList.contains('evening')) {
+        hour.style.background =
+          'linear-gradient(45deg, #e9ecef 0%, #f8f9fa 100%)'
+      }
+    })
+
+    // Add elements to wrapper
+    wrapper.appendChild(header)
+    wrapper.appendChild(scheduleClone)
+
+    // Add wrapper to document temporarily
+    document.body.appendChild(wrapper)
+
+    // Take screenshot with html2canvas
+    const canvas = await html2canvas(wrapper, {
+      scale: 2,
+      backgroundColor: '#f5f5f5',
+      useCORS: true,
+      logging: false,
+      width: 1123, // A4 Landscape width at 300 DPI
+      height: 794, // A4 Landscape height at 300 DPI
+    })
+
+    // Remove wrapper
+    document.body.removeChild(wrapper)
+
+    // Create PDF with exact A4 dimensions
+    const imgData = canvas.toDataURL('image/jpeg', 1.0)
     const pdf = new jsPDF({
       orientation: 'landscape',
       unit: 'mm',
       format: 'a4',
+      compress: true,
     })
-    const props = pdf.getImageProperties(imgData)
-    const pdfW = pdf.internal.pageSize.getWidth()
-    const pdfH = (props.height * pdfW) / props.width
 
-    pdf.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH)
-    const now = new Date()
+    pdf.addImage(imgData, 'JPEG', 0, 0, 297, 210) // A4 dimensions in mm
 
-    const monthYear = prefs.isEnglish
-      ? `Schedule - ${now.toLocaleString('en-US', {
-          month: 'long',
-        })} ${now.getFullYear()}`
-      : `מערכת החוגים - ${now.toLocaleString('he-IL', {
-          month: 'long',
-        })} ${now.getFullYear()}`
+    const fileName = prefs.isEnglish
+      ? `Schedule - ${monthYear}`
+      : `מערכת החוגים - ${monthYear}`
 
-    pdf.save(`${monthYear}.pdf`)
+    pdf.save(`${fileName}.pdf`)
   }
 
   return (
@@ -557,4 +872,180 @@ export function Schedule() {
       </div>
     </section>
   )
+}
+
+function getDefaultTimes() {
+  return [
+    {
+      _id: makeId(),
+      dayName: {
+        he: 'ראשון',
+        eng: 'Sunday',
+      },
+      extra: null,
+      times: {
+        pool: [
+          {
+            from: '06:00',
+            to: '13:00',
+          },
+          {
+            from: '15:00',
+            to: '21:00',
+          },
+        ],
+        gym: [
+          {
+            from: '06:00',
+            to: '13:00',
+          },
+          {
+            from: '16:00',
+            to: '21:00',
+          },
+        ],
+      },
+    },
+    {
+      _id: makeId(),
+      dayName: {
+        he: 'שני',
+        eng: 'Monday',
+      },
+      extra: null,
+      times: {
+        pool: [
+          {
+            from: '06:00',
+            to: '21:00',
+          },
+        ],
+        gym: [
+          {
+            from: '06:00',
+            to: '21:00',
+          },
+        ],
+      },
+    },
+    {
+      _id: makeId(),
+      dayName: {
+        he: 'שלישי',
+        eng: 'Tuesday',
+      },
+      extra: null,
+
+      times: {
+        pool: [
+          {
+            from: '06:00',
+            to: '21:00',
+          },
+        ],
+        gym: [
+          {
+            from: '06:00',
+            to: '21:00',
+          },
+        ],
+      },
+    },
+    {
+      _id: makeId(),
+      dayName: {
+        he: 'רביעי',
+        eng: 'Wednesday',
+      },
+      extra: null,
+
+      times: {
+        pool: [
+          {
+            from: '06:00',
+            to: '21:00',
+          },
+        ],
+        gym: [
+          {
+            from: '06:00',
+            to: '21:00',
+          },
+        ],
+      },
+    },
+    {
+      _id: makeId(),
+      dayName: {
+        he: 'חמישי',
+        eng: 'Thursday',
+      },
+      extra: null,
+
+      times: {
+        pool: [
+          {
+            from: '06:00',
+            to: '21:00',
+          },
+        ],
+        gym: [
+          {
+            from: '06:00',
+            to: '13:00',
+          },
+          {
+            from: '16:00',
+            to: '21:00',
+          },
+        ],
+      },
+    },
+    {
+      _id: makeId(),
+      dayName: {
+        he: 'שישי',
+        eng: 'Friday',
+      },
+      extra: null,
+
+      times: {
+        pool: [
+          {
+            from: '06:00',
+            to: isJulyOrAugust ? '18:00' : '17:00',
+          },
+        ],
+        gym: [
+          {
+            from: '06:00',
+            to: '16:00',
+          },
+        ],
+      },
+    },
+    {
+      _id: makeId(),
+      dayName: {
+        he: 'שבת',
+        eng: 'Saturday',
+      },
+      extra: null,
+
+      times: {
+        pool: [
+          {
+            from: '08:00',
+            to: isJulyOrAugust ? '18:00' : '17:00',
+          },
+        ],
+        gym: [
+          {
+            from: '08:00',
+            to: '16:00',
+          },
+        ],
+      },
+    },
+  ]
 }
