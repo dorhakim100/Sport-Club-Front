@@ -190,10 +190,10 @@ export function Schedule() {
               `<div style="height: 100%; display: flex; flex-direction: column; text-align: ${
                 prefs.isEnglish ? 'left' : 'right'
               }; direction: ${prefs.isEnglish ? 'ltr' : 'rtl'}">
-            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 11px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
+            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 14px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
               ${prefs.isEnglish ? 'Pool Hours' : 'שעות בריכה'}
             </div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
               <tr style="border-bottom: 1px solid #f0f0f0">
                 <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
                   prefs.isEnglish ? 'Sun' : 'ראשון'
@@ -230,10 +230,10 @@ export function Schedule() {
               `<div style="height: 100%; display: flex; flex-direction: column; text-align: ${
                 prefs.isEnglish ? 'left' : 'right'
               }; direction: ${prefs.isEnglish ? 'ltr' : 'rtl'}">
-            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 11px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
+            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 14px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
               ${prefs.isEnglish ? 'Gym Hours' : 'שעות חדר כושר'}
             </div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
+            <table style="width: 100%; border-collapse: collapse;  font-size: 10px;">
               <tr style="border-bottom: 1px solid #f0f0f0">
                 <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
                   prefs.isEnglish ? 'Sun' : 'ראשון'
@@ -309,9 +309,15 @@ export function Schedule() {
         .header {
           text-align: center;
           margin: 5px 0 10px;
-          padding: 8px;
+          padding: 5px;
           background: linear-gradient(135deg, #4A90E2 0%, #2C3E50 100%);
           color: white;
+          // background: linear-gradient(
+          //   135deg,
+          //   #6ec1e48e 0%,
+          //   #a8e6a147 100%
+          // );
+          // color:#2C3E50;
           border-radius: 8px;
           position: relative;
           overflow: hidden;
@@ -364,10 +370,16 @@ export function Schedule() {
         .day-name {
           background: linear-gradient(to right, #2C3E50, #3498db);
           color: white;
+          // background: linear-gradient(
+          //   135deg,
+          //   #6ec1e48e 0%,
+          //   #a8e6a147 100%
+          // );
+          // color:#2C3E50;
           padding: 6px;
           text-align: center;
           font-weight: bold;
-          font-size: 12px;
+          font-size: 16px;
         }
 
         .hour-container {
@@ -419,12 +431,17 @@ export function Schedule() {
           margin: 0 auto;
         }
 
+ 
         .icon.morning svg {
-          color: #f39c12;
+          
+          // fill: #f39c12;
+          fill: #df8d0b;
+
         }
 
         .icon.evening svg {
-          color: #34495e;
+          fill: #34495e;
+
         }
 
         @media print {
@@ -613,86 +630,86 @@ export function Schedule() {
               `<div style="height: 100%; display: flex; flex-direction: column; text-align: ${
                 prefs.isEnglish ? 'left' : 'right'
               }; direction: ${prefs.isEnglish ? 'ltr' : 'rtl'}">
-            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 11px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
-              ${prefs.isEnglish ? 'Pool Hours' : 'שעות בריכה'}
-            </div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
-              <tr style="border-bottom: 1px solid #f0f0f0">
-                <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Sun' : 'ראשון'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">
-                  06:00-13:00<br>15:00-21:00
-                </td>
-              </tr>
-              <tr style="border-bottom: 1px solid #f0f0f0">
-                <td style="padding: 3px; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Mon-Thu' : 'שני-חמישי'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">06:00-21:00</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #f0f0f0">
-                <td style="padding: 3px; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Fri' : 'שישי'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">06:00-${
-                  isJulyOrAugust ? '18:00' : '17:00'
-                }</td>
-              </tr>
-              <tr>
-                <td style="padding: 3px; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Sat' : 'שבת'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">08:00-${
-                  isJulyOrAugust ? '18:00' : '17:00'
-                }</td>
-              </tr>
-            </table>
-          </div>`
+          <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 14px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
+            ${prefs.isEnglish ? 'Pool Hours' : 'שעות בריכה'}
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+            <tr style="border-bottom: 1px solid #f0f0f0">
+              <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Sun' : 'ראשון'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">
+                06:00-13:00<br>15:00-21:00
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #f0f0f0">
+              <td style="padding: 3px; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Mon-Thu' : 'שני-חמישי'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">06:00-21:00</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #f0f0f0">
+              <td style="padding: 3px; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Fri' : 'שישי'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">06:00-${
+                isJulyOrAugust ? '18:00' : '17:00'
+              }</td>
+            </tr>
+            <tr>
+              <td style="padding: 3px; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Sat' : 'שבת'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">08:00-${
+                isJulyOrAugust ? '18:00' : '17:00'
+              }</td>
+            </tr>
+          </table>
+        </div>`
             : // Gym times (Friday cell)
               `<div style="height: 100%; display: flex; flex-direction: column; text-align: ${
                 prefs.isEnglish ? 'left' : 'right'
               }; direction: ${prefs.isEnglish ? 'ltr' : 'rtl'}">
-            <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 11px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
-              ${prefs.isEnglish ? 'Gym Hours' : 'שעות חדר כושר'}
-            </div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
-              <tr style="border-bottom: 1px solid #f0f0f0">
-                <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Sun' : 'ראשון'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">
-                  06:00-13:00<br>16:00-21:00
-                </td>
-              </tr>
-              <tr style="border-bottom: 1px solid #f0f0f0">
-                <td style="padding: 3px; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Mon-Wed' : 'שני-רביעי'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">06:00-21:00</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #f0f0f0">
-                <td style="padding: 3px; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Thu' : 'חמישי'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">
-                  06:00-13:00<br>16:00-21:00
-                </td>
-              </tr>
-              <tr style="border-bottom: 1px solid #f0f0f0">
-                <td style="padding: 3px; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Fri' : 'שישי'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">06:00-16:00</td>
-              </tr>
-              <tr>
-                <td style="padding: 3px; vertical-align: top;"><strong>${
-                  prefs.isEnglish ? 'Sat' : 'שבת'
-                }</strong></td>
-                <td style="padding: 3px; text-align: center;">08:00-16:00</td>
-              </tr>
-            </table>
-          </div>`
+          <div style="font-weight: bold; color: #4A90E2; margin-bottom: 8px; text-align: center; font-size: 14px; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px;">
+            ${prefs.isEnglish ? 'Gym Hours' : 'שעות חדר כושר'}
+          </div>
+          <table style="width: 100%; border-collapse: collapse;  font-size: 10px;">
+            <tr style="border-bottom: 1px solid #f0f0f0">
+              <td style="padding: 3px; width: 30%; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Sun' : 'ראשון'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">
+                06:00-13:00<br>16:00-21:00
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #f0f0f0">
+              <td style="padding: 3px; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Mon-Wed' : 'שני-רביעי'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">06:00-21:00</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #f0f0f0">
+              <td style="padding: 3px; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Thu' : 'חמישי'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">
+                06:00-13:00<br>16:00-21:00
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #f0f0f0">
+              <td style="padding: 3px; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Fri' : 'שישי'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">06:00-16:00</td>
+            </tr>
+            <tr>
+              <td style="padding: 3px; vertical-align: top;"><strong>${
+                prefs.isEnglish ? 'Sat' : 'שבת'
+              }</strong></td>
+              <td style="padding: 3px; text-align: center;">08:00-16:00</td>
+            </tr>
+          </table>
+        </div>`
 
         openingHoursRow.innerHTML = content
         container.appendChild(openingHoursRow)
@@ -721,13 +738,11 @@ export function Schedule() {
         font-size: 24px;
       `
     })
-    // const hourContainers = scheduleClone.querySelectorAll('.hour-container')
-    //   hourContainers.forEach((hourContainer) => {
-    //     hourContainer.style = `
-    //       display: grid;
-    //       grid-template-columns: 1fr;
-    //     `
-    //   })
+    const hourContainers = scheduleClone.querySelectorAll('.hour-container')
+    hourContainers.forEach((hourContainer) => {
+      hourContainer.style.borderBottom = `1px solid #eee;
+        `
+    })
     scheduleClone.querySelectorAll('.hour-container').forEach((hour) => {
       if (hour.classList.contains('morning')) {
         hour.style.background =
@@ -737,6 +752,7 @@ export function Schedule() {
           'linear-gradient(45deg, #e9ecef 0%, #f8f9fa 100%)'
       }
       hour.style.padding = '5px'
+
       hour
         .querySelectorAll('.occurrence-container')
         .forEach((occurrence, lineIndex, array) => {
@@ -757,9 +773,20 @@ export function Schedule() {
           elIcon.style.right = '2px'
           elIcon.style.top = '2px'
           elIcon.style.height = '18px'
+          elIcon.classList.contains('morning')
+            ? (elIcon.querySelector('svg').style.fill = '#df8d0b')
+            : (elIcon.querySelector('svg').style.fill = '#34495e')
         })
       // hour.style.display = 'grid'
       // hour.style.gridTemplateColumns = '1fr'
+    })
+
+    const dayNames = scheduleClone.querySelectorAll('.day-name')
+    dayNames.forEach((dayName) => {
+      // dayName.style.margin = 'auto'
+      dayName.style.height = '60px'
+      dayName.style.fontSize = '20px'
+      dayName.style.fontWeight = 'bold'
     })
 
     // Add elements to wrapper
@@ -875,7 +902,7 @@ export function Schedule() {
                             ? occur.trainer.name.eng
                             : occur.trainer.name.he}
                         </span>
-                        <div className='icon'>
+                        <div className={`icon ${getFromTime(occur.from)}`}>
                           {(getFromTime(occur.from) === 'morning' && (
                             <WbSunnyIcon />
                           )) || <BedtimeIcon />}
