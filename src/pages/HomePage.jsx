@@ -118,7 +118,8 @@ export function HomePage() {
         const messageToSet = {
           he: update.title,
           eng: update.title,
-          link: update.link || `/update`,
+          content: update.content,
+          link: update.link || null,
         }
         setIsShowedUpdateMessage(true)
         setModalMessage(messageToSet)
