@@ -92,6 +92,7 @@ export function MessageModal() {
         >
           {prefs.isEnglish ? modalMessage.eng : modalMessage.he}
         </p>
+        {modalMessage.content && <span>{modalMessage.content}</span>}
         {modalMessage.extra && modalMessage.extra}
         {modalMessage.link && (
           <Button

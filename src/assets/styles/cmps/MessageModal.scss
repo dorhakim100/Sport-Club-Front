@@ -2,6 +2,7 @@
   transition: 0.2s ease-in;
   opacity: 0;
   // z-index: -1;
+  background-color: rgba(0, 0, 0, 0.55);
   &.visible {
     opacity: 1;
     // z-index: 1;
@@ -14,18 +15,25 @@
     margin-right: 1em;
     position: relative;
     display: grid;
-    gap: 1em;
+    // gap: 1em;
     align-items: center;
     justify-items: center;
     opacity: 1;
     font-family: assistantBold;
     border-radius: 5px;
     background-color: $light-gray;
+
+    max-width: 800px;
+
     background: linear-gradient(
       135deg,
       #6ec1e4fe 0%,
       #a8e6a196 100%
     ); // Gradient from light blue to soft green
+
+    @media (max-width: 700px) {
+      // gap: 0.5em;
+    }
 
     .exit-button {
       position: absolute;
@@ -34,11 +42,21 @@
     }
 
     b {
-      font-size: 3em;
+      font-size: 2.8em;
     }
 
     p {
-      font-size: 2em;
+      font-size: 2.2em;
+      margin-bottom: 0em;
+    }
+
+    span {
+      font-size: 1.5em;
+      font-family: assistantRegular;
+      @media (max-width: 700px) {
+        font-size: 0.9em;
+        font-size: 1em;
+      }
     }
 
     padding: 1em;
