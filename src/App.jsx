@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import React from 'react'
-import { Routes, Route, useLocation, Navigate } from 'react-router'
+import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router'
 
 import { useSelector } from 'react-redux'
 
@@ -70,13 +70,19 @@ import { Prefs } from './cmps/Prefs.jsx'
 import { MessageModal } from './cmps/MessageModal'
 
 import './App.css'
+import { smoothScroll } from './services/util.service'
 
 export function App() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const bodyRef = useRef()
 
   const location = useLocation()
+  const navigate = useNavigate()
   const isHome = location.pathname === '/'
+
+  useEffect(() => {
+    smoothScroll()
+  }, [location])
 
   return (
     <>
