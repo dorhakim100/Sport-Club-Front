@@ -76,12 +76,16 @@ export function App() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const bodyRef = useRef()
 
+  const prevPathnameRef = useRef(null)
+
   const location = useLocation()
   const navigate = useNavigate()
   const isHome = location.pathname === '/'
 
   useEffect(() => {
+    if (location.pathname === prevPathnameRef.current) return
     smoothScroll()
+    prevPathnameRef.current = location.pathname
   }, [location])
 
   return (
