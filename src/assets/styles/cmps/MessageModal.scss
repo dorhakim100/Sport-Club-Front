@@ -23,7 +23,15 @@
     border-radius: 5px;
     background-color: $light-gray;
 
+    padding: 1em;
+    min-width: 300px;
+    z-index: 4;
     max-width: 800px;
+
+    &.member-message {
+      // grid-template-rows: auto auto 200px auto;
+      // min-height: 500px;
+    }
 
     background: linear-gradient(
       135deg,
@@ -58,10 +66,6 @@
         font-size: 1em;
       }
     }
-
-    padding: 1em;
-    min-width: 300px;
-    z-index: 4;
 
     @media (min-height: 800px) {
       padding: 2em;
