@@ -71,7 +71,9 @@ export function MessageModal() {
       }}
     >
       <div
-        className='modal-message-container'
+        className={`modal-message-container ${
+          modalMessage.link === '/member' ? 'member-message' : ''
+        }`}
         onMouseEnter={setHoverTrue}
         onMouseLeave={setHoverFalse}
       >

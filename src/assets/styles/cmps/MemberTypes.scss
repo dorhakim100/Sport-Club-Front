@@ -1,5 +1,7 @@
 .member-types-container {
   // height: 50vh;
+  min-height: 150px;
+  height: calc(10vw + 50px);
   align-items: center;
   justify-self: center;
   // margin: auto;
@@ -18,6 +20,7 @@
   .type-container {
     min-height: 100px;
     height: calc(10vw);
+    max-height: 125px;
     // border: 1px solid white;
     display: grid;
     place-items: center; // More concise than display + align-items
