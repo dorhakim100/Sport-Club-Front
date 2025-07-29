@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
-import React from 'react'
-import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router'
+import { useRef, useEffect } from 'react'
+import { Routes, Route, useLocation, Navigate } from 'react-router'
 
 import { useSelector } from 'react-redux'
 
@@ -58,6 +57,7 @@ import { CouponEdit } from './pages/CouponEdit.jsx'
 
 import { SuccessPage } from './pages/SuccessPage.jsx'
 import { ErrorPage } from './pages/ErrorPage.jsx'
+import { UnderConstruction } from './pages/UnderConstruction.jsx'
 
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
@@ -79,7 +79,6 @@ export function App() {
   const prevPathnameRef = useRef(null)
 
   const location = useLocation()
-  const navigate = useNavigate()
   const isHome = location.pathname === '/'
 
   useEffect(() => {
@@ -87,6 +86,8 @@ export function App() {
     smoothScroll()
     prevPathnameRef.current = location.pathname
   }, [location])
+
+  return <UnderConstruction />
 
   return (
     <>
@@ -169,6 +170,7 @@ export function App() {
             </Route>
             <Route path='payment/success' element={<SuccessPage />} />
             <Route path='payment/error' element={<ErrorPage />} />
+            <Route path='construction' element={<UnderConstruction />} />
 
             {/* Redirect Old Paths */}
             <Route
