@@ -87,7 +87,7 @@ export function App() {
     prevPathnameRef.current = location.pathname
   }, [location])
 
-  return <UnderConstruction />
+  // return <UnderConstruction />
 
   return (
     <>
