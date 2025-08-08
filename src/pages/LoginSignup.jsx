@@ -57,12 +57,15 @@ export function LoginSignup() {
         ...(isRemember && userRes._id && { _id: userRes._id }),
       }
 
-      // console.log(updatedUser)
-
       setPrefs({
         ...prefs,
         user: updatedUser,
       })
+
+      if (userRes.isAdmin) {
+        navigate('/admin')
+        return
+      }
 
       navigate('/')
     } catch (err) {
@@ -75,11 +78,13 @@ export function LoginSignup() {
 
   return (
     <div className='login-page'>
-      <nav className='page-navigation-container'>
-        <NavLink to='login'>{prefs.isEnglish ? 'Login' : 'חיבור'}</NavLink>
-        <Divider orientation='vertical' flexItem />
-        <NavLink to='signup'>{prefs.isEnglish ? 'Signup' : 'רישום'}</NavLink>
-      </nav>
+      {location.pathname === '/user' && (
+        <nav className='page-navigation-container'>
+          <NavLink to='login'>{prefs.isEnglish ? 'Login' : 'חיבור'}</NavLink>
+          <Divider orientation='vertical' flexItem />
+          <NavLink to='signup'>{prefs.isEnglish ? 'Signup' : 'רישום'}</NavLink>
+        </nav>
+      )}
       <HeadContainer text={text} />
       <div className={`login-container ${prefs.isDarkMode && 'dark-mode'}`}>
         <Outlet />

@@ -13,6 +13,8 @@ import { classService } from '../services/class/class.service'
 import { showErrorMsg } from '../services/event-bus.service'
 import { setIsLoading } from '../store/actions/system.actions'
 import { HeadContainer } from '../cmps/HeadContainer'
+import { LoginSignupForm } from '../cmps/LoginSignupForm'
+import { LoginSignup } from './LoginSignup.jsx'
 
 import noTasks from '../../public/imgs/no-tasks.json'
 import noTasksDark from '../../public/imgs/no-tasks-dark-mode.json'
@@ -40,11 +42,11 @@ export function AdminIndex() {
   useEffect(() => {
     const checkUser = async () => {
       const loggedIn = await userService.getLoggedinUser()
-      if (!user) {
-        // navigate('/')
-        // return
+      if (!loggedIn) {
+        navigate('/admin/login')
+        return
       }
-      if (!loggedIn || !loggedIn.isAdmin) {
+      if (!loggedIn.isAdmin) {
         navigate('/')
         return
       }
@@ -116,6 +118,9 @@ export function AdminIndex() {
       preserveAspectRatio: 'xMidYMid slice',
     },
   }
+
+  if (!user) return <LoginSignup />
+
   return (
     <section className='admin'>
       <h2>{prefs.isEnglish ? origin.eng : origin.he}</h2>

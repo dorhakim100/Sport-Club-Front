@@ -161,6 +161,7 @@ export function App() {
             <Route path='admin' element={<AdminIndex />}>
               {/* <Route path='update' element={<UpdateIndex />} /> */}
               {/* <Route path='update/edit/:updateId' element={<UpdateEdit />} /> */}
+              <Route path='login' element={<Login />} />
               <Route path='message' element={<MessageIndex />} />
               <Route path='message/:messageId' element={<MessageDetails />} />
               <Route path='order' element={<OrderIndex />} />

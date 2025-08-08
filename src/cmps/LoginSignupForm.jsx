@@ -163,6 +163,10 @@ export function LoginSignupForm({ isSignup, isRemember, setIsRemember }) {
         showSuccessMsg(
           prefs.isEnglish ? 'Loged in successfully' : 'חיבור בוצע בהצלחה'
         )
+        if (logged.isAdmin) {
+          navigate('/admin')
+          return
+        }
         navigate('/')
       }
     } catch (err) {
