@@ -78,7 +78,7 @@ export function LoginSignup() {
 
   return (
     <div className='login-page'>
-      {location.pathname === '/user' && (
+      {location.pathname !== '/admin/login' && (
         <nav className='page-navigation-container'>
           <NavLink to='login'>{prefs.isEnglish ? 'Login' : 'חיבור'}</NavLink>
           <Divider orientation='vertical' flexItem />
