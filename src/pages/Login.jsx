@@ -78,7 +78,9 @@ export function Login() {
     <div className='login-form' onSubmit={onLogin}>
       <img src={logo} alt='logo' width='100%' style={{ maxWidth: '100px' }} />
 
-      <h2>{prefs.isEnglish ? 'Login' : 'חיבור'}</h2>
+      <h2 className={prefs.isDarkMode ? 'dark-mode' : ''}>
+        {prefs.isEnglish ? 'Login' : 'חיבור'}
+      </h2>
       <LoginSignupForm isRemember={isRemember} />
     </div>
   )
