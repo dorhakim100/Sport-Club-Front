@@ -35,6 +35,8 @@ export function Cart() {
     (stateSelector) => stateSelector.userModule.originalPrice
   )
 
+  const isGotMoreThan6 = useRef(false)
+
   const navigate = useNavigate()
 
   const [fullCart, setFullCart] = useState(null)
@@ -189,6 +191,22 @@ export function Cart() {
 
       setIsLoading(true)
       const order = createOrder()
+
+      if (
+        order.items.some((item) => item.types.includes('card')) &&
+        !isGotMoreThan6.current
+      ) {
+        isGotMoreThan6.current = true
+
+        const messageToSet = {
+          he: 'ניתן לנצל עד 6 ניקובים ביום אחד',
+          eng: `You can enter with up to 6 visitors per day`,
+        }
+        setModalMessage(messageToSet)
+        setIsModal(true)
+
+        return
+      }
 
       const url = await paymentService.createNewOrderLink(order)
 
