@@ -220,7 +220,7 @@ export function Tennis() {
       'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
   }
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733031708/WhatsApp_Image_2024-10-29_at_16.16.02_2_q0eenv.jpg',
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735903115/WhatsApp_Image_2024-10-29_at_16.16.02_2_q0eenv.webp',
 
     title: { he: 'האקדמיה לטניס', eng: 'Tennis Academy' },
     preview: {
@@ -264,7 +264,7 @@ export function Tennis() {
     },
     {
       name: { he: 'יורי קובלנבקו', eng: 'Yuri Kovalenko' },
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241757/9354C7DB-7D1A-405D-AC98-ADDA7047F2E8_1_201_a_uihpil.jpg',
+      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735903013/9354C7DB-7D1A-405D-AC98-ADDA7047F2E8_1_201_a_uihpil.webp',
       txt: {
         he: `מנהל האקדמיה לטניס.
    כבר יותר משני עשורים שאני חלק מעולם הטניס – תחילה כשחקן, וכיום כמאמן. במהלך הקריירה שלי עבדתי עם שחקנים בכל הרמות, כולל כאלה שהתחרו ברמות הגבוהות ביותר, אני מביא איתי ידע מעמיק וניסיון עשיר.
@@ -530,7 +530,7 @@ export function SummerCamp() {
       'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
   }
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732541780/WhatsApp_Image_2024-10-29_at_16.16.03_1_ptejag.jpg',
+    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735903265/WhatsApp_Image_2024-10-29_at_16.16.03_1_ptejag.webp',
 
     title: { he: 'קייטנת הספורט', eng: 'The Sports Camp' },
     preview: {

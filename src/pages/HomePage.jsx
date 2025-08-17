@@ -251,7 +251,7 @@ export function HomePage() {
                 />
               </div>
               <img
-                src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1744526378/DSC09079_result_przawo.webp'
+                src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1755081997/studio-animation_yopmsn.jpg'
                 alt=''
                 className='class-img'
               />
