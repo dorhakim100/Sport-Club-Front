@@ -7,9 +7,10 @@ import {
   PrivacyModalContent,
   TermsModalContent,
 } from './LegalContent'
+import { getCurrMonth } from '../services/util.service'
 
-const POLICY_KEY = 'cookies_policy'
-const POLICY_VERSION = '2025-01'
+const POLICY_KEY = 'cookies_privacy_terms_policy'
+const POLICY_VERSION = `2025-${getCurrMonth()}`
 
 export function CookieAgreement() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)

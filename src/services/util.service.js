@@ -1,6 +1,3 @@
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-
 export function makeId(length = 6) {
   var txt = ''
   var possible =
@@ -183,4 +180,10 @@ export function getWindowDimensions() {
     width,
     height,
   }
+}
+
+export function getCurrMonth() {
+  const today = new Date()
+  const month = today.getMonth() + 1
+  return month < 10 ? `0${month}` : month
 }
