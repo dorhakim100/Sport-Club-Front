@@ -58,6 +58,7 @@ import { CouponEdit } from './pages/CouponEdit.jsx'
 import { SuccessPage } from './pages/SuccessPage.jsx'
 import { ErrorPage } from './pages/ErrorPage.jsx'
 import { UnderConstruction } from './pages/UnderConstruction.jsx'
+import { CookieAgreement } from './cmps/CookieAgreement.jsx'
 
 import { AppHeader } from './cmps/AppHeader'
 import { Accessibility } from './cmps/Accessibility'
@@ -98,6 +99,7 @@ export function App() {
       <PrefsButton />
       <Prefs bodyRef={bodyRef} />
       <Loader />
+      <CookieAgreement />
       <AppHeader />
       <main
         className='main-container'

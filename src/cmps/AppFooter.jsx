@@ -11,6 +11,12 @@ import MailIcon from '@mui/icons-material/Mail'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { smoothScroll } from '../services/util.service'
 import Divider from '@mui/material/Divider'
+import { setIsModal, setModalMessage } from '../store/actions/system.actions'
+import {
+  PrivacyModalContent,
+  TermsModalContent,
+  CookiesModalContent,
+} from './LegalContent'
 
 export function AppFooter() {
   const navigate = useNavigate()
@@ -23,9 +29,6 @@ export function AppFooter() {
 
   const phone = '09-958-0404'
   const email = 'service.kfar@gmail.com'
-  const rights = prefs.isEnglish
-    ? 'Dor Hakim, Sport Club Kfar Shmaryahu'
-    : `דור חכים, מועדון הספורט כפר שמריהו`
 
   const links = {
     facebook: 'https://www.facebook.com/moadonsportkfar/?locale=he_IL',
@@ -52,7 +55,7 @@ export function AppFooter() {
     try {
       await navigator.clipboard.writeText(email)
       showSuccessMsg(prefs.isEnglish ? 'Email copied' : 'מייל הועתק')
-    } catch (err) {
+    } catch {
       // // console.log(err)
       showErrorMsg(prefs.isEnglish ? `Couldn't copy email` : 'מייל לא הועתק')
     }
@@ -73,6 +76,31 @@ export function AppFooter() {
 
   const call = () => {
     window.location.href = 'tel:099580404'
+  }
+
+  const openPrivacy = () => {
+    setModalMessage({
+      eng: 'Privacy Policy',
+      he: 'מדיניות פרטיות',
+      extra: <PrivacyModalContent />,
+    })
+    setIsModal(true)
+  }
+  const openTerms = () => {
+    setModalMessage({
+      eng: 'Terms of Use',
+      he: 'תנאי שימוש',
+      extra: <TermsModalContent />,
+    })
+    setIsModal(true)
+  }
+  const openCookies = () => {
+    setModalMessage({
+      eng: 'Cookies Policy',
+      he: 'מדיניות קוקיז',
+      extra: <CookiesModalContent />,
+    })
+    setIsModal(true)
   }
 
   return (
@@ -138,6 +166,59 @@ export function AppFooter() {
         >
           <InstagramIcon />
         </div>
+      </div>
+
+      <div
+        className='legal-links'
+        style={{
+          display: 'flex',
+          gap: '12px',
+          marginTop: '8px',
+          flexWrap: 'wrap',
+        }}
+      >
+        <button
+          onClick={openPrivacy}
+          className='clickable'
+          style={{
+            color: prefs.isDarkMode ? '#fff' : '#2C3E50',
+            textDecoration: 'underline',
+            background: 'transparent',
+            border: 'none',
+            padding: 0,
+            cursor: 'pointer',
+          }}
+        >
+          {prefs.isEnglish ? 'Privacy Policy' : 'מדיניות פרטיות'}
+        </button>
+        <button
+          onClick={openTerms}
+          className='clickable'
+          style={{
+            color: prefs.isDarkMode ? '#fff' : '#2C3E50',
+            textDecoration: 'underline',
+            background: 'transparent',
+            border: 'none',
+            padding: 0,
+            cursor: 'pointer',
+          }}
+        >
+          {prefs.isEnglish ? 'Terms of Use' : 'תנאי שימוש'}
+        </button>
+        <button
+          onClick={openCookies}
+          className='clickable'
+          style={{
+            color: prefs.isDarkMode ? '#fff' : '#2C3E50',
+            textDecoration: 'underline',
+            background: 'transparent',
+            border: 'none',
+            padding: 0,
+            cursor: 'pointer',
+          }}
+        >
+          {prefs.isEnglish ? 'Cookies Policy' : 'מדיניות קוקיז'}
+        </button>
       </div>
 
       {/* <span>{rights} &copy; 2024</span> */}

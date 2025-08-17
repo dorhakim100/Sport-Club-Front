@@ -31,7 +31,7 @@ export function MessageModal() {
 
   useEffect(() => {
     if (isModal) {
-      modalRef.current.style.zIndex = '1'
+      modalRef.current.style.zIndex = '10001'
     }
   }, [isModal])
 
@@ -67,7 +67,7 @@ export function MessageModal() {
       style={{
         transition: 'opacity 0.3s ease-in-out',
         // visibility: !isModal && 'hidden',
-        zIndex: !isModal && '-1',
+        zIndex: isModal ? 10001 : -1,
       }}
     >
       <div
@@ -99,7 +99,7 @@ export function MessageModal() {
         {modalMessage.link && (
           <Button
             variant='contained'
-            onClick={(event) => {
+            onClick={() => {
               navigateToLink()
               setIsModal(false)
               modalRef.current.style.zIndex = '-1'
