@@ -73,7 +73,7 @@ function renderContent(key, isEnglish) {
 
 function PrivacyHe() {
   return (
-    <div>
+    <div className='policy-container'>
       <p>
         מסמך זה מפרט כיצד מועדון הספורט כפר שמריהו (&quot;המועדון&quot;) אוסף,
         משתמש, שומר ומגן על מידע אישי של משתמשים בהתאם לדין הישראלי, לרבות חוק
@@ -117,7 +117,7 @@ function PrivacyHe() {
 }
 function PrivacyEn() {
   return (
-    <div>
+    <div className='policy-container'>
       <p>
         This document explains how Sport Club Kfar Shmaryahu (&quot;the
         Club&quot;) collects, uses, stores, and protects personal data under
@@ -167,7 +167,7 @@ function PrivacyEn() {
 
 function TermsHe() {
   return (
-    <div>
+    <div className='policy-container'>
       <p>
         תנאי שימוש אלה מסדירים את השימוש באתר מועדון הספורט כפר שמריהו. השימוש
         באתר מהווה הסכמה לתנאים אלה ולמדיניות הפרטיות.
@@ -210,7 +210,7 @@ function TermsHe() {
 }
 function TermsEn() {
   return (
-    <div>
+    <div className='policy-container'>
       <p>
         These Terms of Use govern your use of the Sport Club Kfar Shmaryahu
         website. By using the site you agree to these Terms and the Privacy
@@ -259,7 +259,7 @@ function TermsEn() {
 
 function CookiesHe() {
   return (
-    <div>
+    <div className='policy-container'>
       <p>
         האתר עושה שימוש בעוגיות (Cookies) לצורך תפעול תקין, מדידה סטטיסטית,
         התאמת חוויית משתמש ואבטחה. ניתן לשנות את הגדרות הדפדפן כדי לחסום או
@@ -281,7 +281,7 @@ function CookiesHe() {
 }
 function CookiesEn() {
   return (
-    <div>
+    <div className='policy-container'>
       <p>
         This site uses cookies for proper operation, statistics, user experience
         personalization, and security. You can adjust your browser settings to
