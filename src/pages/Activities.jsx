@@ -104,16 +104,16 @@ export function Swimming() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const logo = {
     regular:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732950392/%D7%9C%D7%95%D7%92%D7%95_%D7%A0%D7%98%D7%952_slppgi.png',
+      'https://ik.imagekit.io/n4mhohkzp/h2o-logo.png?updatedAt=1755684235097', // Updated path
     darkMode:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732950396/%D7%9C%D7%95%D7%92%D7%95_%D7%A0%D7%98%D7%952_white_spots_k2w5vv.png',
+      'https://ik.imagekit.io/n4mhohkzp/h2o-logo-dark.png?updatedAt=1755684230962',
   }
   const headText = { he: 'בית הספר לשחייה', eng: 'Swimming School' }
   const instagram =
     'https://www.instagram.com/h2o.plus.swim/?igsh=aDhqb2d4M3hlejBh'
 
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729002409/partush_051214_-_5_so0d8s.jpg',
+    img: 'https://ik.imagekit.io/n4mhohkzp/swimming-school.webp?updatedAt=1755684325941',
 
     title: { he: 'H2o', eng: 'H2o' },
     preview: {
@@ -169,7 +169,7 @@ export function Swimming() {
       <div className='owner-container section hidden'>
         <div className='img-container'>
           <img
-            src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1734093566/466C51BC-5B79-46D7-85F1-6C58F4061424_1_201_a_pt2iuv.jpg'
+            src='https://ik.imagekit.io/n4mhohkzp/eran.webp?updatedAt=1755684210199'
             alt=''
           />
         </div>
@@ -215,12 +215,12 @@ export function Tennis() {
 
   const logo = {
     regular:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
+      'https://ik.imagekit.io/n4mhohkzp/tennis-logo.jpg?updatedAt=1755684317377',
     darkMode:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
+      'https://ik.imagekit.io/n4mhohkzp/tennis-logo.jpg?updatedAt=1755684317377',
   }
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735903115/WhatsApp_Image_2024-10-29_at_16.16.02_2_q0eenv.webp',
+    img: 'https://ik.imagekit.io/n4mhohkzp/activities-tennis.webp?updatedAt=1755684194392',
 
     title: { he: 'האקדמיה לטניס', eng: 'Tennis Academy' },
     preview: {
@@ -252,7 +252,7 @@ export function Tennis() {
   const onwners = [
     {
       name: { he: 'אנה ברלין', eng: 'Anna Berlin' },
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732953318/WhatsApp_Image_2024-11-29_at_15.34.14_2_xbdepl.jpg',
+      img: 'https://ik.imagekit.io/n4mhohkzp/ana.webp?updatedAt=1755684197199',
       txt: {
         he: `מייסדת ומנהלת האקדמיה לטניס.
     מאז ילדותי אני חיה ונושמת טניס. עם עשרות שנות ניסיון על המגרש ובאימון מקצועי ותחרותי, הפכתי את התשוקה שלי לענף לשליחות. במהלך הקריירה שלי אימנתי מאות שחקנים ברמות שונות, תוך התמקדות במצוינות ובחתירה מתמדת לתוצאות הטובות ביותר.
@@ -264,7 +264,7 @@ export function Tennis() {
     },
     {
       name: { he: 'יורי קובלנבקו', eng: 'Yuri Kovalenko' },
-      img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735903013/9354C7DB-7D1A-405D-AC98-ADDA7047F2E8_1_201_a_uihpil.webp',
+      img: 'https://ik.imagekit.io/n4mhohkzp/yori.webp?updatedAt=1755684336326',
       txt: {
         he: `מנהל האקדמיה לטניס.
    כבר יותר משני עשורים שאני חלק מעולם הטניס – תחילה כשחקן, וכיום כמאמן. במהלך הקריירה שלי עבדתי עם שחקנים בכל הרמות, כולל כאלה שהתחרו ברמות הגבוהות ביותר, אני מביא איתי ידע מעמיק וניסיון עשיר.
@@ -311,13 +311,7 @@ export function Tennis() {
           return (
             <div className='owner-container section' key={makeId()}>
               <div className='img-container'>
-                <img
-                  src={
-                    owner.img ||
-                    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732809518/PHOTO-2024-11-28-17-04-04_2_s96eec.jpg'
-                  }
-                  alt=''
-                />
+                <img src={owner.img} alt='' />
                 <b>{prefs.isEnglish ? owner.name.eng : owner.name.he}</b>
               </div>
               <p>{prefs.isEnglish ? owner.txt.eng : owner.txt.he}</p>
@@ -368,13 +362,13 @@ export function Pilates() {
 
   const logo = {
     regular:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733404109/output-onlinepngtools_3_hlpule.png',
+      'https://ik.imagekit.io/n4mhohkzp/meital-pilates-logo.png?updatedAt=1755684265491',
     darkMode:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733404392/output-onlinepngtools__3_pfhncq.png',
+      'https://ik.imagekit.io/n4mhohkzp/meital-pilates-logo-dark.png?updatedAt=1755684263790',
   }
 
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732027475/WhatsApp_Image_2024-11-19_at_15.24.47_ihj8yf.jpg',
+    img: 'https://ik.imagekit.io/n4mhohkzp/pilates-machine.webp?updatedAt=1755684309147',
 
     title: { he: 'סטודיו מיטל תמיר', eng: 'Meital Tamir Studio' },
     preview: {
@@ -415,7 +409,7 @@ Whether you are just beginning your Pilates journey or an experienced practition
 Over the years, I have developed a personalized approach that combines professionalism, attentiveness, and mindfulness, driven by the belief that every woman can achieve amazing results in both body and mind.
     `,
     },
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1732027729/WhatsApp_Image_2024-11-19_at_15.24.46_2_vj7jvc.jpg',
+    img: 'https://ik.imagekit.io/n4mhohkzp/meital-pilates.jpg?updatedAt=1755684265257',
     name: { he: 'מיטל תמיר', eng: 'Meital Tamir' },
   }
   const instagram =
@@ -456,15 +450,15 @@ export function Care() {
 
   const logo = {
     regular:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733240855/WhatsApp_Image_2024-12-02_at_22.36.12-removebg-preview_jeejkc.png',
+      'https://ik.imagekit.io/n4mhohkzp/laor-logo.png?updatedAt=1755684256007',
     darkMode:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733240855/WhatsApp_Image_2024-12-02_at_22.36.12-removebg-preview_2_giphuw.png',
+      'https://ik.imagekit.io/n4mhohkzp/laor-logo-dark.png?updatedAt=1755684253720',
   }
 
   const headText = { he: 'מרכז הטיפולים', eng: 'Care' }
 
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1734166431/IMG_3418_1_nfnh30.jpg',
+    img: 'https://ik.imagekit.io/n4mhohkzp/laor-clinic.webp?updatedAt=1755684259097',
 
     title: { he: 'האקדמיה לטניס', eng: 'Tennis Academy' },
     preview: {
@@ -510,7 +504,7 @@ export function Care() {
       <div className='owner-container section hidden'>
         <div className='img-container'>
           <img
-            src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1733240855/WhatsApp_Image_2024-12-02_at_22.36.12_1_ujtzsz.jpg'
+            src='https://ik.imagekit.io/n4mhohkzp/laor.webp?updatedAt=1755684260933'
             alt=''
           />
         </div>
@@ -525,12 +519,12 @@ export function SummerCamp() {
   const headText = { he: 'קייטנת הקיץ', eng: 'Summer Camp' }
   const logo = {
     regular:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
+      'https://ik.imagekit.io/n4mhohkzp/tennis-logo.jpg?updatedAt=1755684317377',
     darkMode:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733241159/WhatsApp_Image_2024-12-01_at_12.10.21_3_mrxbr1.jpg',
+      'https://ik.imagekit.io/n4mhohkzp/tennis-logo.jpg?updatedAt=1755684317377',
   }
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735903265/WhatsApp_Image_2024-10-29_at_16.16.03_1_ptejag.webp',
+    img: 'https://ik.imagekit.io/n4mhohkzp/activities-summer-camp.webp?updatedAt=1755684194331',
 
     title: { he: 'קייטנת הספורט', eng: 'The Sports Camp' },
     preview: {
@@ -568,26 +562,25 @@ export function SummerCamp() {
   }
   const imgs = [
     {
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325433/WhatsApp_Image_2024-10-29_at_16.16.41_1_2_rvht4i.jpg',
+      link: 'https://ik.imagekit.io/n4mhohkzp/activities-summer-camp-carousel-1.webp?updatedAt=1755684191491',
     },
     {
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325437/WhatsApp_Image_2024-10-29_at_16.16.55_eu1lj6.jpg',
+      link: 'https://ik.imagekit.io/n4mhohkzp/activities-summer-camp-carousel-2.webp?updatedAt=1755684196570',
     },
     {
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325434/WhatsApp_Image_2024-10-29_at_16.16.11_1_jvclzy.jpg',
+      link: 'https://ik.imagekit.io/n4mhohkzp/activities-summer-camp-carousel-3.webp?updatedAt=1755684196376',
     },
     {
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325607/WhatsApp_Image_2024-10-29_at_16.16.42_1_b2aeei.jpg',
+      link: 'https://ik.imagekit.io/n4mhohkzp/activities-summer-camp-carousel-4.webp?updatedAt=1755684196557',
     },
     {
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325434/WhatsApp_Image_2024-10-29_at_16.16.42_2_nusldv.jpg',
+      link: 'https://ik.imagekit.io/n4mhohkzp/activities-summer-camp-carousel-5.webp?updatedAt=1755684193051',
     },
     {
-      link: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325436/WhatsApp_Image_2024-10-29_at_16.16.41_xa539c.jpg',
+      link: 'https://ik.imagekit.io/n4mhohkzp/activities-summer-camp-carousel-6.webp?updatedAt=1755684196379',
     },
   ]
-  const closerImg =
-    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733325607/WhatsApp_Image_2024-10-29_at_16.16.42_1_b2aeei.jpg'
+
   useEffect(() => {
     textAnimation(prefs)
   }, [prefs.isDarkMode, prefs.isEnglish])
@@ -610,7 +603,7 @@ export function Restaurant() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const headText = { he: 'שף הכפר', eng: 'Restaurant' }
   const options = {
-    img: 'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735057090/D-48_e8maer.jpg',
+    img: 'https://ik.imagekit.io/n4mhohkzp/shef.webp?updatedAt=1755684321908',
 
     title: { he: 'קייטנת הספורט', eng: 'The Sports Camp' },
     preview: {
@@ -628,9 +621,9 @@ export function Restaurant() {
   }
   const logo = {
     regular:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735057610/openart-8f0af741-854f-4363-8e82-2455e51d96c1_qqpbun.png',
+      'https://ik.imagekit.io/n4mhohkzp/shef-logo.png?updatedAt=1755684309970',
     darkMode:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1735057610/openart-8f0af741-854f-4363-8e82-2455e51d96c1_qqpbun.png',
+      'https://ik.imagekit.io/n4mhohkzp/shef-logo.png?updatedAt=1755684309970',
   }
   useEffect(() => {
     textAnimation(prefs)

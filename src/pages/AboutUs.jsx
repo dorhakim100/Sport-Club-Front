@@ -165,7 +165,7 @@ export function AboutUs() {
 
   const covers = {
     about:
-      'https://res.cloudinary.com/dnxi70mfs/image/upload/v1733661469/DSC06231_tmop0u.jpg',
+      'https://ik.imagekit.io/n4mhohkzp/about.webp?updatedAt=1755684196575',
   }
 
   useEffect(() => {

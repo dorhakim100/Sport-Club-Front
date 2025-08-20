@@ -28,9 +28,6 @@ import { Cards } from '../cmps/Cards.jsx'
 import { Updates } from '../cmps/Updates.jsx'
 import { ContactUs } from '../cmps/ContactUs.jsx'
 
-import dumbbells from '/public/imgs/yoga.svg'
-import dumbbellsDarkMode from '/public/imgs/yoga-dark-mode.svg'
-
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
@@ -42,7 +39,6 @@ import { userService } from '../services/user/user.service.js'
 import notification from '../../public/imgs/notification.json'
 // import squat from '../../public/imgs/squat.json'
 import squatDarkMode from '../../public/imgs/squat-dark-mode.json'
-import { DynamicCover } from '../cmps/DynamicCover.jsx'
 
 const defaultOptionsNotifications = {
   loop: true,
@@ -251,7 +247,7 @@ export function HomePage() {
                 />
               </div>
               <img
-                src='https://res.cloudinary.com/dnxi70mfs/image/upload/v1755081997/studio-animation_yopmsn.jpg'
+                src='https://ik.imagekit.io/n4mhohkzp/studio-animation.jpg?updatedAt=1755684402161'
                 alt=''
                 className='class-img'
               />

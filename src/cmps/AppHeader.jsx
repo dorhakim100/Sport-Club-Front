@@ -100,7 +100,7 @@ export function AppHeader() {
   )
 
   const [logo, setLogo] = useState(
-    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+    'https://ik.imagekit.io/n4mhohkzp/logo.png?updatedAt=1755684259540'
   )
 
   const [isDropdownVisible, setDropdownVisible] = useState(false)
@@ -243,7 +243,7 @@ export function AppHeader() {
       headerRef.current.style.transition =
         'background-color 0.3s ease, color 0.3s ease'
       setLogo(
-        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729070986/logoDarkMode_i25wgx.png'
+        'https://ik.imagekit.io/n4mhohkzp/logo-dark-mode.png?updatedAt=1755684257089'
       )
     } else {
       headerRef.current.style.backgroundColor = '#dff9ff'
@@ -251,7 +251,7 @@ export function AppHeader() {
       headerRef.current.style.transition =
         'background-color 0.3s ease, color 0.3s ease'
       setLogo(
-        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+        'https://ik.imagekit.io/n4mhohkzp/logo.png?updatedAt=1755684259540'
       )
     }
   }
