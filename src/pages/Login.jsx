@@ -24,17 +24,17 @@ export function Login() {
   const navigate = useNavigate()
 
   const [logo, setLogo] = useState(
-    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+    'https://ik.imagekit.io/n4mhohkzp/logo.png?updatedAt=1755684259540'
   )
 
   const setLogoMode = () => {
     if (prefs.isDarkMode) {
       setLogo(
-        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729070986/logoDarkMode_i25wgx.png'
+        'https://ik.imagekit.io/n4mhohkzp/logo-dark-mode.png?updatedAt=1755684257089'
       )
     } else {
       setLogo(
-        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+        'https://ik.imagekit.io/n4mhohkzp/logo.png?updatedAt=1755684259540'
       )
     }
   }
