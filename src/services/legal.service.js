@@ -39,6 +39,7 @@ function setAcceptance(policyKey, version) {
 }
 
 function isAccepted(policyKey, currentVersion) {
+  return false
   const acc = getAcceptance(policyKey)
 
   return acc.accepted && acc.version === currentVersion
