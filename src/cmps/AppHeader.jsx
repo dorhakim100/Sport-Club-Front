@@ -56,6 +56,7 @@ import DoDisturbIcon from '@mui/icons-material/DoDisturb'
 import LoginIcon from '@mui/icons-material/Login'
 import PersonIcon from '@mui/icons-material/Person'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
+import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
 
 import ListSubheader from '@mui/material/ListSubheader'
 import List from '@mui/material/List'
@@ -393,10 +394,14 @@ export function AppHeader() {
             text: prefs.isEnglish ? 'Accessibility' : 'נגישות',
             path: `${section}/accessibility`,
           },
-          {
-            text: prefs.isEnglish ? 'Cenceling' : 'ביטולים',
-            path: `${section}/cancel`,
-          },
+            {
+              text: prefs.isEnglish ? 'Cenceling' : 'ביטולים',
+              path: `${section}/cancel`,
+            },
+            {
+              text: prefs.isEnglish ? 'Privacy Policy' : 'מדיניות פרטיות',
+              path: `${section}/privacy`,
+            },
         ]
         break
 
@@ -786,6 +791,15 @@ export function AppHeader() {
           onClick: () => {
             setMenu(false)
             delayedNavigate('/about/cancel')
+          },
+        },
+        {
+          title: { eng: 'Privacy Policy', he: 'מדיניות פרטיות' },
+          path: `about/privacy`,
+          icon: <PrivacyTipIcon />,
+          onClick: () => {
+            setMenu(false)
+            delayedNavigate('/about/privacy')
           },
         },
       ],

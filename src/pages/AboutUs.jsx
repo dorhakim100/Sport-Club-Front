@@ -48,6 +48,11 @@ export function AboutUs() {
       he: 'ביטולים',
       eng: 'Cencels',
     },
+    {
+      path: 'privacy',
+      he: 'מדיניות פרטיות',
+      eng: 'Privacy Policy',
+    },
   ]
 
   const headText = {
