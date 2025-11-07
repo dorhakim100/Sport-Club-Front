@@ -76,6 +76,7 @@ import { smoothScroll } from './services/util.service'
 
 export function App() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const user = useSelector((storeState) => storeState.userModule.user)
   const bodyRef = useRef()
 
   const prevPathnameRef = useRef(null)
@@ -100,103 +101,103 @@ export function App() {
       <PrefsButton />
       <Prefs bodyRef={bodyRef} />
       <Loader />
-      <CookieAgreement />
+      {user ? !user.isAdmin && <CookieAgreement /> : <CookieAgreement />}
       <AppHeader />
       <main
-        className='main-container'
+        className="main-container"
         style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
         ref={bodyRef}
       >
         <section className={isHome ? '' : 'page-container'}>
           <Routes>
-            <Route path='' element={<HomePage />} />
-            <Route path='facilities' element={<Facilities />} />
-            <Route path='about' element={<AboutUs />}>
-              <Route path='times' element={<OpeningTimes />} />
-              <Route path='cancel' element={<Cancel />} />
-              <Route path='organization' element={<Organization />} />
-              <Route path='accessibility' element={<AccessibilityPage />} />
-              <Route path='privacy' element={<PrivacyPage />} />
+            <Route path="" element={<HomePage />} />
+            <Route path="facilities" element={<Facilities />} />
+            <Route path="about" element={<AboutUs />}>
+              <Route path="times" element={<OpeningTimes />} />
+              <Route path="cancel" element={<Cancel />} />
+              <Route path="organization" element={<Organization />} />
+              <Route path="accessibility" element={<AccessibilityPage />} />
+              <Route path="privacy" element={<PrivacyPage />} />
             </Route>
-            <Route path='class' element={<ClassIndex />} />
-            <Route path='class/edit/:classId' element={<ClassEdit />} />
-            <Route path='class/:classId' element={<ClassDetails />} />
+            <Route path="class" element={<ClassIndex />} />
+            <Route path="class/edit/:classId" element={<ClassEdit />} />
+            <Route path="class/:classId" element={<ClassDetails />} />
 
-            <Route path='class/schedule' element={<Schedule />} />
-            <Route path='class/trainer' element={<TrainerIndex />} />
+            <Route path="class/schedule" element={<Schedule />} />
+            <Route path="class/trainer" element={<TrainerIndex />} />
             <Route
-              path='class/trainer/edit/:trainerId'
+              path="class/trainer/edit/:trainerId"
               element={<TrainerEdit />}
             />
             <Route
-              path='class/trainer/:trainerId'
+              path="class/trainer/:trainerId"
               element={<TrainerDetails />}
             />
 
-            <Route path='activities' element={<Activities />}>
-              <Route path='swimming' element={<Swimming />} />
-              <Route path='tennis' element={<Tennis />} />
-              <Route path='pilates' element={<Pilates />} />
-              <Route path='care' element={<Care />} />
-              <Route path='camp' element={<SummerCamp />} />
-              <Route path='restaurant' element={<Restaurant />} />
+            <Route path="activities" element={<Activities />}>
+              <Route path="swimming" element={<Swimming />} />
+              <Route path="tennis" element={<Tennis />} />
+              <Route path="pilates" element={<Pilates />} />
+              <Route path="care" element={<Care />} />
+              <Route path="camp" element={<SummerCamp />} />
+              <Route path="restaurant" element={<Restaurant />} />
             </Route>
-            <Route path='item' element={<ItemIndex />}>
-              <Route path='card' element={<ItemIndex />} />
-              <Route path='accessories' element={<ItemIndex />} />
-            </Route>
-
-            <Route path='item/:itemId' element={<ItemDetails />} />
-            <Route path='item/edit/:itemId' element={<ItemEdit />} />
-            <Route path='user/:userId' element={<UserDetails />} />
-            <Route path='user/:userId/cart' element={<Cart />} />
-            <Route path='user/:userId/cart/paying' element={<Paying />} />
-
-            <Route path='member' element={<MemberIndex />} />
-
-            <Route path='user' element={<LoginSignup />}>
-              <Route path='login' element={<Login />} />
-              <Route path='signup' element={<Signup />} />
+            <Route path="item" element={<ItemIndex />}>
+              <Route path="card" element={<ItemIndex />} />
+              <Route path="accessories" element={<ItemIndex />} />
             </Route>
 
-            <Route path='update' element={<UpdateIndex />} />
-            <Route path='update/edit/:updateId' element={<UpdateEdit />} />
+            <Route path="item/:itemId" element={<ItemDetails />} />
+            <Route path="item/edit/:itemId" element={<ItemEdit />} />
+            <Route path="user/:userId" element={<UserDetails />} />
+            <Route path="user/:userId/cart" element={<Cart />} />
+            <Route path="user/:userId/cart/paying" element={<Paying />} />
 
-            <Route path='admin' element={<AdminIndex />}>
+            <Route path="member" element={<MemberIndex />} />
+
+            <Route path="user" element={<LoginSignup />}>
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+            </Route>
+
+            <Route path="update" element={<UpdateIndex />} />
+            <Route path="update/edit/:updateId" element={<UpdateEdit />} />
+
+            <Route path="admin" element={<AdminIndex />}>
               {/* <Route path='update' element={<UpdateIndex />} /> */}
               {/* <Route path='update/edit/:updateId' element={<UpdateEdit />} /> */}
-              <Route path='login' element={<Login />} />
-              <Route path='message' element={<MessageIndex />} />
-              <Route path='message/:messageId' element={<MessageDetails />} />
-              <Route path='order' element={<OrderIndex />} />
-              <Route path='user' element={<UserIndex />} />
-              <Route path='coupon' element={<CouponIndex />} />
-              <Route path='coupon/edit/:couponId' element={<CouponEdit />} />
+              <Route path="login" element={<Login />} />
+              <Route path="message" element={<MessageIndex />} />
+              <Route path="message/:messageId" element={<MessageDetails />} />
+              <Route path="order" element={<OrderIndex />} />
+              <Route path="user" element={<UserIndex />} />
+              <Route path="coupon" element={<CouponIndex />} />
+              <Route path="coupon/edit/:couponId" element={<CouponEdit />} />
             </Route>
-            <Route path='payment/success' element={<SuccessPage />} />
-            <Route path='payment/error' element={<ErrorPage />} />
-            <Route path='construction' element={<UnderConstruction />} />
+            <Route path="payment/success" element={<SuccessPage />} />
+            <Route path="payment/error" element={<ErrorPage />} />
+            <Route path="construction" element={<UnderConstruction />} />
 
             {/* Redirect Old Paths */}
             <Route
-              path='/חוגים/מערכת-חוגים/'
-              element={<Navigate to='/class/schedule' replace />}
+              path="/חוגים/מערכת-חוגים/"
+              element={<Navigate to="/class/schedule" replace />}
             />
             <Route
-              path='/אודות/שעות-פעילות/'
-              element={<Navigate to='/about/times' replace />}
+              path="/אודות/שעות-פעילות/"
+              element={<Navigate to="/about/times" replace />}
             />
             <Route
-              path='/בריכה/'
-              element={<Navigate to='/facilities' replace />}
+              path="/בריכה/"
+              element={<Navigate to="/facilities" replace />}
             />
             <Route
-              path='/אודות/מתקנים/'
-              element={<Navigate to='/facilities' replace />}
+              path="/אודות/מתקנים/"
+              element={<Navigate to="/facilities" replace />}
             />
 
             {/* Catch-All Redirect to Home */}
-            <Route path='*' element={<Navigate to='/' replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </section>
         <AppFooter />
