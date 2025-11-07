@@ -79,12 +79,14 @@ export function AppFooter() {
   }
 
   const openPrivacy = () => {
-    setModalMessage({
-      eng: 'Privacy Policy',
-      he: 'מדיניות פרטיות',
-      extra: <PrivacyModalContent />,
-    })
-    setIsModal(true)
+    // setModalMessage({
+    //   eng: 'Privacy Policy',
+    //   he: 'מדיניות פרטיות',
+    //   extra: <PrivacyModalContent />,
+    // })
+    // setIsModal(true)
+    navigate('/about/privacy')
+    smoothScroll()
   }
   const openTerms = () => {
     setModalMessage({
@@ -104,16 +106,16 @@ export function AppFooter() {
   }
 
   return (
-    <footer className='app-footer full' ref={footerRef}>
-      <div className='contact-container'>
-        <div className='method-container address' onClick={navigateToAbout}>
+    <footer className="app-footer full" ref={footerRef}>
+      <div className="contact-container">
+        <div className="method-container address" onClick={navigateToAbout}>
           <PlaceIcon />
-          <div className='address-container'>
+          <div className="address-container">
             <span>{address}</span>
             <span>{prefs.isEnglish ? 'Kfar Shmaryahu' : 'כפר שמריהו'}</span>
           </div>
         </div>
-        <div className='method-container phone' onClick={call}>
+        <div className="method-container phone" onClick={call}>
           <LocalPhoneIcon />
           <span className={prefs.isDarkMode ? 'dark-mode' : ''}>{phone}</span>
         </div>
@@ -127,9 +129,9 @@ export function AppFooter() {
           </span>
         </div>
       </div>
-      <div className='links-container'>
+      <div className="links-container">
         <div
-          className='social-container facebook-container'
+          className="social-container facebook-container"
           onClick={() => {
             openLink(links.facebook)
           }}
@@ -137,14 +139,14 @@ export function AppFooter() {
           <FacebookIcon />
         </div>
         <Divider
-          orientation='vertical'
+          orientation="vertical"
           flexItem
           sx={{
             backgroundColor: prefs.isDarkMode ? '#fff' : '',
           }}
         />
         <div
-          className='social-container whatsapp-container'
+          className="social-container whatsapp-container"
           onClick={() => {
             openLink(links.whatsapp)
           }}
@@ -152,14 +154,14 @@ export function AppFooter() {
           <WhatsAppIcon />
         </div>
         <Divider
-          orientation='vertical'
+          orientation="vertical"
           flexItem
           sx={{
             backgroundColor: prefs.isDarkMode ? '#fff' : '',
           }}
         />
         <div
-          className='social-container instagram-container'
+          className="social-container instagram-container"
           onClick={() => {
             openLink(links.instagram)
           }}
@@ -169,7 +171,7 @@ export function AppFooter() {
       </div>
 
       <div
-        className='legal-links'
+        className="legal-links"
         style={{
           display: 'flex',
           gap: '12px',
@@ -179,7 +181,7 @@ export function AppFooter() {
       >
         <button
           onClick={openPrivacy}
-          className='clickable'
+          className="clickable"
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
             textDecoration: 'underline',
@@ -193,7 +195,7 @@ export function AppFooter() {
         </button>
         <button
           onClick={openTerms}
-          className='clickable'
+          className="clickable"
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
             textDecoration: 'underline',
@@ -207,7 +209,7 @@ export function AppFooter() {
         </button>
         <button
           onClick={openCookies}
-          className='clickable'
+          className="clickable"
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
             textDecoration: 'underline',
