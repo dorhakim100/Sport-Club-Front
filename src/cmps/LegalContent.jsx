@@ -31,15 +31,21 @@ function LegalModal({ policyKey }) {
 
   const title = getTitle(policyKey, isEnglish)
 
+  const className = useMemo(() => {
+    const type = getTitle(policyKey, true)
+    return type.toLowerCase().replace(' ', '-')
+  }, [policyKey])
+
   return (
-    <div style={{ display: 'grid', gap: 12, direction: dir }}>
+    <div style={{ display: 'grid', gap: 12, direction: dir }} className={`legel-content-container ${className}`}>
       <div style={{ justifySelf: 'center' }}>
         <Lottie options={defaultOptions} height={120} width={120} />
       </div>
       <b style={{ fontSize: '1.1em', justifySelf: 'center' }}>{title}</b>
-      <div style={{ maxHeight: 300, overflowY: 'auto', paddingRight: 4 }}>
+      {/* <div className="legel-content"> */}
+
         {renderContent(policyKey, isEnglish)}
-      </div>
+      {/* </div> */}
     </div>
   )
 }

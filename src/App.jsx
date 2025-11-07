@@ -11,6 +11,7 @@ import {
   Cancel,
   Organization,
   AccessibilityPage,
+  PrivacyPage,
 } from './pages/AboutUs'
 import { ClassIndex } from './pages/ClassIndex.jsx'
 import { ClassEdit } from './pages/ClassEdit.jsx'
@@ -115,6 +116,7 @@ export function App() {
               <Route path='cancel' element={<Cancel />} />
               <Route path='organization' element={<Organization />} />
               <Route path='accessibility' element={<AccessibilityPage />} />
+              <Route path='privacy' element={<PrivacyPage />} />
             </Route>
             <Route path='class' element={<ClassIndex />} />
             <Route path='class/edit/:classId' element={<ClassEdit />} />

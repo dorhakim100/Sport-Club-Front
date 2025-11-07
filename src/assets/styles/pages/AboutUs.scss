@@ -21,6 +21,14 @@
     font-size: 1.5em;
   }
 
+
+ .policy-container{
+
+
+  max-height: fit-content !important;
+    
+ }
+
   .about-page-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

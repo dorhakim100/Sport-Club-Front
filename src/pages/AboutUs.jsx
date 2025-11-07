@@ -11,6 +11,10 @@ import { DynamicCover } from '../cmps/DynamicCover'
 import { ContactUs } from '../cmps/ContactUs'
 import { AccordionCmp } from '../cmps/AccordionCmp'
 
+import {
+  PrivacyModalContent
+} from '../cmps/LegalContent'
+
 import Amota from '/public/jsons/Amota/Amota.json'
 
 export function AboutUs() {
@@ -43,6 +47,11 @@ export function AboutUs() {
       path: 'cancel',
       he: 'ביטולים',
       eng: 'Cencels',
+    },
+    {
+      path: 'privacy',
+      he: 'מדיניות פרטיות',
+      eng: 'Privacy Policy',
     },
   ]
 
@@ -277,6 +286,19 @@ export function AccessibilityPage() {
     <section className='accessibility-container' style={{ direction: 'rtl' }}>
       <HeadContainer text={headText} />
       <AccessibilityText />
+    </section>
+  )
+}
+
+export function PrivacyPage() {
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const headText = { eng: 'Privacy Policy', he: 'מדיניות פרטיות' }
+
+  return (
+    <section className='privacy-container' style={{ direction: 'rtl' }}>
+      <HeadContainer text={headText} />
+
+      <PrivacyModalContent />
     </section>
   )
 }

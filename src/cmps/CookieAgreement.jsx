@@ -2,18 +2,22 @@ import { useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { legalService } from '../services/legal.service'
 import { setIsModal, setModalMessage } from '../store/actions/system.actions'
+import { useNavigate } from 'react-router-dom'
 import {
   CookiesModalContent,
   PrivacyModalContent,
   TermsModalContent,
 } from './LegalContent'
 import { getCurrMonth } from '../services/util.service'
+import { smoothScroll } from '../services/util.service'
 
 const POLICY_KEY = 'cookies_privacy_terms_policy'
 const POLICY_VERSION = `2025-${getCurrMonth()}`
 
 export function CookieAgreement() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  const navigate = useNavigate()
+
   const [accepted, setAccepted] = useState(
     legalService.isAccepted(POLICY_KEY, POLICY_VERSION)
   )
@@ -36,12 +40,14 @@ export function CookieAgreement() {
   }
 
   const openPrivacyModal = () => {
-    setModalMessage({
-      eng: 'Privacy Policy',
-      he: 'מדיניות פרטיות',
-      extra: <PrivacyModalContent />,
-    })
-    setIsModal(true)
+    // setModalMessage({
+    //   eng: 'Privacy Policy',
+    //   he: 'מדיניות פרטיות',
+    //   extra: <PrivacyModalContent />,
+    // })
+    // setIsModal(true)
+    navigate('/about/privacy')
+    smoothScroll()
   }
 
   const openTermsModal = () => {
@@ -69,7 +75,7 @@ export function CookieAgreement() {
         zIndex: 9999,
         background: prefs.isDarkMode ? '#2B373B' : '#f4f7f9',
         color: prefs.isDarkMode ? '#fff' : '#2C3E50',
-        padding: '12px 16px',
+        padding: '8px 16px',
         boxShadow: '0 -2px 8px rgba(0,0,0,0.15)',
         direction: dir,
         display: 'flex',
@@ -151,7 +157,7 @@ export function CookieAgreement() {
         </div>
         <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <input
-            type='checkbox'
+            type="checkbox"
             checked={checked}
             onChange={(e) => setChecked(e.target.checked)}
           />
