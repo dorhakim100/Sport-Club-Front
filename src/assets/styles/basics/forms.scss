@@ -955,3 +955,62 @@ input[type='tel'] {
     }
   }
 }
+
+.MuiButton-root,
+.prefs-button,
+.accessibility-btn {
+  background: linear-gradient(135deg, $primary-light-blue 0%, $dark-blue 100%);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 900 !important;
+  text-transform: none;
+  box-shadow: 0 4px 15px rgba(108, 193, 228, 0.4),
+    0 2px 8px rgba(108, 193, 228, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &.accessibility-btn,
+  &.prefs-button {
+    background: linear-gradient(
+      135deg,
+      $dark-blue 0%,
+      $primary-light-blue 100%
+    );
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  &.Mui-disabled {
+    background: linear-gradient(
+      135deg,
+      rgba(108, 193, 228, 0.5) 0%,
+      rgba(74, 144, 226, 0.5) 100%
+    );
+  }
+
+  &:hover {
+    // transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(108, 193, 228, 0.5),
+      0 4px 12px rgba(108, 193, 228, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+  }
+}

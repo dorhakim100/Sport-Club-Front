@@ -77,7 +77,7 @@ export function NewsBanner() {
     <div
       className={`news-banner ${prefs.isEnglish ? 'ltr' : 'rtl'} ${
         isScrolled ? 'scrolled' : ''
-      }`}
+      } ${prefs.isDarkMode ? 'dark-mode' : ''}`}
     >
       <PlayButton isPlaying={isPlaying} onClick={togglePlaying} />
       <h2 className="title">

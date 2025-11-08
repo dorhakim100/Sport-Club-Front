@@ -18,9 +18,17 @@
 
   background: -webkit-linear-gradient(
     right,
-    $primary-light-blue 40.05%,
+    $dark-blue 40.05%,
     $primary-transparent-blue 100%
   );
+
+  &.dark-mode {
+    background: -webkit-linear-gradient(
+      right,
+      $primary-light-blue 40.05%,
+      $primary-transparent-blue 100%
+    );
+  }
 
   &.scrolled {
     top: 100px;
