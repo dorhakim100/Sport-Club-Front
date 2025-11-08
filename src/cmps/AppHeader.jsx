@@ -1246,6 +1246,7 @@ export function AppHeader() {
                 to={link.to}
                 onClick={() => selectLink(`/${link.to}`)}
                 key={`${index}Link`}
+                className={`${!link.dropdown ? 'underline-animation' : ''}`}
               >
                 {(link.dropdown && (
                   <div
@@ -1286,7 +1287,7 @@ export function AppHeader() {
           {!user && (
             <NavLink
               to="user/login"
-              className="login-link"
+              className="login-link underline-animation"
               onClick={() => selectLink('/user/login')}
             >
               {prefs.isEnglish ? 'Login' : 'כניסה'}
