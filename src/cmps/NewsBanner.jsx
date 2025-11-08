@@ -1,14 +1,19 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
 
 import Marquee from 'react-fast-marquee'
+
+import { setIsLoading } from '../store/actions/system.actions'
+import { loadUpdates } from '../store/actions/update.actions'
+import { showErrorMsg } from '../services/event-bus.service'
 
 import { PlayButton } from './PlayButton'
 
 import Divider from '@mui/material/Divider'
 
 import newsBannerJson from '../../public/jsons/NewsBanner/news-banner.json'
+import { updateService } from '../services/update/update.service'
 
 export function NewsBanner() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -17,9 +22,16 @@ export function NewsBanner() {
     (stateSelector) => stateSelector.systemModule.isScrolled
   )
 
+  const updates = useSelector(
+    (stateSelector) => stateSelector.updateModule.updates
+  )
+
   const [isPlaying, setIsPlaying] = useState(true)
 
+  const [updatesText, setUpdatesText] = useState('')
+
   const direction = useMemo(() => {
+    return 'right'
     return prefs.isEnglish ? 'left' : 'right'
   }, [prefs.isEnglish])
 
@@ -34,6 +46,32 @@ export function NewsBanner() {
   const togglePlaying = () => {
     setIsPlaying((prevState) => !prevState)
   }
+
+  const getUpdatesText = async () => {
+    if (!updates || updates.length === 0) {
+      try {
+        setIsLoading(true)
+        await loadUpdates(updateService.getDefaultFilter())
+      } catch (err) {
+        showErrorMsg(prefs.isEnglish ? 'No updates found' : 'אין עדכונים')
+        return
+      } finally {
+        setIsLoading(false)
+      }
+      return ''
+    }
+
+    const updatesText = updates.map((update) => {
+      return ` ${new Date(update.createdAt).toLocaleDateString('he')} - ${
+        update.title
+      } - ${update.content} | `
+    })
+
+    setUpdatesText(updatesText.join(' '))
+  }
+  useEffect(() => {
+    getUpdatesText()
+  }, [updates, prefs.isEnglish])
 
   return (
     <div
@@ -56,7 +94,7 @@ export function NewsBanner() {
           className={`message ${direction}`}
           play={isPlaying}
         >
-          bla bla bla
+          {updatesText}
         </Marquee>
       </div>
     </div>

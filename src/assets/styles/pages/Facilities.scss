@@ -7,6 +7,10 @@
 
   h2 {
     margin-bottom: 0px;
+    // font-size: 3em;
+    @media (max-width: 600px) {
+      font-size: 2.5em;
+    }
   }
   h3 {
     // font-size: 1em;
