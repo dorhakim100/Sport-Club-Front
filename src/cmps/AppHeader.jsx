@@ -823,10 +823,10 @@ export function AppHeader() {
           isScrolled
             ? `app-header sticky full ${
                 windowDimensions.width <= 1150 ? 'mobile' : ''
-              }`
+              } ${prefs.isDarkMode ? 'dark-mode' : ''}`
             : `app-header full ${
                 windowDimensions.width <= 1150 ? 'mobile' : ''
-              }`
+              } ${prefs.isDarkMode ? 'dark-mode' : ''}`
         }
         onClick={removeDropdown}
         ref={headerRef}

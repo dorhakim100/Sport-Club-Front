@@ -943,9 +943,13 @@ input[type='tel'] {
   }
 
   &.dark-mode {
-    color: $primary-light-blue;
+    // color: $primary-light-blue;
+    // &::before {
+    //   background-color: $primary-light-blue;
+    // }
+    color: #fff;
     &::before {
-      background-color: $primary-light-blue;
+      background-color: #fff;
     }
   }
 
@@ -956,7 +960,7 @@ input[type='tel'] {
   }
 }
 
-.MuiButton-root,
+.MuiButton-root:not(.MuiPickersToolbar-root),
 .prefs-button,
 .accessibility-btn {
   background: linear-gradient(135deg, $primary-light-blue 0%, $dark-blue 100%);

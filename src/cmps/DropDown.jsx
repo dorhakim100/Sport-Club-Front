@@ -61,7 +61,13 @@ export function DropDown({ options, setDropdownVisible }) {
                 padding: '10px 20px',
               }}
             >
-              {option.text}
+              <span
+                className={`${
+                  prefs.isDarkMode ? 'dark-mode' : ''
+                } underline-animation`}
+              >
+                {option.text}
+              </span>
             </li>
           )
         })}

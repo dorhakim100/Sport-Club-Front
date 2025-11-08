@@ -157,8 +157,8 @@
       display: none;
 
       a {
-        // &:hover{
-        //     background-color: $medium-gray;
+        // &:hover {
+        //   background-color: $medium-gray;
         // }
       }
 
@@ -168,6 +168,19 @@
 
       a.login-link {
         margin: 0px;
+      }
+    }
+  }
+
+  &.dark-mode {
+    nav {
+      a {
+        &:hover {
+          color: #fff;
+          &::before {
+            background-color: #fff !important;
+          }
+        }
       }
     }
   }

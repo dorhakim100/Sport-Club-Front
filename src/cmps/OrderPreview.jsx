@@ -167,7 +167,7 @@ export function OrderPreview({ order, updateOrder }) {
             </div>
           )}
           {user && user.isAdmin && (
-            <div className='progress-container'>
+            <div className="progress-container">
               <FormGroup>
                 <FormControlLabel
                   control={
@@ -222,7 +222,7 @@ export function OrderPreview({ order, updateOrder }) {
           )}
 
           {user && user.isAdmin && (
-            <div className='details-container'>
+            <div className="details-container">
               <b>{order.user.fullname}</b>
               <span>-</span>
               <b>{order.user.phone}</b>
@@ -231,11 +231,11 @@ export function OrderPreview({ order, updateOrder }) {
           <span>{new Date(order.createdAt).toLocaleDateString('he')}</span>
         </div>
 
-        <div className='order-num-container'>
+        <div className="order-num-container">
           <span>{prefs.isEnglish ? `Order num` : `הזמנה מס׳`}</span>
           <span>{order.orderNum}</span>
         </div>
-        <div className='items-container'>
+        <div className="items-container">
           {order.items.map((item, index, items) => {
             return (
               <div
@@ -247,11 +247,14 @@ export function OrderPreview({ order, updateOrder }) {
                     navigate(`/item/${item.id}`)
                     smoothScroll()
                   }}
+                  className={`underline-animation ${
+                    prefs.isDarkMode ? 'dark-mode' : ''
+                  }`}
                 >
                   {prefs.isEnglish ? item.title.eng : item.title.he}
                 </b>
-                <div className='quantity-container'>
-                  <div className='sum-container'>
+                <div className="quantity-container">
+                  <div className="sum-container">
                     <span>{prefs.isEnglish && <span>x</span>}</span>
                     <span>{item.quantity}</span>
                     <span> {!prefs.isEnglish && <span>x</span>}</span>
@@ -259,12 +262,12 @@ export function OrderPreview({ order, updateOrder }) {
                   {item.options && item.options[0] && (
                     <>
                       <span>-</span>
-                      <div className='options-container'>
+                      <div className="options-container">
                         {item.options.map((option) => {
                           if (option)
                             return (
                               <div
-                                className='option-container'
+                                className="option-container"
                                 key={`${option}Order${makeId()}`}
                               >
                                 <span>
@@ -273,7 +276,7 @@ export function OrderPreview({ order, updateOrder }) {
                                     : option.title.he}
                                 </span>
                                 {option.quantity !== 1 && (
-                                  <div className='option-quantity-container'>
+                                  <div className="option-quantity-container">
                                     <span>
                                       {prefs.isEnglish && <span>x</span>}
                                     </span>
@@ -293,7 +296,7 @@ export function OrderPreview({ order, updateOrder }) {
                 {index + 1 < items.length && (
                   <Divider
                     style={prefs.isDarkMode ? { backgroundColor: 'white' } : {}}
-                    orientation='vertical'
+                    orientation="vertical"
                     flexItem
                   />
                 )}
@@ -301,7 +304,7 @@ export function OrderPreview({ order, updateOrder }) {
             )
           })}
         </div>
-        <div className='order-total-container'>
+        <div className="order-total-container">
           <span>{prefs.isEnglish ? `Total` : `סה״כ`}</span>
           <span>{`${!prefs.isEnglish ? '₪' : ''}${order.amount}${
             prefs.isEnglish ? '₪' : ''
@@ -315,10 +318,10 @@ export function OrderPreview({ order, updateOrder }) {
 function PendingSvg() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
-  return <img src={prefs.isDarkMode ? pendingDarkMode : pending} alt='' />
+  return <img src={prefs.isDarkMode ? pendingDarkMode : pending} alt="" />
 }
 
 function ReadySvg() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
-  return <img src={prefs.isDarkMode ? readyDarkMode : ready} alt='' />
+  return <img src={prefs.isDarkMode ? readyDarkMode : ready} alt="" />
 }

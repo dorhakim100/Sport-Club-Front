@@ -61,13 +61,13 @@ export function NewsBanner() {
       return ''
     }
 
-    const updatesText = updates.map((update) => {
-      return ` ${new Date(update.createdAt).toLocaleDateString('he')} - ${
+    const updatesText = updates.reverse().map((update) => {
+      return `${new Date(update.createdAt).toLocaleDateString('he')} - ${
         update.title
-      } - ${update.content} | `
+      } - ${update.content}`
     })
 
-    setUpdatesText(updatesText.join(' '))
+    setUpdatesText(updatesText.join(' | '))
   }
   useEffect(() => {
     getUpdatesText()

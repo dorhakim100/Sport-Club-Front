@@ -189,7 +189,9 @@ export function AppFooter() {
       >
         <button
           onClick={openPrivacy}
-          className="clickable underline-animation"
+          className={`clickable underline-animation ${
+            prefs.isDarkMode ? 'dark-mode' : ''
+          }`}
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
             // textDecoration: 'underline',
@@ -204,7 +206,9 @@ export function AppFooter() {
         </button>
         <button
           onClick={openTerms}
-          className="clickable underline-animation"
+          className={`clickable underline-animation ${
+            prefs.isDarkMode ? 'dark-mode' : ''
+          }`}
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
             // textDecoration: 'underline',
@@ -219,7 +223,9 @@ export function AppFooter() {
         </button>
         <button
           onClick={openCookies}
-          className="clickable underline-animation"
+          className={`clickable underline-animation ${
+            prefs.isDarkMode ? 'dark-mode' : ''
+          }`}
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
             // textDecoration: 'underline',

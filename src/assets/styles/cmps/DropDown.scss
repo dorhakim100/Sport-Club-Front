@@ -37,6 +37,11 @@
         &.active {
           background-color: $primary-light-blue;
         }
+        .underline-animation {
+          &::before {
+            width: 100%;
+          }
+        }
       }
 
       &:first-of-type {
@@ -44,6 +49,15 @@
       }
       &:last-of-type {
         border-bottom-left-radius: 8px;
+      }
+    }
+
+    .underline-animation {
+      &.dark-mode {
+        color: #fff;
+        &::before {
+          background-color: #fff;
+        }
       }
     }
     &.dark-mode {
