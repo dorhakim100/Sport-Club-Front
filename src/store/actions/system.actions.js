@@ -11,6 +11,7 @@ import {
   SET_IS_MODAL,
   SET_MODAL_MESSAGE,
   SET_SHOWED_UPDATE_MESSAGE,
+  SET_IS_SCROLLED,
 } from '../reducers/system.reducer'
 
 export function setIsLoading(stateToSet) {
@@ -44,4 +45,7 @@ export function setIsModal(stateToSet) {
 }
 export function setModalMessage(messageToSet) {
   store.dispatch({ type: SET_MODAL_MESSAGE, modalMessage: messageToSet })
+}
+export function setIsScrolled(stateToSet) {
+  store.dispatch({ type: SET_IS_SCROLLED, isScrolled: stateToSet })
 }

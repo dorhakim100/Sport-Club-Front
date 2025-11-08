@@ -13,6 +13,10 @@ import newsBannerJson from '../../public/jsons/NewsBanner/news-banner.json'
 export function NewsBanner() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
 
+  const isScrolled = useSelector(
+    (stateSelector) => stateSelector.systemModule.isScrolled
+  )
+
   const [isPlaying, setIsPlaying] = useState(true)
 
   const direction = useMemo(() => {
@@ -32,7 +36,11 @@ export function NewsBanner() {
   }
 
   return (
-    <div className={`news-banner ${prefs.isEnglish ? 'ltr' : 'rtl'}`}>
+    <div
+      className={`news-banner ${prefs.isEnglish ? 'ltr' : 'rtl'} ${
+        isScrolled ? 'scrolled' : ''
+      }`}
+    >
       <PlayButton isPlaying={isPlaying} onClick={togglePlaying} />
       <h2 className="title">
         {newsBannerJson.title[prefs.isEnglish ? 'eng' : 'he']}

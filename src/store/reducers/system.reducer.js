@@ -8,6 +8,7 @@ export const SET_PREFS = 'SET_PREFS'
 export const SET_IS_MODAL = 'SET_IS_MODAL'
 export const SET_MODAL_MESSAGE = 'SET_MODAL_MESSAGE'
 export const SET_SHOWED_UPDATE_MESSAGE = 'SET_SHOWED_UPDATE_MESSAGE'
+export const SET_IS_SCROLLED = 'SET_IS_SCROLLED'
 
 const initialState = {
   isLoading: false,
@@ -19,6 +20,7 @@ const initialState = {
   isModal: false,
   modalMessage: { he: '', eng: '' },
   showedUpdateMessage: false,
+  isScrolled: false,
 }
 
 export function systemReducer(state = initialState, action = {}) {
@@ -39,6 +41,8 @@ export function systemReducer(state = initialState, action = {}) {
       return { ...state, modalMessage: action.modalMessage }
     case SET_SHOWED_UPDATE_MESSAGE:
       return { ...state, showedUpdateMessage: action.showedUpdateMessage }
+    case SET_IS_SCROLLED:
+      return { ...state, isScrolled: action.isScrolled }
     default:
       return state
   }

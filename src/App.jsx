@@ -91,6 +91,17 @@ export function App() {
     prevPathnameRef.current = location.pathname
   }, [location])
 
+  const getNewsBannerLocation = () => {
+    if (
+      location.pathname === '/' ||
+      location.pathname === '/update' ||
+      location.pathname === '/user/login'
+    ) {
+      return false
+    }
+    return true
+  }
+
   // return <UnderConstruction />
 
   return (
@@ -104,12 +115,12 @@ export function App() {
       <Loader />
       {user ? !user.isAdmin && <CookieAgreement /> : <CookieAgreement />}
       <AppHeader />
+      {getNewsBannerLocation() && <NewsBanner />}
       <main
         className="main-container"
         style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
         ref={bodyRef}
       >
-        <NewsBanner />
         <section className={isHome ? '' : 'page-container'}>
           <Routes>
             <Route path="" element={<HomePage />} />

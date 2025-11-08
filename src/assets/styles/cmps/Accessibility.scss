@@ -4,7 +4,8 @@
   flex-direction: column;
   // gap: 1em;
   position: absolute;
-  top: 11em;
+  top: calc(11em + 80px);
+
   // right: -300px;
   left: -300px;
   transition: right 0.3s ease;
@@ -76,7 +77,7 @@
 .prefs-button {
   position: fixed;
   left: 1em;
-  top: 9em;
+  top: calc(11em + 30px);
   // width: 80px;
   z-index: 1000;
   border-radius: 5px;

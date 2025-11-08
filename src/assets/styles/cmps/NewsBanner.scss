@@ -1,6 +1,7 @@
 .news-banner {
   position: fixed;
-  top: 100px;
+
+  top: 128px;
   left: 0;
   right: 0;
   width: 100%;
@@ -8,7 +9,7 @@
   display: flex;
   gap: 1em;
 
-  z-index: 2;
+  z-index: 1;
   color: white;
   text-align: start;
 
@@ -20,6 +21,10 @@
     $primary-light-blue 40.05%,
     $primary-transparent-blue 100%
   );
+
+  &.scrolled {
+    top: 100px;
+  }
 
   &.en {
     background: -webkit-linear-gradient(
