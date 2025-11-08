@@ -110,21 +110,29 @@ export function AppFooter() {
       <div className="contact-container">
         <div className="method-container address" onClick={navigateToAbout}>
           <PlaceIcon />
-          <div className="address-container">
+          <div className="address-container underline-animation">
             <span>{address}</span>
             <span>{prefs.isEnglish ? 'Kfar Shmaryahu' : 'כפר שמריהו'}</span>
           </div>
         </div>
-        <div className="method-container phone" onClick={call}>
+        <div className="method-container phone " onClick={call}>
           <LocalPhoneIcon />
-          <span className={prefs.isDarkMode ? 'dark-mode' : ''}>{phone}</span>
+          <span
+            className={`underline-animation ${
+              prefs.isDarkMode ? 'dark-mode' : ''
+            }`}
+          >
+            {phone}
+          </span>
         </div>
         <div
           className={`method-container email`}
           onClick={handleCopyToClipboard}
         >
           <MailIcon />
-          <span className={`clickable ${prefs.isDarkMode && 'dark-mode'}`}>
+          <span
+            className={`underline-animation ${prefs.isDarkMode && 'dark-mode'}`}
+          >
             {email}
           </span>
         </div>
@@ -181,10 +189,11 @@ export function AppFooter() {
       >
         <button
           onClick={openPrivacy}
-          className="clickable"
+          className="clickable underline-animation"
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
-            textDecoration: 'underline',
+            // textDecoration: 'underline',
+            fontWeight: 'bold',
             background: 'transparent',
             border: 'none',
             padding: 0,
@@ -195,10 +204,11 @@ export function AppFooter() {
         </button>
         <button
           onClick={openTerms}
-          className="clickable"
+          className="clickable underline-animation"
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
-            textDecoration: 'underline',
+            // textDecoration: 'underline',
+            fontWeight: 'bold',
             background: 'transparent',
             border: 'none',
             padding: 0,
@@ -209,10 +219,11 @@ export function AppFooter() {
         </button>
         <button
           onClick={openCookies}
-          className="clickable"
+          className="clickable underline-animation"
           style={{
             color: prefs.isDarkMode ? '#fff' : '#2C3E50',
-            textDecoration: 'underline',
+            // textDecoration: 'underline',
+            fontWeight: 'bold',
             background: 'transparent',
             border: 'none',
             padding: 0,

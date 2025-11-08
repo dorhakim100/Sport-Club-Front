@@ -183,7 +183,7 @@ export function HomePage() {
   }
 
   return (
-    <section className='home-container'>
+    <section className="home-container">
       <div
         className={`main-header-container background-img section hidden ${
           !prefs.isEnglish && 'rtl'
@@ -215,13 +215,13 @@ export function HomePage() {
         </div>
       </div>
 
-      <div className='home-content-container'>
+      <div className="home-content-container">
         <div
           className={`section hidden ${
             !prefs.isEnglish && 'rtl'
           } text-container`}
         ></div>
-        <div className='home-carousel'>
+        <div className="home-carousel">
           <SwiperCarousel imgs={carouselImgs} />
         </div>
 
@@ -231,15 +231,15 @@ export function HomePage() {
           }`}
         >
           <div
-            className='arrow-link-container schedule'
+            className="arrow-link-container schedule"
             onClick={navigateToClass}
           >
             {/* <img
               src={prefs.isDarkMode ? dumbbellsDarkMode : dumbbells}
               alt=''
             /> */}
-            <div className='img-container'>
-              <div className='animation-container'>
+            <div className="img-container">
+              <div className="animation-container">
                 <Lottie
                   options={classAnimationOptions}
                   width={windowDimensions.width < 480 ? '80%' : '50%'}
@@ -247,13 +247,13 @@ export function HomePage() {
                 />
               </div>
               <img
-                src='https://ik.imagekit.io/n4mhohkzp/studio-animation.jpg?updatedAt=1755684402161'
-                alt=''
-                className='class-img'
+                src="https://ik.imagekit.io/n4mhohkzp/studio-animation.jpg?updatedAt=1755684402161"
+                alt=""
+                className="class-img"
               />
 
               <Link
-                to='class'
+                to="class"
                 className={
                   prefs.isDarkMode ? 'shadow-text dark' : 'shadow-text'
                 }
@@ -262,14 +262,14 @@ export function HomePage() {
               >
                 {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}
                 {prefs.isEnglish ? (
-                  <ArrowForwardIosIcon className='arrow right' />
+                  <ArrowForwardIosIcon className="arrow right" />
                 ) : (
-                  <ArrowBackIosNewIcon className='arrow left' />
+                  <ArrowBackIosNewIcon className="arrow left" />
                 )}
               </Link>
             </div>
           </div>
-          <div className='cards-container'>
+          <div className="cards-container">
             <b
               onClick={navigateToTrainers}
               className={prefs.isDarkMode ? 'dark-mode' : ''}
@@ -278,8 +278,8 @@ export function HomePage() {
             </b>
             <Cards trainers={trainers} />
           </div>
-          <div className='updates-carousel-container'>
-            <div className='animation'>
+          <div className="updates-carousel-container">
+            <div className="animation">
               <Lottie
                 options={defaultOptionsNotifications}
                 width={'100px'}
@@ -292,7 +292,7 @@ export function HomePage() {
         </div>
 
         <div
-          className='reasons-header clickable'
+          className="reasons-header clickable"
           onClick={navigateToFacilities}
         >
           <HeadContainer

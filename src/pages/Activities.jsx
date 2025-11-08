@@ -87,7 +87,7 @@ export function Activities() {
   }
 
   return (
-    <section className='activities-page-container'>
+    <section className="activities-page-container">
       <h2>{prefs.isEnglish ? 'Activities' : 'פעילויות במועדון'}</h2>
       <Nav origin={false} links={links} isMain={true} />
 
@@ -160,32 +160,30 @@ export function Swimming() {
   }, [])
 
   return (
-    <div className='swimming-container'>
+    <div className="swimming-container">
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
-      <div className='information-container'>
+      <div className="information-container">
         <ActivityInfo options={options} logo={logo} />
       </div>
-      <div className='owner-container section hidden'>
-        <div className='img-container'>
+      <div className="owner-container section hidden">
+        <div className="img-container">
           <img
-            src='https://ik.imagekit.io/n4mhohkzp/eran.webp?updatedAt=1755684210199'
-            alt=''
+            src="https://ik.imagekit.io/n4mhohkzp/eran.webp?updatedAt=1755684210199"
+            alt=""
           />
         </div>
         <p>{prefs.isEnglish ? ownerText.eng : ownerText.he}</p>
       </div>
-      <div className='trainers-social-container'>
+      <div className="trainers-social-container">
         <div
-          className='whatsapp-container'
+          className="whatsapp-container"
           onClick={() => openLink('https://wa.me/972525554183')}
         >
-          <img src={whatsapp} alt='' />
+          <img src={whatsapp} alt="" />
           <Button
-            variant='contained'
-            className={
-              prefs.isDarkMode ? 'dark-mode shadow-text' : 'shadow-text'
-            }
+            variant="contained"
+            className={prefs.isDarkMode ? 'dark-mode ' : ''}
           >
             {prefs.isEnglish ? 'WhatsApp' : 'וואצאפ'} -{' '}
             <span style={{ fontFamily: 'assistantRegular' }}>
@@ -193,11 +191,11 @@ export function Swimming() {
             </span>
           </Button>
         </div>
-        <div className='cards-container section hidden'>
+        <div className="cards-container section hidden">
           <Cards trainers={trainers} />
           <b>{prefs.isEnglish ? 'Swimming Trainers' : 'מדריכי השחייה'}</b>
         </div>
-        <div className='instagram-container section hidden'>
+        <div className="instagram-container section hidden">
           <InstagramPost postUrl={instagram} />
           <b>
             {prefs.isEnglish
@@ -300,18 +298,18 @@ export function Tennis() {
     loadTennisTrainers()
   }, [])
   return (
-    <div className='tennis-container'>
+    <div className="tennis-container">
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
-      <div className='information-container'>
+      <div className="information-container">
         <ActivityInfo options={options} logo={logo} />
       </div>
-      <div className='owners-container'>
+      <div className="owners-container">
         {onwners.map((owner) => {
           return (
-            <div className='owner-container section' key={makeId()}>
-              <div className='img-container'>
-                <img src={owner.img} alt='' />
+            <div className="owner-container section" key={makeId()}>
+              <div className="img-container">
+                <img src={owner.img} alt="" />
                 <b>{prefs.isEnglish ? owner.name.eng : owner.name.he}</b>
               </div>
               <p>{prefs.isEnglish ? owner.txt.eng : owner.txt.he}</p>
@@ -320,17 +318,15 @@ export function Tennis() {
         })}
       </div>
 
-      <div className='trainers-social-container'>
+      <div className="trainers-social-container">
         <div
-          className='whatsapp-container'
+          className="whatsapp-container"
           onClick={() => openLink('https://wa.me/972528747690')}
         >
-          <img src={whatsapp} alt='' />
+          <img src={whatsapp} alt="" />
           <Button
-            variant='contained'
-            className={
-              prefs.isDarkMode ? 'dark-mode shadow-text' : 'shadow-text'
-            }
+            variant="contained"
+            className={prefs.isDarkMode ? 'dark-mode ' : ''}
           >
             {prefs.isEnglish ? 'WhatsApp' : 'וואצאפ'} -{' '}
             <span style={{ fontFamily: 'assistantRegular' }}>
@@ -338,11 +334,11 @@ export function Tennis() {
             </span>
           </Button>
         </div>
-        <div className='cards-container section hidden'>
+        <div className="cards-container section hidden">
           <Cards trainers={trainers} />
           <b>{prefs.isEnglish ? 'Tennis Trainers' : 'מדריכי הטניס'}</b>
         </div>
-        <div className='instagram-container section hidden'>
+        <div className="instagram-container section hidden">
           <InstagramPost postUrl={instagram} />
           <b>
             {prefs.isEnglish
@@ -420,21 +416,21 @@ Over the years, I have developed a personalized approach that combines professio
   }, [prefs.isDarkMode, prefs.isEnglish])
 
   return (
-    <div className='pilates-container'>
+    <div className="pilates-container">
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
-      <div className='information-container'>
+      <div className="information-container">
         <ActivityInfo options={options} logo={logo} />
       </div>
-      <div className='trainers-social-container'>
-        <div className='owner-container section'>
-          <div className='img-container'>
-            <img src={owner.img} alt='' />
+      <div className="trainers-social-container">
+        <div className="owner-container section">
+          <div className="img-container">
+            <img src={owner.img} alt="" />
           </div>
           <p>{prefs.isEnglish ? owner.txt.eng : owner.txt.he}</p>
         </div>
 
-        <div className='instagram-container section hidden'>
+        <div className="instagram-container section hidden">
           <InstagramPost postUrl={instagram} />
           <b>
             {prefs.isEnglish ? 'Follow me on Instagram' : 'עקבו אחרי באינסטגרם'}
@@ -495,17 +491,17 @@ export function Care() {
   }, [prefs.isEnglish, prefs.isDarkMode])
 
   return (
-    <div className='care-container'>
+    <div className="care-container">
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
-      <div className='information-container'>
+      <div className="information-container">
         <ActivityInfo options={options} logo={logo} />
       </div>
-      <div className='owner-container section hidden'>
-        <div className='img-container'>
+      <div className="owner-container section hidden">
+        <div className="img-container">
           <img
-            src='https://ik.imagekit.io/n4mhohkzp/laor.webp?updatedAt=1755684260933'
-            alt=''
+            src="https://ik.imagekit.io/n4mhohkzp/laor.webp?updatedAt=1755684260933"
+            alt=""
           />
         </div>
         <p>{prefs.isEnglish ? ownerText.eng : ownerText.he}</p>
@@ -585,14 +581,14 @@ export function SummerCamp() {
     textAnimation(prefs)
   }, [prefs.isDarkMode, prefs.isEnglish])
   return (
-    <div className='camp-container'>
+    <div className="camp-container">
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
-      <div className='information-container'>
+      <div className="information-container">
         <ActivityInfo options={options} logo={logo} />
       </div>
 
-      <div className='section hidden'>
+      <div className="section hidden">
         <SwiperCarousel imgs={imgs} />
       </div>
     </div>
@@ -629,10 +625,10 @@ export function Restaurant() {
     textAnimation(prefs)
   }, [prefs.isEnglish, prefs.isDarkMode])
   return (
-    <div className='restaurant-container'>
+    <div className="restaurant-container">
       <HeadContainer text={headText} />
       <DynamicCover prefs={prefs} coverSrc={options.img} />
-      <div className='information-container'>
+      <div className="information-container">
         <ActivityInfo options={options} logo={logo} />
       </div>
     </div>

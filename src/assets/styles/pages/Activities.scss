@@ -178,16 +178,16 @@
     transition: 0.2s ease;
     cursor: pointer;
     width: 200px;
+    button {
+      background: linear-gradient(135deg, #1dae5c 0%, #25d366 100%) !important;
+    }
 
     &:hover {
       transform: scale(1.05);
-      button {
-        background-color: #1dae5c;
-      }
     }
 
     .shadow-text {
-      text-shadow: black 2px 0 3px;
+      // text-shadow: black 2px 0 3px;
     }
 
     @media (min-width: 1300px) {

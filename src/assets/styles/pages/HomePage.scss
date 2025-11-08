@@ -377,7 +377,7 @@
 
       .animation {
         grid-row: 1/-1;
-        align-self: center;
+        align-self: end;
 
         @media (max-width: 600px) {
           display: none;
