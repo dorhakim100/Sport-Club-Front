@@ -5,6 +5,18 @@
   // gap: 1em;
   position: absolute;
   top: calc(11em + 80px);
+  &.accessibility-panel {
+    top: 9em !important;
+
+    @media (max-width: 450px) {
+      top: 35px !important;
+    }
+  }
+  &.prefs-panel {
+    @media (max-width: 1150px) {
+      top: 180px !important;
+    }
+  }
 
   // right: -300px;
   left: -300px;
@@ -136,6 +148,7 @@
 .prefs-control {
   display: flex;
   flex-direction: column;
+  gap: 0.3em;
 
   button {
     display: flex;
@@ -143,7 +156,7 @@
     justify-items: center;
     justify-content: space-between;
     gap: 0.5em;
-    margin: 5px 0;
+    // margin: 5px 0;
     padding: 8px;
     border-radius: 5px;
     border: none;
