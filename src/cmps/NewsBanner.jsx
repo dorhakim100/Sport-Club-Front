@@ -4,9 +4,11 @@ import { useSelector } from 'react-redux'
 
 import Marquee from 'react-fast-marquee'
 
-import { PlayButton } from '../PlayButton/PlayButton'
+import { PlayButton } from './PlayButton'
 
 import Divider from '@mui/material/Divider'
+
+import newsBannerJson from '../../public/jsons/NewsBanner/news-banner.json'
 
 export function NewsBanner() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
@@ -32,7 +34,9 @@ export function NewsBanner() {
   return (
     <div className={`news-banner ${prefs.isEnglish ? 'ltr' : 'rtl'}`}>
       <PlayButton isPlaying={isPlaying} onClick={togglePlaying} />
-      <h2 className="title">bla bla bla</h2>
+      <h2 className="title">
+        {newsBannerJson.title[prefs.isEnglish ? 'eng' : 'he']}
+      </h2>
       <Divider orientation="vertical" flexItem className="divider" />
       <div
         className="message-container"

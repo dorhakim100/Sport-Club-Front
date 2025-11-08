@@ -73,6 +73,7 @@ import { MessageModal } from './cmps/MessageModal'
 
 import './App.css'
 import { smoothScroll } from './services/util.service'
+import { NewsBanner } from './cmps/NewsBanner'
 
 export function App() {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -108,6 +109,7 @@ export function App() {
         style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
         ref={bodyRef}
       >
+        <NewsBanner />
         <section className={isHome ? '' : 'page-container'}>
           <Routes>
             <Route path="" element={<HomePage />} />

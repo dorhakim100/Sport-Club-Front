@@ -920,3 +920,33 @@ input[type='tel'] {
     text-align: start !important;
   }
 }
+
+.underline-animation {
+  position: relative;
+
+  &::before {
+    content: '';
+    -webkit-transition: 0.4s ease all;
+    -o-transition: 0.4s ease all;
+    transition: 0.4s ease all;
+    display: block;
+    position: absolute;
+    top: 100%;
+    height: 2px;
+    width: 0;
+    background-color: $bold-navy;
+  }
+
+  &.dark-mode {
+    color: $primary-light-blue;
+    &::before {
+      background-color: $primary-light-blue;
+    }
+  }
+
+  &:hover {
+    &::before {
+      width: 100%;
+    }
+  }
+}
