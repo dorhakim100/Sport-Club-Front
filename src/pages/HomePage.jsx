@@ -49,6 +49,15 @@ const defaultOptionsNotifications = {
   },
 }
 
+const classArrowImg = {
+  src: 'https://ik.imagekit.io/n4mhohkzp/studio-animation.jpg?updatedAt=1755684402161',
+  text: {
+    eng: 'Our classes',
+    he: 'השיעורים שלנו',
+  },
+  link: 'class',
+}
+
 export function HomePage() {
   const navigate = useNavigate()
   const prefs = useSelector((state) => state.systemModule.prefs)
@@ -182,6 +191,35 @@ export function HomePage() {
     }, 300) // Adjust time based on your smoothScroll timing
   }
 
+  const renderArrowImg = (img, link, text) => {
+    return (
+      <div className="img-container">
+        <div className="animation-container">
+          <Lottie
+            options={classAnimationOptions}
+            width={windowDimensions.width < 480 ? '80%' : '50%'}
+            height={windowDimensions.width < 480 ? '80%' : '50%'}
+          />
+        </div>
+        <img src={img} alt="" className="class-img" />
+
+        <Link
+          to={link}
+          className={prefs.isDarkMode ? 'shadow-text dark' : 'shadow-text'}
+          // className='shadow-text'
+          onClick={smoothScroll}
+        >
+          {prefs.isEnglish ? text.eng : text.he}
+          {prefs.isEnglish ? (
+            <ArrowForwardIosIcon className="arrow right" />
+          ) : (
+            <ArrowBackIosNewIcon className="arrow left" />
+          )}
+        </Link>
+      </div>
+    )
+  }
+
   return (
     <section className="home-container">
       <div
@@ -238,36 +276,11 @@ export function HomePage() {
               src={prefs.isDarkMode ? dumbbellsDarkMode : dumbbells}
               alt=''
             /> */}
-            <div className="img-container">
-              <div className="animation-container">
-                <Lottie
-                  options={classAnimationOptions}
-                  width={windowDimensions.width < 480 ? '80%' : '50%'}
-                  height={windowDimensions.width < 480 ? '80%' : '50%'}
-                />
-              </div>
-              <img
-                src="https://ik.imagekit.io/n4mhohkzp/studio-animation.jpg?updatedAt=1755684402161"
-                alt=""
-                className="class-img"
-              />
-
-              <Link
-                to="class"
-                className={
-                  prefs.isDarkMode ? 'shadow-text dark' : 'shadow-text'
-                }
-                // className='shadow-text'
-                onClick={smoothScroll}
-              >
-                {prefs.isEnglish ? 'Our classes' : 'השיעורים שלנו'}
-                {prefs.isEnglish ? (
-                  <ArrowForwardIosIcon className="arrow right" />
-                ) : (
-                  <ArrowBackIosNewIcon className="arrow left" />
-                )}
-              </Link>
-            </div>
+            {renderArrowImg(
+              classArrowImg.src,
+              classArrowImg.link,
+              classArrowImg.text
+            )}
           </div>
           <div className="cards-container">
             <b
