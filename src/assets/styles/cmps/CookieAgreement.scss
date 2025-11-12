@@ -1,9 +1,38 @@
 .cookie-agreement-container {
-  @media (max-width: 768px) {
-    font-size: 0.8em;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 12px;
+  align-items: center;
+  justify-items: start;
+  text-align: start;
+  padding: 8px 16px;
+
+  .agreement-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   button {
-    justify-self: end;
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 0.8em;
+    gap: 6px;
+    padding: 6px;
+
+    .agreement-buttons-container {
+      gap: 6px;
+      justify-self: center;
+    }
+
+    button {
+      font-size: 0.8em;
+      grid-column: 1/-1;
+      grid-row: 2/3;
+    }
   }
 }

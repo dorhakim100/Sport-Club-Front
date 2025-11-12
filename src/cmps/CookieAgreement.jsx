@@ -77,15 +77,9 @@ export function CookieAgreement() {
         zIndex: 9999,
         background: prefs.isDarkMode ? '#2B373B' : '#f4f7f9',
         color: prefs.isDarkMode ? '#fff' : '#2C3E50',
-        padding: '8px 16px',
+
         boxShadow: '0 -2px 8px rgba(0,0,0,0.15)',
         direction: dir,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: '12px',
-        flexWrap: 'wrap',
-        textAlign: 'start',
       }}
     >
       <div
@@ -102,13 +96,7 @@ export function CookieAgreement() {
             ? 'We use cookies to enhance your experience, for analytics and security.'
             : 'אנו משתמשים בקוקיז לשיפור החוויה, למדדים סטטיסטיים ולאבטחה.'}
         </span> */}
-        <div
-          style={{
-            display: 'flex',
-            gap: 12,
-            flexWrap: 'wrap',
-          }}
-        >
+        <div className="agreement-buttons-container">
           <button
             onClick={openCookiesModal}
             style={{
@@ -175,13 +163,9 @@ export function CookieAgreement() {
         onClick={onAccept}
         disabled={!checked}
         style={{
-          background: checked ? '#4A90E2' : '#9bbce0',
-          color: '#fff',
-          border: 'none',
-          padding: '8px 16px',
-          borderRadius: 4,
           cursor: checked ? 'pointer' : 'not-allowed',
-          fontSize: 14,
+          justifySelf: 'end',
+          alignSelf: 'end',
         }}
       >
         {prefs.isEnglish ? 'Accept' : 'אישור'}
