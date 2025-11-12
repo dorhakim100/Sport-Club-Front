@@ -10,6 +10,7 @@ import {
 } from './LegalContent'
 import { getCurrMonth } from '../services/util.service'
 import { smoothScroll } from '../services/util.service'
+import { Button } from '@mui/material'
 
 const POLICY_KEY = 'cookies_privacy_terms_policy'
 const POLICY_VERSION = `2025-${getCurrMonth()}`
@@ -67,6 +68,7 @@ export function CookieAgreement() {
 
   return (
     <div
+      className="cookie-agreement-container"
       style={{
         position: 'fixed',
         bottom: 0,
@@ -83,6 +85,7 @@ export function CookieAgreement() {
         alignItems: 'center',
         gap: '12px',
         flexWrap: 'wrap',
+        textAlign: 'start',
       }}
     >
       <div
@@ -94,11 +97,11 @@ export function CookieAgreement() {
           minWidth: 250,
         }}
       >
-        <span>
+        {/* <span>
           {prefs.isEnglish
             ? 'We use cookies to enhance your experience, for analytics and security.'
             : 'אנו משתמשים בקוקיז לשיפור החוויה, למדדים סטטיסטיים ולאבטחה.'}
-        </span>
+        </span> */}
         <div
           style={{
             display: 'flex',
@@ -168,7 +171,7 @@ export function CookieAgreement() {
           </span>
         </label>
       </div>
-      <button
+      <Button
         onClick={onAccept}
         disabled={!checked}
         style={{
@@ -182,7 +185,7 @@ export function CookieAgreement() {
         }}
       >
         {prefs.isEnglish ? 'Accept' : 'אישור'}
-      </button>
+      </Button>
     </div>
   )
 }

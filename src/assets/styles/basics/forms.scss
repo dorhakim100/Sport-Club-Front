@@ -974,6 +974,7 @@ input[type='tel'] {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  font-family: assistantBold !important;
 
   &.accessibility-btn,
   &.prefs-button {
