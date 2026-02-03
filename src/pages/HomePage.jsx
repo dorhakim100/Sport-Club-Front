@@ -39,7 +39,8 @@ import { userService } from '../services/user/user.service.js'
 import notification from '../../public/imgs/notification.json'
 // import squat from '../../public/imgs/squat.json'
 import squatDarkMode from '../../public/imgs/squat-dark-mode.json'
-import { CustomCarousel } from '../cmps/CustomCarousel.jsx'
+
+import { StoreBanner } from '../cmps/StoreBanner.jsx'
 
 const defaultOptionsNotifications = {
   loop: true,
@@ -267,6 +268,8 @@ export function HomePage() {
         <div className='home-carousel'>
           <SwiperCarousel imgs={carouselImgs} />
         </div>
+
+        <StoreBanner />
 
         <div
           className={`info-center-container section hidden ${
