@@ -11,7 +11,13 @@ import 'swiper/css/navigation'
 // import required modules
 
 // Import required modules
-import { FreeMode, Navigation, Thumbs, Autoplay } from 'swiper/modules'
+import {
+  FreeMode,
+  Navigation,
+  Thumbs,
+  Autoplay,
+  EffectCoverflow,
+} from 'swiper/modules'
 import { makeId } from '../services/util.service'
 
 export function CustomCarousel({ imgs }) {
@@ -27,21 +33,33 @@ export function CustomCarousel({ imgs }) {
       style={{
         direction: 'rtl',
       }}
-      // loop={true}
       loop={true}
       spaceBetween={10}
-      // navigation={true}
       thumbs={{
         swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
       }}
-      modules={[FreeMode, Navigation, Thumbs, Autoplay]} // Include the Autoplay module
+      modules={[FreeMode, Navigation, Thumbs, Autoplay, EffectCoverflow]} // Include the Autoplay module
       navigation={imgs.length > 1 ? true : false}
       className='item-details-swiper'
+      grabCursor={true}
+      centeredSlides={true}
+      // slidesPerView={'auto'}
+      coverflowEffect={{
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      }}
+      effect={'coverflow'}
     >
       {imgs.map((img, index) => (
         <SwiperSlide key={`${location.pathname}-${index}`}>
           <div className='img-container'>
-            <img src={img} alt={`${index + 1}`} />
+            <img
+              src={img}
+              alt={`${index + 1}`}
+            />
           </div>
         </SwiperSlide>
       ))}

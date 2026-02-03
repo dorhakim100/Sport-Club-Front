@@ -39,6 +39,7 @@ import { userService } from '../services/user/user.service.js'
 import notification from '../../public/imgs/notification.json'
 // import squat from '../../public/imgs/squat.json'
 import squatDarkMode from '../../public/imgs/squat-dark-mode.json'
+import { CustomCarousel } from '../cmps/CustomCarousel.jsx'
 
 const defaultOptionsNotifications = {
   loop: true,
@@ -193,15 +194,19 @@ export function HomePage() {
 
   const renderArrowImg = (img, link, text) => {
     return (
-      <div className="img-container">
-        <div className="animation-container">
+      <div className='img-container'>
+        <div className='animation-container'>
           <Lottie
             options={classAnimationOptions}
             width={windowDimensions.width < 480 ? '80%' : '50%'}
             height={windowDimensions.width < 480 ? '80%' : '50%'}
           />
         </div>
-        <img src={img} alt="" className="class-img" />
+        <img
+          src={img}
+          alt=''
+          className='class-img'
+        />
 
         <Link
           to={link}
@@ -211,9 +216,9 @@ export function HomePage() {
         >
           {prefs.isEnglish ? text.eng : text.he}
           {prefs.isEnglish ? (
-            <ArrowForwardIosIcon className="arrow right" />
+            <ArrowForwardIosIcon className='arrow right' />
           ) : (
-            <ArrowBackIosNewIcon className="arrow left" />
+            <ArrowBackIosNewIcon className='arrow left' />
           )}
         </Link>
       </div>
@@ -221,7 +226,7 @@ export function HomePage() {
   }
 
   return (
-    <section className="home-container">
+    <section className='home-container'>
       <div
         className={`main-header-container background-img section hidden ${
           !prefs.isEnglish && 'rtl'
@@ -253,13 +258,13 @@ export function HomePage() {
         </div>
       </div>
 
-      <div className="home-content-container">
+      <div className='home-content-container'>
         <div
           className={`section hidden ${
             !prefs.isEnglish && 'rtl'
           } text-container`}
         ></div>
-        <div className="home-carousel">
+        <div className='home-carousel'>
           <SwiperCarousel imgs={carouselImgs} />
         </div>
 
@@ -269,7 +274,7 @@ export function HomePage() {
           }`}
         >
           <div
-            className="arrow-link-container schedule"
+            className='arrow-link-container schedule'
             onClick={navigateToClass}
           >
             {/* <img
@@ -282,7 +287,7 @@ export function HomePage() {
               classArrowImg.text
             )}
           </div>
-          <div className="cards-container">
+          <div className='cards-container'>
             <b
               onClick={navigateToTrainers}
               className={prefs.isDarkMode ? 'dark-mode' : ''}
@@ -291,8 +296,8 @@ export function HomePage() {
             </b>
             <Cards trainers={trainers} />
           </div>
-          <div className="updates-carousel-container">
-            <div className="animation">
+          <div className='updates-carousel-container'>
+            <div className='animation'>
               <Lottie
                 options={defaultOptionsNotifications}
                 width={'100px'}
@@ -300,12 +305,15 @@ export function HomePage() {
               />
             </div>
             <b>{prefs.isEnglish ? 'Updates' : 'עדכונים'}</b>
-            <Updates updates={updates} navigateToUpdates={navigateToUpdates} />
+            <Updates
+              updates={updates}
+              navigateToUpdates={navigateToUpdates}
+            />
           </div>
         </div>
 
         <div
-          className="reasons-header clickable"
+          className='reasons-header clickable'
           onClick={navigateToFacilities}
         >
           <HeadContainer
