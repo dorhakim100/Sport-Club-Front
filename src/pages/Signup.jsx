@@ -11,17 +11,17 @@ export function Signup() {
   const navigate = useNavigate()
 
   const [logo, setLogo] = useState(
-    'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+    'https://ik.imagekit.io/n4mhohkzp/logo.png?updatedAt=1755684259540'
   )
 
   const setLogoMode = () => {
     if (prefs.isDarkMode) {
       setLogo(
-        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729070986/logoDarkMode_i25wgx.png'
+        'https://ik.imagekit.io/n4mhohkzp/logo-dark-mode.png?updatedAt=1755684257089'
       )
     } else {
       setLogo(
-        'https://res.cloudinary.com/dnxi70mfs/image/upload/v1729075214/logo_mp3dgh.png'
+        'https://ik.imagekit.io/n4mhohkzp/logo.png?updatedAt=1755684259540'
       )
     }
   }
@@ -35,9 +35,17 @@ export function Signup() {
   )
   return (
     <div className='signup-form'>
-      <img src={logo} alt='logo' width='100%' style={{ maxWidth: '100px' }} />
+      <img
+        src={logo}
+        alt='logo'
+        width='100%'
+        style={{ maxWidth: '100px' }}
+      />
       <h2>{prefs.isEnglish ? 'Signup' : 'רישום'}</h2>{' '}
-      <LoginSignupForm isSignup={true} isRemember={isRemember} />
+      <LoginSignupForm
+        isSignup={true}
+        isRemember={isRemember}
+      />
     </div>
   )
 }
