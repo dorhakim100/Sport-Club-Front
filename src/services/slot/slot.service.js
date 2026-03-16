@@ -9,24 +9,24 @@ export const slotService = {
 }
 
 async function query(filterBy = getDefaultFilter()) {
-  try {
-    return await httpService.get(KEY, filterBy)
-  } catch (err) {
-    throw err
-  }
+  return await httpService.get(KEY, filterBy)
 }
 
 async function register(slotId, registrationData = {}) {
-  try {
-    return await httpService.put(`${KEY}/${slotId}/register`, registrationData)
-  } catch (err) {
-    throw err
-  }
+  return await httpService.put(`${KEY}/${slotId}/register`, registrationData)
 }
 
 function getDefaultFilter() {
+  const now = new Date()
+  const from = new Date(now)
+  from.setMinutes(0, 0, 0)
+
+  // Keep a rolling 24h window from the closest relevant slot.
+  const to = new Date(from)
+  to.setHours(to.getHours() + 24)
+
   return {
-    from: '',
-    to: '',
+    from: from.toISOString(),
+    to: to.toISOString(),
   }
 }

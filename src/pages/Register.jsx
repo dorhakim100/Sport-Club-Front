@@ -24,10 +24,18 @@ export function Register() {
 
     useEffect(() => {
         fetchSlots()
-
     }, [currFilter])
 
 
+    // Update the filter every minute to get the latest slots
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if(new Date().getMinutes() === 1) 
+            setCurrFilter(slotService.getDefaultFilter())
+        }, 1000 )
+        return () => clearInterval(interval)
+
+    }, [])
 
     async function fetchSlots() {
         try {
