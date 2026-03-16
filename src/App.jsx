@@ -70,6 +70,7 @@ import { Loader } from './cmps/Loader'
 import { PrefsButton } from './cmps/PrefsButton.jsx'
 import { Prefs } from './cmps/Prefs.jsx'
 import { MessageModal } from './cmps/MessageModal'
+import { Register } from './pages/Register'
 
 import './App.css'
 import { smoothScroll } from './services/util.service'
@@ -208,7 +209,7 @@ export function App() {
               path="/אודות/מתקנים/"
               element={<Navigate to="/facilities" replace />}
             />
-
+            <Route path="register" element={<Register />} />
             {/* Catch-All Redirect to Home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

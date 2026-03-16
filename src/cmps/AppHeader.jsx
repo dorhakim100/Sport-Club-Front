@@ -18,7 +18,7 @@ import { DropDown } from '../cmps/DropDown.jsx'
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
-import { Button, SvgIcon } from '@mui/material'
+import { Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import IconButton from '@mui/material/IconButton'
@@ -41,7 +41,6 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi'
 import RecentActorsIcon from '@mui/icons-material/RecentActors'
-import MoreIcon from '@mui/icons-material/More'
 import PoolIcon from '@mui/icons-material/Pool'
 import SportsTennisIcon from '@mui/icons-material/SportsTennis'
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement'
@@ -70,21 +69,17 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import HomeIcon from '@mui/icons-material/Home'
 
 import Divider from '@mui/material/Divider'
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 import { socketService } from '../services/socket.service'
 import { userService } from '../services/user/user.service'
 import {
   setPrefs,
   setIsPrefs,
-  setModalMessage,
-  setIsModal,
   setIsAccessibility,
   setIsScrolled,
 } from '../store/actions/system.actions'
 import { loadOpenPayments } from '../store/actions/payment.actions'
-import { Logout } from '@mui/icons-material'
-
-import goggles from '../../public/imgs/goggles-svgrepo-com.svg'
 
 export function AppHeader() {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -130,9 +125,6 @@ export function AppHeader() {
 
   const [anchorEl, setAnchorEl] = useState(null)
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
   const handleClose = () => {
     setAnchorEl(null)
     setMenu(false)
@@ -559,6 +551,16 @@ export function AppHeader() {
     },
     {
       id: 1,
+      title: { eng: 'Register', he: 'רישום' },
+      to: 'register',
+      onClick: () => {
+        delayedNavigate('/register')
+      },
+      dropdown: false,
+      icon: <AppRegistrationIcon />,
+    },
+    {
+      id: 2,
       title: { eng: 'Updates', he: 'עדכונים' },
       to: 'update',
       onClick: () => {
@@ -568,7 +570,7 @@ export function AppHeader() {
       icon: <NotificationsNoneIcon />,
     },
     {
-      id: 2,
+      id: 3,
       title: { eng: 'Opening times', he: 'שעות הפתיחה' },
       to: `about/times`,
       icon: <QueryBuilderIcon />,
@@ -578,7 +580,7 @@ export function AppHeader() {
       },
     },
     {
-      id: 3,
+      id: 4,
       title: { eng: 'Class', he: 'חוגים' },
       to: 'class',
       onClick: () => {
@@ -617,7 +619,7 @@ export function AppHeader() {
       icon: <EventNoteIcon />,
     },
     {
-      id: 4,
+      id: 5,
       title: { eng: 'Facilities', he: 'מתקני המועדון' },
       to: 'facilities',
       onClick: () => {
@@ -627,7 +629,7 @@ export function AppHeader() {
       icon: <PoolIcon />,
     },
     {
-      id: 5,
+      id: 6,
       title: { eng: 'Member', he: 'מנויים' },
       to: 'member',
       onClick: () => {
@@ -637,7 +639,7 @@ export function AppHeader() {
       icon: <CardMembershipIcon />,
     },
     {
-      id: 6,
+      id: 7,
       title: { eng: 'Store', he: 'חנות' },
       to: 'item',
       onClick: () => {
@@ -677,7 +679,7 @@ export function AppHeader() {
       isOpen: false,
     },
     {
-      id: 7,
+      id: 8,
       title: { eng: 'Activities', he: 'פעילויות' },
       to: 'activities',
       onClick: () => {
@@ -743,7 +745,7 @@ export function AppHeader() {
       icon: <SportsTennisIcon />,
     },
     {
-      id: 8,
+      id: 9,
       title: { eng: 'About', he: 'אודות' },
       to: 'about',
       onClick: () => {
@@ -1384,7 +1386,7 @@ function GogglesIcon() {
         xmlns='http://www.w3.org/2000/svg'
         xmlns:xlink='http://www.w3.org/1999/xlink'
         viewBox='0 0 59 59'
-        xml:space='preserve'
+        xmlSpace='preserve'
         stroke='#ffffff'
         style={{
           width: '1.5em',
@@ -1393,12 +1395,12 @@ function GogglesIcon() {
       >
         <g
           id='SVGRepo_bgCarrier'
-          stroke-width='0'
+          strokeWidth='0'
         ></g>
         <g
           id='SVGRepo_tracerCarrier'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         ></g>
         <g id='SVGRepo_iconCarrier'>
           <g>
@@ -1419,7 +1421,7 @@ function GogglesIcon() {
       xmlns='http://www.w3.org/2000/svg'
       xmlns:xlink='http://www.w3.org/1999/xlink'
       viewBox='0 0 59 59'
-      xml:space='preserve'
+      xmlSpace='preserve'
       stroke={prefs.isDarMode ? 'white' : '#757575'}
       style={{
         width: '1.5em',
@@ -1428,12 +1430,12 @@ function GogglesIcon() {
     >
       <g
         id='SVGRepo_bgCarrier'
-        stroke-width='0'
+        strokeWidth='0'
       ></g>
       <g
         id='SVGRepo_tracerCarrier'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       ></g>
       <g id='SVGRepo_iconCarrier'>
         <g>
@@ -1460,7 +1462,7 @@ function PilatesIcon() {
         xmlns='http://www.w3.org/2000/svg'
         xmlns:xlink='http://www.w3.org/1999/xlink'
         viewBox='0 0 399.421 399.421'
-        xml:space='preserve'
+        xmlSpace='preserve'
         stroke='#ffffff'
         style={{
           width: '1.5em',
@@ -1469,12 +1471,12 @@ function PilatesIcon() {
       >
         <g
           id='SVGRepo_bgCarrier'
-          stroke-width='0'
+          strokeWidth='0'
         ></g>
         <g
           id='SVGRepo_tracerCarrier'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         ></g>
         <g id='SVGRepo_iconCarrier'>
           <path d='M390.421,90.522h-25.905c-0.123-0.003-0.249-0.003-0.372,0h-25.901c-4.971,0-9,4.029-9,9s4.029,9,9,9h17.087v19.085 l-170.319,64.885H95.949l-22.765-31.203h14.013c4.971,0,9-4.029,9-9s-4.029-9-9-9H55.684c-0.144-0.004-0.287-0.004-0.431,0H35.021 c-4.971,0-9,4.029-9,9s4.029,9,9,9h15.882l22.765,31.203H9c-4.971,0-9,4.029-9,9v98.409c0,4.971,4.029,9,9,9h42.09 c4.971,0,9-4.029,9-9v-47.32h253.151v47.32c0,4.971,4.029,9,9,9h42.09c4.971,0,9-4.029,9-9v-98.409c0-0.063,0-0.127-0.002-0.191 v-67.284c0.003-0.139,0.003-0.278,0-0.418v-25.076h17.091c4.971,0,9-4.029,9-9S395.392,90.522,390.421,90.522z M355.33,146.869 v45.623H235.572L355.33,146.869z M42.09,290.901H18v-38.32h24.09V290.901z M355.332,290.901h-24.09v-38.32h24.09V290.901z M355.332,234.581h-33.09H18v-24.089h73.28c0.068,0.001,0.135,0.001,0.203,0h94.981c0.137,0.003,0.273,0.003,0.41,0h168.458V234.581 z'></path>{' '}
@@ -1492,7 +1494,7 @@ function PilatesIcon() {
       xmlns='http://www.w3.org/2000/svg'
       xmlns:xlink='http://www.w3.org/1999/xlink'
       viewBox='0 0 399.421 399.421'
-      xml:space='preserve'
+      xmlSpace='preserve'
       stroke='#757575'
       style={{
         width: '1.5em',
@@ -1501,12 +1503,12 @@ function PilatesIcon() {
     >
       <g
         id='SVGRepo_bgCarrier'
-        stroke-width='0'
+        strokeWidth='0'
       ></g>
       <g
         id='SVGRepo_tracerCarrier'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       ></g>
       <g id='SVGRepo_iconCarrier'>
         <path d='M390.421,90.522h-25.905c-0.123-0.003-0.249-0.003-0.372,0h-25.901c-4.971,0-9,4.029-9,9s4.029,9,9,9h17.087v19.085 l-170.319,64.885H95.949l-22.765-31.203h14.013c4.971,0,9-4.029,9-9s-4.029-9-9-9H55.684c-0.144-0.004-0.287-0.004-0.431,0H35.021 c-4.971,0-9,4.029-9,9s4.029,9,9,9h15.882l22.765,31.203H9c-4.971,0-9,4.029-9,9v98.409c0,4.971,4.029,9,9,9h42.09 c4.971,0,9-4.029,9-9v-47.32h253.151v47.32c0,4.971,4.029,9,9,9h42.09c4.971,0,9-4.029,9-9v-98.409c0-0.063,0-0.127-0.002-0.191 v-67.284c0.003-0.139,0.003-0.278,0-0.418v-25.076h17.091c4.971,0,9-4.029,9-9S395.392,90.522,390.421,90.522z M355.33,146.869 v45.623H235.572L355.33,146.869z M42.09,290.901H18v-38.32h24.09V290.901z M355.332,290.901h-24.09v-38.32h24.09V290.901z M355.332,234.581h-33.09H18v-24.089h73.28c0.068,0.001,0.135,0.001,0.203,0h94.981c0.137,0.003,0.273,0.003,0.41,0h168.458V234.581 z'></path>{' '}
