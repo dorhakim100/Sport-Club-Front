@@ -1,6 +1,7 @@
 .register-container {
 
     display: grid;
+    gap: 1em;
 
 
 
@@ -8,6 +9,5 @@
         display: flex;
         gap: 1em;
         overflow-x: scroll;
-        padding-block: 1em;
     }
 }

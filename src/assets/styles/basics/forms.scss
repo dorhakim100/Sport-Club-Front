@@ -1023,3 +1023,10 @@ input[type='tel'] {
 .MuiButtonGroup-root {
   border-radius: 12px !important;
 }
+
+.divider {
+  &.dark-mode {
+    background-color: white;
+    opacity: 0.8;
+  }
+}
