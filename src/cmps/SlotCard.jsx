@@ -4,15 +4,22 @@ import BorderLinearProgress from "./BorderLinearProgress"
 import GroupIcon from '@mui/icons-material/Group';
 import { Button } from "@mui/material";
 import { formatSlotDate } from "../services/util.service";
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 export function SlotCard({ slot }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     console.log(slot)
+
+    const modifyFacilityName = (facility) => {
+        if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
+        if (facility === 'gym') return prefs.isEnglish ? ' the Gym' : 'חדר הכושר'
+        return facility
+    }
   return <div className={`slot-card-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
 
 
     <div className={`thumbnail ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
-        <span>{`Entrance to ${slot.facility}`}</span>
+        <span>{`${prefs.isEnglish ? 'Entrance to' : 'כניסה ל'}${modifyFacilityName(slot.facility)}`}</span>
     </div>
     <div className="content-container">
 
@@ -28,7 +35,7 @@ export function SlotCard({ slot }) {
         <span>{`${slot.capacity}`}</span>
       </div>
 
-      <Button variant="contained" color="primary">Register</Button>
+      <Button variant="contained" color="primary"><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
 
     </div>
   </div>
