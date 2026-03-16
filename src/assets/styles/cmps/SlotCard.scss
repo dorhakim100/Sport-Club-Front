@@ -1,0 +1,65 @@
+.slot-card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+
+    background-color: $light-gray;
+    min-width: 200px;
+    border-radius: 3px;
+
+
+    &.dark-mode {
+        background-color: $dark-gray;
+    }
+
+    .thumbnail {
+        font-family: assistantBold;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        padding-block: 20px;
+        font-size: 1.2em;
+        
+        &.pool{
+
+            background-color: $primary-light-blue;
+            &.dark-mode {
+                background-color: $dark-blue;
+            }
+        }
+
+        &.gym{
+            background-color: $soft-green;
+            &.dark-mode {
+                background-color: $dark-green;
+            }
+        }
+
+
+    }
+
+    .content-container {
+        display: grid;
+        padding: 1rem;
+        gap: 0.5rem;
+
+    }
+
+    .details {
+        display: flex;
+
+        gap: 0.5rem;
+        .date{
+
+        }
+        font-family: assistantBold;
+
+    }
+
+    .progress-container {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto;
+
+        align-items: center;
+        gap: 1rem;
+    }
+}

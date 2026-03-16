@@ -187,3 +187,34 @@ export function getCurrMonth() {
   const month = today.getMonth() + 1
   return month < 10 ? `0${month}` : month
 }
+
+export function formatSlotDate(dateValue, locale = 'he') {
+  const date = dateValue instanceof Date ? dateValue : new Date(dateValue)
+
+  if (Number.isNaN(date.getTime())) return ''
+
+  const normalizedLocale = locale?.toLowerCase?.() || 'he'
+  const isEnglish =
+    normalizedLocale === 'en' ||
+    normalizedLocale === 'eng' ||
+    normalizedLocale.startsWith('en-')
+
+  const hebrewDays = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת']
+  const englishDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ]
+
+  const dayName = isEnglish
+    ? englishDays[date.getDay()]
+    : hebrewDays[date.getDay()]
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+
+  return `${dayName}, ${day}/${month}`
+}
