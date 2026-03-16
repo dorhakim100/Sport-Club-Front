@@ -47,14 +47,19 @@ export function Register() {
         <HeadContainer text={text} />
         <div className="slots-container">
       {poolSlots.map((slot) => (
-          <SlotCard key={slot.id} slot={slot} />
+        <div className="slot-container" key={slot._id}>
+
+          <SlotCard slot={slot} setSlots={setSlots} />
+        </div>
         ))}
         </div>
         <Divider className={`divider ${prefs.isDarkMode ? 'dark-mode' : ''}`} />
 
         <div className="slots-container">
             {gymSlots.map((slot) => (
-                <SlotCard key={slot.id} slot={slot} />
+                <div className="slot-container" key={slot._id}>
+                    <SlotCard slot={slot} setSlots={setSlots} />
+                </div>
             ))}
             </div>
     </div>

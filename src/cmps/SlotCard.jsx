@@ -7,17 +7,45 @@ import { formatSlotDate, formatSlotTimeRange } from "../services/util.service";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import {CustomDialog} from "./CustomDialog";
 import { useState } from "react";
+import { RegisterForm } from "./RegisterForm";
+import { setIsLoading } from "../store/actions/system.actions";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
+import { slotService } from "../services/slot/slot.service";
 
-export function SlotCard({ slot }) {
+export function SlotCard({ slot, setSlots }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     const [isModal, setIsModal] = useState(false)
+    const [formData, setFormData] = useState({ name: '', phone: '' })
 
-
-
+    const isRegistered = localStorage.getItem(`registered-${slot._id}`)
+    console.log(isRegistered);
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
         if (facility === 'gym') return prefs.isEnglish ? ' the Gym' : 'חדר הכושר'
         return facility
+    }
+    async function onSubmit(e) {
+        e.preventDefault()
+        if (slot.registrations.length >= slot.capacity) {
+            showErrorMsg(prefs.isEnglish ? 'Slot is full' : 'השעה מלאה')
+            return
+        }
+
+        try {
+            setIsLoading(true)
+            const registered = await slotService.register(slot._id, formData)
+            console.log(registered);
+            showSuccessMsg(prefs.isEnglish ? 'Registered successfully' : 'רישום בוצע בהצלחה')
+            setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slot._id ? registered : prevSlot))
+            setIsModal(false)
+            localStorage.setItem(`registered-${slot._id}`, true)
+        } catch (err) {
+            showErrorMsg(prefs.isEnglish ? 'Error registering' : 'שגיאה ברישום')
+            
+        }       finally {
+            setIsLoading(false)
+        }
+       
     }
   return <>
   <div className={`slot-card-container ${prefs.isDarkMode ? 'dark-mode' : ''} ${slot.facility.toLowerCase()}`}>
@@ -40,13 +68,19 @@ export function SlotCard({ slot }) {
         <span>{`${slot.capacity}`}</span>
       </div>
 
-      <Button variant="contained" color="primary" onClick={() => setIsModal(true)}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
+{!isRegistered ? (
+      <Button variant="contained" color="primary" onClick={() => setIsModal(true)} disabled={slot.registrations.length >= slot.capacity}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
+      )
+    : (
+        <span className="registered-text"><HowToRegIcon />{prefs.isEnglish ? 'Registered' : 'רישום בוצע'}</span>
+    )
+    }
 
     </div>
   </div>
 
   <CustomDialog open={isModal} onClose={() => setIsModal(false)} title={prefs.isEnglish ? 'Register' : 'רישום'}>
-
+    <RegisterForm isEnglish={prefs.isEnglish} onSubmit={onSubmit} formData={formData} setFormData={setFormData} />
   </CustomDialog>
   </>
 }

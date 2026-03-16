@@ -191,6 +191,7 @@ export function App() {
             <Route path="payment/success" element={<SuccessPage />} />
             <Route path="payment/error" element={<ErrorPage />} />
             <Route path="construction" element={<UnderConstruction />} />
+            <Route path="register" element={<Register />} />
 
             {/* Redirect Old Paths */}
             <Route
@@ -209,7 +210,6 @@ export function App() {
               path="/אודות/מתקנים/"
               element={<Navigate to="/facilities" replace />}
             />
-            <Route path="register" element={<Register />} />
             {/* Catch-All Redirect to Home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

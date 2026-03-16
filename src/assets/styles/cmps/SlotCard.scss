@@ -72,5 +72,23 @@
         display: flex;
         align-items: center;
         gap: 0.2rem;
+
+    }
+
+    .registered-text{
+        // display: flex;
+        // align-items: center;
+        gap: 0.2rem;
+        color: $dark-green;
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+
+        font-family: assistantBold;
+        font-size: 1.2em;
+
+        justify-self: center;
+
+      
     }
 }
