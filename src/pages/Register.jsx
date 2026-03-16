@@ -7,6 +7,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { showErrorMsg } from '../services/event-bus.service'
 import { slotService } from '../services/slot/slot.service'
 import { setIsLoading } from '../store/actions/system.actions'
+import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED } from '../services/socket.service'
 
 export function Register() {
 
@@ -25,6 +26,12 @@ export function Register() {
     useEffect(() => {
         fetchSlots()
     }, [currFilter])
+
+    useEffect(()=>{
+        socketService.on(SOCKET_EVENT_ADD_SLOT_REGISTERED, (slot) => {
+            setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slot._id ? slot : prevSlot))
+        })
+    },[])
 
 
     // Update the filter every minute to get the latest slots

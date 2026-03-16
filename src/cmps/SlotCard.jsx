@@ -11,6 +11,7 @@ import { RegisterForm } from "./RegisterForm";
 import { setIsLoading } from "../store/actions/system.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { slotService } from "../services/slot/slot.service";
+import { SOCKET_EVENT_UPDATE_SLOT, socketService } from "../services/socket.service";
 
 export function SlotCard({ slot, setSlots }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
@@ -34,7 +35,8 @@ export function SlotCard({ slot, setSlots }) {
         try {
             setIsLoading(true)
             const registered = await slotService.register(slot._id, formData)
-            console.log(registered);
+
+            socketService.emit(SOCKET_EVENT_UPDATE_SLOT, registered)
             showSuccessMsg(prefs.isEnglish ? 'Registered successfully' : 'רישום בוצע בהצלחה')
             setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slot._id ? registered : prevSlot))
             setIsModal(false)
