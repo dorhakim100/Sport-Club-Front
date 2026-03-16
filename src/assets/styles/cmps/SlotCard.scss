@@ -3,16 +3,30 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
 
-    min-width: 200px;
+    min-width: 250px;
     border-radius: 3px;
     margin-bottom: 0.5rem;
-
-
+    
+    
     background-color: rgba(255, 255, 255, 0.909);
-
-
+    
+    
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    border-inline-start: 10px solid;
+  &.pool{
 
+            border-color: $primary-light-blue;
+            &.dark-mode {
+                border-color: $dark-blue;
+            }
+        }
+
+        &.gym{
+            border-color: $soft-green;
+            &.dark-mode {
+                border-color: $dark-green;
+            }
+        }
     &.dark-mode {
         background-color: $dark-gray;
     }
@@ -23,21 +37,68 @@
         border-top-right-radius: 3px;
         padding-block: 20px;
         font-size: 1.2em;
+        position: relative;
+        min-height: 100px;
+        span{
+            z-index: 2;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+
+            width: 100%;
+
+            font-size: 1.3em;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 1);
+            // background-color: rgba(0, 0, 0, 0.22);
+
+
+
+            
+
+            object-fit: cover;
+            z-index: 2;
+
+        }
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.7;
+
+        }
+
+        &::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background: linear-gradient(
+                135deg,
+                rgba(74, 144, 226, 0.45) 0%,
+                rgba(76, 175, 80, 0.35) 55%,
+                rgba(24, 30, 36, 0.55) 100%
+            );
+        }
+
+        &.dark-mode::after{
+            background: linear-gradient(
+                135deg,
+                rgba(74, 144, 226, 0.45) 0%,
+                rgba(76, 175, 80, 0.35) 55%,
+                rgba(24, 30, 36, 0.55) 100%
+            );
+        }
         
-        &.pool{
-
-            background-color: $primary-light-blue;
-            &.dark-mode {
-                background-color: $dark-blue;
-            }
-        }
-
-        &.gym{
-            background-color: $soft-green;
-            &.dark-mode {
-                background-color: $dark-green;
-            }
-        }
+      
 
 
     }
@@ -88,6 +149,7 @@
         font-size: 1.2em;
 
         justify-self: center;
+        min-height: 36.5px;
 
       
     }

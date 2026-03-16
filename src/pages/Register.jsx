@@ -69,7 +69,6 @@ export function Register() {
         ))}
         </div>
         <Divider className={`divider ${prefs.isDarkMode ? 'dark-mode' : ''}`} />
-
         <div className="slots-container">
             {gymSlots.map((slot) => (
                 <div className="slot-container" key={slot._id}>

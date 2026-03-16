@@ -13,6 +13,9 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { slotService } from "../services/slot/slot.service";
 import { SOCKET_EVENT_UPDATE_SLOT, socketService } from "../services/socket.service";
 
+const poolImg = 'https://ik.imagekit.io/n4mhohkzp/mouse-wheel-pool.webp?updatedAt=1755684294789'
+const gymImg = 'https://ik.imagekit.io/n4mhohkzp/facilities-gym.jpg.png?updatedAt=1769599835723'
+
 export function SlotCard({ slot, setSlots }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     const [isModal, setIsModal] = useState(false)
@@ -50,10 +53,11 @@ export function SlotCard({ slot, setSlots }) {
        
     }
   return <>
-  <div className={`slot-card-container ${prefs.isDarkMode ? 'dark-mode' : ''} ${slot.facility.toLowerCase()}`}>
+  <div className={`slot-card-container ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
 
 
     <div className={`thumbnail ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
+        <img src={slot.facility.toLowerCase() === 'pool' ? poolImg : gymImg} alt={slot.facility} />
         <span>{`${prefs.isEnglish ? 'Entrance to' : 'כניסה ל'}${modifyFacilityName(slot.facility)}`}</span>
     </div>
     <div className="content-container">
