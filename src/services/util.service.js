@@ -218,3 +218,26 @@ export function formatSlotDate(dateValue, locale = 'he') {
 
   return `${dayName}, ${day}/${month}`
 }
+
+function formatTimeValue(timeValue) {
+  if (!timeValue) return ''
+
+  // Keep already-formatted values such as "09:00".
+  if (typeof timeValue === 'string' && /^\d{2}:\d{2}$/.test(timeValue)) {
+    return timeValue
+  }
+
+  const parsedDate = timeValue instanceof Date ? timeValue : new Date(timeValue)
+  if (Number.isNaN(parsedDate.getTime())) return ''
+
+  const hours = String(parsedDate.getHours()).padStart(2, '0')
+  const minutes = String(parsedDate.getMinutes()).padStart(2, '0')
+  return `${hours}:${minutes}`
+}
+
+export function formatSlotTimeRange(fromValue, toValue) {
+  const from = formatTimeValue(fromValue)
+  const to = formatTimeValue(toValue)
+  if (!from && !to) return ''
+  return `${from} - ${to}`.trim()
+}

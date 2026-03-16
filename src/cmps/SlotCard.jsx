@@ -3,19 +3,18 @@ import { useSelector } from "react-redux"
 import BorderLinearProgress from "./BorderLinearProgress"
 import GroupIcon from '@mui/icons-material/Group';
 import { Button } from "@mui/material";
-import { formatSlotDate } from "../services/util.service";
+import { formatSlotDate, formatSlotTimeRange } from "../services/util.service";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 export function SlotCard({ slot }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
-    console.log(slot)
 
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
         if (facility === 'gym') return prefs.isEnglish ? ' the Gym' : 'חדר הכושר'
         return facility
     }
-  return <div className={`slot-card-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
+  return <div className={`slot-card-container ${prefs.isDarkMode ? 'dark-mode' : ''} ${slot.facility.toLowerCase()}`}>
 
 
     <div className={`thumbnail ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
@@ -25,7 +24,7 @@ export function SlotCard({ slot }) {
 
     <div className="details">
         <span className="date">{`${formatSlotDate(slot.date)}`}</span>
-        <span style={{ direction: 'ltr' }}>{`${slot.startTime} - ${slot.endTime}`}</span>
+        <span style={{ direction: 'ltr' }}>{formatSlotTimeRange(slot.startTime, slot.endTime)}</span>
     </div>
     <div className="progress-container" style={{ direction: 'ltr' }}>
       <GroupIcon />
@@ -40,3 +39,4 @@ export function SlotCard({ slot }) {
     </div>
   </div>
 }
+
