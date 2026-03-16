@@ -5,16 +5,22 @@ import GroupIcon from '@mui/icons-material/Group';
 import { Button } from "@mui/material";
 import { formatSlotDate, formatSlotTimeRange } from "../services/util.service";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import {CustomDialog} from "./CustomDialog";
+import { useState } from "react";
 
 export function SlotCard({ slot }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+    const [isModal, setIsModal] = useState(false)
+
+
 
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
         if (facility === 'gym') return prefs.isEnglish ? ' the Gym' : 'חדר הכושר'
         return facility
     }
-  return <div className={`slot-card-container ${prefs.isDarkMode ? 'dark-mode' : ''} ${slot.facility.toLowerCase()}`}>
+  return <>
+  <div className={`slot-card-container ${prefs.isDarkMode ? 'dark-mode' : ''} ${slot.facility.toLowerCase()}`}>
 
 
     <div className={`thumbnail ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
@@ -34,9 +40,14 @@ export function SlotCard({ slot }) {
         <span>{`${slot.capacity}`}</span>
       </div>
 
-      <Button variant="contained" color="primary"><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
+      <Button variant="contained" color="primary" onClick={() => setIsModal(true)}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
 
     </div>
   </div>
+
+  <CustomDialog open={isModal} onClose={() => setIsModal(false)} title={prefs.isEnglish ? 'Register' : 'רישום'}>
+
+  </CustomDialog>
+  </>
 }
 
