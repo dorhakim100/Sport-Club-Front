@@ -1,5 +1,4 @@
 import { SlotCard } from '../cmps/SlotCard'
-import { SLOTS } from '../data/slots'
 import { HeadContainer } from '../cmps/HeadContainer'
 import { Divider } from '@mui/material'
 import { useSelector } from 'react-redux'

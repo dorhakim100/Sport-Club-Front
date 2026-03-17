@@ -18,11 +18,12 @@ const gymImg = 'https://ik.imagekit.io/n4mhohkzp/facilities-gym.jpg.png?updatedA
 
 export function SlotCard({ slot, setSlots }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+    const user = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
-    const [formData, setFormData] = useState({ name: '', phone: '' })
+    const [formData, setFormData] = useState({ name: user?.fullname || '', phone: user?.phone || '' })
 
     const isRegistered = localStorage.getItem(`registered-${slot._id}`)
-    console.log(isRegistered);
+
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
         if (facility === 'gym') return prefs.isEnglish ? ' the Gym' : 'חדר הכושר'
@@ -43,6 +44,7 @@ export function SlotCard({ slot, setSlots }) {
             showSuccessMsg(prefs.isEnglish ? 'Registered successfully' : 'רישום בוצע בהצלחה')
             setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slot._id ? registered : prevSlot))
             setIsModal(false)
+            if(user && user.isAdmin) return
             localStorage.setItem(`registered-${slot._id}`, true)
         } catch (err) {
             showErrorMsg(prefs.isEnglish ? 'Error registering' : 'שגיאה ברישום')
