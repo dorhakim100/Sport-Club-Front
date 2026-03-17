@@ -6,7 +6,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { slotService } from '../services/slot/slot.service'
 import { setIsLoading } from '../store/actions/system.actions'
-import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED, SOCKET_EVENT_UPDATE_SLOT } from '../services/socket.service'
+import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED, SOCKET_EVENT_UPDATE_SLOT, SOCKET_EVENT_ADD_SLOT } from '../services/socket.service'
 
 export function Register() {
 
@@ -31,6 +31,16 @@ export function Register() {
         socketService.on(SOCKET_EVENT_ADD_SLOT_REGISTERED, (slot) => {
             setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slot._id ? slot : prevSlot))
         })
+        socketService.on(SOCKET_EVENT_ADD_SLOT, (startTime) => {
+            const filter = slotService.getDefaultFilter()
+            fetchSlots(filter)
+            showSuccessMsg(prefs.isEnglish ? 'New hours added successfully' : 'שעות חדשות נפתחו')
+        })
+
+        return () => {
+            socketService.off(SOCKET_EVENT_ADD_SLOT_REGISTERED)
+            socketService.off(SOCKET_EVENT_ADD_SLOT)
+        }
     },[])
 
     async function fetchSlots(filter) {
