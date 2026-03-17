@@ -14,16 +14,24 @@ import { slotService } from "../services/slot/slot.service";
 import { SOCKET_EVENT_UPDATE_SLOT, socketService } from "../services/socket.service";
 import IconButton from '@mui/material/IconButton';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import {RegistrationList} from "./RegistrationList";
 
 
 const poolImg = 'https://ik.imagekit.io/n4mhohkzp/mouse-wheel-pool.webp?updatedAt=1755684294789'
 const gymImg = 'https://ik.imagekit.io/n4mhohkzp/facilities-gym.jpg.png?updatedAt=1769599835723'
+
+const MODAL_TYPES = {
+    REGISTER: 'register',
+    LIST: 'list',
+}
 
 export function SlotCard({ slot, setSlots }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     const user = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
     const [formData, setFormData] = useState(_getFormData())
+
+    const [modalType, setModalType] = useState(MODAL_TYPES.REGISTER)
 
     const isRegistered = localStorage.getItem(`registered-${slot._id}`)
 
@@ -63,6 +71,23 @@ export function SlotCard({ slot, setSlots }) {
         if(user) return { name: user.fullname, phone: user.phone }
         return { name: '', phone: '' }
     }
+
+    function getModalContent() {
+        if(modalType === MODAL_TYPES.REGISTER) return <RegisterForm isEnglish={prefs.isEnglish} onSubmit={onSubmit} formData={formData} setFormData={setFormData} />
+        if(modalType === MODAL_TYPES.LIST) return <RegistrationList slot={slot} />
+        return null
+    }
+
+    function _getModalTitle() {
+        if(modalType === MODAL_TYPES.REGISTER) return prefs.isEnglish ? 'Register' : 'רישום'
+        if(modalType === MODAL_TYPES.LIST) return prefs.isEnglish ? 'List' : 'רשימה'
+        return ''
+    }
+
+    const onOpenModal = (type) => {
+        setIsModal(true)
+        setModalType(type)
+    }
   return <>
   <div className={`slot-card-container ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
 
@@ -74,7 +99,7 @@ export function SlotCard({ slot, setSlots }) {
     <div className="content-container">
 
     <div className={`details ${user && user.isAdmin ? 'admin-details' : ''}`}>
-      {user && user.isAdmin && <IconButton><FormatListNumberedIcon /></IconButton> }
+      {user && user.isAdmin && <IconButton onClick={() => onOpenModal(MODAL_TYPES.LIST)}><FormatListNumberedIcon /></IconButton> }
         <span className="date">{`${formatSlotDate(slot.date, prefs.isEnglish)}`}</span>
         <span style={{ direction: 'ltr' }}>{formatSlotTimeRange(slot.startTime, slot.endTime)}</span>
     </div>
@@ -87,7 +112,7 @@ export function SlotCard({ slot, setSlots }) {
       </div>
 
 {!isRegistered ? (
-      <Button variant="contained" color="primary" onClick={() => setIsModal(true)} disabled={slot.registrations.length >= slot.capacity}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
+      <Button variant="contained" color="primary" onClick={() => onOpenModal(MODAL_TYPES.REGISTER)} disabled={slot.registrations.length >= slot.capacity}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
       )
     : (
         <span className="registered-text"><HowToRegIcon />{prefs.isEnglish ? 'Registered' : 'רישום בוצע'}</span>
@@ -97,8 +122,8 @@ export function SlotCard({ slot, setSlots }) {
     </div>
   </div>
 
-  <CustomDialog open={isModal} onClose={() => setIsModal(false)} title={prefs.isEnglish ? 'Register' : 'רישום'}>
-    <RegisterForm isEnglish={prefs.isEnglish} onSubmit={onSubmit} formData={formData} setFormData={setFormData} />
+  <CustomDialog open={isModal} onClose={() => setIsModal(false)} title={_getModalTitle()}>
+    {getModalContent()}
   </CustomDialog>
   </>
 }
