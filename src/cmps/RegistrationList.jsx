@@ -31,7 +31,7 @@ export function RegistrationList({ slot, deleteRegistration }) {
           <TableCell align={align}>
             <Tooltip title={prefs.isEnglish ? 'Delete' : 'מחיקה'}>
 
-            <IconButton onClick={() => onDeleteRegistration(registration.phone)}><DeleteIcon /></IconButton>
+            <IconButton color='error' onClick={() => onDeleteRegistration(registration.phone)}><DeleteIcon /></IconButton>
             </Tooltip>
             
             </TableCell>
