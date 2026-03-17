@@ -5,15 +5,32 @@ const KEY = 'slot'
 export const slotService = {
   query,
   register,
+  updateSlot,
   getDefaultFilter,
 }
 
 async function query(filterBy = getDefaultFilter()) {
-  return await httpService.get(KEY, filterBy)
+  try {
+    return await httpService.get(KEY, filterBy)
+  } catch (err) {
+    throw err
+  }
 }
 
 async function register(slotId, registrationData = {}) {
-  return await httpService.put(`${KEY}/${slotId}/register`, registrationData)
+  try {
+    return await httpService.put(`${KEY}/${slotId}/register`, registrationData)
+  } catch (err) {
+    throw err
+  }
+}
+
+async function updateSlot(slot) {
+  try {
+    return await httpService.put(`${KEY}/${slot._id}`, slot)
+  } catch (err) {
+    throw err
+  }
 }
 
 function getDefaultFilter() {

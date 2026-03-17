@@ -3,10 +3,10 @@ import { HeadContainer } from '../cmps/HeadContainer'
 import { Divider } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useState, useEffect, useMemo } from 'react'
-import { showErrorMsg } from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { slotService } from '../services/slot/slot.service'
 import { setIsLoading } from '../store/actions/system.actions'
-import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED } from '../services/socket.service'
+import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED, SOCKET_EVENT_UPDATE_SLOT } from '../services/socket.service'
 
 export function Register() {
 
@@ -46,6 +46,21 @@ export function Register() {
 
     }
 
+    const deleteRegistration = async ( newSlot) => {
+        
+        try {
+            setIsLoading(true)
+            await slotService.updateSlot(newSlot)
+            socketService.emit(SOCKET_EVENT_UPDATE_SLOT, newSlot)
+            showSuccessMsg(prefs.isEnglish ? 'Registration deleted successfully' : 'רישום נמחק בהצלחה')
+            
+            setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === newSlot._id ? newSlot : prevSlot))
+        } catch (err) {
+            showErrorMsg(prefs.isEnglish ? 'Error deleting registration' : 'שגיאה במחיקת רישום')
+        } finally {
+            setIsLoading(false)
+        }
+    }
   return (
     <div className='register-container'>
         <HeadContainer text={text} />
@@ -53,7 +68,7 @@ export function Register() {
       {poolSlots.map((slot) => (
         <div className="slot-container" key={slot._id}>
 
-          <SlotCard slot={slot} setSlots={setSlots} />
+          <SlotCard slot={slot} setSlots={setSlots} deleteRegistration={deleteRegistration} />
         </div>
         ))}
         </div>
@@ -61,7 +76,7 @@ export function Register() {
         <div className="slots-container">
             {gymSlots.map((slot) => (
                 <div className="slot-container" key={slot._id}>
-                    <SlotCard slot={slot} setSlots={setSlots} />
+                    <SlotCard slot={slot} setSlots={setSlots} deleteRegistration={deleteRegistration} />
                 </div>
             ))}
             </div>

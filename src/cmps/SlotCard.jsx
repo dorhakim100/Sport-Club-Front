@@ -25,7 +25,7 @@ const MODAL_TYPES = {
     LIST: 'list',
 }
 
-export function SlotCard({ slot, setSlots }) {
+export function SlotCard({ slot, setSlots, deleteRegistration }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     const user = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
@@ -74,7 +74,7 @@ export function SlotCard({ slot, setSlots }) {
 
     function getModalContent() {
         if(modalType === MODAL_TYPES.REGISTER) return <RegisterForm isEnglish={prefs.isEnglish} onSubmit={onSubmit} formData={formData} setFormData={setFormData} />
-        if(modalType === MODAL_TYPES.LIST) return <RegistrationList slot={slot} />
+        if(modalType === MODAL_TYPES.LIST) return <RegistrationList slot={slot} deleteRegistration={deleteRegistration} />
         return null
     }
 

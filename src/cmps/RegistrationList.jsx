@@ -7,8 +7,11 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useSelector } from 'react-redux'
+import { IconButton, Tooltip } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
 
-export function RegistrationList({ slot }) {
+
+export function RegistrationList({ slot, deleteRegistration }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const registrations = slot?.registrations || []
   const direction = prefs.isEnglish ? 'ltr' : 'rtl'
@@ -25,10 +28,21 @@ export function RegistrationList({ slot }) {
         >
           <TableCell align={align}>{registration.name || '-'}</TableCell>
           <TableCell align={align}>{registration.phone || '-'}</TableCell>
+          <TableCell align={align}>
+            <Tooltip title={prefs.isEnglish ? 'Delete' : 'מחיקה'}>
+
+            <IconButton onClick={() => onDeleteRegistration(registration.phone)}><DeleteIcon /></IconButton>
+            </Tooltip>
+            
+            </TableCell>
         </TableRow>
       ))
   }
 
+  const onDeleteRegistration = (registrationPhoneToDelete) => {
+    const newSlot = { ...slot, registrations: slot.registrations.filter(registration => registration.phone !== registrationPhoneToDelete) }
+    deleteRegistration(newSlot)
+  }
 
   return (
     <TableContainer
@@ -43,6 +57,7 @@ export function RegistrationList({ slot }) {
             <TableCell align={align}>
               {prefs.isEnglish ? 'Phone' : 'מספר טלפון'}
             </TableCell>
+            <TableCell align={align}>{prefs.isEnglish ? 'Actions' : 'פעולות'}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
