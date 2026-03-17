@@ -80,7 +80,7 @@ export function SlotCard({ slot, setSlots }) {
 
     function _getModalTitle() {
         if(modalType === MODAL_TYPES.REGISTER) return prefs.isEnglish ? 'Register' : 'רישום'
-        if(modalType === MODAL_TYPES.LIST) return prefs.isEnglish ? 'List' : 'רשימה'
+        if(modalType === MODAL_TYPES.LIST) return prefs.isEnglish ? 'Registered List' : 'רשימת נרשמים'
         return ''
     }
 
