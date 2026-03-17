@@ -12,6 +12,9 @@ import { setIsLoading } from "../store/actions/system.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { slotService } from "../services/slot/slot.service";
 import { SOCKET_EVENT_UPDATE_SLOT, socketService } from "../services/socket.service";
+import IconButton from '@mui/material/IconButton';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+
 
 const poolImg = 'https://ik.imagekit.io/n4mhohkzp/mouse-wheel-pool.webp?updatedAt=1755684294789'
 const gymImg = 'https://ik.imagekit.io/n4mhohkzp/facilities-gym.jpg.png?updatedAt=1769599835723'
@@ -20,7 +23,7 @@ export function SlotCard({ slot, setSlots }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     const user = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
-    const [formData, setFormData] = useState({ name: user?.fullname || '', phone: user?.phone || '' })
+    const [formData, setFormData] = useState(_getFormData())
 
     const isRegistered = localStorage.getItem(`registered-${slot._id}`)
 
@@ -54,6 +57,12 @@ export function SlotCard({ slot, setSlots }) {
         }
        
     }
+
+    function _getFormData() {
+        if(user && user.isAdmin) return { name: '', phone: '' }
+        if(user) return { name: user.fullname, phone: user.phone }
+        return { name: '', phone: '' }
+    }
   return <>
   <div className={`slot-card-container ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
 
@@ -64,8 +73,9 @@ export function SlotCard({ slot, setSlots }) {
     </div>
     <div className="content-container">
 
-    <div className="details">
-        <span className="date">{`${formatSlotDate(slot.date)}`}</span>
+    <div className={`details ${user && user.isAdmin ? 'admin-details' : ''}`}>
+      {user && user.isAdmin && <IconButton><FormatListNumberedIcon /></IconButton> }
+        <span className="date">{`${formatSlotDate(slot.date, prefs.isEnglish)}`}</span>
         <span style={{ direction: 'ltr' }}>{formatSlotTimeRange(slot.startTime, slot.endTime)}</span>
     </div>
     <div className="progress-container" style={{ direction: 'ltr' }}>

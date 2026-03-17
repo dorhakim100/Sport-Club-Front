@@ -187,6 +187,7 @@ export function App() {
               <Route path="user" element={<UserIndex />} />
               <Route path="coupon" element={<CouponIndex />} />
               <Route path="coupon/edit/:couponId" element={<CouponEdit />} />
+              <Route path="slot" element={<Register />} />
             </Route>
             <Route path="payment/success" element={<SuccessPage />} />
             <Route path="payment/error" element={<ErrorPage />} />

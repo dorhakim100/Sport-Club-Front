@@ -549,7 +549,7 @@ export function AppHeader() {
       dropdown: false,
       icon: <HomeIcon />,
     },
-    {
+    (user && user.isAdmin) ? null :{
       id: 1,
       title: { eng: 'Register', he: 'רישום' },
       to: 'register',
@@ -810,7 +810,7 @@ export function AppHeader() {
       isOpen: false,
       icon: <InfoIcon />,
     },
-  ])
+  ].filter(link => link))
 
   return (
     <>
@@ -950,6 +950,9 @@ export function AppHeader() {
               }
             >
               {links.map((link, index) => {
+                if (!link) return null
+                if (link.to === 'register' && user?.isAdmin) return null
+
                 if (
                   (link.to === 'admin' && !user) ||
                   (link.to === 'admin' && !user.isAdmin)
@@ -1247,6 +1250,9 @@ export function AppHeader() {
             />
           </NavLink>
           {links.map((link, index) => {
+            if (!link) return null
+            if (link.to === 'register' && user?.isAdmin) return null
+
             if (
               (link.to === 'admin' && !user) ||
               (link.to === 'admin' && !user.isAdmin)

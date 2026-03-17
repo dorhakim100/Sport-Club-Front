@@ -112,8 +112,24 @@
 
     .details {
         display: flex;
-
         gap: 0.5rem;
+        align-items: center;
+        &.admin-details {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto auto;
+            justify-items: start;
+            gap: 0rem 0.5rem;
+
+
+            button{
+                grid-column: 1/2;
+                grid-row: 1/-1;
+            }
+
+
+
+        }
         .date{
 
         }

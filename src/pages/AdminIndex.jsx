@@ -99,6 +99,11 @@ export function AdminIndex() {
     //   eng: 'New Members',
     // },
     {
+      path: 'slot',
+      he: 'רישום מראש',
+      eng: 'Register Ahead',
+    },
+    {
       path: 'user',
       he: 'משתמשים',
       eng: 'Users',

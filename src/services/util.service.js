@@ -188,16 +188,10 @@ export function getCurrMonth() {
   return month < 10 ? `0${month}` : month
 }
 
-export function formatSlotDate(dateValue, locale = 'he') {
+export function formatSlotDate(dateValue, isEnglish = false) {
   const date = dateValue instanceof Date ? dateValue : new Date(dateValue)
 
   if (Number.isNaN(date.getTime())) return ''
-
-  const normalizedLocale = locale?.toLowerCase?.() || 'he'
-  const isEnglish =
-    normalizedLocale === 'en' ||
-    normalizedLocale === 'eng' ||
-    normalizedLocale.startsWith('en-')
 
   const hebrewDays = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת']
   const englishDays = [
