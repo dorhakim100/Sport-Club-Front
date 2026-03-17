@@ -1,0 +1,11 @@
+.registration-list-container {
+    &.dark-mode {
+        .MuiTable-root {
+            background-color: $very-dark-blue;
+            th, tr,td{
+
+                color: $light-gray ;
+            }
+        }
+    }
+}

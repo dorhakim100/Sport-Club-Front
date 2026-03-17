@@ -1,0 +1,8 @@
+.custom-dialog {
+    &.dark-mode {
+        .MuiDialog-paper {
+            background-color: $darkest-blue;
+            color: #fff;
+        }
+    }
+}

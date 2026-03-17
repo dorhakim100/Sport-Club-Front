@@ -99,7 +99,7 @@ export function SlotCard({ slot, setSlots }) {
     <div className="content-container">
 
     <div className={`details ${user && user.isAdmin ? 'admin-details' : ''}`}>
-      {user && user.isAdmin && <IconButton onClick={() => onOpenModal(MODAL_TYPES.LIST)}><FormatListNumberedIcon /></IconButton> }
+      {user && user.isAdmin && <IconButton className={`${prefs.isDarkMode ? 'dark-mode' : ''}`} onClick={() => onOpenModal(MODAL_TYPES.LIST)}><FormatListNumberedIcon /></IconButton> }
         <span className="date">{`${formatSlotDate(slot.date, prefs.isEnglish)}`}</span>
         <span style={{ direction: 'ltr' }}>{formatSlotTimeRange(slot.startTime, slot.endTime)}</span>
     </div>

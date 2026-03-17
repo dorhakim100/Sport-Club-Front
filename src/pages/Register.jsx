@@ -19,11 +19,12 @@ export function Register() {
     const [slots, setSlots] = useState([])
     const [currFilter, setCurrFilter] = useState(slotService.getDefaultFilter())
 
+
     const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool'), [slots])
     const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym'), [slots])
 
     useEffect(() => {
-        fetchSlots()
+        fetchSlots(currFilter)
     }, [currFilter])
 
     useEffect(()=>{
@@ -32,21 +33,10 @@ export function Register() {
         })
     },[])
 
-
-    // Update the filter every minute to get the latest slots
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if(new Date().getMinutes() === 1) 
-            setCurrFilter(slotService.getDefaultFilter())
-        }, 1000 )
-        return () => clearInterval(interval)
-
-    }, [])
-
-    async function fetchSlots() {
+    async function fetchSlots(filter) {
         try {
             setIsLoading(true)
-            const s = await slotService.query(currFilter)
+            const s = await slotService.query(filter)
             setSlots(s)
         } catch (err) {
             showErrorMsg(prefs.isEnglish ? 'Error fetching slots' : 'שגיאה בטעינת שעות רישום')

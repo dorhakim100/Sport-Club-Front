@@ -14,6 +14,22 @@ export function RegistrationList({ slot }) {
   const direction = prefs.isEnglish ? 'ltr' : 'rtl'
   const align = prefs.isEnglish ? 'left' : 'right'
 
+  const getTableContent = () => {
+
+    if(registrations.length === 0) return <TableRow><TableCell align={align}>{prefs.isEnglish ? 'No registrations' : 'אין רישומים'}</TableCell></TableRow>
+
+
+    return registrations.map((registration, idx) => (
+        <TableRow
+          key={`${registration.phone || registration.name || 'reg'}-${idx}`}
+        >
+          <TableCell align={align}>{registration.name || '-'}</TableCell>
+          <TableCell align={align}>{registration.phone || '-'}</TableCell>
+        </TableRow>
+      ))
+  }
+
+
   return (
     <TableContainer
       component={Paper}
@@ -30,14 +46,8 @@ export function RegistrationList({ slot }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {registrations.map((registration, idx) => (
-            <TableRow
-              key={`${registration.phone || registration.name || 'reg'}-${idx}`}
-            >
-              <TableCell align={align}>{registration.name || '-'}</TableCell>
-              <TableCell align={align}>{registration.phone || '-'}</TableCell>
-            </TableRow>
-          ))}
+            
+          {getTableContent()}
         </TableBody>
       </Table>
     </TableContainer>

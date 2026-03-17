@@ -20,7 +20,10 @@ export function CustomDialog({
   return (
     <Dialog open={open} onClose={onClose} maxWidth={maxWidth} fullWidth={fullWidth} sx={{
       direction: prefs.isEnglish ? 'ltr' : 'rtl',
-    }}>
+    }}
+
+    className={`custom-dialog ${prefs.isDarkMode ? 'dark-mode' : ''}`}
+    >
       {title && <DialogTitle>{title}</DialogTitle>}
 
       <DialogContent dividers>{children}</DialogContent>
