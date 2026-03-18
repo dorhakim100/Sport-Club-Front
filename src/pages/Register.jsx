@@ -7,6 +7,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { slotService } from '../services/slot/slot.service'
 import { setIsLoading } from '../store/actions/system.actions'
 import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED, SOCKET_EVENT_UPDATE_SLOT, SOCKET_EVENT_ADD_SLOT } from '../services/socket.service'
+import { ContactUs } from '../cmps/ContactUs'
 
 export function Register() {
 
@@ -90,6 +91,7 @@ export function Register() {
                 </div>
             ))}
             </div>
+            <ContactUs/>
     </div>
   )
 }

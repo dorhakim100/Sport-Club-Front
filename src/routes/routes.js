@@ -1,6 +1,7 @@
 export const routes = [
   { title: { eng: 'Admin', he: 'מנהל' }, value: '/admin', type: 'admin' },
   { title: { eng: 'Home', he: 'בית' }, value: '/', type: 'home' },
+  {title:{eng:'Register', he:'רישום'}, value:'/register', type:'register'},
   {
     title: { eng: 'Updates', he: 'עדכונים' },
     value: '/update',
