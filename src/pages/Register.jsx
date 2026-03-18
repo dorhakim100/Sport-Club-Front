@@ -81,7 +81,6 @@ export function Register() {
 
     const onNextDay = () => {
         const filterToSet = slotService.getDatePaginationFilter(currFilter, 1)
-        console.log('filterToSet', filterToSet)
         setCurrFilter(filterToSet)
         setPageDirection(1)
     }
@@ -89,7 +88,6 @@ export function Register() {
     const onPreviousDay = () => {
 
         const filterToSet = slotService.getDatePaginationFilter(currFilter, -1)
-        console.log('filterToSet', filterToSet)
         setCurrFilter(filterToSet)
         setPageDirection(-1)
     }
