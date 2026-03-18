@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import IconButton from '@mui/material/IconButton'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { useSelector } from 'react-redux'
 
 import { formatSlotDate } from '../services/util.service'
 
@@ -13,8 +14,9 @@ export function RegisterDayControlls({
   isPreviousDisabled,
   isNextDisabled,
 }) {
+  const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   return (
-    <div className='day-controlls-container'>
+    <div className={`day-controlls-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
       <IconButton onClick={onPreviousDay} disabled={isPreviousDisabled}>
         {isEnglish ? <ArrowBackIcon /> : <ArrowForwardIcon />}
       </IconButton>

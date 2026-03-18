@@ -17,4 +17,13 @@
         gap: 1em;
         overflow-x: auto;
     }
+
+    .no-slots-container {
+        margin-block: 1em;
+
+        span{
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    }
 }

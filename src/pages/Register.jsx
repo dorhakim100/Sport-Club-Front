@@ -29,6 +29,7 @@ export function Register() {
 
     const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool'), [slots])
     const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym'), [slots])
+    const slotsLength = useMemo(() => slots.length, [slots])
 
     useEffect(() => {
         fetchSlots(currFilter)
@@ -131,6 +132,8 @@ export function Register() {
         />
         <SlideAnimation motionKey={currFilter.date} direction={pageDirection} className="slots-animation-container">
 
+        {slotsLength > 0 ? 
+        <>
         <div className="slots-container">
       {poolSlots.map((slot) => (
           <div className="slot-container" key={slot._id}>
@@ -147,6 +150,12 @@ export function Register() {
                 </div>
             ))}
             </div>
+            </>
+            :
+            <div className="no-slots-container">
+                <span>{prefs.isEnglish ? 'No available slots found' : 'לא נמצאו שעות זמינות'}</span>
+            </div>
+            }
             </SlideAnimation>
             <ContactUs/>
     </div>

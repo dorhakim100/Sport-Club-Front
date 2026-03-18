@@ -9,4 +9,10 @@
         font-weight: bold;
     }
     
+    &.dark-mode{
+        button{
+
+            color: $light-gray;
+        }
+    }
 }
