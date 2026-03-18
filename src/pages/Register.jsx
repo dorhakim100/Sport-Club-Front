@@ -9,11 +9,7 @@ import { setIsLoading } from '../store/actions/system.actions'
 import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED, SOCKET_EVENT_UPDATE_SLOT, SOCKET_EVENT_ADD_SLOT } from '../services/socket.service'
 import { ContactUs } from '../cmps/ContactUs'
 import { SlideAnimation } from '../cmps/SlideAnimation'
-import { formatSlotDate } from '../services/util.service'
-
-import IconButton from '@mui/material/IconButton';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { RegisterDayControlls } from '../cmps/RegisterDayControlls'
 
 export function Register() {
 
@@ -42,15 +38,15 @@ export function Register() {
         socketService.on(SOCKET_EVENT_ADD_SLOT_REGISTERED, (slot) => {
             setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slot._id ? slot : prevSlot))
         })
-        socketService.on(SOCKET_EVENT_ADD_SLOT, (startTime) => {
-            const filter = slotService.getDefaultFilter()
-            fetchSlots(filter)
-            showSuccessMsg(prefs.isEnglish ? 'New hours added successfully' : 'שעות חדשות נפתחו')
-        })
+        // socketService.on(SOCKET_EVENT_ADD_SLOT, (startTime) => {
+        //     const filter = slotService.getDefaultFilter()
+        //     fetchSlots(filter)
+        //     showSuccessMsg(prefs.isEnglish ? 'New hours added successfully' : 'שעות חדשות נפתחו')
+        // })
 
         return () => {
             socketService.off(SOCKET_EVENT_ADD_SLOT_REGISTERED)
-            socketService.off(SOCKET_EVENT_ADD_SLOT)
+            // socketService.off(SOCKET_EVENT_ADD_SLOT)
         }
     },[])
 
@@ -129,16 +125,14 @@ export function Register() {
   return (
     <div className='register-container'>
         <HeadContainer text={text} />
-        <div className="day-controlls-container">
-
-        <IconButton onClick={onPreviousDay} disabled={getPreviousDisabled()}>
-            {prefs.isEnglish ? <ArrowBackIcon /> : <ArrowForwardIcon />}
-        </IconButton>
-        <span>{formatSlotDate(currFilter.date, prefs.isEnglish)}</span>
-        <IconButton onClick={onNextDay} disabled={getNextDisabled()}>
-           {prefs.isEnglish ? <ArrowForwardIcon /> : <ArrowBackIcon />}
-        </IconButton>
-        </div>
+        <RegisterDayControlls
+          date={currFilter.date}
+          isEnglish={prefs.isEnglish}
+          onPreviousDay={onPreviousDay}
+          onNextDay={onNextDay}
+          isPreviousDisabled={getPreviousDisabled()}
+          isNextDisabled={getNextDisabled()}
+        />
         <SlideAnimation motionKey={currFilter.date} direction={pageDirection}>
 
         <div className="slots-container">
