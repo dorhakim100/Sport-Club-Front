@@ -83,8 +83,7 @@ export function Register() {
         const filterToSet = slotService.getDatePaginationFilter(currFilter, 1)
         console.log('filterToSet', filterToSet)
         setCurrFilter(filterToSet)
-        const multDirection = prefs.isEnglish ? 1 : -1
-        setPageDirection(multDirection)
+        setPageDirection(1)
     }
 
     const onPreviousDay = () => {
@@ -92,8 +91,7 @@ export function Register() {
         const filterToSet = slotService.getDatePaginationFilter(currFilter, -1)
         console.log('filterToSet', filterToSet)
         setCurrFilter(filterToSet)
-        const multDirection = prefs.isEnglish ? 1 : -1
-        setPageDirection(multDirection)
+        setPageDirection(-1)
     }
 
     const getPreviousDisabled = () => {

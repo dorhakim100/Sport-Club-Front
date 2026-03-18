@@ -14,7 +14,7 @@ export function SlideAnimation({
   onClick,
 }) {
   const isRtl = useSelector(
-    (state) => state.systemModule.prefs.lang === 'he'
+    (state) => !state.systemModule.prefs.isEnglish
   )
   const effectiveDirection = useMemo(
     () => (isRtl ? -direction : direction),
