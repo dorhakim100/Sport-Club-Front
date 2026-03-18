@@ -129,7 +129,7 @@ export function Register() {
           isPreviousDisabled={getPreviousDisabled()}
           isNextDisabled={getNextDisabled()}
         />
-        <SlideAnimation motionKey={currFilter.date} direction={pageDirection}>
+        <SlideAnimation motionKey={currFilter.date} direction={pageDirection} className="slots-animation-container">
 
         <div className="slots-container">
       {poolSlots.map((slot) => (
