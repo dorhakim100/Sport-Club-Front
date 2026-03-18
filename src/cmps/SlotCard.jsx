@@ -15,6 +15,7 @@ import { SOCKET_EVENT_UPDATE_SLOT, socketService } from "../services/socket.serv
 import IconButton from '@mui/material/IconButton';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import {RegistrationList} from "./RegistrationList";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const poolImg = 'https://ik.imagekit.io/n4mhohkzp/mouse-wheel-pool.webp?updatedAt=1755684294789'
@@ -33,7 +34,9 @@ export function SlotCard({ slot, setSlots, deleteRegistration }) {
 
     const [modalType, setModalType] = useState(MODAL_TYPES.REGISTER)
 
-    const isRegistered = localStorage.getItem(`registered-${slot._id}`)
+    const [registeredObject, setRegisteredObject] = useState(JSON.parse(localStorage.getItem(`registered-${slot._id}`)) || null)
+    
+    
 
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
@@ -47,6 +50,11 @@ export function SlotCard({ slot, setSlots, deleteRegistration }) {
             return
         }
 
+        if(!formData.phone || !formData.name){
+            showErrorMsg(prefs.isEnglish ? 'Please fill in all fields' : 'יש למלא את כל השדות')
+            return
+        }
+
         try {
             setIsLoading(true)
             const registered = await slotService.register(slot._id, formData)
@@ -56,7 +64,13 @@ export function SlotCard({ slot, setSlots, deleteRegistration }) {
             setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slot._id ? registered : prevSlot))
             setIsModal(false)
             if(user && user.isAdmin) return
-            localStorage.setItem(`registered-${slot._id}`, true)
+            const registeredObject = {
+                 isRegistered: true, _id: slot._id,
+                name: formData.name,
+                 phone: formData.phone
+             }
+            localStorage.setItem(`registered-${slot._id}`, JSON.stringify(registeredObject))
+            setRegisteredObject(registeredObject)
         } catch (err) {
             showErrorMsg(prefs.isEnglish ? 'Error registering' : 'שגיאה ברישום')
             
@@ -88,6 +102,35 @@ export function SlotCard({ slot, setSlots, deleteRegistration }) {
         setIsModal(true)
         setModalType(type)
     }
+
+    const onCancelRegistration = async () => {
+        console.log('onCancelRegistration', slot._id)
+        const registeredObject = JSON.parse(localStorage.getItem(`registered-${slot._id}`)) || null
+        console.log('registeredObject', registeredObject)
+        if(!registeredObject || !registeredObject?.isRegistered || !registeredObject?.phone) return
+        
+        const newSlot = { ...slot, registrations: slot.registrations.filter(registration => registration.phone !== registeredObject.phone) }
+
+        try {
+            setIsLoading(true)
+            await deleteRegistration(newSlot)
+            showSuccessMsg(prefs.isEnglish ? 'Registration canceled successfully' : 'רישום נמחק בהצלחה')
+            setRegisteredObject(null)
+            localStorage.removeItem(`registered-${slot._id}`)
+        } catch (err) {
+            showErrorMsg(prefs.isEnglish ? 'Error canceling registration' : 'שגיאה במחיקת רישום')
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const getRegistrationButton = () => {
+        if(registeredObject && registeredObject?.isRegistered) return <span className="registered-text"><HowToRegIcon />{prefs.isEnglish ? 'Registered' : 'רישום בוצע'}
+        <IconButton color='error' onClick={() => onCancelRegistration()}><DeleteIcon /></IconButton>
+        </span>
+        return <Button variant="contained" color="primary" onClick={() => onOpenModal(MODAL_TYPES.REGISTER)} disabled={slot.registrations.length >= slot.capacity}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
+    }
+
   return <>
   <div className={`slot-card-container ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
 
@@ -111,13 +154,7 @@ export function SlotCard({ slot, setSlots, deleteRegistration }) {
         <span>{`${slot.capacity}`}</span>
       </div>
 
-{!isRegistered ? (
-      <Button variant="contained" color="primary" onClick={() => onOpenModal(MODAL_TYPES.REGISTER)} disabled={slot.registrations.length >= slot.capacity}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
-      )
-    : (
-        <span className="registered-text"><HowToRegIcon />{prefs.isEnglish ? 'Registered' : 'רישום בוצע'}</span>
-    )
-    }
+{getRegistrationButton()}
 
     </div>
   </div>
