@@ -64,15 +64,16 @@ export function Register() {
 
     }
 
-    const deleteRegistration = async ( newSlot) => {
-        
+    const cancelRegistration = async ( slotId, phoneToDelete) => {
+
         try {
             setIsLoading(true)
-            await slotService.updateSlot(newSlot)
-            socketService.emit(SOCKET_EVENT_UPDATE_SLOT, newSlot)
+            const updatedSlot = await slotService.cancelRegistration(slotId, phoneToDelete)
+            socketService.emit(SOCKET_EVENT_UPDATE_SLOT, updatedSlot)
             showSuccessMsg(prefs.isEnglish ? 'Registration deleted successfully' : 'רישום נמחק בהצלחה')
+            setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slotId ? updatedSlot : prevSlot))
             
-            setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === newSlot._id ? newSlot : prevSlot))
+
         } catch (err) {
             showErrorMsg(prefs.isEnglish ? 'Error deleting registration' : 'שגיאה במחיקת רישום')
         } finally {
@@ -138,7 +139,7 @@ export function Register() {
       {poolSlots.map((slot) => (
           <div className="slot-container" key={slot._id}>
 
-          <SlotCard slot={slot} setSlots={setSlots} deleteRegistration={deleteRegistration} />
+          <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} />
         </div>
         ))}
         </div>
@@ -146,7 +147,7 @@ export function Register() {
         <div className="slots-container">
             {gymSlots.map((slot) => (
                 <div className="slot-container" key={slot._id}>
-                    <SlotCard slot={slot} setSlots={setSlots} deleteRegistration={deleteRegistration} />
+                    <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} />
                 </div>
             ))}
             </div>

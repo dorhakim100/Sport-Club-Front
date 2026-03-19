@@ -6,6 +6,7 @@ export const slotService = {
   query,
   register,
   updateSlot,
+  cancelRegistration,
   getDefaultFilter,
   getDatePaginationFilter,
 }
@@ -21,6 +22,14 @@ async function query(filterBy = getDefaultFilter()) {
 async function register(slotId, registrationData = {}) {
   try {
     return await httpService.put(`${KEY}/${slotId}/register`, registrationData)
+  } catch (err) {
+    throw err
+  }
+}
+
+async function cancelRegistration(slotId, phoneToDelete) {
+  try {
+    return await httpService.put(`${KEY}/${slotId}/cancel`, { phoneToDelete })
   } catch (err) {
     throw err
   }

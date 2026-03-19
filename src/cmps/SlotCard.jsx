@@ -26,7 +26,7 @@ const MODAL_TYPES = {
     LIST: 'list',
 }
 
-export function SlotCard({ slot, setSlots, deleteRegistration }) {
+export function SlotCard({ slot, setSlots, cancelRegistration }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     const user = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
@@ -88,7 +88,7 @@ export function SlotCard({ slot, setSlots, deleteRegistration }) {
 
     function getModalContent() {
         if(modalType === MODAL_TYPES.REGISTER) return <RegisterForm isEnglish={prefs.isEnglish} onSubmit={onSubmit} formData={formData} setFormData={setFormData} />
-        if(modalType === MODAL_TYPES.LIST) return <RegistrationList slot={slot} deleteRegistration={deleteRegistration} />
+        if(modalType === MODAL_TYPES.LIST) return <RegistrationList slot={slot} cancelRegistration={cancelRegistration} />
         return null
     }
 
@@ -105,16 +105,14 @@ export function SlotCard({ slot, setSlots, deleteRegistration }) {
     }
 
     const onCancelRegistration = async () => {
-        console.log('onCancelRegistration', slot._id)
         const registeredObject = JSON.parse(localStorage.getItem(`registered-${slot._id}`)) || null
-        console.log('registeredObject', registeredObject)
         if(!registeredObject || !registeredObject?.isRegistered || !registeredObject?.phone) return
         
-        const newSlot = { ...slot, registrations: slot.registrations.filter(registration => registration.phone !== registeredObject.phone) }
+        const phoneToDelete = registeredObject.phone
 
         try {
             setIsLoading(true)
-            await deleteRegistration(newSlot)
+            await cancelRegistration(slot._id, phoneToDelete)
             showSuccessMsg(prefs.isEnglish ? 'Registration canceled successfully' : 'רישום נמחק בהצלחה')
             setRegisteredObject(null)
             localStorage.removeItem(`registered-${slot._id}`)

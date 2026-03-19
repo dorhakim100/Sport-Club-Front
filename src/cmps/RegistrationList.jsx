@@ -11,7 +11,7 @@ import { IconButton, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 
-export function RegistrationList({ slot, deleteRegistration }) {
+export function RegistrationList({ slot, cancelRegistration }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const registrations = slot?.registrations || []
   const direction = prefs.isEnglish ? 'ltr' : 'rtl'
@@ -31,7 +31,7 @@ export function RegistrationList({ slot, deleteRegistration }) {
           <TableCell align={align}>
             <Tooltip title={prefs.isEnglish ? 'Delete' : 'מחיקה'}>
 
-            <IconButton color='error' onClick={() => onDeleteRegistration(registration.phone)}><DeleteIcon /></IconButton>
+            <IconButton color='error' onClick={() => onCancelRegistration(registration.phone)}><DeleteIcon /></IconButton>
             </Tooltip>
             
             </TableCell>
@@ -39,9 +39,9 @@ export function RegistrationList({ slot, deleteRegistration }) {
       ))
   }
 
-  const onDeleteRegistration = (registrationPhoneToDelete) => {
-    const newSlot = { ...slot, registrations: slot.registrations.filter(registration => registration.phone !== registrationPhoneToDelete) }
-    deleteRegistration(newSlot)
+  const onCancelRegistration = (registrationPhoneToDelete) => {
+
+    cancelRegistration(slot._id, registrationPhoneToDelete)
   }
 
   return (
