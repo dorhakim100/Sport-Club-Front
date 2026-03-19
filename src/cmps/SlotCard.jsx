@@ -93,6 +93,7 @@ export function SlotCard({ slot, setSlots, deleteRegistration }) {
     }
 
     function _getModalTitle() {
+        return `${formatSlotDate(slot.date, prefs.isEnglish)}, ${formatSlotTimeRange(slot.startTime, slot.endTime)}`
         if(modalType === MODAL_TYPES.REGISTER) return prefs.isEnglish ? 'Register' : 'רישום'
         if(modalType === MODAL_TYPES.LIST) return prefs.isEnglish ? 'Registered List' : 'רשימת נרשמים'
         return ''
