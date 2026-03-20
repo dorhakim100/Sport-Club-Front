@@ -26,7 +26,7 @@ const MODAL_TYPES = {
     LIST: 'list',
 }
 
-export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilityRegistered, setFacilityRegistered }) {
+export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilityRegistered, setFacilityRegistered, currSlots }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     const user = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
@@ -39,6 +39,10 @@ export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilit
         const isRegisterDisabled = useMemo(()=>{
         return disabled || slot.registrations.length >= slot.capacity
     },[disabled, slot.registrations.length, slot.capacity])
+
+    const isCurrSlot = useMemo(()=>{
+        return currSlots.find(currSlot => currSlot._id === slot._id)
+    },[currSlots, slot._id])
 
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
@@ -145,8 +149,10 @@ export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilit
         return <Button variant="contained" color="primary" onClick={() => onOpenModal(MODAL_TYPES.REGISTER)} disabled={isRegisterDisabled}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
     }
 
+
+
   return <>
-  <div className={`slot-card-container ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
+  <div className={`slot-card-container ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''} ${isCurrSlot ? 'curr-slot' : ''}`}>
 
 
     <div className={`thumbnail ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''} ${prefs.isEnglish ? 'eng' : ''}`}>

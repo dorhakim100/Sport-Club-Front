@@ -10,7 +10,7 @@ import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED, SOCKET_EVENT_UPDATE_SL
 import { ContactUs } from '../cmps/ContactUs'
 import { SlideAnimation } from '../cmps/SlideAnimation'
 import { RegisterDayControlls } from '../cmps/RegisterDayControlls'
-
+import { formatTimeValue } from '../services/util.service'
 export function Register() {
 
     const text = {
@@ -26,6 +26,8 @@ export function Register() {
 
     const [facilityRegistered, setFacilityRegistered] = useState(JSON.parse(localStorage.getItem(`registered-${currFilter.date}`)) || {})
 
+    const [currHour, setCurrHour] = useState(new Date().getHours())
+
     
         const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool'), [slots])
         const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym'), [slots])
@@ -40,6 +42,11 @@ const gymDisabled = useMemo(()=>{
     return facilityRegistered.gym
 
 },[facilityRegistered,currFilter.date])
+
+const currSlots = useMemo(()=>{
+    
+    return slots.filter(slot=>formatTimeValue(slot.startTime) === `${currHour}:00`) || []
+},[slots,currFilter.date,currHour])
 
     useEffect(() => {
         fetchSlots(currFilter)
@@ -57,9 +64,15 @@ const gymDisabled = useMemo(()=>{
         //     showSuccessMsg(prefs.isEnglish ? 'New hours added successfully' : 'שעות חדשות נפתחו')
         // })
 
+        const interval = setInterval(()=>{
+            if(new Date().getHours() !== currHour) return
+            setCurrHour(new Date().getHours())
+        },1000)
+
         return () => {
             socketService.off(SOCKET_EVENT_ADD_SLOT_REGISTERED)
             // socketService.off(SOCKET_EVENT_ADD_SLOT)
+            clearInterval(interval)
         }
     },[])
 
@@ -158,7 +171,7 @@ const gymDisabled = useMemo(()=>{
       {poolSlots.map((slot) => (
           <div className="slot-container" key={slot._id}>
 
-          <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={poolDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} />
+          <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={poolDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} currSlots={currSlots}/>
         </div>
         ))}
         </div>
@@ -166,7 +179,7 @@ const gymDisabled = useMemo(()=>{
         <div className="slots-container">
             {gymSlots.map((slot) => (
                 <div className="slot-container" key={slot._id}>
-                    <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={gymDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} />
+                    <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={gymDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} currSlots={currSlots} />
                 </div>
             ))}
             </div>

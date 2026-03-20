@@ -13,6 +13,25 @@
     
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     border-inline-start: 12px solid;
+
+    &.curr-slot{
+        position: relative;
+        background: linear-gradient(
+            135deg,
+            rgba(69, 156, 223, 0.192) 20%,
+            rgba(78, 197, 82, 0.178) 100%
+        );            width: 10px;
+        
+     
+        &.dark-mode{
+            background: $dark-gray;
+                .date, .time{
+                    text-shadow: 0 2px 8px $dark-blue;
+                }
+
+        }
+
+    }
   &.pool{
 
             border-color: $primary-light-blue;
