@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 import { formatSlotDate, formatSlotTimeRange } from "../services/util.service";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import {CustomDialog} from "./CustomDialog";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { RegisterForm } from "./RegisterForm";
 import { setIsLoading } from "../store/actions/system.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
@@ -37,12 +37,18 @@ export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilit
     const [registeredObject, setRegisteredObject] = useState(JSON.parse(localStorage.getItem(`registered-${slot._id}`)) || null)
     
         const isRegisterDisabled = useMemo(()=>{
-        return disabled || slot.registrations.length >= slot.capacity
+        return  slot.registrations.length >= slot.capacity
+        // return disabled || slot.registrations.length >= slot.capacity
     },[disabled, slot.registrations.length, slot.capacity])
 
     const isCurrSlot = useMemo(()=>{
         return currSlots.find(currSlot => currSlot._id === slot._id)
     },[currSlots, slot._id])
+
+    useEffect(()=>{
+        if(!slot._id) return
+        setRegisteredObject(JSON.parse(localStorage.getItem(`registered-${slot._id}`)) || null)
+    },[slot._id])
 
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
@@ -62,7 +68,7 @@ export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilit
         }
 
         if(facilityRegistered[slot.facility]){
-            showErrorMsg(prefs.isEnglish ? 'You are already registered to this facility on this date' : 'ניתן להירשם לשעה ביום')
+            showErrorMsg(prefs.isEnglish ? 'You are already registered to this facility on this date' : 'ניתן להירשם לכל פעילות פעם ביום')
             return
         }
 

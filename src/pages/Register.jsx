@@ -45,8 +45,9 @@ const gymDisabled = useMemo(()=>{
 
 const currSlots = useMemo(()=>{
     
-    return slots.filter(slot=>formatTimeValue(slot.startTime) === `${currHour}:00`) || []
-},[slots,currFilter.date,currHour])
+    
+    return slots.filter(slot=>(formatTimeValue(slot.startTime) === `${currHour}:00`) && slot.date === new Date().toISOString().split('T')[0]) || []
+},[slots,currHour])
 
     useEffect(() => {
         fetchSlots(currFilter)
@@ -65,7 +66,7 @@ const currSlots = useMemo(()=>{
         // })
 
         const interval = setInterval(()=>{
-            if(new Date().getHours() !== currHour) return
+            if(new Date().getHours() === currHour) return
             setCurrHour(new Date().getHours())
         },1000)
 
