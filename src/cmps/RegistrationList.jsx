@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper'
 import { useSelector } from 'react-redux'
 import { IconButton, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { capitalizeFirstLetter } from '../services/util.service'
 
 
 export function RegistrationList({ slot, cancelRegistration }) {
@@ -26,7 +27,7 @@ export function RegistrationList({ slot, cancelRegistration }) {
         <TableRow
           key={`${registration.phone || registration.name || 'reg'}-${idx}`}
         >
-          <TableCell align={align}>{registration.name || '-'}</TableCell>
+          <TableCell align={align}>{capitalizeFirstLetter(registration.name) || '-'}</TableCell>
           <TableCell align={align}>{registration.phone || '-'}</TableCell>
           <TableCell align={align}>
             <Tooltip title={prefs.isEnglish ? 'Delete' : 'מחיקה'}>
