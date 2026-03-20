@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 import { formatSlotDate, formatSlotTimeRange } from "../services/util.service";
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import {CustomDialog} from "./CustomDialog";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { RegisterForm } from "./RegisterForm";
 import { setIsLoading } from "../store/actions/system.actions";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
@@ -26,7 +26,7 @@ const MODAL_TYPES = {
     LIST: 'list',
 }
 
-export function SlotCard({ slot, setSlots, cancelRegistration }) {
+export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilityRegistered, setFacilityRegistered }) {
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
     const user = useSelector((storeState) => storeState.userModule.user)
     const [isModal, setIsModal] = useState(false)
@@ -36,7 +36,9 @@ export function SlotCard({ slot, setSlots, cancelRegistration }) {
 
     const [registeredObject, setRegisteredObject] = useState(JSON.parse(localStorage.getItem(`registered-${slot._id}`)) || null)
     
-    
+        const isRegisterDisabled = useMemo(()=>{
+        return disabled || slot.registrations.length >= slot.capacity
+    },[disabled, slot.registrations.length, slot.capacity])
 
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
@@ -52,6 +54,11 @@ export function SlotCard({ slot, setSlots, cancelRegistration }) {
 
         if(!formData.phone || !formData.name){
             showErrorMsg(prefs.isEnglish ? 'Please fill in all fields' : 'יש למלא את כל השדות')
+            return
+        }
+
+        if(facilityRegistered[slot.facility]){
+            showErrorMsg(prefs.isEnglish ? 'You are already registered to this facility on this date' : 'ניתן להירשם לשעה ביום')
             return
         }
 
@@ -71,6 +78,12 @@ export function SlotCard({ slot, setSlots, cancelRegistration }) {
              }
             localStorage.setItem(`registered-${slot._id}`, JSON.stringify(registeredObject))
             setRegisteredObject(registeredObject)
+            const facilityRegisteredToSet = {
+                ...facilityRegistered,
+                [slot.facility]: true
+            }
+            setFacilityRegistered(facilityRegisteredToSet)
+            localStorage.setItem(`registered-${slot.date}`,JSON.stringify(facilityRegisteredToSet))
         } catch (err) {
             showErrorMsg(prefs.isEnglish ? 'Error registering' : 'שגיאה ברישום')
             
@@ -123,11 +136,13 @@ export function SlotCard({ slot, setSlots, cancelRegistration }) {
         }
     }
 
+
+
     const getRegistrationButton = () => {
         if(registeredObject && registeredObject?.isRegistered) return <span className="registered-text"><HowToRegIcon />{prefs.isEnglish ? 'Registered' : 'רישום בוצע'}
         <IconButton color='error' onClick={() => onCancelRegistration()}><DeleteIcon /></IconButton>
         </span>
-        return <Button variant="contained" color="primary" onClick={() => onOpenModal(MODAL_TYPES.REGISTER)} disabled={slot.registrations.length >= slot.capacity}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
+        return <Button variant="contained" color="primary" onClick={() => onOpenModal(MODAL_TYPES.REGISTER)} disabled={isRegisterDisabled}><HowToRegIcon />{prefs.isEnglish ? 'Register' : 'רישום'}</Button>
     }
 
   return <>

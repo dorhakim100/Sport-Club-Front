@@ -24,15 +24,27 @@ export function Register() {
 
     const [pageDirection, setPageDirection] = useState(1)
 
+    const [facilityRegistered, setFacilityRegistered] = useState(JSON.parse(localStorage.getItem(`registered-${currFilter.date}`)) || {})
 
+    
+        const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool'), [slots])
+        const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym'), [slots])
+        const slotsLength = useMemo(() => slots.length, [slots])
 
+const poolDisabled = useMemo(()=>{
+    return facilityRegistered.pool
 
-    const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool'), [slots])
-    const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym'), [slots])
-    const slotsLength = useMemo(() => slots.length, [slots])
+},[facilityRegistered,currFilter.date])
+
+const gymDisabled = useMemo(()=>{
+    return facilityRegistered.gym
+
+},[facilityRegistered,currFilter.date])
 
     useEffect(() => {
         fetchSlots(currFilter)
+        const facilityRegistered = JSON.parse(localStorage.getItem(`registered-${currFilter.date}`)) || {}
+        setFacilityRegistered(facilityRegistered)
     }, [currFilter])
 
     useEffect(()=>{
@@ -72,7 +84,12 @@ export function Register() {
             socketService.emit(SOCKET_EVENT_UPDATE_SLOT, updatedSlot)
             showSuccessMsg(prefs.isEnglish ? 'Registration deleted successfully' : 'רישום נמחק בהצלחה')
             setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slotId ? updatedSlot : prevSlot))
-            
+            const facilityRegisteredToSet = {
+                ...facilityRegistered,
+                [updatedSlot.facility]: false
+            }
+            setFacilityRegistered(facilityRegisteredToSet)
+            localStorage.setItem(`registered-${currFilter.date}`,JSON.stringify(facilityRegisteredToSet))
 
         } catch (err) {
             showErrorMsg(prefs.isEnglish ? 'Error deleting registration' : 'שגיאה במחיקת רישום')
@@ -120,6 +137,8 @@ export function Register() {
         return currDayStart.getTime() === maxDate.getTime()
     }
 
+    
+
   return (
     <div className='register-container'>
         <HeadContainer text={text} />
@@ -139,7 +158,7 @@ export function Register() {
       {poolSlots.map((slot) => (
           <div className="slot-container" key={slot._id}>
 
-          <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} />
+          <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={poolDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} />
         </div>
         ))}
         </div>
@@ -147,7 +166,7 @@ export function Register() {
         <div className="slots-container">
             {gymSlots.map((slot) => (
                 <div className="slot-container" key={slot._id}>
-                    <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} />
+                    <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={gymDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} />
                 </div>
             ))}
             </div>
