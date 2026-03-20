@@ -134,7 +134,7 @@ export function SlotCard({ slot, setSlots, cancelRegistration }) {
   <div className={`slot-card-container ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
 
 
-    <div className={`thumbnail ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
+    <div className={`thumbnail ${slot.facility.toLowerCase()} ${prefs.isDarkMode ? 'dark-mode' : ''} ${prefs.isEnglish ? 'eng' : ''}`}>
         <img src={slot.facility.toLowerCase() === 'pool' ? poolImg : gymImg} alt={slot.facility} />
         <span>{`${prefs.isEnglish ? 'Entrance to' : 'כניסה ל'}${modifyFacilityName(slot.facility)}`}</span>
     </div>
@@ -142,8 +142,8 @@ export function SlotCard({ slot, setSlots, cancelRegistration }) {
 
     <div className={`details ${user && user.isAdmin ? 'admin-details' : ''}`}>
       {user && user.isAdmin && <IconButton className={`${prefs.isDarkMode ? 'dark-mode' : ''}`} onClick={() => onOpenModal(MODAL_TYPES.LIST)}><FormatListNumberedIcon /></IconButton> }
+        <span style={{ direction: 'ltr' }} className="time">{formatSlotTimeRange(slot.startTime, slot.endTime)}</span>
         <span className="date">{`${formatSlotDate(slot.date, prefs.isEnglish)}`}</span>
-        <span style={{ direction: 'ltr' }}>{formatSlotTimeRange(slot.startTime, slot.endTime)}</span>
     </div>
     <div className="progress-container" style={{ direction: 'ltr' }}>
       <GroupIcon />
