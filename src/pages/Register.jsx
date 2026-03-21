@@ -44,10 +44,12 @@ const gymDisabled = useMemo(()=>{
 },[facilityRegistered,currFilter.date])
 
 const currSlots = useMemo(()=>{
+    const hourToSet = currHour < 10 ? `0${currHour}` : currHour
     
-    
-    return slots.filter(slot=>(formatTimeValue(slot.startTime) === `${currHour}:00`) && slot.date === new Date().toISOString().split('T')[0]) || []
+    return slots.filter(slot=>(formatTimeValue(slot.startTime) === `${hourToSet}:00`) && slot.date === new Date().toISOString().split('T')[0]) || []
 },[slots,currHour])
+
+
 
     useEffect(() => {
         fetchSlots(currFilter)
@@ -60,11 +62,12 @@ const currSlots = useMemo(()=>{
             setSlots(prevSlots => prevSlots.map(prevSlot => prevSlot._id === slot._id ? slot : prevSlot))
         })
         // socketService.on(SOCKET_EVENT_ADD_SLOT, (startTime) => {
-        //     const filter = slotService.getDefaultFilter()
-        //     fetchSlots(filter)
-        //     showSuccessMsg(prefs.isEnglish ? 'New hours added successfully' : 'שעות חדשות נפתחו')
-        // })
-
+            //     const filter = slotService.getDefaultFilter()
+            //     fetchSlots(filter)
+            //     showSuccessMsg(prefs.isEnglish ? 'New hours added successfully' : 'שעות חדשות נפתחו')
+            // })
+        setCurrHour(new Date().getHours())
+            
         const interval = setInterval(()=>{
             if(new Date().getHours() === currHour) return
             setCurrHour(new Date().getHours())
