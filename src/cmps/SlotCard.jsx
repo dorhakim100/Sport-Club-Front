@@ -34,7 +34,7 @@ export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilit
 
     const [modalType, setModalType] = useState(MODAL_TYPES.REGISTER)
 
-    const [registeredObject, setRegisteredObject] = useState(JSON.parse(localStorage.getItem(`registered-${slot._id}`)) || null)
+    const [registeredObject, setRegisteredObject] = useState(null)
     
         const isRegisterDisabled = useMemo(()=>{
         return  slot.registrations.length >= slot.capacity
@@ -47,8 +47,9 @@ export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilit
 
     useEffect(()=>{
         if(!slot._id) return
-        setRegisteredObject(JSON.parse(localStorage.getItem(`registered-${slot._id}`)) || null)
-    },[slot._id])
+        const registeredObjectToSet = localStorage.getItem(`registered-${slot._id}`)
+        if(registeredObjectToSet !== JSON.stringify(registeredObject))setRegisteredObject(JSON.parse(registeredObjectToSet) || null)
+    },[slot])
 
     const modifyFacilityName = (facility) => {
         if (facility === 'pool') return prefs.isEnglish ? ' the Pool' : 'בריכה'
@@ -95,6 +96,15 @@ export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilit
             setFacilityRegistered(facilityRegisteredToSet)
             localStorage.setItem(`registered-${slot.date}`,JSON.stringify(facilityRegisteredToSet))
         } catch (err) {
+
+            const alreadyRegistered = 'User already registered for this slot today'
+            const errorMessage = err.response.data.err
+
+            if(alreadyRegistered === errorMessage) {
+                showErrorMsg(prefs.isEnglish ? 'You are already registered to this facility on this date' : 'ניתן להירשם לכל פעילות פעם ביום')
+                return
+            }
+        
             showErrorMsg(prefs.isEnglish ? 'Error registering' : 'שגיאה ברישום')
             
         }       finally {
