@@ -27,6 +27,7 @@
     min-width: 300px;
     z-index: 999;
     max-width: 800px;
+ 
 
     &.member-message {
       // grid-template-rows: auto auto 200px auto;
@@ -61,6 +62,8 @@
     span {
       font-size: 1.5em;
       font-family: assistantRegular;
+      max-height: 80%;
+      overflow-y: auto;
       @media (max-width: 700px) {
         font-size: 0.9em;
         font-size: 1em;
