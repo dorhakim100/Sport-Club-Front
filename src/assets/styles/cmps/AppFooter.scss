@@ -69,6 +69,8 @@
 
   .contact-container {
     display: flex;
+    // grid-auto-flow: column;
+    // grid-template-columns: repeat(3, 1fr);
     justify-content: space-around;
     gap: 1em;
     // width: 100%;
@@ -86,7 +88,7 @@
     // justify-items: center;
 
     .method-container {
-      max-width: 180px;
+      // max-width: 180px;
       display: flex;
       align-items: center;
       gap: 10px;

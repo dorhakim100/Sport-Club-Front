@@ -1,33 +1,51 @@
 @font-face {
   font-family: alef;
-  src: url('/fonts/Alef-Regular.ttf');
+  src: local('Alef'), local('Arial');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'assistantRegular';
-  src: url('/fonts/Assistant-Regular.ttf');
+  src: local('Assistant Regular'), local('Assistant'), local('Noto Sans Hebrew'), local('Rubik'), local('Arial');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'assistantLight';
-  src: url('/fonts/Assistant-Light.ttf');
+  src: local('Assistant Light'), local('Assistant'), local('Noto Sans Hebrew'), local('Rubik'), local('Arial');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'assistantMedium';
-  src: url('/fonts/Assistant-Medium.ttf');
+  src: local('Assistant Medium'), local('Assistant'), local('Noto Sans Hebrew'), local('Rubik'), local('Arial');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'assistantBold';
-  src: url('/fonts/Assistant-Bold.ttf');
+  src: local('Assistant Bold'), local('Assistant'), local('Noto Sans Hebrew'), local('Rubik'), local('Arial Bold'), local('Arial');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'assistantExtraBold';
-  src: url('/fonts/Assistant-ExtraBold.ttf');
+  src: local('Assistant ExtraBold'), local('Assistant'), local('Noto Sans Hebrew'), local('Rubik'), local('Arial Bold'), local('Arial');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
 // Apply to body and headings
 body {
   // font-family: alef;
-  font-family: assistantRegular;
+  font-family: assistantRegular, 'Noto Sans Hebrew', 'Rubik', 'Arial', sans-serif;
   font-size: 16px;
 }
 
