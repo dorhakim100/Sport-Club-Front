@@ -1,6 +1,6 @@
 import { SlotCard } from '../cmps/SlotCard'
 import { HeadContainer } from '../cmps/HeadContainer'
-import { Divider } from '@mui/material'
+import { Button, Divider } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useState, useEffect, useMemo } from 'react'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
@@ -28,9 +28,11 @@ export function Register() {
 
     const [currHour, setCurrHour] = useState(new Date().getHours())
 
+    const [search, setSearch] = useState('')
+
     
-        const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool'), [slots])
-        const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym'), [slots])
+        const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool' && slot.registrations.some(registration=>getTxtRegex().test(registration.name) || getTxtRegex().test(registration.phone))), [slots,search])
+        const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym' && slot.registrations.some(registration=>getTxtRegex().test(registration.name) || getTxtRegex().test(registration.phone))), [slots,search])
         const slotsLength = useMemo(() => slots.length, [slots])
 
 const poolDisabled = useMemo(()=>{
@@ -154,11 +156,20 @@ const currSlots = useMemo(()=>{
         return currDayStart.getTime() === maxDate.getTime()
     }
 
+    function getTxtRegex(){
+        return new RegExp(search, 'i')
+    }
+
     
 
   return (
     <div className='register-container'>
         <HeadContainer text={text} />
+        <div className="filter-container">
+
+        <div className="input-container">
+            <input type="search" placeholder={prefs.isEnglish ? 'Name, phone number' : 'שם, מספר טלפון'} value={search} onChange={e => setSearch(e.target.value)} />
+        </div>
         <RegisterDayControlls
           date={currFilter.date}
           isEnglish={prefs.isEnglish}
@@ -166,7 +177,8 @@ const currSlots = useMemo(()=>{
           onNextDay={onNextDay}
           isPreviousDisabled={getPreviousDisabled()}
           isNextDisabled={getNextDisabled()}
-        />
+          />
+          </div>
         <SlideAnimation motionKey={currFilter.date} direction={pageDirection} className="slots-animation-container">
 
         {slotsLength > 0 ? 
