@@ -12,6 +12,17 @@
         gap: 1em;
         align-items: center;
         justify-content: center;
+
+        @media (max-width: 668px) {
+            grid-template-columns: 1fr;
+            gap: 0;
+            margin-bottom: 1em;
+            .input-container{
+                grid-row: 2/3;
+
+
+            }
+        }
     }
 
     h3{

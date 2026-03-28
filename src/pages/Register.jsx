@@ -19,6 +19,7 @@ export function Register() {
     }
 
     const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+    const user = useSelector((storeState) => storeState.userModule.user)
     const [slots, setSlots] = useState([])
     const [currFilter, setCurrFilter] = useState(slotService.getDefaultFilter())
 
@@ -160,6 +161,9 @@ const currSlots = useMemo(()=>{
         return new RegExp(search, 'i')
     }
 
+    const getInputPlaceholder = () => {
+        return prefs.isEnglish ? 'Search members by name or phone number' : 'חיפוש לפי שם או מספר טלפון'
+    }
     
 
   return (
@@ -167,9 +171,9 @@ const currSlots = useMemo(()=>{
         <HeadContainer text={text} />
         <div className="filter-container">
 
-        <div className="input-container">
-            <input type="search" placeholder={prefs.isEnglish ? 'Name, phone number' : 'שם, מספר טלפון'} value={search} onChange={e => setSearch(e.target.value)} />
-        </div>
+       {user && user.isAdmin && <div className="input-container">
+            <input type="search" placeholder={getInputPlaceholder()} value={search} onChange={e => setSearch(e.target.value)} />
+        </div>}
         <RegisterDayControlls
           date={currFilter.date}
           isEnglish={prefs.isEnglish}
