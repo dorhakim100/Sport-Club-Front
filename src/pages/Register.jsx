@@ -32,8 +32,12 @@ export function Register() {
     const [search, setSearch] = useState('')
 
     
-        const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool' && slot.registrations.some(registration=>getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone))), [slots,search])
-        const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym' && slot.registrations.some(registration=>getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone))), [slots,search])
+        const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool' 
+            // && slot.registrations.some(registration=>getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone))
+        ), [slots,search])
+        const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym' 
+            // && slot.registrations.some(registration=>getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone))
+        ), [slots,search])
         const slotsLength = useMemo(() => slots.length, [slots])
 
 const poolDisabled = useMemo(()=>{
@@ -87,6 +91,7 @@ const currSlots = useMemo(()=>{
         try {
             setIsLoading(true)
             const s = await slotService.query(filter)
+            console.log('s',s)
             setSlots(s)
         } catch (err) {
             showErrorMsg(prefs.isEnglish ? 'Error fetching slots' : 'שגיאה בטעינת שעות רישום')
@@ -169,9 +174,9 @@ const currSlots = useMemo(()=>{
         <HeadContainer text={text} />
         <div className="filter-container">
 
-       {user && user.isAdmin && <div className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
+       {/* {user && user.isAdmin && <div className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
             <input type="search" placeholder={getInputPlaceholder()} value={search} onChange={e => setSearch(e.target.value)} />
-        </div>}
+        </div>} */}
         <RegisterDayControlls
           date={currFilter.date}
           isEnglish={prefs.isEnglish}

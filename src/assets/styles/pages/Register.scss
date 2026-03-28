@@ -13,6 +13,10 @@
         align-items: center;
         justify-content: center;
 
+        .day-controlls-container {
+            grid-column: 2/3;
+        }
+
         @media (max-width: 668px) {
             grid-template-columns: 1fr;
             gap: 0;
