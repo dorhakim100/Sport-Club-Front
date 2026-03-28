@@ -10,9 +10,10 @@ import { useSelector } from 'react-redux'
 import { IconButton, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { capitalizeFirstLetter } from '../services/util.service'
+import { getTxtRegex } from '../services/util.service'
 
 
-export function RegistrationList({ slot, cancelRegistration }) {
+export function RegistrationList({ slot, cancelRegistration, search }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const registrations = slot?.registrations || []
   const direction = prefs.isEnglish ? 'ltr' : 'rtl'
@@ -25,7 +26,8 @@ export function RegistrationList({ slot, cancelRegistration }) {
 
     return registrations.map((registration, idx) => (
         <TableRow
-          key={`${registration.phone || registration.name || 'reg'}-${idx}`}
+          key={`${registration.phone || registration.name || 'reg'}-${idx}-`}
+          className={getIsSearched(registration) ? 'searched' : ''}
         >
           <TableCell align={align}>{capitalizeFirstLetter(registration.name) || '-'}</TableCell>
           <TableCell align={align}>{registration.phone || '-'}</TableCell>
@@ -43,6 +45,12 @@ export function RegistrationList({ slot, cancelRegistration }) {
   const onCancelRegistration = (registrationPhoneToDelete) => {
 
     cancelRegistration(slot._id, registrationPhoneToDelete)
+  }
+
+  function getIsSearched(registration){
+    if(!search) return false
+    const isSearched = getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone)
+    return isSearched
   }
 
   return (

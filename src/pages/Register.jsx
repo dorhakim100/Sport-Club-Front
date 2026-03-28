@@ -10,7 +10,7 @@ import { socketService, SOCKET_EVENT_ADD_SLOT_REGISTERED, SOCKET_EVENT_UPDATE_SL
 import { ContactUs } from '../cmps/ContactUs'
 import { SlideAnimation } from '../cmps/SlideAnimation'
 import { RegisterDayControlls } from '../cmps/RegisterDayControlls'
-import { formatTimeValue } from '../services/util.service'
+import { formatTimeValue, getTxtRegex } from '../services/util.service'
 export function Register() {
 
     const text = {
@@ -32,8 +32,8 @@ export function Register() {
     const [search, setSearch] = useState('')
 
     
-        const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool' && slot.registrations.some(registration=>getTxtRegex().test(registration.name) || getTxtRegex().test(registration.phone))), [slots,search])
-        const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym' && slot.registrations.some(registration=>getTxtRegex().test(registration.name) || getTxtRegex().test(registration.phone))), [slots,search])
+        const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool' && slot.registrations.some(registration=>getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone))), [slots,search])
+        const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym' && slot.registrations.some(registration=>getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone))), [slots,search])
         const slotsLength = useMemo(() => slots.length, [slots])
 
 const poolDisabled = useMemo(()=>{
@@ -157,9 +157,7 @@ const currSlots = useMemo(()=>{
         return currDayStart.getTime() === maxDate.getTime()
     }
 
-    function getTxtRegex(){
-        return new RegExp(search, 'i')
-    }
+
 
     const getInputPlaceholder = () => {
         return prefs.isEnglish ? 'Search members by name or phone number' : 'חיפוש לפי שם או מספר טלפון'
@@ -171,7 +169,7 @@ const currSlots = useMemo(()=>{
         <HeadContainer text={text} />
         <div className="filter-container">
 
-       {user && user.isAdmin && <div className="input-container">
+       {user && user.isAdmin && <div className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
             <input type="search" placeholder={getInputPlaceholder()} value={search} onChange={e => setSearch(e.target.value)} />
         </div>}
         <RegisterDayControlls
@@ -191,7 +189,7 @@ const currSlots = useMemo(()=>{
       {poolSlots.map((slot) => (
           <div className="slot-container" key={slot._id}>
 
-          <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={poolDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} currSlots={currSlots}/>
+          <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={poolDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} currSlots={currSlots} search={search} />
         </div>
         ))}
         </div>
@@ -199,7 +197,7 @@ const currSlots = useMemo(()=>{
         <div className="slots-container">
             {gymSlots.map((slot) => (
                 <div className="slot-container" key={slot._id}>
-                    <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={gymDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} currSlots={currSlots} />
+                    <SlotCard slot={slot} setSlots={setSlots} cancelRegistration={cancelRegistration} disabled={gymDisabled} facilityRegistered={facilityRegistered} setFacilityRegistered={setFacilityRegistered} currSlots={currSlots} search={search} />
                 </div>
             ))}
             </div>

@@ -235,3 +235,7 @@ export function formatSlotTimeRange(fromValue, toValue) {
   if (!from && !to) return ''
   return `${from} - ${to}`.trim()
 }
+
+export function getTxtRegex(search){
+  return new RegExp(search, 'i')
+}
