@@ -21,6 +21,15 @@ export function RegisterForm({ onSubmit, formData, setFormData }) {
           onChange={handleChange}
         />
       </div>
+      <div className='input-container'>
+        <input
+          type='email'
+          name='email'
+          placeholder={prefs.isEnglish ? 'Email' : 'דואר אלקטרוני'}
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </div>
       <Button variant='contained' color='primary' type='submit'>
         {prefs.isEnglish ? 'Register' : 'רישום'}
       </Button>

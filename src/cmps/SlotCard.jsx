@@ -114,9 +114,9 @@ export function SlotCard({ slot, setSlots, cancelRegistration, disabled, facilit
     }
 
     function _getFormData() {
-        if(user && user.isAdmin) return { name: '', phone: '' }
-        if(user) return { name: user.fullname, phone: user.phone }
-        return { name: '', phone: '' }
+        if(user && user.isAdmin) return { name: '', phone: '', email: '' }
+        if(user) return { name: user.fullname, phone: user.phone, email: user.email }
+        return { name: '', phone: '', email: '' }
     }
 
     function getModalContent() {
