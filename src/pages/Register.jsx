@@ -35,12 +35,24 @@ export function Register() {
         const poolSlots = useMemo(() => {
             const regex = new RegExp(search, 'i')
 
+            let slotsToReturn = slots.filter(slot=>slot.facility === 'pool' )
+
+            if(search) {
+                slotsToReturn = slotsToReturn.filter(slot=>slot.registrations.find(registration=>regex.test(registration.name) || regex.test(registration.phone)))
+            }
+
             
-            return slots.filter(slot=>slot.facility === 'pool' && slot.registrations.some(registration=>regex.test(registration.name) || regex.test(registration.phone)))
+            return slotsToReturn
         }, [slots,search])
         const gymSlots = useMemo(() => {
             const regex = new RegExp(search, 'i')
-            return slots.filter(slot=>slot.facility === 'gym' && slot.registrations.some(registration=>regex.test(registration.name) || regex.test(registration.phone)))
+            let slotsToReturn = slots.filter(slot=>slot.facility === 'gym' )
+
+            if(search) {
+                slotsToReturn = slotsToReturn.filter(slot=>slot.registrations.find(registration=>regex.test(registration.name) || regex.test(registration.phone)))
+            }
+
+            return slotsToReturn
         }, [slots,search])
         const slotsLength = useMemo(() => slots.length, [slots, gymSlots.length, poolSlots.length])
 
@@ -153,6 +165,7 @@ const currSlots = useMemo(()=>{
     }
 
     const getNextDisabled = () => {
+        if(user && user.isAdmin) return false
         const currDate = new Date(currFilter.date)
         if (Number.isNaN(currDate.getTime())) return true
 

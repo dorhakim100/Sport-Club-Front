@@ -15,6 +15,7 @@ export function RegisterDayControlls({
   isNextDisabled,
 }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
+  
   return (
     <div className={`day-controlls-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
       <IconButton onClick={onPreviousDay}
