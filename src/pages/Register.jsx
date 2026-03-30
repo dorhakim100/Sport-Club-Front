@@ -32,13 +32,17 @@ export function Register() {
     const [search, setSearch] = useState('')
 
     
-        const poolSlots = useMemo(() => slots.filter(slot=>slot.facility === 'pool' 
-            // && slot.registrations.some(registration=>getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone))
-        ), [slots,search])
-        const gymSlots = useMemo(() => slots.filter(slot=>slot.facility === 'gym' 
-            // && slot.registrations.some(registration=>getTxtRegex(search).test(registration.name) || getTxtRegex(search).test(registration.phone))
-        ), [slots,search])
-        const slotsLength = useMemo(() => slots.length, [slots])
+        const poolSlots = useMemo(() => {
+            const regex = new RegExp(search, 'i')
+
+            
+            return slots.filter(slot=>slot.facility === 'pool' && slot.registrations.some(registration=>regex.test(registration.name) || regex.test(registration.phone)))
+        }, [slots,search])
+        const gymSlots = useMemo(() => {
+            const regex = new RegExp(search, 'i')
+            return slots.filter(slot=>slot.facility === 'gym' && slot.registrations.some(registration=>regex.test(registration.name) || regex.test(registration.phone)))
+        }, [slots,search])
+        const slotsLength = useMemo(() => slots.length, [slots, gymSlots.length, poolSlots.length])
 
 const poolDisabled = useMemo(()=>{
     return facilityRegistered.pool
@@ -174,9 +178,9 @@ const currSlots = useMemo(()=>{
         <HeadContainer text={text} />
         <div className="filter-container">
 
-       {/* {user && user.isAdmin && <div className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
+       {user && user.isAdmin && <div className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
             <input type="search" placeholder={getInputPlaceholder()} value={search} onChange={e => setSearch(e.target.value)} />
-        </div>} */}
+        </div>}
         <RegisterDayControlls
           date={currFilter.date}
           isEnglish={prefs.isEnglish}
