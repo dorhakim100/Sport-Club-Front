@@ -31,6 +31,11 @@ export function Register() {
 
     const [search, setSearch] = useState('')
 
+    const isToday = useMemo(()=>{
+        
+        return new Date(currFilter.date).toISOString().split('T')[0] === new Date().toISOString().split('T')[0]
+    },[currFilter.date])
+
     
         const poolSlots = useMemo(() => {
             const regex = new RegExp(search, 'i')
@@ -191,7 +196,13 @@ const currSlots = useMemo(()=>{
         <HeadContainer text={text} />
         <div className="filter-container">
 
-       {user && user.isAdmin && <div className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
+       {user && user.isAdmin && 
+       
+       <div className={`input-container ${prefs.isDarkMode ? 'dark-mode' : ''}`}>
+        <Button disabled={isToday} variant="contained" color="primary" onClick={() => {
+        setPageDirection(-1)
+        setCurrFilter(slotService.getDefaultFilter())
+       }}>{prefs.isEnglish ? 'Today' : 'היום'}</Button>
             <input type="search" placeholder={getInputPlaceholder()} value={search} onChange={e => setSearch(e.target.value)} />
         </div>}
         <RegisterDayControlls

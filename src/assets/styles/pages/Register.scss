@@ -17,6 +17,11 @@
             grid-column: 2/3;
         }
 
+        .input-container{
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
 
 
         @media (max-width: 668px) {
