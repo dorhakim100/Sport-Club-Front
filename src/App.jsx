@@ -192,7 +192,8 @@ export function App() {
             <Route path="payment/success" element={<SuccessPage />} />
             <Route path="payment/error" element={<ErrorPage />} />
             <Route path="construction" element={<UnderConstruction />} />
-            <Route path="register" element={<Register />} />
+            {/* Kept for future use: /register route is temporarily disabled. */}
+            {/* <Route path="register" element={<Register />} /> */}
 
             {/* Redirect Old Paths */}
             <Route

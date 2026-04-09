@@ -69,7 +69,8 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import HomeIcon from '@mui/icons-material/Home'
 
 import Divider from '@mui/material/Divider'
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+// Kept for future use with the disabled register route/menu entry:
+// import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 
 import { socketService } from '../services/socket.service'
 import { userService } from '../services/user/user.service'
@@ -549,16 +550,17 @@ export function AppHeader() {
       dropdown: false,
       icon: <HomeIcon />,
     },
-    (user && user.isAdmin) ? null :{
-      id: 1,
-      title: { eng: 'Register', he: 'רישום' },
-      to: 'register',
-      onClick: () => {
-        delayedNavigate('/register')
-      },
-      dropdown: false,
-      icon: <AppRegistrationIcon />,
-    },
+    // Kept for future use: register menu route is temporarily disabled.
+    // (user && user.isAdmin) ? null :{
+    //   id: 1,
+    //   title: { eng: 'Register', he: 'רישום' },
+    //   to: 'register',
+    //   onClick: () => {
+    //     delayedNavigate('/register')
+    //   },
+    //   dropdown: false,
+    //   icon: <AppRegistrationIcon />,
+    // },
     {
       id: 2,
       title: { eng: 'Updates', he: 'עדכונים' },
