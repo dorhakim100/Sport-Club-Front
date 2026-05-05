@@ -495,15 +495,20 @@ div.dark-mode {
 
   span {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -10px;
+    right: -10px;
     transition: 0.2s ease-out;
+
 
     width: fit-content;
     height: fit-content;
 
-    width: 25px;
+    text-align: center;
+
+    width: 30px;
+
     // height: 25px;
+
 
     color: $bold-navy;
 

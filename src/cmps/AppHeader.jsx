@@ -1335,15 +1335,16 @@ export function AppHeader() {
                 </b>
               )}
               {!user.isAdmin && (
-                <NavLink to={`/user/${user._id}/cart`}>
+                <NavLink to={`/user/${user._id}/cart`}
+                className='notification-btn'>
                   <Button
                     variant='contained'
                     onClick={() => selectLink(`/user/${user._id}/cart`)}
-                    className='notification-btn'
+                    // className='notification-btn'
                   >
-                    {cart && cart.length > 0 && <span>{cartLength}</span>}
                     <ShoppingCartIcon />
                   </Button>
+                    {cart && cart.length > 0 && <span>{cartLength}</span>}
                 </NavLink>
               )}
               <Button

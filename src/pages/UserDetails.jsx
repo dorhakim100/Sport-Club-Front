@@ -69,6 +69,7 @@ export function UserDetails() {
         setGoogleImg(prefs.user.imgUrl)
       }
     } catch (err) {
+      console.log(err)
       showErrorMsg(
         prefs.isEnglish
           ? `Couldn't show user details`
