@@ -124,27 +124,27 @@ export function UserDetails() {
           const hebrewKey = translations[key] || capitalizeFirstLetter(key)
 
           if (key === 'memberStatus') {
-            elements.push(
-              renderDetail(
-                `${key}`,
-                `${hebrewKey}`,
-                watchedUser.memberStatus.isMember &&
-                  watchedUser?.memberStatus.expiry > Date.now()
-                  ? dayjs(watchedUser?.memberStatus.expiry).format('DD/MM/YYYY')
-                  : `לא ${
-                      // watchedUser?.memberStatus.expiry
-                      //   ? `(${dayjs(watchedUser?.memberStatus.expiry).format(
-                      //       'DD/MM/YYYY'
-                      //     )})`
-                      //   : ''
-                      ''
-                    }
+            // elements.push(
+            //   renderDetail(
+            //     `${key}`,
+            //     `${hebrewKey}`,
+            //     watchedUser.memberStatus.isMember &&
+            //       watchedUser?.memberStatus.expiry > Date.now()
+            //       ? dayjs(watchedUser?.memberStatus.expiry).format('DD/MM/YYYY')
+            //       : `לא ${
+            //           // watchedUser?.memberStatus.expiry
+            //           //   ? `(${dayjs(watchedUser?.memberStatus.expiry).format(
+            //           //       'DD/MM/YYYY'
+            //           //     )})`
+            //           //   : ''
+            //           ''
+            //         }
                     
-                    `,
-                watchedUser.memberStatus.isMember &&
-                  watchedUser?.memberStatus.expiry > Date.now()
-              )
-            )
+            //         `,
+            //     watchedUser.memberStatus.isMember &&
+            //       watchedUser?.memberStatus.expiry > Date.now()
+            //   )
+            // )
           } else {
             elements.push(renderDetail(`${key}`, hebrewKey, watchedUser[key]))
           }
@@ -229,6 +229,11 @@ export function UserDetails() {
       [name]: value,
     }))
   }
+
+  console.log(editUser)
+  console.log(googleImg);
+  console.log(watchedUser);
+  
 
   return (
     <section className='user-details'>
