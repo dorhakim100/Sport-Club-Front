@@ -562,16 +562,6 @@ export function AppHeader() {
     //   icon: <AppRegistrationIcon />,
     // },
     {
-      id: 2,
-      title: { eng: 'Updates', he: 'עדכונים' },
-      to: 'update',
-      onClick: () => {
-        delayedNavigate('/update')
-      },
-      dropdown: false,
-      icon: <NotificationsNoneIcon />,
-    },
-    {
       id: 3,
       title: { eng: 'Opening times', he: 'שעות הפתיחה' },
       to: `about/times`,
@@ -621,26 +611,6 @@ export function AppHeader() {
       icon: <EventNoteIcon />,
     },
     {
-      id: 5,
-      title: { eng: 'Facilities', he: 'מתקני המועדון' },
-      to: 'facilities',
-      onClick: () => {
-        delayedNavigate('/facilities')
-      },
-      dropdown: false,
-      icon: <PoolIcon />,
-    },
-    {
-      id: 6,
-      title: { eng: 'Member', he: 'מנויים' },
-      to: 'member',
-      onClick: () => {
-        delayedNavigate('/member')
-      },
-      dropdown: false,
-      icon: <CardMembershipIcon />,
-    },
-    {
       id: 7,
       title: { eng: 'Store', he: 'חנות' },
       to: 'item',
@@ -679,6 +649,36 @@ export function AppHeader() {
       ],
       icon: <AddShoppingCartIcon />,
       isOpen: false,
+    },
+    {
+      id: 2,
+      title: { eng: 'Updates', he: 'עדכונים' },
+      to: 'update',
+      onClick: () => {
+        delayedNavigate('/update')
+      },
+      dropdown: false,
+      icon: <NotificationsNoneIcon />,
+    },
+    {
+      id: 5,
+      title: { eng: 'Facilities', he: 'מתקני המועדון' },
+      to: 'facilities',
+      onClick: () => {
+        delayedNavigate('/facilities')
+      },
+      dropdown: false,
+      icon: <PoolIcon />,
+    },
+    {
+      id: 6,
+      title: { eng: 'Member', he: 'מנויים' },
+      to: 'member',
+      onClick: () => {
+        delayedNavigate('/member')
+      },
+      dropdown: false,
+      icon: <CardMembershipIcon />,
     },
     {
       id: 8,
