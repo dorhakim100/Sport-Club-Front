@@ -1336,7 +1336,7 @@ export function AppHeader() {
               )}
               {!user.isAdmin && (
                 <NavLink to={`/user/${user._id}/cart`}
-                className='notification-btn'>
+                className='notification-btn cart-btn'>
                   <Button
                     variant='contained'
                     onClick={() => selectLink(`/user/${user._id}/cart`)}

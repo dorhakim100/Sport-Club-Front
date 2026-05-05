@@ -505,7 +505,11 @@ div.dark-mode {
 
     text-align: center;
 
-    width: 30px;
+    
+    
+    width: 25px;
+
+
 
     // height: 25px;
 
@@ -520,6 +524,12 @@ div.dark-mode {
     }
 
     // font-size: 1.2em;
+  }
+
+  &.cart-btn {
+    span {
+      width: 30px;
+    }
   }
 
   b {
