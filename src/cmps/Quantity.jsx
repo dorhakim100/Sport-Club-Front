@@ -11,6 +11,7 @@ import { ConfirmModal } from './ConfirmModal.jsx'
 
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
+import { showErrorMsg } from '../services/event-bus.service.js'
 
 export function Quantity({ quantity, setQuantity, isCart, item }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
