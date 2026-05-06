@@ -24,7 +24,7 @@ import { Button } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import { makeId } from '../services/util.service'
 import { paymentService } from '../services/payment/payment.service'
-import { setOriginalItem } from '../store/actions/user.actions'
+import { setOriginalItems } from '../store/actions/user.actions'
 import { setOriginalPrice } from '../store/actions/user.actions'
 
 export function Cart() {
@@ -33,6 +33,9 @@ export function Cart() {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const originalPrice = useSelector(
     (stateSelector) => stateSelector.userModule.originalPrice
+  )
+  const originalItems = useSelector(
+    (stateSelector) => stateSelector.userModule.originalItems
   )
 
   const isGotMoreThan6 = useRef(false)
@@ -88,6 +91,7 @@ export function Cart() {
       isFirstRender.current === false
       // setOriginalPrice(total)
 
+      const originalItemsToSet = [...originalItems]
       if (
         loaded.memberStatus.isMember &&
         loaded.memberStatus.expiry > Date.now()
@@ -98,7 +102,15 @@ export function Cart() {
               (cartItem) => cartItem.id === item.id
             )
             let itemToModify = fetchedCart[idx]
-            setOriginalItem(fetchedCart[idx])
+            const idxToModify = originalItemsToSet.findIndex(
+              (originalItem) => originalItem.id === item.id
+            )
+            if (idxToModify !== -1) {
+              originalItemsToSet.splice(idxToModify, 1, item)
+            } else {
+              originalItemsToSet.push(item)
+            }
+            setOriginalItems([...originalItemsToSet])
 
             itemToModify = {
               ...itemToModify,
@@ -124,7 +136,15 @@ export function Cart() {
             (cartItem) => cartItem.id === item.id
           )
           let itemToModify = fetchedCart[idx]
-          setOriginalItem(fetchedCart[idx])
+          const idxToModify = originalItemsToSet.findIndex(
+            (originalItem) => originalItem.id === item.id
+          )
+          if (idxToModify !== -1) {
+            originalItemsToSet.splice(idxToModify, 1, item)
+          } else {
+            originalItemsToSet.push(item)
+          }
+          setOriginalItems([...originalItemsToSet])
 
           if (discount.type === 'fixed') {
             itemToModify = {

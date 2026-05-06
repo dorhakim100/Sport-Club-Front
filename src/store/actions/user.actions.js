@@ -13,7 +13,7 @@ import {
   SET_TOTAL,
   SET_IS_REMEMBER,
   // SET_PREFS,
-  SET_ORIGINAL_ITEM,
+  SET_ORIGINAL_ITEMS,
   SET_ORIGINAL_PRICE,
   SET_FILTER,
 } from '../reducers/user.reducer'
@@ -176,8 +176,8 @@ export function setIsRemember(stateToSet) {
   store.dispatch({ type: SET_IS_REMEMBER, isRemember: stateToSet })
 }
 
-export function setOriginalItem(item) {
-  store.dispatch({ type: SET_ORIGINAL_ITEM, originalItem: item })
+export function setOriginalItems(items) {
+  store.dispatch({ type: SET_ORIGINAL_ITEMS, originalItems: items })
 }
 export function setOriginalPrice(price) {
   store.dispatch({ type: SET_ORIGINAL_PRICE, originalPrice: price })

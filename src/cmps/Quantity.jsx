@@ -15,8 +15,8 @@ import RemoveIcon from '@mui/icons-material/Remove'
 export function Quantity({ quantity, setQuantity, isCart, item }) {
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
-  const originalItem = useSelector(
-    (stateSelector) => stateSelector.userModule.originalItem
+  const originalItems = useSelector(
+    (stateSelector) => stateSelector.userModule.originalItems
   )
   const originalPrice = useSelector(
     (stateSelector) => stateSelector.userModule.originalPrice
@@ -47,15 +47,20 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
       return
     }
 
+    const originalItem = originalItems.find(
+      (originalItem) => originalItem.id === item.id
+    )
+    
+
     let priceToSet
-    if (originalItem.id && originalItem.id === item.id) {
+    if (originalItem && originalItem.id === item.id) {
       priceToSet = originalPrice + originalItem.price * diff
 
-      setOriginalPrice(priceToSet)
     } else {
       priceToSet = originalPrice + item.price * diff
-      setOriginalPrice(priceToSet)
     }
+    
+    setOriginalPrice(priceToSet)
     setQuantity((prev) => prev + diff)
   }
 
@@ -70,8 +75,11 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
       (itemToRemove) => itemToRemove.id === item.id
     )
     user.items.splice(idx, 1)
-    if (originalItem.id && originalItem.id === item.id) {
-      setOriginalPrice(null)
+    const originalItem = originalItems.find(
+      (originalItem) => originalItem.id === item.id
+    )
+    if (originalItem && originalItem.id === item.id) {
+      setOriginalPrice(originalPrice - originalItem.price)
     }
 
     try {
