@@ -189,8 +189,9 @@ export function Cart() {
       // )
       if(res.code === 'MOMS80'){
         setModalMessage({
-          he: 'איזה כיף, רכשת במכירה המוקדמת ומגיעה לך כניסה נוספת מתנה 😀',
+          he: 'רכשת במכירה המוקדמת ומגיעה לך כניסה נוספת מתנה! 😀',
           eng: 'You get a free entry to use at the office 😀',
+          isDiscount: true,
         })
         setIsModal(true)
       }

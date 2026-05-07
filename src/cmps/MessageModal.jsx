@@ -55,6 +55,16 @@ export function MessageModal() {
     setIsHover(false)
   }
 
+  const renderMessageHeader = () => {
+    if(!modalMessage) return null
+    if (modalMessage.isDiscount) {
+      return <b style={{ direction: prefs.isEnglish ? 'ltr' : 'rtl' }}>
+        {prefs.isEnglish ? 'Congratulations!' : 'איזה כיף!'}
+      </b>
+    }
+    return <b>{prefs.isEnglish ? 'For your concern' : 'לידיעתכם'}</b>
+  }
+
   return (
     <div
       className={`modal-container ${isModal && 'visible'} ${
@@ -88,7 +98,8 @@ export function MessageModal() {
         >
           <CloseIcon sx={{ color: prefs.isDarkMode ? 'white' : '' }} />
         </IconButton>
-        <b>{prefs.isEnglish ? 'For your concern' : 'לידיעתכם'}</b>
+
+        {renderMessageHeader()}
         <p
           style={prefs.isEnglish ? { direction: 'ltr' } : { direction: 'rtl' }}
         >
