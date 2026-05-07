@@ -523,12 +523,13 @@ div.dark-mode {
     span {
     }
 
-    // font-size: 1.2em;
   }
-
+  
   &.cart-btn {
     span {
+      font-size: 20px;
       width: 30px;
+      height: 30px;
     }
   }
 
