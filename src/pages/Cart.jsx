@@ -184,9 +184,16 @@ export function Cart() {
       const res = await couponService.getDiscount(coupon)
 
       await setCart(res)
-      showSuccessMsg(
-        prefs.isEnglish ? 'Coupon added successfully' : 'קופון נוסף בהצלחה'
-      )
+      // showSuccessMsg(
+      //   prefs.isEnglish ? 'Coupon added successfully' : 'קופון נוסף בהצלחה'
+      // )
+      if(res.code === 'MOMS80'){
+        setModalMessage({
+          he: 'איזה כיף, רכשת במכירה המוקדמת ומגיעה לך כניסה נוספת מתנה 😀',
+          eng: 'You get a free entry to use at the office 😀',
+        })
+        setIsModal(true)
+      }
     } catch (err) {
       showErrorMsg(
         prefs.isEnglish ? `Couldn't load coupon` : 'לא ניתן היה לטעון קופון'
