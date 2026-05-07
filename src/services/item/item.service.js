@@ -5,6 +5,7 @@ const KEY = 'item'
 
 export const itemService = {
   query,
+  getCartItems,
   getById,
   save,
   remove,
@@ -33,6 +34,14 @@ async function query(
   }
 }
 
+async function getCartItems(cart) {
+  try {
+    const items = await httpService.get(`${KEY}/cart`, cart)
+    return items
+  } catch (err) {
+    throw err
+  }
+}
 async function getById(itemId, filter) {
   try {
     const res = await httpService.get(`${KEY}/${itemId}`, filter)

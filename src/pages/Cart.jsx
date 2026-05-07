@@ -1,28 +1,21 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
-import { smoothScroll } from '../services/util.service'
-
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { itemService } from '../services/item/item.service'
+import { showErrorMsg } from '../services/event-bus.service'  
 import { userService } from '../services/user/user.service'
-import { loadCoupons } from '../store/actions/coupon.actions'
 import { couponService } from '../services/coupon/coupon.service'
 
 import { HeadContainer } from '../cmps/HeadContainer'
 import { CartList } from '../cmps/CartList.jsx'
-import { loadUser, updateCart } from '../store/actions/user.actions'
+import { loadOriginalItems, loadUser, setCartState, updateCart, updateStoreUser } from '../store/actions/user.actions'
 import {
   setIsLoading,
   setIsModal,
   setModalMessage,
 } from '../store/actions/system.actions'
-import { setCartTotal } from '../store/actions/user.actions'
 
 import { Button } from '@mui/material'
 import Divider from '@mui/material/Divider'
-import { makeId } from '../services/util.service'
 import { paymentService } from '../services/payment/payment.service'
 import { setOriginalItems } from '../store/actions/user.actions'
 import { setOriginalPrice } from '../store/actions/user.actions'
@@ -31,6 +24,9 @@ export function Cart() {
   const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
   const user = useSelector((stateSelector) => stateSelector.userModule.user)
   const prefs = useSelector((stateSelector) => stateSelector.systemModule.prefs)
+  const isLoading = useSelector(
+    (stateSelector) => stateSelector.systemModule.isLoading
+  )
   const originalPrice = useSelector(
     (stateSelector) => stateSelector.userModule.originalPrice
   )
@@ -38,17 +34,14 @@ export function Cart() {
     (stateSelector) => stateSelector.userModule.originalItems
   )
 
-  const isGotMoreThan6 = useRef(false)
-
-  const navigate = useNavigate()
-
   const [fullCart, setFullCart] = useState(null)
 
   const [coupon, setCoupon] = useState('')
   // const [originalPrice, setOriginalPrice] = useState()
   const [discount, setDiscount] = useState()
   const isDiscount = useRef(false)
-  const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0)
+  const isApplyingCoupon = useRef(false)
+  const appliedCouponCode = useRef('')
 
   const isFirstRender = useRef(true)
 
@@ -60,6 +53,14 @@ export function Cart() {
     if(!user?._id) return
     setCart()
   }, [user?._id])
+
+  useEffect(() => {
+    if(originalItems.length) return
+
+    loadOriginalItems(cart)
+
+
+  }, [originalItems.length, cart])
 
   const total = useMemo(() => {
     if (!fullCart) return
@@ -79,21 +80,28 @@ export function Cart() {
     return cartTotal
   }, [cart]) // using useMemo to prevent calculating each and every render
 
+  const containsDiscount = useMemo(() => {
+    return cart.some((item) => item.isDiscount)
+  }, [cart])
+
   async function setCart(discount) {
     if (cart.length === 0) return
     try {
       setIsLoading(true)
       // const logged = await userService.getLoggedinUser()
 
-      // const loaded = await loadUser(logged._id)
-      const loaded = user
+      const loaded = await loadUser(user._id)
+      // const loaded = user
+      updateStoreUser(loaded)
 
       const fetchedCart = await userService.getCartItems(cart)
+      const originalFetchedCart = await userService.getCartItems(originalItems)
+    
 
       isFirstRender.current === false
       // setOriginalPrice(total)
 
-      const originalItemsToSet = [...originalItems]
+      const originalItemsToSet = [...originalFetchedCart]
       if (
         loaded.memberStatus.isMember &&
         loaded.memberStatus.expiry > Date.now()
@@ -133,10 +141,12 @@ export function Cart() {
           )
 
           if (!matchedDiscountItem) return // Skip if no match is found
+          if(item.isDiscount) return // Skip if item is already discounted
 
           const idx = fetchedCart.findIndex(
             (cartItem) => cartItem.id === item.id
           )
+
           let itemToModify = fetchedCart[idx]
           const idxToModify = originalItemsToSet.findIndex(
             (originalItem) => originalItem.id === item.id
@@ -149,30 +159,54 @@ export function Cart() {
           setOriginalItems([...originalItemsToSet])
 
           if (discount.type === 'fixed') {
+            const originalItem = originalItemsToSet.find(
+              (originalItem) => originalItem.id === item.id
+            )
+            const basePrice = originalItem?.price ?? itemToModify.price
             itemToModify = {
               ...itemToModify,
-              price: itemToModify.price - discount.amount,
+              price: basePrice - discount.amount,
               isDiscount: true,
             }
           }
 
           if (discount.type === 'percentage') {
+            const originalItem = originalItemsToSet.find(
+              (originalItem) => originalItem.id === item.id
+            )
+            const basePrice = originalItem?.price ?? itemToModify.price
             itemToModify = {
               ...itemToModify,
               price:
-                itemToModify.price -
-                itemToModify.price * (discount.amount / 100),
+                basePrice -
+                basePrice * (discount.amount / 100),
               isDiscount: true,
             }
           }
 
           fetchedCart.splice(idx, 1, itemToModify)
         })
-      }
+      } else {
 
+        
+        fetchedCart.forEach((item) => {
+          const idx = fetchedCart.findIndex(
+            (cartItem) => cartItem.id === item.id
+          )
+          const originalItem = originalItemsToSet.find(
+            (originalItem) => originalItem.id === item.id
+          )
+          const basePrice = originalItem?.price ?? fetchedCart[idx].price
+          fetchedCart[idx].price = basePrice
+          fetchedCart[idx].isDiscount = false
+        })
+        
+      }
       setFullCart([...fetchedCart])
       const userToUpdate = { ...loaded, items: [...fetchedCart] }
+
       await updateCart(userToUpdate)
+      setCartState(fetchedCart)
     } catch (err) {
       // console.log(err)
     } finally {
@@ -181,11 +215,25 @@ export function Cart() {
   }
 
   async function onEnterCoupon({ target }) {
+    if(containsDiscount) return
+    if (isApplyingCoupon.current) return
+    if (!coupon?.trim()) return
+    const normalizedCouponCode = coupon.trim().toUpperCase()
+    if (
+      isDiscount.current &&
+      appliedCouponCode.current === normalizedCouponCode
+    )
+      return
+
     try {
+      isApplyingCoupon.current = true
       setIsLoading(true)
-      const res = await couponService.getDiscount(coupon)
+      const couponCode = normalizedCouponCode
+
+      const res = await couponService.getDiscount(couponCode,user._id)
 
       await setCart(res)
+      appliedCouponCode.current = couponCode
       // showSuccessMsg(
       //   prefs.isEnglish ? 'Coupon added successfully' : 'קופון נוסף בהצלחה'
       // )
@@ -202,6 +250,7 @@ export function Cart() {
         prefs.isEnglish ? `Couldn't load coupon` : 'לא ניתן היה לטעון קופון'
       )
     } finally {
+      isApplyingCoupon.current = false
       setIsLoading(false)
     }
   }
@@ -295,7 +344,7 @@ export function Cart() {
             )}
             <b>₪{total}</b>
             <Divider orientation='horizontal' flexItem />
-            {!discount && (
+            {!containsDiscount &&!discount && (
               <div className='discount-container'>
                 <div
                   className={`input-container ${
@@ -308,7 +357,11 @@ export function Cart() {
                     onChange={(event) => setCoupon(event.target.value)}
                     value={coupon}
                   />
-                  <Button variant='contained' onClick={onEnterCoupon}>
+                  <Button
+                    variant='contained'
+                    onClick={onEnterCoupon}
+                    disabled={isLoading || isApplyingCoupon.current}
+                  >
                     {prefs.isEnglish ? 'Enter' : 'אישור'}
                   </Button>
                 </div>

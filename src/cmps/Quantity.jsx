@@ -23,9 +23,11 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
     (stateSelector) => stateSelector.userModule.originalPrice
   )
 
-  // const [isModal, setIsModal] = useState(false)
+  const isLoading = useSelector((stateSelector) => stateSelector.systemModule.isLoading)
+
 
   const onSetQuantity = (diff) => {
+    if (isLoading) return
     if (quantity === 1 && diff === -1 && !isCart) return
     if (quantity === 1 && diff === -1 && isCart) {
       setIsModal(true)
@@ -66,12 +68,14 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
   }
 
   const handleChange = (ev) => {
+    if (isLoading) return
     let value = ev.target.value
     value = +value
     if (value > 0) setQuantity(value)
   }
 
   async function onRemoveFromCart() {
+    if (isLoading) return
     const idx = user.items.findIndex(
       (itemToRemove) => itemToRemove.id === item.id
     )
@@ -101,7 +105,7 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
     <>
       <div className='quantity-container'>
         <span>{prefs.isEnglish ? 'Quantity' : 'כמות'}</span>
-        <button onClick={() => onSetQuantity(1)}>
+        <button onClick={() => onSetQuantity(1)} disabled={isLoading}>
           <AddIcon />
         </button>
         <input
@@ -112,7 +116,7 @@ export function Quantity({ quantity, setQuantity, isCart, item }) {
           onChange={handleChange}
           disabled
         />
-        <button onClick={() => onSetQuantity(-1)}>
+        <button onClick={() => onSetQuantity(-1)} disabled={isLoading}>
           <RemoveIcon />
         </button>
       </div>

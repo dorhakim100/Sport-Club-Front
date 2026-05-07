@@ -206,6 +206,10 @@ export function UserDetails() {
 
     try {
       const saved = await updateUser(userToUpdate)
+      console.log('saved:', saved)
+      console.log('user:', user)
+      console.log('watchedUser:', watchedUser)
+      
       if (user._id === watchedUser._id) updateStoreUser(saved)
       else updateStoreWatchedUser(saved)
       showSuccessMsg(

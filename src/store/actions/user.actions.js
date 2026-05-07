@@ -18,6 +18,7 @@ import {
   SET_FILTER,
 } from '../reducers/user.reducer'
 import { setPrefs } from './system.actions'
+import { itemService } from '../../services/item/item.service'
 
 export async function loadUsers(filter) {
   try {
@@ -149,16 +150,33 @@ export async function loadUser(userId) {
 export async function updateCart(user) {
   const cart = [...user.items]
 
-  store.dispatch({ type: UPDATE_CART, cart })
-  store.dispatch({ type: SET_USER, user })
 
+  store.dispatch({ type: UPDATE_CART, cart })
+  
   try {
     const saved = await userService.update(user)
+
+    store.dispatch({ type: SET_USER, user: saved })
     return saved
   } catch (err) {
     // console.log(err)
     throw err
   }
+}
+
+export async function loadOriginalItems(cart) {
+  try {
+    const originalItems = await itemService.getCartItems(cart)
+    store.dispatch({ type: SET_ORIGINAL_ITEMS, originalItems })
+    
+  } catch (err) {
+    throw err
+    
+  }
+}
+
+export function setCartState(cart) {
+  store.dispatch({ type: UPDATE_CART, cart })
 }
 
 export function setEmptyCart(user) {
