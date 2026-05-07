@@ -57,8 +57,9 @@ export function Cart() {
     : { eng: 'Login First', he: 'יש להתחבר' }
 
   useEffect(() => {
+    if(!user?._id) return
     setCart()
-  }, [])
+  }, [user?._id])
 
   const total = useMemo(() => {
     if (!fullCart) return
@@ -82,9 +83,10 @@ export function Cart() {
     if (cart.length === 0) return
     try {
       setIsLoading(true)
-      const logged = await userService.getLoggedinUser()
+      // const logged = await userService.getLoggedinUser()
 
-      const loaded = await loadUser(logged._id)
+      // const loaded = await loadUser(logged._id)
+      const loaded = user
 
       const fetchedCart = await userService.getCartItems(cart)
 

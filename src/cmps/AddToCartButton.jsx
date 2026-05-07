@@ -76,13 +76,15 @@ export function AddToCartButton({
       (item.options && !isOptionSelected) ||
       (item.optionsIds && !isOptionSelected)
     ) {
-      const messageToSet = {
-        he: `יש לבחור סוג פריט בדף הפריט`,
-        eng: `Item option must be selected at item page`,
-        link: `/item/${item._id}`,
-      }
-      setModalMessage(messageToSet)
-      setIsModal(true)
+      // const messageToSet = {
+      //   he: `יש לבחור סוג פריט בדף הפריט`,
+      //   eng: `Item option must be selected at item page`,
+      //   link: `/item/${item._id}`,
+      // }
+      // setModalMessage(messageToSet)
+      // setIsModal(true)
+      navigate(`/item/${item._id}`)
+      smoothScroll()
       return
     }
 
