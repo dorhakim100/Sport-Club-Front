@@ -83,7 +83,7 @@ function getEmptyCoupon() {
   }
 }
 
-async function getDiscount(couponCode,userId) {
+async function getDiscount(couponCode) {
   try {
     // const coupons = await query({ allActive: true })
 
@@ -95,7 +95,7 @@ async function getDiscount(couponCode,userId) {
     //   throw new Error(`Couldn't find coupon`)
     // }
 
-    const res = await httpService.get('coupon/allActive', { code: couponCode, userId })
+    const res = await httpService.get('coupon/allActive', { code: couponCode })
     return res
   } catch (err) {
     // // console.log(err)

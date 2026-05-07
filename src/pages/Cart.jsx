@@ -230,7 +230,7 @@ export function Cart() {
       setIsLoading(true)
       const couponCode = normalizedCouponCode
 
-      const res = await couponService.getDiscount(couponCode,user._id)
+      const res = await couponService.getDiscount(couponCode)
 
       await setCart(res)
       appliedCouponCode.current = couponCode
