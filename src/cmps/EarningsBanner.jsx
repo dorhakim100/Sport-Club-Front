@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 import Box from '@mui/material/Box'
@@ -9,9 +9,11 @@ import Typography from '@mui/material/Typography'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 
 import { paymentService } from '../services/payment/payment.service'
 import { showErrorMsg } from '../services/event-bus.service'
+import { CircularProgress } from '@mui/material'
 
 function monthRangeDefaults() {
   const now = dayjs()
@@ -28,6 +30,12 @@ export function EarningsBanner() {
   const [to, setTo] = useState(defaults.end)
   const [earnings, setEarnings] = useState(null)
   const [loading, setLoading] = useState(false)
+
+
+  useEffect(()=>{
+    handleCalculate()
+
+  },[])
 
   const labels = prefs.isEnglish
     ? {
@@ -129,9 +137,11 @@ export function EarningsBanner() {
             variant='contained'
             onClick={handleCalculate}
             disabled={loading}
-            sx={{ alignSelf: { xs: 'stretch', sm: 'center' } }}
+            sx={{ alignSelf: { xs: 'stretch', sm: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', minWidth:'100px' } }}
           >
             {labels.calculate}
+
+            { loading ? <CircularProgress size={15} color='white' /> : <LocalAtmIcon />}
           </Button>
           {earnings !== null && (
             <Box sx={{ minWidth: 120 }}>

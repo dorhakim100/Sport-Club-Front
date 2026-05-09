@@ -1,7 +1,8 @@
 .earnings-banner {
     display: grid;
     gap: 1rem;
-    
+
+
     &.dark-mode {
         background-color: $very-dark-blue;
         color: white !important;

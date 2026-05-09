@@ -183,12 +183,12 @@ async function getOpenOrders() {
   }
 }
 
-/** @param {{ from: string, to: string }} range ISO date strings YYYY-MM-DD */
+/** ISO date strings YYYY-MM-DD */
 async function getEarnings({ from, to }) {
   try {
     const res = await httpService.get(`${KEY}/earnings`, { from, to })
     return res
-    
+
   } catch (err) {
     // // console.log(err)
     throw err
