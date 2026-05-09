@@ -150,7 +150,6 @@ export function Cart() {
           )
 
           let itemToModify = fetchedCart[idx]
-          console.log('itemToModify:', itemToModify);
           
           const idxToModify = originalItemsToSet.findIndex(
             (originalItem) => originalItem.id === item.id

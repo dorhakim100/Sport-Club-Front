@@ -206,9 +206,6 @@ export function UserDetails() {
 
     try {
       const saved = await updateUser(userToUpdate)
-      console.log('saved:', saved)
-      console.log('user:', user)
-      console.log('watchedUser:', watchedUser)
       
       if (user._id === watchedUser._id) updateStoreUser(saved)
       else updateStoreWatchedUser(saved)
@@ -233,11 +230,6 @@ export function UserDetails() {
       [name]: value,
     }))
   }
-
-  console.log(editUser)
-  console.log(googleImg);
-  console.log(watchedUser);
-  
 
   return (
     <section className='user-details'>

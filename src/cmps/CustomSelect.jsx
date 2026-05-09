@@ -55,7 +55,6 @@ export function CustomSelect({ initLabel, options, onSelectChange }) {
 
   const handleChange = (event) => {
     const valueToSet = event.target.value
-    console.log(valueToSet)
     setSelectedValue(valueToSet)
     onSelectChange(valueToSet)
   }
