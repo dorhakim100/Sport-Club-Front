@@ -211,7 +211,7 @@ export function Cart() {
       }
       setFullCart([...fetchedCart])
       const userToUpdate = { ...loaded, items: [...fetchedCart] }
-
+      
       await updateCart(userToUpdate)
       setCartState(fetchedCart)
     } catch (err) {
