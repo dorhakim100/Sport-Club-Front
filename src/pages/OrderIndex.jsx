@@ -12,6 +12,7 @@ import {
 import { updatePayment } from '../store/actions/payment.actions'
 
 import { HeadContainer } from '../cmps/HeadContainer'
+import { EarningsBanner } from '../cmps/EarningsBanner'
 import { OrderList } from '../cmps/OrderList'
 import { OrderFilter } from '../cmps/OrderFilter.jsx'
 import {
@@ -129,6 +130,8 @@ export function OrderIndex() {
   return (
     <div className='order-index-container'>
       <HeadContainer text={text} />
+
+      {user?.isAdmin && <EarningsBanner />}
 
       <OrderFilter
         filter={filterBy}

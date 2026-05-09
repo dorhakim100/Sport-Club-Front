@@ -21,6 +21,7 @@ export const paymentService = {
   getEmptyOrder,
   createNewOrderLink,
   getOpenOrders,
+  getEarnings,
 }
 
 async function query(filterBy = { pageIdx: 0, types: [] }) {
@@ -176,6 +177,18 @@ async function getOpenOrders() {
     // return unDone.length
     const length = await httpService.get('payment/openLength')
     return length
+  } catch (err) {
+    // // console.log(err)
+    throw err
+  }
+}
+
+/** @param {{ from: string, to: string }} range ISO date strings YYYY-MM-DD */
+async function getEarnings({ from, to }) {
+  try {
+    const res = await httpService.get(`${KEY}/earnings`, { from, to })
+    return res
+    
   } catch (err) {
     // // console.log(err)
     throw err
