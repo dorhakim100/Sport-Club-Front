@@ -107,6 +107,7 @@ export function Cart() {
         loaded.memberStatus.expiry > Date.now()
       ) {
         fetchedCart.forEach((item) => {
+
           if (item.types.includes('card')) {
             const idx = fetchedCart.findIndex(
               (cartItem) => cartItem.id === item.id
@@ -126,6 +127,7 @@ export function Cart() {
               ...itemToModify,
               price: 500,
               isDiscount: true,
+              addedAt:Date.now(),
             }
             fetchedCart.splice(idx, 1, itemToModify)
           }
@@ -148,6 +150,8 @@ export function Cart() {
           )
 
           let itemToModify = fetchedCart[idx]
+          console.log('itemToModify:', itemToModify);
+          
           const idxToModify = originalItemsToSet.findIndex(
             (originalItem) => originalItem.id === item.id
           )
@@ -167,6 +171,7 @@ export function Cart() {
               ...itemToModify,
               price: basePrice - discount.amount,
               isDiscount: true,
+              addedAt:Date.now(),
             }
           }
 
@@ -181,6 +186,7 @@ export function Cart() {
                 basePrice -
                 basePrice * (discount.amount / 100),
               isDiscount: true,
+              addedAt:Date.now(),
             }
           }
 
@@ -199,6 +205,7 @@ export function Cart() {
           const basePrice = originalItem?.price ?? fetchedCart[idx].price
           fetchedCart[idx].price = basePrice
           fetchedCart[idx].isDiscount = false
+          fetchedCart[idx].addedAt = Date.now()
         })
         
       }

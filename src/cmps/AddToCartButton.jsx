@@ -138,12 +138,14 @@ export function AddToCartButton({
         id: itemToAdd._id,
         quantity: newQuantity,
         options: [...itemOptions],
+        addedAt: Date.now(),
       })
     } else {
       user.items.push({
         id: itemToAdd._id,
         quantity: quantity || 1,
         options: [selectedOption],
+        addedAt: Date.now(),
       })
     }
 
