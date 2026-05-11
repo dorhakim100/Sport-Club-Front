@@ -388,7 +388,7 @@ export function Cart() {
                 </div>
               </div>
             )}
-            <Divider orientation='horizontal' flexItem />
+            {!containsDiscount &&<Divider orientation='horizontal' flexItem />}
 
             <div
               ref={phoneInputContainerRef}
