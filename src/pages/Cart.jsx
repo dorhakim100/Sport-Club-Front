@@ -14,7 +14,7 @@ import {
   setModalMessage,
 } from '../store/actions/system.actions'
 
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import Divider from '@mui/material/Divider'
 import { paymentService } from '../services/payment/payment.service'
 import { setOriginalItems } from '../store/actions/user.actions'
@@ -402,6 +402,8 @@ export function Cart() {
                 prefs.isDarkMode && 'dark-mode'
               } ${phoneFieldInvalid ? 'phone-field-shake' : ''}`}
             >
+              <Typography variant='body1' color='text.secondary'>{prefs.isEnglish ? 'Phone number' : 'טלפון לקבלת הזמנה'}</Typography>
+
               <input
                 type="search"
                 inputMode="tel"
