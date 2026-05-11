@@ -289,6 +289,7 @@ export function Cart() {
       }
 
       setIsLoading(true)
+      
       const order = createOrder()
 
       // if (
@@ -402,7 +403,7 @@ export function Cart() {
               } ${phoneFieldInvalid ? 'phone-field-shake' : ''}`}
             >
               <input
-                type="text"
+                type="search"
                 inputMode="tel"
                 autoComplete="tel"
                 className={phoneFieldInvalid ? 'error' : ''}
