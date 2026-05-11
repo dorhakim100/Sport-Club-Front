@@ -44,6 +44,14 @@ export function Cart() {
   const appliedCouponCode = useRef('')
 
   const isFirstRender = useRef(true)
+  const phoneInputContainerRef = useRef(null)
+
+  const [checkoutPhone, setCheckoutPhone] = useState(() => user?.phone ?? '')
+  const [phoneFieldInvalid, setPhoneFieldInvalid] = useState(false)
+
+  useEffect(() => {
+    setCheckoutPhone(user?.phone ?? '')
+  }, [user?.phone])
 
   const headText = user
     ? { eng: user.fullname, he: user.fullname }
@@ -261,16 +269,22 @@ export function Cart() {
     }
   }
 
+  function triggerPhoneFieldShake() {
+    const el = phoneInputContainerRef.current
+    if (!el) return
+    el.classList.remove('phone-field-shake')
+    void el.offsetWidth
+    el.classList.add('phone-field-shake')
+  }
+
   async function onPay() {
     try {
-      if (!user.phone || user.phone.length === 0 || user.phone === '') {
-        const messageToSet = {
-          he: 'יש להוסיף מספר טלפון לפני ביצוע הזמנה',
-          eng: `A phone number must be added before placing an order`,
-          link: `/user/${user._id}`,
+      if (!checkoutPhone.trim()) {
+        setPhoneFieldInvalid(true)
+        triggerPhoneFieldShake()
+        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+          navigator.vibrate([35, 25, 35])
         }
-        setModalMessage(messageToSet)
-        setIsModal(true)
         return
       }
 
@@ -316,7 +330,7 @@ export function Cart() {
       user: {
         id: user._id,
         name: user.fullname,
-        phone: user.phone,
+        phone: checkoutPhone.trim(),
         email: user.email,
       },
       coupon: coupon,
@@ -373,6 +387,34 @@ export function Cart() {
                 </div>
               </div>
             )}
+            <Divider orientation='horizontal' flexItem />
+
+            <div
+              ref={phoneInputContainerRef}
+              onAnimationEnd={(e) => {
+                if (e.target !== e.currentTarget) return
+                if (e.animationName === 'cart-phone-shake') {
+                  e.currentTarget.classList.remove('phone-field-shake')
+                }
+              }}
+              className={`input-container checkout-phone ${
+                prefs.isDarkMode && 'dark-mode'
+              } ${phoneFieldInvalid ? 'phone-field-shake' : ''}`}
+            >
+              <input
+                type="text"
+                inputMode="tel"
+                autoComplete="tel"
+                className={phoneFieldInvalid ? 'error' : ''}
+                placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
+                value={checkoutPhone}
+                onChange={(e) => {
+                  setCheckoutPhone(e.target.value)
+                  if (phoneFieldInvalid) setPhoneFieldInvalid(false)
+                }}
+              />
+            </div>
+
 
             <Button
               variant='contained'

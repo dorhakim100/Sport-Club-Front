@@ -1,3 +1,5 @@
+
+
 @media (max-width: 500px) {
   .cart-page-container {
     padding: 20px;
@@ -79,8 +81,36 @@
     gap: 0.3em;
   }
 
+  .input-container.checkout-phone.phone-field-shake {
+    animation: cart-phone-shake 0.42s ease;
+  }
+
+  .input-container.checkout-phone.checkout-phone-invalid input {
+    border-color: #e53e3e;
+  }
+
   button,
   .discount-container {
     justify-self: center;
+  }
+}
+
+
+@keyframes cart-phone-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
   }
 }
