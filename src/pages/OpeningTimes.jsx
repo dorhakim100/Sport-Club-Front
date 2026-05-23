@@ -13,7 +13,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { ContactUs } from '../cmps/ContactUs'
-import { Button } from '@mui/material'
+import { Button, Divider } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 import EditIcon from '@mui/icons-material/Edit'
 
@@ -529,6 +529,9 @@ export function OpeningTimes() {
                                   display: 'grid',
                                   color: prefs.isDarkMode && 'white',
                                   borderBottom: 'none',
+                                  padding: '0px',
+                                  paddingTop: '0.5em',
+                                  paddingBottom: '0.5em',
                                   fontSize: '1.3em',
                                 }}
                               >
@@ -538,6 +541,7 @@ export function OpeningTimes() {
                                   <span>{time.to}</span>
                                 </div>
                               </div>
+
                             )}
                           </div>
                         )
