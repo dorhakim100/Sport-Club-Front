@@ -222,6 +222,19 @@ export function AppHeader() {
     return cartLength
   }, [cart, user]) // using useMemo to prevent calculating each and every render
 
+  useEffect(() => {
+    const hebrewOriginalTitle = 'מועדון הספורט כפר שמריהו'
+
+    let titleToSet = ''
+
+    if (openTasks > 0) {
+      titleToSet = `${hebrewOriginalTitle} (${openTasks})`
+    } else {
+      titleToSet = hebrewOriginalTitle
+    }
+    document.title = titleToSet
+  }, [openTasks])
+
   const handleScroll = () => {
     const scrollY = window.scrollY
 
@@ -529,290 +542,292 @@ export function AppHeader() {
       )
     )
   }
-  const [links, setLinks] = useState([
-    {
-      id: 9,
-      title: { eng: 'Admin', he: 'מנהל' },
-      to: 'admin',
-      onClick: () => {
-        selectLink('/admin')
+  const [links, setLinks] = useState(
+    [
+      {
+        id: 9,
+        title: { eng: 'Admin', he: 'מנהל' },
+        to: 'admin',
+        onClick: () => {
+          selectLink('/admin')
+        },
+        dropdown: false,
+        icon: <AdminPanelSettingsIcon />,
       },
-      dropdown: false,
-      icon: <AdminPanelSettingsIcon />,
-    },
-    {
-      id: 0,
-      title: { eng: 'Home', he: 'בית' },
-      to: '',
-      onClick: () => {
-        delayedNavigate('')
+      {
+        id: 0,
+        title: { eng: 'Home', he: 'בית' },
+        to: '',
+        onClick: () => {
+          delayedNavigate('')
+        },
+        dropdown: false,
+        icon: <HomeIcon />,
       },
-      dropdown: false,
-      icon: <HomeIcon />,
-    },
-    // Kept for future use: register menu route is temporarily disabled.
-    // (user && user.isAdmin) ? null :{
-    //   id: 1,
-    //   title: { eng: 'Register', he: 'רישום' },
-    //   to: 'register',
-    //   onClick: () => {
-    //     delayedNavigate('/register')
-    //   },
-    //   dropdown: false,
-    //   icon: <AppRegistrationIcon />,
-    // },
-    {
-      id: 3,
-      title: { eng: 'Opening times', he: 'שעות הפתיחה' },
-      to: `about/times`,
-      icon: <QueryBuilderIcon />,
-      onClick: () => {
-        // setMenu(false)
-        delayedNavigate('/about/times')
+      // Kept for future use: register menu route is temporarily disabled.
+      // (user && user.isAdmin) ? null :{
+      //   id: 1,
+      //   title: { eng: 'Register', he: 'רישום' },
+      //   to: 'register',
+      //   onClick: () => {
+      //     delayedNavigate('/register')
+      //   },
+      //   dropdown: false,
+      //   icon: <AppRegistrationIcon />,
+      // },
+      {
+        id: 3,
+        title: { eng: 'Opening times', he: 'שעות הפתיחה' },
+        to: `about/times`,
+        icon: <QueryBuilderIcon />,
+        onClick: () => {
+          // setMenu(false)
+          delayedNavigate('/about/times')
+        },
       },
-    },
-    {
-      id: 4,
-      title: { eng: 'Class', he: 'חוגים' },
-      to: 'class',
-      onClick: () => {
-        selectLink('/class')
+      {
+        id: 4,
+        title: { eng: 'Class', he: 'חוגים' },
+        to: 'class',
+        onClick: () => {
+          selectLink('/class')
+        },
+        dropdown: [
+          {
+            title: { eng: 'Classes', he: 'שיעורים' },
+            path: `class`,
+            icon: <SelfImprovementIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/class')
+            },
+          },
+          {
+            title: { eng: 'Schedule', he: 'מערכת החוגים' },
+            path: `class/schedule`,
+            icon: <CalendarTodayIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/class/schedule')
+            },
+          },
+          {
+            title: { eng: 'Our Trainers', he: 'צוות המדריכים שלנו' },
+            path: `class/trainer`,
+            icon: <SportsKabaddiIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/class/trainer')
+            },
+          },
+        ],
+        isOpen: false,
+        icon: <EventNoteIcon />,
       },
-      dropdown: [
-        {
-          title: { eng: 'Classes', he: 'שיעורים' },
-          path: `class`,
-          icon: <SelfImprovementIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/class')
-          },
+      {
+        id: 7,
+        title: { eng: 'Store', he: 'חנות' },
+        to: 'item',
+        onClick: () => {
+          selectLink('/item')
         },
-        {
-          title: { eng: 'Schedule', he: 'מערכת החוגים' },
-          path: `class/schedule`,
-          icon: <CalendarTodayIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/class/schedule')
+        dropdown: [
+          {
+            title: { eng: 'All Items', he: 'כל המוצרים' },
+            path: `item`,
+            icon: <ShoppingBagIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/item')
+            },
           },
-        },
-        {
-          title: { eng: 'Our Trainers', he: 'צוות המדריכים שלנו' },
-          path: `class/trainer`,
-          icon: <SportsKabaddiIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/class/trainer')
+          {
+            title: { eng: 'Cards', he: 'כרטיסיות' },
+            path: `item/card`,
+            icon: <RecentActorsIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/item/card')
+            },
           },
-        },
-      ],
-      isOpen: false,
-      icon: <EventNoteIcon />,
-    },
-    {
-      id: 7,
-      title: { eng: 'Store', he: 'חנות' },
-      to: 'item',
-      onClick: () => {
-        selectLink('/item')
+          {
+            title: { eng: 'Accessories', he: 'אביזרים' },
+            path: `item/accessories`,
+            icon: <GogglesIcon />,
+            // icon: <MoreIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/item/accessories')
+            },
+          },
+        ],
+        icon: <AddShoppingCartIcon />,
+        isOpen: false,
       },
-      dropdown: [
-        {
-          title: { eng: 'All Items', he: 'כל המוצרים' },
-          path: `item`,
-          icon: <ShoppingBagIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/item')
-          },
+      {
+        id: 2,
+        title: { eng: 'Updates', he: 'עדכונים' },
+        to: 'update',
+        onClick: () => {
+          delayedNavigate('/update')
         },
-        {
-          title: { eng: 'Cards', he: 'כרטיסיות' },
-          path: `item/card`,
-          icon: <RecentActorsIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/item/card')
-          },
-        },
-        {
-          title: { eng: 'Accessories', he: 'אביזרים' },
-          path: `item/accessories`,
-          icon: <GogglesIcon />,
-          // icon: <MoreIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/item/accessories')
-          },
-        },
-      ],
-      icon: <AddShoppingCartIcon />,
-      isOpen: false,
-    },
-    {
-      id: 2,
-      title: { eng: 'Updates', he: 'עדכונים' },
-      to: 'update',
-      onClick: () => {
-        delayedNavigate('/update')
+        dropdown: false,
+        icon: <NotificationsNoneIcon />,
       },
-      dropdown: false,
-      icon: <NotificationsNoneIcon />,
-    },
-    {
-      id: 5,
-      title: { eng: 'Facilities', he: 'מתקני המועדון' },
-      to: 'facilities',
-      onClick: () => {
-        delayedNavigate('/facilities')
+      {
+        id: 5,
+        title: { eng: 'Facilities', he: 'מתקני המועדון' },
+        to: 'facilities',
+        onClick: () => {
+          delayedNavigate('/facilities')
+        },
+        dropdown: false,
+        icon: <PoolIcon />,
       },
-      dropdown: false,
-      icon: <PoolIcon />,
-    },
-    {
-      id: 6,
-      title: { eng: 'Member', he: 'מנויים' },
-      to: 'member',
-      onClick: () => {
-        delayedNavigate('/member')
+      {
+        id: 6,
+        title: { eng: 'Member', he: 'מנויים' },
+        to: 'member',
+        onClick: () => {
+          delayedNavigate('/member')
+        },
+        dropdown: false,
+        icon: <CardMembershipIcon />,
       },
-      dropdown: false,
-      icon: <CardMembershipIcon />,
-    },
-    {
-      id: 8,
-      title: { eng: 'Activities', he: 'פעילויות' },
-      to: 'activities',
-      onClick: () => {
-        selectLink('/activities')
+      {
+        id: 8,
+        title: { eng: 'Activities', he: 'פעילויות' },
+        to: 'activities',
+        onClick: () => {
+          selectLink('/activities')
+        },
+        dropdown: [
+          {
+            title: { eng: 'Swimming School', he: 'בית הספר לשחייה' },
+            path: `activities/swimming`,
+            icon: <PoolIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/activities/swimming')
+            },
+          },
+          {
+            title: { eng: 'Tennis Academy', he: 'האקדמיה לטניס' },
+            path: `activities/tennis`,
+            icon: <SportsTennisIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/activities/tennis')
+            },
+          },
+          {
+            title: { eng: 'Reformer Pilates', he: 'פילאטיס מכשירים' },
+            path: `activities/pilates`,
+            icon: <PilatesIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/activities/pilates')
+            },
+          },
+          {
+            title: { eng: 'Care Center', he: 'מרכז הטיפולים' },
+            path: `activities/care`,
+            icon: <SpaIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/activities/care')
+            },
+          },
+          {
+            title: { eng: 'Summer Camp', he: 'קייטנת הקיץ' },
+            path: `activities/camp`,
+            icon: <CabinIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/activities/camp')
+            },
+          },
+          {
+            title: { eng: 'Restaurant', he: 'שף הכפר' },
+            path: `activities/restaurant`,
+            icon: <RestaurantMenuIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/activities/restaurant')
+            },
+          },
+        ],
+        isOpen: false,
+        icon: <SportsTennisIcon />,
       },
-      dropdown: [
-        {
-          title: { eng: 'Swimming School', he: 'בית הספר לשחייה' },
-          path: `activities/swimming`,
-          icon: <PoolIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/activities/swimming')
-          },
+      {
+        id: 9,
+        title: { eng: 'About', he: 'אודות' },
+        to: 'about',
+        onClick: () => {
+          selectLink('/about')
         },
-        {
-          title: { eng: 'Tennis Academy', he: 'האקדמיה לטניס' },
-          path: `activities/tennis`,
-          icon: <SportsTennisIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/activities/tennis')
+        dropdown: [
+          {
+            title: { eng: 'About us', he: 'אודותינו' },
+            path: `about`,
+            icon: <MyLocationIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/about')
+            },
           },
-        },
-        {
-          title: { eng: 'Reformer Pilates', he: 'פילאטיס מכשירים' },
-          path: `activities/pilates`,
-          icon: <PilatesIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/activities/pilates')
+          {
+            title: { eng: 'Opening times', he: 'שעות הפתיחה' },
+            path: `about/times`,
+            icon: <QueryBuilderIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/about/times')
+            },
           },
-        },
-        {
-          title: { eng: 'Care Center', he: 'מרכז הטיפולים' },
-          path: `activities/care`,
-          icon: <SpaIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/activities/care')
+          {
+            title: { eng: 'Organization', he: 'העמותה' },
+            path: `about/organization`,
+            icon: <LocalLibraryIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/about/organization')
+            },
           },
-        },
-        {
-          title: { eng: 'Summer Camp', he: 'קייטנת הקיץ' },
-          path: `activities/camp`,
-          icon: <CabinIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/activities/camp')
+          {
+            title: { eng: 'Accessibility', he: 'נגישות' },
+            path: `about/accessibility`,
+            icon: <AccessibilityIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/about/accessibility')
+            },
           },
-        },
-        {
-          title: { eng: 'Restaurant', he: 'שף הכפר' },
-          path: `activities/restaurant`,
-          icon: <RestaurantMenuIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/activities/restaurant')
+          {
+            title: { eng: 'Cenceling', he: 'ביטולים' },
+            path: `about/cancel`,
+            icon: <DoDisturbIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/about/cancel')
+            },
           },
-        },
-      ],
-      isOpen: false,
-      icon: <SportsTennisIcon />,
-    },
-    {
-      id: 9,
-      title: { eng: 'About', he: 'אודות' },
-      to: 'about',
-      onClick: () => {
-        selectLink('/about')
+          {
+            title: { eng: 'Privacy Policy', he: 'מדיניות פרטיות' },
+            path: `about/privacy`,
+            icon: <PrivacyTipIcon />,
+            onClick: () => {
+              setMenu(false)
+              delayedNavigate('/about/privacy')
+            },
+          },
+        ],
+        isOpen: false,
+        icon: <InfoIcon />,
       },
-      dropdown: [
-        {
-          title: { eng: 'About us', he: 'אודותינו' },
-          path: `about`,
-          icon: <MyLocationIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/about')
-          },
-        },
-        {
-          title: { eng: 'Opening times', he: 'שעות הפתיחה' },
-          path: `about/times`,
-          icon: <QueryBuilderIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/about/times')
-          },
-        },
-        {
-          title: { eng: 'Organization', he: 'העמותה' },
-          path: `about/organization`,
-          icon: <LocalLibraryIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/about/organization')
-          },
-        },
-        {
-          title: { eng: 'Accessibility', he: 'נגישות' },
-          path: `about/accessibility`,
-          icon: <AccessibilityIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/about/accessibility')
-          },
-        },
-        {
-          title: { eng: 'Cenceling', he: 'ביטולים' },
-          path: `about/cancel`,
-          icon: <DoDisturbIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/about/cancel')
-          },
-        },
-        {
-          title: { eng: 'Privacy Policy', he: 'מדיניות פרטיות' },
-          path: `about/privacy`,
-          icon: <PrivacyTipIcon />,
-          onClick: () => {
-            setMenu(false)
-            delayedNavigate('/about/privacy')
-          },
-        },
-      ],
-      isOpen: false,
-      icon: <InfoIcon />,
-    },
-  ].filter(link => link))
+    ].filter((link) => link)
+  )
 
   return (
     <>
@@ -1335,8 +1350,10 @@ export function AppHeader() {
                 </b>
               )}
               {!user.isAdmin && (
-                <NavLink to={`/user/${user._id}/cart`}
-                className='notification-btn cart-btn'>
+                <NavLink
+                  to={`/user/${user._id}/cart`}
+                  className='notification-btn cart-btn'
+                >
                   <Button
                     variant='contained'
                     onClick={() => selectLink(`/user/${user._id}/cart`)}
@@ -1344,7 +1361,7 @@ export function AppHeader() {
                   >
                     <ShoppingCartIcon />
                   </Button>
-                    {cart && cart.length > 0 && <span>{cartLength}</span>}
+                  {cart && cart.length > 0 && <span>{cartLength}</span>}
                 </NavLink>
               )}
               <Button
