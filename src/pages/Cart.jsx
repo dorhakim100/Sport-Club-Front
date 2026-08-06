@@ -35,8 +35,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 
 const cardsRead = {
   he: [
-    'הכניסה כוללת סופי שבוע וחגים',
-    'ביקורים במחיר מוזל',
+    'בכרטיסיית אמצע השבוע, הכניסה רק בימי ראשון-חמישי',
     'בכרטיסיית 12 ביקורים תוקף הכרטיסייה לשנה מיום הרכישה',
     'בכרטיסיית 20 ביקורים תוקף הכרטיסייה עד לסוף השנה שבה נרכשה',
     'ניתן לממש עד 6 ניקובים בכניסה אחת',
@@ -48,8 +47,7 @@ const cardsRead = {
     'השגיחו על ילדיכם שלא יעשו את צרכיהם בשטחי הדשא וליד העצים',
   ],
   eng: [
-    'Entrance includes weekend and holidays',
-    'Visits at a discounted price',
+    'In the middle of the week card, entrance is only on weekdays',
     'The 12 visits card is valid for one year from the date of purchase',
     'The 20 visits card is valid for the end of the year in which it was purchased',
     'Up to 6 visitors can enter in a single visit',
