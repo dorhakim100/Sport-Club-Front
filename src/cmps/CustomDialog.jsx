@@ -13,16 +13,22 @@ export function CustomDialog({
   actions = null,
   maxWidth = 'sm',
   fullWidth = true,
+  fullScreen = false,
   defaultCloseText,
 }) {
   const prefs = useSelector((storeState) => storeState.systemModule.prefs)
   const closeText = defaultCloseText || (prefs.isEnglish ? 'Close' : 'סגירה')
   return (
-    <Dialog open={open} onClose={onClose} maxWidth={maxWidth} fullWidth={fullWidth} sx={{
-      direction: prefs.isEnglish ? 'ltr' : 'rtl',
-    }}
-
-    className={`custom-dialog ${prefs.isDarkMode ? 'dark-mode' : ''}`}
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth={maxWidth}
+      fullWidth={fullWidth}
+      fullScreen={fullScreen}
+      sx={{
+        direction: prefs.isEnglish ? 'ltr' : 'rtl',
+      }}
+      className={`custom-dialog ${prefs.isDarkMode ? 'dark-mode' : ''}`}
     >
       {title && <DialogTitle>{title}</DialogTitle>}
 

@@ -1,24 +1,66 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { useSelector } from 'react-redux'
 
-import { showErrorMsg } from '../services/event-bus.service'  
+import { showErrorMsg } from '../services/event-bus.service'
 import { userService } from '../services/user/user.service'
 import { couponService } from '../services/coupon/coupon.service'
 
 import { HeadContainer } from '../cmps/HeadContainer'
 import { CartList } from '../cmps/CartList.jsx'
-import { loadOriginalItems, loadUser, setCartState, updateCart, updateStoreUser } from '../store/actions/user.actions'
+import {
+  loadOriginalItems,
+  loadUser,
+  setCartState,
+  updateCart,
+  updateStoreUser,
+} from '../store/actions/user.actions'
 import {
   setIsLoading,
   setIsModal,
   setModalMessage,
 } from '../store/actions/system.actions'
 
-import { Button, Typography } from '@mui/material'
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  IconButton,
+  Typography,
+} from '@mui/material'
 import Divider from '@mui/material/Divider'
 import { paymentService } from '../services/payment/payment.service'
 import { setOriginalItems } from '../store/actions/user.actions'
 import { setOriginalPrice } from '../store/actions/user.actions'
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
+
+const cardsRead = {
+  he: [
+    'הכניסה כוללת סופי שבוע וחגים',
+    'ביקורים במחיר מוזל',
+    'בכרטיסיית 12 ביקורים תוקף הכרטיסייה לשנה מיום הרכישה',
+    'בכרטיסיית 20 ביקורים תוקף הכרטיסייה עד לסוף השנה שבה נרכשה',
+    'ניתן לממש עד 6 ניקובים בכניסה אחת',
+    'אין לקיים ימי הולדת ומסיבות ללא תאום מראש מול משרד המועדון',
+    'הרחצה לבעלי שיער ארוך עם כובע ים בלבד',
+    'חל איסור להכניס משלוחי מזון חיצוניים לשטח המועדון',
+    'אסור לעשן בכל שטח המועדון',
+    'חל איסור מוחלט על הכנסת צידניות ו/או בקבוקי זכוכית',
+    'השגיחו על ילדיכם שלא יעשו את צרכיהם בשטחי הדשא וליד העצים',
+  ],
+  eng: [
+    'Entrance includes weekend and holidays',
+    'Visits at a discounted price',
+    'The 12 visits card is valid for one year from the date of purchase',
+    'The 20 visits card is valid for the end of the year in which it was purchased',
+    'Up to 6 visitors can enter in a single visit',
+    'Birthday parties and events require prior coordination with the club office',
+    'Swimming for individuals with long hair is permitted only with a swim cap',
+    'External food deliveries are not allowed within the club premises',
+    'Smoking is prohibited throughout the club area',
+    'The entry of coolers and/or glass bottles is strictly forbidden',
+    'Please ensure your children do not relieve themselves on the grass or near the trees',
+  ],
+}
 
 export function Cart() {
   const cart = useSelector((stateSelector) => stateSelector.userModule.cart)
@@ -48,6 +90,12 @@ export function Cart() {
 
   const [checkoutPhone, setCheckoutPhone] = useState(() => user?.phone ?? '')
   const [phoneFieldInvalid, setPhoneFieldInvalid] = useState(false)
+  const [cardTermsAccepted, setCardTermsAccepted] = useState(false)
+
+  const hasCard = useMemo(() => {
+    if (!cart || cart?.length === 0) return false
+    return cart.some((item) => item.types?.includes('card'))
+  }, [cart])
 
   useEffect(() => {
     setCheckoutPhone(user?.phone ?? '')
@@ -58,16 +106,14 @@ export function Cart() {
     : { eng: 'Login First', he: 'יש להתחבר' }
 
   useEffect(() => {
-    if(!user?._id) return
+    if (!user?._id) return
     setCart()
   }, [user?._id])
 
   useEffect(() => {
-    if(originalItems.length) return
+    if (originalItems.length) return
 
     loadOriginalItems(cart)
-
-
   }, [originalItems.length, cart])
 
   const total = useMemo(() => {
@@ -104,7 +150,6 @@ export function Cart() {
 
       const fetchedCart = await userService.getCartItems(cart)
       const originalFetchedCart = await userService.getCartItems(originalItems)
-    
 
       isFirstRender.current === false
       // setOriginalPrice(total)
@@ -115,7 +160,6 @@ export function Cart() {
         loaded.memberStatus.expiry > Date.now()
       ) {
         fetchedCart.forEach((item) => {
-
           if (item.types.includes('card')) {
             const idx = fetchedCart.findIndex(
               (cartItem) => cartItem.id === item.id
@@ -135,7 +179,7 @@ export function Cart() {
               ...itemToModify,
               price: 500,
               isDiscount: true,
-              addedAt:Date.now(),
+              addedAt: Date.now(),
             }
             fetchedCart.splice(idx, 1, itemToModify)
           }
@@ -151,14 +195,14 @@ export function Cart() {
           )
 
           if (!matchedDiscountItem) return // Skip if no match is found
-          if(item.isDiscount) return // Skip if item is already discounted
+          if (item.isDiscount) return // Skip if item is already discounted
 
           const idx = fetchedCart.findIndex(
             (cartItem) => cartItem.id === item.id
           )
 
           let itemToModify = fetchedCart[idx]
-          
+
           const idxToModify = originalItemsToSet.findIndex(
             (originalItem) => originalItem.id === item.id
           )
@@ -178,7 +222,7 @@ export function Cart() {
               ...itemToModify,
               price: basePrice - discount.amount,
               isDiscount: true,
-              addedAt:Date.now(),
+              addedAt: Date.now(),
             }
           }
 
@@ -189,19 +233,15 @@ export function Cart() {
             const basePrice = originalItem?.price ?? itemToModify.price
             itemToModify = {
               ...itemToModify,
-              price:
-                basePrice -
-                basePrice * (discount.amount / 100),
+              price: basePrice - basePrice * (discount.amount / 100),
               isDiscount: true,
-              addedAt:Date.now(),
+              addedAt: Date.now(),
             }
           }
 
           fetchedCart.splice(idx, 1, itemToModify)
         })
       } else {
-
-        
         fetchedCart.forEach((item) => {
           const idx = fetchedCart.findIndex(
             (cartItem) => cartItem.id === item.id
@@ -214,11 +254,10 @@ export function Cart() {
           fetchedCart[idx].isDiscount = false
           fetchedCart[idx].addedAt = Date.now()
         })
-        
       }
       setFullCart([...fetchedCart])
       const userToUpdate = { ...loaded, items: [...fetchedCart] }
-      
+
       await updateCart(userToUpdate)
       setCartState(fetchedCart)
     } catch (err) {
@@ -229,7 +268,7 @@ export function Cart() {
   }
 
   async function onEnterCoupon({ target }) {
-    if(containsDiscount) return
+    if (containsDiscount) return
     if (isApplyingCoupon.current) return
     if (!coupon?.trim()) return
     const normalizedCouponCode = coupon.trim().toUpperCase()
@@ -251,7 +290,7 @@ export function Cart() {
       // showSuccessMsg(
       //   prefs.isEnglish ? 'Coupon added successfully' : 'קופון נוסף בהצלחה'
       // )
-      if(res.code === 'MOMS80'){
+      if (res.code === 'MOMS80') {
         setModalMessage({
           he: 'רכשת במכירה המוקדמת ומגיעה לך כניסה נוספת מתנה! 😀',
           eng: 'You get a free entry to use at the office 😀',
@@ -289,32 +328,14 @@ export function Cart() {
       }
 
       setIsLoading(true)
-      
+
       const order = createOrder()
-
-      // if (
-      //   order.items.some((item) => item.types.includes('card')) &&
-      //   !isGotMoreThan6.current
-      // ) {
-      //   isGotMoreThan6.current = true
-
-      //   const messageToSet = {
-      //     he: 'ניתן לנצל עד 6 ניקובים ביום אחד',
-      //     eng: `You can enter with up to 6 visitors per day`,
-      //   }
-      //   setModalMessage(messageToSet)
-      //   setIsModal(true)
-
-      //   return
-      // }
 
       const url = await paymentService.createNewOrderLink(order)
 
       setIsLoading(false)
-      // return
       openPelecardLink(url)
     } catch (err) {
-      // // console.log(err)
       showErrorMsg(
         prefs.isEnglish ? `Couldn't start payment` : 'לא ניתן להתחיל תשלום'
       )
@@ -345,12 +366,32 @@ export function Cart() {
     window.location.href = link
   }
 
+  const onOpenCardTerms = () => {
+    setModalMessage({
+      eng: 'Card terms',
+      he: 'תנאי הכרטיסייה',
+      extra: (
+        <ul className='card-terms-list'>
+          {(prefs.isEnglish ? cardsRead.eng : cardsRead.he).map((term) => (
+            <li key={term}>{term}</li>
+          ))}
+        </ul>
+      ),
+    })
+    setIsModal(true)
+  }
+
   return (
     <section className='cart-page-container'>
       <h2>{prefs.isEnglish ? 'Shopping Cart' : 'סל הקניות'}</h2>
       <HeadContainer text={headText} />
       <div className='cart-container'>
-        {fullCart && <CartList cart={cart} setCart={setCart} />}
+        {fullCart && (
+          <CartList
+            cart={cart}
+            setCart={setCart}
+          />
+        )}
         {fullCart && (
           <div className='total-container'>
             {isDiscount.current && originalPrice && (
@@ -360,12 +401,18 @@ export function Cart() {
                 <b>₪{originalPrice}</b>
                 <b>-₪{discount}</b>
 
-                <Divider orientation='horizontal' flexItem />
+                <Divider
+                  orientation='horizontal'
+                  flexItem
+                />
               </div>
             )}
             <b>₪{total}</b>
-            <Divider orientation='horizontal' flexItem />
-            {!containsDiscount &&!discount && (
+            <Divider
+              orientation='horizontal'
+              flexItem
+            />
+            {!containsDiscount && !discount && (
               <div className='discount-container'>
                 <div
                   className={`input-container ${
@@ -388,7 +435,12 @@ export function Cart() {
                 </div>
               </div>
             )}
-            {!containsDiscount &&<Divider orientation='horizontal' flexItem />}
+            {!containsDiscount && (
+              <Divider
+                orientation='horizontal'
+                flexItem
+              />
+            )}
 
             <div
               ref={phoneInputContainerRef}
@@ -402,12 +454,17 @@ export function Cart() {
                 prefs.isDarkMode && 'dark-mode'
               } ${phoneFieldInvalid ? 'phone-field-shake' : ''}`}
             >
-              <Typography variant='body1' color='text.secondary'>{prefs.isEnglish ? 'Phone number' : 'טלפון לקבלת הזמנה'}</Typography>
+              <Typography
+                variant='body1'
+                color='text.secondary'
+              >
+                {prefs.isEnglish ? 'Phone number' : 'טלפון לקבלת הזמנה'}
+              </Typography>
 
               <input
-                type="search"
-                inputMode="tel"
-                autoComplete="tel"
+                type='search'
+                inputMode='tel'
+                autoComplete='tel'
                 className={phoneFieldInvalid ? 'error' : ''}
                 placeholder={prefs.isEnglish ? 'Phone' : 'טלפון'}
                 value={checkoutPhone}
@@ -418,9 +475,33 @@ export function Cart() {
               />
             </div>
 
+            {hasCard && (
+              <div className='card-terms-container'>
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label={
+                    prefs.isEnglish
+                      ? 'I accept the card terms'
+                      : 'אני מאשר את תנאי הכרטיסייה'
+                  }
+                  checked={cardTermsAccepted}
+                  onChange={(e) => setCardTermsAccepted(e.target.checked)}
+                  sx={{
+                    '& .MuiFormControlLabel-label': {
+                      margin: 0,
+                      fontSize: '14px',
+                    },
+                  }}
+                />
+                <IconButton onClick={onOpenCardTerms}>
+                  <RemoveRedEyeIcon />
+                </IconButton>
+              </div>
+            )}
 
             <Button
               variant='contained'
+              disabled={(hasCard && !cardTermsAccepted) || cart?.length === 0}
               onClick={() => {
                 // smoothScroll()
                 // navigate(`/user/${user._id}/cart/paying`)
